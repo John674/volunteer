@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * All hook_update()'s.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function novo_master_install() {
+  $module_list = array(
+    'menu',
+    'admin_menu',
+    'better_exposed_filters',
+    'ctools',
+    'date',
+    'devel',
+    'entity',
+    'entitycache',
+    'features',
+    'field_ui',
+    'field_collection',
+    'field_group',
+    'jquery_update',
+    'libraries',
+    'memcache',
+    'module_filter',
+    'panels',
+    'views',
+    'views_ui',
+    'views_data_export',
+    'strongarm'
+  );
+  module_enable($module_list);
+}
+
+/**
+ * Enable Novo theme.
+ */
+function novo_master_update_7001() {
+  $theme_list = array(
+    'bootstrap',
+    'novo',
+  );
+  theme_enable($theme_list);
+  variable_set('theme_default', 'novo');
+  variable_set('admin_theme', 'seven');
+  theme_disable(array('bartik'));
+}
