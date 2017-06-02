@@ -1,7 +1,7 @@
 ---
 drupal_user: admin
 drupal_pass: password
-installation_profile_name: minimal
+installation_profile_name: pp
 mysql_user: root
 mysql_pass: root
 mysql_db: drupal
