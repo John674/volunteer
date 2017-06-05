@@ -38,7 +38,8 @@ function novo_master_install() {
 /**
  * Enable Novo theme.
  */
-function novo_master_update_7101() {
+function novo_master_update_7001() {
+  watchdog("svip", "test");
   $theme_list = array(
     'bootstrap',
     'novo',
@@ -52,7 +53,7 @@ function novo_master_update_7101() {
 /**
  * Enable taxonomy. Enable List. Add States.
  */
-function novo_master_update_7102() {
+function novo_master_update_7002() {
   module_enable(array('taxonomy', 'list'));
   $state_list = array('AL'=>"Alabama",
     'AK'=>"Alaska",
@@ -130,7 +131,7 @@ function novo_master_update_7102() {
 /**
  * Enable novo_content_feature.
  */
-function novo_master_update_7103() {
+function novo_master_update_7003() {
   module_enable(array('novo_content_feature'));
   features_revert_module('novo_content_feature');
 }
