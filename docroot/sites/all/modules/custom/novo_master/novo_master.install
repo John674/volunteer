@@ -48,3 +48,89 @@ function novo_master_update_7001() {
   variable_set('admin_theme', 'seven');
   theme_disable(array('bartik'));
 }
+
+/**
+ * Enable taxonomy. Enable List. Add States.
+ */
+function novo_master_update_7002() {
+  module_enable(array('taxonomy', 'list'));
+  $state_list = array('AL'=>"Alabama",
+    'AK'=>"Alaska",
+    'AZ'=>"Arizona",
+    'AR'=>"Arkansas",
+    'CA'=>"California",
+    'CO'=>"Colorado",
+    'CT'=>"Connecticut",
+    'DE'=>"Delaware",
+    'DC'=>"District Of Columbia",
+    'FL'=>"Florida",
+    'GA'=>"Georgia",
+    'HI'=>"Hawaii",
+    'ID'=>"Idaho",
+    'IL'=>"Illinois",
+    'IN'=>"Indiana",
+    'IA'=>"Iowa",
+    'KS'=>"Kansas",
+    'KY'=>"Kentucky",
+    'LA'=>"Louisiana",
+    'ME'=>"Maine",
+    'MD'=>"Maryland",
+    'MA'=>"Massachusetts",
+    'MI'=>"Michigan",
+    'MN'=>"Minnesota",
+    'MS'=>"Mississippi",
+    'MO'=>"Missouri",
+    'MT'=>"Montana",
+    'NE'=>"Nebraska",
+    'NV'=>"Nevada",
+    'NH'=>"New Hampshire",
+    'NJ'=>"New Jersey",
+    'NM'=>"New Mexico",
+    'NY'=>"New York",
+    'NC'=>"North Carolina",
+    'ND'=>"North Dakota",
+    'OH'=>"Ohio",
+    'OK'=>"Oklahoma",
+    'OR'=>"Oregon",
+    'PA'=>"Pennsylvania",
+    'RI'=>"Rhode Island",
+    'SC'=>"South Carolina",
+    'SD'=>"South Dakota",
+    'TN'=>"Tennessee",
+    'TX'=>"Texas",
+    'UT'=>"Utah",
+    'VT'=>"Vermont",
+    'VA'=>"Virginia",
+    'WA'=>"Washington",
+    'WV'=>"West Virginia",
+    'WI'=>"Wisconsin",
+    'WY'=>"Wyoming");
+
+  $vocab = taxonomy_vocabulary_machine_name_load("states");
+  if (empty($vocab)) {
+    $new_vocab = (object) array(
+      'name' => 'States',
+      'description' => 'USA states list',
+      'machine_name' => 'states',
+    );
+    taxonomy_vocabulary_save($new_vocab);
+    $vocab = taxonomy_vocabulary_machine_name_load("states");
+  }
+  $vid = $vocab->vid;
+
+  foreach($state_list as $abbr => $state_name) {
+    $term = new stdClass();
+    $term->name = $state_name;
+    $term->description = $abbr;
+    $term->vid = $vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Enable novo_content_feature.
+ */
+function novo_master_update_7003() {
+  module_enable(array('novo_content_feature'));
+  features_revert_module('novo_content_feature');
+}

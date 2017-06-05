@@ -4,3 +4,12 @@
  * @file
  * Helper functions.
  */
+
+
+function novo_master_preprocess_page() {
+  $vocab = taxonomy_vocabulary_machine_name_load("states2");
+  kpr($vocab);
+
+  $vocab = taxonomy_vocabulary_machine_name_load("states2");
+  kpr($vocab);
+}
