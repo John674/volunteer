@@ -9,6 +9,7 @@
  * Implements hook_install().
  */
 function novo_master_install() {
+  // Enable modules.
   $module_list = array(
     'menu',
     'admin_menu',
@@ -30,16 +31,14 @@ function novo_master_install() {
     'views',
     'views_ui',
     'views_data_export',
-    'strongarm'
+    'strongarm',
+    'taxonomy',
+    'list',
+    'novo_content_feature'
   );
-  module_enable($module_list);
-}
 
-/**
- * Enable Novo theme.
- */
-function novo_master_update_7101() {
-  watchdog("svip", "test");
+  // Change theme.
+  module_enable($module_list);
   $theme_list = array(
     'bootstrap',
     'novo',
@@ -48,64 +47,61 @@ function novo_master_update_7101() {
   variable_set('theme_default', 'novo');
   variable_set('admin_theme', 'seven');
   theme_disable(array('bartik'));
-}
 
-/**
- * Enable taxonomy. Enable List. Add States.
- */
-function novo_master_update_7102() {
-  module_enable(array('taxonomy', 'list'));
-  $state_list = array('AL'=>"Alabama",
-    'AK'=>"Alaska",
-    'AZ'=>"Arizona",
-    'AR'=>"Arkansas",
-    'CA'=>"California",
-    'CO'=>"Colorado",
-    'CT'=>"Connecticut",
-    'DE'=>"Delaware",
-    'DC'=>"District Of Columbia",
-    'FL'=>"Florida",
-    'GA'=>"Georgia",
-    'HI'=>"Hawaii",
-    'ID'=>"Idaho",
-    'IL'=>"Illinois",
-    'IN'=>"Indiana",
-    'IA'=>"Iowa",
-    'KS'=>"Kansas",
-    'KY'=>"Kentucky",
-    'LA'=>"Louisiana",
-    'ME'=>"Maine",
-    'MD'=>"Maryland",
-    'MA'=>"Massachusetts",
-    'MI'=>"Michigan",
-    'MN'=>"Minnesota",
-    'MS'=>"Mississippi",
-    'MO'=>"Missouri",
-    'MT'=>"Montana",
-    'NE'=>"Nebraska",
-    'NV'=>"Nevada",
-    'NH'=>"New Hampshire",
-    'NJ'=>"New Jersey",
-    'NM'=>"New Mexico",
-    'NY'=>"New York",
-    'NC'=>"North Carolina",
-    'ND'=>"North Dakota",
-    'OH'=>"Ohio",
-    'OK'=>"Oklahoma",
-    'OR'=>"Oregon",
-    'PA'=>"Pennsylvania",
-    'RI'=>"Rhode Island",
-    'SC'=>"South Carolina",
-    'SD'=>"South Dakota",
-    'TN'=>"Tennessee",
-    'TX'=>"Texas",
-    'UT'=>"Utah",
-    'VT'=>"Vermont",
-    'VA'=>"Virginia",
-    'WA'=>"Washington",
-    'WV'=>"West Virginia",
-    'WI'=>"Wisconsin",
-    'WY'=>"Wyoming");
+  // Add States.
+  $state_list = array(
+    'AL' => "Alabama",
+    'AK' => "Alaska",
+    'AZ' => "Arizona",
+    'AR' => "Arkansas",
+    'CA' => "California",
+    'CO' => "Colorado",
+    'CT' => "Connecticut",
+    'DE' => "Delaware",
+    'DC' => "District Of Columbia",
+    'FL' => "Florida",
+    'GA' => "Georgia",
+    'HI' => "Hawaii",
+    'ID' => "Idaho",
+    'IL' => "Illinois",
+    'IN' => "Indiana",
+    'IA' => "Iowa",
+    'KS' => "Kansas",
+    'KY' => "Kentucky",
+    'LA' => "Louisiana",
+    'ME' => "Maine",
+    'MD' => "Maryland",
+    'MA' => "Massachusetts",
+    'MI' => "Michigan",
+    'MN' => "Minnesota",
+    'MS' => "Mississippi",
+    'MO' => "Missouri",
+    'MT' => "Montana",
+    'NE' => "Nebraska",
+    'NV' => "Nevada",
+    'NH' => "New Hampshire",
+    'NJ' => "New Jersey",
+    'NM' => "New Mexico",
+    'NY' => "New York",
+    'NC' => "North Carolina",
+    'ND' => "North Dakota",
+    'OH' => "Ohio",
+    'OK' => "Oklahoma",
+    'OR' => "Oregon",
+    'PA' => "Pennsylvania",
+    'RI' => "Rhode Island",
+    'SC' => "South Carolina",
+    'SD' => "South Dakota",
+    'TN' => "Tennessee",
+    'TX' => "Texas",
+    'UT' => "Utah",
+    'VT' => "Vermont",
+    'VA' => "Virginia",
+    'WA' => "Washington",
+    'WV' => "West Virginia",
+    'WI' => "Wisconsin",
+    'WY' => "Wyoming"
+  );
 
   $vocab = taxonomy_vocabulary_machine_name_load("states");
   if (empty($vocab)) {
@@ -119,7 +115,7 @@ function novo_master_update_7102() {
   }
   $vid = $vocab->vid;
 
-  foreach($state_list as $abbr => $state_name) {
+  foreach ($state_list as $abbr => $state_name) {
     $term = new stdClass();
     $term->name = $state_name;
     $term->description = $abbr;
@@ -129,9 +125,8 @@ function novo_master_update_7102() {
 }
 
 /**
- * Enable novo_content_feature.
+ * Revert novo_content_feature.
  */
-function novo_master_update_7103() {
-  module_enable(array('novo_content_feature'));
+function novo_master_update_7101() {
   features_revert_module('novo_content_feature');
 }
