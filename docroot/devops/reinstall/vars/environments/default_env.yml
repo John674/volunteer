@@ -7,6 +7,8 @@ env:
     - { name: 'devel', status: true }
     - { name: 'views_ui', status: false }
     - { name: 'diff', status: false }
+    - { name: 'novo_dev', status: true }
+    - { name: 'memcache', status: true }
   drush_commands:
     # Update admin username and password.
     - { name: 'sqlq', status: true, arguments: "\"UPDATE users SET name='{{ drupal_user }}' WHERE uid=1\"" }
@@ -18,3 +20,6 @@ env:
     - { name: '$conf["preprocess_css"]', status: true, value: '0' }
     - { name: '$conf["preprocess_js"]', status: true, value: '0' }
     - { name: '$conf["stage_file_proxy_origin"]', status: false, value: "{{ origin_site_url }}" }
+    - { name: '$conf["cache_backends"][]', status: true, value: 'sites/all/modules/contrib/memcache/memcache.inc' }
+    - { name: '$conf["cache_default_class"]', status: true, value: 'MemCacheDrupal' }
+    - { name: '$conf["memcache_key_prefix"]', status: true, value: 'ha" . hash("crc32", $drupal_hash_salt) . "ck' }
