@@ -9,6 +9,14 @@
  */
 function novo_taxonomy_feature_taxonomy_default_vocabularies() {
   return array(
+    'gender' => array(
+      'name' => 'Gender',
+      'machine_name' => 'gender',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'states' => array(
       'name' => 'States',
       'machine_name' => 'states',
