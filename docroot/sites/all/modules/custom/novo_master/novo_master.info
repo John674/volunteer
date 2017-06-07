@@ -3,3 +3,11 @@ description = Master module with hook_update()'s.
 core = 7.x
 package = Novo
 version = 7.x-1.1
+
+dependencies[] = novo_content_feature
+dependencies[] = novo_taxonomy_feature
+dependencies[] = jquery_update
+dependencies[] = libraries
+dependencies[] = entity
+dependencies[] = entitycache
+
