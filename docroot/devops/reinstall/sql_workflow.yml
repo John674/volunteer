@@ -5,8 +5,9 @@
 # - Running registry rebuild (when modules have been moved to new directory)
 # - Running database updates
 - name: Start the MySQL service
-  service: 
-    name: mysql 
+  sudo: yes
+  service:
+    name: mysql
     state: started
     enabled: true
     
