@@ -9,35 +9,18 @@
  * Implements hook_install().
  */
 function novo_master_install() {
-
-  //all this code must be disabled later
-
   // Enable modules.
   $module_list = array(
     'menu',
     'better_exposed_filters',
-//    'ctools',
-//    'date',
-//    'entity',
-//    'entitycache',
-//    'features',
     'field_collection',
     'field_group',
-//    'jquery_update',
-//    'libraries',
-//    'memcache',
-//    'module_filter',
     'panels',
     'views',
     'views_data_export',
     'strongarm',
-//    'taxonomy',
-    'list',
-//    'novo_content_feature'
+    'list'
   );
 
   module_enable($module_list);
-
 }
-
-
