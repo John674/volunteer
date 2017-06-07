@@ -24,3 +24,18 @@ function novo_master_install() {
 
   module_enable($module_list);
 }
+
+/**
+ *  Enable modules Date,Date Popup, Number, Telephone
+ */
+
+function novo_master_update_7001() {
+  // Enable modules.
+  $module_list = array(
+    'date',
+    'date_popup',
+    'number',
+    'telephone'
+  );
+  module_enable($module_list);
+}
