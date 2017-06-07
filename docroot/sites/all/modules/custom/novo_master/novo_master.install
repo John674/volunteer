@@ -24,10 +24,3 @@ function novo_master_install() {
 
   module_enable($module_list);
 }
-
-/**
- * Revert content feature
- */
-function novo_master_update_7101() {
-  features_revert_module("novo_content_feature");
-}
