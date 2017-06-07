@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the novo installation profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Performs actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function novo_profile_install() {
+  $theme_list = array(
+    'bootstrap',
+    'novo',
+  );
+  theme_enable($theme_list);
+  variable_set('theme_default', 'novo');
+  variable_set('admin_theme', 'seven');
+  theme_disable(array('bartik'));
+}
