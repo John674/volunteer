@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo roles/permissions feature feature.
+ */
+
+include_once 'novo_roles_permissions_feature.features.inc';
