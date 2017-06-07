@@ -24,3 +24,11 @@ function novo_master_install() {
 
   module_enable($module_list);
 }
+
+/**
+ *  Rebuild novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7101() {
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+}
