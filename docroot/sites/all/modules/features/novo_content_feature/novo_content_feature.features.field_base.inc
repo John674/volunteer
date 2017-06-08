@@ -195,6 +195,21 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
+  // Exported field_base: 'field_email'.
+  $field_bases['field_email'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_email',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'email',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'email',
+  );
+
   // Exported field_base: 'field_food_allergies'.
   $field_bases['field_food_allergies'] = array(
     'active' => 1,
@@ -438,6 +453,40 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_parent_guardian_phone_1'.
+  $field_bases['field_parent_guardian_phone_1'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_parent_guardian_phone_1',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'phone',
+    'settings' => array(
+      'country' => 'ca',
+    ),
+    'translatable' => 0,
+    'type' => 'phone',
+  );
+
+  // Exported field_base: 'field_parent_guardian_phone_2'.
+  $field_bases['field_parent_guardian_phone_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_parent_guardian_phone_2',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'phone',
+    'settings' => array(
+      'country' => 'ca',
+    ),
+    'translatable' => 0,
+    'type' => 'phone',
+  );
+
   // Exported field_base: 'field_parent_guardian_relation'.
   $field_bases['field_parent_guardian_relation'] = array(
     'active' => 1,
@@ -445,27 +494,6 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_parent_guardian_relation',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_primary_contact_email'.
-  $field_bases['field_primary_contact_email'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_primary_contact_email',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -522,13 +550,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_primary_contact_phone_1'.
-  $field_bases['field_primary_contact_phone_1'] = array(
+  // Exported field_base: 'field_primary_phone_1'.
+  $field_bases['field_primary_phone_1'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_primary_contact_phone_1',
+    'field_name' => 'field_primary_phone_1',
     'indexes' => array(),
     'locked' => 0,
     'module' => 'phone',
@@ -539,13 +567,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'phone',
   );
 
-  // Exported field_base: 'field_primary_contact_phone_2'.
-  $field_bases['field_primary_contact_phone_2'] = array(
+  // Exported field_base: 'field_primary_phone_2'.
+  $field_bases['field_primary_phone_2'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_primary_contact_phone_2',
+    'field_name' => 'field_primary_phone_2',
     'indexes' => array(),
     'locked' => 0,
     'module' => 'phone',
@@ -580,27 +608,6 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
-  );
-
-  // Exported field_base: 'field_secondary_contact_email'.
-  $field_bases['field_secondary_contact_email'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_secondary_contact_email',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
   );
 
   // Exported field_base: 'field_secondary_contact_first_na'.
@@ -645,13 +652,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_secondary_contact_phone_1'.
-  $field_bases['field_secondary_contact_phone_1'] = array(
+  // Exported field_base: 'field_secondary_phone_1'.
+  $field_bases['field_secondary_phone_1'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_secondary_contact_phone_1',
+    'field_name' => 'field_secondary_phone_1',
     'indexes' => array(),
     'locked' => 0,
     'module' => 'phone',
@@ -662,13 +669,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'phone',
   );
 
-  // Exported field_base: 'field_secondary_contact_phone_2'.
-  $field_bases['field_secondary_contact_phone_2'] = array(
+  // Exported field_base: 'field_secondary_phone_2'.
+  $field_bases['field_secondary_phone_2'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_secondary_contact_phone_2',
+    'field_name' => 'field_secondary_phone_2',
     'indexes' => array(),
     'locked' => 0,
     'module' => 'phone',
