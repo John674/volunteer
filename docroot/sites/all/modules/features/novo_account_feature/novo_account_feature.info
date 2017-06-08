@@ -1,0 +1,6 @@
+name = Novo account feature
+core = 7.x
+package = Novo
+version = 7.x-1.0
+dependencies[] = email_registration
+features[features_api][] = api:2
