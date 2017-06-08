@@ -89,8 +89,17 @@ function novo_master_update_7106() {
 }
 
 /**
- * Rebuild novo_content_feature and novo_content_feature, disable telephone.
+ * Rebuild novo_content_feature.
  */
 function novo_master_update_7107() {
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ * Rebuild novo_content_feature and enable phone.
+ */
+function novo_master_update_7108() {
+  // Enable modules.
+  module_enable(array('phone'));
   features_revert_module("novo_content_feature");
 }
