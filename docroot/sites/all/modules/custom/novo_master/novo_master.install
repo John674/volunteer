@@ -110,3 +110,12 @@ function novo_master_update_7108() {
 function novo_master_update_7109() {
   module_enable(array('novo_master_feature'));
 }
+
+/**
+ *  Revert novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7110() {
+  module_enable(array('novo_taxonomy_feature'));
+  module_enable(array('novo_views_feature'));
+  module_enable(array('novo_content_feature'));
+}

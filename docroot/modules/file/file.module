@@ -510,7 +510,7 @@ function file_managed_file_value(&$element, $input = FALSE, $form_state = NULL) 
   }
 
   // Process any input and save new uploads.
-  if ($input !== FALSE) {
+  if ($input !== FALSE && $input !== NULL) {
     $return = $input;
 
     // Uploads take priority over all other values.
