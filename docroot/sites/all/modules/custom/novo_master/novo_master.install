@@ -74,3 +74,16 @@ function novo_master_update_7105() {
 
   module_enable($enable_module_list);
 }
+
+/**
+ * Enable Email.
+ */
+function novo_master_update_7106() {
+  // Enable modules.
+  $enable_module_list = array(
+    'email'
+  );
+  module_enable($enable_module_list);
+  features_revert_module("novo_content_feature");
+
+}
