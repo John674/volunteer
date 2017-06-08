@@ -1095,7 +1095,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => -4,
+      'weight' => 1,
     ),
   );
 
@@ -1175,7 +1175,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -1215,7 +1215,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 10,
     ),
   );
 
@@ -1255,7 +1255,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -3,
+      'weight' => 2,
     ),
   );
 
@@ -1295,7 +1295,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -2,
+      'weight' => 3,
     ),
   );
 
@@ -1337,7 +1337,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 17,
+      'weight' => 13,
     ),
   );
 
@@ -1379,12 +1379,12 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 18,
+      'weight' => 14,
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_secondary_contact_first_na'.
-  $field_instances['node-locations-field_secondary_contact_first_na'] = array(
+  // Exported field_instance: 'node-locations-field_secondary_first_name'.
+  $field_instances['node-locations-field_secondary_first_name'] = array(
     'bundle' => 'locations',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1395,7 +1395,7 @@ function novo_content_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1405,7 +1405,7 @@ function novo_content_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_secondary_contact_first_na',
+    'field_name' => 'field_secondary_first_name',
     'label' => 'Secondary Contact First Name',
     'required' => 0,
     'settings' => array(
@@ -1419,12 +1419,12 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_secondary_contact_last_nam'.
-  $field_instances['node-locations-field_secondary_contact_last_nam'] = array(
+  // Exported field_instance: 'node-locations-field_secondary_last_name'.
+  $field_instances['node-locations-field_secondary_last_name'] = array(
     'bundle' => 'locations',
     'default_value' => NULL,
     'deleted' => 0,
@@ -1435,7 +1435,7 @@ function novo_content_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1445,7 +1445,7 @@ function novo_content_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_secondary_contact_last_nam',
+    'field_name' => 'field_secondary_last_name',
     'label' => 'Secondary Contact Last Name',
     'required' => 0,
     'settings' => array(
@@ -1459,7 +1459,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 5,
     ),
   );
 
@@ -1501,7 +1501,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 19,
+      'weight' => 15,
     ),
   );
 
@@ -1543,7 +1543,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 20,
+      'weight' => 16,
     ),
   );
 
@@ -1580,7 +1580,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 11,
     ),
   );
 
@@ -1626,7 +1626,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 16,
+      'weight' => 12,
     ),
   );
 

@@ -610,13 +610,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_secondary_contact_first_na'.
-  $field_bases['field_secondary_contact_first_na'] = array(
+  // Exported field_base: 'field_secondary_first_name'.
+  $field_bases['field_secondary_first_name'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_secondary_contact_first_na',
+    'field_name' => 'field_secondary_first_name',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -631,13 +631,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_secondary_contact_last_nam'.
-  $field_bases['field_secondary_contact_last_nam'] = array(
+  // Exported field_base: 'field_secondary_last_name'.
+  $field_bases['field_secondary_last_name'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_secondary_contact_last_nam',
+    'field_name' => 'field_secondary_last_name',
     'indexes' => array(
       'format' => array(
         0 => 'format',
