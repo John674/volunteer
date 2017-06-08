@@ -13,7 +13,11 @@ function novo_content_feature_field_default_field_instances() {
   // Exported field_instance: 'node-kids-field_active_inactive'.
   $field_instances['node-kids-field_active_inactive'] = array(
     'bundle' => 'kids',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -170,7 +174,11 @@ function novo_content_feature_field_default_field_instances() {
   // Exported field_instance: 'node-kids-field_attend_church_regularly'.
   $field_instances['node-kids-field_attend_church_regularly'] = array(
     'bundle' => 'kids',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -316,7 +324,7 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Date of Birth',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -326,13 +334,13 @@ function novo_content_feature_field_default_field_instances() {
       'active' => 1,
       'module' => 'date',
       'settings' => array(
-        'increment' => 15,
+        'increment' => 30,
         'input_format' => 'm/d/Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'no_fieldset' => 0,
+        'no_fieldset' => 1,
         'text_parts' => array(),
-        'year_range' => '1917:+0',
+        'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
       'weight' => 5,
@@ -382,7 +390,11 @@ function novo_content_feature_field_default_field_instances() {
   // Exported field_instance: 'node-kids-field_gender'.
   $field_instances['node-kids-field_gender'] = array(
     'bundle' => 'kids',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 53,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -570,6 +582,46 @@ function novo_content_feature_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_middle'.
+  $field_instances['node-kids-field_middle'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_middle',
+    'label' => 'Middle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -3,
     ),
   );
 
@@ -1065,7 +1117,11 @@ function novo_content_feature_field_default_field_instances() {
   // Exported field_instance: 'node-locations-field_active_inactive'.
   $field_instances['node-locations-field_active_inactive'] = array(
     'bundle' => 'locations',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1086,7 +1142,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_active_inactive',
     'label' => 'Active / Inactive',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1931,6 +1987,7 @@ function novo_content_feature_field_default_field_instances() {
   t('Health Concerns');
   t('Job Title');
   t('Last Name');
+  t('Middle');
   t('Middle Name');
   t('Moved');
   t('Parent / Guardian First Name');
