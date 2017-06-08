@@ -19,7 +19,8 @@ function novo_master_install() {
     'views',
     'views_data_export',
     'strongarm',
-    'list'
+    'list',
+    'novo_master_feature'
   );
 
   module_enable($module_list);
@@ -31,4 +32,11 @@ function novo_master_install() {
 function novo_master_update_7101() {
   features_revert_module("novo_taxonomy_feature");
   features_revert_module("novo_content_feature");
+}
+
+/**
+ *  Enable novo_master_feature.
+ */
+function novo_master_update_7102() {
+  module_enable(array('novo_master_feature'));
 }
