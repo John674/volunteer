@@ -26,6 +26,22 @@ function novo_content_feature_node_info() {
       'title_label' => t('First Name'),
       'help' => '',
     ),
+    'locations' => array(
+      'name' => t('Locations'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Location Name'),
+      'help' => '',
+    ),
+    'staff' => array(
+      'name' => t('Staff'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('First Name'),
+      'help' => '',
+    ),
   );
   drupal_alter('node_info', $items);
   return $items;
