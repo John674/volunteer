@@ -39,3 +39,9 @@ function novo_master_update_7101() {
 function novo_master_update_7102() {
   features_revert_module("novo_content_feature");
 }
+
+*  Rebuild novo_content_feature.
+ */
+function novo_master_update_7103() {
+  features_revert_module("novo_content_feature");
+}
