@@ -3,6 +3,7 @@
 /** Constants */
 define('NOVO_VOCABULARY_STATES', 'states');
 define('NOVO_VOCABULARY_GENDER', 'gender');
+define('NOVO_VOCABULARY_GRADE', 'grade');
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
@@ -74,11 +75,36 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
   }
 
   if ($vocabulary->machine_name == NOVO_VOCABULARY_GENDER) {
-    $list = array(
+    $gender_list = array(
       'M' => "Male",
       'F' => "Female",
     );
-    foreach ($list as $abbr => $name) {
+    foreach ($gender_list as $abbr => $name) {
+      $term = new stdClass();
+      $term->name = $abbr;
+      $term->description = $name;
+      $term->vid = $vocabulary->vid;
+      taxonomy_term_save($term);
+    }
+  }
+
+  if ($vocabulary->machine_name == NOVO_VOCABULARY_GRADE) {
+    $grade_list = array(
+      'K' => "Kindergarten",
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '10' => '10',
+      '11' => '11',
+      '12' => '12',
+    );
+    foreach ($grade_list as $abbr => $name) {
       $term = new stdClass();
       $term->name = $abbr;
       $term->description = $name;
@@ -87,3 +113,4 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
     }
   }
 }
+

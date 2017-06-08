@@ -659,90 +659,6 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-kids-field_parent_guardian_phone_1'.
-  $field_instances['node-kids-field_parent_guardian_phone_1'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 22,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_parent_guardian_phone_1',
-    'label' => 'Parent / Guardian Phone 1',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 18,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_parent_guardian_phone_2'.
-  $field_instances['node-kids-field_parent_guardian_phone_2'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 23,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_parent_guardian_phone_2',
-    'label' => 'Parent / Guardian Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 19,
-    ),
-  );
-
   // Exported field_instance: 'node-kids-field_school'.
   $field_instances['node-kids-field_school'] = array(
     'bundle' => 'kids',
@@ -1899,8 +1815,6 @@ function novo_content_feature_field_default_field_instances() {
   t('Middle Name');
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
-  t('Parent / Guardian Phone 1');
-  t('Parent / Guardian Phone 2');
   t('Phone 1');
   t('Phone 2');
   t('Primary Contact Email');

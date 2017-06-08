@@ -403,40 +403,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_parent_guardian_phone_1'.
-  $field_bases['field_parent_guardian_phone_1'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_parent_guardian_phone_1',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
-  // Exported field_base: 'field_parent_guardian_phone_2'.
-  $field_bases['field_parent_guardian_phone_2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_parent_guardian_phone_2',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
   // Exported field_base: 'field_primary_contact_email'.
   $field_bases['field_primary_contact_email'] = array(
     'active' => 1,

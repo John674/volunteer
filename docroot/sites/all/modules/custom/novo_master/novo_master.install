@@ -43,3 +43,20 @@ function novo_master_update_7102() {
 function novo_master_update_7103() {
   features_revert_module("novo_content_feature");
 }
+
+
+/**
+ * Rebuild novo_content_feature and novo_content_feature
+ */
+function novo_master_update_7104() {
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_roles_permissions_feature");
+
+  // Disable modules.
+  $module_list = array(
+    'telephone'
+  );
+
+  module_disable($module_list);
+}
