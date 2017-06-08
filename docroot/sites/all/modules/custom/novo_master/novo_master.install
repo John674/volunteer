@@ -87,3 +87,10 @@ function novo_master_update_7106() {
   features_revert_module("novo_content_feature");
 
 }
+
+/**
+ * Rebuild novo_content_feature and novo_content_feature, disable telephone.
+ */
+function novo_master_update_7107() {
+  features_revert_module("novo_content_feature");
+}
