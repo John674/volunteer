@@ -127,17 +127,22 @@ function novo_content_feature_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_church',
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'taxonomy',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'church',
+          'parent' => 0,
+        ),
+      ),
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_city'.
@@ -256,6 +261,32 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_grade'.
+  $field_bases['field_grade'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_grade',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'grade',
+          'parent' => 0,
+        ),
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
   // Exported field_base: 'field_health_concerns'.
   $field_bases['field_health_concerns'] = array(
     'active' => 1,
@@ -319,27 +350,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_middle'.
-  $field_bases['field_middle'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_middle',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_middle_name'.
   $field_bases['field_middle_name'] = array(
     'active' => 1,
@@ -359,6 +369,31 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_moved'.
+  $field_bases['field_moved'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_moved',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => 'Moved',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_parent_guardian_first_name'.
@@ -389,6 +424,27 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_parent_guardian_last_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_parent_guardian_relation'.
+  $field_bases['field_parent_guardian_relation'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_parent_guardian_relation',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -508,17 +564,22 @@ function novo_content_feature_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_school',
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'taxonomy',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => '',
+          'parent' => 0,
+        ),
+      ),
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_secondary_contact_email'.

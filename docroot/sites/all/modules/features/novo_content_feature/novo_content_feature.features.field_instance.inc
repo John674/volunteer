@@ -10,6 +10,43 @@
 function novo_content_feature_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-kids-field_active_inactive'.
+  $field_instances['node-kids-field_active_inactive'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_active_inactive',
+    'label' => 'Active / Inactive',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance: 'node-kids-field_address_1'.
   $field_instances['node-kids-field_address_1'] = array(
     'bundle' => 'kids',
@@ -46,7 +83,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 7,
     ),
   );
 
@@ -86,7 +123,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 8,
     ),
   );
 
@@ -113,7 +150,7 @@ function novo_content_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_apt',
-    'label' => 'Apt #',
+    'label' => 'Address Apartment number',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -126,7 +163,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 9,
     ),
   );
 
@@ -142,7 +179,7 @@ function novo_content_feature_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -154,7 +191,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_attend_church_regularly',
     'label' => 'Attend Church Regularly?',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -163,7 +200,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 16,
     ),
   );
 
@@ -176,10 +213,10 @@ function novo_content_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -193,17 +230,17 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Church',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 10,
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 15,
     ),
   );
 
@@ -243,7 +280,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 10,
     ),
   );
 
@@ -276,7 +313,7 @@ function novo_content_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_dob',
-    'label' => 'DOB',
+    'label' => 'Date of Birth',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -290,7 +327,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'M j Y - H:i:s',
+        'input_format' => 'm/d/Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -298,7 +335,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '1917:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 0,
+      'weight' => 5,
     ),
   );
 
@@ -338,7 +375,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 12,
+      'weight' => 17,
     ),
   );
 
@@ -375,7 +412,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 1,
+      'weight' => 6,
     ),
   );
 
@@ -415,7 +452,44 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -4,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_grade'.
+  $field_instances['node-kids-field_grade'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_grade',
+    'label' => 'Grade',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 24,
     ),
   );
 
@@ -455,7 +529,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 18,
     ),
   );
 
@@ -495,47 +569,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -2,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_middle'.
-  $field_instances['node-kids-field_middle'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_middle',
-    'label' => 'Middle',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => -3,
+      'weight' => 3,
     ),
   );
 
@@ -575,7 +609,50 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -3,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_moved'.
+  $field_instances['node-kids-field_moved'] = array(
+    'bundle' => 'kids',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 27,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_moved',
+    'label' => 'Moved',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 23,
     ),
   );
 
@@ -615,7 +692,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 19,
     ),
   );
 
@@ -655,12 +732,12 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 20,
     ),
   );
 
-  // Exported field_instance: 'node-kids-field_school'.
-  $field_instances['node-kids-field_school'] = array(
+  // Exported field_instance: 'node-kids-field_parent_guardian_relation'.
+  $field_instances['node-kids-field_parent_guardian_relation'] = array(
     'bundle' => 'kids',
     'default_value' => NULL,
     'deleted' => 0,
@@ -671,7 +748,7 @@ function novo_content_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 28,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -681,8 +758,8 @@ function novo_content_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_school',
-    'label' => 'School',
+    'field_name' => 'field_parent_guardian_relation',
+    'label' => 'Parent / Guardian Relation',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -695,7 +772,46 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_school'.
+  $field_instances['node-kids-field_school'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_school',
+    'label' => 'School',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 13,
     ),
   );
 
@@ -732,7 +848,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 11,
     ),
   );
 
@@ -772,7 +888,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -1,
+      'weight' => 4,
     ),
   );
 
@@ -812,7 +928,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 14,
     ),
   );
 
@@ -847,7 +963,7 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Zip',
     'required' => 0,
     'settings' => array(
-      'max' => 999999,
+      'max' => 99999,
       'min' => 10000,
       'prefix' => '',
       'suffix' => '',
@@ -858,7 +974,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 12,
     ),
   );
 
@@ -1799,22 +1915,24 @@ function novo_content_feature_field_default_field_instances() {
   t('Active / Inactive');
   t('Address 1');
   t('Address 2');
-  t('Apt #');
+  t('Address Apartment number');
   t('Attend Church Regularly?');
   t('Church');
   t('City');
-  t('DOB');
+  t('Date of Birth');
   t('Email');
   t('Food Allergies');
   t('Gender');
   t('Goes By');
+  t('Grade');
   t('Health Concerns');
   t('Job Title');
   t('Last Name');
-  t('Middle');
   t('Middle Name');
+  t('Moved');
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
+  t('Parent / Guardian Relation');
   t('Phone 1');
   t('Phone 2');
   t('Primary Contact Email');
