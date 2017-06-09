@@ -97,10 +97,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_middle']['settings'] = array(
     'trim_length' => '50',
   );
-  /* Field: Content: Parent / Guardian Phone 1 */
-  $handler->display->display_options['fields']['field_parent_guardian_phone_1']['id'] = 'field_parent_guardian_phone_1';
-  $handler->display->display_options['fields']['field_parent_guardian_phone_1']['table'] = 'field_data_field_parent_guardian_phone_1';
-  $handler->display->display_options['fields']['field_parent_guardian_phone_1']['field'] = 'field_parent_guardian_phone_1';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -241,10 +237,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_address_1']['settings'] = array(
     'trim_length' => '50',
   );
-  /* Field: Content: Phone 1 */
-  $handler->display->display_options['fields']['field_primary_phone_1']['id'] = 'field_primary_phone_1';
-  $handler->display->display_options['fields']['field_primary_phone_1']['table'] = 'field_data_field_primary_phone_1';
-  $handler->display->display_options['fields']['field_primary_phone_1']['field'] = 'field_primary_phone_1';
   /* Field: Content: Active / Inactive */
   $handler->display->display_options['fields']['field_active_inactive']['id'] = 'field_active_inactive';
   $handler->display->display_options['fields']['field_active_inactive']['table'] = 'field_data_field_active_inactive';
@@ -363,10 +355,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['settings'] = array(
     'trim_length' => '50',
   );
-  /* Field: Content: Phone 1 */
-  $handler->display->display_options['fields']['field_primary_phone_1']['id'] = 'field_primary_phone_1';
-  $handler->display->display_options['fields']['field_primary_phone_1']['table'] = 'field_data_field_primary_phone_1';
-  $handler->display->display_options['fields']['field_primary_phone_1']['field'] = 'field_primary_phone_1';
   /* Field: Content: Email */
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
