@@ -13,9 +13,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'access administration menu'.
   $permissions['access administration menu'] = array(
     'name' => 'access administration menu',
-    'roles' => array(
-      'siteadmin' => 'siteadmin',
-    ),
+    'roles' => array(),
     'module' => 'admin_menu',
   );
 
@@ -80,6 +78,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'create application content'.
+  $permissions['create application content'] = array(
+    'name' => 'create application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create kids content'.
   $permissions['create kids content'] = array(
     'name' => 'create kids content',
@@ -101,6 +108,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'create staff content'.
   $permissions['create staff content'] = array(
     'name' => 'create staff content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any application content'.
+  $permissions['delete any application content'] = array(
+    'name' => 'delete any application content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -134,6 +150,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own application content'.
+  $permissions['delete own application content'] = array(
+    'name' => 'delete own application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own kids content'.
   $permissions['delete own kids content'] = array(
     'name' => 'delete own kids content',
@@ -161,6 +186,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any application content'.
+  $permissions['edit any application content'] = array(
+    'name' => 'edit any application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any kids content'.
   $permissions['edit any kids content'] = array(
     'name' => 'edit any kids content',
@@ -182,6 +216,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'edit any staff content'.
   $permissions['edit any staff content'] = array(
     'name' => 'edit any staff content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own application content'.
+  $permissions['edit own application content'] = array(
+    'name' => 'edit own application content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),

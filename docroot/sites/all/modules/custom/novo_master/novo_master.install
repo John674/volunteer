@@ -119,3 +119,10 @@ function novo_master_update_7110() {
   module_enable(array('novo_views_feature'));
   module_enable(array('novo_content_feature'));
 }
+
+/**
+ *  Enable contextual.
+ */
+function novo_master_update_7111() {
+  module_enable(array('contextual'));
+}
