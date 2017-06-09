@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function novo_content_feature_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -18,8 +21,32 @@ function novo_content_feature_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function novo_content_feature_node_info() {
   $items = array(
+    'application' => array(
+      'name' => t('Application'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Legal First Name'),
+      'help' => '',
+    ),
     'kids' => array(
       'name' => t('Kids'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('First Name'),
+      'help' => '',
+    ),
+    'locations' => array(
+      'name' => t('Locations'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Location Name'),
+      'help' => '',
+    ),
+    'staff' => array(
+      'name' => t('Staff'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

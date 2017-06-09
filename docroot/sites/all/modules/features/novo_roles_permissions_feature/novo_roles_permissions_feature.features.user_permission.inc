@@ -89,9 +89,45 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create locations content'.
+  $permissions['create locations content'] = array(
+    'name' => 'create locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create staff content'.
+  $permissions['create staff content'] = array(
+    'name' => 'create staff content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any kids content'.
   $permissions['delete any kids content'] = array(
     'name' => 'delete any kids content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any locations content'.
+  $permissions['delete any locations content'] = array(
+    'name' => 'delete any locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any staff content'.
+  $permissions['delete any staff content'] = array(
+    'name' => 'delete any staff content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -107,6 +143,24 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own locations content'.
+  $permissions['delete own locations content'] = array(
+    'name' => 'delete own locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own staff content'.
+  $permissions['delete own staff content'] = array(
+    'name' => 'delete own staff content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any kids content'.
   $permissions['edit any kids content'] = array(
     'name' => 'edit any kids content',
@@ -116,9 +170,45 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any locations content'.
+  $permissions['edit any locations content'] = array(
+    'name' => 'edit any locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any staff content'.
+  $permissions['edit any staff content'] = array(
+    'name' => 'edit any staff content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own kids content'.
   $permissions['edit own kids content'] = array(
     'name' => 'edit own kids content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own locations content'.
+  $permissions['edit own locations content'] = array(
+    'name' => 'edit own locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own staff content'.
+  $permissions['edit own staff content'] = array(
+    'name' => 'edit own staff content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),

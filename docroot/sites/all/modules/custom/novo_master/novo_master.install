@@ -19,7 +19,8 @@ function novo_master_install() {
     'views',
     'views_data_export',
     'strongarm',
-    'list'
+    'list',
+    'novo_master_feature'
   );
 
   module_enable($module_list);
@@ -31,4 +32,90 @@ function novo_master_install() {
 function novo_master_update_7101() {
   features_revert_module("novo_taxonomy_feature");
   features_revert_module("novo_content_feature");
+}
+
+function novo_master_update_7102() {
+  features_revert_module("novo_content_feature");
+}
+/**
+ *  Rebuild novo_content_feature.
+ */
+function novo_master_update_7103() {
+  features_revert_module("novo_content_feature");
+}
+
+
+/**
+ * Rebuild novo_content_feature and novo_content_feature, disable telephone.
+ */
+function novo_master_update_7104() {
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_roles_permissions_feature");
+
+  // Disable modules.
+  $disable_module_list = array(
+    'telephone'
+  );
+
+  module_disable($disable_module_list);
+}
+
+/**
+ * Enable Email.
+ */
+function novo_master_update_7105() {
+  features_revert_module("novo_content_feature");
+
+  // Enable modules.
+  $enable_module_list = array(
+    'email'
+  );
+
+  module_enable($enable_module_list);
+}
+
+/**
+ * Enable Email.
+ */
+function novo_master_update_7106() {
+  // Enable modules.
+  $enable_module_list = array(
+    'email'
+  );
+  module_enable($enable_module_list);
+  features_revert_module("novo_content_feature");
+
+}
+
+/**
+ * Rebuild novo_content_feature.
+ */
+function novo_master_update_7107() {
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ * Rebuild novo_content_feature and enable phone.
+ */
+function novo_master_update_7108() {
+  // Enable modules.
+  module_enable(array('phone'));
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ *  Enable novo_master_feature.
+ */
+function novo_master_update_7109() {
+  module_enable(array('novo_master_feature'));
+}
+
+/**
+ *  Revert novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7110() {
+  module_enable(array('novo_taxonomy_feature'));
+  module_enable(array('novo_views_feature'));
+  module_enable(array('novo_content_feature'));
 }

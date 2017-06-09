@@ -3,87 +3,273 @@
 /** Constants */
 define('NOVO_VOCABULARY_STATES', 'states');
 define('NOVO_VOCABULARY_GENDER', 'gender');
+define('NOVO_VOCABULARY_GRADE', 'grade');
+define('NOVO_VOCABULARY_APPLICATION_SITE', 'application_site');
+define('NOVO_VOCABULARY_COLOR_PREFERENCE', 'color_preference');
+define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
+define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
+
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
  */
 function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
-  if ($vocabulary->machine_name == NOVO_VOCABULARY_STATES) {
-    //lets import known states
-    $state_list = array(
-      'AL' => "Alabama",
-      'AK' => "Alaska",
-      'AZ' => "Arizona",
-      'AR' => "Arkansas",
-      'CA' => "California",
-      'CO' => "Colorado",
-      'CT' => "Connecticut",
-      'DE' => "Delaware",
-      'DC' => "District Of Columbia",
-      'FL' => "Florida",
-      'GA' => "Georgia",
-      'HI' => "Hawaii",
-      'ID' => "Idaho",
-      'IL' => "Illinois",
-      'IN' => "Indiana",
-      'IA' => "Iowa",
-      'KS' => "Kansas",
-      'KY' => "Kentucky",
-      'LA' => "Louisiana",
-      'ME' => "Maine",
-      'MD' => "Maryland",
-      'MA' => "Massachusetts",
-      'MI' => "Michigan",
-      'MN' => "Minnesota",
-      'MS' => "Mississippi",
-      'MO' => "Missouri",
-      'MT' => "Montana",
-      'NE' => "Nebraska",
-      'NV' => "Nevada",
-      'NH' => "New Hampshire",
-      'NJ' => "New Jersey",
-      'NM' => "New Mexico",
-      'NY' => "New York",
-      'NC' => "North Carolina",
-      'ND' => "North Dakota",
-      'OH' => "Ohio",
-      'OK' => "Oklahoma",
-      'OR' => "Oregon",
-      'PA' => "Pennsylvania",
-      'RI' => "Rhode Island",
-      'SC' => "South Carolina",
-      'SD' => "South Dakota",
-      'TN' => "Tennessee",
-      'TX' => "Texas",
-      'UT' => "Utah",
-      'VT' => "Vermont",
-      'VA' => "Virginia",
-      'WA' => "Washington",
-      'WV' => "West Virginia",
-      'WI' => "Wisconsin",
-      'WY' => "Wyoming"
-    );
-    foreach ($state_list as $abbr => $state_name) {
-      $term = new stdClass();
-      $term->name = $state_name;
-      $term->description = $abbr;
-      $term->vid = $vocabulary->vid;
-      taxonomy_term_save($term);
-    }
-  }
 
-  if ($vocabulary->machine_name == NOVO_VOCABULARY_GENDER) {
-    $list = array(
-      'M' => "Male",
-      'F' => "Female",
-    );
-    foreach ($list as $abbr => $name) {
-      $term = new stdClass();
-      $term->name = $abbr;
-      $term->description = $name;
-      $term->vid = $vocabulary->vid;
-      taxonomy_term_save($term);
-    }
+  switch ($vocabulary->machine_name) {
+    case NOVO_VOCABULARY_STATES:
+      _novo_taxonomy_feature_add_states($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_GENDER:
+      _novo_taxonomy_feature_add_gender($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_GRADE:
+      _novo_taxonomy_feature_add_grade($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_APPLICATION_SITE:
+      _novo_taxonomy_feature_add_application_site($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_COLOR_PREFERENCE:
+      _novo_taxonomy_feature_add_color_preference($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_T_SHIRT_SIZE:
+      _novo_taxonomy_feature_add_t_shirt_size($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES:
+      _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary);
+      break;
+
+  }
+}
+
+/**
+ * Import states.
+ */
+function _novo_taxonomy_feature_add_states($vocabulary) {
+  //lets import known states
+  $state_list = array(
+    'AL' => "Alabama",
+    'AK' => "Alaska",
+    'AZ' => "Arizona",
+    'AR' => "Arkansas",
+    'CA' => "California",
+    'CO' => "Colorado",
+    'CT' => "Connecticut",
+    'DE' => "Delaware",
+    'DC' => "District Of Columbia",
+    'FL' => "Florida",
+    'GA' => "Georgia",
+    'HI' => "Hawaii",
+    'ID' => "Idaho",
+    'IL' => "Illinois",
+    'IN' => "Indiana",
+    'IA' => "Iowa",
+    'KS' => "Kansas",
+    'KY' => "Kentucky",
+    'LA' => "Louisiana",
+    'ME' => "Maine",
+    'MD' => "Maryland",
+    'MA' => "Massachusetts",
+    'MI' => "Michigan",
+    'MN' => "Minnesota",
+    'MS' => "Mississippi",
+    'MO' => "Missouri",
+    'MT' => "Montana",
+    'NE' => "Nebraska",
+    'NV' => "Nevada",
+    'NH' => "New Hampshire",
+    'NJ' => "New Jersey",
+    'NM' => "New Mexico",
+    'NY' => "New York",
+    'NC' => "North Carolina",
+    'ND' => "North Dakota",
+    'OH' => "Ohio",
+    'OK' => "Oklahoma",
+    'OR' => "Oregon",
+    'PA' => "Pennsylvania",
+    'RI' => "Rhode Island",
+    'SC' => "South Carolina",
+    'SD' => "South Dakota",
+    'TN' => "Tennessee",
+    'TX' => "Texas",
+    'UT' => "Utah",
+    'VT' => "Vermont",
+    'VA' => "Virginia",
+    'WA' => "Washington",
+    'WV' => "West Virginia",
+    'WI' => "Wisconsin",
+    'WY' => "Wyoming"
+  );
+  foreach ($state_list as $abbr => $state_name) {
+    $term = new stdClass();
+    $term->name = $state_name;
+    $term->description = $abbr;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import gender.
+ */
+function _novo_taxonomy_feature_add_gender($vocabulary) {
+  $gender_list = array(
+    'M' => "Male",
+    'F' => "Female",
+  );
+  foreach ($gender_list as $abbr => $name) {
+    $term = new stdClass();
+    $term->name = $abbr;
+    $term->description = $name;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import grade.
+ */
+function _novo_taxonomy_feature_add_grade($vocabulary) {
+  $grade_list = array(
+    'K' => "Kindergarten",
+    '1' => '1',
+    '2' => '2',
+    '3' => '3',
+    '4' => '4',
+    '5' => '5',
+    '6' => '6',
+    '7' => '7',
+    '8' => '8',
+    '9' => '9',
+    '10' => '10',
+    '11' => '11',
+    '12' => '12',
+  );
+  foreach ($grade_list as $abbr => $name) {
+    $term = new stdClass();
+    $term->name = $abbr;
+    $term->description = $name;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import application_site.
+ */
+function _novo_taxonomy_feature_add_application_site($vocabulary) {
+  $list = array(
+    'Monday, Ambassador Courts Apartments, 4:15pm - 7:15pm',
+    'Monday, Fred Factory Gardens, 4:30pm - 7:00pm',
+    'Tuesday, Edwards Elementary School, 3:00pm - 5:30pm',
+    'Tuesday, Northeast Scattered Sites, 4:30pm - 7:30pm',
+    'Tuesday, Oak Grove Apartments, 5:00pm - 8:15pm',
+    'Thursday, Tulakes Elementary School, 3:00pm - 5:30pm',
+    'Thursday, Sooner Haven Apartments, 5:00pm - 8:00pm',
+    'Thursday, Forest Creek Apartments, 5:15pm - 8:15pm'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import color_preference.
+ */
+function _novo_taxonomy_feature_add_color_preference($vocabulary) {
+  $list = array(
+    'Cardinal Red',
+    'Heather Gray',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import t_shirt_size.
+ */
+function _novo_taxonomy_feature_add_t_shirt_size($vocabulary) {
+  $list = array(
+    'S',
+    'L',
+    'M',
+    'XL',
+    'XXL',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import volunteer_interests_roles.
+ */
+function _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary) {
+  $list = array(
+    'Assistant Liaison' => array(
+      3,
+      "Assist the Community Liaison with logistics, emergencies, and more."
+    ),
+    'Buddy' => array(
+      3,
+      "Stays with one specific child, helps them throughout the program."
+    ),
+    'Canvasser' => array(
+      2,
+      "Assists with walking and picking up children from their homes / apartments before programming, and / or walking them home after programming."
+    ),
+    'Greeter / Registration Leader or Helper' => array(
+      1,
+      "Ensures child is registered, checks children into the program, helps them find their nametags, and directs them to their Small Groups and Leaders."
+    ),
+    'Large Group Leader' => array(
+      2,
+      "Prepares for and leads various parts of Large Group each week (Games, Songs, Testimony, Bible Story, or Challenge)."
+    ),
+    'Prayer Team' => array(
+      1,
+      "Commits to pray for the program, volunteers, and children. Receives updated prayer requests and is able to pray specifcally for the team and the kids."
+    ),
+    'Program Substitute' => array(
+      2,
+      "Is willing to be “on call” if needed to fll in because of the absence of another teacher, and would fll in if available."
+    ),
+    'Small Group Helper' => array(
+      2,
+      "Assists the Small Group Leader. Tasks include helping children pay attention, assisting with activities, assisting with discipline problems, and more."
+    ),
+    'Small Group Leader' => array(
+      3,
+      "Leads a group of 5 - 10 children each week. Develops relationships with each child, leads activities, and teaches Biblical truth."
+    ),
+    'Snack Leader / Helper' => array(
+      1,
+      "Assembles the snacks needed for the programs, delivers them to the small group leaders of each Small Group."
+    ),
+
+  );
+  foreach ($list as $key => $data) {
+    $term = new stdClass();
+    $term->name = $key;
+    $term->description = $data[1];
+    $term->field_vol_roles_time[LANGUAGE_NONE][0]['value'] = $data[0];
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
   }
 }

@@ -1,0 +1,12 @@
+diff --git a/modules/file/file.module b/modules/file/file.module
+--- a/modules/file/file.module
++++ b/modules/file/file.module
+@@ -494,7 +494,7 @@
+   }
+ 
+   // Process any input and save new uploads.
+-  if ($input !== FALSE) {
++  if ($input !== FALSE && $input !== NULL) {
+     $return = $input;
+ 
+     // Uploads take priority over all other values.
