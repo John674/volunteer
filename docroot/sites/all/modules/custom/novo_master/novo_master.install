@@ -126,3 +126,12 @@ function novo_master_update_7110() {
 function novo_master_update_7111() {
   module_enable(array('contextual'));
 }
+
+/**
+ *  Revert novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7112() {
+  module_enable(array('novo_master_feature'));
+  module_enable(array('novo_roles_permissions_feature'));
+  module_enable(array('novo_views_feature'));
+}
