@@ -128,7 +128,7 @@ function novo_master_update_7111() {
 }
 
 /**
- *  Revert novo_taxonomy_feature and novo_content_feature.
+ *  Revert novo_master_feature and novo_roles_permissions_feature and novo_views_feature.
  */
 function novo_master_update_7112() {
   module_enable(array('novo_master_feature'));
