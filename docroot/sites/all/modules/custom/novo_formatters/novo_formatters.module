@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function novo_formatters_field_formatter_info() {
+  $info = field_info_field_types();
+  $formatters = array(
+    'novo_formatters' => array(
+      'label' => t('Icon times'),
+      'field types' => array('number_integer'),
+    ),
+  );
+
+  return $formatters;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_formatters_theme($existing, $type, $theme, $path) {
+  return array(
+    'icon_clock' => array(
+      'variables' => array('times' => NULL),
+      'template' => 'templates/icon_clock'
+    )
+  );
+}
+/**
+ * Implements hook_field_formatter_view().
+ */
+function novo_formatters_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $times = (int) $items[0]['value'];
+  $element[0] = array(
+    '#theme' => 'icon_clock',
+    '#times' => $times
+  );
+  return $element;
+}
+

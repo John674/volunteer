@@ -1,10 +1,11 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.0
+version = 7.x-1.1
 dependencies[] = features
 dependencies[] = novo_account_feature
 dependencies[] = novo_content_feature
+dependencies[] = novo_formatters
 dependencies[] = novo_menu_feature
 dependencies[] = novo_roles_permissions_feature
 dependencies[] = novo_taxonomy_feature
