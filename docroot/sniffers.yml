@@ -12,7 +12,7 @@
     webroot: http://localhost
     installation_profile_name: pp
     docroot: docroot/
-    sniff_diffs: true
+    sniff_diffs: false
     installation_profile_path: "profiles/{{ installation_profile_name }}"
     scan_security: false
     phpcs_extensions: php,inc,install,module
