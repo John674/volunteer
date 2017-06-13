@@ -137,7 +137,7 @@ function novo_master_update_7112() {
 }
 
 /**
- *  Remove old phone fields.
+ *  Remove old phone fields
  */
 function novo_master_update_7113() {
   field_delete_field('field_primary_phone_1');
