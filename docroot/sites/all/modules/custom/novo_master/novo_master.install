@@ -154,3 +154,11 @@ function novo_master_update_7113() {
   features_revert_module("novo_roles_permissions_feature");
   features_revert_module("novo_views_feature");
 }
+
+/**
+ *  Revert novo_master_feature .
+ */
+function novo_master_update_7114() {
+  module_enable(array('novo_master_feature'));
+}
+
