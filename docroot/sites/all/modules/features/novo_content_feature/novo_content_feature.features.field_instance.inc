@@ -167,7 +167,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 38,
+      'weight' => 40,
     ),
   );
 
@@ -222,7 +222,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 35,
+      'weight' => 37,
     ),
   );
 
@@ -311,7 +311,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 36,
+      'weight' => 38,
     ),
   );
 
@@ -352,48 +352,6 @@ College',
       ),
       'type' => 'text_textfield',
       'weight' => 17,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_emergency_phone'.
-  $field_instances['node-application-field_emergency_phone'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 18,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_emergency_phone',
-    'label' => 'Phone',
-    'required' => 1,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 1,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 19,
     ),
   );
 
@@ -601,7 +559,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 40,
+      'weight' => 42,
     ),
   );
 
@@ -683,6 +641,132 @@ Church',
       ),
       'type' => 'text_textfield',
       'weight' => 27,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_masked_emergency_phone'.
+  $field_instances['node-application-field_masked_emergency_phone'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_emergency_phone',
+    'label' => 'Phone',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_masked_phone_1'.
+  $field_instances['node-application-field_masked_phone_1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 28,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_1',
+    'label' => 'Phone 1',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_masked_phone_2'.
+  $field_instances['node-application-field_masked_phone_2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_2',
+    'label' => 'Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 36,
     ),
   );
 
@@ -803,90 +887,6 @@ Church',
       ),
       'type' => 'text_textarea',
       'weight' => 46,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_primary_phone_1'.
-  $field_instances['node-application-field_primary_phone_1'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_1',
-    'label' => 'Phone 1',
-    'required' => 1,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 1,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 33,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_primary_phone_2'.
-  $field_instances['node-application-field_primary_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 10,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 34,
     ),
   );
 
@@ -1053,7 +1053,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 37,
+      'weight' => 39,
     ),
   );
 
@@ -1140,7 +1140,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 43,
     ),
   );
 
@@ -1765,6 +1765,90 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-kids-field_masked_phone_1'.
+  $field_instances['node-kids-field_masked_phone_1'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_1',
+    'label' => 'Parent / Guardian Phone 1',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 27,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_masked_phone_2'.
+  $field_instances['node-kids-field_masked_phone_2'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_2',
+    'label' => 'Parent / Guardian Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 28,
+    ),
+  );
+
   // Exported field_instance: 'node-kids-field_middle'.
   $field_instances['node-kids-field_middle'] = array(
     'bundle' => 'kids',
@@ -1965,90 +2049,6 @@ Friend',
       ),
       'type' => 'text_textfield',
       'weight' => 20,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_parent_guardian_phone_1'.
-  $field_instances['node-kids-field_parent_guardian_phone_1'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 30,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_parent_guardian_phone_1',
-    'label' => 'Parent / Guardian Phone 1',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 25,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_parent_guardian_phone_2'.
-  $field_instances['node-kids-field_parent_guardian_phone_2'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 31,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_parent_guardian_phone_2',
-    'label' => 'Parent / Guardian Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 26,
     ),
   );
 
@@ -2455,6 +2455,174 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-locations-field_masked_phone_1'.
+  $field_instances['node-locations-field_masked_phone_1'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_1',
+    'label' => 'Primary Contact Phone 1',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-locations-field_masked_phone_2'.
+  $field_instances['node-locations-field_masked_phone_2'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_2',
+    'label' => 'Primary Contact Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-locations-field_masked_phone_3'.
+  $field_instances['node-locations-field_masked_phone_3'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_3',
+    'label' => 'Secondary Contact Phone 1',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance: 'node-locations-field_masked_phone_4'.
+  $field_instances['node-locations-field_masked_phone_4'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_4',
+    'label' => 'Secondary Contact Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance: 'node-locations-field_primary_contact_first_name'.
   $field_instances['node-locations-field_primary_contact_first_name'] = array(
     'bundle' => 'locations',
@@ -2535,90 +2703,6 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_primary_phone_1'.
-  $field_instances['node-locations-field_primary_phone_1'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_1',
-    'label' => 'Primary Contact Phone 1',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_primary_phone_2'.
-  $field_instances['node-locations-field_primary_phone_2'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 17,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_2',
-    'label' => 'Primary Contact Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 14,
-    ),
-  );
-
   // Exported field_instance: 'node-locations-field_secondary_first_name'.
   $field_instances['node-locations-field_secondary_first_name'] = array(
     'bundle' => 'locations',
@@ -2696,90 +2780,6 @@ Friend',
       ),
       'type' => 'text_textfield',
       'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_secondary_phone_1'.
-  $field_instances['node-locations-field_secondary_phone_1'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 18,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_secondary_phone_1',
-    'label' => 'Secondary Contact Phone 1',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 15,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_secondary_phone_2'.
-  $field_instances['node-locations-field_secondary_phone_2'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 19,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_secondary_phone_2',
-    'label' => 'Secondary Contact Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 16,
     ),
   );
 
@@ -3025,6 +3025,90 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-staff-field_masked_phone_1'.
+  $field_instances['node-staff-field_masked_phone_1'] = array(
+    'bundle' => 'staff',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_1',
+    'label' => 'Phone 1',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-staff-field_masked_phone_2'.
+  $field_instances['node-staff-field_masked_phone_2'] = array(
+    'bundle' => 'staff',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_masked_phone_2',
+    'label' => 'Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-staff-field_middle_name'.
   $field_instances['node-staff-field_middle_name'] = array(
     'bundle' => 'staff',
@@ -3062,90 +3146,6 @@ Friend',
       ),
       'type' => 'text_textfield',
       'weight' => -1,
-    ),
-  );
-
-  // Exported field_instance: 'node-staff-field_primary_phone_1'.
-  $field_instances['node-staff-field_primary_phone_1'] = array(
-    'bundle' => 'staff',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_1',
-    'label' => 'Phone 1',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-staff-field_primary_phone_2'.
-  $field_instances['node-staff-field_primary_phone_2'] = array(
-    'bundle' => 'staff',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'phone',
-        'settings' => array(),
-        'type' => 'phone',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'ca_phone_parentheses' => 1,
-      'ca_phone_separator' => '-',
-      'phone_country_code' => 0,
-      'phone_default_country_code' => 1,
-      'phone_int_max_length' => 15,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'phone',
-      'settings' => array(),
-      'type' => 'phone_textfield',
-      'weight' => 7,
     ),
   );
 

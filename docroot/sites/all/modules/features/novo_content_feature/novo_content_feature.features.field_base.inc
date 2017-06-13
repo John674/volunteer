@@ -278,23 +278,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_emergency_phone'.
-  $field_bases['field_emergency_phone'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_emergency_phone',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
   // Exported field_base: 'field_empl_length'.
   $field_bases['field_empl_length'] = array(
     'active' => 1,
@@ -555,6 +538,111 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_masked_emergency_phone'.
+  $field_bases['field_masked_emergency_phone'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_masked_emergency_phone',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_masked_phone_1'.
+  $field_bases['field_masked_phone_1'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_masked_phone_1',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_masked_phone_2'.
+  $field_bases['field_masked_phone_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_masked_phone_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_masked_phone_3'.
+  $field_bases['field_masked_phone_3'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_masked_phone_3',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_masked_phone_4'.
+  $field_bases['field_masked_phone_4'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_masked_phone_4',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_middle'.
   $field_bases['field_middle'] = array(
     'active' => 1,
@@ -702,40 +790,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_parent_guardian_phone_1'.
-  $field_bases['field_parent_guardian_phone_1'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_parent_guardian_phone_1',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
-  // Exported field_base: 'field_parent_guardian_phone_2'.
-  $field_bases['field_parent_guardian_phone_2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_parent_guardian_phone_2',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
   // Exported field_base: 'field_parent_guardian_relation'.
   $field_bases['field_parent_guardian_relation'] = array(
     'active' => 1,
@@ -797,40 +851,6 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_primary_phone_1'.
-  $field_bases['field_primary_phone_1'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_primary_phone_1',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
-  // Exported field_base: 'field_primary_phone_2'.
-  $field_bases['field_primary_phone_2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_primary_phone_2',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
   );
 
   // Exported field_base: 'field_relationship'.
@@ -941,40 +961,6 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_secondary_phone_1'.
-  $field_bases['field_secondary_phone_1'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_secondary_phone_1',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
-  );
-
-  // Exported field_base: 'field_secondary_phone_2'.
-  $field_bases['field_secondary_phone_2'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_secondary_phone_2',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'phone',
-    'settings' => array(
-      'country' => 'ca',
-    ),
-    'translatable' => 0,
-    'type' => 'phone',
   );
 
   // Exported field_base: 'field_state'.
