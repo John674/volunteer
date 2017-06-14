@@ -1,11 +1,14 @@
 name = Novo views feature
 core = 7.x
 package = Novo
-version = 7.x-1.1
+version = 7.x-1.3
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = kids
+features[views_view][] = locations
+features[views_view][] = staff
 features[views_view][] = volunteer_interests_roles
+features[views_view][] = volunteers

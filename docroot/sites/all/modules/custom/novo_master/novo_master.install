@@ -119,3 +119,38 @@ function novo_master_update_7110() {
   module_enable(array('novo_views_feature'));
   module_enable(array('novo_content_feature'));
 }
+
+/**
+ *  Enable contextual.
+ */
+function novo_master_update_7111() {
+  module_enable(array('contextual'));
+}
+
+/**
+ *  Revert novo_master_feature and novo_roles_permissions_feature and novo_views_feature.
+ */
+function novo_master_update_7112() {
+  module_enable(array('novo_master_feature'));
+  module_enable(array('novo_roles_permissions_feature'));
+  module_enable(array('novo_views_feature'));
+}
+
+/**
+ *  Remove old phone fields
+ */
+function novo_master_update_7113() {
+  field_delete_field('field_primary_phone_1');
+  field_delete_field('field_primary_phone_2');
+  field_delete_field('field_secondary_phone_1');
+  field_delete_field('field_secondary_phone_2');
+  field_delete_field('field_parent_guardian_phone_1');
+  field_delete_field('field_parent_guardian_phone_2');
+  field_delete_field('field_emergency_phone');
+  field_purge_batch(1);
+  module_disable(array('telephone'));
+  features_revert_module("novo_master_feature");
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_roles_permissions_feature");
+  features_revert_module("novo_views_feature");
+}
