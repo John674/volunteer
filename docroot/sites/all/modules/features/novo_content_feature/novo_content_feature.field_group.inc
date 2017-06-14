@@ -76,19 +76,114 @@ function novo_content_feature_field_group_info() {
     'label' => 'Step 3',
     'weight' => '2',
     'children' => array(
-      0 => 'field_remove_me',
+      0 => 'group_app_3_list',
     ),
     'format_type' => 'multistep',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'Step 3',
       'instance_settings' => array(
         'description' => '',
         'nav_label' => '',
-        'classes' => 'group-apl-step3 field-group-multistep',
       ),
     ),
   );
   $field_groups['group_apl_step3|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_apl_step4|node|application|form';
+  $field_group->group_name = 'group_apl_step4';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 4',
+    'weight' => '3',
+    'children' => array(
+      0 => 'group_app_4_list',
+    ),
+    'format_type' => 'multistep',
+    'format_settings' => array(
+      'label' => 'Step 4',
+      'instance_settings' => array(
+        'description' => '',
+        'nav_label' => '',
+      ),
+    ),
+  );
+  $field_groups['group_apl_step4|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app3_reference_2|node|application|form';
+  $field_group->group_name = 'group_app3_reference_2';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_3_references';
+  $field_group->data = array(
+    'label' => 'Reference 2:',
+    'weight' => '72',
+    'children' => array(
+      0 => 'field_ref_2_prefix',
+      1 => 'field_ref_2_first_name',
+      2 => 'field_ref_2_last_name',
+      3 => 'field_ref_2_email',
+      4 => 'field_ref_2_phone_1',
+      5 => 'field_ref_2_phone_2',
+      6 => 'field_ref_2_how_long',
+      7 => 'field_ref_2_how_long_period',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-app3-reference-2 field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_app3_reference_2|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app3_reference_3|node|application|form';
+  $field_group->group_name = 'group_app3_reference_3';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_3_references';
+  $field_group->data = array(
+    'label' => 'Standby Reference',
+    'weight' => '73',
+    'children' => array(
+      0 => 'field_ref_3_prefix',
+      1 => 'field_ref_3_first_name',
+      2 => 'field_ref_3_last_name',
+      3 => 'field_ref_3_email',
+      4 => 'field_ref_3_phone_1',
+      5 => 'field_ref_3_phone_2',
+      6 => 'field_ref_3_how_long',
+      7 => 'field_ref_3_how_long_period',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-app3-reference-3 field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_app3_reference_3|node|application|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -120,8 +215,9 @@ function novo_content_feature_field_group_info() {
       14 => 'field_what_site_want',
       15 => 'field_masked_phone_1',
       16 => 'field_masked_phone_2',
-      17 => 'title',
-      18 => 'group_app_emergency_contact',
+      17 => 'field_prefix',
+      18 => 'title',
+      19 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -268,11 +364,11 @@ function novo_content_feature_field_group_info() {
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'List',
       'instance_settings' => array(
-        'effect' => 'none',
-        'classes' => 'group-app-2-list field-group-accordion',
         'id' => '',
+        'classes' => 'group-app-2-list field-group-accordion',
+        'effect' => 'none',
       ),
     ),
   );
@@ -310,6 +406,154 @@ function novo_content_feature_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_3_list|node|application|form';
+  $field_group->group_name = 'group_app_3_list';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_apl_step3';
+  $field_group->data = array(
+    'label' => 'List',
+    'weight' => '71',
+    'children' => array(
+      0 => 'group_app_3_references',
+    ),
+    'format_type' => 'accordion',
+    'format_settings' => array(
+      'label' => 'List',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-app-3-list field-group-accordion',
+        'effect' => 'none',
+      ),
+    ),
+  );
+  $field_groups['group_app_3_list|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_3_references_1|node|application|form';
+  $field_group->group_name = 'group_app_3_references_1';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_3_references';
+  $field_group->data = array(
+    'label' => 'Reference 1:',
+    'weight' => '71',
+    'children' => array(
+      0 => 'field_ref_1_prefix',
+      1 => 'field_ref_1_first_name',
+      2 => 'field_ref_1_last_name',
+      3 => 'field_ref_1_email',
+      4 => 'field_ref_1_phone_1',
+      5 => 'field_ref_1_phone_2',
+      6 => 'field_ref_1_how_long',
+      7 => 'field_ref_1_how_long_period',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-app-3-references-1 field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_app_3_references_1|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_3_references|node|application|form';
+  $field_group->group_name = 'group_app_3_references';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_3_list';
+  $field_group->data = array(
+    'label' => 'REFERENCES',
+    'weight' => '71',
+    'children' => array(
+      0 => 'group_app_3_references_1',
+      1 => 'group_app3_reference_3',
+      2 => 'group_app3_reference_2',
+    ),
+    'format_type' => 'accordion-item',
+    'format_settings' => array(
+      'label' => 'REFERENCES',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-app-3-references field-group-accordion-item',
+        'description' => '',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_app_3_references|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_4_list|node|application|form';
+  $field_group->group_name = 'group_app_4_list';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_apl_step4';
+  $field_group->data = array(
+    'label' => 'List',
+    'weight' => '95',
+    'children' => array(
+      0 => 'group_app_4_questions',
+    ),
+    'format_type' => 'accordion',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'effect' => 'none',
+        'classes' => 'group-app-4-list field-group-accordion',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_app_4_list|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_4_questions|node|application|form';
+  $field_group->group_name = 'group_app_4_questions';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_4_list';
+  $field_group->data = array(
+    'label' => 'PERTINENT QUESTIONS',
+    'weight' => '117',
+    'children' => array(
+      0 => 'field_pertinent_q1',
+      1 => 'field_pertinent_q2',
+    ),
+    'format_type' => 'accordion-item',
+    'format_settings' => array(
+      'label' => 'PERTINENT QUESTIONS',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-app-4-questions field-group-accordion-item',
+        'description' => 'In order to best protect and serve the children with whom you may be working, please answer all questions truthfully. We pledge to protect your privacy in these sensitive issues and promise to handle all matters appropriately and with the utmost integrity and discretion.',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_app_4_questions|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_app_emergency_contact|node|application|form';
   $field_group->group_name = 'group_app_emergency_contact';
   $field_group->entity_type = 'node';
@@ -318,12 +562,11 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '41',
+    'weight' => '66',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',
-      2 => 'field_emergency_phone',
-      3 => 'field_masked_emergency_phone',
+      2 => 'field_masked_emergency_phone',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -346,9 +589,15 @@ function novo_content_feature_field_group_info() {
   t('Emergency Contact');
   t('List');
   t('MINISTRY / VOLUNTEER EXPERIENCE');
+  t('PERTINENT QUESTIONS');
+  t('REFERENCES');
+  t('Reference 1:');
+  t('Reference 2:');
+  t('Standby Reference');
   t('Step 1');
   t('Step 2');
   t('Step 3');
+  t('Step 4');
   t('VOLUNTEER INTERESTS / ROLES');
 
   return $field_groups;
