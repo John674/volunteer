@@ -49,6 +49,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'prefix' => array(
+      'name' => 'Prefix',
+      'machine_name' => 'prefix',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'school' => array(
       'name' => 'School',
       'machine_name' => 'school',
