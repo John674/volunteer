@@ -228,7 +228,7 @@ function multistep_block_view($type = '', $entity_type = 'node') {
   // Get design variables
   $workflow_mode = variable_get('multistep_workflow_mode', 'free');
   // Generate the menu items.
-  if (variable_get('multistep_menu_' . $entity_type . '_' . $type, 1)) {
+  if (variable_get('multistep_menu_' . $type, 1)) {
     $content['multistep_block_navigation'] = array(
       '#theme' => 'multistep_navigation',
       '#children' => array(),
@@ -263,8 +263,9 @@ function multistep_block_view($type = '', $entity_type = 'node') {
       }
     }
   }
+
   // Generate the progress bar.
-  if (variable_get('multistep_progress_' . $entity_type . '_' . $type, 1) && count($groups) > 0) {
+  if (variable_get('multistep_progress_' . $type, 1) && count($groups) > 0) {
     $content['multistep_block_progress'] = array(
       '#theme' => 'multistep_progress_bar',
       '#progress' => round($submitted / count($groups) * 100),
