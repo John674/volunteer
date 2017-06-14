@@ -19,7 +19,7 @@ function novo_content_feature_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '23',
+          'weight' => '50',
         ),
       ),
       'display' => array(),
@@ -159,7 +159,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'multistep_show_step_numbers';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['multistep_show_step_numbers'] = $strongarm;
 
   $strongarm = new stdClass();

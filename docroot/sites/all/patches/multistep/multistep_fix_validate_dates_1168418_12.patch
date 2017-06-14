@@ -1,0 +1,22 @@
+Index: docroot/sites/all/modules/contrib/multistep/multistep.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/multistep/multistep.module	(revision da305b06985a35962b4c7e9e59fdb5a287ccc9ba)
++++ docroot/sites/all/modules/contrib/multistep/multistep.module	(revision )
+@@ -501,6 +501,14 @@
+         $form['actions'][$key]['#limit_validation_errors'] = $current_children;
+       }
+     }
++
++    // Disable date validation.
++    foreach ($excluded_children as $field) {
++      if (isset($form[$field]) && isset($form[$field][LANGUAGE_NONE][0]['#type']) && $form[$field][LANGUAGE_NONE][0]['#type'] == "date_combo") {
++        $form[$field][LANGUAGE_NONE][0]['#element_validate'] = array();
++        $form[$field]['#access'] = FALSE;
++      }
++    }
+   }
+ }
+ 

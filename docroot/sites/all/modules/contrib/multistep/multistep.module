@@ -166,13 +166,25 @@ function multistep_block_save($delta = '', $edit = array()) {
  * @return array
  */
 function multistep_block_view($type = '', $entity_type = 'node') {
-  if (!is_multistep($type, $entity_type)) return;
+  if (!is_multistep($type, $entity_type)) {
+    return;
+  }
 
   $router_item = menu_get_item();
   $page_callback = $router_item['page_callback'];
 
-  $node_edit = array('node_page_edit', 'page_manager_node_edit','entity_translation_edit_page', 'workbench_moderation_node_edit_page_override', '_revisioning_edit');
-  $node_add = array('node_add', 'page_manager_node_edit', 'page_manager_node_add');
+  $node_edit = array(
+    'node_page_edit',
+    'page_manager_node_edit',
+    'entity_translation_edit_page',
+    'workbench_moderation_node_edit_page_override',
+    '_revisioning_edit'
+  );
+  $node_add = array(
+    'node_add',
+    'page_manager_node_edit',
+    'page_manager_node_add'
+  );
 
   if (in_array($page_callback, $node_edit)) {
     $node = menu_get_object();
@@ -186,12 +198,14 @@ function multistep_block_view($type = '', $entity_type = 'node') {
       return;
     }
     $id = 0;
-  } elseif ($page_callback == 'entity_ui_get_form') {
+  }
+  elseif ($page_callback == 'entity_ui_get_form') {
     $entity = menu_get_object();
     if (!empty($entity)) {
       $wrapper = entity_metadata_wrapper($entity_type, $entity);
       $id = $wrapper->getIdentifier();
-    } else {
+    }
+    else {
       return;
     }
   }
@@ -214,7 +228,7 @@ function multistep_block_view($type = '', $entity_type = 'node') {
   // Get design variables
   $workflow_mode = variable_get('multistep_workflow_mode', 'free');
   // Generate the menu items.
-  if (variable_get('multistep_menu_' . $entity_type . '_' . $type, 1)) {
+  if (variable_get('multistep_menu_' . $type, 1)) {
     $content['multistep_block_navigation'] = array(
       '#theme' => 'multistep_navigation',
       '#children' => array(),
@@ -229,7 +243,7 @@ function multistep_block_view($type = '', $entity_type = 'node') {
         'id' => 'multistep-' . $entity_type . '-' . $type . '-' . $group->group_name,
         'class' => array(
           is_null($status) || $status == '' ? '' : 'multistep-' . $status,
-          $current_step == $group->group_name ? 'active': '',
+          $current_step == $group->group_name ? 'active' : '',
         ),
         'url' => $id && ($workflow_mode == 'free' || ($workflow_mode == 'direct' && ($status == 'submitted' || multistep_get_next($type, $last_submitted_step) == $group->group_name))) ? $_GET['q'] : NULL,
         'step' => $group->group_name,
@@ -249,8 +263,9 @@ function multistep_block_view($type = '', $entity_type = 'node') {
       }
     }
   }
+
   // Generate the progress bar.
-  if (variable_get('multistep_progress_' . $entity_type . '_' . $type, 1) && count($groups) > 0 ) {
+  if (variable_get('multistep_progress_' . $type, 1) && count($groups) > 0) {
     $content['multistep_block_progress'] = array(
       '#theme' => 'multistep_progress_bar',
       '#progress' => round($submitted / count($groups) * 100),
@@ -338,7 +353,9 @@ function multistep_field_group_format_summary($group) {
  * @param $form
  */
 function multistep_field_group_pre_render(&$element, $group, &$form) {
-  if(!array_key_exists('#multistep', $form)) return;
+  if (!array_key_exists('#multistep', $form)) {
+    return;
+  }
   $step = $form['#multistep']['current'];
   $access = $group->group_name == $step;
   // Verify if user wants to see all steps at once
@@ -349,12 +366,12 @@ function multistep_field_group_pre_render(&$element, $group, &$form) {
   if ($group->format_type == 'multistep') {
     $description = isset($group->format_settings['instance_settings']['description']) ? filter_xss_admin($group->format_settings['instance_settings']['description']) : '';
     if (!empty($description)) {
-      $prefix .= '<div class="multistep-description">'.$description.'</div>';
+      $prefix .= '<div class="multistep-description">' . $description . '</div>';
     }
 
     $element += array(
       '#type' => 'markup',
-      '#prefix' => '<div id="multistep-' . $group->group_name . '" class="multistep">'.$prefix,
+      '#prefix' => '<div id="multistep-' . $group->group_name . '" class="multistep">' . $prefix,
       '#suffix' => '</div>',
       '#weight' => $group->weight,
       '#access' => $access,
@@ -474,7 +491,7 @@ function multistep_form_user_profile_form_alter(&$form, &$form_state, $form_id) 
  * @param $form_id
  */
 function multistep_form_alter(&$form, &$form_state, $form_id) {
-//  // Check if this is a multistep enabled form.
+  // Check if this is a multistep enabled form.
   if (isset($form['#multistep'])) {
     $excluded_children = _multistep_gather_excluded_fieldgroup_children($form, $form['#multistep']['current']);
     $current_children = _multistep_gather_current_children($form, $excluded_children);
@@ -483,6 +500,14 @@ function multistep_form_alter(&$form, &$form_state, $form_id) {
     foreach (element_children($form['actions']) as $key) {
       if (isset($form['actions'][$key]['#type']) && $form['actions'][$key]['#type'] == 'submit') {
         $form['actions'][$key]['#limit_validation_errors'] = $current_children;
+      }
+    }
+
+    // Disable date validation.
+    foreach ($excluded_children as $field) {
+      if (isset($form[$field]) && isset($form[$field][LANGUAGE_NONE][0]['#type']) && $form[$field][LANGUAGE_NONE][0]['#type'] == "date_combo") {
+        $form[$field][LANGUAGE_NONE][0]['#element_validate'] = array();
+        $form[$field]['#access'] = FALSE;
       }
     }
   }
@@ -584,7 +609,10 @@ function _multistep_gather_current_children($element, $excluded_children) {
   foreach (element_children($element) as $key) {
     // If the element has #tree set to TRUE or has no children, add it to the
     // current children. Otherwise, fetch the children of that element.
-    $children = count(element_children($element[$key])) > 0 && (!isset($element[$key]['#type']) || !in_array($element[$key]['#type'], array('radios', 'checkboxes')));
+    $children = count(element_children($element[$key])) > 0 && (!isset($element[$key]['#type']) || !in_array($element[$key]['#type'], array(
+          'radios',
+          'checkboxes'
+        )));
     if (!empty($element[$key]['#tree']) || !$children) {
       if (!isset($excluded_children[$key])) {
         $current_children[] = array($key);
@@ -603,17 +631,23 @@ function _multistep_gather_current_children($element, $excluded_children) {
  * @param $exclude_group
  * @return array
  */
-function _multistep_gather_excluded_fieldgroup_children($form, $exclude_group) {
+function _multistep_gather_excluded_fieldgroup_children($form, $exclude_group, $is_parent_multistep = FALSE) {
   $form_elements = array();
   foreach ($form['#groups'] as $group) {
-    if ($group->format_type == 'multistep' && $group->group_name != $exclude_group) {
+    if (($is_parent_multistep && $group->format_type != 'multistep' && $group->group_name === $exclude_group) || (!$is_parent_multistep && $group->format_type == 'multistep' && $group->group_name != $exclude_group)) {
       foreach ($group->children as $child) {
-        if (in_array($child, array_keys($form['#groups']))) {
-          $form_elements = array_merge($form_elements, _multistep_gather_child_fieldgroup_children($form, $child));
-        }
-        else {
-          $form_elements[$child] = $child;
-        }
+          if (in_array($child, array_keys($form['#groups']))) {
+            if (strpos($child, "group_") === 0) {
+              $processed_childs[] = $child;
+              $form_elements = array_merge($form_elements, _multistep_gather_excluded_fieldgroup_children($form, $child, TRUE));
+            }
+            else {
+              $form_elements = array_merge($form_elements, _multistep_gather_child_fieldgroup_children($form, $child));
+            }
+          }
+          else {
+            $form_elements[$child] = $child;
+          }
       }
     }
   }
@@ -707,7 +741,8 @@ function multistep_submit($form, &$form_state) {
     else {
       $form_state['redirect'] = array('node/' . $nid);
     }
-  } elseif ($user && !empty($form_state['user']->uid)) {
+  }
+  elseif ($user && !empty($form_state['user']->uid)) {
     $uid = $form_state['user']->uid;
     // Update the step list for this node in the database
     $current_step = $form['#multistep']['current'];
@@ -887,7 +922,8 @@ function multistep_get_step($entity, $entity_type = 'node') {
   // This condition occurs for autocomplete fields
   // @see http://drupal.org/node/868826
   if (arg(1) == 'autocomplete' // Nodereference does this
-    || arg(0) == 'autocomplete_widgets') { // Autocomplete Widgets does this
+    || arg(0) == 'autocomplete_widgets'
+  ) { // Autocomplete Widgets does this
     $field = arg(2);
     // Decide step based on type/field combination
     return multistep_get_field_step($field, $type, $entity_type);
@@ -895,7 +931,8 @@ function multistep_get_step($entity, $entity_type = 'node') {
   // This condition occurs if using AJAX to add another value for a multi-value field
   if (arg(1) == 'js_add_more' // Add more button
     || arg(1) == 'js' // Upload through the upload module
-    || arg(1) == 'ajax') { // Upload through the file module
+    || arg(1) == 'ajax'
+  ) { // Upload through the file module
     $field = arg(2);
     // For system/ajax callbacks, there is no field name passed in the request
     if (!$field) {
@@ -937,9 +974,13 @@ function multistep_get_previous($entity, $step, $entity_type = 'node') {
   $steps = multistep_get_steps($entity, $entity_type);
   $step_names = array_keys($steps);
   $step_index = array_search($step, $step_names);
-  if($step_index === FALSE) return FALSE;
-  $return_step_index = $step_index-1;
-  if($return_step_index < 0) return FALSE;
+  if ($step_index === FALSE) {
+    return FALSE;
+  }
+  $return_step_index = $step_index - 1;
+  if ($return_step_index < 0) {
+    return FALSE;
+  }
   $return_step = $steps[$step_names[$return_step_index]];
   $return = $return_step->group_name;
   return $return;
@@ -956,9 +997,13 @@ function multistep_get_next($entity, $step, $entity_type = 'node') {
   $steps = multistep_get_steps($entity, $entity_type);
   $step_names = array_keys($steps);
   $step_index = array_search($step, $step_names);
-  if($step_index === FALSE) return FALSE;
-  $return_step_index = $step_index+1;
-  if($return_step_index >= count($step_names)) return FALSE;
+  if ($step_index === FALSE) {
+    return FALSE;
+  }
+  $return_step_index = $step_index + 1;
+  if ($return_step_index >= count($step_names)) {
+    return FALSE;
+  }
   $return_step = $steps[$step_names[$return_step_index]];
   $return = $return_step->group_name;
   return $return;
@@ -1007,7 +1052,9 @@ function multistep_get_field_step($field_name, $type, $entity_type = 'node') {
  * @return bool
  */
 function multistep_get_field_step_recursive($field, $group_name, $groupinfo) {
-  if(!isset($groupinfo[$group_name])) return FALSE;
+  if (!isset($groupinfo[$group_name])) {
+    return FALSE;
+  }
   $group = $groupinfo[$group_name];
   if (isset($group->children) && is_array($group->children)) {
     if (in_array($field, $group->children)) {
@@ -1016,8 +1063,9 @@ function multistep_get_field_step_recursive($field, $group_name, $groupinfo) {
     else {
       foreach ($group->children as $child) {
         if (strpos($child, 'group_') === 0) {
-          if(multistep_get_field_step_recursive($field, $child, $groupinfo))
+          if (multistep_get_field_step_recursive($field, $child, $groupinfo)) {
             return $group->group_name;
+          }
         }
       }
     }
@@ -1146,7 +1194,9 @@ function _multistep_reset_data($type, $entity_type = 'node') {
  * @return array|bool
  */
 function _multistep_get_status($id, $step = 'all', $entity_type = 'node') {
-  if(!$id) return FALSE;
+  if (!$id) {
+    return FALSE;
+  }
   if ($step == 'all') {
     $result = db_query('SELECT step, status FROM {multistep} WHERE id = :id AND entity_type = :entity_type', array(
       ':id' => $id,
@@ -1237,6 +1287,7 @@ function multistep_views_api() {
  * @return array
  */
 function _multistep_gather_fieldgroup_children($form, $group) {
+  $form_elements = array();
   $children = $form['#groups'][$group]->children;
   foreach ($children as $child) {
     if (in_array($child, array_keys($form['#groups']))) {

@@ -8,6 +8,7 @@ define('NOVO_VOCABULARY_APPLICATION_SITE', 'application_site');
 define('NOVO_VOCABULARY_COLOR_PREFERENCE', 'color_preference');
 define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
 define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
+define('NOVO_VOCABULARY_PREFIX', 'prefix');
 
 
 /**
@@ -45,6 +46,9 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
       _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary);
       break;
 
+    case NOVO_VOCABULARY_PREFIX:
+      _novo_taxonomy_feature_add_prefix($vocabulary);
+      break;
   }
 }
 
@@ -269,6 +273,23 @@ function _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary) {
     $term->name = $key;
     $term->description = $data[1];
     $term->field_vol_roles_time[LANGUAGE_NONE][0]['value'] = $data[0];
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import prefixes.
+ */
+function _novo_taxonomy_feature_add_prefix($vocabulary) {
+  $list = array(
+    'Mr.',
+    'Mrs.',
+    'Ms.'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
     $term->vid = $vocabulary->vid;
     taxonomy_term_save($term);
   }
