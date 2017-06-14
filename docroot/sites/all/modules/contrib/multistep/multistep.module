@@ -501,6 +501,14 @@ function multistep_form_alter(&$form, &$form_state, $form_id) {
         $form['actions'][$key]['#limit_validation_errors'] = $current_children;
       }
     }
+
+    // Disable date validation.
+    foreach ($excluded_children as $field) {
+      if (isset($form[$field]) && isset($form[$field][LANGUAGE_NONE][0]['#type']) && $form[$field][LANGUAGE_NONE][0]['#type'] == "date_combo") {
+        $form[$field][LANGUAGE_NONE][0]['#element_validate'] = array();
+        $form[$field]['#access'] = FALSE;
+      }
+    }
   }
 }
 
