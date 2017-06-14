@@ -5,7 +5,9 @@
  * Helper functions.
  */
 
-
+/**
+ * Preprocess page.
+ */
 function novo_master_preprocess_page() {
 
 }

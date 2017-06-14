@@ -1,0 +1,8 @@
+name = Novo Formatters
+description = Change integer to HTML
+core = 7.x
+package = Novo
+version = 7.x-1.0
+
+dependencies[] = views
+dependencies[] = fontawesome
