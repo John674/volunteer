@@ -20,30 +20,33 @@ function novo_master_install() {
     'views_data_export',
     'strongarm',
     'list',
-    'novo_master_feature'
+    'novo_master_feature',
   );
 
   module_enable($module_list);
 }
 
 /**
- *  Rebuild novo_taxonomy_feature and novo_content_feature.
+ * Rebuild novo_taxonomy_feature and novo_content_feature.
  */
 function novo_master_update_7101() {
   features_revert_module("novo_taxonomy_feature");
   features_revert_module("novo_content_feature");
 }
 
+/**
+ * Rebuild novo_content_feature.
+ */
 function novo_master_update_7102() {
   features_revert_module("novo_content_feature");
 }
+
 /**
- *  Rebuild novo_content_feature.
+ * Rebuild novo_content_feature.
  */
 function novo_master_update_7103() {
   features_revert_module("novo_content_feature");
 }
-
 
 /**
  * Rebuild novo_content_feature and novo_content_feature, disable telephone.
@@ -55,7 +58,7 @@ function novo_master_update_7104() {
 
   // Disable modules.
   $disable_module_list = array(
-    'telephone'
+    'telephone',
   );
 
   module_disable($disable_module_list);
@@ -69,7 +72,7 @@ function novo_master_update_7105() {
 
   // Enable modules.
   $enable_module_list = array(
-    'email'
+    'email',
   );
 
   module_enable($enable_module_list);
@@ -81,7 +84,7 @@ function novo_master_update_7105() {
 function novo_master_update_7106() {
   // Enable modules.
   $enable_module_list = array(
-    'email'
+    'email',
   );
   module_enable($enable_module_list);
   features_revert_module("novo_content_feature");
@@ -105,14 +108,14 @@ function novo_master_update_7108() {
 }
 
 /**
- *  Enable novo_master_feature.
+ * Enable novo_master_feature.
  */
 function novo_master_update_7109() {
   module_enable(array('novo_master_feature'));
 }
 
 /**
- *  Revert novo_taxonomy_feature and novo_content_feature.
+ * Revert novo_taxonomy_feature and novo_content_feature.
  */
 function novo_master_update_7110() {
   module_enable(array('novo_taxonomy_feature'));
@@ -121,14 +124,14 @@ function novo_master_update_7110() {
 }
 
 /**
- *  Enable contextual.
+ * Enable contextual.
  */
 function novo_master_update_7111() {
   module_enable(array('contextual'));
 }
 
 /**
- *  Revert novo_master_feature and novo_roles_permissions_feature and novo_views_feature.
+ * Revert novo_master_feature,novo_roles_permissions_feature,novo_views_feature.
  */
 function novo_master_update_7112() {
   module_enable(array('novo_master_feature'));
@@ -137,7 +140,7 @@ function novo_master_update_7112() {
 }
 
 /**
- *  Remove old phone fields.
+ * Remove old phone fields.
  */
 function novo_master_update_7113() {
   field_delete_field('field_primary_phone_1');
@@ -156,9 +159,8 @@ function novo_master_update_7113() {
 }
 
 /**
- *  Revert novo_master_feature.
+ * Revert novo_master_feature.
  */
 function novo_master_update_7114() {
   module_enable(array('novo_master_feature'));
 }
-

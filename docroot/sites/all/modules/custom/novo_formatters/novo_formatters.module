@@ -27,10 +27,11 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
   return array(
     'icon_clock' => array(
       'variables' => array('times' => NULL),
-      'template' => 'templates/icon_clock'
-    )
+      'template' => 'templates/icon_clock',
+    ),
   );
 }
+
 /**
  * Implements hook_field_formatter_view().
  */
@@ -39,8 +40,7 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
   $times = (int) $items[0]['value'];
   $element[0] = array(
     '#theme' => 'icon_clock',
-    '#times' => $times
+    '#times' => $times,
   );
   return $element;
 }
-

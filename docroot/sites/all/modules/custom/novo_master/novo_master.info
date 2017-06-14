@@ -12,4 +12,3 @@ dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = entity
 dependencies[] = entitycache
-
