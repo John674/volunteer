@@ -171,3 +171,11 @@ function novo_master_update_7114() {
 function novo_master_update_7115() {
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7116() {
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_master_feature");
+}
