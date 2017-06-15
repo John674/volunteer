@@ -5,6 +5,11 @@
  * The primary PHP file for this theme.
  */
 
+
+define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
+define("NOVO_BASE_PHONE", "4052084255");
+define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
+
 /**
  * Implements hook_preprocess_html().
  */
@@ -42,6 +47,6 @@ function novo_preprocess_form(&$variables) {
  */
 function novo_preprocess_field(&$variables) {
   // @codingStandardsIgnoreStart
-  //kpr($variables);
+  // kpr($variables);
   // @codingStandardsIgnoreEnd
 }
