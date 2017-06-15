@@ -17,7 +17,10 @@ function novo_preprocess_html(&$variables) {
  */
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
-  // kpr($variables);
+  // @codingStandardsIgnoreStart
+  //kpr($variables);
+  // @codingStandardsIgnoreEnd
+
 }
 
 /**
