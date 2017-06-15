@@ -70,6 +70,8 @@ function novo_preprocess_field(&$variables) {
         $variables['icon'] = 'globe';
         break;
     }
+    // @codingStandardsIgnoreStart
     // kpr($variables);
+    // @codingStandardsIgnoreEnd
   }
 }
