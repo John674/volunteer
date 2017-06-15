@@ -127,16 +127,7 @@ function novo_content_feature_field_group_info() {
   $field_group->data = array(
     'label' => 'Reference 2:',
     'weight' => '72',
-    'children' => array(
-      0 => 'field_ref_2_prefix',
-      1 => 'field_ref_2_first_name',
-      2 => 'field_ref_2_last_name',
-      3 => 'field_ref_2_email',
-      4 => 'field_ref_2_phone_1',
-      5 => 'field_ref_2_phone_2',
-      6 => 'field_ref_2_how_long',
-      7 => 'field_ref_2_how_long_period',
-    ),
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -162,16 +153,7 @@ function novo_content_feature_field_group_info() {
   $field_group->data = array(
     'label' => 'Standby Reference',
     'weight' => '73',
-    'children' => array(
-      0 => 'field_ref_3_prefix',
-      1 => 'field_ref_3_first_name',
-      2 => 'field_ref_3_last_name',
-      3 => 'field_ref_3_email',
-      4 => 'field_ref_3_phone_1',
-      5 => 'field_ref_3_phone_2',
-      6 => 'field_ref_3_how_long',
-      7 => 'field_ref_3_how_long_period',
-    ),
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -215,9 +197,8 @@ function novo_content_feature_field_group_info() {
       14 => 'field_what_site_want',
       15 => 'field_masked_phone_1',
       16 => 'field_masked_phone_2',
-      17 => 'field_prefix',
-      18 => 'title',
-      19 => 'group_app_emergency_contact',
+      17 => 'title',
+      18 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -303,8 +284,8 @@ function novo_content_feature_field_group_info() {
     'weight' => '44',
     'children' => array(
       0 => 'group_app_1_contact',
-      1 => 'group_app_1_employment',
-      2 => 'group_app_1_education',
+      1 => 'group_app_1_education',
+      2 => 'group_app_1_employment',
       3 => 'group_app_1_ministry',
     ),
     'format_type' => 'accordion',
@@ -442,16 +423,7 @@ function novo_content_feature_field_group_info() {
   $field_group->data = array(
     'label' => 'Reference 1:',
     'weight' => '71',
-    'children' => array(
-      0 => 'field_ref_1_prefix',
-      1 => 'field_ref_1_first_name',
-      2 => 'field_ref_1_last_name',
-      3 => 'field_ref_1_email',
-      4 => 'field_ref_1_phone_1',
-      5 => 'field_ref_1_phone_2',
-      6 => 'field_ref_1_how_long',
-      7 => 'field_ref_1_how_long_period',
-    ),
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -478,9 +450,9 @@ function novo_content_feature_field_group_info() {
     'label' => 'REFERENCES',
     'weight' => '71',
     'children' => array(
-      0 => 'group_app_3_references_1',
+      0 => 'group_app3_reference_2',
       1 => 'group_app3_reference_3',
-      2 => 'group_app3_reference_2',
+      2 => 'group_app_3_references_1',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -534,10 +506,7 @@ function novo_content_feature_field_group_info() {
   $field_group->data = array(
     'label' => 'PERTINENT QUESTIONS',
     'weight' => '117',
-    'children' => array(
-      0 => 'field_pertinent_q1',
-      1 => 'field_pertinent_q2',
-    ),
+    'children' => array(),
     'format_type' => 'accordion-item',
     'format_settings' => array(
       'label' => 'PERTINENT QUESTIONS',

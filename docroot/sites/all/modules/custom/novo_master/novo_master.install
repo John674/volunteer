@@ -164,3 +164,10 @@ function novo_master_update_7113() {
 function novo_master_update_7114() {
   module_enable(array('novo_master_feature'));
 }
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7115() {
+  features_revert_module(array('novo_content_feature'));
+}

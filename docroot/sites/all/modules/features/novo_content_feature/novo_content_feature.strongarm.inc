@@ -15,11 +15,21 @@ function novo_content_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__application';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => TRUE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '50',
+          'weight' => '23',
         ),
       ),
       'display' => array(),
@@ -159,7 +169,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'multistep_show_step_numbers';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['multistep_show_step_numbers'] = $strongarm;
 
   $strongarm = new stdClass();
