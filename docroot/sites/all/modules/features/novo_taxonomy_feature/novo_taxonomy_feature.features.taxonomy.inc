@@ -17,6 +17,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'application_status' => array(
+      'name' => 'Application status',
+      'machine_name' => 'application_status',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'church' => array(
       'name' => 'Church',
       'machine_name' => 'church',

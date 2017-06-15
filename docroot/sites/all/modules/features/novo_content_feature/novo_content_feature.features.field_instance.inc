@@ -90,6 +90,1003 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-application-field_app7_statement_agree'.
+  $field_instances['node-application-field_app7_statement_agree'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 92,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app7_statement_agree',
+    'label' => 'I have read and agree to abide by the Statement of Faith Agreement.',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 151,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_1'.
+  $field_instances['node-application-field_app_7_final_agree_1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I have carefully read this document and recognize that it is a legally-binding agreement.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 94,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_1',
+    'label' => 'App 7 final agree 1',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 153,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_2'.
+  $field_instances['node-application-field_app_7_final_agree_2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I certify that, to the best of my knowledge, all answers and information given are true and complete.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 95,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_2',
+    'label' => 'App 7 final agree 2',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 154,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_3'.
+  $field_instances['node-application-field_app_7_final_agree_3'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I give Novo the right to use my picture, voice, and / or testimony for promotional materials.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 96,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_3',
+    'label' => 'App 7 final agree 3',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 155,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_4'.
+  $field_instances['node-application-field_app_7_final_agree_4'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I understand that I am entitled to a complete and accurate disclosure of the nature and scope of any consumer report on me. I also understand that I may receive a written summary of my rights under 15 U.S.C. § 1681 et. seq.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 97,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_4',
+    'label' => 'App 7 final agree 4',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 156,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_5'.
+  $field_instances['node-application-field_app_7_final_agree_5'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I authorize Novo Ministries to contact any person or entity listed on this application, and I further authorize any such person or entity to provide the organization with information, opinions, and impressions relating to my background or qualifications',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 98,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_5',
+    'label' => 'App 7 final agree 5',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 157,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_7_final_agree_6'.
+  $field_instances['node-application-field_app_7_final_agree_6'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'I authorize Novo Ministries to conduct a background inquiry that may include criminal records, public records, and personal references. I agree to all statements in this application and certify that I have properly initialed each statement and / or accept that any text placed in the fields provided will be considered acceptance of the statements.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 99,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_7_final_agree_6',
+    'label' => 'App 7 final agree 6',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 158,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_status'.
+  $field_instances['node-application-field_app_status'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'tid' => 96,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 101,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_status',
+    'label' => 'Status',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 160,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs2_q1'.
+  $field_instances['node-application-field_beliefs2_q1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Ephesians 2:4-7, Romans 3:10-12',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 83,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs2_q1',
+    'label' => 'How did you realize you needed Christ?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 142,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs2_q2'.
+  $field_instances['node-application-field_beliefs2_q2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Ephesians 2:8-9, Romans 10:9-10, Romans 5:1',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 84,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs2_q2',
+    'label' => 'When and how did you receive Jesus as Savior?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 143,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs2_q3'.
+  $field_instances['node-application-field_beliefs2_q3'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Ephesians 2:10, Romans 8:1',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 85,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs2_q3',
+    'label' => 'How has that decision changed your life?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 144,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q1'.
+  $field_instances['node-application-field_beliefs_q1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 76,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q1',
+    'label' => 'I believe that I am saved by God’s grace alone, through faith in Christ alone, and I am not saved by any good works.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 135,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q2'.
+  $field_instances['node-application-field_beliefs_q2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 77,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q2',
+    'label' => 'I believe in the virgin birth.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 136,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q3'.
+  $field_instances['node-application-field_beliefs_q3'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 78,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q3',
+    'label' => 'I believe in the Trinity — only one God, but in three persons — God the Father, God the Son, and God the Holy Spirit.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 137,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q4'.
+  $field_instances['node-application-field_beliefs_q4'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 79,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q4',
+    'label' => 'I believe that Jesus is God the Son and the ultimate sacrifice for sin.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 138,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q5'.
+  $field_instances['node-application-field_beliefs_q5'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 80,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q5',
+    'label' => 'I believe that Jesus rose bodily from the dead.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 139,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q6'.
+  $field_instances['node-application-field_beliefs_q6'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 81,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q6',
+    'label' => 'I believe that a person must be born again to receive eternal life.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 140,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_beliefs_q7'.
+  $field_instances['node-application-field_beliefs_q7'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 82,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_beliefs_q7',
+    'label' => 'I believe in the infallibility and authority of the Bible.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 141,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_email'.
+  $field_instances['node-application-field_church_email'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you cannot provide an email for this reference, please enter “volunteer@novoministries.org” into this field.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 73,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_email',
+    'label' => 'Email',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 132,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_home'.
+  $field_instances['node-application-field_church_home'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 69,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_home',
+    'label' => 'Home Church',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 128,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_how_long_attended'.
+  $field_instances['node-application-field_church_how_long_attended'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 70,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_how_long_attended',
+    'label' => 'How Long Have You Attended?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 129,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_phone_1'.
+  $field_instances['node-application-field_church_phone_1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 74,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_phone_1',
+    'label' => 'Phone 1',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 133,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_phone_2'.
+  $field_instances['node-application-field_church_phone_2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 75,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_phone_2',
+    'label' => 'Phone 2',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 134,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_prev'.
+  $field_instances['node-application-field_church_prev'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_prev',
+    'label' => 'Previous Church Involvement',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 130,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_church_reference'.
+  $field_instances['node-application-field_church_reference'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Pastor, Small Group Leader, or other church leader',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 72,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church_reference',
+    'label' => 'Church Reference',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 131,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_city'.
   $field_instances['node-application-field_city'] = array(
     'bundle' => 'application',
@@ -471,6 +1468,61 @@ College',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_expired_date'.
+  $field_instances['node-application-field_expired_date'] = array(
+    'bundle' => 'application',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 100,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_expired_date',
+    'label' => 'Expired date (36 months after CIA response)',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 30,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 1,
+        'text_parts' => array(),
+        'year_range' => '-0:+10',
+      ),
+      'type' => 'date_popup',
+      'weight' => 159,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_goes_by'.
   $field_instances['node-application-field_goes_by'] = array(
     'bundle' => 'application',
@@ -479,7 +1531,7 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -567,7 +1619,7 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -774,7 +1826,7 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -932,6 +1984,186 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_pertinent_q10'.
+  $field_instances['node-application-field_pertinent_q10'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 65,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q10',
+    'label' => 'Have you ever been asked to leave a church or otherwise terminate your voluntary service to any program?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 124,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q11'.
+  $field_instances['node-application-field_pertinent_q11'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 66,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q11',
+    'label' => 'Have you ever been asked to step away from ministry or work with children in any setting, paid or volunteer?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 125,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q12'.
+  $field_instances['node-application-field_pertinent_q12'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 67,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q12',
+    'label' => 'Is there any reason why you should not work with children, youth, or others?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 126,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q13'.
+  $field_instances['node-application-field_pertinent_q13'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 68,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q13',
+    'label' => 'Is there anything in your past or current life that might be a problem if we found out about it later?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 127,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_pertinent_q2'.
   $field_instances['node-application-field_pertinent_q2'] = array(
     'bundle' => 'application',
@@ -977,6 +2209,321 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_pertinent_q3'.
+  $field_instances['node-application-field_pertinent_q3'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q3',
+    'label' => 'Are there any allergies, illnesses, or other health concerns we should be aware of?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 117,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q4'.
+  $field_instances['node-application-field_pertinent_q4'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 59,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q4',
+    'label' => 'Have you ever been convicted of or plead guilty to a crime?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 118,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q5'.
+  $field_instances['node-application-field_pertinent_q5'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 60,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q5',
+    'label' => 'Have you ever been accused of, engaged in or investigated for any form of sexual misconduct or child abuse involving a minor or ',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 119,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q6'.
+  $field_instances['node-application-field_pertinent_q6'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 61,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q6',
+    'label' => 'Have you used illegal drugs in the past 12 months?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 120,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q7'.
+  $field_instances['node-application-field_pertinent_q7'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 62,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q7',
+    'label' => 'Have you gone through treatment for alcohol or drug abuse in the past 12 months?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 121,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q8'.
+  $field_instances['node-application-field_pertinent_q8'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 63,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q8',
+    'label' => 'Have you ever been a victim of physical, sexual, or emotional abuse?',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 122,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_pertinent_q9'.
+  $field_instances['node-application-field_pertinent_q9'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 64,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_pertinent_q9',
+    'label' => 'Have you ever had any painful life experiences as a child / minor that would hinder you from a productive ministry with children',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'No',
+        'other' => 'Yes',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 123,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_prefix'.
   $field_instances['node-application-field_prefix'] = array(
     'bundle' => 'application',
@@ -1015,6 +2562,48 @@ Church',
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 49,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_program_policies_agree'.
+  $field_instances['node-application-field_program_policies_agree'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 93,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_policies_agree',
+    'label' => 'I have read and agree to abide by the Pertinent Program Policies.',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => 'aa',
+        'placeholder' => '_',
+        'size' => 2,
+      ),
+      'type' => 'masked_input',
+      'weight' => 152,
     ),
   );
 
@@ -2135,6 +3724,228 @@ Friend',
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 64,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q1'.
+  $field_instances['node-application-field_things_q1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Matthew 28:19-20',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 86,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q1',
+    'label' => 'I want to see inner-city children mentored toward and in a relationship with Jesus.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 145,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q2'.
+  $field_instances['node-application-field_things_q2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'II Timothy 3:16',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 87,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q2',
+    'label' => 'I will purpose to continually point children in Novo programs towards God and the Holy Bible for answers and direction.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 146,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q3'.
+  $field_instances['node-application-field_things_q3'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 88,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q3',
+    'label' => 'If I teach in Small or Large Group, I will use Novo curriculum.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 147,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q4'.
+  $field_instances['node-application-field_things_q4'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'II Corinthians 5:21',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 89,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q4',
+    'label' => 'I believe that the Gospel of Jesus Christ is not only life-changing, but the basis for true and lasting life change.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 148,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q5'.
+  $field_instances['node-application-field_things_q5'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Romans 1:16',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 90,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q5',
+    'label' => 'I will look for opportunities to point children to a greater understanding of the gospel message.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 149,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_things_q6'.
+  $field_instances['node-application-field_things_q6'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 91,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_things_q6',
+    'label' => 'I am willing to pursue Novo training in the areas in which I will be serving.',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 150,
     ),
   );
 
@@ -4236,29 +6047,79 @@ Friend',
   t('Address 1');
   t('Address 2');
   t('Address Apartment number');
+  t('App 7 final agree 1');
+  t('App 7 final agree 2');
+  t('App 7 final agree 3');
+  t('App 7 final agree 4');
+  t('App 7 final agree 5');
+  t('App 7 final agree 6');
+  t('Are there any allergies, illnesses, or other health concerns we should be aware of?');
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');
   t('Attend Church Regularly?');
   t('Church');
+  t('Church Reference');
   t('City');
   t('Color Preference');
   t('Date of Birth');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
   t('Employer');
+  t('Ephesians 2:10, Romans 8:1');
+  t('Ephesians 2:4-7, Romans 3:10-12');
+  t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
+  t('Expired date (36 months after CIA response)');
   t('First Name');
   t('Food Allergies');
   t('Gender');
   t('Goes By');
   t('Grade');
+  t('Have you ever been a victim of physical, sexual, or emotional abuse?');
+  t('Have you ever been accused of, engaged in or investigated for any form of sexual misconduct or child abuse involving a minor or ');
+  t('Have you ever been asked to leave a church or otherwise terminate your voluntary service to any program?');
+  t('Have you ever been asked to step away from ministry or work with children in any setting, paid or volunteer?');
+  t('Have you ever been convicted of or plead guilty to a crime?');
+  t('Have you ever had any painful life experiences as a child / minor that would hinder you from a productive ministry with children');
+  t('Have you gone through treatment for alcohol or drug abuse in the past 12 months?');
+  t('Have you used illegal drugs in the past 12 months?');
   t('Health Concerns');
+  t('Home Church');
+  t('How Long Have You Attended?');
   t('How did you hear about Novo?');
+  t('How did you realize you needed Christ?');
   t('How do you know this reference?');
+  t('How has that decision changed your life?');
+  t('I am willing to pursue Novo training in the areas in which I will be serving.');
+  t('I authorize Novo Ministries to conduct a background inquiry that may include criminal records, public records, and personal references. I agree to all statements in this application and certify that I have properly initialed each statement and / or accept that any text placed in the fields provided will be considered acceptance of the statements.');
+  t('I authorize Novo Ministries to contact any person or entity listed on this application, and I further authorize any such person or entity to provide the organization with information, opinions, and impressions relating to my background or qualifications');
+  t('I believe in the Trinity — only one God, but in three persons — God the Father, God the Son, and God the Holy Spirit.');
+  t('I believe in the infallibility and authority of the Bible.');
+  t('I believe in the virgin birth.');
+  t('I believe that I am saved by God’s grace alone, through faith in Christ alone, and I am not saved by any good works.');
+  t('I believe that Jesus is God the Son and the ultimate sacrifice for sin.');
+  t('I believe that Jesus rose bodily from the dead.');
+  t('I believe that a person must be born again to receive eternal life.');
+  t('I believe that the Gospel of Jesus Christ is not only life-changing, but the basis for true and lasting life change.');
+  t('I certify that, to the best of my knowledge, all answers and information given are true and complete.');
+  t('I give Novo the right to use my picture, voice, and / or testimony for promotional materials.');
+  t('I have carefully read this document and recognize that it is a legally-binding agreement.');
+  t('I have read and agree to abide by the Pertinent Program Policies.');
+  t('I have read and agree to abide by the Statement of Faith Agreement.');
+  t('I understand that I am entitled to a complete and accurate disclosure of the nature and scope of any consumer report on me. I also understand that I may receive a written summary of my rights under 15 U.S.C. § 1681 et. seq.');
+  t('I want to see inner-city children mentored toward and in a relationship with Jesus.');
+  t('I will look for opportunities to point children to a greater understanding of the gospel message.');
+  t('I will purpose to continually point children in Novo programs towards God and the Holy Bible for answers and direction.');
+  t('II Corinthians 5:21');
+  t('II Timothy 3:16');
+  t('If I teach in Small or Large Group, I will use Novo curriculum.');
   t('If you cannot provide an email for this reference, please enter “volunteer@novoministries.org” into this field.');
+  t('Is there any reason why you should not work with children, youth, or others?');
+  t('Is there anything in your past or current life that might be a problem if we found out about it later?');
   t('Job Title');
   t('Last Name');
   t('Length of Current Employment');
   t('Maiden name or Alias names used');
+  t('Matthew 28:19-20');
   t('Middle');
   t('Middle Name');
   t('Month/Years');
@@ -4269,6 +6130,7 @@ Friend',
   t('Parent / Guardian Phone 1');
   t('Parent / Guardian Phone 2');
   t('Parent / Guardian Relation');
+  t('Pastor, Small Group Leader, or other church leader');
   t('Pertinent Certifcation or Training (e.g. CPR, First Aid, etc.)');
   t('Phone');
   t('Phone 1');
@@ -4276,22 +6138,26 @@ Friend',
   t('Please list all ministry / volunteer experience');
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
+  t('Previous Church Involvement');
   t('Primary Contact First Name');
   t('Primary Contact Last Name');
   t('Primary Contact Phone 1');
   t('Primary Contact Phone 2');
   t('Relationship');
+  t('Romans 1:16');
   t('School');
   t('Secondary Contact First Name');
   t('Secondary Contact Last Name');
   t('Secondary Contact Phone 1');
   t('Secondary Contact Phone 2');
   t('State');
+  t('Status');
   t('Suffix');
   t('T-shirt Size');
   t('Teacher');
   t('Title');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('When and how did you receive Jesus as Savior?');
   t('Zip');
 
   return $field_instances;

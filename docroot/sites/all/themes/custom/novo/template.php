@@ -17,7 +17,10 @@ function novo_preprocess_html(&$variables) {
  */
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
+  // @codingStandardsIgnoreStart
   //kpr($variables);
+  // @codingStandardsIgnoreEnd
+
 }
 
 /**
@@ -38,5 +41,7 @@ function novo_preprocess_form(&$variables) {
  * Implements hook_preprocess_field().
  */
 function novo_preprocess_field(&$variables) {
+  // @codingStandardsIgnoreStart
   //kpr($variables);
+  // @codingStandardsIgnoreEnd
 }
