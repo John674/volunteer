@@ -9,6 +9,7 @@ define('NOVO_VOCABULARY_COLOR_PREFERENCE', 'color_preference');
 define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
 define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
 define('NOVO_VOCABULARY_PREFIX', 'prefix');
+define('NOVO_VOCABULARY_APPLICATION_STATUS', 'application_status');
 
 
 /**
@@ -48,6 +49,10 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_PREFIX:
       _novo_taxonomy_feature_add_prefix($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_APPLICATION_STATUS:
+      _novo_taxonomy_feature_add_application_status($vocabulary);
       break;
   }
 }
@@ -286,6 +291,24 @@ function _novo_taxonomy_feature_add_prefix($vocabulary) {
     'Mr.',
     'Mrs.',
     'Ms.'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import statuses.
+ */
+function _novo_taxonomy_feature_add_application_status($vocabulary) {
+  $list = array(
+    'Approved',
+    'Started',
+    'Completed',
+    'Expired'
   );
   foreach ($list as $key => $value) {
     $term = new stdClass();

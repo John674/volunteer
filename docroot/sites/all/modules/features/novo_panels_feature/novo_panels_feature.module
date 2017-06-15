@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo panels feature feature.
+ */
+
+include_once 'novo_panels_feature.features.inc';

@@ -384,6 +384,47 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-application-field_app_status'.
+  $field_instances['node-application-field_app_status'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'tid' => 96,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 101,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_status',
+    'label' => 'Status',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 160,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_beliefs2_q1'.
   $field_instances['node-application-field_beliefs2_q1'] = array(
     'bundle' => 'application',
@@ -6110,6 +6151,7 @@ Friend',
   t('Secondary Contact Phone 1');
   t('Secondary Contact Phone 2');
   t('State');
+  t('Status');
   t('Suffix');
   t('T-shirt Size');
   t('Teacher');

@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * Applications functions.
+ */
+
+
+define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
+define('NOVO_APPLICATION_STATUS_COMPLETED_NAME', 'Completed');
+define('NOVO_APPLICATION_STATUS_STARTED_NAME', 'Started');
+
+/**
+ * Implements hook_node_insert().
+ */
+function novo_applications_node_insert($node) {
+  if (!isset($node->is_new) || !$node->is_new) {
+    return;
+  }
+
+  if ($node->type == 'application') {
+    $tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_STARTED_NAME);
+    if (!empty($tid)) {
+      $node->field_app_status[LANGUAGE_NONE][0]['tid'] = $tid;
+      field_attach_update('node', $node);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function novo_applications_node_update($node) {
+  if ($node->type == 'application') {
+    if (isset($node->original->status) && $node->original->status == 0 && isset($node->status) && $node->status == 1) {
+      // If was published. We update status.
+      $started_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_STARTED_NAME);
+      $current_status_tid = isset($node->field_app_status[LANGUAGE_NONE][0]['tid']) ? $node->field_app_status[LANGUAGE_NONE][0]['tid'] : NULL;
+      if ($current_status_tid == $started_tid) {
+        $completed_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_COMPLETED_NAME);
+        if (!empty($completed_tid)) {
+          // If was status "Started" we Change status to "Completed".
+          $node->field_app_status[LANGUAGE_NONE][0]['tid'] = $completed_tid;
+          field_attach_update('node', $node);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_applications_form_application_node_form_alter(&$form, &$form_state, $form_id) {
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if ($is_new) {
+    $nodes = novo_applications_get_app_node_for_user();
+    if (!empty($nodes)) {
+      // User already create application. Redirect.
+      drupal_set_message(t("You already submit application"));
+      drupal_goto("<front>");
+    }
+  }
+  //$form['field_app_status']['#access'] = FALSE;
+}
+
+/**
+ * Get status tid by name.
+ */
+function novo_applications_get_status_tid($term_name) {
+  $term = taxonomy_get_term_by_name($term_name, NOVO_APPLICATION_STATUS_VOC_NAME);
+  $term = array_values($term);
+  $term = isset($term[0]) ? $term[0] : -1;
+  return (isset($term->tid)) ? $term->tid : NULL;
+}
+
+
+/**
+ * Get application node for current user.
+ */
+function novo_applications_get_app_node_for_user($account = NULL) {
+  global $user;
+  $uid = (isset($account->uid)) ? $account->uid : $user->uid;
+  $nodes = node_load_multiple(NULL, array('uid' => $user->uid, 'type' => 'application'));
+  return $nodes;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_applications_theme() {
+  return array(
+    'novo_applications_welcome_block' => array(
+      'render element' => 'data',
+      'template' => 'plugins/templates/novo_applications_welcome_block'
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function novo_applications_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' || $owner == 'panels') {
+    return 'plugins/' . $plugin_type;
+  }
+}
