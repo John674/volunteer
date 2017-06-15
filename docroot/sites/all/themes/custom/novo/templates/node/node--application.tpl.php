@@ -108,7 +108,7 @@
                       <div class="col-md-6">
                           <div class="field-label">
                               <i class="fa fa-user"></i>
-                              <span><?php print(t('Applicant name:')) ?>:</span>
+                              <span><?php print(t('Applicant name')) ?>:</span>
                           </div>
                       </div>
                       <div class="col-md-6">
@@ -129,6 +129,7 @@
                         <div class="field-label">
                             <i class="fa fa-file-text-o"></i>
                             <span><?php print(t('Application status'))?>:</span>
+                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -152,6 +153,7 @@
                     <div class="col-md-6">
                         <div class="field-label">
                             <span><?php print(t('Request date'))?>:</span>
+                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -163,6 +165,7 @@
                     <div class="col-md-6">
                         <div class="field-label">
                             <span><?php print(t('Response date'))?>:</span>
+                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -172,20 +175,22 @@
                 <hr>
             </div>
             <div class="panel-footer clearfix">
-                <div class="btn-group pull-left">
-                    <a role="button" class="btn btn-default" href="#">
-                        <i class="fa fa-download"></i>
-                        <?php print (t('Generate Pdf'))?>
-                    </a>
-                </div>
-                <div class="btn-group pull-left">
+
+                <div class="pull-left" style="border: 1px solid #d9534f; padding: 5px">
                     <a role="button" class="btn btn-default" href="#">
                         <i class="fa fa-envelope-o"></i>
                       <?php print (t('Notify User About Expiration'))?>
                     </a>
+                    <a role="button" class="btn btn-default" href="#">
+                        <i class="fa fa-download"></i>
+                      <?php print (t('Generate Pdf'))?>
+                    </a>
+                    -
+                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
                 </div>
 
-                <div class="btn-group pull-right">
+
+                <div class="pull-right" style="border: 1px solid #d9534f; padding: 5px">
                     <a role="button" class="btn btn-success" href="#">
                         <i class="fa fa-check"></i>
                       <?php print (t('Approve'))?>
@@ -194,6 +199,8 @@
                         <i class="fa fa-times"></i>
                       <?php print (t('Not Approve'))?>
                     </a>
+                    -
+                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
                 </div>
             </div>
         </div>
