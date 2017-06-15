@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file field.tpl.php
- * Default template implementation to display the value of a field.
+ * @file
+ * Default template implementation to display the value of a application fields.
  *
  * This file is not used and is here as a starting point for customization only.
  * @see theme_field()
@@ -45,11 +45,13 @@
  */
 ?>
 
-<div class="row">
-
+<div class="row field">
     <div class="col-md-6">
       <?php if (!$label_hidden): ?>
-        <?php print $label ?>:
+          <div class="field-label">
+              <i class="fa fa-<?php !empty($icon) ? print ($icon) : print ('') ?>"></i>
+            <?php print $label ?>:
+          </div>
       <?php endif; ?>
     </div>
     <div class="col-md-6">
@@ -58,3 +60,4 @@
       <?php endforeach; ?>
     </div>
 </div>
+<?php empty($is_phone_1) ? print ('<hr>') : print ('') ?>

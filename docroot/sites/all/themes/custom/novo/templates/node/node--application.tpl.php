@@ -100,13 +100,103 @@
       </header>
   <?php endif; ?>
     <div class="container">
-      <?php
-      // Hide comments, tags, and links now so that we can render them later.
-      hide($content['comments']);
-      hide($content['links']);
-      hide($content['field_tags']);
-      print render($content);
-      ?>
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php print(t('Application view')) ?></div>
+            <div class="panel-body">
+              <?php if (!empty($title)): ?>
+                  <div class="row field">
+                      <div class="col-md-6">
+                          <div class="field-label">
+                              <i class="fa fa-user"></i>
+                              <span><?php print(t('Applicant name:')) ?>:</span>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <span><?php print $title; ?></span>
+                      </div>
+                  </div>
+                  <hr>
+              <?php endif; ?>
+              <?php
+     // Hide comments, tags, and links now so that we can render them later.
+              hide($content['comments']);
+              hide($content['links']);
+              hide($content['field_tags']);
+              print render($content);
+              ?>
+                <div class="row field">
+                    <div class="col-md-6">
+                        <div class="field-label">
+                            <i class="fa fa-file-text-o"></i>
+                            <span><?php print(t('Application status'))?>:</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label label-success" title="Status"><?php print(t('Approved'))?></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row field">
+                    <div class="col-md-6">
+                        <div class="field-label">
+                            <i class="fa fa-inbox"></i>
+                            <span><?php print(t('Created date'))?>:</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span><?php print format_date($node->created, 'custom', 'Y-m-d  H:i:s'); ?></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row field">
+                    <div class="col-md-6">
+                        <div class="field-label">
+                            <span><?php print(t('Request date'))?>:</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span>N/A</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row field">
+                    <div class="col-md-6">
+                        <div class="field-label">
+                            <span><?php print(t('Response date'))?>:</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span>N/A</span>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="panel-footer clearfix">
+                <div class="btn-group pull-left">
+                    <a role="button" class="btn btn-default" href="#">
+                        <i class="fa fa-download"></i>
+                        <?php print (t('Generate Pdf'))?>
+                    </a>
+                </div>
+                <div class="btn-group pull-left">
+                    <a role="button" class="btn btn-default" href="#">
+                        <i class="fa fa-envelope-o"></i>
+                      <?php print (t('Notify User About Expiration'))?>
+                    </a>
+                </div>
+
+                <div class="btn-group pull-right">
+                    <a role="button" class="btn btn-success" href="#">
+                        <i class="fa fa-check"></i>
+                      <?php print (t('Approve'))?>
+                    </a>
+                    <a role="button" class="btn btn-danger" href="#">
+                        <i class="fa fa-times"></i>
+                      <?php print (t('Not Approve'))?>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
   <?php
   // Only display the wrapper div if there are tags or links.
