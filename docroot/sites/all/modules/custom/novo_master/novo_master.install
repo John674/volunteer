@@ -179,3 +179,10 @@ function novo_master_update_7116() {
   features_revert_module("novo_content_feature");
   features_revert_module("novo_master_feature");
 }
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7117() {
+  features_revert_module('novo_content_feature');
+}
