@@ -23,7 +23,7 @@ function novo_frontpage_volunteer_welcome($subtype, $conf, $args, $context) {
   $block = new stdClass();
   $account = isset($context->ctools_context->data) ? $context->ctools_context->data : $user;
   $app_nodes = novo_applications_get_app_node_for_user($account);
-  $already_created_app = (!empty($app_nodes)) ? TRUE: FALSE;
+  $already_created_app = (!empty($app_nodes)) ? TRUE : FALSE;
 
   $block->title = '';
   $data = array(

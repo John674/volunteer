@@ -5,7 +5,6 @@
  * Applications functions.
  */
 
-
 define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
 define('NOVO_APPLICATION_STATUS_COMPLETED_NAME', 'Completed');
 define('NOVO_APPLICATION_STATUS_STARTED_NAME', 'Started');
@@ -61,7 +60,7 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
       drupal_goto("<front>");
     }
   }
-  //$form['field_app_status']['#access'] = FALSE;
+  $form['field_app_status']['#access'] = FALSE;
 }
 
 /**
@@ -73,7 +72,6 @@ function novo_applications_get_status_tid($term_name) {
   $term = isset($term[0]) ? $term[0] : -1;
   return (isset($term->tid)) ? $term->tid : NULL;
 }
-
 
 /**
  * Get application node for current user.
