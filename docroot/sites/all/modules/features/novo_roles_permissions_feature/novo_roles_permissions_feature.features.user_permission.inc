@@ -82,6 +82,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create application content'] = array(
     'name' => 'create application content',
     'roles' => array(
+      'authenticated user' => 'authenticated user',
       'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
@@ -226,6 +227,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own application content'] = array(
     'name' => 'edit own application content',
     'roles' => array(
+      'authenticated user' => 'authenticated user',
       'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
