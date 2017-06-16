@@ -5076,7 +5076,7 @@ Friend',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5113,7 +5113,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5124,7 +5124,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address_1',
-    'label' => 'Address 1',
+    'label' => 'Address',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -5150,10 +5150,9 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 12,
+        'type' => 'hidden',
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5193,7 +5192,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5233,7 +5232,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 22,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5244,7 +5243,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_masked_phone_1',
-    'label' => 'Primary Contact Phone 1',
+    'label' => 'Primary Contact Phone',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -5272,10 +5271,9 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 23,
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5317,7 +5315,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 24,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5328,7 +5326,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_masked_phone_3',
-    'label' => 'Secondary Contact Phone 1',
+    'label' => 'Secondary Contact Phone',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -5356,10 +5354,9 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 25,
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5401,7 +5398,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5441,7 +5438,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5481,7 +5478,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 20,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5521,7 +5518,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 21,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5558,10 +5555,9 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 14,
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5603,7 +5599,7 @@ Friend',
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 15,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5814,7 +5810,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_masked_phone_1',
-    'label' => 'Phone 1',
+    'label' => 'Phone',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -5842,9 +5838,8 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 8,
       ),
       'teaser' => array(
@@ -5919,7 +5914,6 @@ Friend',
   // Included for use with string extractors like potx.
   t('Active / Inactive');
   t('Address');
-  t('Address 1');
   t('Address 2');
   t('Address Apartment number');
   t('App 7 final agree 1');
@@ -6016,14 +6010,14 @@ Friend',
   t('Previous Church Involvement');
   t('Primary Contact First Name');
   t('Primary Contact Last Name');
-  t('Primary Contact Phone 1');
+  t('Primary Contact Phone');
   t('Primary Contact Phone 2');
   t('Relationship');
   t('Romans 1:16');
   t('School');
   t('Secondary Contact First Name');
   t('Secondary Contact Last Name');
-  t('Secondary Contact Phone 1');
+  t('Secondary Contact Phone');
   t('Secondary Contact Phone 2');
   t('State');
   t('Status');
