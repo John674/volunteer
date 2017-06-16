@@ -44,10 +44,16 @@ function novo_preprocess_field(&$variables) {
   $type = $variables['element']['#object']->type;
 
   if ($type == 'application') {
+    $node = $variables['element']['#object'];
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
-        $variables['icon'] = 'phone ';
-        $variables['is_phone_1'] = TRUE;
+        $variables['icon'] = 'phone';
+        $variables['label'] = 'Phone';
+        $field_phone_2 = field_get_items('node', $node, 'field_masked_phone_2');
+        $value_phone_2 = field_view_value('node', $node, 'field_masked_phone_2', $field_phone_2[0]);
+        if (!empty($value_phone_2['#markup'])) {
+          $variables['items'][] = $value_phone_2;
+        }
         break;
 
       case 'field_email':
@@ -55,7 +61,13 @@ function novo_preprocess_field(&$variables) {
         break;
 
       case 'field_address_1':
+        $variables['label'] = 'Address';
         $variables['icon'] = 'home';
+        $field_address_2 = field_get_items('node', $node, 'field_address_2');
+        $value_address_2 = field_view_value('node', $node, 'field_address_2', $field_address_2[0]);
+        if (!empty($value_address_2['#markup'])) {
+          $variables['items'][] = $value_address_2;
+        }
         break;
 
       case 'field_dob':
@@ -64,14 +76,58 @@ function novo_preprocess_field(&$variables) {
 
       case 'field_city':
         $variables['icon'] = 'globe';
+        $field_state = field_get_items('node', $node, 'field_state');
+
+        if (!empty($field_state)) {
+          $term_id = $field_state[0]['tid'];
+          $state_term = taxonomy_term_load($term_id);
+          $variables['items'][0]['#markup'] .= '/' . $state_term->description;
+
+          $field_state_info = field_info_instance('node', 'field_state', 'application');
+          $variables['label'] .= '/' . $field_state_info['label'];
+        }
         break;
 
-      case 'field_state':
-        $variables['icon'] = 'globe';
+      case 'field_app_status':
+        $variables['icon'] = 'file-text-o';
+        $variables['label'] = 'Application status';
+        $field_app_status = field_get_items('node', $node, 'field_app_status');
+        if (!empty($field_app_status)) {
+          $status_labels = [
+            'started' => 'info',
+            'approved' => 'success',
+            'completed' => 'primary',
+            'expired' => 'danger',
+          ];
+
+          $term_id = $field_app_status[0]['tid'];
+          $status_term = taxonomy_term_load($term_id);
+          $status = $status_term->name;
+          $label = $status_labels[drupal_strtolower($status)];
+          $label_html = theme('status_label', array(
+            'status' => $status,
+            'label' => $label,
+          ));
+          $variables['items'][0]['#markup'] = $label_html;
+        }
         break;
     }
+
     // @codingStandardsIgnoreStart
     // kpr($variables);
     // @codingStandardsIgnoreEnd
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_theme($existing, $type, $theme, $path) {
+
+  return array(
+    'status_label' => array(
+      'variables' => array('status' => NULL, 'label' => NULL),
+      'template' => 'templates/system/status-label',
+    ),
+  );
 }

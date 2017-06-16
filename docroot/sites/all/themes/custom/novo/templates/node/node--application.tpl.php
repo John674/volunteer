@@ -127,19 +127,6 @@
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
-                            <i class="fa fa-file-text-o"></i>
-                            <span><?php print(t('Application status'))?>:</span>
-                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="label label-success" title="Status"><?php print(t('Approved'))?></span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
                             <i class="fa fa-inbox"></i>
                             <span><?php print(t('Created date'))?>:</span>
                         </div>
