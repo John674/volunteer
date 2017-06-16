@@ -3,4 +3,6 @@ description = Applications module.
 core = 7.x
 package = Novo
 
+// @codingStandardsIgnoreStart
 files[] = includes/novo_applications.access.inc
+// @codingStandardsIgnoreEnd
