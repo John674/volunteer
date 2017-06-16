@@ -33,7 +33,7 @@ function novo_content_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address_1',
-    'label' => 'Address 1',
+    'label' => 'Address',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -1713,7 +1713,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_masked_phone_1',
-    'label' => 'Phone 1',
+    'label' => 'Phone',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -4024,7 +4024,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address_1',
-    'label' => 'Address 1',
+    'label' => 'Address',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -4050,9 +4050,8 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'teaser' => array(
@@ -4173,7 +4172,7 @@ Friend',
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 22,
       ),
       'teaser' => array(
@@ -4352,7 +4351,7 @@ Friend',
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 5,
       ),
       'teaser' => array(
@@ -4429,7 +4428,7 @@ Friend',
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'taxonomy_term_reference_plain',
         'weight' => 29,
       ),
       'teaser' => array(
@@ -4558,7 +4557,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_masked_phone_1',
-    'label' => 'Parent / Guardian Phone 1',
+    'label' => 'Parent / Guardian Phone',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -4586,9 +4585,8 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 33,
       ),
       'teaser' => array(
@@ -4910,9 +4908,8 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 10,
       ),
       'teaser' => array(
@@ -4947,9 +4944,8 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'teaser' => array(
@@ -5922,6 +5918,7 @@ Friend',
   // Translatables
   // Included for use with string extractors like potx.
   t('Active / Inactive');
+  t('Address');
   t('Address 1');
   t('Address 2');
   t('Address Apartment number');
@@ -6005,7 +6002,7 @@ Friend',
   t('Name');
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
-  t('Parent / Guardian Phone 1');
+  t('Parent / Guardian Phone');
   t('Parent / Guardian Phone 2');
   t('Parent / Guardian Relation');
   t('Pastor, Small Group Leader, or other church leader');
