@@ -46,7 +46,35 @@ function novo_preprocess_form(&$variables) {
  * Implements hook_preprocess_field().
  */
 function novo_preprocess_field(&$variables) {
-  // @codingStandardsIgnoreStart
-  // kpr($variables);
-  // @codingStandardsIgnoreEnd
+  $type = $variables['element']['#object']->type;
+
+  if ($type == 'application') {
+    switch ($variables['element']['#field_name']) {
+      case 'field_masked_phone_1':
+        $variables['icon'] = 'phone ';
+        $variables['is_phone_1'] = TRUE;
+        break;
+
+      case 'field_email':
+        $variables['icon'] = 'envelope';
+        break;
+
+      case 'field_address_1':
+        $variables['icon'] = 'home';
+        break;
+
+      case 'field_dob':
+        $variables['icon'] = 'calendar';
+        break;
+
+      case 'field_city':
+        $variables['icon'] = 'globe';
+        break;
+
+      case 'field_state':
+        $variables['icon'] = 'globe';
+        break;
+    }
+    // kpr($variables);
+  }
 }
