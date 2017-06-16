@@ -41,10 +41,10 @@ function novo_preprocess_form(&$variables) {
  * Implements hook_preprocess_field().
  */
 function novo_preprocess_field(&$variables) {
-  $type = $variables['element']['#object']->type;
+  $node = $variables['element']['#object'];
 
-  if ($type == 'application') {
-    $node = $variables['element']['#object'];
+  if ($node->type == 'application') {
+
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
         $variables['icon'] = 'phone';

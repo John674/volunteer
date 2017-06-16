@@ -49,7 +49,9 @@
     <div class="col-md-6">
       <?php if (!$label_hidden): ?>
           <div class="field-label">
-              <i class="fa fa-<?php !empty($icon) ? print ($icon) : print ('') ?>"></i>
+            <?php if (!empty($icon)): ?>
+                <i class="fa fa-<?php print ($icon) ?>"></i>
+            <?php endif; ?>
             <?php print $label ?>:
           </div>
       <?php endif; ?>
