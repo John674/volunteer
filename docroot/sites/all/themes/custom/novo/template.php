@@ -5,7 +5,6 @@
  * The primary PHP file for this theme.
  */
 
-
 define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
@@ -55,7 +54,7 @@ function novo_preprocess_form(&$variables) {
 function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
-  if ($node->type == 'application' || $node->type == 'kids') {
+  if ($node->type == 'application' || $node->type == 'kids' || $node->type == 'locations' || $node->type == 'staff') {
 
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
@@ -64,6 +63,15 @@ function novo_preprocess_field(&$variables) {
         $value_phone_2 = field_view_value('node', $node, 'field_masked_phone_2', $field_phone_2[0]);
         if (!empty($value_phone_2['#markup'])) {
           $variables['items'][] = $value_phone_2;
+        }
+        break;
+
+      case 'field_masked_phone_3':
+        $variables['icon'] = 'phone';
+        $field_phone_4 = field_get_items('node', $node, 'field_masked_phone_4');
+        $value_phone_4 = field_view_value('node', $node, 'field_masked_phone_4', $field_phone_4[0]);
+        if (!empty($value_phone_4['#markup'])) {
+          $variables['items'][] = $value_phone_4;
         }
         break;
 
