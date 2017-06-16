@@ -25,7 +25,7 @@ function novo_frontpage_volunteer_welcome($subtype, $conf, $args, $context) {
   $app_nodes = novo_applications_get_app_node_for_user($account);
   $already_created_app = (!empty($app_nodes)) ? TRUE : FALSE;
 
-  $account  = user_load($user->uid);
+  $account = user_load($user->uid);
   $user_fname = field_get_items("user", $account, "field_u_first_name");
   $user_fname = field_view_value('user', $account, 'field_u_first_name', $user_fname[0]);
   $user_lname = field_get_items("user", $account, "field_u_last_name");
