@@ -17,8 +17,15 @@ function novo_preprocess_html(&$variables) {
  */
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
+
+  if ($variables['type'] == 'kids') {
+    $node = $variables['node'];
+    $field_suffix = field_get_items('node', $node, 'field_suffix');
+    $suffix = $field_suffix[0]['value'];
+    $variables['suffix'] = $suffix;
+  }
   // @codingStandardsIgnoreStart
-  //kpr($variables);
+  // kpr($variables);
   // @codingStandardsIgnoreEnd
 
 }
@@ -43,12 +50,11 @@ function novo_preprocess_form(&$variables) {
 function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
-  if ($node->type == 'application') {
+  if ($node->type == 'application' || $node->type == 'kids') {
 
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
         $variables['icon'] = 'phone';
-        $variables['label'] = 'Phone';
         $field_phone_2 = field_get_items('node', $node, 'field_masked_phone_2');
         $value_phone_2 = field_view_value('node', $node, 'field_masked_phone_2', $field_phone_2[0]);
         if (!empty($value_phone_2['#markup'])) {
@@ -61,7 +67,6 @@ function novo_preprocess_field(&$variables) {
         break;
 
       case 'field_address_1':
-        $variables['label'] = 'Address';
         $variables['icon'] = 'home';
         $field_address_2 = field_get_items('node', $node, 'field_address_2');
         $value_address_2 = field_view_value('node', $node, 'field_address_2', $field_address_2[0]);
