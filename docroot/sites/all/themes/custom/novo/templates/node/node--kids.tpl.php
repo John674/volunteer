@@ -101,18 +101,19 @@
   <?php endif; ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php print(t('Application view')) ?></div>
+            <div class="panel-heading"><?php print(t('Kid view')) ?></div>
             <div class="panel-body">
               <?php if (!empty($title)): ?>
                   <div class="row field">
                       <div class="col-md-6">
                           <div class="field-label">
                               <i class="fa fa-user"></i>
-                              <span><?php print(t('Applicant name')) ?>:</span>
+                              <span><?php print(t('Kid name')) ?>:</span>
                           </div>
                       </div>
                       <div class="col-md-6">
                         <span><?php print $title; ?></span>
+                          <strong><?php print ($suffix)?></strong>
                       </div>
                   </div>
                   <hr>
@@ -124,71 +125,6 @@
               hide($content['field_tags']);
               print render($content);
               ?>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <i class="fa fa-inbox"></i>
-                            <span><?php print(t('Created date'))?>:</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span><?php print format_date($node->created, 'custom', 'Y-m-d  H:i:s'); ?></span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <span><?php print(t('Request date'))?>:</span>
-                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span>N/A</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <span><?php print(t('Response date'))?>:</span>
-                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span>N/A</span>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            <div class="panel-footer clearfix">
-
-                <div class="pull-left" style="border: 1px solid #d9534f; padding: 5px">
-                    <a role="button" class="btn btn-default" href="#">
-                        <i class="fa fa-envelope-o"></i>
-                      <?php print (t('Notify User About Expiration'))?>
-                    </a>
-                    <a role="button" class="btn btn-default" href="#">
-                        <i class="fa fa-download"></i>
-                      <?php print (t('Generate Pdf'))?>
-                    </a>
-                    -
-                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
-                </div>
-
-
-                <div class="pull-right" style="border: 1px solid #d9534f; padding: 5px">
-                    <a role="button" class="btn btn-success" href="#">
-                        <i class="fa fa-check"></i>
-                      <?php print (t('Approve'))?>
-                    </a>
-                    <a role="button" class="btn btn-danger" href="#">
-                        <i class="fa fa-times"></i>
-                      <?php print (t('Not Approve'))?>
-                    </a>
-                    -
-                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
-                </div>
             </div>
         </div>
     </div>

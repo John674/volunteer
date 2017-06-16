@@ -49,15 +49,17 @@
     <div class="col-md-6">
       <?php if (!$label_hidden): ?>
           <div class="field-label">
-              <i class="fa fa-<?php !empty($icon) ? print ($icon) : print ('') ?>"></i>
+            <?php if (!empty($icon)): ?>
+                <i class="fa fa-<?php print ($icon) ?>"></i>
+            <?php endif; ?>
             <?php print $label ?>:
           </div>
       <?php endif; ?>
     </div>
     <div class="col-md-6">
       <?php foreach ($items as $delta => $item): ?>
-        <?php print render($item); ?>
+        <p><?php print render($item); ?></p>
       <?php endforeach; ?>
     </div>
 </div>
-<?php empty($is_phone_1) ? print ('<hr>') : print ('') ?>
+<hr>
