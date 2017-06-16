@@ -9,6 +9,8 @@ define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
 define('NOVO_APPLICATION_STATUS_COMPLETED_NAME', 'Completed');
 define('NOVO_APPLICATION_STATUS_STARTED_NAME', 'Started');
 
+module_load_include("inc", "novo_applications", "includes/novo_applications.access");
+
 /**
  * Implements hook_node_insert().
  */
@@ -61,6 +63,35 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
     }
   }
   $form['field_app_status']['#access'] = FALSE;
+
+  // kpr($form);
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+
+  $form['field_app_7_final_agree_1'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_2'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_3'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_4'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_5'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_6'][$lang][0]['value']['#smart_description'] = FALSE;
+  $form['field_app_7_final_agree_1'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app_7_final_agree_2'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app_7_final_agree_3'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app_7_final_agree_4'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app_7_final_agree_5'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app_7_final_agree_6'][$lang][0]['value']['#title_display'] = 'invisible';
+
+  $form['field_masked_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_masked_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_masked_emergency_phone'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_1_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_1_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_2_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_2_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_3_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_ref_3_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_church_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+  $form['field_church_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+
 }
 
 /**
@@ -79,7 +110,10 @@ function novo_applications_get_status_tid($term_name) {
 function novo_applications_get_app_node_for_user($account = NULL) {
   global $user;
   $uid = (isset($account->uid)) ? $account->uid : $user->uid;
-  $nodes = node_load_multiple(NULL, array('uid' => $user->uid, 'type' => 'application'));
+  $nodes = node_load_multiple(NULL, array(
+    'uid' => $uid,
+    'type' => 'application'
+  ));
   return $nodes;
 }
 
