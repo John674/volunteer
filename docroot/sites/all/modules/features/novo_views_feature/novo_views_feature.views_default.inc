@@ -431,6 +431,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_vol_roles_time']['field'] = 'field_vol_roles_time';
   $handler->display->display_options['fields']['field_vol_roles_time']['label'] = '';
   $handler->display->display_options['fields']['field_vol_roles_time']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_vol_roles_time']['type'] = 'novo_formatters';
   $handler->display->display_options['fields']['field_vol_roles_time']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 0,
