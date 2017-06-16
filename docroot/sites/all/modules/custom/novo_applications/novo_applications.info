@@ -1,4 +1,6 @@
-name = Novo Applications
+name = Novo Applicationsf
 description = Applications module.
 core = 7.x
 package = Novo
+
+files[] = includes/novo_applications.access.inc

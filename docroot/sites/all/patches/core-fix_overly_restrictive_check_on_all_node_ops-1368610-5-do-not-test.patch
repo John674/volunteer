@@ -1,0 +1,13 @@
+diff --git a/modules/node/node.module b/modules/node/node.module
+index abcd4e0..22b7ddd 100644
+--- a/modules/node/node.module
++++ b/modules/node/node.module
+@@ -3013,7 +3013,7 @@ function node_access($op, $node, $account = NULL) {
+     $rights[$account->uid][$cid][$op] = TRUE;
+     return TRUE;
+   }
+-  if (!user_access('access content', $account)) {
++  if ($op == 'view' && !user_access('access content', $account)) {
+     $rights[$account->uid][$cid][$op] = FALSE;
+     return FALSE;
+   }
