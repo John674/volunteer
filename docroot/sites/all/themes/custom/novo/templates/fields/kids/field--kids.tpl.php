@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default template implementation to display the value of a field.
+ * Default template implementation to display the value of a application fields.
  *
  * This file is not used and is here as a starting point for customization only.
  * @see theme_field()
@@ -46,9 +46,19 @@
 ?>
 
 <div class="row field">
-    <div class="col-md-offset-6 col-md-6">
+    <div class="col-md-6">
+      <?php if (!$label_hidden): ?>
+          <div class="field-label">
+            <?php if (!empty($icon)): ?>
+                <i class="fa fa-<?php print ($icon) ?>"></i>
+            <?php endif; ?>
+            <?php print $label ?>:
+          </div>
+      <?php endif; ?>
+    </div>
+    <div class="col-md-6">
       <?php foreach ($items as $delta => $item): ?>
-        <?php print render($item); ?>
+        <p><?php print render($item); ?></p>
       <?php endforeach; ?>
     </div>
 </div>

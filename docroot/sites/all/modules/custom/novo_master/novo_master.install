@@ -186,3 +186,10 @@ function novo_master_update_7116() {
 function novo_master_update_7117() {
   features_revert_module('novo_content_feature');
 }
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7118() {
+  features_revert_module('novo_content_feature');
+}
