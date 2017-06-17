@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
+
+}
+
+
+function novo_program_preprocess_field($variables) {
+
+}

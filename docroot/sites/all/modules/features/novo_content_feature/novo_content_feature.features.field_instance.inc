@@ -10,6 +10,688 @@
 function novo_content_feature_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_church_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_church_phone-field_phone_number'] = array(
+    'bundle' => 'field_church_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_church_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_church_phone-field_phone_type'] = array(
+    'bundle' => 'field_church_phone',
+    'default_value' => array(
+      0 => array(
+        'tid' => 99,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_phone-field_phone_number'] = array(
+    'bundle' => 'field_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_phone-field_phone_type'] = array(
+    'bundle' => 'field_phone',
+    'default_value' => array(
+      0 => array(
+        'tid' => 99,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_day-field_program_time'.
+  $field_instances['field_collection_item-field_program_day-field_program_time'] = array(
+    'bundle' => 'field_program_day',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'timefield',
+        'settings' => array(
+          'display_format' => array(
+            'hour' => 'g',
+            'minute' => 'i',
+            'period' => 'a',
+            'period_separator' => '',
+            'separator' => ':',
+          ),
+        ),
+        'type' => 'timefield_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_program_time',
+    'label' => 'Time',
+    'required' => 1,
+    'settings' => array(
+      'disable_plugin' => 0,
+      'input_format' => array(
+        'am_text' => 'AM',
+        'atPosition' => 'left bottom',
+        'closeButtonText' => 'Done',
+        'deselectButtonText' => 'Deselect',
+        'myPosition' => 'left top',
+        'nowButtonText' => 'Now',
+        'periodSeparator' => '',
+        'pm_text' => 'PM',
+        'separator' => ':',
+        'showCloseButton' => 0,
+        'showDeselectButton' => 0,
+        'showLeadingZero' => 0,
+        'showNowButton' => 0,
+        'showPeriod' => 1,
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'timefield',
+      'settings' => array(
+        'label_position' => 'above',
+      ),
+      'type' => 'timefield_standard',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_day-field_program_weekday'.
+  $field_instances['field_collection_item-field_program_day-field_program_weekday'] = array(
+    'bundle' => 'field_program_day',
+    'default_value' => array(
+      0 => array(
+        'tid' => 113,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_program_weekday',
+    'label' => 'Weekday',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_canvassing_group'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_canvassing_group'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_canvassing_group',
+    'label' => 'Canvassing Group',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_kid_name'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_kid_name'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_kid_name',
+    'label' => 'Kid name',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_parent_sign'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_parent_sign'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_parent_sign',
+    'label' => 'Parent / Guardian Signature',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_photo_release'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_photo_release'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_photo_release',
+    'label' => 'Photo Release',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_small_group'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_small_group'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => 0,
+          'link' => 0,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_small_group',
+    'label' => 'Small Group',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_text_parent'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_text_parent'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_text_parent',
+    'label' => 'Text Parent / Guardian',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_1_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_ref_1_phone-field_phone_number'] = array(
+    'bundle' => 'field_ref_1_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_1_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_ref_1_phone-field_phone_type'] = array(
+    'bundle' => 'field_ref_1_phone',
+    'default_value' => array(
+      0 => array(
+        'tid' => 99,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_2_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_ref_2_phone-field_phone_number'] = array(
+    'bundle' => 'field_ref_2_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_2_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_ref_2_phone-field_phone_type'] = array(
+    'bundle' => 'field_ref_2_phone',
+    'default_value' => array(
+      0 => array(
+        'tid' => 99,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_3_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_ref_3_phone-field_phone_number'] = array(
+    'bundle' => 'field_ref_3_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_ref_3_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_ref_3_phone-field_phone_type'] = array(
+    'bundle' => 'field_ref_3_phone',
+    'default_value' => array(
+      0 => array(
+        'tid' => 99,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_address_1'.
   $field_instances['node-application-field_address_1'] = array(
     'bundle' => 'application',
@@ -167,7 +849,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 153,
+      'weight' => 166,
     ),
   );
 
@@ -208,7 +890,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 154,
+      'weight' => 167,
     ),
   );
 
@@ -249,7 +931,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 155,
+      'weight' => 168,
     ),
   );
 
@@ -290,7 +972,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 156,
+      'weight' => 169,
     ),
   );
 
@@ -331,7 +1013,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 157,
+      'weight' => 170,
     ),
   );
 
@@ -372,7 +1054,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 158,
+      'weight' => 171,
     ),
   );
 
@@ -452,7 +1134,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 142,
+      'weight' => 150,
     ),
   );
 
@@ -491,7 +1173,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 143,
+      'weight' => 151,
     ),
   );
 
@@ -530,7 +1212,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 144,
+      'weight' => 153,
     ),
   );
 
@@ -566,7 +1248,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 135,
+      'weight' => 150,
     ),
   );
 
@@ -602,7 +1284,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 136,
+      'weight' => 151,
     ),
   );
 
@@ -638,7 +1320,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 137,
+      'weight' => 153,
     ),
   );
 
@@ -674,7 +1356,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 138,
+      'weight' => 154,
     ),
   );
 
@@ -710,7 +1392,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 139,
+      'weight' => 155,
     ),
   );
 
@@ -746,7 +1428,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 140,
+      'weight' => 156,
     ),
   );
 
@@ -782,7 +1464,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 141,
+      'weight' => 157,
     ),
   );
 
@@ -902,8 +1584,8 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-application-field_church_phone_1'.
-  $field_instances['node-application-field_church_phone_1'] = array(
+  // Exported field_instance: 'node-application-field_church_phone'.
+  $field_instances['node-application-field_church_phone'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
@@ -911,9 +1593,16 @@ function novo_content_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 71,
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 102,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -923,64 +1612,18 @@ function novo_content_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_church_phone_1',
-    'label' => 'Phone 1',
+    'field_name' => 'field_church_phone',
+    'label' => 'Phone',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
       'weight' => 133,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_church_phone_2'.
-  $field_instances['node-application-field_church_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 72,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_church_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 134,
     ),
   );
 
@@ -1138,7 +1781,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 66,
     ),
   );
 
@@ -1193,7 +1836,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 62,
+      'weight' => 63,
     ),
   );
 
@@ -1277,7 +1920,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 63,
+      'weight' => 64,
     ),
   );
 
@@ -1566,7 +2209,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 67,
+      'weight' => 68,
     ),
   );
 
@@ -1686,90 +2329,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 20,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_masked_phone_1'.
-  $field_instances['node-application-field_masked_phone_1'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_1',
-    'label' => 'Phone',
-    'required' => 1,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 60,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_masked_phone_2'.
-  $field_instances['node-application-field_masked_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 61,
+      'weight' => 19,
     ),
   );
 
@@ -1975,7 +2535,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 124,
+      'weight' => 125,
     ),
   );
 
@@ -2019,7 +2579,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 125,
+      'weight' => 126,
     ),
   );
 
@@ -2063,7 +2623,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 126,
+      'weight' => 127,
     ),
   );
 
@@ -2107,7 +2667,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 127,
+      'weight' => 128,
     ),
   );
 
@@ -2195,7 +2755,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 117,
+      'weight' => 118,
     ),
   );
 
@@ -2239,7 +2799,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 118,
+      'weight' => 119,
     ),
   );
 
@@ -2283,7 +2843,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 119,
+      'weight' => 120,
     ),
   );
 
@@ -2327,7 +2887,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 120,
+      'weight' => 121,
     ),
   );
 
@@ -2371,7 +2931,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 121,
+      'weight' => 122,
     ),
   );
 
@@ -2415,7 +2975,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 122,
+      'weight' => 123,
     ),
   );
 
@@ -2459,7 +3019,50 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 123,
+      'weight' => 124,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_phone'.
+  $field_instances['node-application-field_phone'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 98,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 62,
     ),
   );
 
@@ -2540,7 +3143,7 @@ Church',
         'size' => 2,
       ),
       'type' => 'masked_input',
-      'weight' => 152,
+      'weight' => 164,
     ),
   );
 
@@ -2657,7 +3260,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 77,
+      'weight' => 78,
     ),
   );
 
@@ -2697,7 +3300,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 78,
+      'weight' => 79,
     ),
   );
 
@@ -2740,8 +3343,8 @@ Church',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_ref_1_phone_1'.
-  $field_instances['node-application-field_ref_1_phone_1'] = array(
+  // Exported field_instance: 'node-application-field_ref_1_phone'.
+  $field_instances['node-application-field_ref_1_phone'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
@@ -2749,9 +3352,16 @@ Church',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 33,
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 99,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2761,64 +3371,18 @@ Church',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_ref_1_phone_1',
-    'label' => 'Phone 1',
+    'field_name' => 'field_ref_1_phone',
+    'label' => 'Phone',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
       'weight' => 75,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_ref_1_phone_2'.
-  $field_instances['node-application-field_ref_1_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 34,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_ref_1_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 76,
     ),
   );
 
@@ -2975,7 +3539,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 113,
+      'weight' => 114,
     ),
   );
 
@@ -3015,7 +3579,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 114,
+      'weight' => 115,
     ),
   );
 
@@ -3058,8 +3622,8 @@ Church',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_ref_2_phone_1'.
-  $field_instances['node-application-field_ref_2_phone_1'] = array(
+  // Exported field_instance: 'node-application-field_ref_2_phone'.
+  $field_instances['node-application-field_ref_2_phone'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
@@ -3067,9 +3631,16 @@ Church',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 41,
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 100,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3079,64 +3650,18 @@ Church',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_ref_2_phone_1',
-    'label' => 'Phone 1',
+    'field_name' => 'field_ref_2_phone',
+    'label' => 'Phone',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
       'weight' => 111,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_ref_2_phone_2'.
-  $field_instances['node-application-field_ref_2_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 42,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_ref_2_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 112,
     ),
   );
 
@@ -3293,7 +3818,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 102,
+      'weight' => 103,
     ),
   );
 
@@ -3333,7 +3858,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 103,
+      'weight' => 104,
     ),
   );
 
@@ -3376,8 +3901,8 @@ Church',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_ref_3_phone_1'.
-  $field_instances['node-application-field_ref_3_phone_1'] = array(
+  // Exported field_instance: 'node-application-field_ref_3_phone'.
+  $field_instances['node-application-field_ref_3_phone'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
@@ -3385,9 +3910,16 @@ Church',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 49,
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 101,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -3397,64 +3929,18 @@ Church',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_ref_3_phone_1',
-    'label' => 'Phone 1',
+    'field_name' => 'field_ref_3_phone',
+    'label' => 'Phone',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
       'weight' => 100,
-    ),
-  );
-
-  // Exported field_instance: 'node-application-field_ref_3_phone_2'.
-  $field_instances['node-application-field_ref_3_phone_2'] = array(
-    'bundle' => 'application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 50,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_ref_3_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 101,
     ),
   );
 
@@ -3618,7 +4104,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 64,
+      'weight' => 65,
     ),
   );
 
@@ -3916,7 +4402,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 68,
+      'weight' => 69,
     ),
   );
 
@@ -3997,7 +4483,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -4037,7 +4523,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -4076,7 +4562,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -4116,7 +4602,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -4157,7 +4643,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -4197,7 +4683,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -4237,7 +4723,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -4292,7 +4778,44 @@ Friend',
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_ethnicity'.
+  $field_instances['node-kids-field_ethnicity'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 34,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ethnicity',
+    'label' => 'Ethnicity',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 28,
     ),
   );
 
@@ -4332,7 +4855,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -4373,7 +4896,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -4450,7 +4973,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -4490,7 +5013,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -4530,130 +5053,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_masked_phone_1'.
-  $field_instances['node-kids-field_masked_phone_1'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 32,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_1',
-    'label' => 'Parent / Guardian Phone',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 27,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_masked_phone_2'.
-  $field_instances['node-kids-field_masked_phone_2'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 33,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_2',
-    'label' => 'Parent / Guardian Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 28,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_middle'.
-  $field_instances['node-kids-field_middle'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_middle',
-    'label' => 'Middle',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => -3,
+      'weight' => 4,
     ),
   );
 
@@ -4736,7 +5136,7 @@ Friend',
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -4776,7 +5176,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -4816,7 +5216,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -4856,7 +5256,50 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_phone'.
+  $field_instances['node-kids-field_phone'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 35,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone',
+    'label' => 'Parent / Guardian Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 30,
     ),
   );
 
@@ -4895,7 +5338,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -4931,7 +5374,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -4970,7 +5413,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -5010,7 +5453,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -5056,7 +5499,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -5076,7 +5519,7 @@ Friend',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5113,7 +5556,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5124,7 +5567,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address_1',
-    'label' => 'Address',
+    'label' => 'Address 1',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -5150,9 +5593,10 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
+        'type' => 'text_default',
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5192,7 +5636,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5220,8 +5664,8 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_masked_phone_1'.
-  $field_instances['node-locations-field_masked_phone_1'] = array(
+  // Exported field_instance: 'node-locations-field_phone'.
+  $field_instances['node-locations-field_phone'] = array(
     'bundle' => 'locations',
     'default_value' => NULL,
     'deleted' => 0,
@@ -5229,10 +5673,12 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 8,
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5242,147 +5688,18 @@ Friend',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_1',
-    'label' => 'Primary Contact Phone',
-    'required' => 0,
+    'field_name' => 'field_phone',
+    'label' => 'Phone',
+    'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 18,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_masked_phone_2'.
-  $field_instances['node-locations-field_masked_phone_2'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_2',
-    'label' => 'Primary Contact Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 20,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_masked_phone_3'.
-  $field_instances['node-locations-field_masked_phone_3'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_3',
-    'label' => 'Secondary Contact Phone',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_masked_phone_4'.
-  $field_instances['node-locations-field_masked_phone_4'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_4',
-    'label' => 'Secondary Contact Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 22,
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 14,
     ),
   );
 
@@ -5398,7 +5715,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5438,7 +5755,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5478,7 +5795,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5518,7 +5835,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5555,9 +5872,10 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5599,7 +5917,7 @@ Friend',
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 6,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5625,6 +5943,261 @@ Friend',
       'settings' => array(),
       'type' => 'number',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_day'.
+  $field_instances['node-program-field_program_day'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_day',
+    'label' => 'Program day',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_kids_list'.
+  $field_instances['node-program-field_program_kids_list'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_kids_list',
+    'label' => 'Kids list',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_location'.
+  $field_instances['node-program-field_program_location'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_location',
+    'label' => 'Location',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_staff_list'.
+  $field_instances['node-program-field_program_staff_list'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_staff_list',
+    'label' => 'Staff list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(),
+      'type' => 'select2widget',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_volunteers_list'.
+  $field_instances['node-program-field_program_volunteers_list'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_volunteers_list',
+    'label' => 'Volunteers list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'CONTAINS',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+      ),
+      'type' => 'select2widgetajax',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_school_year'.
+  $field_instances['node-program-field_school_year'] = array(
+    'bundle' => 'program',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(),
+        'type' => 'date_plain',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_school_year',
+    'label' => 'School year',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 30,
+        'input_format' => 'custom',
+        'input_format_custom' => 'Y',
+        'label_position' => 'above',
+        'no_fieldset' => 1,
+        'text_parts' => array(),
+        'year_range' => '-20:+3',
+      ),
+      'type' => 'date_select',
+      'weight' => 1,
     ),
   );
 
@@ -5787,89 +6360,6 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-staff-field_masked_phone_1'.
-  $field_instances['node-staff-field_masked_phone_1'] = array(
-    'bundle' => 'staff',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_1',
-    'label' => 'Phone',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance: 'node-staff-field_masked_phone_2'.
-  $field_instances['node-staff-field_masked_phone_2'] = array(
-    'bundle' => 'staff',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_masked_phone_2',
-    'label' => 'Phone 2',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'masked_input',
-      'settings' => array(
-        'mask' => '999-999-9999',
-        'placeholder' => '_',
-        'size' => 60,
-      ),
-      'type' => 'masked_input',
-      'weight' => 11,
-    ),
-  );
-
   // Exported field_instance: 'node-staff-field_middle_name'.
   $field_instances['node-staff-field_middle_name'] = array(
     'bundle' => 'staff',
@@ -5910,10 +6400,50 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-staff-field_phone'.
+  $field_instances['node-staff-field_phone'] = array(
+    'bundle' => 'staff',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone',
+    'label' => 'Phone',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 12,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Active / Inactive');
   t('Address');
+  t('Address 1');
   t('Address 2');
   t('Address Apartment number');
   t('App 7 final agree 1');
@@ -5926,6 +6456,7 @@ Friend',
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');
   t('Attend Church Regularly?');
+  t('Canvassing Group');
   t('Church');
   t('Church Reference');
   t('City');
@@ -5937,6 +6468,7 @@ Friend',
   t('Ephesians 2:10, Romans 8:1');
   t('Ephesians 2:4-7, Romans 3:10-12');
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
+  t('Ethnicity');
   t('Expired date (36 months after CIA response)');
   t('First Name');
   t('Food Allergies');
@@ -5985,8 +6517,11 @@ Friend',
   t('Is there any reason why you should not work with children, youth, or others?');
   t('Is there anything in your past or current life that might be a problem if we found out about it later?');
   t('Job Title');
+  t('Kid name');
+  t('Kids list');
   t('Last Name');
   t('Length of Current Employment');
+  t('Location');
   t('Maiden name or Alias names used');
   t('Matthew 28:19-20');
   t('Middle');
@@ -5997,35 +6532,39 @@ Friend',
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
   t('Parent / Guardian Phone');
-  t('Parent / Guardian Phone 2');
   t('Parent / Guardian Relation');
+  t('Parent / Guardian Signature');
   t('Pastor, Small Group Leader, or other church leader');
   t('Pertinent Certifcation or Training (e.g. CPR, First Aid, etc.)');
   t('Phone');
-  t('Phone 1');
-  t('Phone 2');
+  t('Photo Release');
   t('Please list all ministry / volunteer experience');
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
   t('Previous Church Involvement');
   t('Primary Contact First Name');
   t('Primary Contact Last Name');
-  t('Primary Contact Phone');
-  t('Primary Contact Phone 2');
+  t('Program day');
   t('Relationship');
   t('Romans 1:16');
   t('School');
+  t('School year');
   t('Secondary Contact First Name');
   t('Secondary Contact Last Name');
-  t('Secondary Contact Phone');
-  t('Secondary Contact Phone 2');
+  t('Small Group');
+  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');
   t('T-shirt Size');
   t('Teacher');
+  t('Text Parent / Guardian');
+  t('Time');
   t('Title');
+  t('Type');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('Volunteers list');
+  t('Weekday');
   t('When and how did you receive Jesus as Savior?');
   t('Zip');
 

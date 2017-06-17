@@ -9,6 +9,8 @@ define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
 
+novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
+
 /**
  * Implements hook_preprocess_html().
  */
@@ -54,7 +56,7 @@ function novo_preprocess_form(&$variables) {
 function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
-  if ($node->type == 'application' || $node->type == 'kids' || $node->type == 'locations' || $node->type == 'staff') {
+  if ($node->type == 'application' || $node->type == 'kids') {
 
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
@@ -63,15 +65,6 @@ function novo_preprocess_field(&$variables) {
         $value_phone_2 = field_view_value('node', $node, 'field_masked_phone_2', $field_phone_2[0]);
         if (!empty($value_phone_2['#markup'])) {
           $variables['items'][] = $value_phone_2;
-        }
-        break;
-
-      case 'field_masked_phone_3':
-        $variables['icon'] = 'phone';
-        $field_phone_4 = field_get_items('node', $node, 'field_masked_phone_4');
-        $value_phone_4 = field_view_value('node', $node, 'field_masked_phone_4', $field_phone_4[0]);
-        if (!empty($value_phone_4['#markup'])) {
-          $variables['items'][] = $value_phone_4;
         }
         break;
 
@@ -148,4 +141,33 @@ function novo_theme($existing, $type, $theme, $path) {
       'template' => 'templates/system/status-label',
     ),
   );
+}
+
+/**
+ * Analog module_load_include.
+ */
+function novo_theme_load_include($type, $theme, $name = NULL) {
+  static $files = array();
+
+  if (!isset($name)) {
+    $name = $theme;
+  }
+
+  $key = $type . ':' . $theme . ':' . $name;
+  if (isset($files[$key])) {
+    return $files[$key];
+  }
+
+  if (function_exists('drupal_get_path')) {
+    $file = DRUPAL_ROOT . '/' . drupal_get_path('theme', $theme) . "/$name.$type";
+    if (is_file($file)) {
+      require_once $file;
+      $files[$key] = $file;
+      return $file;
+    }
+    else {
+      $files[$key] = FALSE;
+    }
+  }
+  return FALSE;
 }

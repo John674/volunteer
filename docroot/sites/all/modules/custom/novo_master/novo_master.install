@@ -193,3 +193,27 @@ function novo_master_update_7117() {
 function novo_master_update_7118() {
   features_revert_module('novo_content_feature');
 }
+
+/**
+ * Remove old phone fields.
+ */
+function novo_master_update_7119() {
+  features_revert_module("novo_panels_feature");
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_master_feature");
+  features_revert_module("novo_content_feature");
+  module_disable(array('phone'));
+  field_delete_field('field_masked_phone_1');
+  field_delete_field('field_masked_phone_2');
+  field_delete_field('field_masked_phone_3');
+  field_delete_field('field_masked_phone_4');
+  field_delete_field('field_ref_1_phone_1');
+  field_delete_field('field_ref_1_phone_2');
+  field_delete_field('field_ref_2_phone_1');
+  field_delete_field('field_ref_2_phone_2');
+  field_delete_field('field_ref_3_phone_1');
+  field_delete_field('field_ref_3_phone_2');
+  field_delete_field('field_church_phone_1');
+  field_delete_field('field_church_phone_2');
+  field_purge_batch(1);
+}

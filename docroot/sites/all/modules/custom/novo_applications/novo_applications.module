@@ -79,19 +79,7 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['field_app_7_final_agree_4'][$lang][0]['value']['#title_display'] = 'invisible';
   $form['field_app_7_final_agree_5'][$lang][0]['value']['#title_display'] = 'invisible';
   $form['field_app_7_final_agree_6'][$lang][0]['value']['#title_display'] = 'invisible';
-
-  $form['field_masked_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_masked_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
   $form['field_masked_emergency_phone'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_1_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_1_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_2_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_2_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_3_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_ref_3_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_church_phone_1'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-  $form['field_church_phone_2'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
-
 }
 
 /**

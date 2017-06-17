@@ -10,7 +10,11 @@ define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
 define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
 define('NOVO_VOCABULARY_PREFIX', 'prefix');
 define('NOVO_VOCABULARY_APPLICATION_STATUS', 'application_status');
-
+define('NOVO_VOCABULARY_PHONE_TYPE', 'phone_type');
+define('NOVO_VOCABULARY_ETHNICITY', 'ethnicity');
+define('NOVO_VOCABULARY_WEEKDAYS', 'weekdays');
+define('NOVO_VOCABULARY_SMALL_GROUP', 'small_group');
+define('NOVO_VOCABULARY_CANVASSING_GROUP', 'canvassing_group');
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
@@ -53,6 +57,26 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_APPLICATION_STATUS:
       _novo_taxonomy_feature_add_application_status($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_PHONE_TYPE:
+      _novo_taxonomy_feature_add_phone_type($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_ETHNICITY:
+      _novo_taxonomy_feature_add_ethnicity($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_WEEKDAYS:
+      _novo_taxonomy_feature_add_weekdays($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_SMALL_GROUP:
+      _novo_taxonomy_feature_add_small_group($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_CANVASSING_GROUP:
+      _novo_taxonomy_feature_add_canvassing_group($vocabulary);
       break;
   }
 }
@@ -314,6 +338,112 @@ function _novo_taxonomy_feature_add_application_status($vocabulary) {
     $term = new stdClass();
     $term->name = $value;
     $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_phone_type($vocabulary) {
+  $list = array(
+    'Mobile',
+    'Home',
+    'Work',
+    'Fax'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_ethnicity($vocabulary) {
+  $list = array(
+    'african american',
+    'asian american',
+    'native american',
+    'latino',
+    'white',
+    'other'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import Weekdays.
+ */
+function _novo_taxonomy_feature_add_weekdays($vocabulary) {
+  $list = array(
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import small groups.
+ */
+function _novo_taxonomy_feature_add_small_group($vocabulary) {
+  $list = array(
+    'Red 1',
+    'Red 2',
+    'Red 3',
+    'Blue 1',
+    'Blue 2',
+    'Blue 3',
+    'Green 1',
+    'Green 2',
+    'Green 3',
+    'Yellow 1',
+    'Yellow 2',
+    'Yellow 3'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import canvassing groups.
+ */
+function _novo_taxonomy_feature_add_canvassing_group($vocabulary) {
+  $list = array(
+    'Orange',
+    'Lime',
+    'Teal',
+    'Burgundy'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
     taxonomy_term_save($term);
   }
 }

@@ -23,8 +23,11 @@ regions[page_bottom]    = 'Page bottom'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
+stylesheets[all][] = js/bootstrap_select/css/bootstrap-select.min.css
+
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/application_form.css
+stylesheets[all][] = css/program_form.css
 stylesheets[all][] = css/custom.css
 
 
@@ -44,6 +47,10 @@ scripts[] = 'bootstrap/js/popover.js'
 scripts[] = 'bootstrap/js/scrollspy.js'
 scripts[] = 'bootstrap/js/tab.js'
 scripts[] = 'bootstrap/js/transition.js'
+
+scripts[] = 'js/bootstrap_select/js/bootstrap-select.min.js'
+scripts[] = 'js/novo.js'
+
 
 ; Disable the CDN provider so compiled source files can be used.
 settings[bootstrap_cdn] = ''

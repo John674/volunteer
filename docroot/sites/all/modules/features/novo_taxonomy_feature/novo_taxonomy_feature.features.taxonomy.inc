@@ -25,6 +25,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'canvassing_group' => array(
+      'name' => 'Canvassing Group',
+      'machine_name' => 'canvassing_group',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'church' => array(
       'name' => 'Church',
       'machine_name' => 'church',
@@ -68,6 +76,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
     'school' => array(
       'name' => 'School',
       'machine_name' => 'school',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
+    'small_group' => array(
+      'name' => 'Small Group',
+      'machine_name' => 'small_group',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
