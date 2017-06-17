@@ -30,3 +30,24 @@
   width: 100px;
   display: inline-block;
 }
+
+.ui-timepicker-table td a {
+  width: 2em;
+}
+
+a.tabledrag-handle .handle {
+  height: 23px;
+  width: 23px;
+}
+
+.field-name-field-program-kids-list .table-responsive {
+  overflow: inherit;
+}
+
+.novo-select-color-block {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 5px;
+}

@@ -5,10 +5,11 @@
  * The primary PHP file for this theme.
  */
 
-
 define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
+
+novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
 
 /**
  * Implements hook_preprocess_html().
@@ -140,4 +141,33 @@ function novo_theme($existing, $type, $theme, $path) {
       'template' => 'templates/system/status-label',
     ),
   );
+}
+
+/**
+ * Analog module_load_include.
+ */
+function novo_theme_load_include($type, $theme, $name = NULL) {
+  static $files = array();
+
+  if (!isset($name)) {
+    $name = $theme;
+  }
+
+  $key = $type . ':' . $theme . ':' . $name;
+  if (isset($files[$key])) {
+    return $files[$key];
+  }
+
+  if (function_exists('drupal_get_path')) {
+    $file = DRUPAL_ROOT . '/' . drupal_get_path('theme', $theme) . "/$name.$type";
+    if (is_file($file)) {
+      require_once $file;
+      $files[$key] = $file;
+      return $file;
+    }
+    else {
+      $files[$key] = FALSE;
+    }
+  }
+  return FALSE;
 }
