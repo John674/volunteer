@@ -114,18 +114,18 @@
   margin-top: 25px;
 }
 
-.node-program-form .field-name-field-school-year {
+.node-program-form .field-name-field-program-school-year {
   min-width: 170px;
   display: inline-block;
   vertical-align: top;
 }
 
-.node-program-form .field-name-field-school-year .date-form-element-content{
+.node-program-form .field-name-field-program-school-year .date-form-element-content{
   border: none;
   padding: 0px;
   max-width: 300px;
 }
-.node-program-form .field-name-field-school-year .date-year{
+.node-program-form .field-name-field-program-school-year .date-year{
   display: inline-block;
 }
 

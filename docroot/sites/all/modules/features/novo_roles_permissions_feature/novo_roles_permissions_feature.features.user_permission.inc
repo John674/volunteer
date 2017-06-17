@@ -106,6 +106,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create program content'.
+  $permissions['create program content'] = array(
+    'name' => 'create program content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create staff content'.
   $permissions['create staff content'] = array(
     'name' => 'create staff content',
@@ -136,6 +145,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'delete any locations content'.
   $permissions['delete any locations content'] = array(
     'name' => 'delete any locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any program content'.
+  $permissions['delete any program content'] = array(
+    'name' => 'delete any program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -178,6 +196,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own program content'.
+  $permissions['delete own program content'] = array(
+    'name' => 'delete own program content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own staff content'.
   $permissions['delete own staff content'] = array(
     'name' => 'delete own staff content',
@@ -208,6 +235,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'edit any locations content'.
   $permissions['edit any locations content'] = array(
     'name' => 'edit any locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any program content'.
+  $permissions['edit any program content'] = array(
+    'name' => 'edit any program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -245,6 +281,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'edit own locations content'.
   $permissions['edit own locations content'] = array(
     'name' => 'edit own locations content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own program content'.
+  $permissions['edit own program content'] = array(
+    'name' => 'edit own program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),

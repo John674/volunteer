@@ -217,3 +217,14 @@ function novo_master_update_7119() {
   field_delete_field('field_church_phone_2');
   field_purge_batch(1);
 }
+
+/**
+ * Remove old field_school_year fields.
+ */
+function novo_master_update_7120() {
+  features_revert_module("novo_roles_permissions_feature");
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_views_feature");
+  field_delete_field('field_school_year');
+  field_purge_batch(1);
+}
