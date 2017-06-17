@@ -27,6 +27,7 @@ stylesheets[all][] = js/bootstrap_select/css/bootstrap-select.min.css
 
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/application_form.css
+stylesheets[all][] = css/program_form.css
 stylesheets[all][] = css/custom.css
 
 

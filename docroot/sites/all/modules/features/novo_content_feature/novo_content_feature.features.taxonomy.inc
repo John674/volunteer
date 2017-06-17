@@ -25,5 +25,13 @@ function novo_content_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'weekdays' => array(
+      'name' => 'Weekdays',
+      'machine_name' => 'weekdays',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
   );
 }

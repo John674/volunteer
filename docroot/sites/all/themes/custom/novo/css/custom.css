@@ -40,14 +40,37 @@ a.tabledrag-handle .handle {
   width: 23px;
 }
 
-.field-name-field-program-kids-list .table-responsive {
+.table-responsive {
   overflow: inherit;
 }
 
-.novo-select-color-block {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  vertical-align: text-top;
-  margin-right: 5px;
+.select2-container-multi .select2-choices .select2-search-choice {
+  background: none;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  padding: 5px 5px 5px 18px;
+}
+
+.select2-search-choice-close {
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  background: none;
+  font-size: 12px;
+  color: white;
+  top: 5px;
+}
+
+.select2-search-choice-close:before {
+  content: "\e020";
+}
+
+a.select2-search-choice-close:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.select2-search-choice-close:hover{
+  color: #d9534f;
+  text-decoration: none;
 }
