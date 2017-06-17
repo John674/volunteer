@@ -165,7 +165,7 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'timefield',
         'settings' => array(
           'display_format' => array(
@@ -228,7 +228,7 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
@@ -5960,7 +5960,7 @@ Friend',
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_fields',
-        'weight' => 4,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5999,7 +5999,7 @@ Friend',
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_fields',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6039,7 +6039,7 @@ Friend',
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6064,6 +6064,61 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-program-field_program_school_year'.
+  $field_instances['node-program-field_program_school_year'] = array(
+    'bundle' => 'program',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'custom',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_school_year',
+    'label' => 'School year',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 30,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 1,
+        'text_parts' => array(),
+        'year_range' => '-50:+3',
+      ),
+      'type' => 'date_select',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-program-field_program_staff_list'.
   $field_instances['node-program-field_program_staff_list'] = array(
     'bundle' => 'program',
@@ -6079,7 +6134,7 @@ Friend',
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 6,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6119,7 +6174,7 @@ Friend',
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 7,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6150,54 +6205,6 @@ Friend',
       ),
       'type' => 'select2widgetajax',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-program-field_school_year'.
-  $field_instances['node-program-field_school_year'] = array(
-    'bundle' => 'program',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'date',
-        'settings' => array(),
-        'type' => 'date_plain',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_school_year',
-    'label' => 'School year',
-    'required' => 1,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 30,
-        'input_format' => 'custom',
-        'input_format_custom' => 'Y',
-        'label_position' => 'above',
-        'no_fieldset' => 1,
-        'text_parts' => array(),
-        'year_range' => '-20:+3',
-      ),
-      'type' => 'date_select',
-      'weight' => 1,
     ),
   );
 
