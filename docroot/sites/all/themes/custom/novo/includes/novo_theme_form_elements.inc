@@ -26,9 +26,9 @@ function novo_select($variables) {
   }
 
   // Theme School year.
-  if (in_array("field_school_year", $element['#array_parents'])) {
+  if (strpos($element['#name'], "field_school_year") === 0) {
     foreach ($element['#options'] as $key => $value) {
-      //$element['#options'][$key] = $value . " - " . ($value + 1);
+      $element['#options'][$key] = $value . " - " . ($value + 1);
     }
   }
 

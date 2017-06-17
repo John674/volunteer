@@ -24,11 +24,21 @@
   border: none;
 }
 
+.node-program-form .field-name-field-p-kid-name {
+  max-width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 0px;
+}
+
 .node-program-form .field-name-field-p-parent-sign,
 .node-program-form .field-name-field-p-photo-release,
 .node-program-form .field-name-field-p-text-parent {
   display: inline-block;
-  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 0px;
+  margin-top: 31px;
+  vertical-align: top;
 }
 
 .node-program-form .field-name-field-p-small-group .bootstrap-select.form-select,
@@ -39,7 +49,7 @@
 }
 
 .node-program-form .field-p-group-wrapper {
-
+  margin-top: 15px;
 }
 
 .node-program-form .field-p-group-wrapper .field-name-field-p-small-group,
@@ -59,6 +69,73 @@
   margin-top: -50px;
 }
 
+.node-program-form .field-name-field-program-time .panel.form-wrapper {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.node-program-form .field-name-field-program-time .panel-heading {
+  display: none;
+}
+
+.node-program-form .field-name-field-program-time .panel-body {
+  padding: 0px;
+}
+
 .node-program-form .field-name-field-program-time .panel-body > .form-item {
   display: inline-block;
+  margin-right: 20px;
+}
+
+.node-program-form .field-name-field-program-time .panel-body > .form-item:last-child {
+  margin-right: 0px;
+}
+
+.node-program-form .field-name-field-program-weekday {
+  display: inline-block;
+  width: 210px;
+  margin-bottom: 0px;
+  margin-right: 30px;
+}
+
+.node-program-form .field-name-field-program-time {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.node-program-form .field-name-field-program-weekday .form-control.form-select {
+  display: inline-block;
+  max-width: 120px;
+  margin-left: 10px;
+}
+
+.node-program-form .field-name-field-program-day tr.draggable td button.form-submit {
+  margin-top: 25px;
+}
+
+.node-program-form .field-name-field-school-year {
+  min-width: 170px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.node-program-form .field-name-field-school-year .date-form-element-content{
+  border: none;
+  padding: 0px;
+  max-width: 300px;
+}
+.node-program-form .field-name-field-school-year .date-year{
+  display: inline-block;
+}
+
+.node-program-form .field-name-field-program-location {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 380px;
+}
+
+.node-program-form .field-name-field-program-location .form-control.form-select {
+  display: inline-block;
+  max-width: 300px;
 }
