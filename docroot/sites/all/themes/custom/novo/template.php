@@ -56,7 +56,7 @@ function novo_preprocess_form(&$variables) {
 function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
-  if (isset($node->type) && $node->type == 'application' || $node->type == 'kids') {
+  if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids')) {
 
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
