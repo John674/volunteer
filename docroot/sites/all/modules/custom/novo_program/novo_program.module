@@ -10,14 +10,10 @@
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
-  //kpr($form);
-  //$lanf = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
-  //$form['field_school_year'][$lanf][0]
+
 }
 
 
 function novo_program_preprocess_field($variables) {
-  //kpr($variables);
-  //theme_select()
-  //theme_date_form_element()
+
 }

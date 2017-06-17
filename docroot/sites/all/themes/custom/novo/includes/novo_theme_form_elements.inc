@@ -1,11 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: svipsa
- * Date: 17.06.17
- * Time: 17:38
+ * @file
+ * Theme and preprocess form elements.
  */
-
 
 /**
  * Theme_select.
@@ -21,7 +18,8 @@ function novo_select($variables) {
       case "field_p_canvassing_group":
         _form_set_class($element, array('form-select', 'selectpicker'));
         return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element) . '</select>';
-        break;
+
+      break;
     }
   }
 
