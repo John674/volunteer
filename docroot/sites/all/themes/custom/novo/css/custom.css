@@ -13,3 +13,20 @@
 .navbar-default .navbar-nav > li > a:hover {
   color: white;
 }
+
+.field-name-field-phone .field-name-field-phone-number,
+.field-name-field-phone .field-name-field-phone-type {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.field-name-field-phone .field-name-field-phone-number input.form-text {
+  width: 200px;
+}
+
+.field-name-field-phone .field-name-field-phone-type select.form-select {
+  width: 100px;
+  display: inline-block;
+}
