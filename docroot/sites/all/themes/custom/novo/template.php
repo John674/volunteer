@@ -171,4 +171,3 @@ function novo_theme_load_include($type, $theme, $name = NULL) {
   }
   return FALSE;
 }
-
