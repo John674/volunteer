@@ -228,3 +228,10 @@ function novo_master_update_7120() {
   field_delete_field('field_school_year');
   field_purge_batch(1);
 }
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7121() {
+  features_revert_module('novo_content_feature');
+}

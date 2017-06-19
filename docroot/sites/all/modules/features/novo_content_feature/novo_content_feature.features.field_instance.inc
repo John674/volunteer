@@ -4735,16 +4735,9 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
+        'module' => 'novo_formatters',
+        'settings' => array(),
+        'type' => 'date_age',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -5054,6 +5047,46 @@ Friend',
       ),
       'type' => 'text_textfield',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_middle'.
+  $field_instances['node-kids-field_middle'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_middle',
+    'label' => 'Middle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -3,
     ),
   );
 
