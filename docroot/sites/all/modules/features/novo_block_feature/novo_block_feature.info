@@ -1,0 +1,11 @@
+name = Novo Block feature
+core = 7.x
+package = Novo
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = menu
+dependencies[] = multistep
+features[fe_block_settings][] = menu-menu-program-menu
+features[fe_block_settings][] = multistep-application
+features[fe_block_settings][] = user-login
+features[features_api][] = api:2

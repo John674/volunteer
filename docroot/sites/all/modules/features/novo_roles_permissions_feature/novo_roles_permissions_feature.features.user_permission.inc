@@ -305,6 +305,24 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'publish any content'.
+  $permissions['publish any content'] = array(
+    'name' => 'publish any content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'publishcontent',
+  );
+
+  // Exported permission: 'unpublish any content'.
+  $permissions['unpublish any content'] = array(
+    'name' => 'unpublish any content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'publishcontent',
+  );
+
   // Exported permission: 'view own unpublished content'.
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',

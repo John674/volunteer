@@ -1095,7 +1095,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 160,
+      'weight' => 70,
     ),
   );
 
@@ -1781,7 +1781,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -1836,7 +1836,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 63,
+      'weight' => 62,
     ),
   );
 
@@ -1920,7 +1920,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 64,
+      'weight' => 63,
     ),
   );
 
@@ -2209,7 +2209,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -2447,6 +2447,46 @@ Church',
       ),
       'type' => 'text_textarea',
       'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_notes'.
+  $field_instances['node-application-field_notes'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 104,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_notes',
+    'label' => 'Notes',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 69,
     ),
   );
 
@@ -3062,7 +3102,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 62,
+      'weight' => 60,
     ),
   );
 
@@ -4104,7 +4144,50 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 64,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_texting'.
+  $field_instances['node-application-field_texting'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 103,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_texting',
+    'label' => 'Texting',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 61,
     ),
   );
 
@@ -4402,7 +4485,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -6074,7 +6157,7 @@ Friend',
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'custom',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -6536,6 +6619,7 @@ Friend',
   t('Month/Years');
   t('Moved');
   t('Name');
+  t('Notes');
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
   t('Parent / Guardian Phone');
@@ -6566,6 +6650,7 @@ Friend',
   t('T-shirt Size');
   t('Teacher');
   t('Text Parent / Guardian');
+  t('Texting');
   t('Time');
   t('Title');
   t('Type');

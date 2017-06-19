@@ -228,3 +228,15 @@ function novo_master_update_7120() {
   field_delete_field('field_school_year');
   field_purge_batch(1);
 }
+
+/**
+ * Update field_u_birthday.
+ */
+function novo_master_update_7121() {
+  field_delete_field('field_u_birthday');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_account_feature");
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_master_feature");
+}
