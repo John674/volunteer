@@ -320,9 +320,12 @@ function novo_content_feature_field_group_info() {
       13 => 'field_how_did_you_hear_about_nov',
       14 => 'field_what_site_want',
       15 => 'field_prefix',
-      16 => 'field_phone',
-      17 => 'title',
-      18 => 'group_app_emergency_contact',
+      16 => 'field_app_status',
+      17 => 'field_phone',
+      18 => 'field_texting',
+      19 => 'field_notes',
+      20 => 'title',
+      21 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -651,9 +654,7 @@ function novo_content_feature_field_group_info() {
       2 => 'field_church_prev',
       3 => 'field_church_reference',
       4 => 'field_church_email',
-      5 => 'field_church_phone_1',
-      6 => 'field_church_phone_2',
-      7 => 'field_church_phone',
+      5 => 'field_church_phone',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1254,7 +1255,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '67',
+    'weight' => '66',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',
