@@ -9,6 +9,13 @@ define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
 
+define("NOVO_BASE_APPLICATION_STATUS_LABELS", serialize(array(
+  'started' => 'info',
+  'approved' => 'success',
+  'completed' => 'primary',
+  'expired' => 'danger',
+)));
+
 novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
 
 /**
@@ -56,7 +63,7 @@ function novo_preprocess_form(&$variables) {
 function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
-  if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids')) {
+  if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids' || $node->type == 'partner')) {
 
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
@@ -104,12 +111,7 @@ function novo_preprocess_field(&$variables) {
         $variables['label'] = 'Application status';
         $field_app_status = field_get_items('node', $node, 'field_app_status');
         if (!empty($field_app_status)) {
-          $status_labels = [
-            'started' => 'info',
-            'approved' => 'success',
-            'completed' => 'primary',
-            'expired' => 'danger',
-          ];
+          $status_labels = unserialize(NOVO_BASE_APPLICATION_STATUS_LABELS);
 
           $term_id = $field_app_status[0]['tid'];
           $status_term = taxonomy_term_load($term_id);
@@ -138,7 +140,7 @@ function novo_theme($existing, $type, $theme, $path) {
   return array(
     'status_label' => array(
       'variables' => array('status' => NULL, 'label' => NULL),
-      'template' => 'templates/system/status-label',
+      'template' => 'templates/custom/status-label',
     ),
   );
 }

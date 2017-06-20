@@ -11,9 +11,13 @@
 function novo_formatters_field_formatter_info() {
   $info = field_info_field_types();
   $formatters = array(
-    'novo_formatters' => array(
+    'icon_times' => array(
       'label' => t('Icon times'),
       'field types' => array('number_integer'),
+    ),
+    'date_age' => array(
+      'label' => t('Date and age'),
+      'field types' => array('date', 'datestamp', 'datetime'),
     ),
   );
 
@@ -29,6 +33,10 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
       'variables' => array('times' => NULL),
       'template' => 'templates/icon_clock',
     ),
+    'date_age' => array(
+      'variables' => array('dob' => NULL, 'age' => NULL),
+      'template' => 'templates/date_age',
+    ),
   );
 }
 
@@ -36,11 +44,29 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
  * Implements hook_field_formatter_view().
  */
 function novo_formatters_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  $element = array();
-  $times = (int) $items[0]['value'];
-  $element[0] = array(
-    '#theme' => 'icon_clock',
-    '#times' => $times,
-  );
+  $element = [];
+  $type = $display['type'];
+
+  switch ($type) {
+    case 'icon_times':
+      $times = (int) $items[0]['value'];
+      $element[] = array(
+        '#theme' => 'icon_clock',
+        '#times' => $times,
+      );
+      break;
+
+    case 'date_age':
+      $dob = format_date($items[0]['value'], 'custom', 'm/d/Y');
+      $date_diff = date_diff(new DateTime($dob), new DateTime());
+      $age = $date_diff->y;
+      $element[] = array(
+        '#theme' => 'date_age',
+        '#dob' => $dob,
+        '#age' => $age,
+      );
+      break;
+  }
+
   return $element;
 }
