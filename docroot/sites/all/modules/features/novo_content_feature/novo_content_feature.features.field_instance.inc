@@ -83,6 +83,142 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_contact-field_email'.
+  $field_instances['field_collection_item-field_contact-field_email'] = array(
+    'bundle' => 'field_contact',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_email',
+    'label' => 'Email',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_contact-field_first_name'.
+  $field_instances['field_collection_item-field_contact-field_first_name'] = array(
+    'bundle' => 'field_contact',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_first_name',
+    'label' => 'First Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_contact-field_last_name'.
+  $field_instances['field_collection_item-field_contact-field_last_name'] = array(
+    'bundle' => 'field_contact',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_last_name',
+    'label' => 'Last Name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_contact-field_phone'.
+  $field_instances['field_collection_item-field_contact-field_phone'] = array(
+    'bundle' => 'field_contact',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance:
   // 'field_collection_item-field_phone-field_phone_number'.
   $field_instances['field_collection_item-field_phone-field_phone_number'] = array(
@@ -5589,7 +5725,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5613,7 +5749,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 3,
     ),
   );
 
@@ -5629,7 +5765,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5653,7 +5789,47 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-locations-field_apt'.
+  $field_instances['node-locations-field_apt'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_apt',
+    'label' => 'Address Apartment number',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
     ),
   );
 
@@ -5669,7 +5845,7 @@ Friend',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5693,12 +5869,12 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_phone'.
-  $field_instances['node-locations-field_phone'] = array(
+  // Exported field_instance: 'node-locations-field_contact'.
+  $field_instances['node-locations-field_contact'] = array(
     'bundle' => 'locations',
     'default_value' => NULL,
     'deleted' => 0,
@@ -5711,43 +5887,6 @@ Friend',
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_fields',
-        'weight' => 22,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_phone',
-    'label' => 'Phone',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 14,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_primary_contact_first_name'.
-  $field_instances['node-locations-field_primary_contact_first_name'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -5758,141 +5897,18 @@ Friend',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_primary_contact_first_name',
-    'label' => 'Primary Contact First Name',
-    'required' => 0,
+    'field_name' => 'field_contact',
+    'label' => 'Multiple Contact',
+    'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_primary_contact_last_name'.
-  $field_instances['node-locations-field_primary_contact_last_name'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_contact_last_name',
-    'label' => 'Primary Contact Last Name',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_secondary_first_name'.
-  $field_instances['node-locations-field_secondary_first_name'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 20,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_secondary_first_name',
-    'label' => 'Secondary Contact First Name',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_secondary_last_name'.
-  $field_instances['node-locations-field_secondary_last_name'] = array(
-    'bundle' => 'locations',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 21,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_secondary_last_name',
-    'label' => 'Secondary Contact Last Name',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
     ),
   );
 
@@ -5908,7 +5924,7 @@ Friend',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 14,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5929,7 +5945,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 7,
     ),
   );
 
@@ -5950,7 +5966,7 @@ Friend',
           'thousand_separator' => '',
         ),
         'type' => 'number_integer',
-        'weight' => 15,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5975,7 +5991,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 8,
     ),
   );
 
@@ -6809,6 +6825,7 @@ Friend',
   t('Middle Name');
   t('Month/Years');
   t('Moved');
+  t('Multiple Contact');
   t('Name');
   t('Parent / Guardian First Name');
   t('Parent / Guardian Last Name');
@@ -6823,15 +6840,11 @@ Friend',
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
   t('Previous Church Involvement');
-  t('Primary Contact First Name');
-  t('Primary Contact Last Name');
   t('Program day');
   t('Relationship');
   t('Romans 1:16');
   t('School');
   t('School year');
-  t('Secondary Contact First Name');
-  t('Secondary Contact Last Name');
   t('Small Group');
   t('Staff list');
   t('State');
