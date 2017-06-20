@@ -1,0 +1,9 @@
+name = Novo Migrate
+description = Migrate module.
+core = 7.x
+package = Novo
+version = 7.x-1.0
+
+files[] = includes/baseNovoMigration.inc
+files[] = includes/userNovoMigration.inc
+files[] = includes/volunteerNovoMigration.inc

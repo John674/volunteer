@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Migrate functions.
+ */
+
+/**
+ * Implement hook_migrate_api()
+ */
+function novo_migrate_migrate_api() {
+  return array(
+    'api' => 2,
+    'groups' => array(
+      'novo' => array(
+        'title' => 'Import data',
+      ),
+    ),
+    'migrations' => array(
+      'Users' => array(
+        'class_name' => 'UserNovoMigration',
+        'group_name' => 'novo',
+      ),
+      'Volunteers' => array(
+        'class_name' => 'VolunteerNovoMigration',
+        'group_name' => 'novo',
+      ),
+    ),
+  );
+}
+
+
+function novo_migrate_preprocess_page($variables) {
+//  $query = Database::getConnection('default', 'old_database')
+//    ->select('users', 'u')
+//    ->fields('u', array(
+//      'id',
+//      'email',
+//      'password',
+//      'created_at',
+//      'first_name',
+//      'last_name',
+//      'birthday',
+//      'active'
+//    ))
+//    ->isNull('u.deleted_at');
+//
+//  $query->addField("u", "id", "user_id");
+//  $query->leftJoin("role_user", "r_u", "r_u.user_id = u.id");
+//  $query->leftJoin("roles", "r", "r.id = r_u.role_id");
+//  // Only volunteers.
+//  $query->condition("r.name", "applicant");
+//
+//
+//  // Add source fields
+//
+//  $query->innerJoin("user_applications", "ua", "ua.user_id = u.id");
+//  $query->innerJoin("user_steps", "us", "us.user_application_id = ua.id"); // step_id
+//  $query->innerJoin("answers", "a", "a.user_step_id = us.id"); // question_id
+//
+//  $query->addField("a", "data", "answer");
+//
+//  $query->innerJoin("questions", "q", "q.id = a.question_id"); // question_id
+//  $query->addField("q", "name", "q_name");
+//  $query->addField("q", "type", "q_type");
+//  $query->addField("q", "template_data", "q_template_data");
+//
+//  $query->innerJoin("answer_variants", "av", "av.question_id = q.id"); // question_id
+//  $query->addField("av", "template_data", "answer_variant");
+//
+//
+//  $query->range(0, 10);
+//
+//
+//  $r = $query->execute()->fetchAll();
+//  kpr($r);
+}
