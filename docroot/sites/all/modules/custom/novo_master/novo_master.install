@@ -240,3 +240,15 @@ function novo_master_update_7121() {
   features_revert_module("novo_views_feature");
   features_revert_module("novo_master_feature");
 }
+
+/**
+ * Update field_u_birthday.
+ */
+function novo_master_update_7122() {
+  field_delete_field('field_primary_contact_first_name');
+  field_delete_field('field_primary_contact_last_name');
+  field_delete_field('field_secondary_first_name');
+  field_delete_field('field_secondary_last_name');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+}

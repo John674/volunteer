@@ -45,6 +45,14 @@ function novo_content_feature_node_info() {
       'title_label' => t('Location Name'),
       'help' => '',
     ),
+    'partner' => array(
+      'name' => t('Partner'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Partner name'),
+      'help' => '',
+    ),
     'program' => array(
       'name' => t('Program'),
       'base' => 'node_content',
