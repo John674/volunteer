@@ -252,3 +252,10 @@ function novo_master_update_7122() {
   field_purge_batch(1);
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7123() {
+  features_revert_module("novo_views_feature");
+}
