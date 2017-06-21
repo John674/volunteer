@@ -12,6 +12,7 @@ class MigrateSourceApplication extends MigrateSource {
 
   /**
    * A URL pointing to an JSON object containing a list of IDs to be processed.
+   *
    * @var array
    */
   protected $items;
