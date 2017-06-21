@@ -243,7 +243,7 @@ function multistep_block_view($type = '', $entity_type = 'node') {
         'id' => 'multistep-' . $entity_type . '-' . $type . '-' . $group->group_name,
         'class' => array(
           is_null($status) || $status == '' ? '' : 'multistep-' . $status,
-          $current_step == $group->group_name ? 'active' : '',
+          $current_step == $group->group_name ? 'multistep-active' : '',
         ),
         'url' => $id && ($workflow_mode == 'free' || ($workflow_mode == 'direct' && ($status == 'submitted' || multistep_get_next($type, $last_submitted_step) == $group->group_name))) ? $_GET['q'] : NULL,
         'step' => $group->group_name,
