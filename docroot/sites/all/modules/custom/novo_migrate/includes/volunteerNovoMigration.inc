@@ -4,19 +4,24 @@
  * @file
  * Volunteer class to handle the novo migration.
  */
+
+/**
+ * Class VolunteerNovoMigration.
+ */
 class VolunteerNovoMigration extends BaseNovoMigration {
+
   /**
-   * General initialization of a Migration object.
+   * VolunteerNovoMigration constructor.
    */
   public function __construct($args) {
     parent::__construct($args);
 
     $items = $this->getList();
-    //kpr($items);
+    // kpr($items);
     $this->source = new MigrateSourceApplication($items);
     $this->destination = new MigrateDestinationNode("application");
 
-    // Key schema
+    // Key schema.
     $source_key_schema = array(
       'id' => array(
         'type' => 'int',
@@ -112,13 +117,13 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
     // Attach phones.
-    $this->attach_phone($node, $row, "personal_information_", "field_phone");
-    $this->attach_phone($node, $row, "reference_1_", "field_ref_1_phone");
-    $this->attach_phone($node, $row, "reference_2_", "field_ref_2_phone");
-    $this->attach_phone($node, $row, "standby_", "field_ref_3_phone");
-    $this->attach_phone($node, $row, "church_background_", "field_church_phone");
+    $this->attachPhone($node, $row, "personal_information_", "field_phone");
+    $this->attachPhone($node, $row, "reference_1_", "field_ref_1_phone");
+    $this->attachPhone($node, $row, "reference_2_", "field_ref_2_phone");
+    $this->attachPhone($node, $row, "standby_", "field_ref_3_phone");
+    $this->attachPhone($node, $row, "church_background_", "field_church_phone");
 
-    // Multistep
+    // Multistep.
     if (function_exists("_multistep_update_status")) {
       _multistep_update_status($node, "node", "submitted", "all");
     }
@@ -127,7 +132,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   /**
    * Attach field_collection phone filed.
    */
-  function attach_phone($node, $row, $field, $ref_field) {
+  private function attachPhone($node, $row, $field, $ref_field) {
     $phone_arr = array();
     $additional_fields = array("phone_1", "phone_2");
 
@@ -139,11 +144,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           $phone_arr[] = $number;
         }
         else {
-          watchdog("novo_migrate", t('Can\' convert phone :phone for nid :nid for field :field', array(
+          watchdog("novo_migrate", 'Can\' convert phone :phone for nid :nid for field :field', array(
             ":phone" => $row->{$phone_field},
             ":nid" => $node->nid,
             ":field" => $ref_field
-          )));
+          ));
         }
       }
     }
@@ -167,6 +172,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Convert phone number. @TODO: need test and change. To Vasya - finish it.
    */
   protected function formatPhoneNumber($s) {
+    // @codingStandardsIgnoreStart
     $rx = "/
     (1)?\D*     # optional country code
     (\d{3})?\D* # optional area code
@@ -199,9 +205,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     // check that no digits were truncated
     // if (preg_replace('/\D/', '', $s) != preg_replace('/\D/', '', $out)) return false;
+    // @codingStandardsIgnoreEnd
     return $out;
   }
-
 
   /**
    * Prepare Interests Roles taxonomy reference.
@@ -266,7 +272,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // Only volunteers.
     $query->condition("r.name", "applicant");
 
-    // Add source fields
+    // Add source fields.
     $query->innerJoin("user_applications", "ua", "ua.user_id = u.id");
     $query->addField("ua", "created_at", "created_at");
     $query->addField("ua", "updated_at", "updated_at");
@@ -274,11 +280,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("ua", "status", "application_status");
     $query->isNull('ua.deleted_at');
 
-    $query->innerJoin("user_steps", "us", "us.user_application_id = ua.id"); // step_id
-    $query->innerJoin("answers", "a", "a.user_step_id = us.id"); // question_id
+    $query->innerJoin("user_steps", "us", "us.user_application_id = ua.id");
+    $query->innerJoin("answers", "a", "a.user_step_id = us.id");
     $query->addField("a", "data", "answer");
 
-    $query->innerJoin("questions", "q", "q.id = a.question_id"); // question_id
+    $query->innerJoin("questions", "q", "q.id = a.question_id");
     $query->addField("q", "name", "q_name");
     $query->addField("q", "type", "q_type");
 
@@ -324,7 +330,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           $val = $this->getAnswer($field['answer'], $field['q_type'], $field['variants']);
           if (count($field_group) < 2) {
             $users[$uid][$key] = $val['value'];
-            // Add base fields
+            // Add base fields.
             if (isset($field['base_fields']) && !empty($field['base_fields'])) {
               foreach ($field['base_fields'] as $b_field => $b_value) {
                 if (!isset($users[$uid][$b_field])) {
@@ -336,7 +342,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           else {
             unset($users[$uid][$key]);
             $users[$uid][$section_name . "_" . $key] = $val['value'];
-            // Add base fields
+            // Add base fields.
             if (isset($field['base_fields']) && !empty($field['base_fields'])) {
               foreach ($field['base_fields'] as $b_field => $b_value) {
                 if (!isset($users[$uid][$b_field])) {
@@ -369,6 +375,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           }
         }
         break;
+
       case "textarea":
       case "input":
       case "date":
@@ -378,6 +385,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       case "checkbox":
         $answer_data["value"] = isset($answer_obj->checked) ? ($answer_obj->checked) : FALSE;
         break;
+
       case "radio_with_explanation":
         if (isset($answer_obj->radio) && isset($variants[$answer_obj->radio])) {
           if (isset($answer_obj->explanation) && !empty($answer_obj->explanation)) {
@@ -391,6 +399,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           }
         }
         break;
+
       default:
         $answer_data["value"] = isset($answer_obj) ? $answer_obj : NULL;
     }
@@ -411,13 +420,12 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Main field mapping
+   * Main field mapping.
    */
   protected function mapping() {
-    // Mapping
+    // Mapping.
     $this->addFieldMapping('comment')->defaultValue(FALSE);
     $this->addFieldMapping('status')->defaultValue(TRUE);
-
 
     $this->addFieldMapping('title', 'legal_first_name');
     $this->addFieldMapping('field_prefix', 'prefix')
@@ -576,16 +584,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_app_7_final_agree_5', 'contact_any_person');
     $this->addFieldMapping('field_app_7_final_agree_6', 'background_inquiry');
 
-
     // @todo: To Vasya - finish it.
-//    $this->addFieldMapping('field_what_site_want', '');
-//    $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
-//    $this->addFieldMapping('field_expired_date', '');
-//    $this->addFieldMapping('field_app_status', 'application_status')
-//      ->callback(array($this, "getApplicationStatus"));
-//    $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
+    // $this->addFieldMapping('field_what_site_want', '');
+    // $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
+    // $this->addFieldMapping('field_expired_date', '');
+    // $this->addFieldMapping('field_app_status', 'application_status')
+    // ->callback(array($this, "getApplicationStatus"));
+    // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
   }
-
 
   /**
    * Get term tid by name.
@@ -642,10 +648,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           }
         }
 
-        watchdog("novo_migrate", t('Not found tid :tid for value :value', array(
+        watchdog("novo_migrate", 'Not found tid :tid for value :value', array(
           ":tid" => $tid,
           ":value" => $value
-        )));
+        ));
         return NULL;
       }
     }
@@ -678,10 +684,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         return $number;
       }
       else {
-        watchdog("novo_migrate", t('Can\' convert phone :phone for field :field', array(
+        watchdog("novo_migrate", 'Can\' convert phone :phone for field :field', array(
           ":phone" => $value,
           ":field" => "field_masked_emergency_phone"
-        )));
+        ));
       }
     }
 
@@ -691,7 +697,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   /**
    * Get Taxonomy tid by name.
    */
-  function getTidByName($term_name, $voc_name) {
+  protected function getTidByName($term_name, $voc_name) {
     $term = taxonomy_get_term_by_name($term_name, $voc_name);
     $term = array_values($term);
     $term = isset($term[0]) ? $term[0] : -1;

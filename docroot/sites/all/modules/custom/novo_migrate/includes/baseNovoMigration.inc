@@ -4,6 +4,10 @@
  * @file
  * Basic class to handle the novo migration.
  */
+
+/**
+ * Class BaseNovoMigration.
+ */
 class BaseNovoMigration extends Migration {
 
   public $databaseKey = NULL;
@@ -15,4 +19,5 @@ class BaseNovoMigration extends Migration {
     parent::__construct($args);
     $this->databaseKey = "old_database";
   }
+
 }

@@ -4,7 +4,12 @@
  * @file
  * Volunteer class to handle the novo migration.
  */
+
+/**
+ * Class UserNovoMigration.
+ */
 class UserNovoMigration extends BaseNovoMigration {
+
   /**
    * General initialization of a Migration object.
    */
@@ -33,7 +38,7 @@ class UserNovoMigration extends BaseNovoMigration {
     $this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
     $this->destination = new MigrateDestinationUser(array('md5_passwords' => TRUE));
 
-    // Key schema
+    // Key schema.
     $source_key_schema = array(
       'user_id' => array(
         'type' => 'int',
@@ -43,15 +48,19 @@ class UserNovoMigration extends BaseNovoMigration {
     );
     $this->map = new MigrateSQLMap($this->machineName, $source_key_schema, MigrateDestinationUser::getKeySchema());
 
-    // Mapping
+    // Mapping.
     $this->addFieldMapping('name', 'name')->dedupe('users', 'name');
     $this->addFieldMapping('mail', 'email')->dedupe('users', 'mail');
     $this->addFieldMapping('created', 'created_at');
-    $this->addFieldMapping('field_u_first_name', 'first_name')->defaultValue("User");
+    $this->addFieldMapping('field_u_first_name', 'first_name')
+      ->defaultValue("User");
     $this->addFieldMapping('field_u_last_name', 'last_name');
     $this->addFieldMapping('field_u_birthday', 'birthday');
     $this->addFieldMapping('status', 'active');
-    $this->addFieldMapping('pass', 'password')->callback(array($this, 'convertPassword'));
+    $this->addFieldMapping('pass', 'password')->callback(array(
+      $this,
+      'convertPassword'
+    ));
 
     $this->addFieldMapping('roles')
       ->defaultValue(DRUPAL_AUTHENTICATED_RID);
@@ -87,15 +96,10 @@ class UserNovoMigration extends BaseNovoMigration {
 
   /**
    * Implemens prepareRow().
-   *
-   * @param Object $row
-   *   Object containing raw source data.
-   *
-   * @return bool
-   *   TRUE to process this row, FALSE to have the source skip it.
    */
   public function prepareRow($row) {
     $row->name = "{$row->first_name} {$row->last_name}";
     return parent::prepareRow($row);
   }
+
 }
