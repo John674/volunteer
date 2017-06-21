@@ -7,3 +7,5 @@ version = 7.x-1.0
 files[] = includes/baseNovoMigration.inc
 files[] = includes/userNovoMigration.inc
 files[] = includes/volunteerNovoMigration.inc
+
+files[] = includes/MigrateSourceApplication.inc
