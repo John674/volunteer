@@ -19,8 +19,8 @@
   border-radius: 5px;
 }
 
-#block-multistep-application ul li span.active,
-#block-multistep-application ul li a.active {
+#block-multistep-application ul li span.multistep-active,
+#block-multistep-application ul li a.multistep-active {
   background-color: #666;
 }
 

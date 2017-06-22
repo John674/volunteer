@@ -1,0 +1,16 @@
+Index: docroot/sites/all/modules/contrib/multistep/multistep.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/multistep/multistep.module	(date 1497968515000)
++++ docroot/sites/all/modules/contrib/multistep/multistep.module	(revision )
+@@ -243,7 +243,7 @@
+         'id' => 'multistep-' . $entity_type . '-' . $type . '-' . $group->group_name,
+         'class' => array(
+           is_null($status) || $status == '' ? '' : 'multistep-' . $status,
+-          $current_step == $group->group_name ? 'active' : '',
++          $current_step == $group->group_name ? 'multistep-active' : '',
+         ),
+         'url' => $id && ($workflow_mode == 'free' || ($workflow_mode == 'direct' && ($status == 'submitted' || multistep_get_next($type, $last_submitted_step) == $group->group_name))) ? $_GET['q'] : NULL,
+         'step' => $group->group_name,
