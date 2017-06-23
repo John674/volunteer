@@ -100,7 +100,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 4',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'group_app_4_list',
     ),
@@ -126,7 +126,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 5',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'group_app_5_list',
     ),
@@ -153,7 +153,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 6',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'group_app_6_list',
     ),
@@ -180,7 +180,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 7',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'group_app_7_list',
     ),
@@ -207,7 +207,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 8',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'group_app_8_list',
     ),
@@ -236,12 +236,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Reference 2:',
     'weight' => '72',
     'children' => array(
-      0 => 'field_ref_2_prefix',
+      0 => 'field_ref_2_email',
       1 => 'field_ref_2_first_name',
-      2 => 'field_ref_2_last_name',
-      3 => 'field_ref_2_email',
-      4 => 'field_ref_2_how_long',
-      5 => 'field_ref_2_how_long_period',
+      2 => 'field_ref_2_how_long',
+      3 => 'field_ref_2_how_long_period',
+      4 => 'field_ref_2_last_name',
+      5 => 'field_ref_2_prefix',
       6 => 'field_ref_2_phone',
     ),
     'format_type' => 'fieldset',
@@ -270,12 +270,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Standby Reference',
     'weight' => '73',
     'children' => array(
-      0 => 'field_ref_3_prefix',
+      0 => 'field_ref_3_email',
       1 => 'field_ref_3_first_name',
-      2 => 'field_ref_3_last_name',
-      3 => 'field_ref_3_email',
-      4 => 'field_ref_3_how_long',
-      5 => 'field_ref_3_how_long_period',
+      2 => 'field_ref_3_how_long',
+      3 => 'field_ref_3_how_long_period',
+      4 => 'field_ref_3_last_name',
+      5 => 'field_ref_3_prefix',
       6 => 'field_ref_3_phone',
     ),
     'format_type' => 'fieldset',
@@ -319,13 +319,11 @@ function novo_content_feature_field_group_info() {
       12 => 'field_color_preference',
       13 => 'field_how_did_you_hear_about_nov',
       14 => 'field_what_site_want',
-      15 => 'field_prefix',
-      16 => 'field_app_status',
+      15 => 'field_app_status',
+      16 => 'field_prefix',
       17 => 'field_phone',
-      18 => 'field_texting',
-      19 => 'field_notes',
-      20 => 'title',
-      21 => 'group_app_emergency_contact',
+      18 => 'title',
+      19 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -525,6 +523,7 @@ function novo_content_feature_field_group_info() {
     'weight' => '71',
     'children' => array(
       0 => 'group_app_3_references',
+      1 => 'group_app_3_parents',
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
@@ -541,6 +540,38 @@ function novo_content_feature_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_app_3_parents|node|application|form';
+  $field_group->group_name = 'group_app_3_parents';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_app_3_list';
+  $field_group->data = array(
+    'label' => 'Parents',
+    'weight' => '176',
+    'children' => array(
+      0 => 'field_parent_prefix',
+      1 => 'field_parent_guardian_first_name',
+      2 => 'field_parent_guardian_last_name',
+      3 => 'field_parent_phone',
+      4 => 'field_parent_email',
+    ),
+    'format_type' => 'accordion-item',
+    'format_settings' => array(
+      'label' => 'Parents',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-app-3-parents field-group-accordion-item',
+        'description' => 'As you are under 18 years old, please provide following info:',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_app_3_parents|node|application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_app_3_references_1|node|application|form';
   $field_group->group_name = 'group_app_3_references_1';
   $field_group->entity_type = 'node';
@@ -551,12 +582,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Reference 1:',
     'weight' => '71',
     'children' => array(
-      0 => 'field_ref_1_prefix',
+      0 => 'field_ref_1_email',
       1 => 'field_ref_1_first_name',
-      2 => 'field_ref_1_last_name',
-      3 => 'field_ref_1_email',
-      4 => 'field_ref_1_how_long',
-      5 => 'field_ref_1_how_long_period',
+      2 => 'field_ref_1_how_long',
+      3 => 'field_ref_1_how_long_period',
+      4 => 'field_ref_1_last_name',
+      5 => 'field_ref_1_prefix',
       6 => 'field_ref_1_phone',
     ),
     'format_type' => 'fieldset',
@@ -583,7 +614,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_3_list';
   $field_group->data = array(
     'label' => 'REFERENCES',
-    'weight' => '71',
+    'weight' => '175',
     'children' => array(
       0 => 'group_app3_reference_2',
       1 => 'group_app3_reference_3',
@@ -649,11 +680,11 @@ function novo_content_feature_field_group_info() {
     'label' => 'CHURCH ATTENDANCE AND BACKGROUND',
     'weight' => '118',
     'children' => array(
-      0 => 'field_church_home',
-      1 => 'field_church_how_long_attended',
-      2 => 'field_church_prev',
-      3 => 'field_church_reference',
-      4 => 'field_church_email',
+      0 => 'field_church_email',
+      1 => 'field_church_home',
+      2 => 'field_church_how_long_attended',
+      3 => 'field_church_prev',
+      4 => 'field_church_reference',
       5 => 'field_church_phone',
     ),
     'format_type' => 'accordion-item',
@@ -711,18 +742,18 @@ function novo_content_feature_field_group_info() {
     'weight' => '117',
     'children' => array(
       0 => 'field_pertinent_q1',
-      1 => 'field_pertinent_q2',
-      2 => 'field_pertinent_q3',
-      3 => 'field_pertinent_q4',
-      4 => 'field_pertinent_q5',
-      5 => 'field_pertinent_q6',
-      6 => 'field_pertinent_q7',
-      7 => 'field_pertinent_q8',
-      8 => 'field_pertinent_q9',
-      9 => 'field_pertinent_q10',
-      10 => 'field_pertinent_q11',
-      11 => 'field_pertinent_q12',
-      12 => 'field_pertinent_q13',
+      1 => 'field_pertinent_q10',
+      2 => 'field_pertinent_q11',
+      3 => 'field_pertinent_q12',
+      4 => 'field_pertinent_q13',
+      5 => 'field_pertinent_q2',
+      6 => 'field_pertinent_q3',
+      7 => 'field_pertinent_q4',
+      8 => 'field_pertinent_q5',
+      9 => 'field_pertinent_q6',
+      10 => 'field_pertinent_q7',
+      11 => 'field_pertinent_q8',
+      12 => 'field_pertinent_q9',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1323,6 +1354,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   t('PERSONAL BELIEFS');
   t('PERTINENT PROGRAM POLICIES');
   t('PERTINENT QUESTIONS');
+  t('Parents');
   t('REFERENCES');
   t('Reference 1:');
   t('Reference 2:');
