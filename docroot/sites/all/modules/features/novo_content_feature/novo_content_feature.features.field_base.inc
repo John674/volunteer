@@ -2387,6 +2387,28 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_ref_1_how_know'.
+  $field_bases['field_ref_1_how_know'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ref_1_how_know',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_ref_1_how_long'.
   $field_bases['field_ref_1_how_long'] = array(
     'active' => 1,
@@ -2394,6 +2416,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ref_1_how_long',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -2539,6 +2564,28 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_ref_2_how_know'.
+  $field_bases['field_ref_2_how_know'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ref_2_how_know',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_ref_2_how_long'.
   $field_bases['field_ref_2_how_long'] = array(
     'active' => 1,
@@ -2546,6 +2593,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ref_2_how_long',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -2691,6 +2741,28 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_ref_3_how_know'.
+  $field_bases['field_ref_3_how_know'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ref_3_how_know',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_ref_3_how_long'.
   $field_bases['field_ref_3_how_long'] = array(
     'active' => 1,
@@ -2698,6 +2770,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ref_3_how_long',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',

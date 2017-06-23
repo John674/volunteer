@@ -243,6 +243,7 @@ function novo_content_feature_field_group_info() {
       4 => 'field_ref_2_last_name',
       5 => 'field_ref_2_prefix',
       6 => 'field_ref_2_phone',
+      7 => 'field_ref_2_how_know',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -277,6 +278,7 @@ function novo_content_feature_field_group_info() {
       4 => 'field_ref_3_last_name',
       5 => 'field_ref_3_prefix',
       6 => 'field_ref_3_phone',
+      7 => 'field_ref_3_how_know',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -589,6 +591,7 @@ function novo_content_feature_field_group_info() {
       4 => 'field_ref_1_last_name',
       5 => 'field_ref_1_prefix',
       6 => 'field_ref_1_phone',
+      7 => 'field_ref_1_how_know',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

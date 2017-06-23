@@ -3631,6 +3631,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_1_how_know'.
+  $field_instances['node-application-field_ref_1_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 110,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_1_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 76,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_1_how_long'.
   $field_instances['node-application-field_ref_1_how_long'] = array(
     'bundle' => 'application',
@@ -3653,7 +3693,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_1_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -3667,7 +3707,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 78,
+      'weight' => 77,
     ),
   );
 
@@ -3707,7 +3747,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 79,
+      'weight' => 78,
     ),
   );
 
@@ -3910,6 +3950,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_2_how_know'.
+  $field_instances['node-application-field_ref_2_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 111,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_2_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 112,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_2_how_long'.
   $field_instances['node-application-field_ref_2_how_long'] = array(
     'bundle' => 'application',
@@ -3932,7 +4012,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_2_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -3946,7 +4026,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 114,
+      'weight' => 113,
     ),
   );
 
@@ -3986,7 +4066,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 115,
+      'weight' => 114,
     ),
   );
 
@@ -4189,6 +4269,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_3_how_know'.
+  $field_instances['node-application-field_ref_3_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 112,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_3_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 101,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_3_how_long'.
   $field_instances['node-application-field_ref_3_how_long'] = array(
     'bundle' => 'application',
@@ -4211,7 +4331,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_3_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -4225,7 +4345,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 103,
+      'weight' => 102,
     ),
   );
 
@@ -4265,7 +4385,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 104,
+      'weight' => 103,
     ),
   );
 
@@ -7058,6 +7178,7 @@ Friend',
   t('How did you realize you needed Christ?');
   t('How do you know this reference?');
   t('How has that decision changed your life?');
+  t('How long have you known him / her?');
   t('I am willing to pursue Novo training in the areas in which I will be serving.');
   t('I authorize Novo Ministries to conduct a background inquiry that may include criminal records, public records, and personal references. I agree to all statements in this application and certify that I have properly initialed each statement and / or accept that any text placed in the fields provided will be considered acceptance of the statements.');
   t('I authorize Novo Ministries to contact any person or entity listed on this application, and I further authorize any such person or entity to provide the organization with information, opinions, and impressions relating to my background or qualifications');
