@@ -1300,7 +1300,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 160,
+      'weight' => 68,
     ),
   );
 
@@ -1986,7 +1986,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -2041,7 +2041,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 63,
+      'weight' => 61,
     ),
   );
 
@@ -2125,7 +2125,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 64,
+      'weight' => 62,
     ),
   );
 
@@ -2414,7 +2414,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 68,
+      'weight' => 66,
     ),
   );
 
@@ -3469,7 +3469,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 62,
+      'weight' => 60,
     ),
   );
 
@@ -4631,7 +4631,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 63,
     ),
   );
 
@@ -4893,22 +4893,22 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_what_site_want'.
-  $field_instances['node-application-field_what_site_want'] = array(
+  // Exported field_instance: 'node-application-field_what_site_you_want'.
+  $field_instances['node-application-field_what_site_you_want'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 74,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 19,
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 114,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4918,7 +4918,7 @@ Friend',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_what_site_want',
+    'field_name' => 'field_what_site_you_want',
     'label' => 'At what site do you want to volunteer?',
     'required' => 1,
     'settings' => array(
@@ -4929,7 +4929,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 67,
     ),
   );
 

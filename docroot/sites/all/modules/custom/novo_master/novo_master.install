@@ -261,8 +261,11 @@ function novo_master_update_7123() {
 }
 
 /**
- * Revert novo_content_feature.
+ * Revert novo_content_feature, novo_views_feature.
  */
 function novo_master_update_7124() {
+  field_delete_field('field_what_site_want');
+  field_purge_batch(1);
+  features_revert_module("novo_views_feature");
   features_revert_module("novo_content_feature");
 }

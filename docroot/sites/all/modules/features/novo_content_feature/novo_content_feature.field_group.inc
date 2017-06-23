@@ -320,10 +320,10 @@ function novo_content_feature_field_group_info() {
       11 => 'field_t_shirt_size',
       12 => 'field_color_preference',
       13 => 'field_how_did_you_hear_about_nov',
-      14 => 'field_what_site_want',
-      15 => 'field_app_status',
-      16 => 'field_prefix',
-      17 => 'field_phone',
+      14 => 'field_app_status',
+      15 => 'field_prefix',
+      16 => 'field_phone',
+      17 => 'field_what_site_you_want',
       18 => 'title',
       19 => 'group_app_emergency_contact',
     ),
@@ -524,8 +524,8 @@ function novo_content_feature_field_group_info() {
     'label' => 'List',
     'weight' => '71',
     'children' => array(
-      0 => 'group_app_3_references',
-      1 => 'group_app_3_parents',
+      0 => 'group_app_3_parents',
+      1 => 'group_app_3_references',
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
@@ -566,7 +566,7 @@ function novo_content_feature_field_group_info() {
         'classes' => 'group-app-3-parents field-group-accordion-item',
         'description' => 'As you are under 18 years old, please provide following info:',
       ),
-      'formatter' => 'open',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_app_3_parents|node|application|form'] = $field_group;
@@ -1289,7 +1289,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '66',
+    'weight' => '64',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',
