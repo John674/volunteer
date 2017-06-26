@@ -220,6 +220,75 @@ function novo_content_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_parent_phone-field_phone_number'.
+  $field_instances['field_collection_item-field_parent_phone-field_phone_number'] = array(
+    'bundle' => 'field_parent_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_number',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_parent_phone-field_phone_type'.
+  $field_instances['field_collection_item-field_parent_phone-field_phone_type'] = array(
+    'bundle' => 'field_parent_phone',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_phone_type',
+    'label' => 'Type',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_phone-field_phone_number'.
   $field_instances['field_collection_item-field_phone-field_phone_number'] = array(
     'bundle' => 'field_phone',
@@ -1231,7 +1300,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 160,
+      'weight' => 68,
     ),
   );
 
@@ -1917,7 +1986,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -1972,7 +2041,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 63,
+      'weight' => 61,
     ),
   );
 
@@ -2056,7 +2125,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 64,
+      'weight' => 62,
     ),
   );
 
@@ -2345,7 +2414,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 68,
+      'weight' => 66,
     ),
   );
 
@@ -2583,6 +2652,208 @@ Church',
       ),
       'type' => 'text_textarea',
       'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_parent_email'.
+  $field_instances['node-application-field_parent_email'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 109,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_email',
+    'label' => 'Email',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 180,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-application-field_parent_guardian_first_name'.
+  $field_instances['node-application-field_parent_guardian_first_name'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 106,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_guardian_first_name',
+    'label' => 'First Name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 178,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-application-field_parent_guardian_last_name'.
+  $field_instances['node-application-field_parent_guardian_last_name'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 107,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_guardian_last_name',
+    'label' => 'Last Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 179,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_parent_phone'.
+  $field_instances['node-application-field_parent_phone'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 108,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_phone',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 181,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_parent_prefix'.
+  $field_instances['node-application-field_parent_prefix'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 103,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_prefix',
+    'label' => 'Prefix',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 177,
     ),
   );
 
@@ -3198,7 +3469,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 62,
+      'weight' => 60,
     ),
   );
 
@@ -3360,6 +3631,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_1_how_know'.
+  $field_instances['node-application-field_ref_1_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 110,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_1_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 76,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_1_how_long'.
   $field_instances['node-application-field_ref_1_how_long'] = array(
     'bundle' => 'application',
@@ -3382,7 +3693,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_1_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -3396,7 +3707,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 78,
+      'weight' => 77,
     ),
   );
 
@@ -3436,7 +3747,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 79,
+      'weight' => 78,
     ),
   );
 
@@ -3639,6 +3950,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_2_how_know'.
+  $field_instances['node-application-field_ref_2_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 111,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_2_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 112,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_2_how_long'.
   $field_instances['node-application-field_ref_2_how_long'] = array(
     'bundle' => 'application',
@@ -3661,7 +4012,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_2_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -3675,7 +4026,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 114,
+      'weight' => 113,
     ),
   );
 
@@ -3715,7 +4066,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 115,
+      'weight' => 114,
     ),
   );
 
@@ -3918,6 +4269,46 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ref_3_how_know'.
+  $field_instances['node-application-field_ref_3_how_know'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 112,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_3_how_know',
+    'label' => 'How do you know this reference?',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 101,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_ref_3_how_long'.
   $field_instances['node-application-field_ref_3_how_long'] = array(
     'bundle' => 'application',
@@ -3940,7 +4331,7 @@ Church',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ref_3_how_long',
-    'label' => 'How do you know this reference?',
+    'label' => 'How long have you known him / her?',
     'required' => 1,
     'settings' => array(
       'max' => 100,
@@ -3954,7 +4345,7 @@ Church',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 103,
+      'weight' => 102,
     ),
   );
 
@@ -3994,7 +4385,7 @@ Church',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 104,
+      'weight' => 103,
     ),
   );
 
@@ -4240,7 +4631,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 63,
     ),
   );
 
@@ -4502,22 +4893,22 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_what_site_want'.
-  $field_instances['node-application-field_what_site_want'] = array(
+  // Exported field_instance: 'node-application-field_what_site_you_want'.
+  $field_instances['node-application-field_what_site_you_want'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 74,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 19,
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 114,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4527,7 +4918,7 @@ Friend',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_what_site_want',
+    'field_name' => 'field_what_site_you_want',
     'label' => 'At what site do you want to volunteer?',
     'required' => 1,
     'settings' => array(
@@ -4538,7 +4929,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 67,
     ),
   );
 
@@ -6787,6 +7178,7 @@ Friend',
   t('How did you realize you needed Christ?');
   t('How do you know this reference?');
   t('How has that decision changed your life?');
+  t('How long have you known him / her?');
   t('I am willing to pursue Novo training in the areas in which I will be serving.');
   t('I authorize Novo Ministries to conduct a background inquiry that may include criminal records, public records, and personal references. I agree to all statements in this application and certify that I have properly initialed each statement and / or accept that any text placed in the fields provided will be considered acceptance of the statements.');
   t('I authorize Novo Ministries to contact any person or entity listed on this application, and I further authorize any such person or entity to provide the organization with information, opinions, and impressions relating to my background or qualifications');
