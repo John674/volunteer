@@ -537,6 +537,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_church',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -1222,6 +1225,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_middle',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1561,6 +1567,35 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_parent_guardian'.
+  $field_bases['field_parent_guardian'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_parent_guardian',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_parent_guardian_first_name'.
   $field_bases['field_parent_guardian_first_name'] = array(
     'active' => 1,
@@ -1616,6 +1651,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_parent_guardian_relation',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -2910,6 +2948,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_school',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -2920,7 +2961,7 @@ function novo_content_feature_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => '',
+          'vocabulary' => 'application_site',
           'parent' => 0,
         ),
       ),
@@ -3012,6 +3053,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_teacher',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',

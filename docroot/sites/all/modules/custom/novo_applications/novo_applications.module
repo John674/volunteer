@@ -81,6 +81,11 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['field_app_7_final_agree_6'][$lang][0]['value']['#title_display'] = 'invisible';
   $form['field_masked_emergency_phone'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
 
+  $form['field_ref_1_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
+  $form['field_ref_2_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
+  $form['field_ref_3_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
+
+
   // Parent section.
   $node = (isset($form_state['node'])) ? $form_state['node'] : NULL;
   if ($node) {
@@ -126,7 +131,7 @@ function novo_applications_get_app_node_for_user($account = NULL) {
   $uid = (isset($account->uid)) ? $account->uid : $user->uid;
   $nodes = node_load_multiple(NULL, array(
     'uid' => $uid,
-    'type' => 'application'
+    'type' => 'application',
   ));
   return $nodes;
 }
@@ -138,7 +143,7 @@ function novo_applications_theme() {
   return array(
     'novo_applications_welcome_block' => array(
       'render element' => 'data',
-      'template' => 'plugins/templates/novo_applications_welcome_block'
+      'template' => 'plugins/templates/novo_applications_welcome_block',
     ),
   );
 }
@@ -149,5 +154,21 @@ function novo_applications_theme() {
 function novo_applications_ctools_plugin_directory($owner, $plugin_type) {
   if ($owner == 'ctools' || $owner == 'panels') {
     return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Validate 'How do you know this reference?' fields, value should be minimum 6 months.
+ */
+function _custom_ref_how_long_field_validate($element, $form_state) {
+  $field_how_long_name = $element['und']['#field_name'];
+  $field_how_long_period_name = $field_how_long_name . '_period';
+  $field_how_long_period_value = $form_state['values'][$field_how_long_period_name]['und'];
+
+  if ($field_how_long_period_value == 'months') {
+    $field_how_long_value = (int) $element['und'][0]['value']['#value'];
+    if ($field_how_long_value < 6) {
+      form_error($element, 'Should be minimum 6 months!');
+    }
   }
 }
