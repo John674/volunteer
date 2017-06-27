@@ -173,3 +173,10 @@ function novo_theme_load_include($type, $theme, $name = NULL) {
   }
   return FALSE;
 }
+
+/**
+ * Implements hook_menu_tree__menu_program_menu().
+ */
+function novo_menu_tree__menu_program_menu(&$variables) {
+  return '<ul class="nav nav-tabs">' . $variables['tree'] . '</ul>';
+}
