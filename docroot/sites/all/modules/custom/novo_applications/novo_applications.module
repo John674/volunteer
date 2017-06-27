@@ -80,6 +80,32 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['field_app_7_final_agree_5'][$lang][0]['value']['#title_display'] = 'invisible';
   $form['field_app_7_final_agree_6'][$lang][0]['value']['#title_display'] = 'invisible';
   $form['field_masked_emergency_phone'][$lang][0]['value']['#attributes']['class'][] = 'form-control';
+
+  // Parent section.
+  $node = (isset($form_state['node'])) ? $form_state['node'] : NULL;
+  if ($node) {
+    $dob = (isset($node->field_dob[$node->language][0]['value'])) ? $node->field_dob[$node->language][0]['value'] : NULL;
+    if ($dob) {
+      $dob_date = new DateTime();
+      $dob_date->setTimestamp($dob);
+      $today = new DateTime();
+      $age = $today->diff($dob_date)->format("%y");
+      if ($age >= 18) {
+        _novo_application_hide_parent_section($form);
+      }
+    }
+  }
+}
+
+/**
+ * Hide parents section if age more 18.
+ */
+function _novo_application_hide_parent_section(&$form) {
+  $form['field_parent_email']['#access'] = FALSE;
+  $form['field_parent_guardian_first_name']['#access'] = FALSE;
+  $form['field_parent_guardian_last_name']['#access'] = FALSE;
+  $form['field_parent_phone']['#access'] = FALSE;
+  $form['field_parent_prefix']['#access'] = FALSE;
 }
 
 /**
