@@ -133,14 +133,15 @@ function novo_applications_ctools_plugin_directory($owner, $plugin_type) {
  * Validate 'How do you know this reference?' fields, value should be minimum 6 months.
  */
 function _custom_ref_how_long_field_validate($element, $form_state) {
-  $field_how_long_name = $element['und']['#field_name'];
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  $field_how_long_name = $element[$lang]['#field_name'];
   $field_how_long_period_name = $field_how_long_name . '_period';
-  $field_how_long_period_value = $form_state['values'][$field_how_long_period_name]['und'];
+  $field_how_long_period_value = isset($form_state['values'][$field_how_long_period_name][$lang]) ? $form_state['values'][$field_how_long_period_name][$lang] : NULL;
 
-  if ($field_how_long_period_value == 'months') {
-    $field_how_long_value = (int) $element['und'][0]['value']['#value'];
-    if ($field_how_long_value < 6) {
-      form_error($element, 'Should be minimum 6 months!');
+  if (!empty($field_how_long_period_value) && ($field_how_long_period_value == 'months')) {
+    $field_how_long_value = isset($field_how_long_period_value) ? intval($element[$lang][0]['value']['#value']) : NULL;
+    if (!empty($field_how_long_value) && ($field_how_long_value < 6)) {
+      form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
     }
   }
 }
