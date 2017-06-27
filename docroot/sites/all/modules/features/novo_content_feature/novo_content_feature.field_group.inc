@@ -324,8 +324,9 @@ function novo_content_feature_field_group_info() {
       15 => 'field_prefix',
       16 => 'field_phone',
       17 => 'field_what_site_you_want',
-      18 => 'title',
-      19 => 'group_app_emergency_contact',
+      18 => 'field_ssn',
+      19 => 'title',
+      20 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -351,7 +352,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'EDUCATION',
-    'weight' => '47',
+    'weight' => '48',
     'children' => array(
       0 => 'field_edu_level',
     ),
@@ -378,7 +379,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'EMPLOYMENT / OCCUPATION',
-    'weight' => '46',
+    'weight' => '47',
     'children' => array(
       0 => 'field_employer',
       1 => 'field_empl_title',
@@ -438,7 +439,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'MINISTRY / VOLUNTEER EXPERIENCE',
-    'weight' => '48',
+    'weight' => '49',
     'children' => array(
       0 => 'field_ministry_experience',
       1 => 'field_ministry_cert',
@@ -1289,7 +1290,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '64',
+    'weight' => '65',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

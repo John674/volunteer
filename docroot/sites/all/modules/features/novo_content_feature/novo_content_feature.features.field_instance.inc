@@ -1443,7 +1443,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 68,
+      'weight' => 69,
     ),
   );
 
@@ -2129,7 +2129,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 66,
     ),
   );
 
@@ -2184,7 +2184,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 61,
+      'weight' => 62,
     ),
   );
 
@@ -2268,7 +2268,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 62,
+      'weight' => 63,
     ),
   );
 
@@ -2557,7 +2557,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 66,
+      'weight' => 67,
     ),
   );
 
@@ -3612,7 +3612,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 60,
+      'weight' => 61,
     ),
   );
 
@@ -4702,6 +4702,56 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_ssn'.
+  $field_instances['node-application-field_ssn'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 115,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ssn',
+    'label' => 'Social security number',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-99-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 60,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_state'.
   $field_instances['node-application-field_state'] = array(
     'bundle' => 'application',
@@ -4725,7 +4775,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_state',
     'label' => 'State',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -4774,7 +4824,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 63,
+      'weight' => 64,
     ),
   );
 
@@ -5068,7 +5118,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 67,
+      'weight' => 68,
     ),
   );
 
@@ -7216,6 +7266,7 @@ Friend',
   t('School name');
   t('School year');
   t('Small Group');
+  t('Social security number');
   t('Staff list');
   t('State');
   t('Status');
