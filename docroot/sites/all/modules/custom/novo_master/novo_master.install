@@ -277,3 +277,15 @@ function novo_master_update_7124() {
 function novo_master_update_7125() {
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature, remove fields.
+ */
+function novo_master_update_7126() {
+  field_delete_field('field_program_staff_list');
+  field_delete_field('field_program_volunteers_list');
+  field_purge_batch(1);
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+  module_disable(array("select2widget"));
+}

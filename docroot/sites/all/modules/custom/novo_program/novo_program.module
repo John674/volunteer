@@ -9,7 +9,7 @@
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
-
+  //$form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program_autocomplete.js";
 }
 
 /**
@@ -17,4 +17,31 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
  */
 function novo_program_preprocess_field($variables) {
 
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_program_preprocess_node($variables) {
+  if (isset($variables['node']) && isset($variables['view_mode']) && $variables['view_mode'] == "full" && node_access("update", $variables['node'])) {
+    drupal_goto("node/" . $variables['nid'] . "/edit");
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function novo_program_menu_alter(&$items) {
+  $items['node/%node/view']['access callback'] = 'novo_program_disable_node_view';
+  $items['node/%node/view']['access arguments'] = array(1);
+}
+
+/**
+ * Access node view tab callback.
+ */
+function novo_program_disable_node_view($node) {
+  if ($node->type == 'program') {
+    return FALSE;
+  }
+  return TRUE;
 }

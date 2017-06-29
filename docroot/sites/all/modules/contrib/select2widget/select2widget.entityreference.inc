@@ -32,7 +32,7 @@ function select2widget_entityreference_widget_settings_form($field, $instance) {
 
     $form['select2widgetajax'] = array(
       '#type' => 'fieldset',
-      '#title' =>  t('Select2Widget settings'),
+      '#title' => t('Select2Widget settings'),
       '#tree' => TRUE,
     );
 
@@ -42,8 +42,10 @@ function select2widget_entityreference_widget_settings_form($field, $instance) {
       '#default_value' => (isset($settings['select2widgetajax']['view_mode'])) ? $settings['select2widgetajax']['view_mode'] : reset($view_mode_options),
       '#options' => $view_mode_options,
       '#description' => t('Install !entity_view_mode_link module to create own view modes.',
-        array('!entity_view_mode_link' => l(t('"Entity view modes"'), "http://drupal.org/project/entity_view_mode",
-        array('attributes' => array('target' => '_blank'))))),
+        array(
+          '!entity_view_mode_link' => l(t('"Entity view modes"'), "http://drupal.org/project/entity_view_mode",
+            array('attributes' => array('target' => '_blank')))
+        )),
     );
 
     $form['select2widgetajax']['placeholder'] = array(
@@ -120,9 +122,15 @@ function select2widget_entity_process_callback($element, &$form_state, $form) {
     $cardinality = $form_state['field'][$field_name][$langcode]['field']['cardinality'];
   }
   else {
-    $parents = array_merge($element['#parents'], array($field_name));
-    $field = drupal_array_get_nested_value($form_state, $parents, $langcode);
-    $cardinality = $field['field']['cardinality'];
+    $info = field_info_field($field_name);
+    if (isset($info['cardinality'])) {
+      $cardinality = $info['cardinality'];
+    }
+    else {
+      $parents = array_merge($element['#parents'], array($field_name));
+      $field = drupal_array_get_nested_value($form_state, $parents, $langcode);
+      $cardinality = $field['field']['cardinality'];
+    }
   }
 
   $data['select2widgetajax']['elements'][$element['#id']] = array(
@@ -131,10 +139,10 @@ function select2widget_entity_process_callback($element, &$form_state, $form) {
     'cardinality' => $cardinality,
     'init' => $element['#init'],
     'placeholder' => (isset($element['#settings']['select2widgetajax']) && isset($element['#settings']['select2widgetajax']['placeholder'])) ? $element['#settings']['select2widgetajax']['placeholder'] : '',
-    'min_char' => (isset($element['#settings']['select2widgetajax']) && isset($element['#settings']['select2widgetajax']['min_char']))?$element['#settings']['select2widgetajax']['min_char']:'',
+    'min_char' => (isset($element['#settings']['select2widgetajax']) && isset($element['#settings']['select2widgetajax']['min_char'])) ? $element['#settings']['select2widgetajax']['min_char'] : '',
   );
 
-  if(isset($element['#settings']['select2widgetajax']) && isset($element['#settings']['select2widgetajax']['width'])){
+  if (isset($element['#settings']['select2widgetajax']) && isset($element['#settings']['select2widgetajax']['width'])) {
     $data['select2widgetajax']['elements'][$element['#id']]['width'] = $element['#settings']['select2widgetajax']['width'];
   }
 
@@ -183,7 +191,11 @@ function select2widget_entityreference_get_matches($field, $instance, $entity_ty
   if ($instance['widget']['type'] == 'og_complex') {
     $instance['field_mode'] = 'default';
     // Set the current field mode if passed in.
-    if (!empty($_GET['field_mode']) && in_array($_GET['field_mode'], array('admin', 'default'))) {
+    if (!empty($_GET['field_mode']) && in_array($_GET['field_mode'], array(
+        'admin',
+        'default'
+      ))
+    ) {
       $instance['field_mode'] = $_GET['field_mode'];
     }
     $settings = isset($instance['settings']['behaviors']['og_widget'][$instance['field_mode']]['widget_settings']['select2widgetajax']) ? $instance['settings']['behaviors']['og_widget'][$instance['field_mode']]['widget_settings']['select2widgetajax'] : array();
@@ -254,26 +266,26 @@ function select2widget_render_entity($entity_type, $entity, $view_mode = 'full')
 
   switch ($entity_type) {
     case "node":
-        $entity_array['id'] = $entity->nid;
-        $entity_array['title'] = $entity->title . " - " . $entity->nid;
-        $entity_array['data'] = node_view($entity, $view_mode);
+      $entity_array['id'] = $entity->nid;
+      $entity_array['title'] = $entity->title . " - " . $entity->nid;
+      $entity_array['data'] = node_view($entity, $view_mode);
       break;
     case "user":
-        $entity_array['id'] = $entity->uid;
-        $entity_array['title'] = $entity->name . " - " . $entity->uid;
-        $entity_array['data'] = user_view($entity, $view_mode);
+      $entity_array['id'] = $entity->uid;
+      $entity_array['title'] = $entity->name . " - " . $entity->uid;
+      $entity_array['data'] = user_view($entity, $view_mode);
       break;
     case "taxonomy_term":
-        $entity_array['id'] = $entity->tid;
-        $entity_array['title'] = $entity->name . " - " . $entity->tid;
-        $entity_array['data'] = taxonomy_term_view($entity, $view_mode);
+      $entity_array['id'] = $entity->tid;
+      $entity_array['title'] = $entity->name . " - " . $entity->tid;
+      $entity_array['data'] = taxonomy_term_view($entity, $view_mode);
       break;
     default:
-        $entity_id = entity_id($entity_type, $entity);
-        $entity_label = entity_label($entity_type, $entity);
-        $entity_array['id'] = $entity_id;
-        $entity_array['title'] =  $entity_label . " - " . $entity_id;
-        $entity_array['data'] = entity_view($entity_type, array($entity), $view_mode);
+      $entity_id = entity_id($entity_type, $entity);
+      $entity_label = entity_label($entity_type, $entity);
+      $entity_array['id'] = $entity_id;
+      $entity_array['title'] = $entity_label . " - " . $entity_id;
+      $entity_array['data'] = entity_view($entity_type, array($entity), $view_mode);
   }
 
   return $entity_array;
@@ -301,7 +313,7 @@ function select2widget_entity_validate_field(&$element, &$form_state, $form) {
       $value[] = array('target_id' => $target_entity);
       $entity = entity_load_single($field['settings']['target_type'], $target_entity);
 
-      if($entity !== FALSE) {
+      if ($entity !== FALSE) {
         $label = entity_label($field['settings']['target_type'], $entity);
         $key = "$label ($target_entity)";
       }
