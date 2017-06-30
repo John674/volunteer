@@ -295,7 +295,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("av", "template_data", "answer_variant");
     $query->addField("av", "id", "answer_variant_id");
 
-    $query->condition("u.id", 423);
+    //$query->condition("u.id", 423);
 
     $result = $query->execute()->fetchAll();
 
@@ -605,7 +605,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // ->callback([$this, "getApplicationStatus"]);
     // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_ssn', 'social_security_number')
-      ->callback([$this, "formattingSsn"]);
+      ->callback(array($this, "formattingSsn"));
   }
 
   /**
@@ -648,14 +648,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * How long callback function.
    */
   protected function getHowLong($value) {
-    return (!empty($value) && !empty($value['length'])) ? intval($value['length']) : 0;
+    return !empty($value['length']) ? intval($value['length']) : 0;
   }
 
   /**
    * How long period callback function.
    */
   protected function getHowLongPeriod($value) {
-    return (!empty($value) && !empty($value['period'])) ? $value['period'] : '';
+    return (!empty($value['period']) && ($value['period'] == 'months' || $value['period'] == 'years')) ? $value['period'] : '';
   }
 
   /**
@@ -737,14 +737,19 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Cut first five symbols form zip.
    */
   protected function formattingZip($value) {
-    return !empty($value) ? substr($value, 0, 5) : NULL;
+    return !empty($value) ? intval(substr($value, 0, 5)) : NULL;
   }
 
   /**
    * Delete "-" from ssn.
    */
   protected function formattingSsn($value) {
-    return !empty($value) ? str_replace("-", "", $value) : NULL;
+    if (empty($value)) {
+      return NULL;
+    }
+    $value = (string) $value;
+    $value = intval(str_replace("-", "", $value));
+    return $value;
   }
 
 }
