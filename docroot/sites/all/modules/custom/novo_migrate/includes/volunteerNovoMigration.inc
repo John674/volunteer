@@ -295,7 +295,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("av", "template_data", "answer_variant");
     $query->addField("av", "id", "answer_variant_id");
 
-    $query->condition("u.id", 423);
+    //$query->condition("u.id", 423);
 
     $result = $query->execute()->fetchAll();
 
