@@ -30,10 +30,31 @@ function novo_menu_feature_menu_default_menu_links() {
     'weight' => -49,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_users:admin/people.
+  $menu_links['main-menu_users:admin/people'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'admin/people',
+    'router_path' => 'admin/people',
+    'link_title' => 'Users',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_users:admin/people',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -46,
+    'customized' => 1,
+  );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Programs');
+  t('Users');
 
   return $menu_links;
 }
