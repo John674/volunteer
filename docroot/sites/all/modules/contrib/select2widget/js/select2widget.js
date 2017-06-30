@@ -35,7 +35,6 @@
             }
 
             e.addClass('select2widget-processed');
-
             e.select2({
               width: (settings[el].width) ? settings[el].width : 'element',
               separator: settings[el].separator,

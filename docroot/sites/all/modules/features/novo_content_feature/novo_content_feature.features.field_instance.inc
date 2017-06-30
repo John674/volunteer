@@ -635,6 +635,42 @@ function novo_content_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_dismissal'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_dismissal'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => array(
+      0 => array(
+        'tid' => 125,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_dismissal',
+    'label' => 'Dismissal',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_program_kids_list-field_p_kid_name'.
   $field_instances['field_collection_item-field_program_kids_list-field_p_kid_name'] = array(
     'bundle' => 'field_program_kids_list',
@@ -656,19 +692,21 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_p_kid_name',
     'label' => 'Kid name',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
+        'hide_ids' => 1,
         'match_operator' => 'CONTAINS',
         'path' => '',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 0,
+      'weight' => 3,
     ),
   );
 
@@ -706,7 +744,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -744,7 +782,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -817,7 +855,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -2795,6 +2833,46 @@ Church',
       ),
       'type' => 'text_textarea',
       'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_notes'.
+  $field_instances['node-application-field_notes'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 104,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_notes',
+    'label' => 'Notes',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 3,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 69,
     ),
   );
 
@@ -4828,6 +4906,49 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_texting'.
+  $field_instances['node-application-field_texting'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 103,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_texting',
+    'label' => 'Texting',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 61,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_things_q1'.
   $field_instances['node-application-field_things_q1'] = array(
     'bundle' => 'application',
@@ -5766,6 +5887,46 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-kids-field_middle'.
+  $field_instances['node-kids-field_middle'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_middle',
+    'label' => 'Middle',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -3,
+    ),
+  );
+
   // Exported field_instance: 'node-kids-field_middle_name'.
   $field_instances['node-kids-field_middle_name'] = array(
     'bundle' => 'kids',
@@ -5889,6 +6050,169 @@ Friend',
       'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_parent_guardian_first_name'.
+  $field_instances['node-kids-field_parent_guardian_first_name'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_guardian_first_name',
+    'label' => 'Parent / Guardian First Name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_parent_guardian_last_name'.
+  $field_instances['node-kids-field_parent_guardian_last_name'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_guardian_last_name',
+    'label' => 'Parent / Guardian Last Name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_parent_guardian_relation'.
+  $field_instances['node-kids-field_parent_guardian_relation'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 28,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_parent_guardian_relation',
+    'label' => 'Parent / Guardian Relation',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_phone'.
+  $field_instances['node-kids-field_phone'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 35,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone',
+    'label' => 'Parent / Guardian Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 30,
     ),
   );
 
@@ -6333,6 +6657,45 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-locations-field_phone'.
+  $field_instances['node-locations-field_phone'] = array(
+    'bundle' => 'locations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_phone',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-locations-field_state'.
   $field_instances['node-locations-field_state'] = array(
     'bundle' => 'locations',
@@ -6748,7 +7111,7 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
           'view_mode' => 'full',
@@ -6810,10 +7173,13 @@ Friend',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
+      'active' => 1,
+      'module' => 'field_collection_table',
+      'settings' => array(
+        'nodragging' => 0,
+        'title_on_top' => 1,
+      ),
+      'type' => 'field_collection_table',
       'weight' => 4,
     ),
   );
@@ -6826,14 +7192,14 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
           'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6865,10 +7231,10 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'custom',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -6876,7 +7242,7 @@ Friend',
           'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -6910,95 +7276,6 @@ Friend',
       ),
       'type' => 'date_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-program-field_program_staff_list'.
-  $field_instances['node-program-field_program_staff_list'] = array(
-    'bundle' => 'program',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_program_staff_list',
-    'label' => 'Staff list',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-program-field_program_volunteers_list'.
-  $field_instances['node-program-field_program_volunteers_list'] = array(
-    'bundle' => 'program',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_program_volunteers_list',
-    'label' => 'Volunteers list',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(
-        'select2widgetajax' => array(
-          'match_limit' => 10,
-          'match_operator' => 'CONTAINS',
-          'min_char' => 1,
-          'placeholder' => 'Search',
-          'view_mode' => 'select2widget_labels',
-          'width' => '',
-        ),
-      ),
-      'type' => 'select2widgetajax',
-      'weight' => 6,
     ),
   );
 
@@ -7264,6 +7541,7 @@ Friend',
   t('Color Preference');
   t('Contact List');
   t('Date of Birth');
+  t('Dismissal');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
   t('Employer');
@@ -7333,7 +7611,12 @@ Friend',
   t('Moved');
   t('Multiple Contact');
   t('Name');
+  t('Notes');
+  t('Parent / Guardian First Name');
+  t('Parent / Guardian Last Name');
   t('Parent / Guardian List');
+  t('Parent / Guardian Phone');
+  t('Parent / Guardian Relation');
   t('Parent / Guardian Signature');
   t('Pastor, Small Group Leader, or other church leader');
   t('Pertinent Certifcation or Training (e.g. CPR, First Aid, etc.)');
@@ -7359,11 +7642,11 @@ Friend',
   t('T-shirt Size');
   t('Teacher name');
   t('Text Parent / Guardian');
+  t('Texting');
   t('Time');
   t('Title');
   t('Type');
   t('VOLUNTEER INTERESTS / ROLES');
-  t('Volunteers list');
   t('Weekday');
   t('When and how did you receive Jesus as Savior?');
   t('Zip');

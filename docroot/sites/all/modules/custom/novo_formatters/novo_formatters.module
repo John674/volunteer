@@ -9,7 +9,6 @@
  * Implements hook_field_formatter_info().
  */
 function novo_formatters_field_formatter_info() {
-  $info = field_info_field_types();
   $formatters = array(
     'icon_times' => array(
       'label' => t('Icon times'),
@@ -17,6 +16,10 @@ function novo_formatters_field_formatter_info() {
     ),
     'date_age' => array(
       'label' => t('Date and age'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
+    'only_age' => array(
+      'label' => t('Only age'),
       'field types' => array('date', 'datestamp', 'datetime'),
     ),
   );
@@ -36,6 +39,10 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
     'date_age' => array(
       'variables' => array('dob' => NULL, 'age' => NULL),
       'template' => 'templates/date_age',
+    ),
+    'only_age' => array(
+      'variables' => array('dob' => NULL, 'age' => NULL),
+      'template' => 'templates/only_age',
     ),
   );
 }
@@ -62,6 +69,17 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
       $age = $date_diff->y;
       $element[] = array(
         '#theme' => 'date_age',
+        '#dob' => $dob,
+        '#age' => $age,
+      );
+      break;
+
+    case 'only_age':
+      $dob = format_date($items[0]['value'], 'custom', 'm/d/Y');
+      $date_diff = date_diff(new DateTime($dob), new DateTime());
+      $age = $date_diff->y;
+      $element[] = array(
+        '#theme' => 'only_age',
         '#dob' => $dob,
         '#age' => $age,
       );

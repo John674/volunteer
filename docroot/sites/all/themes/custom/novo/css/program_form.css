@@ -10,6 +10,8 @@
   display: inline-block;
   vertical-align: text-top;
   margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
 }
 
 .node-program-form .field-name-field-program-volunteers-list .select2-container.select2-container-multi,
@@ -35,9 +37,9 @@
 .node-program-form .field-name-field-p-photo-release,
 .node-program-form .field-name-field-p-text-parent {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-bottom: 0px;
-  margin-top: 31px;
+  margin-top: 6px;
   vertical-align: top;
 }
 
@@ -46,6 +48,10 @@
   display: inline-block;
   max-width: 200px;
   margin-left: 0px;
+}
+
+.node-program-form .field-name-field-p-small-group .bootstrap-select.form-select {
+  max-width: 200px;
 }
 
 .node-program-form .field-p-group-wrapper {
@@ -59,14 +65,6 @@
 
 .node-program-form .field-p-group-wrapper .field-name-field-p-small-group {
   margin-right: 30px;
-}
-
-.node-program-form tr.draggable td button.form-submit {
-  float: right;
-}
-
-.node-program-form .field-name-field-program-kids-list tr.draggable td button.form-submit {
-  margin-top: -50px;
 }
 
 .node-program-form .field-name-field-program-time .panel.form-wrapper {
@@ -111,31 +109,75 @@
 }
 
 .node-program-form .field-name-field-program-day tr.draggable td button.form-submit {
-  margin-top: 25px;
+  margin-left: 20px;
 }
 
-.node-program-form .field-name-field-program-school-year {
-  min-width: 170px;
+.node-program-form .form-item-title {
+  min-width: 300px;
   display: inline-block;
   vertical-align: top;
 }
 
-.node-program-form .field-name-field-program-school-year .date-form-element-content{
+.node-program-form .field-name-field-program-school-year {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+}
+
+.node-program-form .field-name-field-program-school-year .date-form-element-content {
   border: none;
   padding: 0px;
   max-width: 300px;
-}
-.node-program-form .field-name-field-program-school-year .date-year{
-  display: inline-block;
 }
 
 .node-program-form .field-name-field-program-location {
   display: inline-block;
   vertical-align: top;
   min-width: 380px;
+  margin-left: 20px;
 }
 
 .node-program-form .field-name-field-program-location .form-control.form-select {
-  display: inline-block;
   max-width: 300px;
+}
+
+.node-program-form .field-name-field-program-kids-list table .tabledrag,
+.node-program-form .field-name-field-program-kids-list table .field-multiple-drag,
+.node-program-form .field-name-field-program-kids-list .tabledrag-toggle-weight-wrapper,
+.node-program-form .field-name-field-program-day table .tabledrag,
+.node-program-form .field-name-field-program-day table .field-multiple-drag,
+.node-program-form .field-name-field-program-day .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+
+.node-program-form .field-name-field-program-kids-list table thead tr th {
+  padding: 0px 0px 7px 7px;
+}
+
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) {
+  width: 50px;
+}
+
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label {
+  -moz-transform: rotate(300deg);
+  -webkit-transform: rotate(300deg);
+  -o-transform: rotate(300deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  font-size: 12px;
+}
+
+.node-program-form .field-name-field-program-day table td,
+.node-program-form .field-name-field-program-kids-list table td {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.node-program-form .field-name-field-program-kids-list .field-p-parent-sign,
+.node-program-form .field-name-field-program-kids-list .field-p-photo-release,
+.node-program-form .field-name-field-program-kids-list .field-p-text-parent {
+  text-align: center;
 }
