@@ -460,7 +460,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       "getState"
     ));
     $this->addFieldMapping('field_state:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_zip', 'zip');
+    $this->addFieldMapping('field_zip', 'zip')
+      ->callback(array($this, "formatZip"));
     $this->addFieldMapping('field_dob', 'date_of_birth');
     $this->addFieldMapping('field_email', 'email');
     $this->addFieldMapping('field_t_shirt_size', 't_shirt_size')
@@ -603,7 +604,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // $this->addFieldMapping('field_app_status', 'application_status')
     // ->callback([$this, "getApplicationStatus"]);
     // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_ssn', 'social_security_number');
+    $this->addFieldMapping('field_ssn', 'social_security_number')
+      ->callback([$this, "formattingSsn"]);
   }
 
   /**
@@ -729,6 +731,20 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $term = array_values($term);
     $term = isset($term[0]) ? $term[0] : -1;
     return (isset($term->tid)) ? $term->tid : NULL;
+  }
+
+  /**
+   * Cut first five symbols form zip.
+   */
+  protected function formattingZip($value) {
+    return !empty($value) ? substr($value, 0, 5) : NULL;
+  }
+
+  /**
+   * Delete "-" from ssn.
+   */
+  protected function formattingSsn($value) {
+    return !empty($value) ? str_replace("-", "", $value) : NULL;
   }
 
 }
