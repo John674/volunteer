@@ -18,11 +18,12 @@ function novo_select($variables) {
       case "field_p_small_group":
         _form_set_class($element, array('form-select', 'selectpicker'));
         return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element, NULL, FALSE) . '</select>';
+        break;
+
       case "field_p_canvassing_group":
         _form_set_class($element, array('form-select', 'selectpicker'));
         return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element) . '</select>';
-
-      break;
+        break;
     }
   }
 
@@ -75,7 +76,8 @@ function novo_form_select_options_color($element, $choices = NULL, $short = FALS
         if ($short) {
           $choice_color = filter_var($choice, FILTER_SANITIZE_NUMBER_INT);
           $choice = "";
-        } else {
+        }
+        else {
           $choice_color = "";
         }
         if (!empty($color)) {

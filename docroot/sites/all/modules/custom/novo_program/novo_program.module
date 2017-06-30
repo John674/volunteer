@@ -9,7 +9,7 @@
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
-  //$form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program_autocomplete.js";
+
 }
 
 /**
