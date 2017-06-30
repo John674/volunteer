@@ -371,7 +371,13 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         if (isset($answer_obj->radio) && isset($variants[$answer_obj->radio])) {
           $variant_obj = $this->getAnswerJson($variants[$answer_obj->radio]);
           if ($variant_obj && isset($variant_obj->title)) {
-            $answer_data["value"] = $variant_obj->title;
+            if (isset($answer_obj->length)) {
+              $answer_data["value"]['period'] = $variant_obj->title;
+              $answer_data["value"]['length'] = $answer_obj->length;
+            }
+            else {
+              $answer_data["value"] = $variant_obj->title;
+            }
           }
         }
         break;
@@ -496,9 +502,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_1_first_name', 'reference_1_first_name');
     $this->addFieldMapping('field_ref_1_last_name', 'reference_1_last_name');
     $this->addFieldMapping('field_ref_1_email', 'reference_1_email');
-    $this->addFieldMapping('field_ref_1_how_long', 'reference_1_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_1_how_long_period', 'reference_1_how_long');
+    $this->addFieldMapping('field_ref_1_how_know', 'reference_1_how_know');
+    $this->addFieldMapping('field_ref_1_how_long', 'reference_1_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_1_how_long_period', 'reference_1_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_ref_2_prefix', 'reference_2_title')
       ->callback(array($this, "getPrefix"));
@@ -507,9 +515,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_2_first_name', 'reference_2_first_name');
     $this->addFieldMapping('field_ref_2_last_name', 'reference_2_last_name');
     $this->addFieldMapping('field_ref_2_email', 'reference_2_email');
-    $this->addFieldMapping('field_ref_2_how_long', 'reference_2_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_2_how_long_period', 'reference_2_how_long');
+    $this->addFieldMapping('field_ref_2_how_know', 'reference_2_how_know');
+    $this->addFieldMapping('field_ref_2_how_long', 'reference_2_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_2_how_long_period', 'reference_2_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_ref_3_prefix', 'standby_title')
       ->callback(array($this, "getPrefix"));
@@ -518,9 +528,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_3_first_name', 'standby_first_name');
     $this->addFieldMapping('field_ref_3_last_name', 'standby_last_name');
     $this->addFieldMapping('field_ref_3_email', 'standby_email');
-    $this->addFieldMapping('field_ref_3_how_long', 'standby_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_3_how_long_period', 'standby_how_long');
+    $this->addFieldMapping('field_ref_3_how_know', 'standby_how_know');
+    $this->addFieldMapping('field_ref_3_how_long', 'standby_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_3_how_long_period', 'standby_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_pertinent_q1', 'mental_conditions');
     $this->addFieldMapping('field_pertinent_q2', 'medications');
@@ -627,6 +639,20 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    */
   protected function getPrefix($value) {
     return $this->getTermTid($value, "prefix");
+  }
+
+  /**
+   * How long callback function.
+   */
+  protected function getHowLong($value) {
+    return (!empty($value) && !empty($value['length'])) ? intval($value['length']) : 0;
+  }
+
+  /**
+   * How long period callback function.
+   */
+  protected function getHowLongPeriod($value) {
+    return (!empty($value) && !empty($value['period'])) ? $value['period'] : '';
   }
 
   /**
