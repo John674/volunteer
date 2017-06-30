@@ -6938,6 +6938,89 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-partner-field_contact'.
+  $field_instances['node-partner-field_contact'] = array(
+    'bundle' => 'partner',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_contact',
+    'label' => 'Contact List',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-partner-field_staff_contact'.
+  $field_instances['node-partner-field_staff_contact'] = array(
+    'bundle' => 'partner',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_staff_contact',
+    'label' => 'Staff contact',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-partner-field_state'.
   $field_instances['node-partner-field_state'] = array(
     'bundle' => 'partner',
@@ -7456,6 +7539,7 @@ Friend',
   t('Church name');
   t('City');
   t('Color Preference');
+  t('Contact List');
   t('Date of Birth');
   t('Dismissal');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
@@ -7550,6 +7634,8 @@ Friend',
   t('School year');
   t('Small Group');
   t('Social security number');
+  t('Staff contact');
+  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');

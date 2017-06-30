@@ -278,7 +278,7 @@ function novo_master_update_7125() {
   features_revert_module("novo_content_feature");
 }
 
-/**
+/*
  * Revert novo_content_feature, remove fields.
  */
 function novo_master_update_7126() {
@@ -288,4 +288,12 @@ function novo_master_update_7126() {
   features_revert_module("novo_taxonomy_feature");
   features_revert_module("novo_content_feature");
   module_disable(array("select2widget"));
+}
+
+/**
+ * Revert novo_content_feature, novo_views_feature.
+ */
+function novo_master_update_7127() {
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_content_feature");
 }
