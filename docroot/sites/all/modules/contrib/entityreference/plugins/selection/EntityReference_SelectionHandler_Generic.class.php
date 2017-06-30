@@ -159,6 +159,13 @@ class EntityReference_SelectionHandler_Generic implements EntityReference_Select
     $options = array();
     $entity_type = $this->field['settings']['target_type'];
 
+    // Check if using hide_ids option and them remove the extra " when have an ',' or '"'.
+    if (isset($this->instance['widget']['settings']['hide_ids']) && $this->instance['widget']['settings']['hide_ids'] && $match_operator == '=') {
+      if (strpos($match, ',') !== FALSE || strpos($match, '"') !== FALSE) {
+        $match = substr($match, 1, -1);
+      }
+    }
+
     $query = $this->buildEntityFieldQuery($match, $match_operator);
     if ($limit > 0) {
       $query->range(0, $limit);

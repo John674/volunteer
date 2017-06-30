@@ -49,6 +49,22 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'dismissal' => array(
+      'name' => 'Dismissal',
+      'machine_name' => 'dismissal',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
+    'ethnicity' => array(
+      'name' => 'Ethnicity',
+      'machine_name' => 'ethnicity',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'gender' => array(
       'name' => 'Gender',
       'machine_name' => 'gender',
@@ -60,6 +76,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
     'grade' => array(
       'name' => 'Grade',
       'machine_name' => 'grade',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
+    'phone_type' => array(
+      'name' => 'Phone type',
+      'machine_name' => 'phone_type',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
@@ -108,6 +132,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
     'volunteer_interests_roles' => array(
       'name' => 'Volunteer interests / roles',
       'machine_name' => 'volunteer_interests_roles',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
+    'weekdays' => array(
+      'name' => 'Weekdays',
+      'machine_name' => 'weekdays',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',

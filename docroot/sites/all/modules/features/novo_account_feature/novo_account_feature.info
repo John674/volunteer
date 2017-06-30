@@ -1,7 +1,7 @@
 name = Novo account feature
 core = 7.x
 package = Novo
-version = 7.x-1.2
+version = 7.x-1.4
 dependencies[] = date
 dependencies[] = email_registration
 dependencies[] = features

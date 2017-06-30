@@ -15,6 +15,7 @@ define('NOVO_VOCABULARY_ETHNICITY', 'ethnicity');
 define('NOVO_VOCABULARY_WEEKDAYS', 'weekdays');
 define('NOVO_VOCABULARY_SMALL_GROUP', 'small_group');
 define('NOVO_VOCABULARY_CANVASSING_GROUP', 'canvassing_group');
+define('NOVO_VOCABULARY_DISMISSAL', 'dismissal');
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
@@ -77,6 +78,10 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_CANVASSING_GROUP:
       _novo_taxonomy_feature_add_canvassing_group($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_DISMISSAL:
+      _novo_taxonomy_feature_add_dismissal($vocabulary);
       break;
   }
 }
@@ -438,6 +443,24 @@ function _novo_taxonomy_feature_add_canvassing_group($vocabulary) {
     'Lime',
     'Teal',
     'Burgundy'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import dismissal.
+ */
+function _novo_taxonomy_feature_add_dismissal($vocabulary) {
+  $list = array(
+    'Alone walk',
+    'Picked Up',
+    'Walked Home'
   );
   foreach ($list as $key => $value) {
     $term = new stdClass();

@@ -85,7 +85,6 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['field_ref_2_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
   $form['field_ref_3_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
 
-
   // Parent section.
   $node = (isset($form_state['node'])) ? $form_state['node'] : NULL;
   if ($node) {
