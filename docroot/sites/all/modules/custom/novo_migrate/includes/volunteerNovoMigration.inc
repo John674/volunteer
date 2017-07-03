@@ -122,6 +122,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->attachPhone($node, $row, "reference_2_", "field_ref_2_phone");
     $this->attachPhone($node, $row, "standby_", "field_ref_3_phone");
     $this->attachPhone($node, $row, "church_background_", "field_church_phone");
+    $this->attachPhone($node, $row, "parent_", "field_parent_phone");
 
     // Multistep.
     if (function_exists("_multistep_update_status")) {
@@ -606,6 +607,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_ssn', 'social_security_number')
       ->callback(array($this, "formattingSsn"));
+    $this->addFieldMapping('field_parent_prefix', 'parent_title');
+    $this->addFieldMapping('field_parent_guardian_first_name', 'parent_first_name');
+    $this->addFieldMapping('field_parent_guardian_last_name', 'parent_last_name');
+    $this->addFieldMapping('field_parent_email', 'parent_email');
   }
 
   /**
@@ -655,7 +660,20 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * How long period callback function.
    */
   protected function getHowLongPeriod($value) {
-    return (!empty($value['period']) && ($value['period'] == 'months' || $value['period'] == 'years')) ? $value['period'] : '';
+    if (!empty($value['period'])) {
+      if ($value['period'] == 'months' || $value['period'] == 'years') {
+        return $value['period'];
+      }
+      else {
+        $current_key = $this->source->getCurrentKey();
+        $source_user_id = $current_key['id'];
+        watchdog("novo_migrate", 'Value :not_valid_value  should be equal months or years in user with source_user_id = :source_user_id', array(
+          ":source_user_id" => $source_user_id,
+          ":not_valid_value" => $value['period']
+        ));
+      }
+    }
+    return NULL;
   }
 
   /**
@@ -674,6 +692,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         foreach ($tree as $term) {
           if (strtolower(trim($term->description)) === strtolower(trim($value))) {
             return $term->tid;
+          }
+        }
+
+        preg_match("/ok[l]?a/i", $value, $is_oklahoma);
+        if (!empty($is_oklahoma[0])) {
+          $tid = $this->getTidByName("Oklahoma", "states");
+          if (!empty($tid)) {
+            return $tid;
           }
         }
 
