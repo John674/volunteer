@@ -461,7 +461,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     ));
     $this->addFieldMapping('field_state:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_zip', 'zip')
-      ->callback(array($this, "formatZip"));
+      ->callback(array($this, "formattingZip"));
     $this->addFieldMapping('field_dob', 'date_of_birth');
     $this->addFieldMapping('field_email', 'email');
     $this->addFieldMapping('field_t_shirt_size', 't_shirt_size')
@@ -737,7 +737,12 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Cut first five symbols form zip.
    */
   protected function formattingZip($value) {
-    return !empty($value) ? intval(substr($value, 0, 5)) : NULL;
+    if (empty($value)) {
+      return NULL;
+    }
+    $value = (string) $value;
+    $value = intval(substr($value, 0, 5));
+    return $value;
   }
 
   /**
