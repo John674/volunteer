@@ -173,6 +173,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Convert phone number. @TODO: need test and change. To Vasya - finish it.
    */
   protected function formatPhoneNumber($s) {
+    if (strlen(preg_replace("/\D*/", "", $s)) < 10) {
+      return FALSE;
+    }
     // @codingStandardsIgnoreStart
     $rx = "/
     (1)?\D*     # optional country code
@@ -183,7 +186,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     (\d*)       # optional extension
 /x";
     preg_match($rx, $s, $matches);
-    if (!isset($matches[0])) {
+    if (!isset($matches[0]) || !isset($matches[2])) {
       return FALSE;
     }
 
@@ -463,7 +466,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_state:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_zip', 'zip')
       ->callback(array($this, "formattingZip"));
-    $this->addFieldMapping('field_dob', 'date_of_birth');
+    $this->addFieldMapping('field_dob', 'date_of_birth')
+      ->callback(array($this, "checkDob"));
     $this->addFieldMapping('field_email', 'email');
     $this->addFieldMapping('field_t_shirt_size', 't_shirt_size')
       ->callback(array(
@@ -476,7 +480,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       ->callback(array(
         $this,
         "getColorPref"
-      ));;
+      ));
     $this->addFieldMapping('field_color_preference:source_type')
       ->defaultValue('tid');
 
@@ -781,6 +785,31 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $value = (string) $value;
     $value = intval(str_replace("-", "", $value));
     return $value;
+  }
+
+  /**
+   * Check date of birthday.
+   */
+  protected function checkDob($value) {
+    if (!empty($value)) {
+      return NULL;
+    }
+    $value = trim($value);
+    $dob = \DateTime::createFromFormat("m/d/Y", $value);
+    $year = $dob->format("Y");
+
+    if ($year[0] == 0) {
+      $new_year = preg_replace("/^.{1}/", "1", $year);
+      $new_dob = $dob->format("m") . "/" . $dob->format("d") . "/" . $new_year;
+      watchdog("novo_migrate", 'Value field_value was changing from :value to :new_value', array(
+        ":value" => $value,
+        ":new_value" => $new_dob,
+      ));
+      return $new_dob;
+    }
+    else {
+      return $value;
+    }
   }
 
 }
