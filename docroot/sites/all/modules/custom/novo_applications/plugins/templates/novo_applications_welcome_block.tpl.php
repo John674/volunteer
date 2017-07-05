@@ -64,7 +64,11 @@
                     <?php print l(t("Continue Application"), "node/" . $app_nid . "/edit", array(
                       "attributes" => array(
                         "role" => "button",
-                        "class" => array("btn", "btn-danger", "novo-applications-create-edit-form-btn")
+                        "class" => array(
+                          "btn",
+                          "btn-danger",
+                          "novo-applications-create-edit-form-btn"
+                        )
                       )
                     )); ?>
                   </div>
@@ -102,7 +106,7 @@
                           </div>
                       </div>
                   </div>
-              <?php else: ?>
+                <?php else: ?>
                   <p>
                     <?php print t("Thank you for your interest in volunteering with Novo. We can’t wait to start working together to reaching inner-city children boys and girls with the Gospel of Jesus Christ!"); ?>
                   </p>
@@ -115,7 +119,11 @@
                     <?php print l(t("Create Application"), "node/add/application", array(
                       "attributes" => array(
                         "role" => "button",
-                        "class" => array("btn", "btn-danger", "novo-applications-create-edit-form-btn")
+                        "class" => array(
+                          "btn",
+                          "btn-danger",
+                          "novo-applications-create-edit-form-btn"
+                        )
                       )
                     )); ?>
                   </div>

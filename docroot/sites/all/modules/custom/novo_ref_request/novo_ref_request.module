@@ -1,7 +1,10 @@
 <?php
+/**
+ * @file
+ * Ref request functions.
+ */
 
 define("NOVO_REF_REQUEST_SALT", "dbNovoS");
-
 define('NOVO_REF_QUESTIONS_VOC', 'reference_request_questions');
 define('NOVO_REF_QUESTIONS_REF1_TERM_NAME', 'Reference 1');
 define('NOVO_REF_QUESTIONS_REF2_TERM_NAME', 'Reference 2');
@@ -10,10 +13,8 @@ define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
 define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
 
 /**
- * @file
- * Ref request functions.
+ * Implements hook_node_access().
  */
-
 function novo_ref_request_node_access($node, $op, $account) {
   $type = is_string($node) ? $node : $node->type;
   if ($type == "reference_request" && $op == 'update') {
@@ -39,8 +40,7 @@ function novo_ref_request_check_hash_access($node) {
 }
 
 /**
- * @param $nid
- * @return string
+ * Generate Link for Ref with hash.
  */
 function novo_ref_request_generate_hashed_link($nid) {
   $access_key = crypt($nid, NOVO_REF_REQUEST_SALT);
@@ -67,7 +67,6 @@ function novo_ref_request_preprocess_page(&$variables) {
     drupal_set_title(t("Reference form"));
   }
 }
-
 
 /**
  * Ref save form().

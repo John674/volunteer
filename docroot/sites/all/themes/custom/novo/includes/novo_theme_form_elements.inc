@@ -12,6 +12,7 @@ function novo_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
 
+  // @codingStandardsIgnoreStart
   // Theme Color selects.
   if (isset($element['#field_name'])) {
     switch ($element['#field_name']) {
@@ -26,6 +27,7 @@ function novo_select($variables) {
         break;
     }
   }
+  // @codingStandardsIgnoreEnd
 
   // Theme School year.
   if (strpos($element['#name'], "field_program_school_year") === 0) {
