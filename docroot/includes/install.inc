@@ -1,9 +1,9 @@
 <?php
 
 /**
-* @file
-* API functions for installing modules and themes.
-*/
+ * @file
+ * API functions for installing modules and themes.
+ */
 
 /**
  * Indicates that a module has not been installed yet.
@@ -204,6 +204,9 @@ function drupal_install_profile_distribution_name() {
   else {
     $profile = drupal_get_profile();
     $info = system_get_info('module', $profile);
+    if (!array_key_exists('distribution_name', $info)) {
+      $info['distribution_name'] = 'Drupal';
+    }
     return $info['distribution_name'];
   }
 }
@@ -299,11 +302,11 @@ abstract class DatabaseTasks {
    */
   protected $tasks = array(
     array(
-      'function'    => 'checkEngineVersion',
-      'arguments'   => array(),
+      'function' => 'checkEngineVersion',
+      'arguments' => array(),
     ),
     array(
-      'arguments'   => array(
+      'arguments' => array(
         'CREATE TABLE {drupal_install_test} (id int NULL)',
         'Drupal can use CREATE TABLE database commands.',
         'Failed to <strong>CREATE</strong> a test table on your database server with the command %query. The server reports the following message: %error.<p>Are you sure the configured username has the necessary permissions to create tables in the database?</p>',
@@ -311,28 +314,28 @@ abstract class DatabaseTasks {
       ),
     ),
     array(
-      'arguments'   => array(
+      'arguments' => array(
         'INSERT INTO {drupal_install_test} (id) VALUES (1)',
         'Drupal can use INSERT database commands.',
         'Failed to <strong>INSERT</strong> a value into a test table on your database server. We tried inserting a value with the command %query and the server reported the following error: %error.',
       ),
     ),
     array(
-      'arguments'   => array(
+      'arguments' => array(
         'UPDATE {drupal_install_test} SET id = 2',
         'Drupal can use UPDATE database commands.',
         'Failed to <strong>UPDATE</strong> a value in a test table on your database server. We tried updating a value with the command %query and the server reported the following error: %error.',
       ),
     ),
     array(
-      'arguments'   => array(
+      'arguments' => array(
         'DELETE FROM {drupal_install_test}',
         'Drupal can use DELETE database commands.',
         'Failed to <strong>DELETE</strong> a value from a test table on your database server. We tried deleting a value with the command %query and the server reported the following error: %error.',
       ),
     ),
     array(
-      'arguments'   => array(
+      'arguments' => array(
         'DROP TABLE {drupal_install_test}',
         'Drupal can use DROP TABLE database commands.',
         'Failed to <strong>DROP</strong> a test table from your database server. We tried dropping a table with the command %query and the server reported the following error %error.',
@@ -403,7 +406,11 @@ abstract class DatabaseTasks {
         }
         if (method_exists($this, $task['function'])) {
           // Returning false is fatal. No other tasks can run.
-          if (FALSE === call_user_func_array(array($this, $task['function']), $task['arguments'])) {
+          if (FALSE === call_user_func_array(array(
+              $this,
+              $task['function']
+            ), $task['arguments'])
+          ) {
             break;
           }
         }
@@ -416,7 +423,7 @@ abstract class DatabaseTasks {
     $message = '';
     foreach ($this->results as $result => $success) {
       if (!$success) {
-        $message .= '<p class="error">' . $result  . '</p>';
+        $message .= '<p class="error">' . $result . '</p>';
       }
     }
     if (!empty($message)) {
@@ -452,7 +459,11 @@ abstract class DatabaseTasks {
       $this->pass(st($pass));
     }
     catch (Exception $e) {
-      $this->fail(st($fail, array('%query' => $query, '%error' => $e->getMessage(), '%name' => $this->name())));
+      $this->fail(st($fail, array(
+        '%query' => $query,
+        '%error' => $e->getMessage(),
+        '%name' => $this->name()
+      )));
       return !$fatal;
     }
   }
@@ -461,8 +472,14 @@ abstract class DatabaseTasks {
    * Check the engine version.
    */
   protected function checkEngineVersion() {
-    if ($this->minimumVersion() && version_compare(Database::getConnection()->version(), $this->minimumVersion(), '<')) {
-      $this->fail(st("The database version %version is less than the minimum required version %minimum_version.", array('%version' => Database::getConnection()->version(), '%minimum_version' => $this->minimumVersion())));
+    if ($this->minimumVersion() && version_compare(Database::getConnection()
+        ->version(), $this->minimumVersion(), '<')
+    ) {
+      $this->fail(st("The database version %version is less than the minimum required version %minimum_version.", array(
+        '%version' => Database::getConnection()
+          ->version(),
+        '%minimum_version' => $this->minimumVersion()
+      )));
     }
   }
 
@@ -517,7 +534,10 @@ abstract class DatabaseTasks {
       '#title' => st('Table prefix'),
       '#default_value' => '',
       '#size' => 45,
-      '#description' => st('If more than one application will be sharing this database, enter a table prefix such as %prefix for your @drupal site here.', array('@drupal' => drupal_install_profile_distribution_name(), '%prefix' => $db_prefix)),
+      '#description' => st('If more than one application will be sharing this database, enter a table prefix such as %prefix for your @drupal site here.', array(
+        '@drupal' => drupal_install_profile_distribution_name(),
+        '%prefix' => $db_prefix
+      )),
       '#weight' => 10,
     );
 
@@ -567,7 +587,7 @@ abstract class DatabaseTasks {
 
     // Verify the database port.
     if (!empty($database['port']) && !is_numeric($database['port'])) {
-      $errors[$database['driver'] . '][advanced_options][port'] =  st('Database port must be a number.');
+      $errors[$database['driver'] . '][advanced_options][port'] = st('Database port must be a number.');
     }
 
     return $errors;
@@ -710,9 +730,9 @@ function drupal_verify_profile($install_state) {
       $modules[] = '<span class="admin-missing">' . drupal_ucfirst($module) . '</span>';
     }
     $requirements['required_modules'] = array(
-      'title'       => st('Required modules'),
-      'value'       => st('Required modules not found.'),
-      'severity'    => REQUIREMENT_ERROR,
+      'title' => st('Required modules'),
+      'value' => st('Required modules not found.'),
+      'severity' => REQUIREMENT_ERROR,
       'description' => st('The following modules are required but were not found. Move them into the appropriate modules subdirectory, such as <em>sites/all/modules</em>. Missing modules: !modules', array('!modules' => implode(', ', $modules))),
     );
   }
@@ -733,16 +753,24 @@ function drupal_install_system() {
   $system_versions = drupal_get_schema_versions('system');
   $system_version = $system_versions ? max($system_versions) : SCHEMA_INSTALLED;
   db_insert('system')
-    ->fields(array('filename', 'name', 'type', 'owner', 'status', 'schema_version', 'bootstrap'))
+    ->fields(array(
+      'filename',
+      'name',
+      'type',
+      'owner',
+      'status',
+      'schema_version',
+      'bootstrap'
+    ))
     ->values(array(
-        'filename' => $system_path . '/system.module',
-        'name' => 'system',
-        'type' => 'module',
-        'owner' => '',
-        'status' => 1,
-        'schema_version' => $system_version,
-        'bootstrap' => 0,
-      ))
+      'filename' => $system_path . '/system.module',
+      'name' => 'system',
+      'type' => 'module',
+      'owner' => '',
+      'status' => 1,
+      'schema_version' => $system_version,
+      'bootstrap' => 0,
+    ))
     ->execute();
   system_rebuild_module_data();
 }
@@ -850,7 +878,15 @@ function drupal_verify_install_file($file, $mask = NULL, $type = 'file') {
 
   // Verify file permissions.
   if (isset($mask)) {
-    $masks = array(FILE_EXIST, FILE_READABLE, FILE_WRITABLE, FILE_EXECUTABLE, FILE_NOT_READABLE, FILE_NOT_WRITABLE, FILE_NOT_EXECUTABLE);
+    $masks = array(
+      FILE_EXIST,
+      FILE_READABLE,
+      FILE_WRITABLE,
+      FILE_EXECUTABLE,
+      FILE_NOT_READABLE,
+      FILE_NOT_WRITABLE,
+      FILE_NOT_EXECUTABLE
+    );
     foreach ($masks as $current_mask) {
       if ($mask & $current_mask) {
         switch ($current_mask) {
@@ -916,7 +952,14 @@ function drupal_verify_install_file($file, $mask = NULL, $type = 'file') {
  */
 function drupal_install_mkdir($file, $mask, $message = TRUE) {
   $mod = 0;
-  $masks = array(FILE_READABLE, FILE_WRITABLE, FILE_EXECUTABLE, FILE_NOT_READABLE, FILE_NOT_WRITABLE, FILE_NOT_EXECUTABLE);
+  $masks = array(
+    FILE_READABLE,
+    FILE_WRITABLE,
+    FILE_EXECUTABLE,
+    FILE_NOT_READABLE,
+    FILE_NOT_WRITABLE,
+    FILE_NOT_EXECUTABLE
+  );
   foreach ($masks as $m) {
     if ($mask & $m) {
       switch ($m) {
@@ -970,7 +1013,14 @@ function drupal_install_fix_file($file, $mask, $message = TRUE) {
   }
 
   $mod = fileperms($file) & 0777;
-  $masks = array(FILE_READABLE, FILE_WRITABLE, FILE_EXECUTABLE, FILE_NOT_READABLE, FILE_NOT_WRITABLE, FILE_NOT_EXECUTABLE);
+  $masks = array(
+    FILE_READABLE,
+    FILE_WRITABLE,
+    FILE_EXECUTABLE,
+    FILE_NOT_READABLE,
+    FILE_NOT_WRITABLE,
+    FILE_NOT_EXECUTABLE
+  );
 
   // FILE_READABLE, FILE_WRITABLE, and FILE_EXECUTABLE permission strings
   // can theoretically be 0400, 0200, and 0100 respectively, but to be safe
@@ -1131,7 +1181,7 @@ function st($string, array $args = array(), array $options = array()) {
       // with its name ending in {$install_state['parameters']['locale']}.po
       // This might or might not be the entire filename. It is also possible
       // that multiple files end with the same extension, even if unlikely.
-      $po_files = file_scan_directory('./profiles/' . $install_state['parameters']['profile'] . '/translations', '/'. $install_state['parameters']['locale'] .'\.po$/', array('recurse' => FALSE));
+      $po_files = file_scan_directory('./profiles/' . $install_state['parameters']['profile'] . '/translations', '/' . $install_state['parameters']['locale'] . '\.po$/', array('recurse' => FALSE));
       if (count($po_files)) {
         require_once DRUPAL_ROOT . '/includes/locale.inc';
         foreach ($po_files as $po_file) {
@@ -1232,7 +1282,10 @@ function drupal_check_module($module) {
         if (isset($requirement['severity']) && $requirement['severity'] == REQUIREMENT_ERROR) {
           $message = $requirement['description'];
           if (isset($requirement['value']) && $requirement['value']) {
-            $message .= ' (' . t('Currently using !item !version', array('!item' => $requirement['title'], '!version' => $requirement['value'])) . ')';
+            $message .= ' (' . t('Currently using !item !version', array(
+                '!item' => $requirement['title'],
+                '!version' => $requirement['value']
+              )) . ')';
           }
           drupal_set_message($message, 'error');
         }
@@ -1300,9 +1353,9 @@ function install_profile_info($profile, $locale = 'en') {
     );
     $info = drupal_parse_info_file("profiles/$profile/$profile.info") + $defaults;
     $info['dependencies'] = array_unique(array_merge(
-      drupal_required_modules(),
-      $info['dependencies'],
-      ($locale != 'en' && !empty($locale) ? array('locale') : array()))
+        drupal_required_modules(),
+        $info['dependencies'],
+        ($locale != 'en' && !empty($locale) ? array('locale') : array()))
     );
 
     // drupal_required_modules() includes the current profile as a dependency.

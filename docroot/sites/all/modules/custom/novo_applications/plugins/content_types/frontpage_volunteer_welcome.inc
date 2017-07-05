@@ -23,7 +23,10 @@ function novo_frontpage_volunteer_welcome($subtype, $conf, $args, $context) {
   $block = new stdClass();
   $account = isset($context->ctools_context->data) ? $context->ctools_context->data : $user;
   $app_nodes = novo_applications_get_app_node_for_user($account);
+  $app_nodes = reset($app_nodes);
   $already_created_app = (!empty($app_nodes)) ? TRUE : FALSE;
+  $app_nid = (!empty($app_nodes) && isset($app_nodes->nid)) ? $app_nodes->nid : NULL;
+  $finished_app = (!empty($app_nodes) && isset($app_nodes->status)) ? ($app_nodes->status) : FALSE;
 
   $account = user_load($user->uid);
   $user_fname = field_get_items("user", $account, "field_u_first_name");
@@ -38,6 +41,8 @@ function novo_frontpage_volunteer_welcome($subtype, $conf, $args, $context) {
   $block->title = '';
   $data = array(
     'already_created_app' => $already_created_app,
+    'finished_app' => $finished_app,
+    'app_nid' => $app_nid,
     'user_name' => $user_name,
   );
   $content = array(

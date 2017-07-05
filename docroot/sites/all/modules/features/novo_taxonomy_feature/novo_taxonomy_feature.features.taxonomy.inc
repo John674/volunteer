@@ -97,6 +97,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'reference_request_questions' => array(
+      'name' => 'Reference request questions',
+      'machine_name' => 'reference_request_questions',
+      'description' => '',
+      'hierarchy' => 1,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'school' => array(
       'name' => 'School',
       'machine_name' => 'school',

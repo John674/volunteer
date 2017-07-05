@@ -11,3 +11,26 @@
 function novo_master_preprocess_page() {
 
 }
+
+/**
+ * Implements hook_menu_alter().
+ */
+function novo_master_menu_alter(&$items) {
+  $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
+  $items['node/%node/view']['access arguments'] = array(1);
+}
+
+/**
+ * Access node view tab callback.
+ */
+function novo_master_disable_node_view($node) {
+  if ($node->type == 'program') {
+    return FALSE;
+  }
+
+  if ($node->type == 'reference_request' && function_exists("novo_ref_request_check_hash_access")) {
+    return novo_ref_request_check_hash_access($node);
+  }
+
+  return user_access('access content');
+}

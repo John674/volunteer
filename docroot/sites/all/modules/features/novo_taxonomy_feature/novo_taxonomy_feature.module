@@ -16,6 +16,7 @@ define('NOVO_VOCABULARY_WEEKDAYS', 'weekdays');
 define('NOVO_VOCABULARY_SMALL_GROUP', 'small_group');
 define('NOVO_VOCABULARY_CANVASSING_GROUP', 'canvassing_group');
 define('NOVO_VOCABULARY_DISMISSAL', 'dismissal');
+define('NOVO_VOCABULARY_REF_QUESTIONS', 'reference_request_questions');
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
@@ -82,6 +83,10 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_DISMISSAL:
       _novo_taxonomy_feature_add_dismissal($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_REF_QUESTIONS:
+      _novo_taxonomy_feature_add_ref_questions($vocabulary);
       break;
   }
 }
@@ -468,5 +473,78 @@ function _novo_taxonomy_feature_add_dismissal($vocabulary) {
     $term->vid = $vocabulary->vid;
     $term->weight = $key;
     taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import ref_questions.
+ */
+function _novo_taxonomy_feature_add_ref_questions($vocabulary) {
+  $list = array(
+    'Reference 1' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Reference 2' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Standby' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Parents' => array(
+      'I hereby certify that: I and my son / daughter have read and agrees he / she will abide by the Statement of Faith Agreement.',
+      'I hereby certify that: I and my son / daughter have read and agrees he / she will abide by the Pertinent Novo Program Policies.',
+      'By signing below, I indicate that: I and my son / daughter have carefully read this document and recognize that it is a legally-binding agreement.',
+      'By signing below, I indicate that: I certify that, to the best of my knowledge, all answers and information given are true and complete.',
+      'By signing below, I indicate that: I give Novo the right to use my son’s / daughter’s picture, voice, and / or testimony for promotional materials.',
+    ),
+    'Church' => array(
+      'How long has [ref_name] been attending your church?',
+      'What is your relationship with [ref_name]?',
+      'Has he or she made the decision to make Jesus their Lord and Savior?',
+      'What involvement does this person have within your church?',
+      'How have you seen God use [ref_name]?',
+      'Do you have any hesitations for this person to volunteer working directly with children?',
+      'Other Questions or Comments'
+    )
+  );
+  $w_p = 0;
+  foreach ($list as $parent_name => $childs) {
+    $term = new stdClass();
+    $term->name = $parent_name;
+    $term->vid = $vocabulary->vid;
+    $term->description = t("Do not rename or change this term! You can change only children terms!");
+    $term->weight = $w_p;
+    taxonomy_term_save($term);
+    if (!empty($childs)) {
+      $w_c = 0;
+      foreach($childs as $child_name) {
+        $term_child = new stdClass();
+        $term_child->name = $child_name;
+        $term_child->vid = $vocabulary->vid;
+        $term_child->weight = $w_c;
+        $term_child->parent = $term->tid;
+        taxonomy_term_save($term_child);
+        $w_c++;
+      }
+    }
+    $w_p++;
   }
 }
