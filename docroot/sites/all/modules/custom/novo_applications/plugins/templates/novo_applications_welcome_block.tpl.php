@@ -106,7 +106,7 @@
                           </div>
                       </div>
                   </div>
-                <?php else: ?>
+              <?php else: ?>
                   <p>
                     <?php print t("Thank you for your interest in volunteering with Novo. We can’t wait to start working together to reaching inner-city children boys and girls with the Gospel of Jesus Christ!"); ?>
                   </p>
@@ -147,7 +147,6 @@
                           </div>
                       </div>
                   </div>
-
               <?php endif; ?>
             </div>
         </div>
