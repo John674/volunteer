@@ -286,6 +286,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     $query->innerJoin("user_steps", "us", "us.user_application_id = ua.id");
     $query->innerJoin("answers", "a", "a.user_step_id = us.id");
+    $query->addField("us", "status", "step_status");
     $query->addField("a", "data", "answer");
 
     $query->innerJoin("questions", "q", "q.id = a.question_id");
@@ -307,6 +308,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     foreach ($result as $key => $value) {
       if (isset($users[$value->id][$value->q_name][$value->section_name])) {
         $users[$value->id][$value->q_name][$value->section_name]['variants'][$value->answer_variant_id] = $value->answer_variant;
+        if (($users[$value->id][$value->q_name][$value->section_name]['base_fields']['step_status'] == "completed") && $value->step_status != "completed") {
+          $users[$value->id][$value->q_name][$value->section_name]['base_fields']['step_status'] = $value->step_status;
+        }
       }
       else {
         $users[$value->id][$value->q_name][$value->section_name] = array(
@@ -315,6 +319,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
             'updated_at' => $value->updated_at,
             'application_approved' => $value->application_approved,
             'application_status' => $value->application_status,
+            'step_status' => $value->step_status,
           ),
           'answer' => $value->answer,
           'query' => $value->q_name,
@@ -435,7 +440,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   protected function mapping() {
     // Mapping.
     $this->addFieldMapping('comment')->defaultValue(FALSE);
-    $this->addFieldMapping('status')->defaultValue(TRUE);
+    $this->addFieldMapping('status', "step_status")->callback(array($this, "isPublished"));
 
     $this->addFieldMapping('title', 'legal_first_name');
     $this->addFieldMapping('field_prefix', 'prefix')
@@ -606,15 +611,16 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // $this->addFieldMapping('field_what_site_want', '');
     // $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
     // $this->addFieldMapping('field_expired_date', '');
-    // $this->addFieldMapping('field_app_status', 'application_status')
-    // ->callback([$this, "getApplicationStatus"]);
-    // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
+
     $this->addFieldMapping('field_ssn', 'social_security_number')
       ->callback(array($this, "formattingSsn"));
     $this->addFieldMapping('field_parent_prefix', 'parent_title');
     $this->addFieldMapping('field_parent_guardian_first_name', 'parent_first_name');
     $this->addFieldMapping('field_parent_guardian_last_name', 'parent_last_name');
     $this->addFieldMapping('field_parent_email', 'parent_email');
+
+    $this->addFieldMapping('field_app_status', 'application_approved')->callback(array($this, "getApplicationStatus"));
+    $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
   }
 
   /**
@@ -809,6 +815,29 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     }
     else {
       return $value;
+    }
+  }
+
+  /**
+   * Check publish or not publish application.
+   */
+  protected function isPublished($value) {
+    return !empty($value) && ($value == "completed") ? TRUE : FALSE;
+  }
+
+  /**
+   * Approved or Not Approved application.
+   */
+  protected function getApplicationStatus($value) {
+    if (is_null($value)) {
+      return NULL;
+    }
+    $value = intval($value);
+    if ($value) {
+      return $this->getTermTid("Approved", "application_status");
+    }
+    else {
+      return $this->getTermTid("Not Approved", "application_status");
     }
   }
 
