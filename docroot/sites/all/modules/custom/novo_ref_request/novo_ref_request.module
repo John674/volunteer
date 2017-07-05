@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * Ref request functions.
+ */
+
+define("NOVO_REF_REQUEST_SALT", "dbNovoS");
+define('NOVO_REF_QUESTIONS_VOC', 'reference_request_questions');
+define('NOVO_REF_QUESTIONS_REF1_TERM_NAME', 'Reference 1');
+define('NOVO_REF_QUESTIONS_REF2_TERM_NAME', 'Reference 2');
+define('NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME', 'Standby');
+define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
+define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
+
+/**
+ * Implements hook_node_access().
+ */
+function novo_ref_request_node_access($node, $op, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  if ($type == "reference_request" && $op == 'update') {
+    return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : NODE_ACCESS_IGNORE;
+  }
+
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Access to ref nodes vial hash link.
+ */
+function novo_ref_request_check_hash_access($node) {
+  $op = arg(2);
+  $hash = arg(3);
+  $access_key = crypt($node->nid, NOVO_REF_REQUEST_SALT);
+
+  if (!empty($hash) && $op == 'view' && hash_equals($access_key, $hash)) {
+    return TRUE;
+  }
+
+  return user_access("access content");
+}
+
+/**
+ * Generate Link for Ref with hash.
+ */
+function novo_ref_request_generate_hashed_link($nid) {
+  $access_key = crypt($nid, NOVO_REF_REQUEST_SALT);
+  $link = url("node/" . $nid . "/view/" . $access_key, array("absolute" => TRUE));
+  return $link;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_ref_request_preprocess_node(&$variables) {
+  if (isset($variables['type']) && $variables['type'] == "reference_request") {
+    $save_form = drupal_get_form("novo_ref_request_save_form");
+    $variables['content']['save_form'] = $save_form;
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function novo_ref_request_preprocess_page(&$variables) {
+  $node = isset($variables['node']) ? $variables['node'] : NULL;
+  if ($node && $node->type == "reference_request") {
+    drupal_set_title(t("Reference form"));
+  }
+}
+
+/**
+ * Ref save form().
+ */
+function novo_ref_request_save_form($form, &$form_state) {
+  $form['#weight'] = 20;
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Send")
+  );
+
+  return $form;
+}
+
+/**
+ * Ref save form submit().
+ */
+function novo_ref_request_save_form_submit($form, &$form_state) {
+  drupal_set_message(t("Your answers have been saved."));
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function novo_ref_request_node_presave($node) {
+  if ($node->type == "application") {
+    if (
+      // If new node and published.
+      (isset($node->is_new) && $node->is_new && $node->status) ||
+      // If node was updated and was set published.
+      (
+        isset($node->original) &&
+        isset($node->original->status) &&
+        empty($node->original->status) &&
+        !empty($node->status)
+      )
+    ) {
+      // Create and attach ref request nodes.
+      novo_ref_request_attach_ref($node, "field_reference_request_1", NOVO_REF_QUESTIONS_REF1_TERM_NAME);
+      novo_ref_request_attach_ref($node, "field_reference_request_2", NOVO_REF_QUESTIONS_REF2_TERM_NAME);
+      novo_ref_request_attach_ref($node, "field_reference_request_standby", NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
+      novo_ref_request_attach_ref($node, "field_reference_request_church", NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
+      novo_ref_request_attach_ref($node, "field_reference_request_parents", NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
+    }
+  }
+}
+
+/**
+ * Attach ref node to parent node.
+ */
+function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
+  $ref1_items = field_get_items("node", $node, $field);
+  if (empty($ref1_items)) {
+    $ref_nid = novo_ref_request_create_ref_entity($parent_term_name);
+    if ($ref_nid) {
+      $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
+      $node->{$field}[$lang][0]['target_id'] = $ref_nid;
+    }
+  }
+}
+
+/**
+ * Crete reference node with questions.
+ */
+function novo_ref_request_create_ref_entity($q_type = NULL) {
+  if (!empty($q_type)) {
+    // Prepare questions from taxonomy.
+    $ref1_terms = taxonomy_get_term_by_name($q_type, NOVO_REF_QUESTIONS_VOC);
+    $ref1_terms = reset($ref1_terms);
+    $questions = array();
+    if (isset($ref1_terms->tid)) {
+      $term_childrens = taxonomy_get_children($ref1_terms->tid);
+      if ($term_childrens) {
+        foreach ($term_childrens as $child) {
+          $questions[] = $child->name;
+        }
+      }
+    }
+
+    // Create ref node.
+    $node = entity_create('node', array('type' => 'reference_request'));
+    $entity = entity_metadata_wrapper('node', $node);
+    $entity->save();
+    $en = $entity->value();
+
+    // Add questions to fc.
+    foreach ($questions as $q) {
+      $collection = entity_create('field_collection_item', array('field_name' => 'field_ref_faq'));
+      $collection->setHostEntity('node', $en);
+
+      $cwrapper = entity_metadata_wrapper('field_collection_item', $collection);
+      $cwrapper->field_faq_q->set($q);
+      $cwrapper->save();
+    }
+    return isset($en->nid) ? $en->nid : NULL;
+  }
+  return NULL;
+}

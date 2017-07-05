@@ -27,21 +27,3 @@ function novo_program_preprocess_node($variables) {
     drupal_goto("node/" . $variables['nid'] . "/edit");
   }
 }
-
-/**
- * Implements hook_menu_alter().
- */
-function novo_program_menu_alter(&$items) {
-  $items['node/%node/view']['access callback'] = 'novo_program_disable_node_view';
-  $items['node/%node/view']['access arguments'] = array(1);
-}
-
-/**
- * Access node view tab callback.
- */
-function novo_program_disable_node_view($node) {
-  if ($node->type == 'program') {
-    return FALSE;
-  }
-  return TRUE;
-}
