@@ -182,9 +182,11 @@ function _custom_ref_how_long_field_validate($element, $form_state) {
  * Implements hook_preprocess_node().
  */
 function novo_applications_preprocess_node(&$variables) {
+  // @codingStandardsIgnoreStart
 //  if (isset($variables['node']) && isset($variables['view_mode']) && $variables['view_mode'] == "full" && $variables['type'] == 'application' && node_access("view", $variables['node'])) {
 //    drupal_goto("<front>");
 //  }
+  // @codingStandardsIgnoreEnd
 }
 
 /**
