@@ -387,11 +387,10 @@ function multistep_field_group_pre_render(&$element, $group, &$form) {
  */
 function multistep_entity_insert($entity, $entity_type = 'node') {
   if (is_multistep($entity, $entity_type)) {
-    $wrapper = entity_metadata_wrapper($entity_type, $entity);
     _multistep_update_status(
-      $wrapper->getIdentifier(),
-      'unsubmitted',
-      $entity_type
+      $entity,
+      $entity_type,
+      'unsubmitted'
     );
   }
 }
@@ -636,18 +635,18 @@ function _multistep_gather_excluded_fieldgroup_children($form, $exclude_group, $
   foreach ($form['#groups'] as $group) {
     if (($is_parent_multistep && $group->format_type != 'multistep' && $group->group_name === $exclude_group) || (!$is_parent_multistep && $group->format_type == 'multistep' && $group->group_name != $exclude_group)) {
       foreach ($group->children as $child) {
-          if (in_array($child, array_keys($form['#groups']))) {
-            if (strpos($child, "group_") === 0) {
-              $processed_childs[] = $child;
-              $form_elements = array_merge($form_elements, _multistep_gather_excluded_fieldgroup_children($form, $child, TRUE));
-            }
-            else {
-              $form_elements = array_merge($form_elements, _multistep_gather_child_fieldgroup_children($form, $child));
-            }
+        if (in_array($child, array_keys($form['#groups']))) {
+          if (strpos($child, "group_") === 0) {
+            $processed_childs[] = $child;
+            $form_elements = array_merge($form_elements, _multistep_gather_excluded_fieldgroup_children($form, $child, TRUE));
           }
           else {
-            $form_elements[$child] = $child;
+            $form_elements = array_merge($form_elements, _multistep_gather_child_fieldgroup_children($form, $child));
           }
+        }
+        else {
+          $form_elements[$child] = $child;
+        }
       }
     }
   }
@@ -688,16 +687,22 @@ function multistep_node_validate($node, $form, &$form_state) {
   if (!is_multistep($node, 'node')) {
     return;
   }
+
   /*if ($form['revision_information']['revision']['#value']) {
     $complete = multistep_is_complete($node);
     $last = $form_state['triggering_element']['#parents'][0] == 'done' ? TRUE : FALSE;
     $form_state['values']['revision'] = _multistep_revisioning($complete, $last);
   }*/
+
   // Verify if the status checkbox is checked, and the Publishing option is set to Publish
-  /*if ($form_state['values']['status'] && array_search('status', variable_get('node_options_' . $form_state['values']['type'], array())) !== FALSE) {
+  $original_status = isset($form_state['node']->status) ? $form_state['node']->status : FALSE;
+  $new_status = isset($form_state['values']['status']) ? $form_state['values']['status'] : FALSE;
+
+  if ($original_status == $new_status && isset($form_state['values']['status']) && array_search('status', variable_get('node_options_' . $form_state['values']['type'], array())) !== FALSE) {
     $complete = multistep_will_complete($node);
+    // Change status only if was not completed and will complete.
     $form_state['values']['status'] = _multistep_publishing($complete);
-  }*/
+  }
 }
 
 /**
@@ -1095,7 +1100,6 @@ function multistep_multistep_update_status($form_state, $status, $step) {
  * @param string $step
  */
 function _multistep_update_status($entity, $type, $status, $step = 'all') {
-
   if ($type == 'node' && !empty($entity->nid)) {
     // When all steps are passed (or no step specified), initialize
     if ($step == 'all') {
@@ -1227,9 +1231,14 @@ function _multistep_get_status($id, $step = 'all', $entity_type = 'node') {
 function multistep_is_complete($entity, $entity_type = 'node') {
   // Get the status of all the steps in the node
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
-  $status = _multistep_get_status($wrapper->getIdentifier(), $entity_type);
-  // Look for a step that is not yet submitted
-  return !in_array('unsubmitted', $status);
+  $status = _multistep_get_status($wrapper->getIdentifier(), 'all', $entity_type);
+  if (is_array($status)) {
+    // Look for a step that is not yet submitted
+    return !in_array('unsubmitted', $status);
+  }
+  else {
+    return FALSE;
+  }
 }
 
 /**
@@ -1247,14 +1256,17 @@ function multistep_will_complete($entity, $entity_type = 'node') {
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
   $step = multistep_get_step($wrapper->getBundle(), $entity_type);
   // Get the status of all the steps in the node
-  $status = _multistep_get_status($wrapper->getIdentifier(), $entity_type);
-  // Remove non-unsubmitted steps from the array
-  foreach ($status as $key => $unsubmitted) {
-    if ($unsubmitted != 'unsubmitted') {
-      unset($status[$key]);
+  $status = _multistep_get_status($wrapper->getIdentifier(), "all", $entity_type);
+  if (is_array($status)) {
+    // Remove non-unsubmitted steps from the array
+    foreach ($status as $key => $unsubmitted) {
+      if ($unsubmitted != 'unsubmitted') {
+        unset($status[$key]);
+      }
     }
+    return (count($status) == 1 && array_key_exists($step, $status));
   }
-  return (count($status) == 1 && array_key_exists($step, $status));
+  return FALSE;
 }
 
 /**
