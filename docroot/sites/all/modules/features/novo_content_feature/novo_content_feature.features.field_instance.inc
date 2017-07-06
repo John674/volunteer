@@ -403,7 +403,11 @@ function novo_content_feature_field_default_field_instances() {
   // 'field_collection_item-field_parent_phone-field_phone_type'.
   $field_instances['field_collection_item-field_parent_phone-field_phone_type'] = array(
     'bundle' => 'field_parent_phone',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 100,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1236,7 +1240,7 @@ function novo_content_feature_field_default_field_instances() {
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'I have read and agree to abide by the Statement of Faith Agreement.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3118,7 +3122,11 @@ Church',
   // Exported field_instance: 'node-application-field_parent_prefix'.
   $field_instances['node-application-field_parent_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 92,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -3813,7 +3821,7 @@ Church',
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'I have read and agree to abide by the Pertinent Program Policies.',
     'display' => array(
       'default' => array(
         'label' => 'above',

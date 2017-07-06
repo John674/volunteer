@@ -165,16 +165,29 @@
   border: none;
 }
 
+.node-application-form .multistep .group-app-7-statement .form-item input,
+.node-application-form .multistep .group-app-7-program-policies .form-item input,
 .node-application-form .multistep .group-app-7-final .form-item input {
   vertical-align: middle;
+  color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 40px;
 }
 
-.node-application-form .multistep .group-app-7-final .form-item .help-block {
+.node-application-form .multistep .group-app-7-statement .form-item .help-block,
+.node-application-form .multistep .group-app-7-program-policies .form-item .help-block,
+.node-application-form .multistep .group-app-7-final .form-item .help-block{
   display: inline-block;
   width: 90%;
   vertical-align: middle;
   font-size: 14px;
   color: black;
   padding-left: 10px;
+  margin: 0px;
 }
 
+.node-application-form .multistep .group-app-7-statement .field-name-field-app7-statement-agree,
+.node-application-form .multistep .group-app-7-program-policies .field-name-field-program-policies-agree {
+  margin-top: 10px;
+}
