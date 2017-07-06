@@ -1078,6 +1078,80 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_ref_faq-field_faq_a'.
+  $field_instances['field_collection_item-field_ref_faq-field_faq_a'] = array(
+    'bundle' => 'field_ref_faq',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => 0,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => 'text_plain',
+          'fallback_settings' => array(),
+        ),
+        'type' => 'editable',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_faq_a',
+    'label' => 'A',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_ref_faq-field_faq_q'.
+  $field_instances['field_collection_item-field_ref_faq-field_faq_q'] = array(
+    'bundle' => 'field_ref_faq',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_faq_q',
+    'label' => 'Q',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_address_1'.
   $field_instances['node-application-field_address_1'] = array(
     'bundle' => 'application',
@@ -1481,7 +1555,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 69,
+      'weight' => 70,
     ),
   );
 
@@ -2167,7 +2241,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 66,
+      'weight' => 67,
     ),
   );
 
@@ -2222,7 +2296,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 62,
+      'weight' => 63,
     ),
   );
 
@@ -2306,7 +2380,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 63,
+      'weight' => 64,
     ),
   );
 
@@ -2595,7 +2669,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 67,
+      'weight' => 68,
     ),
   );
 
@@ -2872,7 +2946,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 69,
+      'weight' => 71,
     ),
   );
 
@@ -4732,6 +4806,233 @@ Church',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_reference_request_1'.
+  $field_instances['node-application-field_reference_request_1'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 116,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_reference_request_1',
+    'label' => 'Reference request 1',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 79,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_reference_request_2'.
+  $field_instances['node-application-field_reference_request_2'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 118,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_reference_request_2',
+    'label' => 'Reference request 2',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 115,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_reference_request_church'.
+  $field_instances['node-application-field_reference_request_church'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 117,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_reference_request_church',
+    'label' => 'Reference request church',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 134,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-application-field_reference_request_parents'.
+  $field_instances['node-application-field_reference_request_parents'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 120,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_reference_request_parents',
+    'label' => 'Reference request parents',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 182,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-application-field_reference_request_standby'.
+  $field_instances['node-application-field_reference_request_standby'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 119,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_reference_request_standby',
+    'label' => 'Reference request standby',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 104,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_relationship'.
   $field_instances['node-application-field_relationship'] = array(
     'bundle' => 'application',
@@ -4902,7 +5203,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 64,
+      'weight' => 65,
     ),
   );
 
@@ -4945,7 +5246,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 61,
+      'weight' => 62,
     ),
   );
 
@@ -5230,7 +5531,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_what_site_you_want',
     'label' => 'At what site do you want to volunteer?',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -5239,7 +5540,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 68,
+      'weight' => 69,
     ),
   );
 
@@ -5268,7 +5569,7 @@ Friend',
     'label' => 'Zip',
     'required' => 1,
     'settings' => array(
-      'max' => 99999,
+      'max' => 999999,
       'min' => 10000,
       'prefix' => '',
       'suffix' => '',
@@ -7279,6 +7580,45 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-reference_request-field_ref_faq'.
+  $field_instances['node-reference_request-field_ref_faq'] = array(
+    'bundle' => 'reference_request',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ref_faq',
+    'label' => 'FAQ',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => -3,
+    ),
+  );
+
   // Exported field_instance: 'node-staff-field_email'.
   $field_instances['node-staff-field_email'] = array(
     'bundle' => 'staff',
@@ -7519,6 +7859,7 @@ Friend',
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('A');
   t('Active / Inactive');
   t('Address');
   t('Address 1');
@@ -7550,6 +7891,7 @@ Friend',
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
   t('Ethnicity');
   t('Expired date (36 months after CIA response)');
+  t('FAQ');
   t('First Name');
   t('Food Allergies');
   t('Gender');
@@ -7627,6 +7969,12 @@ Friend',
   t('Prefix');
   t('Previous Church Involvement');
   t('Program day');
+  t('Q');
+  t('Reference request 1');
+  t('Reference request 2');
+  t('Reference request church');
+  t('Reference request parents');
+  t('Reference request standby');
   t('Relation');
   t('Relationship');
   t('Romans 1:16');
@@ -7635,7 +7983,6 @@ Friend',
   t('Small Group');
   t('Social security number');
   t('Staff contact');
-  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');

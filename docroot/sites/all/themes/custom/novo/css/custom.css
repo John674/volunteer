@@ -82,3 +82,9 @@ a.select2-search-choice-close:hover {
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #fff;
 }
+
+.novo-applications-create-edit-form-btn {
+  margin: 20px auto;
+  display: block;
+  width: 200px;
+}
