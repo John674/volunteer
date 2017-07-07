@@ -18,13 +18,16 @@ function novo_select($variables) {
     switch ($element['#field_name']) {
       case "field_p_small_group":
         _form_set_class($element, array('form-select', 'selectpicker'));
+
         return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element, NULL, FALSE) . '</select>';
-        break;
+
+      break;
 
       case "field_p_canvassing_group":
         _form_set_class($element, array('form-select', 'selectpicker'));
         return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element) . '</select>';
-        break;
+
+      break;
     }
   }
   // @codingStandardsIgnoreEnd
