@@ -49,14 +49,6 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
-    'dismissal' => array(
-      'name' => 'Dismissal',
-      'machine_name' => 'dismissal',
-      'description' => '',
-      'hierarchy' => 0,
-      'module' => 'taxonomy',
-      'weight' => 0,
-    ),
     'ethnicity' => array(
       'name' => 'Ethnicity',
       'machine_name' => 'ethnicity',
@@ -97,14 +89,6 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
-    'reference_request_questions' => array(
-      'name' => 'Reference request questions',
-      'machine_name' => 'reference_request_questions',
-      'description' => '',
-      'hierarchy' => 1,
-      'module' => 'taxonomy',
-      'weight' => 0,
-    ),
     'school' => array(
       'name' => 'School',
       'machine_name' => 'school',
@@ -132,6 +116,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
     't_shirt_size' => array(
       'name' => 'T-shirt Size',
       'machine_name' => 't_shirt_size',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
+    'training' => array(
+      'name' => 'Training',
+      'machine_name' => 'training',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',

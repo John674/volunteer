@@ -17,6 +17,7 @@ define('NOVO_VOCABULARY_SMALL_GROUP', 'small_group');
 define('NOVO_VOCABULARY_CANVASSING_GROUP', 'canvassing_group');
 define('NOVO_VOCABULARY_DISMISSAL', 'dismissal');
 define('NOVO_VOCABULARY_REF_QUESTIONS', 'reference_request_questions');
+define('NOVO_VOCABULARY_TRAINING', 'training');
 
 /**
  * Implements hook_taxonomy_vocabulary_insert().
@@ -87,6 +88,10 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_REF_QUESTIONS:
       _novo_taxonomy_feature_add_ref_questions($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_TRAINING:
+      _novo_taxonomy_feature_add_training($vocabulary);
       break;
   }
 }
@@ -546,5 +551,27 @@ function _novo_taxonomy_feature_add_ref_questions($vocabulary) {
       }
     }
     $w_p++;
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_training($vocabulary) {
+  $list = array(
+    'CPR Training Certification',
+    'Discipline',
+    'Foundational Gospel Truths',
+    'Mentoring',
+    'Ministry Safe',
+    'Orientation',
+    'Policy and Procedure Assessment',
+    'Small Groups',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
   }
 }
