@@ -1644,7 +1644,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 72,
+      'weight' => 73,
     ),
   );
 
@@ -2370,7 +2370,50 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 70,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_completed'.
+  $field_instances['node-application-field_completed'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 123,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_completed',
+    'label' => 'Completed',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 68,
     ),
   );
 
@@ -2835,7 +2878,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 70,
+      'weight' => 71,
     ),
   );
 
@@ -3112,7 +3155,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 73,
+      'weight' => 74,
     ),
   );
 
@@ -5753,7 +5796,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 71,
+      'weight' => 72,
     ),
   );
 
@@ -8225,6 +8268,7 @@ Friend',
   t('Church name');
   t('City');
   t('Color Preference');
+  t('Completed');
   t('Contact List');
   t('Date of Birth');
   t('Dismissal');

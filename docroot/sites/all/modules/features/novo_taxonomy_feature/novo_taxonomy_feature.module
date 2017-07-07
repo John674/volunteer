@@ -345,9 +345,7 @@ function _novo_taxonomy_feature_add_prefix($vocabulary) {
 function _novo_taxonomy_feature_add_application_status($vocabulary) {
   $list = array(
     'Approved',
-    'Started',
-    'Completed',
-    'Expired'
+    'Not Approved',
   );
   foreach ($list as $key => $value) {
     $term = new stdClass();
