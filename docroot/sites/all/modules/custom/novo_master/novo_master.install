@@ -299,8 +299,9 @@ function novo_master_update_7127() {
 }
 
 /**
- * Revert novo_taxonomy_feature.
+ * Revert novo_content_feature, novo_taxonomy_feature.
  */
 function novo_master_update_7128() {
   features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
 }

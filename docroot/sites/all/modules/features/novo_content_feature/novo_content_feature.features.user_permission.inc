@@ -17,6 +17,15 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_gender'.
+  $permissions['create field_gender'] = array(
+    'name' => 'create field_gender',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_notes'.
   $permissions['create field_notes'] = array(
     'name' => 'create field_notes',
@@ -76,6 +85,15 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_gender'.
+  $permissions['edit field_gender'] = array(
+    'name' => 'edit field_gender',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_notes'.
   $permissions['edit field_notes'] = array(
     'name' => 'edit field_notes',
@@ -129,6 +147,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['edit own field_faq_a'] = array(
     'name' => 'edit own field_faq_a',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_gender'.
+  $permissions['edit own field_gender'] = array(
+    'name' => 'edit own field_gender',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -191,6 +218,15 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_gender'.
+  $permissions['view field_gender'] = array(
+    'name' => 'view field_gender',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_notes'.
   $permissions['view field_notes'] = array(
     'name' => 'view field_notes',
@@ -244,6 +280,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['view own field_faq_a'] = array(
     'name' => 'view own field_faq_a',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_gender'.
+  $permissions['view own field_gender'] = array(
+    'name' => 'view own field_gender',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
