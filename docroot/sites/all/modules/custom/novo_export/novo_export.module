@@ -47,7 +47,7 @@ function novo_export_preprocess_entity_print(&$variables) {
  * Prepare data for export.
  */
 function novo_export_reference_request(&$variables, $nid) {
-  $ref_name = novo_ref_get_ref_name($nid);
+  $ref_name = (function_exists("novo_ref_get_ref_name")) ? novo_ref_get_ref_name($nid) : "";
 
   $variables['entity_array']['node'][$nid]['#node']->title = t("Reference request !name", array("!name" => $ref_name));
   $variables['theme_hook_suggestion'] = "entity_print__node__reference_request";

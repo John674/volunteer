@@ -304,7 +304,7 @@ function novo_ref_get_ref_name($ref_nid) {
   $ref_name = "";
   $ref_name_data = novo_ref_request_get_parent_node_with_field($ref_nid);
 
-  if (!empty($ref_name_data) && function_exists("novo_ref_request_get_ref_name")) {
+  if (!empty($ref_name_data)) {
     $parent_node = node_load($ref_name_data['nid']);
     switch ($ref_name_data['field']) {
       case "ref_1":
