@@ -1353,6 +1353,36 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   );
   $field_groups['group_p_group|field_collection_item|field_program_kids_list|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_test|node|application|pdf';
+  $field_group->group_name = 'group_test';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'test',
+    'weight' => '2',
+    'children' => array(
+      0 => 'field_address_1',
+      1 => 'field_city',
+      2 => 'field_dob',
+      3 => 'field_email',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-test field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_test|node|application|pdf'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('ADDITIONAL INFORMATION');
@@ -1383,6 +1413,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   t('Step 8');
   t('THINGS TO KNOW ABOUT NOVO');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('test');
 
   return $field_groups;
 }
