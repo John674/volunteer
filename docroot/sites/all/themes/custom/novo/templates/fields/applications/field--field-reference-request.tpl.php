@@ -53,11 +53,16 @@
           <?php print $ref_data['title']; ?>
         </div>
         <div class="col-md-3">
-          <?php print $ref_data['status']; ?>
+          <?php print $ref_data['status_label']; ?>
         </div>
         <div class="col-md-3">
-          <?php print $ref_data['send_link']; ?>
-          <?php print $ref_data['pdf_link']; ?>
+          <?php if ($ref_data['status'] == "responded"): ?>
+            <?php print $ref_data['resend_link']; ?>
+            <?php print $ref_data['pdf_link']; ?>
+          <?php else: ?>
+            <?php print $ref_data['send_link']; ?>
+          <?php endif; ?>
+
           <?php print $ref_data['edit_link']; ?>
         </div>
     </div>

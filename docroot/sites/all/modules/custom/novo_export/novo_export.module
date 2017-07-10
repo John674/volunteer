@@ -53,9 +53,6 @@ function novo_export_reference_request(&$variables, $nid) {
   $variables['theme_hook_suggestion'] = "entity_print__node__reference_request";
 }
 
-
-
-
 /**
  * Implements hook_entity_print_css().
  */

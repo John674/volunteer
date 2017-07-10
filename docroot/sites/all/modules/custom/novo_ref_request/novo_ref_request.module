@@ -54,7 +54,7 @@ function novo_ref_request_generate_hashed_link($nid) {
  */
 function novo_ref_request_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
-    $save_form = drupal_get_form("novo_ref_request_save_form");
+    $save_form = drupal_get_form("novo_ref_request_save_form", $variables['nid']);
     $variables['content']['save_form'] = $save_form;
   }
 }
@@ -72,8 +72,12 @@ function novo_ref_request_preprocess_page(&$variables) {
 /**
  * Ref save form().
  */
-function novo_ref_request_save_form($form, &$form_state) {
+function novo_ref_request_save_form($form, &$form_state, $nid) {
   $form['#weight'] = 20;
+  $form['nid'] = array(
+    '#type' => 'hidden',
+    '#value' => $nid
+  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t("Send")
@@ -86,6 +90,18 @@ function novo_ref_request_save_form($form, &$form_state) {
  * Ref save form submit().
  */
 function novo_ref_request_save_form_submit($form, &$form_state) {
+  $nid = (isset($form_state['values']['nid'])) ? $form_state['values']['nid'] : NULL;
+  $node = node_load($nid);
+
+  if ($node) {
+    $land = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
+    $responded = (isset($node->field_responded[$land][0]['value'])) ?: FALSE;
+    if (!$responded) {
+      $node->field_responded[$land][0]['value'] = 1;
+      node_save($node);
+    }
+  }
+
   drupal_set_message(t("Your answers have been saved."));
 }
 
@@ -340,10 +356,19 @@ function novo_ref_request_preprocess_field(&$variables) {
     switch ($variables['element']['#field_name']) {
       case 'field_reference_request_1':
       case 'field_reference_request_2':
+        novo_ref_request_prepare_fields($variables, "Reference request");
+
+        break;
       case 'field_reference_request_standby':
+        novo_ref_request_prepare_fields($variables, "Standby reference request");
+
+        break;
       case 'field_reference_request_parents':
+        novo_ref_request_prepare_fields($variables, "Parent reference");
+
+        break;
       case 'field_reference_request_church':
-        novo_ref_request_prepare_fields($variables);
+        novo_ref_request_prepare_fields($variables, "Church reference request");
 
         break;
     }
@@ -355,37 +380,19 @@ function novo_ref_request_preprocess_field(&$variables) {
  * Theme and preprocess ref requests.
  */
 
-function novo_ref_request_prepare_fields(&$variables) {
+function novo_ref_request_prepare_fields(&$variables, $title = "") {
 
   $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
   if (!empty($entity->nid)) {
-    $status = t("Responded"); //Not responded, Not Sent, Expired;
+    $lang = isset($entity->language) ? $entity->language : LANGUAGE_NONE;
+    $responded = (isset($entity->field_responded[$lang][0]['value'])) ?: FALSE;
+
+    $status = ($responded) ? "responded" : "not_responded"; // Not Sent, Expired;
+    $status_label = ($responded) ? t("Responded") : t("Not responded"); // Not Sent, Expired;
+
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
-
-    switch ($variables['element']['#field_name']) {
-      case 'field_reference_request_1':
-        $label = t("Reference request :name", array(":name" => $ref_name));
-
-        break;
-      case 'field_reference_request_2':
-        $label = t("Reference request :name", array(":name" => $ref_name));
-
-        break;
-      case 'field_reference_request_standby':
-        $label = t("Standby reference request :name", array(":name" => $ref_name));
-
-        break;
-      case 'field_reference_request_parents':
-        $label = t("Parent reference :name", array(":name" => $ref_name));
-
-        break;
-      case 'field_reference_request_church':
-        $label = t("Church reference request :name", array(":name" => $ref_name));
-
-        break;
-    }
-
+    $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));
 
     $variables['ref_data'] = array(
       'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('Pdf'), "entityprint/node/" . $entity->nid, array(
@@ -402,7 +409,14 @@ function novo_ref_request_prepare_fields(&$variables) {
           'class' => array("btn", "btn-default", "btn-xs")
         )
       )),
-      'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "entityprint/node/" . $entity->nid, array(
+      'resend_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "node/" . $entity->nid, array(
+        'query' => drupal_get_destination(),
+        'html' => TRUE,
+        'attributes' => array(
+          'class' => array("btn", "btn-default", "btn-xs")
+        )
+      )),
+      'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send to referer'), "node/" . $entity->nid, array(
         'query' => drupal_get_destination(),
         'html' => TRUE,
         'attributes' => array(
@@ -410,6 +424,7 @@ function novo_ref_request_prepare_fields(&$variables) {
         )
       )),
       'status' => $status,
+      'status_label' => $status_label,
       'title' => $label
     );
   }
