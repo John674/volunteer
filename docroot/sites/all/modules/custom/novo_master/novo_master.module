@@ -13,6 +13,20 @@ function novo_master_preprocess_page() {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['actions']['publish']['#value'])) {
+    if ($form['actions']['publish']['#value'] == "Publish") {
+      $form['actions']['publish']['#value'] = t("Active");
+    }
+    else {
+      $form['actions']['publish']['#value'] = t("Not active");
+    }
+  }
+}
+
+/**
  * Implements hook_menu_alter().
  */
 function novo_master_menu_alter(&$items) {

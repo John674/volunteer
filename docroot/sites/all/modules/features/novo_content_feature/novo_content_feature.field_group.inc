@@ -327,13 +327,14 @@ function novo_content_feature_field_group_info() {
       16 => 'field_phone',
       17 => 'field_what_site_you_want',
       18 => 'field_ssn',
-      19 => 'field_notes',
-      20 => 'field_texting',
-      21 => 'field_church',
-      22 => 'field_training_list',
-      23 => 'field_completed',
-      24 => 'title',
-      25 => 'group_app_emergency_contact',
+      19 => 'field_gender',
+      20 => 'field_notes',
+      21 => 'field_texting',
+      22 => 'field_church',
+      23 => 'field_training_list',
+      24 => 'field_completed',
+      25 => 'title',
+      26 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -359,7 +360,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'EDUCATION',
-    'weight' => '48',
+    'weight' => '47',
     'children' => array(
       0 => 'field_edu_level',
     ),
@@ -386,7 +387,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'EMPLOYMENT / OCCUPATION',
-    'weight' => '47',
+    'weight' => '46',
     'children' => array(
       0 => 'field_employer',
       1 => 'field_empl_title',
@@ -446,7 +447,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = 'group_app_1_list';
   $field_group->data = array(
     'label' => 'MINISTRY / VOLUNTEER EXPERIENCE',
-    'weight' => '49',
+    'weight' => '48',
     'children' => array(
       0 => 'field_ministry_experience',
       1 => 'field_ministry_cert',
@@ -1300,7 +1301,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '69',
+    'weight' => '73',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',
