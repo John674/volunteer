@@ -3,3 +3,5 @@ description = Export to PDF module.
 core = 7.x
 package = Novo
 version = 7.x-1.0
+
+dependencies[] = entity_print
