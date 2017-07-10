@@ -137,6 +137,14 @@ function novo_taxonomy_feature_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'training' => array(
+      'name' => 'Training',
+      'machine_name' => 'training',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'volunteer_interests_roles' => array(
       'name' => 'Volunteer interests / roles',
       'machine_name' => 'volunteer_interests_roles',
