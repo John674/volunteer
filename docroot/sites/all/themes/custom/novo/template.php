@@ -10,10 +10,8 @@ define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
 
 define("NOVO_BASE_APPLICATION_STATUS_LABELS", serialize(array(
-  'started' => 'info',
   'approved' => 'success',
-  'completed' => 'primary',
-  'expired' => 'danger',
+  'not approved' => 'danger',
 )));
 
 novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
@@ -116,7 +114,7 @@ function novo_preprocess_field(&$variables) {
           $term_id = $field_app_status[0]['tid'];
           $status_term = taxonomy_term_load($term_id);
           $status = $status_term->name;
-          $label = $status_labels[drupal_strtolower($status)];
+          $label = !empty($status_labels[drupal_strtolower($status)]) ? $status_labels[drupal_strtolower($status)] : "default";
           $label_html = theme('status_label', array(
             'status' => $status,
             'label' => $label,

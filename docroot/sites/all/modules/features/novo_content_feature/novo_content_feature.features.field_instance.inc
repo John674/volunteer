@@ -1156,6 +1156,91 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'field_collection_item-field_training_list-field_training_completed'.
+  $field_instances['field_collection_item-field_training_list-field_training_completed'] = array(
+    'bundle' => 'field_training_list',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_training_completed',
+    'label' => 'Training Completed',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_training_list-field_training_completed_date'.
+  $field_instances['field_collection_item-field_training_list-field_training_completed_date'] = array(
+    'bundle' => 'field_training_list',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_training_completed_date',
+    'label' => 'Training Completed Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_address_1'.
   $field_instances['node-application-field_address_1'] = array(
     'bundle' => 'application',
@@ -1932,6 +2017,46 @@ function novo_content_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-application-field_church'.
+  $field_instances['node-application-field_church'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 121,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_church',
+    'label' => 'Church name',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 63,
+    ),
+  );
+
   // Exported field_instance: 'node-application-field_church_email'.
   $field_instances['node-application-field_church_email'] = array(
     'bundle' => 'application',
@@ -2246,6 +2371,49 @@ function novo_content_feature_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 67,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_completed'.
+  $field_instances['node-application-field_completed'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 123,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_completed',
+    'label' => 'Completed',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 68,
     ),
   );
 
@@ -2588,6 +2756,43 @@ College',
       ),
       'type' => 'date_popup',
       'weight' => 159,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_gender'.
+  $field_instances['node-application-field_gender'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 118,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_gender',
+    'label' => 'Gender',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 56,
     ),
   );
 
@@ -5474,6 +5679,49 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-application-field_training_list'.
+  $field_instances['node-application-field_training_list'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 122,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_training_list',
+    'label' => 'Training List',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 64,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-application-field_volunteer_interests_roles'.
   $field_instances['node-application-field_volunteer_interests_roles'] = array(
@@ -7588,6 +7836,95 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-program-field_program_staff_list'.
+  $field_instances['node-program-field_program_staff_list'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_staff_list',
+    'label' => 'Staff list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(),
+      'type' => 'select2widget',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-program-field_program_volunteers_list'.
+  $field_instances['node-program-field_program_volunteers_list'] = array(
+    'bundle' => 'program',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_program_volunteers_list',
+    'label' => 'Volunteers list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'CONTAINS',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+      ),
+      'type' => 'select2widgetajax',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-reference_request-field_ref_faq'.
   $field_instances['node-reference_request-field_ref_faq'] = array(
     'bundle' => 'reference_request',
@@ -7865,6 +8202,49 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-staff-field_training_list'.
+  $field_instances['node-staff-field_training_list'] = array(
+    'bundle' => 'staff',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_training_list',
+    'label' => 'Training List',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 14,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A');
@@ -7888,6 +8268,7 @@ Friend',
   t('Church name');
   t('City');
   t('Color Preference');
+  t('Completed');
   t('Contact List');
   t('Date of Birth');
   t('Dismissal');
@@ -7991,6 +8372,7 @@ Friend',
   t('Small Group');
   t('Social security number');
   t('Staff contact');
+  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');
@@ -8000,8 +8382,12 @@ Friend',
   t('Texting');
   t('Time');
   t('Title');
+  t('Training Completed');
+  t('Training Completed Date');
+  t('Training List');
   t('Type');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('Volunteers list');
   t('Weekday');
   t('When and how did you receive Jesus as Savior?');
   t('Zip');

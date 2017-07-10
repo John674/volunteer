@@ -440,7 +440,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   protected function mapping() {
     // Mapping.
     $this->addFieldMapping('comment')->defaultValue(FALSE);
-    $this->addFieldMapping('status', "step_status")->callback(array($this, "isPublished"));
+    $this->addFieldMapping('status')->defaultValue(TRUE);
 
     $this->addFieldMapping('title', 'legal_first_name');
     $this->addFieldMapping('field_prefix', 'prefix')
@@ -621,6 +621,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     $this->addFieldMapping('field_app_status', 'application_approved')->callback(array($this, "getApplicationStatus"));
     $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
+
+    $this->addFieldMapping('field_completed', "step_status")->callback(array($this, "isCompleted"));
   }
 
   /**
@@ -821,7 +823,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   /**
    * Check publish or not publish application.
    */
-  protected function isPublished($value) {
+  protected function isCompleted($value) {
     return !empty($value) && ($value == "completed") ? TRUE : FALSE;
   }
 
