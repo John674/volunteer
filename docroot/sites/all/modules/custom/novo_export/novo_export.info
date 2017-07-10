@@ -5,3 +5,4 @@ package = Novo
 version = 7.x-1.0
 
 dependencies[] = entity_print
+dependencies[] = auto_entitylabel
