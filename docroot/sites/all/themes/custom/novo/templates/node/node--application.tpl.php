@@ -112,13 +112,13 @@
                           </div>
                       </div>
                       <div class="col-md-6">
-                        <span><?php print $title; ?></span>
+                          <span><?php print $title; ?></span>
                       </div>
                   </div>
                   <hr>
               <?php endif; ?>
               <?php
-     // Hide comments, tags, and links now so that we can render them later.
+              // Hide comments, tags, and links now so that we can render them later.
               hide($content['comments']);
               hide($content['links']);
               hide($content['field_tags']);
@@ -128,7 +128,7 @@
                     <div class="col-md-6">
                         <div class="field-label">
                             <i class="fa fa-inbox"></i>
-                            <span><?php print(t('Created date'))?>:</span>
+                            <span><?php print(t('Created date')) ?>:</span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -139,8 +139,8 @@
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
-                            <span><?php print(t('Request date'))?>:</span>
-                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
+                            <span><?php print(t('Request date')) ?>:</span>
+                            <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -151,8 +151,8 @@
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
-                            <span><?php print(t('Response date'))?>:</span>
-                            <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
+                            <span><?php print(t('Response date')) ?>:</span>
+                            <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -163,31 +163,34 @@
             </div>
             <div class="panel-footer clearfix">
 
-                <div class="pull-left" style="border: 1px solid #d9534f; padding: 5px">
+                <div class="pull-left"
+                     style="border: 1px solid #d9534f; padding: 5px">
                     <a role="button" class="btn btn-default" href="#">
                         <i class="fa fa-envelope-o"></i>
-                      <?php print (t('Notify User About Expiration'))?>
-                    </a>
-                    <a role="button" class="btn btn-default" href="#">
-                        <i class="fa fa-download"></i>
-                      <?php print (t('Generate Pdf'))?>
+                      <?php print (t('Notify User About Expiration')) ?>
                     </a>
                     -
-                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
+                    <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
                 </div>
+                <a role="button" class="btn btn-default"
+                   href="<?php print url("entityprint/node/" . $node->nid); ?>">
+                    <i class="fa fa-download"></i>
+                  <?php print (t('Generate Pdf')) ?>
+                </a>
 
 
-                <div class="pull-right" style="border: 1px solid #d9534f; padding: 5px">
+                <div class="pull-right"
+                     style="border: 1px solid #d9534f; padding: 5px">
                     <a role="button" class="btn btn-success" href="#">
                         <i class="fa fa-check"></i>
-                      <?php print (t('Approve'))?>
+                      <?php print (t('Approve')) ?>
                     </a>
                     <a role="button" class="btn btn-danger" href="#">
                         <i class="fa fa-times"></i>
-                      <?php print (t('Not Approve'))?>
+                      <?php print (t('Not Approve')) ?>
                     </a>
                     -
-                    <span class="label label-danger" ><?php print(t('Coming soon'))?></span>
+                    <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
                 </div>
             </div>
         </div>

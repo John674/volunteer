@@ -159,7 +159,7 @@ function novo_theme_load_include($type, $theme, $name = NULL) {
   if (isset($files[$key])) {
     return $files[$key];
   }
-
+  //@codingStandardsIgnoreStart
   if (function_exists('drupal_get_path')) {
     $file = DRUPAL_ROOT . '/' . drupal_get_path('theme', $theme) . "/$name.$type";
     if (is_file($file)) {
@@ -171,6 +171,7 @@ function novo_theme_load_include($type, $theme, $name = NULL) {
       $files[$key] = FALSE;
     }
   }
+  //@codingStandardsIgnoreEnd
   return FALSE;
 }
 
