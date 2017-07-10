@@ -15,6 +15,7 @@ define("NOVO_BASE_APPLICATION_STATUS_LABELS", serialize(array(
 )));
 
 novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
+novo_theme_load_include("inc", "novo", "includes/novo_theme_reference_request");
 
 /**
  * Implements hook_preprocess_html().
@@ -62,7 +63,6 @@ function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
   if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids' || $node->type == 'partner')) {
-
     switch ($variables['element']['#field_name']) {
       case 'field_masked_phone_1':
         $variables['icon'] = 'phone';
@@ -122,10 +122,23 @@ function novo_preprocess_field(&$variables) {
           $variables['items'][0]['#markup'] = $label_html;
         }
         break;
+
+      case 'field_reference_request_1':
+      case 'field_reference_request_2':
+      case 'field_reference_request_standby':
+      case 'field_reference_request_parents':
+      case 'field_reference_request_church':
+        $variables['theme_hook_suggestions'][] = 'field__field_reference_request';
+
+      break;
     }
 
     // @codingStandardsIgnoreStart
-    // kpr($variables);
+
+//    if ("field_reference_request_1" == $variables['element']['#field_name']) {
+//      kpr($variables);
+//    }
+
     // @codingStandardsIgnoreEnd
   }
 }

@@ -206,6 +206,52 @@ function novo_ref_request_get_parent_node($ref_nid) {
 }
 
 /**
+ * Get parent node.
+ */
+function novo_ref_request_get_parent_node_with_field($ref_nid) {
+
+  $query = db_select("node", "n");
+  $query->fields("n", array("nid"));
+
+  $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
+  $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
+  $query->leftJoin("field_data_field_reference_request_church", "ref_church", "n.nid = ref_church.entity_id");
+  $query->leftJoin("field_data_field_reference_request_parents", "ref_parents", "n.nid = ref_parents.entity_id");
+  $query->leftJoin("field_data_field_reference_request_standby", "ref_standby", "n.nid = ref_standby.entity_id");
+
+  $or = db_or();
+  $or->condition("ref_1.field_reference_request_1_target_id", $ref_nid);
+  $or->condition("ref_2.field_reference_request_2_target_id", $ref_nid);
+  $or->condition("ref_church.field_reference_request_church_target_id", $ref_nid);
+  $or->condition("ref_parents.field_reference_request_parents_target_id", $ref_nid);
+  $or->condition("ref_standby.field_reference_request_standby_target_id", $ref_nid);
+  $query->condition($or);
+
+  $query->addExpression("ref_1.field_reference_request_1_target_id = :id", "ref_1", array(":id" => $ref_nid));
+  $query->addExpression("ref_2.field_reference_request_2_target_id = :id", "ref_2", array(":id" => $ref_nid));
+  $query->addExpression("ref_church.field_reference_request_church_target_id = :id", "ref_church", array(":id" => $ref_nid));
+  $query->addExpression("ref_parents.field_reference_request_parents_target_id = :id", "ref_parents", array(":id" => $ref_nid));
+  $query->addExpression("ref_standby.field_reference_request_standby_target_id = :id", "ref_standby", array(":id" => $ref_nid));
+
+  $query->range(0, 1);
+
+  $result = $query->execute()->fetchAll();
+
+  $items = array();
+  if (!empty($result[0])) {
+    $items = array('nid' => $result[0]->nid);
+    unset($result[0]->nid);
+    foreach ($result[0] as $field => $exist) {
+      if ($exist) {
+        $items["field"] = $field;
+      }
+    }
+  }
+
+  return $items;
+}
+
+/**
  * Get parent first/last names.
  */
 function novo_ref_request_get_parent_node_user_name($ref_nid) {
@@ -226,5 +272,149 @@ function novo_ref_request_get_appl_user_name($node) {
     $names[] = $last_name[0]['value'];
   }
   return implode(" ", $names);
+}
 
+/**
+ * Get application referral names.
+ */
+function novo_ref_request_get_ref_name($node, $field1 = NULL, $field2 = NULL) {
+  $names = array();
+
+  if (!empty($field1)) {
+    $name1 = field_get_items("node", $node, $field1);
+    if (isset($name1[0]['value'])) {
+      $names[] = $name1[0]['value'];
+    }
+  }
+
+  if (!empty($field2)) {
+    $name2 = field_get_items("node", $node, $field2);
+    if (isset($name2[0]['value'])) {
+      $names[] = $name2[0]['value'];
+    }
+  }
+
+  return implode(" ", $names);
+}
+
+/**
+ * Get ref name by ref id.
+ */
+function novo_ref_get_ref_name($ref_nid) {
+  $ref_name = "";
+  $ref_name_data = novo_ref_request_get_parent_node_with_field($ref_nid);
+
+  if (!empty($ref_name_data) && function_exists("novo_ref_request_get_ref_name")) {
+    $parent_node = node_load($ref_name_data['nid']);
+    switch ($ref_name_data['field']) {
+      case "ref_1":
+        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_1_first_name", "field_ref_1_last_name");
+
+        break;
+      case "ref_2":
+        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_2_first_name", "field_ref_2_last_name");
+
+        break;
+      case "ref_church":
+        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_church_home");
+
+        break;
+      case "ref_parents":
+        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_parent_guardian_first_name", "field_parent_guardian_last_name");
+
+        break;
+      case "ref_standby":
+        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_3_first_name", "field_ref_3_last_name");
+
+        break;
+    }
+  }
+  return (!empty($ref_name)) ? "(" . $ref_name . ")" : "";
+}
+
+
+function novo_ref_request_preprocess_field(&$variables) {
+  $node = $variables['element']['#object'];
+
+  if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids' || $node->type == 'partner')) {
+    switch ($variables['element']['#field_name']) {
+      case 'field_reference_request_1':
+      case 'field_reference_request_2':
+      case 'field_reference_request_standby':
+      case 'field_reference_request_parents':
+      case 'field_reference_request_church':
+        novo_ref_request_prepare_fields($variables);
+
+        break;
+    }
+  }
+}
+
+/**
+ * @file
+ * Theme and preprocess ref requests.
+ */
+
+function novo_ref_request_prepare_fields(&$variables) {
+
+  $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
+  if (!empty($entity->nid)) {
+    $parent_node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
+
+
+    $status = t("Responded"); //Not responded, Not Sent, Expired;
+
+    $ref_name = novo_ref_get_ref_name($entity->nid);
+
+    switch ($variables['element']['#field_name']) {
+      case 'field_reference_request_1':
+        $label = t("Reference request :name", array(":name" => $ref_name));
+
+        break;
+      case 'field_reference_request_2':
+        $label = t("Reference request :name", array(":name" => $ref_name));
+
+        break;
+      case 'field_reference_request_standby':
+        $label = t("Standby reference request :name", array(":name" => $ref_name));
+
+        break;
+      case 'field_reference_request_parents':
+        $label = t("Parent reference :name", array(":name" => $ref_name));
+
+        break;
+      case 'field_reference_request_church':
+        $label = t("Church reference request :name", array(":name" => $ref_name));
+
+        break;
+    }
+
+
+    $variables['ref_data'] = array(
+      'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('Pdf'), "entityprint/node/" . $entity->nid, array(
+        'html' => TRUE,
+        'attributes' => array(
+          'target' => '_blank',
+          'class' => array("btn", "btn-default", "btn-xs")
+        )
+      )),
+      'edit_link' => l('<i class="glyphicon glyphicon-edit"></i> ' . t('Edit'), "node/" . $entity->nid . "/view", array(
+        'query' => drupal_get_destination(),
+        'html' => TRUE,
+        'attributes' => array(
+          'class' => array("btn", "btn-default", "btn-xs")
+        )
+      )),
+      'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "entityprint/node/" . $entity->nid, array(
+        'query' => drupal_get_destination(),
+        'html' => TRUE,
+        'attributes' => array(
+          'class' => array("btn", "btn-default", "btn-xs")
+        )
+      )),
+      'status' => $status,
+
+      'title' => $label
+    );
+  }
 }
