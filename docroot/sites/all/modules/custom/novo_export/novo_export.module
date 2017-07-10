@@ -5,7 +5,6 @@
  * Export to PDF functions.
  */
 
-
 /**
  * Implements hook_theme().
  */
@@ -23,7 +22,7 @@ function novo_export_theme() {
 }
 
 /**
- * @param $variables
+ * Implement hook_preprocess_entity_print().
  */
 function novo_export_preprocess_entity_print(&$variables) {
   $nid = isset($variables['entity']->nid) ? $variables['entity']->nid : NULL;
@@ -37,8 +36,6 @@ function novo_export_preprocess_entity_print(&$variables) {
 
   if (isset($variables['entity']->type)) {
     switch ($variables['entity']->type) {
-      case "application" :
-        break;
       case "reference_request":
         novo_export_reference_request($variables, $nid);
         break;
@@ -46,6 +43,9 @@ function novo_export_preprocess_entity_print(&$variables) {
   }
 }
 
+/**
+ * Prepare data for export.
+ */
 function novo_export_reference_request(&$variables, $nid) {
   $user_name = (function_exists("novo_ref_request_get_parent_node_user_name")) ? "(" . novo_ref_request_get_parent_node_user_name($nid) . ")" : "";
 
@@ -58,7 +58,6 @@ function novo_export_reference_request(&$variables, $nid) {
  */
 function novo_export_entity_print_css($entity_type, $entity) {
   if ($entity_type === 'node') {
-    //kpr($entity);
     switch ($entity->type) {
       case "reference_request":
         entity_print_add_css(drupal_get_path("module", "novo_export") . "/css/reference_request_pdf.css");
@@ -66,5 +65,3 @@ function novo_export_entity_print_css($entity_type, $entity) {
     }
   }
 }
-
-
