@@ -53,7 +53,7 @@ function novo_ref_request_generate_hashed_link($nid) {
  * Implements hook_preprocess_node().
  */
 function novo_ref_request_preprocess_node(&$variables) {
-  if (isset($variables['type']) && $variables['type'] == "reference_request") {
+  if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
     $save_form = drupal_get_form("novo_ref_request_save_form");
     $variables['content']['save_form'] = $save_form;
   }
@@ -119,9 +119,9 @@ function novo_ref_request_node_presave($node) {
  * Attach ref node to parent node.
  */
 function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
-  $ref1_items = field_get_items("node", $node, $field);
-  if (empty($ref1_items)) {
-    $ref_nid = novo_ref_request_create_ref_entity($parent_term_name);
+  $ref_items = field_get_items("node", $node, $field);
+  if (empty($ref_items)) {
+    $ref_nid = novo_ref_request_create_ref_entity($parent_term_name, $node);
     if ($ref_nid) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
       $node->{$field}[$lang][0]['target_id'] = $ref_nid;
@@ -132,7 +132,7 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
 /**
  * Crete reference node with questions.
  */
-function novo_ref_request_create_ref_entity($q_type = NULL) {
+function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
   if (!empty($q_type)) {
     // Prepare questions from taxonomy.
     $ref1_terms = taxonomy_get_term_by_name($q_type, NOVO_REF_QUESTIONS_VOC);
@@ -145,6 +145,12 @@ function novo_ref_request_create_ref_entity($q_type = NULL) {
           $questions[] = $child->name;
         }
       }
+    }
+
+    // Tokens.
+    foreach ($questions as $key => $q) {
+      $user_name = novo_ref_request_get_appl_user_name($node);
+      $questions[$key] = str_replace("[ref_name]", $user_name, $q);
     }
 
     // Create ref node.
@@ -165,4 +171,60 @@ function novo_ref_request_create_ref_entity($q_type = NULL) {
     return isset($en->nid) ? $en->nid : NULL;
   }
   return NULL;
+}
+
+/**
+ * Get parent node.
+ */
+function novo_ref_request_get_parent_node($ref_nid) {
+
+  $query = db_select("node", "n");
+  $query->fields("n", array("nid", "nid"));
+
+  $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
+  $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
+  $query->leftJoin("field_data_field_reference_request_church", "ref_church", "n.nid = ref_church.entity_id");
+  $query->leftJoin("field_data_field_reference_request_parents", "ref_parents", "n.nid = ref_parents.entity_id");
+  $query->leftJoin("field_data_field_reference_request_standby", "ref_standby", "n.nid = ref_standby.entity_id");
+
+  $or = db_or();
+  $or->condition("ref_1.field_reference_request_1_target_id", $ref_nid);
+  $or->condition("ref_2.field_reference_request_2_target_id", $ref_nid);
+  $or->condition("ref_church.field_reference_request_church_target_id", $ref_nid);
+  $or->condition("ref_parents.field_reference_request_parents_target_id", $ref_nid);
+  $or->condition("ref_standby.field_reference_request_standby_target_id", $ref_nid);
+  $query->condition($or);
+
+  $result = $query->execute()->fetchAllKeyed();
+
+  $items = array();
+  if (!empty($result)) {
+    $items = node_load_multiple($result);
+  }
+
+  return array_values($items);
+}
+
+/**
+ * Get parent first/last names.
+ */
+function novo_ref_request_get_parent_node_user_name($ref_nid) {
+  $nodes = novo_ref_request_get_parent_node($ref_nid);
+  if (isset($nodes[0]) && !empty($nodes[0])) {
+    return novo_ref_request_get_appl_user_name($nodes[0]);
+  }
+  return "";
+}
+
+/**
+ * Get application user first/last names.
+ */
+function novo_ref_request_get_appl_user_name($node) {
+  $last_name = field_get_items("node", $node, "field_last_name");
+  $names = array($node->title);
+  if (isset($last_name[0]['value'])) {
+    $names[] = $last_name[0]['value'];
+  }
+  return implode(" ", $names);
+
 }
