@@ -69,6 +69,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'bypass entity print access'.
+  $permissions['bypass entity print access'] = array(
+    'name' => 'bypass entity print access',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'entity_print',
+  );
+
   // Exported permission: 'change own username'.
   $permissions['change own username'] = array(
     'name' => 'change own username',
