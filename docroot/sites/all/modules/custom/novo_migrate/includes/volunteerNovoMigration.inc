@@ -122,6 +122,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->attachPhone($node, $row, "reference_2_", "field_ref_2_phone");
     $this->attachPhone($node, $row, "standby_", "field_ref_3_phone");
     $this->attachPhone($node, $row, "church_background_", "field_church_phone");
+    $this->attachPhone($node, $row, "parent_", "field_parent_phone");
 
     // Multistep.
     if (function_exists("_multistep_update_status")) {
@@ -172,6 +173,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Convert phone number. @TODO: need test and change. To Vasya - finish it.
    */
   protected function formatPhoneNumber($s) {
+    if (strlen(preg_replace("/\D*/", "", $s)) < 10) {
+      return FALSE;
+    }
     // @codingStandardsIgnoreStart
     $rx = "/
     (1)?\D*     # optional country code
@@ -182,7 +186,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     (\d*)       # optional extension
 /x";
     preg_match($rx, $s, $matches);
-    if (!isset($matches[0])) {
+    if (!isset($matches[0]) || !isset($matches[2])) {
       return FALSE;
     }
 
@@ -282,6 +286,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     $query->innerJoin("user_steps", "us", "us.user_application_id = ua.id");
     $query->innerJoin("answers", "a", "a.user_step_id = us.id");
+    $query->addField("us", "status", "step_status");
     $query->addField("a", "data", "answer");
 
     $query->innerJoin("questions", "q", "q.id = a.question_id");
@@ -295,7 +300,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("av", "template_data", "answer_variant");
     $query->addField("av", "id", "answer_variant_id");
 
-    //$query->condition("u.id", 423);
+    /* $query->condition("u.id", 423);*/
 
     $result = $query->execute()->fetchAll();
 
@@ -303,6 +308,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     foreach ($result as $key => $value) {
       if (isset($users[$value->id][$value->q_name][$value->section_name])) {
         $users[$value->id][$value->q_name][$value->section_name]['variants'][$value->answer_variant_id] = $value->answer_variant;
+        if (($users[$value->id][$value->q_name][$value->section_name]['base_fields']['step_status'] == "completed") && $value->step_status != "completed") {
+          $users[$value->id][$value->q_name][$value->section_name]['base_fields']['step_status'] = $value->step_status;
+        }
       }
       else {
         $users[$value->id][$value->q_name][$value->section_name] = array(
@@ -311,6 +319,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
             'updated_at' => $value->updated_at,
             'application_approved' => $value->application_approved,
             'application_status' => $value->application_status,
+            'step_status' => $value->step_status,
           ),
           'answer' => $value->answer,
           'query' => $value->q_name,
@@ -371,7 +380,13 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         if (isset($answer_obj->radio) && isset($variants[$answer_obj->radio])) {
           $variant_obj = $this->getAnswerJson($variants[$answer_obj->radio]);
           if ($variant_obj && isset($variant_obj->title)) {
-            $answer_data["value"] = $variant_obj->title;
+            if (isset($answer_obj->length)) {
+              $answer_data["value"]['period'] = $variant_obj->title;
+              $answer_data["value"]['length'] = $answer_obj->length;
+            }
+            else {
+              $answer_data["value"] = $variant_obj->title;
+            }
           }
         }
         break;
@@ -454,8 +469,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       "getState"
     ));
     $this->addFieldMapping('field_state:source_type')->defaultValue('tid');
-    $this->addFieldMapping('field_zip', 'zip');
-    $this->addFieldMapping('field_dob', 'date_of_birth');
+    $this->addFieldMapping('field_zip', 'zip')
+      ->callback(array($this, "formattingZip"));
+    $this->addFieldMapping('field_dob', 'date_of_birth')
+      ->callback(array($this, "checkDob"));
     $this->addFieldMapping('field_email', 'email');
     $this->addFieldMapping('field_t_shirt_size', 't_shirt_size')
       ->callback(array(
@@ -468,7 +485,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       ->callback(array(
         $this,
         "getColorPref"
-      ));;
+      ));
     $this->addFieldMapping('field_color_preference:source_type')
       ->defaultValue('tid');
 
@@ -496,9 +513,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_1_first_name', 'reference_1_first_name');
     $this->addFieldMapping('field_ref_1_last_name', 'reference_1_last_name');
     $this->addFieldMapping('field_ref_1_email', 'reference_1_email');
-    $this->addFieldMapping('field_ref_1_how_long', 'reference_1_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_1_how_long_period', 'reference_1_how_long');
+    $this->addFieldMapping('field_ref_1_how_know', 'reference_1_how_know');
+    $this->addFieldMapping('field_ref_1_how_long', 'reference_1_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_1_how_long_period', 'reference_1_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_ref_2_prefix', 'reference_2_title')
       ->callback(array($this, "getPrefix"));
@@ -507,9 +526,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_2_first_name', 'reference_2_first_name');
     $this->addFieldMapping('field_ref_2_last_name', 'reference_2_last_name');
     $this->addFieldMapping('field_ref_2_email', 'reference_2_email');
-    $this->addFieldMapping('field_ref_2_how_long', 'reference_2_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_2_how_long_period', 'reference_2_how_long');
+    $this->addFieldMapping('field_ref_2_how_know', 'reference_2_how_know');
+    $this->addFieldMapping('field_ref_2_how_long', 'reference_2_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_2_how_long_period', 'reference_2_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_ref_3_prefix', 'standby_title')
       ->callback(array($this, "getPrefix"));
@@ -518,9 +539,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_ref_3_first_name', 'standby_first_name');
     $this->addFieldMapping('field_ref_3_last_name', 'standby_last_name');
     $this->addFieldMapping('field_ref_3_email', 'standby_email');
-    $this->addFieldMapping('field_ref_3_how_long', 'standby_how_know')
-      ->callback("intval");
-    $this->addFieldMapping('field_ref_3_how_long_period', 'standby_how_long');
+    $this->addFieldMapping('field_ref_3_how_know', 'standby_how_know');
+    $this->addFieldMapping('field_ref_3_how_long', 'standby_how_long')
+      ->callback(array($this, "getHowLong"));
+    $this->addFieldMapping('field_ref_3_how_long_period', 'standby_how_long')
+      ->callback(array($this, "getHowLongPeriod"));
 
     $this->addFieldMapping('field_pertinent_q1', 'mental_conditions');
     $this->addFieldMapping('field_pertinent_q2', 'medications');
@@ -588,9 +611,18 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // $this->addFieldMapping('field_what_site_want', '');
     // $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
     // $this->addFieldMapping('field_expired_date', '');
-    // $this->addFieldMapping('field_app_status', 'application_status')
-    // ->callback(array($this, "getApplicationStatus"));
-    // $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
+
+    $this->addFieldMapping('field_ssn', 'social_security_number')
+      ->callback(array($this, "formattingSsn"));
+    $this->addFieldMapping('field_parent_prefix', 'parent_title');
+    $this->addFieldMapping('field_parent_guardian_first_name', 'parent_first_name');
+    $this->addFieldMapping('field_parent_guardian_last_name', 'parent_last_name');
+    $this->addFieldMapping('field_parent_email', 'parent_email');
+
+    $this->addFieldMapping('field_app_status', 'application_approved')->callback(array($this, "getApplicationStatus"));
+    $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
+
+    $this->addFieldMapping('field_completed', "step_status")->callback(array($this, "isCompleted"));
   }
 
   /**
@@ -630,6 +662,33 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
+   * How long callback function.
+   */
+  protected function getHowLong($value) {
+    return !empty($value['length']) ? intval($value['length']) : 0;
+  }
+
+  /**
+   * How long period callback function.
+   */
+  protected function getHowLongPeriod($value) {
+    if (!empty($value['period'])) {
+      if ($value['period'] == 'months' || $value['period'] == 'years') {
+        return $value['period'];
+      }
+      else {
+        $current_key = $this->source->getCurrentKey();
+        $source_user_id = $current_key['id'];
+        watchdog("novo_migrate", 'Value :not_valid_value  should be equal months or years in user with source_user_id = :source_user_id', array(
+          ":source_user_id" => $source_user_id,
+          ":not_valid_value" => $value['period']
+        ));
+      }
+    }
+    return NULL;
+  }
+
+  /**
    * State callback function.
    */
   protected function getState($value) {
@@ -645,6 +704,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         foreach ($tree as $term) {
           if (strtolower(trim($term->description)) === strtolower(trim($value))) {
             return $term->tid;
+          }
+        }
+
+        preg_match("/ok[l]?a/i", $value, $is_oklahoma);
+        if (!empty($is_oklahoma[0])) {
+          $tid = $this->getTidByName("Oklahoma", "states");
+          if (!empty($tid)) {
+            return $tid;
           }
         }
 
@@ -702,6 +769,78 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $term = array_values($term);
     $term = isset($term[0]) ? $term[0] : -1;
     return (isset($term->tid)) ? $term->tid : NULL;
+  }
+
+  /**
+   * Cut first five symbols form zip.
+   */
+  protected function formattingZip($value) {
+    if (empty($value)) {
+      return NULL;
+    }
+    $value = (string) $value;
+    $value = intval(substr($value, 0, 5));
+    return $value;
+  }
+
+  /**
+   * Delete "-" from ssn.
+   */
+  protected function formattingSsn($value) {
+    if (empty($value)) {
+      return NULL;
+    }
+    $value = (string) $value;
+    $value = intval(str_replace("-", "", $value));
+    return $value;
+  }
+
+  /**
+   * Check date of birthday.
+   */
+  protected function checkDob($value) {
+    if (!empty($value)) {
+      return NULL;
+    }
+    $value = trim($value);
+    $dob = \DateTime::createFromFormat("m/d/Y", $value);
+    $year = $dob->format("Y");
+
+    if ($year[0] == 0) {
+      $new_year = preg_replace("/^.{1}/", "1", $year);
+      $new_dob = $dob->format("m") . "/" . $dob->format("d") . "/" . $new_year;
+      watchdog("novo_migrate", 'Value field_value was changing from :value to :new_value', array(
+        ":value" => $value,
+        ":new_value" => $new_dob,
+      ));
+      return $new_dob;
+    }
+    else {
+      return $value;
+    }
+  }
+
+  /**
+   * Check publish or not publish application.
+   */
+  protected function isCompleted($value) {
+    return !empty($value) && ($value == "completed") ? TRUE : FALSE;
+  }
+
+  /**
+   * Approved or Not Approved application.
+   */
+  protected function getApplicationStatus($value) {
+    if (is_null($value)) {
+      return NULL;
+    }
+    $value = intval($value);
+    if ($value) {
+      return $this->getTermTid("Approved", "application_status");
+    }
+    else {
+      return $this->getTermTid("Not Approved", "application_status");
+    }
   }
 
 }

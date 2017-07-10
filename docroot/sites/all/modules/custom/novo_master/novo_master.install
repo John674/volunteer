@@ -297,3 +297,35 @@ function novo_master_update_7127() {
   features_revert_module("novo_views_feature");
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature, novo_taxonomy_feature.
+ */
+function novo_master_update_7128() {
+  $vocabulary = taxonomy_vocabulary_machine_name_load('application_status');
+  $list = array(
+    'Approved',
+    'Not Approved',
+  );
+  if (!empty($vocabulary) && isset($vocabulary->vid)) {
+    $taxonomy_tree = taxonomy_get_tree($vocabulary->vid);
+    if (is_array($taxonomy_tree)) {
+
+      // Delete old terms.
+      foreach ($taxonomy_tree as $term) {
+        taxonomy_term_delete($term->tid);
+      }
+
+      // Create new terms.
+      foreach ($list as $key => $value) {
+        $term = new stdClass();
+        $term->name = $value;
+        $term->vid = $vocabulary->vid;
+        taxonomy_term_save($term);
+      }
+    }
+  }
+
+  features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+}
