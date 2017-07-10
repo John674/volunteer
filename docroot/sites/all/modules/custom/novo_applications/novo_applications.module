@@ -148,7 +148,7 @@ function novo_applications_theme() {
     'novo_applications_welcome_block' => array(
       'render element' => 'data',
       'template' => 'plugins/templates/novo_applications_welcome_block',
-    ),
+    )
   );
 }
 

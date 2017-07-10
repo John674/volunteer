@@ -1102,6 +1102,13 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'editable',
         'weight' => 1,
       ),
+      'pdf' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
     ),
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_faq_a',
@@ -1130,6 +1137,13 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'pdf' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
@@ -1255,6 +1269,13 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 6,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1294,6 +1315,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1328,6 +1355,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'I have read and agree to abide by the Statement of Faith Agreement.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 89,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1374,6 +1407,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 91,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 91,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1410,6 +1449,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'I certify that, to the best of my knowledge, all answers and information given are true and complete.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 92,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1456,6 +1501,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 93,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 93,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1492,6 +1543,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'I understand that I am entitled to a complete and accurate disclosure of the nature and scope of any consumer report on me. I also understand that I may receive a written summary of my rights under 15 U.S.C. § 1681 et. seq.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 94,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1538,6 +1595,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 95,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 95,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1574,6 +1637,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'I authorize Novo Ministries to conduct a background inquiry that may include criminal records, public records, and personal references. I agree to all statements in this application and certify that I have properly initialed each statement and / or accept that any text placed in the fields provided will be considered acceptance of the statements.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 96,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1625,6 +1694,13 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_plain',
         'weight' => 8,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 8,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1656,6 +1732,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'Ephesians 2:4-7, Romans 3:10-12',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 80,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1700,6 +1782,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 81,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 81,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1734,6 +1822,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => 'Ephesians 2:10, Romans 8:1',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 82,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1778,6 +1872,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 73,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 73,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1809,6 +1909,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 74,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1850,6 +1956,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 75,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 75,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1881,6 +1993,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 76,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1922,6 +2040,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 77,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 77,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1953,6 +2077,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 78,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1994,6 +2124,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 79,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 79,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2025,6 +2161,13 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 121,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
@@ -2070,6 +2213,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 70,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 70,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2103,6 +2252,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 66,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2142,6 +2297,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 67,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2193,6 +2354,19 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'field_collection_view',
         'weight' => 102,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 102,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2224,6 +2398,12 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 68,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2268,6 +2448,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 69,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 69,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2302,6 +2488,13 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'pdf' => array(
         'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
@@ -2351,6 +2544,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2392,6 +2591,13 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 123,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 123,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2424,6 +2630,20 @@ function novo_content_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
+      ),
+      'pdf' => array(
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
@@ -2485,6 +2705,12 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 23,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2531,6 +2757,13 @@ College',
         'type' => 'email_default',
         'weight' => 2,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2564,6 +2797,12 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2608,6 +2847,12 @@ College',
         'type' => 'hidden',
         'weight' => 22,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2642,6 +2887,12 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2686,6 +2937,12 @@ College',
         'type' => 'hidden',
         'weight' => 20,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2719,6 +2976,12 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 97,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2773,6 +3036,13 @@ College',
         'type' => 'taxonomy_term_reference_link',
         'weight' => 118,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 118,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2804,6 +3074,12 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'pdf' => array(
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
@@ -2844,6 +3120,12 @@ College',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2895,6 +3177,12 @@ Church',
         'type' => 'hidden',
         'weight' => 11,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2935,6 +3223,12 @@ Church',
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2969,6 +3263,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 27,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3015,6 +3315,12 @@ Church',
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3054,6 +3360,12 @@ Church',
         'type' => 'hidden',
         'weight' => 25,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 25,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3088,6 +3400,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3133,6 +3451,13 @@ Church',
         'type' => 'text_default',
         'weight' => 104,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 104,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3167,6 +3492,13 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 109,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
@@ -3214,6 +3546,13 @@ Church',
         'type' => 'text_default',
         'weight' => 106,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 106,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3255,6 +3594,13 @@ Church',
         'type' => 'text_default',
         'weight' => 107,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 107,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3289,6 +3635,19 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 108,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
@@ -3342,6 +3701,13 @@ Church',
         'type' => 'taxonomy_term_reference_link',
         'weight' => 103,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 103,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3373,6 +3739,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 53,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3423,6 +3795,12 @@ Church',
         'type' => 'hidden',
         'weight' => 62,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 62,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3462,6 +3840,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 63,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3511,6 +3895,12 @@ Church',
         'type' => 'hidden',
         'weight' => 64,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 64,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3550,6 +3940,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 65,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3599,6 +3995,12 @@ Church',
         'type' => 'hidden',
         'weight' => 54,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 54,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3638,6 +4040,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 55,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3687,6 +4095,12 @@ Church',
         'type' => 'hidden',
         'weight' => 56,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 56,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3726,6 +4140,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 57,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3775,6 +4195,12 @@ Church',
         'type' => 'hidden',
         'weight' => 58,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 58,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3814,6 +4240,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 59,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3863,6 +4295,12 @@ Church',
         'type' => 'hidden',
         'weight' => 60,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 60,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3902,6 +4340,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 61,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3958,6 +4402,19 @@ Church',
         'type' => 'field_collection_view',
         'weight' => 98,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 98,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3998,6 +4455,12 @@ Church',
         'type' => 'hidden',
         'weight' => 28,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4029,6 +4492,12 @@ Church',
     'description' => 'I have read and agree to abide by the Pertinent Program Policies.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 90,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4075,6 +4544,12 @@ Church',
         'type' => 'hidden',
         'weight' => 32,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 32,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4108,6 +4583,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 30,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4153,6 +4634,13 @@ Church',
         'type' => 'text_default',
         'weight' => 110,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 110,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4187,6 +4675,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 35,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4236,6 +4730,12 @@ Church',
         'type' => 'hidden',
         'weight' => 36,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 36,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4267,6 +4767,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 31,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4306,6 +4812,19 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 99,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
@@ -4358,6 +4877,12 @@ Church',
         'type' => 'hidden',
         'weight' => 29,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4389,6 +4914,12 @@ Church',
     'description' => 'If you cannot provide an email for this reference, please enter “volunteer@novoministries.org” into this field.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 40,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4427,6 +4958,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 38,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4472,6 +5009,13 @@ Church',
         'type' => 'text_default',
         'weight' => 111,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 111,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4506,6 +5050,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 43,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4555,6 +5105,12 @@ Church',
         'type' => 'hidden',
         'weight' => 44,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 44,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4586,6 +5142,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 39,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4625,6 +5187,19 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 100,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
@@ -4677,6 +5252,12 @@ Church',
         'type' => 'hidden',
         'weight' => 37,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 37,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4708,6 +5289,12 @@ Church',
     'description' => 'If you cannot provide an email for this reference, please enter “volunteer@novoministries.org” into this field.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 48,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4746,6 +5333,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 46,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4791,6 +5384,13 @@ Church',
         'type' => 'text_default',
         'weight' => 112,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 112,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4825,6 +5425,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 51,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4874,6 +5480,12 @@ Church',
         'type' => 'hidden',
         'weight' => 52,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 52,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4905,6 +5517,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 47,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4944,6 +5562,19 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 101,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
@@ -4996,6 +5627,12 @@ Church',
         'type' => 'hidden',
         'weight' => 45,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 45,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5027,6 +5664,16 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 116,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
@@ -5081,6 +5728,16 @@ Church',
         'type' => 'entityreference_label',
         'weight' => 118,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 118,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5117,6 +5774,16 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 117,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
@@ -5172,6 +5839,16 @@ Church',
         'type' => 'entityreference_label',
         'weight' => 120,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 120,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5218,6 +5895,16 @@ Church',
         'type' => 'entityreference_label',
         'weight' => 119,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 119,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5254,6 +5941,12 @@ Church',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -5313,6 +6006,18 @@ Friend',
         'type' => 'number_integer',
         'weight' => 115,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 115,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5357,6 +6062,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'pdf' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5392,6 +6103,12 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -5438,6 +6155,13 @@ Friend',
         'type' => 'list_default',
         'weight' => 103,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 103,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5471,6 +6195,12 @@ Friend',
     'description' => 'Matthew 28:19-20',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 83,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -5512,6 +6242,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 84,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 84,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5543,6 +6279,12 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 85,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -5584,6 +6326,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 86,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 86,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5615,6 +6363,12 @@ Friend',
     'description' => 'Romans 1:16',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 87,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -5656,6 +6410,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 88,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 88,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5687,6 +6447,19 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 122,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
@@ -5736,6 +6509,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 26,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 26,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5777,6 +6556,12 @@ Friend',
         'type' => 'hidden',
         'weight' => 114,
       ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 114,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5808,6 +6593,12 @@ Friend',
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -7937,6 +8728,15 @@ Friend',
         'module' => 'field_collection',
         'settings' => array(
           'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 1,
+      ),
+      'pdf' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'view_mode' => 'pdf',
         ),
         'type' => 'field_collection_fields',
         'weight' => 1,

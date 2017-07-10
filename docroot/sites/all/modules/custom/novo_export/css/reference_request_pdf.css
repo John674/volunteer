@@ -1,0 +1,17 @@
+header {
+  margin-bottom: 20px;
+}
+
+header a {
+  color:black;
+  text-decoration: none;
+}
+
+.field-name-field-ref-faq {
+  line-height: 32px;
+}
+
+.field-name-field-faq-q {
+  display: block;
+  font-weight: bold;
+}

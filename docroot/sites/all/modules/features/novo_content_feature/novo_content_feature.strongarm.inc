@@ -38,13 +38,16 @@ function novo_content_feature_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
+      ),
+      'pdf' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
@@ -173,13 +176,16 @@ function novo_content_feature_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
         'custom_settings' => FALSE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
+      ),
+      'pdf' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(
