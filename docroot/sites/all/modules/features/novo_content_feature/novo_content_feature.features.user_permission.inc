@@ -10,6 +10,15 @@
 function novo_content_feature_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'create field_completed'.
+  $permissions['create field_completed'] = array(
+    'name' => 'create field_completed',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_faq_a'.
   $permissions['create field_faq_a'] = array(
     'name' => 'create field_faq_a',
@@ -72,6 +81,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['create field_texting'] = array(
     'name' => 'create field_texting',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_completed'.
+  $permissions['edit field_completed'] = array(
+    'name' => 'edit field_completed',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -143,6 +161,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_completed'.
+  $permissions['edit own field_completed'] = array(
+    'name' => 'edit own field_completed',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_faq_a'.
   $permissions['edit own field_faq_a'] = array(
     'name' => 'edit own field_faq_a',
@@ -205,6 +230,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['edit own field_texting'] = array(
     'name' => 'edit own field_texting',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_completed'.
+  $permissions['view field_completed'] = array(
+    'name' => 'view field_completed',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -272,6 +306,13 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view field_texting'.
   $permissions['view field_texting'] = array(
     'name' => 'view field_texting',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_completed'.
+  $permissions['view own field_completed'] = array(
+    'name' => 'view own field_completed',
     'roles' => array(),
     'module' => 'field_permissions',
   );

@@ -2619,7 +2619,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 70,
+      'weight' => 73,
     ),
   );
 
@@ -3160,7 +3160,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 71,
+      'weight' => 70,
     ),
   );
 
@@ -6581,7 +6581,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 71,
     ),
   );
 

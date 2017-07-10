@@ -356,7 +356,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'multistep_status_publishing';
-  $strongarm->value = 'complete';
+  $strongarm->value = 'default';
   $export['multistep_status_publishing'] = $strongarm;
 
   $strongarm = new stdClass();
