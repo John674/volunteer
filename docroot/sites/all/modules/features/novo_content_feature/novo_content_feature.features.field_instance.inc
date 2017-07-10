@@ -381,7 +381,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_phone_number',
     'label' => 'Phone',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -390,7 +390,7 @@ function novo_content_feature_field_default_field_instances() {
       'active' => 1,
       'module' => 'masked_input',
       'settings' => array(
-        'mask' => '',
+        'mask' => '999-999-9999',
         'placeholder' => '_',
         'size' => 60,
       ),
@@ -1298,7 +1298,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 55,
+      'weight' => 56,
     ),
   );
 
@@ -1343,7 +1343,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 56,
+      'weight' => 57,
     ),
   );
 
@@ -1720,7 +1720,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 70,
+      'weight' => 74,
     ),
   );
 
@@ -2196,7 +2196,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 63,
+      'weight' => 65,
     ),
   );
 
@@ -2523,7 +2523,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 57,
+      'weight' => 58,
     ),
   );
 
@@ -2569,7 +2569,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 67,
+      'weight' => 69,
     ),
   );
 
@@ -2619,7 +2619,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 68,
+      'weight' => 70,
     ),
   );
 
@@ -2688,7 +2688,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 63,
+      'weight' => 64,
     ),
   );
 
@@ -2785,7 +2785,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 64,
+      'weight' => 67,
     ),
   );
 
@@ -3062,7 +3062,7 @@ College',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 56,
+      'weight' => 50,
     ),
   );
 
@@ -3107,7 +3107,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 51,
+      'weight' => 52,
     ),
   );
 
@@ -3160,7 +3160,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 68,
+      'weight' => 71,
     ),
   );
 
@@ -3205,7 +3205,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 53,
+      'weight' => 54,
     ),
   );
 
@@ -3251,7 +3251,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 55,
     ),
   );
 
@@ -3343,7 +3343,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 53,
     ),
   );
 
@@ -3480,7 +3480,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 71,
+      'weight' => 75,
     ),
   );
 
@@ -3563,7 +3563,7 @@ Church',
     'entity_type' => 'node',
     'field_name' => 'field_parent_guardian_first_name',
     'label' => 'First Name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4434,7 +4434,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 61,
+      'weight' => 62,
     ),
   );
 
@@ -6045,7 +6045,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 60,
+      'weight' => 61,
     ),
   );
 
@@ -6087,7 +6087,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 58,
+      'weight' => 59,
     ),
   );
 
@@ -6133,7 +6133,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 65,
+      'weight' => 68,
     ),
   );
 
@@ -6183,7 +6183,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 62,
+      'weight' => 63,
     ),
   );
 
@@ -6491,7 +6491,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 64,
+      'weight' => 66,
     ),
   );
 
@@ -6581,7 +6581,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 72,
     ),
   );
 
@@ -6627,7 +6627,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 59,
+      'weight' => 60,
     ),
   );
 
@@ -8764,6 +8764,48 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-reference_request-field_responded'.
+  $field_instances['node-reference_request-field_responded'] = array(
+    'bundle' => 'reference_request',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_responded',
+    'label' => 'Responded',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => -2,
+    ),
+  );
+
   // Exported field_instance: 'node-staff-field_email'.
   $field_instances['node-staff-field_email'] = array(
     'bundle' => 'staff',
@@ -9166,6 +9208,7 @@ Friend',
   t('Reference request standby');
   t('Relation');
   t('Relationship');
+  t('Responded');
   t('Romans 1:16');
   t('School name');
   t('School year');

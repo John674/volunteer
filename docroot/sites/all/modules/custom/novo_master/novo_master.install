@@ -24,6 +24,11 @@ function novo_master_install() {
   );
 
   module_enable($module_list);
+
+  db_update('system')
+    ->fields(array('weight' => 100))
+    ->condition('name', 'novo_master', '=')
+    ->execute();
 }
 
 /**
@@ -327,5 +332,17 @@ function novo_master_update_7128() {
   }
 
   features_revert_module("novo_taxonomy_feature");
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7129() {
+  db_update('system')
+    ->fields(array('weight' => 100))
+    ->condition('name', 'novo_master', '=')
+    ->execute();
+
   features_revert_module("novo_content_feature");
 }
