@@ -334,9 +334,9 @@ function novo_ref_get_ref_name($ref_nid) {
 
 
 function novo_ref_request_preprocess_field(&$variables) {
-  $node = $variables['element']['#object'];
+  $node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
 
-  if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids' || $node->type == 'partner')) {
+  if (isset($node->type) && $node->type == 'application') {
     switch ($variables['element']['#field_name']) {
       case 'field_reference_request_1':
       case 'field_reference_request_2':
@@ -359,9 +359,6 @@ function novo_ref_request_prepare_fields(&$variables) {
 
   $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
   if (!empty($entity->nid)) {
-    $parent_node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
-
-
     $status = t("Responded"); //Not responded, Not Sent, Expired;
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
@@ -413,7 +410,6 @@ function novo_ref_request_prepare_fields(&$variables) {
         )
       )),
       'status' => $status,
-
       'title' => $label
     );
   }
