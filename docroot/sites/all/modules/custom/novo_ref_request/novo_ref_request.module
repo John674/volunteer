@@ -140,7 +140,7 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
     $questions = array();
     if (isset($ref1_terms->tid)) {
       $term_childrens = taxonomy_get_children($ref1_terms->tid);
-      if ($term_childrens) {
+      if ($term_childrens) {l
         foreach ($term_childrens as $child) {
           $questions[] = $child->name;
         }
