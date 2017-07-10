@@ -1,8 +1,9 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.7
+version = 7.x-1.8
 dependencies[] = ctools
+dependencies[] = entity_print
 dependencies[] = features
 dependencies[] = novo_account_feature
 dependencies[] = novo_block_feature
@@ -19,4 +20,5 @@ dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[variable][] = configurable_timezones
+features[variable][] = entity_print_wkhtmltopdf
 features[variable][] = site_frontpage
