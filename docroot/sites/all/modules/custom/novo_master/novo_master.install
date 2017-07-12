@@ -346,3 +346,20 @@ function novo_master_update_7129() {
 
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature, novo_views_feature.
+ */
+function novo_master_update_7130() {
+  // Enable modules.
+  $enable_module_list = array(
+    'novo_mentors',
+    'ddf',
+    'ddf_entityreference',
+  );
+  module_enable($enable_module_list);
+  field_delete_field('field_parent_email');
+  field_purge_batch(1);
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_content_feature");
+}
