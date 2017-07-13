@@ -25,6 +25,18 @@ module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.db");
 module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.func");
 
 /**
+ * Implements hook_permission().
+ */
+function novo_ref_request_permission() {
+  return array(
+    'edit ref request with any status' => array(
+      'title' => t('Allow edit ref request with any status'),
+      'description' => t('Allow edit ref request with any status: complete or not.'),
+    ),
+  );
+}
+
+/**
  * Implements hook_node_access().
  */
 function novo_ref_request_node_access($node, $op, $account) {
@@ -65,8 +77,17 @@ function novo_ref_request_generate_hashed_link($nid) {
  */
 function novo_ref_request_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
-    $save_form = drupal_get_form("novo_ref_request_save_form", $variables['nid']);
-    $variables['content']['save_form'] = $save_form;
+    $node = $variables['node'];
+    $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
+    if (!$responded || user_access("edit ref request with any status")) {
+      $save_form = drupal_get_form("novo_ref_request_save_form", $node);
+      $variables['content'] = array();
+      $variables['content']['save_form'] = $save_form;
+    }
+
+    $link = novo_ref_request_generate_hashed_link($variables['nid']);
+    kpr("This is test link which sent via email: " . $link);
   }
 }
 
@@ -83,11 +104,36 @@ function novo_ref_request_preprocess_page(&$variables) {
 /**
  * Ref save form().
  */
-function novo_ref_request_save_form($form, &$form_state, $nid) {
-  $form['#weight'] = 20;
+function novo_ref_request_save_form($form, &$form_state, $node) {
+  $form['faq'] = array(
+    '#tree' => TRUE,
+    '#type' => 'container',
+  );
+
+  $faq = field_get_items("node", $node, "field_ref_faq");
+  foreach ($faq as $key => $value) {
+    $collection = field_collection_item_load($value['value']);
+    $q_items = field_get_items("field_collection_item", $collection, "field_faq_q");
+    $q_arr = (isset($q_items[0])) ? field_view_value("field_collection_item", $collection, "field_faq_q", $q_items[0]) : NULL;
+    $a_items = field_get_items("field_collection_item", $collection, "field_faq_a");
+    $a = (isset($a_items[0]['value'])) ? $a_items[0]['value'] : "";
+
+    if ($q_arr) {
+      $form['faq'][$key]["fc_id"] = array(
+        '#type' => 'hidden',
+        '#value' => $collection->item_id
+      );
+      $form['faq'][$key]["q"] = $q_arr;
+      $form['faq'][$key]["a"] = array(
+        '#type' => 'textarea',
+        '#default_value' => $a,
+      );
+    }
+  }
+
   $form['nid'] = array(
     '#type' => 'hidden',
-    '#value' => $nid
+    '#value' => $node->nid
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -101,9 +147,11 @@ function novo_ref_request_save_form($form, &$form_state, $nid) {
  * Ref save form submit().
  */
 function novo_ref_request_save_form_submit($form, &$form_state) {
-  $nid = (isset($form_state['values']['nid'])) ? $form_state['values']['nid'] : NULL;
-  $node = node_load($nid);
+  $values = (isset($form_state['values'])) ? $form_state['values'] : NULL;
+  $nid = (isset($values['nid'])) ? $values['nid'] : NULL;
+  $faq = (isset($values['faq'])) ? $values['faq'] : NULL;
 
+  $node = node_load($nid);
   if ($node) {
     $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
     $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
@@ -111,6 +159,14 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
       $node->field_responded[$land][0]['value'] = 1;
       novo_ref_request_task_update_status($node->nid, 2);
       node_save($node);
+
+      // Update answers FC.
+      foreach ($faq as $key => $value) {
+        $raw_collection = field_collection_item_load($value['fc_id']);
+        $collection = entity_metadata_wrapper('field_collection_item', $raw_collection);
+        $collection->field_faq_a = $value['a'];
+        $collection->save();
+      }
     }
   }
 
@@ -187,7 +243,7 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
   if (!empty($entity->nid)) {
     $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
     $ref_task = novo_ref_request_task_get_last($entity->nid);
-    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status]))  ? $ref_task->status : 0;
+    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : 0;
     $status_label = $statuses[$status];
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
