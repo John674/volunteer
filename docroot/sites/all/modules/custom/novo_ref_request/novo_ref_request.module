@@ -105,10 +105,11 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
   $node = node_load($nid);
 
   if ($node) {
-    $land = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-    $responded = (isset($node->field_responded[$land][0]['value'])) ?: FALSE;
+    $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
     if (!$responded) {
       $node->field_responded[$land][0]['value'] = 1;
+      novo_ref_request_task_update_status($node->nid, 2);
       node_save($node);
     }
   }
@@ -123,8 +124,8 @@ function novo_ref_request_node_presave($node) {
   if ($node->type == "application") {
 
     $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
-    $node_original_completed = isset($node->original->field_completed[$lang][0]['value']) ? ($node->original->field_completed[$lang][0]['value']) : FALSE;
-    $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+    $node_original_completed = isset($node->original->field_completed[$lang][0]['value']) ? $node->original->field_completed[$lang][0]['value'] : FALSE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? $node->field_completed[$lang][0]['value'] : FALSE;
 
     if (!$node_original_completed && $node_completed) {
       // Create and attach ref request nodes.
@@ -140,7 +141,7 @@ function novo_ref_request_node_presave($node) {
 }
 
 /**
- * Implements hook_node_delete(),
+ * Implements hook_node_delete().
  */
 function novo_ref_request_node_delete($node) {
   if ($node->type == "reference_request") {
@@ -160,19 +161,18 @@ function novo_ref_request_preprocess_field(&$variables) {
       case 'field_reference_request_1':
       case 'field_reference_request_2':
         novo_ref_request_prepare_fields($variables, "Reference request");
-
         break;
+
       case 'field_reference_request_standby':
         novo_ref_request_prepare_fields($variables, "Standby reference request");
-
         break;
+
       case 'field_reference_request_parents':
         novo_ref_request_prepare_fields($variables, "Parent reference");
-
         break;
+
       case 'field_reference_request_church':
         novo_ref_request_prepare_fields($variables, "Church reference request");
-
         break;
     }
   }
@@ -185,12 +185,10 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
 
   $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
   if (!empty($entity->nid)) {
-    $lang = isset($entity->language) ? $entity->language : LANGUAGE_NONE;
-    $responded = (isset($entity->field_responded[$lang][0]['value'])) ?: FALSE;
-
-    $status = ($responded) ? "responded" : "not_responded"; // Not Sent, Expired;
-    $status_label = ($responded) ? t("Responded") : t("Not responded"); // Not Sent, Expired;
-
+    $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
+    $ref_task = novo_ref_request_task_get_last($entity->nid);
+    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status]))  ? $ref_task->status : 0;
+    $status_label = $statuses[$status];
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
     $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));

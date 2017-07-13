@@ -45,7 +45,7 @@ function novo_ref_request_task_add($uid, $nid, $name, $email) {
 }
 
 /**
- * Get last task
+ * Get last task.
  *
  * @param int $nid
  *   Node nid.
@@ -61,6 +61,7 @@ function novo_ref_request_task_get_last($nid) {
 
 /**
  * Get all not cancelled tasks by nid.
+ *
  * @param int $nid
  *   Node nid.
  *
@@ -72,7 +73,6 @@ function novo_ref_request_task_get_all_active($nid) {
     ":nid" => $nid
   ))->fetchAll();
 }
-
 
 /**
  * Remove task from database.
@@ -88,4 +88,33 @@ function novo_ref_request_task_delete($nid) {
     ->condition('nid', $nid)
     ->execute();
 
+}
+
+/**
+ * Update status for task.
+ *
+ * @param int $nid
+ *   Node nid.
+ *
+ * @return mixed
+ *   Result.
+ */
+function novo_ref_request_task_update_status($nid, $status = 4) {
+  $exist = novo_ref_request_task_get_last($nid);
+  if ($exist) {
+    return db_update('novo_ref_tasks')
+      ->fields(array(
+        'status' => $status,
+        'updated' => REQUEST_TIME,
+      ))
+      ->condition('id', $exist->id)
+      ->execute();
+  }
+  else {
+    watchdog("novo_ref_request_task", "UPDATE status: Task not found nid: :nid", array(
+      ":nid",
+      $nid
+    ), WATCHDOG_ERROR);
+  }
+  return NULL;
 }

@@ -15,7 +15,6 @@ define("NOVO_BASE_APPLICATION_STATUS_LABELS", serialize(array(
 )));
 
 novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
-novo_theme_load_include("inc", "novo", "includes/novo_theme_reference_request");
 
 /**
  * Implements hook_preprocess_html().
@@ -130,7 +129,7 @@ function novo_preprocess_field(&$variables) {
       case 'field_reference_request_church':
         $variables['theme_hook_suggestions'][] = 'field__field_reference_request';
 
-      break;
+        break;
     }
 
     // @codingStandardsIgnoreStart

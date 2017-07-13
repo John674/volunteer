@@ -43,11 +43,9 @@
  *
  * @ingroup themeable
  */
-
 ?>
 
 <?php if (!empty($ref_data)): ?>
-
     <div class="row field">
         <div class="col-md-6">
           <?php print $ref_data['title']; ?>
@@ -56,7 +54,7 @@
           <?php print $ref_data['status_label']; ?>
         </div>
         <div class="col-md-3">
-          <?php if ($ref_data['status'] == "responded"): ?>
+          <?php if ($ref_data['status'] > 0): ?>
             <?php print $ref_data['resend_link']; ?>
             <?php print $ref_data['pdf_link']; ?>
           <?php else: ?>

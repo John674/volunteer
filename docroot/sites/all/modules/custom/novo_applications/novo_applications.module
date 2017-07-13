@@ -23,8 +23,7 @@ function novo_applications_node_insert($node) {
  */
 function novo_applications_node_update($node) {
   if ($node->type == 'application') {
-    //  $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-    //  $completed = (isset($node->field_completed[$lang][0]['value'])) ? $node->field_completed[$lang][0]['value'] : FALSE;
+
   }
 }
 
@@ -205,8 +204,8 @@ function novo_applications_permission() {
 function novo_applications_node_access($node, $op, $account) {
   $type = is_string($node) ? $node : $node->type;
   if ($type == "application" && $op == 'update' && !user_access("edit application with any status")) {
-    // Disable edit access for volunteer for completed(published) node.
 
+    // Disable edit access for volunteer for completed node.
     $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
     $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
 

@@ -83,19 +83,18 @@ function novo_ref_request_add_tasks_callback($ref_nids) {
           case "ref_1":
           case "ref_2":
             $title = t("Reference request");
-
             break;
+
           case "ref_church":
             $title = t("Church reference request");
-
             break;
+
           case "ref_parents":
             $title = t("Parent reference request");
-
             break;
+
           case "ref_standby":
             $title = t("Standby reference request");
-
             break;
         }
 
