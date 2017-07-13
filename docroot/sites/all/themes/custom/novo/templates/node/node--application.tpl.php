@@ -123,7 +123,6 @@
               hide($content['links']);
               hide($content['field_tags']);
 
-
               hide($content['field_reference_request_1']);
               hide($content['field_reference_request_2']);
               hide($content['field_reference_request_standby']);

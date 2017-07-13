@@ -13,6 +13,17 @@ define('NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME', 'Standby');
 define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
 define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
 
+define('NOVO_REF_REQUEST_TASK_STATUSES', serialize(array(
+  0 => t("Not sent"),
+  1 => t("Not responded"),
+  2 => t("Responded"),
+  3 => t("Expired"),
+  4 => t("Canceled"),
+)));
+
+module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.db");
+module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.func");
+
 /**
  * Implements hook_node_access().
  */
@@ -110,245 +121,37 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
  */
 function novo_ref_request_node_presave($node) {
   if ($node->type == "application") {
-    if (
-      // If new node and published.
-      (isset($node->is_new) && $node->is_new && $node->status) ||
-      // If node was updated and was set published.
-      (
-        isset($node->original) &&
-        isset($node->original->status) &&
-        empty($node->original->status) &&
-        !empty($node->status)
-      )
-    ) {
+
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node_original_completed = isset($node->original->field_completed[$lang][0]['value']) ? ($node->original->field_completed[$lang][0]['value']) : FALSE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+
+    if (!$node_original_completed && $node_completed) {
       // Create and attach ref request nodes.
-      novo_ref_request_attach_ref($node, "field_reference_request_1", NOVO_REF_QUESTIONS_REF1_TERM_NAME);
-      novo_ref_request_attach_ref($node, "field_reference_request_2", NOVO_REF_QUESTIONS_REF2_TERM_NAME);
-      novo_ref_request_attach_ref($node, "field_reference_request_standby", NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
-      novo_ref_request_attach_ref($node, "field_reference_request_church", NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
-      novo_ref_request_attach_ref($node, "field_reference_request_parents", NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
+      $ref_nids = array();
+      $ref_nids[] = novo_ref_request_attach_ref($node, "field_reference_request_1", NOVO_REF_QUESTIONS_REF1_TERM_NAME);
+      $ref_nids[] = novo_ref_request_attach_ref($node, "field_reference_request_2", NOVO_REF_QUESTIONS_REF2_TERM_NAME);
+      $ref_nids[] = novo_ref_request_attach_ref($node, "field_reference_request_standby", NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
+      $ref_nids[] = novo_ref_request_attach_ref($node, "field_reference_request_church", NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
+      $ref_nids[] = novo_ref_request_attach_ref($node, "field_reference_request_parents", NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
+      drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids);
     }
   }
 }
 
 /**
- * Attach ref node to parent node.
+ * Implements hook_node_delete(),
  */
-function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
-  $ref_items = field_get_items("node", $node, $field);
-  if (empty($ref_items)) {
-    $ref_nid = novo_ref_request_create_ref_entity($parent_term_name, $node);
-    if ($ref_nid) {
-      $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      $node->{$field}[$lang][0]['target_id'] = $ref_nid;
-    }
+function novo_ref_request_node_delete($node) {
+  if ($node->type == "reference_request") {
+    // Remove tasks when node removed.
+    novo_ref_request_task_delete($node->nid);
   }
 }
 
 /**
- * Crete reference node with questions.
+ * Implements hook_preprocess_field().
  */
-function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
-  if (!empty($q_type)) {
-    // Prepare questions from taxonomy.
-    $ref1_terms = taxonomy_get_term_by_name($q_type, NOVO_REF_QUESTIONS_VOC);
-    $ref1_terms = reset($ref1_terms);
-    $questions = array();
-    if (isset($ref1_terms->tid)) {
-      $term_childrens = taxonomy_get_children($ref1_terms->tid);
-      if ($term_childrens) {
-        foreach ($term_childrens as $child) {
-          $questions[] = $child->name;
-        }
-      }
-    }
-
-    // Tokens.
-    foreach ($questions as $key => $q) {
-      $user_name = novo_ref_request_get_appl_user_name($node);
-      $questions[$key] = str_replace("[ref_name]", $user_name, $q);
-    }
-
-    // Create ref node.
-    $node = entity_create('node', array('type' => 'reference_request'));
-    $entity = entity_metadata_wrapper('node', $node);
-    $entity->save();
-    $en = $entity->value();
-
-    // Add questions to fc.
-    foreach ($questions as $q) {
-      $collection = entity_create('field_collection_item', array('field_name' => 'field_ref_faq'));
-      $collection->setHostEntity('node', $en);
-
-      $cwrapper = entity_metadata_wrapper('field_collection_item', $collection);
-      $cwrapper->field_faq_q->set($q);
-      $cwrapper->save();
-    }
-    return isset($en->nid) ? $en->nid : NULL;
-  }
-  return NULL;
-}
-
-/**
- * Get parent node.
- */
-function novo_ref_request_get_parent_node($ref_nid) {
-
-  $query = db_select("node", "n");
-  $query->fields("n", array("nid", "nid"));
-
-  $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
-  $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
-  $query->leftJoin("field_data_field_reference_request_church", "ref_church", "n.nid = ref_church.entity_id");
-  $query->leftJoin("field_data_field_reference_request_parents", "ref_parents", "n.nid = ref_parents.entity_id");
-  $query->leftJoin("field_data_field_reference_request_standby", "ref_standby", "n.nid = ref_standby.entity_id");
-
-  $or = db_or();
-  $or->condition("ref_1.field_reference_request_1_target_id", $ref_nid);
-  $or->condition("ref_2.field_reference_request_2_target_id", $ref_nid);
-  $or->condition("ref_church.field_reference_request_church_target_id", $ref_nid);
-  $or->condition("ref_parents.field_reference_request_parents_target_id", $ref_nid);
-  $or->condition("ref_standby.field_reference_request_standby_target_id", $ref_nid);
-  $query->condition($or);
-
-  $result = $query->execute()->fetchAllKeyed();
-
-  $items = array();
-  if (!empty($result)) {
-    $items = node_load_multiple($result);
-  }
-
-  return array_values($items);
-}
-
-/**
- * Get parent node.
- */
-function novo_ref_request_get_parent_node_with_field($ref_nid) {
-
-  $query = db_select("node", "n");
-  $query->fields("n", array("nid"));
-
-  $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
-  $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
-  $query->leftJoin("field_data_field_reference_request_church", "ref_church", "n.nid = ref_church.entity_id");
-  $query->leftJoin("field_data_field_reference_request_parents", "ref_parents", "n.nid = ref_parents.entity_id");
-  $query->leftJoin("field_data_field_reference_request_standby", "ref_standby", "n.nid = ref_standby.entity_id");
-
-  $or = db_or();
-  $or->condition("ref_1.field_reference_request_1_target_id", $ref_nid);
-  $or->condition("ref_2.field_reference_request_2_target_id", $ref_nid);
-  $or->condition("ref_church.field_reference_request_church_target_id", $ref_nid);
-  $or->condition("ref_parents.field_reference_request_parents_target_id", $ref_nid);
-  $or->condition("ref_standby.field_reference_request_standby_target_id", $ref_nid);
-  $query->condition($or);
-
-  $query->addExpression("ref_1.field_reference_request_1_target_id = :id", "ref_1", array(":id" => $ref_nid));
-  $query->addExpression("ref_2.field_reference_request_2_target_id = :id", "ref_2", array(":id" => $ref_nid));
-  $query->addExpression("ref_church.field_reference_request_church_target_id = :id", "ref_church", array(":id" => $ref_nid));
-  $query->addExpression("ref_parents.field_reference_request_parents_target_id = :id", "ref_parents", array(":id" => $ref_nid));
-  $query->addExpression("ref_standby.field_reference_request_standby_target_id = :id", "ref_standby", array(":id" => $ref_nid));
-
-  $query->range(0, 1);
-
-  $result = $query->execute()->fetchAll();
-
-  $items = array();
-  if (!empty($result[0])) {
-    $items = array('nid' => $result[0]->nid);
-    unset($result[0]->nid);
-    foreach ($result[0] as $field => $exist) {
-      if ($exist) {
-        $items["field"] = $field;
-      }
-    }
-  }
-
-  return $items;
-}
-
-/**
- * Get parent first/last names.
- */
-function novo_ref_request_get_parent_node_user_name($ref_nid) {
-  $nodes = novo_ref_request_get_parent_node($ref_nid);
-  if (isset($nodes[0]) && !empty($nodes[0])) {
-    return novo_ref_request_get_appl_user_name($nodes[0]);
-  }
-  return "";
-}
-
-/**
- * Get application user first/last names.
- */
-function novo_ref_request_get_appl_user_name($node) {
-  $last_name = field_get_items("node", $node, "field_last_name");
-  $names = array($node->title);
-  if (isset($last_name[0]['value'])) {
-    $names[] = $last_name[0]['value'];
-  }
-  return implode(" ", $names);
-}
-
-/**
- * Get application referral names.
- */
-function novo_ref_request_get_ref_name($node, $field1 = NULL, $field2 = NULL) {
-  $names = array();
-
-  if (!empty($field1)) {
-    $name1 = field_get_items("node", $node, $field1);
-    if (isset($name1[0]['value'])) {
-      $names[] = $name1[0]['value'];
-    }
-  }
-
-  if (!empty($field2)) {
-    $name2 = field_get_items("node", $node, $field2);
-    if (isset($name2[0]['value'])) {
-      $names[] = $name2[0]['value'];
-    }
-  }
-
-  return implode(" ", $names);
-}
-
-/**
- * Get ref name by ref id.
- */
-function novo_ref_get_ref_name($ref_nid) {
-  $ref_name = "";
-  $ref_name_data = novo_ref_request_get_parent_node_with_field($ref_nid);
-
-  if (!empty($ref_name_data)) {
-    $parent_node = node_load($ref_name_data['nid']);
-    switch ($ref_name_data['field']) {
-      case "ref_1":
-        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_1_first_name", "field_ref_1_last_name");
-
-        break;
-      case "ref_2":
-        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_2_first_name", "field_ref_2_last_name");
-
-        break;
-      case "ref_church":
-        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_church_home");
-
-        break;
-      case "ref_parents":
-        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_parent_guardian_first_name", "field_parent_guardian_last_name");
-
-        break;
-      case "ref_standby":
-        $ref_name = novo_ref_request_get_ref_name($parent_node, "field_ref_3_first_name", "field_ref_3_last_name");
-
-        break;
-    }
-  }
-  return (!empty($ref_name)) ? "(" . $ref_name . ")" : "";
-}
-
-
 function novo_ref_request_preprocess_field(&$variables) {
   $node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
 
@@ -376,10 +179,8 @@ function novo_ref_request_preprocess_field(&$variables) {
 }
 
 /**
- * @file
- * Theme and preprocess ref requests.
+ * Prepare fields.
  */
-
 function novo_ref_request_prepare_fields(&$variables, $title = "") {
 
   $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;

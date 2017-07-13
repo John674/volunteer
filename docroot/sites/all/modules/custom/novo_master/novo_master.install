@@ -346,3 +346,12 @@ function novo_master_update_7129() {
 
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Change field_parent_email to email type.
+ */
+function novo_master_update_7130() {
+  field_delete_field('field_parent_email');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+}
