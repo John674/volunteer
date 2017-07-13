@@ -363,3 +363,16 @@ function novo_master_update_7130() {
   features_revert_module("novo_views_feature");
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature, novo_views_feature. Enable conditional_fields.
+ */
+function novo_master_update_7131() {
+  module_enable(array("conditional_fields"));
+  if (module_exists('novo_mentors')) {
+    module_disable(array("novo_mentors"));
+    drupal_uninstall_modules(array('novo_mentors'));
+  }
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_content_feature");
+}
