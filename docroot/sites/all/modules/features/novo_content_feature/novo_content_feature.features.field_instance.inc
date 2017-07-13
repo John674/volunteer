@@ -1720,7 +1720,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 75,
+      'weight' => 74,
     ),
   );
 
@@ -2196,7 +2196,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -2386,7 +2386,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 134,
+      'weight' => 133,
     ),
   );
 
@@ -2569,7 +2569,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -2619,7 +2619,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 71,
+      'weight' => 73,
     ),
   );
 
@@ -2688,7 +2688,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 65,
+      'weight' => 64,
     ),
   );
 
@@ -2785,7 +2785,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -3160,7 +3160,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 72,
+      'weight' => 70,
     ),
   );
 
@@ -3480,12 +3480,12 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 76,
+      'weight' => 75,
     ),
   );
 
-  // Exported field_instance: 'node-application-field_parent_email_u'.
-  $field_instances['node-application-field_parent_email_u'] = array(
+  // Exported field_instance: 'node-application-field_parent_email'.
+  $field_instances['node-application-field_parent_email'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
@@ -3506,7 +3506,7 @@ Church',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_parent_email_u',
+    'field_name' => 'field_parent_email',
     'label' => 'Email',
     'required' => 1,
     'settings' => array(
@@ -3519,7 +3519,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 181,
+      'weight' => 180,
     ),
   );
 
@@ -3671,7 +3671,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 182,
+      'weight' => 181,
     ),
   );
 
@@ -4426,7 +4426,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 63,
+      'weight' => 62,
     ),
   );
 
@@ -5809,7 +5809,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 135,
+      'weight' => 134,
     ),
   );
 
@@ -5865,7 +5865,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 183,
+      'weight' => 182,
     ),
   );
 
@@ -6125,7 +6125,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -6175,7 +6175,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 64,
+      'weight' => 63,
     ),
   );
 
@@ -6483,7 +6483,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 67,
+      'weight' => 66,
     ),
   );
 
@@ -6573,7 +6573,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 73,
+      'weight' => 71,
     ),
   );
 
@@ -8145,7 +8145,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_mentor_kid_name',
-    'label' => 'Kid name',
+    'label' => 'Kid Name',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -8185,7 +8185,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_mentor_program_name',
-    'label' => 'Program name',
+    'label' => 'Program Name',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -8204,7 +8204,7 @@ Friend',
     'bundle' => 'mentors',
     'default_value' => array(
       0 => array(
-        'value' => 'staff',
+        'value' => 'Staff',
       ),
     ),
     'deleted' => 0,
@@ -8316,7 +8316,7 @@ Re-Dedication',
     'entity_type' => 'node',
     'field_name' => 'field_mentoring_date',
     'label' => 'Mentoring Date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
@@ -8329,10 +8329,10 @@ Re-Dedication',
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'j M Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'no_fieldset' => 0,
+        'no_fieldset' => 1,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -8384,45 +8384,7 @@ Re-Dedication',
   // Exported field_instance: 'node-mentors-field_staff_mentor_name'.
   $field_instances['node-mentors-field_staff_mentor_name'] = array(
     'bundle' => 'mentors',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_staff_mentor_name',
-    'label' => 'Staff Mentor Name',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_volunteer_mentor_name'.
-  $field_instances['node-mentors-field_volunteer_mentor_name'] = array(
-    'bundle' => 'mentors',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -8444,17 +8406,74 @@ Re-Dedication',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_volunteer_mentor_name',
-    'label' => 'Volunteer Mentor Name',
-    'required' => 0,
+    'field_name' => 'field_staff_mentor_name',
+    'label' => 'Staff Mentor Name',
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
+      'settings' => array(
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'STARTS_WITH',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+      ),
+      'type' => 'select2widgetajax',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-mentors-field_volunteer_mentor_name'.
+  $field_instances['node-mentors-field_volunteer_mentor_name'] = array(
+    'bundle' => 'mentors',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_volunteer_mentor_name',
+    'label' => 'Volunteer Mentor Name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'STARTS_WITH',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+      ),
+      'type' => 'select2widgetajax',
       'weight' => 4,
     ),
   );
@@ -9583,6 +9602,7 @@ Re-Dedication',
   t('Is there any reason why you should not work with children, youth, or others?');
   t('Is there anything in your past or current life that might be a problem if we found out about it later?');
   t('Job Title');
+  t('Kid Name');
   t('Kid name');
   t('Kids list');
   t('Last Name');
@@ -9615,8 +9635,8 @@ Re-Dedication',
   t('Prefix');
   t('Previous Church Involvement');
   t('Program Location');
+  t('Program Name');
   t('Program day');
-  t('Program name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');

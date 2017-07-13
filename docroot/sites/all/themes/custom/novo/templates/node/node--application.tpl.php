@@ -122,6 +122,13 @@
               hide($content['comments']);
               hide($content['links']);
               hide($content['field_tags']);
+
+              hide($content['field_reference_request_1']);
+              hide($content['field_reference_request_2']);
+              hide($content['field_reference_request_standby']);
+              hide($content['field_reference_request_parents']);
+              hide($content['field_reference_request_church']);
+
               print render($content);
               ?>
                 <div class="row field">
@@ -160,6 +167,33 @@
                     </div>
                 </div>
                 <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?php print(t('Application background tasks')); ?></div>
+                    <div class="panel-body">
+                        <div class="row field">
+                            <div class="col-md-6">
+                                <div class="field-label">
+                                    <span><?php print(t('CIA Background Check')) ?>
+                                        :</span>
+                                    <span class="label label-danger"><?php print(t('Coming soon')); ?></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span>N/A</span>
+                            </div>
+                        </div>
+                        <hr>
+
+                      <?php print render($content['field_reference_request_1']); ?>
+                      <?php print render($content['field_reference_request_2']); ?>
+                      <?php print render($content['field_reference_request_standby']); ?>
+                      <?php print render($content['field_reference_request_church']); ?>
+                      <?php print render($content['field_reference_request_parents']); ?>
+                    </div>
+                </div>
+
+
             </div>
             <div class="panel-footer clearfix">
 

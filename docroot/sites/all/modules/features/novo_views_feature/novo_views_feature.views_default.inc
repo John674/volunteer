@@ -560,6 +560,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
   $handler->display->display_options['arguments']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['arguments']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['default_action'] = 'not found';
   $handler->display->display_options['arguments']['field_program_location_target_id']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['format'] = 'default_summary';

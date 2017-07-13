@@ -26,7 +26,9 @@ function novo_frontpage_volunteer_welcome($subtype, $conf, $args, $context) {
   $app_nodes = reset($app_nodes);
   $already_created_app = (!empty($app_nodes)) ? TRUE : FALSE;
   $app_nid = (!empty($app_nodes) && isset($app_nodes->nid)) ? $app_nodes->nid : NULL;
-  $finished_app = (!empty($app_nodes) && isset($app_nodes->status)) ? ($app_nodes->status) : FALSE;
+
+  $lang = isset($app_nodes->language) ? $app_nodes->language : LANGUAGE_NONE;
+  $finished_app = isset($app_nodes->field_completed[$lang][0]['value']) ? ($app_nodes->field_completed[$lang][0]['value']) : FALSE;
 
   $account = user_load($user->uid);
   $user_fname = field_get_items("user", $account, "field_u_first_name");

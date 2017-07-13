@@ -749,7 +749,7 @@ function novo_content_feature_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_completed',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -1201,9 +1201,6 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_how_did_you_hear_about_nov',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1404,8 +1401,8 @@ function novo_content_feature_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'staff' => 'Staff',
-        'volunteer' => 'Volunteer',
+        'Staff' => 'Staff',
+        'Volunteer' => 'Volunteer',
       ),
       'allowed_values_function' => '',
     ),
@@ -1668,7 +1665,7 @@ function novo_content_feature_field_default_field_bases() {
   // Exported field_base: 'field_p_kid_name'.
   $field_bases['field_p_kid_name'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_p_kid_name',
@@ -1683,18 +1680,20 @@ function novo_content_feature_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'delete_on_parent_delete' => '',
-      'handler' => 'ddf',
+      'handler' => 'base',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => 'entityreference_1',
-          'view_name' => 'kids_list',
+        'sort' => array(
+          'direction' => 'ASC',
+          'property' => 'title',
+          'type' => 'property',
+        ),
+        'target_bundles' => array(
+          'kids' => 'kids',
         ),
       ),
       'target_type' => 'node',
@@ -1824,13 +1823,13 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_parent_email_u'.
-  $field_bases['field_parent_email_u'] = array(
+  // Exported field_base: 'field_parent_email'.
+  $field_bases['field_parent_email'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_parent_email_u',
+    'field_name' => 'field_parent_email',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -3561,7 +3560,7 @@ function novo_content_feature_field_default_field_bases() {
   // Exported field_base: 'field_staff_mentor_name'.
   $field_bases['field_staff_mentor_name'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_staff_mentor_name',
@@ -4013,7 +4012,7 @@ function novo_content_feature_field_default_field_bases() {
   // Exported field_base: 'field_volunteer_mentor_name'.
   $field_bases['field_volunteer_mentor_name'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_volunteer_mentor_name',

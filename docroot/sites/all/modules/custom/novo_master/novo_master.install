@@ -26,7 +26,7 @@ function novo_master_install() {
   module_enable($module_list);
 
   db_update('system')
-    ->fields(array('weight' => 100))
+    ->fields(array('weight' => 10))
     ->condition('name', 'novo_master', '=')
     ->execute();
 }
@@ -340,7 +340,7 @@ function novo_master_update_7128() {
  */
 function novo_master_update_7129() {
   db_update('system')
-    ->fields(array('weight' => 100))
+    ->fields(array('weight' => 10))
     ->condition('name', 'novo_master', '=')
     ->execute();
 
@@ -360,6 +360,19 @@ function novo_master_update_7130() {
   module_enable($enable_module_list);
   field_delete_field('field_parent_email');
   field_purge_batch(1);
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ * Revert novo_content_feature, novo_views_feature. Enable conditional_fields.
+ */
+function novo_master_update_7131() {
+  module_enable(array("conditional_fields"));
+  if (module_exists('novo_mentors')) {
+    module_disable(array("novo_mentors"));
+    drupal_uninstall_modules(array('novo_mentors'));
+  }
   features_revert_module("novo_views_feature");
   features_revert_module("novo_content_feature");
 }

@@ -6,8 +6,6 @@
  */
 
 define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
-define('NOVO_APPLICATION_STATUS_COMPLETED_NAME', 'Completed');
-define('NOVO_APPLICATION_STATUS_STARTED_NAME', 'Started');
 
 module_load_include("inc", "novo_applications", "includes/novo_applications.access");
 
@@ -18,14 +16,6 @@ function novo_applications_node_insert($node) {
   if (!isset($node->is_new) || !$node->is_new) {
     return;
   }
-
-  if ($node->type == 'application') {
-    $tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_STARTED_NAME);
-    if (!empty($tid)) {
-      $node->field_app_status[LANGUAGE_NONE][0]['tid'] = $tid;
-      field_attach_update('node', $node);
-    }
-  }
 }
 
 /**
@@ -33,19 +23,7 @@ function novo_applications_node_insert($node) {
  */
 function novo_applications_node_update($node) {
   if ($node->type == 'application') {
-    if (isset($node->original->status) && $node->original->status == 0 && isset($node->status) && $node->status == 1) {
-      // If was published. We update status.
-      $started_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_STARTED_NAME);
-      $current_status_tid = isset($node->field_app_status[LANGUAGE_NONE][0]['tid']) ? $node->field_app_status[LANGUAGE_NONE][0]['tid'] : NULL;
-      if ($current_status_tid == $started_tid) {
-        $completed_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_COMPLETED_NAME);
-        if (!empty($completed_tid)) {
-          // If was status "Started" we Change status to "Completed".
-          $node->field_app_status[LANGUAGE_NONE][0]['tid'] = $completed_tid;
-          field_attach_update('node', $node);
-        }
-      }
-    }
+
   }
 }
 
@@ -62,6 +40,8 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
       drupal_goto("<front>");
     }
   }
+
+  $form['#submit'][] = "novo_applications_form_submit";
   $form['field_app_status']['#access'] = FALSE;
 
   // kpr($form);
@@ -102,6 +82,23 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
       if ($age >= 18) {
         _novo_application_hide_parent_section($form);
       }
+    }
+  }
+}
+
+/**
+ * Node application form submit.
+ */
+function novo_applications_form_submit(&$form, &$form_state) {
+  // Set completed field for node when multistep completed.
+  $complete = isset($form_state['#multistep_complete']) ? ($form_state['#multistep_complete']) : FALSE;
+  if ($complete) {
+    $node = isset($form_state['node']) ? $form_state['node'] : NULL;
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+    if (!$node_completed) {
+      $node->field_completed[$lang][0]['value'] = 1;
+      node_save($node);
     }
   }
 }
@@ -207,8 +204,12 @@ function novo_applications_permission() {
 function novo_applications_node_access($node, $op, $account) {
   $type = is_string($node) ? $node : $node->type;
   if ($type == "application" && $op == 'update' && !user_access("edit application with any status")) {
-    // Disable edit access for volunteer for completed(published) node.
-    return (!$node->status && $node->uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+
+    // Disable edit access for volunteer for completed node.
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+
+    return (!$node_completed && $node->uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
   }
 
   return NODE_ACCESS_IGNORE;

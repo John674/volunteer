@@ -10,59 +10,18 @@
  */
 function novo_mentors_form_mentors_node_form_alter(&$form, &$form_state) {
 
-  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
-
-  $form['field_staff_mentor_name']['#value_callback'][] = 'empty_value_mentor_name';
-
-  $visible_staff = array(
-    'visible' => array(
-      ':input[name="field_mentor_type[' . $lang . ']"]' => array('value' => 'staff'),
-    ),
-  );
-  $visible_volunteer = array(
-    'visible' => array(
-      ':input[name="field_mentor_type[' . $lang . ']"]' => array('value' => 'volunteer'),
-    ),
-  );
-
-  $form['field_staff_mentor_name']['#states'] = $visible_staff;
-  $form['field_staff_mentor_name']['#element_validate'][] = '_validate_mentor_name';
-
-  $form['field_volunteer_mentor_name']['#states'] = $visible_volunteer;
-  $form['field_volunteer_mentor_name']['#element_validate'][] = '_validate_mentor_name';
-
 }
 
 /**
  * Define required mentor names field.
  */
-function _validate_mentor_name($element, $form_state) {
-  $lang = isset($element['#language']) ? $element['#language'] : LANGUAGE_NONE;
-  $reg = '/name=["|\'](.*)\[/';
-  $required_field_key = key($element['#states']['visible']);
-  preg_match($reg, $required_field_key, $matches);
-  $required_field_name = $matches[1];
+function _novo_mentors_validate_mentor_name($element, $form_state) {
 
-  if ($form_state['values'][$required_field_name][$lang] == $element['#states']['visible'][$required_field_key]['value']) {
-    $element_name = $element[$lang]['#field_name'];
-    if (isset($element_name) && empty($form_state['values'][$element_name][$lang][0]['target_id'])) {
-      form_error($element, t('@field_name field is required.', array('@field_name' => $element[$lang]['#title'])));
-    }
-  }
 }
 
 /**
  * Implements hook_node_presave().
  */
 function novo_mentors_node_presave($node) {
-  if ($node->type == "mentors") {
-    $lang = isset($element['#language']) ? $element['#language'] : LANGUAGE_NONE;
-    $mentor_type = isset($node->field_mentor_type[$lang][0]['value']) ? $node->field_mentor_type[$lang][0]['value'] : NULL;
-    if (!empty($mentor_type) && $mentor_type == "staff") {
-      $node->field_volunteer_mentor_name[$lang] = [];
-    }
-    elseif (!empty($mentor_type) && $mentor_type == "volunteer") {
-      $node->field_staff_mentor_name[$lang] = [];
-    }
-  }
+
 }
