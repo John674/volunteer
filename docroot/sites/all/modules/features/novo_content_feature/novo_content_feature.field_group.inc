@@ -561,12 +561,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Parents',
     'weight' => '176',
     'children' => array(
-      0 => 'field_parent_email',
-      1 => 'field_parent_guardian_first_name',
-      2 => 'field_parent_guardian_last_name',
-      3 => 'field_parent_phone',
-      4 => 'field_parent_prefix',
-      5 => 'field_reference_request_parents',
+      0 => 'field_parent_guardian_first_name',
+      1 => 'field_parent_guardian_last_name',
+      2 => 'field_parent_phone',
+      3 => 'field_parent_prefix',
+      4 => 'field_reference_request_parents',
+      5 => 'field_parent_email',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1301,7 +1301,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '73',
+    'weight' => '72',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

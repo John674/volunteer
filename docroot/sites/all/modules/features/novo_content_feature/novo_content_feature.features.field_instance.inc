@@ -1720,7 +1720,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 75,
+      'weight' => 74,
     ),
   );
 
@@ -2196,7 +2196,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -2386,7 +2386,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 134,
+      'weight' => 133,
     ),
   );
 
@@ -2569,7 +2569,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -2619,7 +2619,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 71,
+      'weight' => 73,
     ),
   );
 
@@ -2688,7 +2688,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 65,
+      'weight' => 64,
     ),
   );
 
@@ -2785,7 +2785,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -3160,7 +3160,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 72,
+      'weight' => 70,
     ),
   );
 
@@ -3480,7 +3480,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 76,
+      'weight' => 75,
     ),
   );
 
@@ -3493,19 +3493,12 @@ Church',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'email',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 109,
+        'type' => 'email_default',
+        'weight' => 124,
       ),
       'pdf' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 109,
-      ),
-      'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3517,16 +3510,15 @@ Church',
     'label' => 'Email',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'email',
       'settings' => array(
         'size' => 60,
       ),
-      'type' => 'text_textfield',
+      'type' => 'email_textfield',
       'weight' => 180,
     ),
   );
@@ -3679,7 +3671,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 182,
+      'weight' => 181,
     ),
   );
 
@@ -4434,7 +4426,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 63,
+      'weight' => 62,
     ),
   );
 
@@ -5817,7 +5809,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 135,
+      'weight' => 134,
     ),
   );
 
@@ -5873,7 +5865,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 183,
+      'weight' => 182,
     ),
   );
 
@@ -6133,7 +6125,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -6183,7 +6175,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 64,
+      'weight' => 63,
     ),
   );
 
@@ -6491,7 +6483,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 67,
+      'weight' => 66,
     ),
   );
 
@@ -6581,7 +6573,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 73,
+      'weight' => 71,
     ),
   );
 
@@ -8127,426 +8119,6 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-mentors-field_mentor_kid_name'.
-  $field_instances['node-mentors-field_mentor_kid_name'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mentor_kid_name',
-    'label' => 'Kid name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_mentor_program_name'.
-  $field_instances['node-mentors-field_mentor_program_name'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mentor_program_name',
-    'label' => 'Program name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_mentor_type'.
-  $field_instances['node-mentors-field_mentor_type'] = array(
-    'bundle' => 'mentors',
-    'default_value' => array(
-      0 => array(
-        'value' => 'staff',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mentor_type',
-    'label' => 'Mentor Type',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_mentoring'.
-  $field_instances['node-mentors-field_mentoring'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mentoring',
-    'label' => 'Mentoring',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select_or_other',
-      'settings' => array(
-        'available_options' => 'Salvation
-Re-Dedication',
-        'other' => 'Other',
-        'other_size' => 60,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'sort_options' => 0,
-      ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_mentoring_date'.
-  $field_instances['node-mentors-field_mentoring_date'] = array(
-    'bundle' => 'mentors',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mentoring_date',
-    'label' => 'Mentoring Date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_program_location'.
-  $field_instances['node-mentors-field_program_location'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_program_location',
-    'label' => 'Program Location',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_staff_mentor_name'.
-  $field_instances['node-mentors-field_staff_mentor_name'] = array(
-    'bundle' => 'mentors',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_staff_mentor_name',
-    'label' => 'Staff Mentor Name',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_volunteer_mentor_name'.
-  $field_instances['node-mentors-field_volunteer_mentor_name'] = array(
-    'bundle' => 'mentors',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => 0,
-          'link' => 0,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_volunteer_mentor_name',
-    'label' => 'Volunteer Mentor Name',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_what_talk_about'.
-  $field_instances['node-mentors-field_what_talk_about'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_what_talk_about',
-    'label' => 'What did you talk about',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_what_verses_share'.
-  $field_instances['node-mentors-field_what_verses_share'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_what_verses_share',
-    'label' => 'What verses did you share',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 11,
-    ),
-  );
-
   // Exported field_instance: 'node-partner-field_address_1'.
   $field_instances['node-partner-field_address_1'] = array(
     'bundle' => 'partner',
@@ -9598,9 +9170,6 @@ Re-Dedication',
   t('Location');
   t('Maiden name or Alias names used');
   t('Matthew 28:19-20');
-  t('Mentor Type');
-  t('Mentoring');
-  t('Mentoring Date');
   t('Middle');
   t('Middle Name');
   t('Month/Years');
@@ -9622,9 +9191,7 @@ Re-Dedication',
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
   t('Previous Church Involvement');
-  t('Program Location');
   t('Program day');
-  t('Program name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');
@@ -9639,7 +9206,6 @@ Re-Dedication',
   t('School year');
   t('Small Group');
   t('Social security number');
-  t('Staff Mentor Name');
   t('Staff contact');
   t('Staff list');
   t('State');
@@ -9656,11 +9222,8 @@ Re-Dedication',
   t('Training List');
   t('Type');
   t('VOLUNTEER INTERESTS / ROLES');
-  t('Volunteer Mentor Name');
   t('Volunteers list');
   t('Weekday');
-  t('What did you talk about');
-  t('What verses did you share');
   t('When and how did you receive Jesus as Savior?');
   t('Zip');
 
