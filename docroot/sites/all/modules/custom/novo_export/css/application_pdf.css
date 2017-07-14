@@ -1,0 +1,30 @@
+
+div[class*="field-name"]{
+  display: table;
+  width: 100%;
+  border-bottom: 2px #CCCCCC solid;
+  border-left: 2px #CCCCCC solid;
+  border-right: 2px #CCCCCC solid;
+}
+div[class*="field-name"]:first-child{
+  border-top: 2px #CCCCCC solid;
+}
+div[class*="field-name"]>.field-label,
+div[class*="field-name"]>.field-items{
+  display: table-cell;
+  width: 50%;
+  padding: 10px;
+}
+
+div[class*="field-name"]>.field-items{
+  border-left: 2px #CCCCCC solid;
+}
+.entity-field-collection-item div[class*="field-name"]{
+  border: none;
+}
+
+.entity-field-collection-item div[class*="field-name"]>.field-items,
+.entity-field-collection-item div[class*="field-name"]>.field-label{
+  padding: 0;
+  border: none;
+}

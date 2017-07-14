@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * PDF template for printing.
@@ -13,7 +14,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php print t("Reference request");?></title>
+    <title><?php print t("Application");?></title>
   <?php print drupal_get_css($entity_print_css); ?>
 </head>
 <body>
