@@ -18,6 +18,10 @@ function novo_export_theme() {
       'base hook' => 'entity_print',
       'template' => 'templates/entity-print--node--reference-request',
     ),
+    'entity_print__node__application' => array(
+      'base hook' => 'entity_print',
+      'template' => 'templates/entity-print--node--application',
+    ),
   );
 }
 
@@ -38,6 +42,10 @@ function novo_export_preprocess_entity_print(&$variables) {
     switch ($variables['entity']->type) {
       case "reference_request":
         novo_export_reference_request($variables, $nid);
+        break;
+
+      case "application":
+        $variables['theme_hook_suggestion'] = "entity_print__node__application";
         break;
     }
   }
@@ -61,6 +69,9 @@ function novo_export_entity_print_css($entity_type, $entity) {
     switch ($entity->type) {
       case "reference_request":
         entity_print_add_css(drupal_get_path("module", "novo_export") . "/css/reference_request_pdf.css");
+        break;
+      case "application":
+        entity_print_add_css(drupal_get_path("module", "novo_export") . "/css/application_pdf.css");
         break;
     }
   }
