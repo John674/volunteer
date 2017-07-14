@@ -192,7 +192,9 @@ function novo_ref_request_save_form($form, &$form_state, $node) {
  * Cancel form submit.
  */
 function novo_ref_request_save_form_cancel($form, &$form_state) {
-  $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+  $nid = arg(1);
+  $not_destination_url = (!empty($nid)) ? "node/" . $nid : "<front>";
+  $url = (isset($_GET['destination']) && !empty($_GET['destination'])) ? $_GET['destination'] : $not_destination_url;
   drupal_goto($url);
 }
 
