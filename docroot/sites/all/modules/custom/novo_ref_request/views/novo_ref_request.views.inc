@@ -229,6 +229,5 @@ function novo_ref_request_views_data() {
     ),
   );
 
-
   return $data;
 }

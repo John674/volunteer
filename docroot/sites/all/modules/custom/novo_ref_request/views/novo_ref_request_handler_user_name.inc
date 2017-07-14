@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Definition of hr_promo_code_handler_status.
@@ -9,11 +10,10 @@
  */
 class novo_ref_request_handler_user_name extends views_handler_field {
 
-
   /**
    * Override init function to add uid and homepage fields.
    */
-  function init(&$view, &$data) {
+  public function init(&$view, &$data) {
     parent::init($view, $data);
     $this->additional_fields['id'] = 'id';
   }
@@ -21,7 +21,7 @@ class novo_ref_request_handler_user_name extends views_handler_field {
   /**
    * Renders the field handler.
    */
-  function render($values) {
+  public function render($values) {
     $value = $this->get_value($values);
     $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
 
@@ -31,5 +31,4 @@ class novo_ref_request_handler_user_name extends views_handler_field {
 
     return $status;
   }
-
 }

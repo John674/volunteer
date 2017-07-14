@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Definition of hr_promo_code_handler_status.
@@ -9,11 +10,10 @@
  */
 class novo_ref_request_handler_actions extends views_handler_field {
 
-
   /**
    * Override init function to add uid and homepage fields.
    */
-  function init(&$view, &$data) {
+  public function init(&$view, &$data) {
     parent::init($view, $data);
     $this->additional_fields['nid'] = 'nid';
     $this->additional_fields['phone'] = 'phone';
@@ -22,7 +22,7 @@ class novo_ref_request_handler_actions extends views_handler_field {
   /**
    * Renders the field handler.
    */
-  function render($values) {
+  public function render($values) {
     $value = $this->get_value($values);
     $nid = $this->get_value($values, "nid");
     $output = "";
@@ -31,19 +31,19 @@ class novo_ref_request_handler_actions extends views_handler_field {
       $buttons = novo_ref_request_prepare_action_buttons($nid);
 
       switch ($value) {
-        case "0" :
+        case "0":
           // Not send - show "Send to referer button".
           $output = $buttons['send_link'];
           break;
 
-        case "1" :
+        case "1":
           // Not responded - show phone number.
-          // Edit
+          // Edit.
           $phone = $this->get_value($values, "phone");
           $output = $phone . " " . $buttons['edit_link'];
           break;
 
-        case "4" :
+        case "4":
           // Cancelled.
           $output = "";
           break;
