@@ -24,6 +24,41 @@ define('NOVO_REF_REQUEST_TASK_STATUSES', serialize(array(
 module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.db");
 module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.func");
 
+
+/**
+ * Implements hook_menu().
+ */
+function novo_ref_request_menu() {
+  $items = array();
+
+  $items['novo-ref-request/resend/%'] = array(
+    'title' => 'Mark result as not relevant by AJAX',
+    'page arguments' => array(2),
+    'access arguments' => array('edit ref request with any status'),
+    'page callback' => 'novo_ref_request_resend_callback',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Resend task callback.
+ */
+function novo_ref_request_resend_callback($nid) {
+  $task = novo_ref_request_task_get_last($nid);
+  if (!empty($task)) {
+    novo_ref_request_task_add($task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->name, $task->email, $task->phone);
+    drupal_set_message(t("The request was sent to the queue for sending."));
+    $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+    drupal_goto($url);
+  }
+  else {
+    drupal_set_message(t("Can't resend."), "error");
+    watchdog("novo_ref_request", "Can't resend. NID: :nid", array(":nid" => $nid), WATCHDOG_ERROR);
+  }
+}
+
 /**
  * Implements hook_permission().
  */
@@ -78,6 +113,8 @@ function novo_ref_request_generate_hashed_link($nid) {
 function novo_ref_request_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
     $node = $variables['node'];
+//    $r = novo_ref_request_get_ref_data_by_ref_nid($node->nid);
+//    kpr($r);
     $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
     $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
     if (!$responded || user_access("edit ref request with any status")) {
@@ -135,12 +172,28 @@ function novo_ref_request_save_form($form, &$form_state, $node) {
     '#type' => 'hidden',
     '#value' => $node->nid
   );
+
+  $form['actions']['cancel'] = array(
+    '#type' => 'submit',
+    '#value' => t('Cancel'),
+    '#submit' => array('novo_ref_request_save_form_cancel', 'node_form_submit_build_node'),
+    '#limit_validation_errors' => array(),
+  );
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t("Send")
   );
 
   return $form;
+}
+
+/**
+ * Cancel form submit.
+ */
+function novo_ref_request_save_form_cancel($form, &$form_state) {
+  $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+  drupal_goto($url);
 }
 
 /**
@@ -235,6 +288,16 @@ function novo_ref_request_preprocess_field(&$variables) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function novo_ref_request_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_ref_request') . '/views',
+  );
+}
+
+/**
  * Prepare fields.
  */
 function novo_ref_request_prepare_fields(&$variables, $title = "") {
@@ -249,38 +312,50 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
     $ref_name = novo_ref_get_ref_name($entity->nid);
     $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));
 
-    $variables['ref_data'] = array(
-      'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('Pdf'), "entityprint/node/" . $entity->nid, array(
-        'html' => TRUE,
-        'attributes' => array(
-          'target' => '_blank',
-          'class' => array("btn", "btn-default", "btn-xs")
-        )
-      )),
-      'edit_link' => l('<i class="glyphicon glyphicon-edit"></i> ' . t('Edit'), "node/" . $entity->nid . "/view", array(
-        'query' => drupal_get_destination(),
-        'html' => TRUE,
-        'attributes' => array(
-          'class' => array("btn", "btn-default", "btn-xs")
-        )
-      )),
-      'resend_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "node/" . $entity->nid, array(
-        'query' => drupal_get_destination(),
-        'html' => TRUE,
-        'attributes' => array(
-          'class' => array("btn", "btn-default", "btn-xs")
-        )
-      )),
-      'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send to referer'), "node/" . $entity->nid, array(
-        'query' => drupal_get_destination(),
-        'html' => TRUE,
-        'attributes' => array(
-          'class' => array("btn", "btn-default", "btn-xs")
-        )
-      )),
+    $buttons = novo_ref_request_prepare_action_buttons($entity->nid);
+
+    $variables['ref_data'] = array_merge($buttons, array(
       'status' => $status,
       'status_label' => $status_label,
       'title' => $label
-    );
+    ));
   }
+}
+
+/**
+ * Prepare action buttons.
+ */
+function novo_ref_request_prepare_action_buttons($nid) {
+  $buttons = array(
+    'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('Pdf'), "entityprint/node/" . $nid, array(
+      'html' => TRUE,
+      'attributes' => array(
+        'target' => '_blank',
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'edit_link' => l('<i class="glyphicon glyphicon-edit"></i> ' . t('Edit'), "node/" . $nid . "/view", array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'resend_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "novo-ref-request/resend/" . $nid, array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send to referer'), "novo-ref-request/resend/" . $nid, array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+  );
+
+  return $buttons;
 }

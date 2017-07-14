@@ -98,8 +98,8 @@ function novo_ref_request_add_tasks_callback($ref_nids) {
             break;
         }
 
-        $name = $title . " " . $ref->ref_username;
-        novo_ref_request_task_add($ref->parent_uid, $nid, $name, $ref->ref_email);
+        $task_name = $title . " " . $ref->ref_username;
+        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $task_name, $ref->ref_email, $ref->ref_phone);
       }
     }
   }
@@ -134,6 +134,9 @@ function novo_ref_request_get_ref_data_by_ref_nid($ref_nid) {
   $query->addField("n", "nid", "parent_nid");
   $query->addField("n", "uid", "parent_uid");
 
+  $query->leftJoin("field_data_field_last_name", "last_name", "n.nid = last_name.entity_id");
+  $query->addExpression("CONCAT(n.title, ' ', last_name.field_last_name_value)", "parent_name");
+
   $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
   $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
   $query->leftJoin("field_data_field_reference_request_church", "ref_church", "n.nid = ref_church.entity_id");
@@ -158,21 +161,39 @@ function novo_ref_request_get_ref_data_by_ref_nid($ref_nid) {
     END", "ref_type", array(":id" => $ref_nid));
 
   // Get email.
+  $ref_1_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_1_email", "field_ref_1_email_email");
+  $ref_2_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_2_email", "field_ref_2_email_email");
+  $ref_standby_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_3_email", "field_ref_3_email_email");
+  $ref_church_subselect = novo_ref_request_get_ref_subselect("field_data_field_church_email", "field_church_email_email");
+  $ref_parents_subselect = novo_ref_request_get_ref_subselect("field_data_field_parent_email", "field_parent_email_email");
   $query->addExpression("CASE
-    WHEN ref_1.field_reference_request_1_target_id = :id THEN (SELECT field_ref_1_email_email FROM field_data_field_ref_1_email WHERE field_data_field_ref_1_email.entity_id = n.nid)
-    WHEN ref_2.field_reference_request_2_target_id = :id THEN (SELECT field_ref_2_email_email FROM field_data_field_ref_2_email WHERE field_data_field_ref_2_email.entity_id = n.nid)
-    WHEN ref_standby.field_reference_request_standby_target_id = :id THEN (SELECT field_ref_3_email_email FROM field_data_field_ref_3_email WHERE field_data_field_ref_3_email.entity_id = n.nid)
-    WHEN ref_church.field_reference_request_church_target_id = :id THEN (SELECT field_church_email_email FROM field_data_field_church_email WHERE field_data_field_church_email.entity_id = n.nid)
-    WHEN ref_parents.field_reference_request_parents_target_id = :id THEN (SELECT field_parent_email_email FROM field_data_field_parent_email WHERE field_data_field_parent_email.entity_id = n.nid)
+    WHEN ref_1.field_reference_request_1_target_id = :id THEN (" . $ref_1_subselect . ")
+    WHEN ref_2.field_reference_request_2_target_id = :id THEN (" . $ref_2_subselect . ")
+    WHEN ref_standby.field_reference_request_standby_target_id = :id THEN (" . $ref_standby_subselect . ")
+    WHEN ref_church.field_reference_request_church_target_id = :id THEN (" . $ref_church_subselect . ")
+    WHEN ref_parents.field_reference_request_parents_target_id = :id THEN (" . $ref_parents_subselect . ")
     END", "ref_email", array(":id" => $ref_nid));
 
-  // Get name.
-  $ref_1_subselect = novo_ref_request_get_ref_name_subselect("field_data_field_ref_1_first_name", "field_ref_1_first_name_value", "field_data_field_ref_1_last_name", "field_ref_1_last_name_value");
-  $ref_2_subselect = novo_ref_request_get_ref_name_subselect("field_data_field_ref_2_first_name", "field_ref_2_first_name_value", "field_data_field_ref_2_last_name", "field_ref_2_last_name_value");
-  $ref_standby_subselect = novo_ref_request_get_ref_name_subselect("field_data_field_ref_3_first_name", "field_ref_3_first_name_value", "field_data_field_ref_3_last_name", "field_ref_3_last_name_value");
-  $ref_church_subselect = novo_ref_request_get_ref_name_subselect("field_data_field_church_home", "field_church_home_value");
-  $ref_parents_subselect = novo_ref_request_get_ref_name_subselect("field_data_field_parent_guardian_first_name", "field_parent_guardian_first_name_value", "field_data_field_parent_guardian_last_name", "field_parent_guardian_last_name_value");
+  // Get phone.
+  $ref_1_subselect = novo_ref_request_get_ref_subselect_fc("field_data_field_ref_1_phone", "field_ref_1_phone_value", "field_data_field_phone_number", "field_phone_number_value");
+  $ref_2_subselect = novo_ref_request_get_ref_subselect_fc("field_data_field_ref_2_phone", "field_ref_2_phone_value", "field_data_field_phone_number", "field_phone_number_value");
+  $ref_standby_subselect = novo_ref_request_get_ref_subselect_fc("field_data_field_ref_3_phone", "field_ref_3_phone_value", "field_data_field_phone_number", "field_phone_number_value");
+  $ref_church_subselect = novo_ref_request_get_ref_subselect_fc("field_data_field_church_phone", "field_church_phone_value", "field_data_field_phone_number", "field_phone_number_value");
+  $ref_parents_subselect = novo_ref_request_get_ref_subselect_fc("field_data_field_parent_phone", "field_parent_phone_value", "field_data_field_phone_number", "field_phone_number_value");
+  $query->addExpression("CASE
+    WHEN ref_1.field_reference_request_1_target_id = :id THEN (" . $ref_1_subselect . ")
+    WHEN ref_2.field_reference_request_2_target_id = :id THEN (" . $ref_2_subselect . ")
+    WHEN ref_standby.field_reference_request_standby_target_id = :id THEN (" . $ref_standby_subselect . ")
+    WHEN ref_church.field_reference_request_church_target_id = :id THEN (" . $ref_church_subselect . ")
+    WHEN ref_parents.field_reference_request_parents_target_id = :id THEN (" . $ref_parents_subselect . ")
+    END", "ref_phone", array(":id" => $ref_nid));
 
+  // Get name.
+  $ref_1_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_1_first_name", "field_ref_1_first_name_value", "field_data_field_ref_1_last_name", "field_ref_1_last_name_value");
+  $ref_2_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_2_first_name", "field_ref_2_first_name_value", "field_data_field_ref_2_last_name", "field_ref_2_last_name_value");
+  $ref_standby_subselect = novo_ref_request_get_ref_subselect("field_data_field_ref_3_first_name", "field_ref_3_first_name_value", "field_data_field_ref_3_last_name", "field_ref_3_last_name_value");
+  $ref_church_subselect = novo_ref_request_get_ref_subselect("field_data_field_church_home", "field_church_home_value");
+  $ref_parents_subselect = novo_ref_request_get_ref_subselect("field_data_field_parent_guardian_first_name", "field_parent_guardian_first_name_value", "field_data_field_parent_guardian_last_name", "field_parent_guardian_last_name_value");
   $query->addExpression("CASE
     WHEN ref_1.field_reference_request_1_target_id = :id THEN (" . $ref_1_subselect . ")
     WHEN ref_2.field_reference_request_2_target_id = :id THEN (" . $ref_2_subselect . ")
@@ -189,16 +210,25 @@ function novo_ref_request_get_ref_data_by_ref_nid($ref_nid) {
 }
 
 /**
- * Build ref name subselect.
+ * Build ref subselect.
  */
-function novo_ref_request_get_ref_name_subselect($table_1, $field_1, $table_2 = NULL, $field_2 = NULL) {
+function novo_ref_request_get_ref_subselect($table_1, $field_1, $table_2 = NULL, $field_2 = NULL) {
   if (!empty($table_2) && !empty($field_2)) {
-    return "SELECT concat(" . $table_1 . "." . $field_1 . ", ' ', " . $table_2 . "." . $field_2 . ")
+    return "SELECT GROUP_CONCAT(concat(" . $table_1 . "." . $field_1 . ", ' ', " . $table_2 . "." . $field_2 . ") SEPARATOR ', ')
           FROM " . $table_1 . " 
           LEFT JOIN " . $table_2 . " on " . $table_1 . ".entity_id = " . $table_2 . ".entity_id
           WHERE " . $table_1 . ".entity_id = n.nid";
   }
   else {
-    return "SELECT " . $table_1 . "." . $field_1 . " FROM " . $table_1 . " WHERE " . $table_1 . ".entity_id = n.nid";
+    return "SELECT GROUP_CONCAT(" . $table_1 . "." . $field_1 . " SEPARATOR ', ') FROM " . $table_1 . " WHERE " . $table_1 . ".entity_id = n.nid";
   }
+}
+
+/**
+ * Build ref subselect for field collection.
+ */
+function novo_ref_request_get_ref_subselect_fc($table_1, $field_1, $fc_table, $fc_field) {
+  return "SELECT GROUP_CONCAT(" . $fc_table . "." . $fc_field . " SEPARATOR ', ') FROM " . $table_1 . " 
+  INNER JOIN field_data_field_phone_number ON field_data_field_phone_number.entity_id = " . $table_1 . "." . $field_1 . "
+  WHERE " . $table_1 . ".entity_id = n.nid";
 }

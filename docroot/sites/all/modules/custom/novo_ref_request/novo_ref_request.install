@@ -44,6 +44,13 @@ function novo_ref_request_install() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'phone' => array(
+        'description' => 'User phone',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'status' => array(
         'description' => 'Task status',
         'type' => 'int',
@@ -62,6 +69,20 @@ function novo_ref_request_install() {
         'type' => 'int',
         'unsigned' => TRUE,
         'default' => 0
+      ),
+      'volunteer_nid' => array(
+        'description' => 'The volunteer node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1
+      ),
+      'volunteer_name' => array(
+        'description' => 'Volunteer name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
       ),
     ),
     'primary key' => array('id'),
@@ -142,4 +163,36 @@ function novo_ref_request_update_7101() {
     ),
   );
   db_create_table('novo_ref_tasks', $table);
+}
+
+/**
+ * Add fields "volunteer_nid" and "volunteer_name".
+ */
+function novo_ref_request_update_7102() {
+  $spec = array(
+    'description' => 'User phone',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'phone', $spec);
+
+  $spec = array(
+    'description' => 'The volunteer node.nid identifier.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 1
+  );
+  db_add_field('novo_ref_tasks', 'volunteer_nid', $spec);
+
+  $spec = array(
+    'description' => 'Volunteer name',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'volunteer_name', $spec);
 }
