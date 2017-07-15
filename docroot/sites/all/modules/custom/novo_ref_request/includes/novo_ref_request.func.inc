@@ -99,7 +99,7 @@ function novo_ref_request_add_tasks_callback($ref_nids) {
         }
 
         $task_name = $title . " " . $ref->ref_username;
-        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $task_name, $ref->ref_email, $ref->ref_phone);
+        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone);
       }
     }
   }
@@ -231,4 +231,22 @@ function novo_ref_request_get_ref_subselect_fc($table_1, $field_1, $fc_table, $f
   return "SELECT GROUP_CONCAT(" . $fc_table . "." . $fc_field . " SEPARATOR ', ') FROM " . $table_1 . " 
   INNER JOIN field_data_field_phone_number ON field_data_field_phone_number.entity_id = " . $table_1 . "." . $field_1 . "
   WHERE " . $table_1 . ".entity_id = n.nid";
+}
+
+/**
+ * Send email to referral.
+ */
+function novo_ref_request_send_email($nid) {
+  $task_data = novo_ref_request_task_get_last($nid);
+  if (!empty($task_data)) {
+    $link = novo_ref_request_generate_hashed_link($nid);
+
+    $data = array(
+      'ref_name' => $task_data->ref_name,
+      'vol_name' => $task_data->volunteer_name,
+      'link' => $link
+    );
+    return drupal_mail('novo_ref_request', 'referral_request', $task_data->email, language_default(), $data);
+  }
+  return FALSE;
 }

@@ -1,4 +1,5 @@
 name = Novoministries Database
+version = VERSION
 description = Novo installation profile
 core = 7.x
 
