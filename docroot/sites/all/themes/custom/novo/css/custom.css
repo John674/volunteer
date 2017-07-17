@@ -88,3 +88,7 @@ a.select2-search-choice-close:hover {
   display: block;
   width: 200px;
 }
+
+#ui-datepicker-div {
+  z-index: 2;
+}

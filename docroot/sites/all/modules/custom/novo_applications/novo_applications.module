@@ -42,7 +42,6 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   }
 
   $form['#submit'][] = "novo_applications_form_submit";
-  $form['field_app_status']['#access'] = FALSE;
 
   // kpr($form);
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;

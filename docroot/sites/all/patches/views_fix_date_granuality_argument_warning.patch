@@ -1,0 +1,34 @@
+Index: docroot/sites/all/modules/contrib/views/handlers/views_handler_field.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/views/handlers/views_handler_field.inc	(date 1500298985000)
++++ docroot/sites/all/modules/contrib/views/handlers/views_handler_field.inc	(revision )
+@@ -1394,7 +1394,7 @@
+       // Use strip tags as there should never be HTML in the path.
+       // However, we need to preserve special characters like " that
+       // were removed by check_plain().
+-      $tokens['!' . $count] = isset($this->view->args[$count - 1]) ? strip_tags(decode_entities($this->view->args[$count - 1])) : '';
++      $tokens['!' . $count] = (isset($this->view->args[$count - 1]) && is_string($this->view->args[$count - 1])) ? strip_tags(decode_entities($this->view->args[$count - 1])) : '';
+     }
+ 
+     // Get flattened set of tokens for any array depth in $_GET parameters.
+Index: docroot/sites/all/modules/contrib/views/includes/view.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/views/includes/view.inc	(date 1500298985000)
++++ docroot/sites/all/modules/contrib/views/includes/view.inc	(revision )
+@@ -832,7 +832,9 @@
+ 
+         // Add this argument's substitution
+         $substitutions['%' . ($position + 1)] = $arg_title;
+-        $substitutions['!' . ($position + 1)] = strip_tags(decode_entities($arg));
++        if (is_string($arg)) {
++          $substitutions['!' . ($position + 1)] = strip_tags(decode_entities($arg));
++        }
+ 
+         // Since we're really generating the breadcrumb for the item above us,
+         // check the default action of this argument.

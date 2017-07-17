@@ -1683,7 +1683,7 @@ function novo_content_feature_field_default_field_instances() {
     'bundle' => 'application',
     'default_value' => array(
       0 => array(
-        'tid' => 96,
+        'tid' => 194,
       ),
     ),
     'deleted' => 0,
@@ -6573,6 +6573,296 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-attendance-field_attendance_date'.
+  $field_instances['node-attendance-field_attendance_date'] = array(
+    'bundle' => 'attendance',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_date',
+    'label' => 'Attendance date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_kids_list'.
+  $field_instances['node-attendance-field_attendance_kids_list'] = array(
+    'bundle' => 'attendance',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_kids_list',
+    'label' => 'Kids list',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_program_name'.
+  $field_instances['node-attendance-field_attendance_program_name'] = array(
+    'bundle' => 'attendance',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_program_name',
+    'label' => 'Program name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_staff_list'.
+  $field_instances['node-attendance-field_attendance_staff_list'] = array(
+    'bundle' => 'attendance',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_staff_list',
+    'label' => 'Staff list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(
+        'hide_ids' => FALSE,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'STARTS_WITH',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+        'size' => 60,
+      ),
+      'type' => 'select2widgetajax',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_volunteer_list'.
+  $field_instances['node-attendance-field_attendance_volunteer_list'] = array(
+    'bundle' => 'attendance',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_volunteer_list',
+    'label' => 'Volunteer list',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select2widget',
+      'settings' => array(
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'STARTS_WITH',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
+      ),
+      'type' => 'select2widgetajax',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_year'.
+  $field_instances['node-attendance-field_attendance_year'] = array(
+    'bundle' => 'attendance',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_year',
+    'label' => 'Year',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'site-wide',
+        'input_format_custom' => 'Y',
+        'label_position' => 'above',
+        'no_fieldset' => 1,
+        'text_parts' => array(),
+        'year_range' => '-10:+3',
+      ),
+      'type' => 'date_select',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-kids-field_active_inactive'.
   $field_instances['node-kids-field_active_inactive'] = array(
     'bundle' => 'kids',
@@ -9486,6 +9776,7 @@ Re-Dedication',
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');
   t('Attend Church Regularly?');
+  t('Attendance date');
   t('Canvassing Group');
   t('Church Reference');
   t('Church name');
@@ -9587,6 +9878,7 @@ Re-Dedication',
   t('Program Location');
   t('Program Name');
   t('Program day');
+  t('Program name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');
@@ -9619,11 +9911,13 @@ Re-Dedication',
   t('Type');
   t('VOLUNTEER INTERESTS / ROLES');
   t('Volunteer Mentor Name');
+  t('Volunteer list');
   t('Volunteers list');
   t('Weekday');
   t('What did you talk about');
   t('What verses did you share');
   t('When and how did you receive Jesus as Savior?');
+  t('Year');
   t('Zip');
 
   return $field_instances;

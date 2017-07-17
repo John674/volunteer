@@ -1,0 +1,5 @@
+name = Novo Attendance
+description = Attendance module.
+core = 7.x
+package = Novo
+version = 7.x-1.0

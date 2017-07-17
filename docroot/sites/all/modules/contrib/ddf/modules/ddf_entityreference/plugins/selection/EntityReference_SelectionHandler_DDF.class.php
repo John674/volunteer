@@ -11,7 +11,7 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
   public static function storeControllingFieldValues($values, $entity_type, $entity) {
     $entity_id = 0;
     if (!is_null($entity)) {
-      list($entity_id,,) = entity_extract_ids($entity_type, $entity);
+      list($entity_id, ,) = entity_extract_ids($entity_type, $entity);
       if (empty($entity_id)) {
         $entity_id = 0;
       }
@@ -52,13 +52,15 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
         if ($other_instance['field_name'] == $instance['field_name']) {
           continue;
         }
-        if (($other_instance['widget']['type'] != 'options_select') && ($other_instance['widget']['type'] != 'options_buttons')) {
+
+        if (($other_instance['widget']['type'] != 'options_select') && ($other_instance['widget']['type'] != 'options_buttons') && ($other_instance['widget']['type'] != 'date_select')) {
           continue;
         }
         $other_field = field_info_field($other_instance['field_name']);
         if ($other_field['cardinality'] != 1) {
           continue;
         }
+
         if (($other_field['type'] === 'entityreference') || (count($other_field['columns']) === 1)) {
           $master_fields[$other_instance['field_name']] = htmlspecialchars($other_instance['label']);
         }
@@ -99,7 +101,7 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
       $target_type = $this->field['settings']['target_type'];
       $entities = entity_load($target_type, array_keys($result));
       foreach ($entities as $entity) {
-        list($id,, $bundle) = entity_extract_ids($target_type, $entity);
+        list($id, , $bundle) = entity_extract_ids($target_type, $entity);
         $return[$bundle][$id] = $result[$id];
       }
     }
@@ -142,6 +144,7 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
       $data = array($this->entity_type_token => $this->entity);
     }
     // Replace tokens for each argument.
+
     foreach ($args as $key => $arg) {
       $args[$key] = token_replace($arg, $data, $options);
     }
@@ -162,7 +165,7 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
 
     $entity_id = 0;
     if (!is_null($this->entity)) {
-      list($entity_id,,) = entity_extract_ids($this->entity_type, $this->entity);
+      list($entity_id, ,) = entity_extract_ids($this->entity_type, $this->entity);
       if (empty($entity_id)) {
         $entity_id = 0;
       }
@@ -184,12 +187,14 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
 
       $column = $columns[0];
       if ((isset(self::$controlling_field_values[$this->entity_type][$entity_id]))
-          && (array_key_exists($field_name, self::$controlling_field_values[$this->entity_type][$entity_id]))) {
+        && (array_key_exists($field_name, self::$controlling_field_values[$this->entity_type][$entity_id]))
+      ) {
         $args[$key] = self::$controlling_field_values[$this->entity_type][$entity_id][$field_name];
       }
       elseif (isset($this->entity->{$field_name})) {
         foreach ($this->entity->{$field_name} as $values) {
           foreach ($values as $value) {
+            drupal_alter("ddf_handle_args", $value, $column, $field);
             if (!is_array($value)) {
               $args[$key] = $value;
             }
