@@ -236,12 +236,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Reference 2:',
     'weight' => '72',
     'children' => array(
-      0 => 'field_ref_2_prefix',
+      0 => 'field_ref_2_email',
       1 => 'field_ref_2_first_name',
-      2 => 'field_ref_2_last_name',
-      3 => 'field_ref_2_email',
-      4 => 'field_ref_2_how_long',
-      5 => 'field_ref_2_how_long_period',
+      2 => 'field_ref_2_how_long',
+      3 => 'field_ref_2_how_long_period',
+      4 => 'field_ref_2_last_name',
+      5 => 'field_ref_2_prefix',
       6 => 'field_ref_2_phone',
       7 => 'field_ref_2_how_know',
       8 => 'field_reference_request_2',
@@ -272,12 +272,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Standby Reference',
     'weight' => '73',
     'children' => array(
-      0 => 'field_ref_3_prefix',
+      0 => 'field_ref_3_email',
       1 => 'field_ref_3_first_name',
-      2 => 'field_ref_3_last_name',
-      3 => 'field_ref_3_email',
-      4 => 'field_ref_3_how_long',
-      5 => 'field_ref_3_how_long_period',
+      2 => 'field_ref_3_how_long',
+      3 => 'field_ref_3_how_long_period',
+      4 => 'field_ref_3_last_name',
+      5 => 'field_ref_3_prefix',
       6 => 'field_ref_3_phone',
       7 => 'field_ref_3_how_know',
       8 => 'field_reference_request_standby',
@@ -322,17 +322,17 @@ function novo_content_feature_field_group_info() {
       11 => 'field_t_shirt_size',
       12 => 'field_color_preference',
       13 => 'field_how_did_you_hear_about_nov',
-      14 => 'field_prefix',
-      15 => 'field_app_status',
+      14 => 'field_app_status',
+      15 => 'field_prefix',
       16 => 'field_phone',
-      17 => 'field_texting',
-      18 => 'field_notes',
-      19 => 'field_what_site_you_want',
-      20 => 'field_ssn',
-      21 => 'field_church',
-      22 => 'field_completed',
-      23 => 'field_gender',
-      24 => 'field_training_list',
+      17 => 'field_what_site_you_want',
+      18 => 'field_ssn',
+      19 => 'field_gender',
+      20 => 'field_notes',
+      21 => 'field_texting',
+      22 => 'field_church',
+      23 => 'field_training_list',
+      24 => 'field_completed',
       25 => 'title',
       26 => 'group_app_emergency_contact',
     ),
@@ -561,10 +561,10 @@ function novo_content_feature_field_group_info() {
     'label' => 'Parents',
     'weight' => '176',
     'children' => array(
-      0 => 'field_parent_guardian_first_name',
-      1 => 'field_parent_guardian_last_name',
-      2 => 'field_parent_phone',
-      3 => 'field_parent_prefix',
+      0 => 'field_parent_prefix',
+      1 => 'field_parent_guardian_first_name',
+      2 => 'field_parent_guardian_last_name',
+      3 => 'field_parent_phone',
       4 => 'field_reference_request_parents',
       5 => 'field_parent_email',
     ),
@@ -594,12 +594,12 @@ function novo_content_feature_field_group_info() {
     'label' => 'Reference 1:',
     'weight' => '71',
     'children' => array(
-      0 => 'field_ref_1_prefix',
+      0 => 'field_ref_1_email',
       1 => 'field_ref_1_first_name',
-      2 => 'field_ref_1_last_name',
-      3 => 'field_ref_1_email',
-      4 => 'field_ref_1_how_long',
-      5 => 'field_ref_1_how_long_period',
+      2 => 'field_ref_1_how_long',
+      3 => 'field_ref_1_how_long_period',
+      4 => 'field_ref_1_last_name',
+      5 => 'field_ref_1_prefix',
       6 => 'field_ref_1_phone',
       7 => 'field_ref_1_how_know',
       8 => 'field_reference_request_1',
@@ -694,11 +694,11 @@ function novo_content_feature_field_group_info() {
     'label' => 'CHURCH ATTENDANCE AND BACKGROUND',
     'weight' => '118',
     'children' => array(
-      0 => 'field_church_home',
-      1 => 'field_church_how_long_attended',
-      2 => 'field_church_prev',
-      3 => 'field_church_reference',
-      4 => 'field_church_email',
+      0 => 'field_church_email',
+      1 => 'field_church_home',
+      2 => 'field_church_how_long_attended',
+      3 => 'field_church_prev',
+      4 => 'field_church_reference',
       5 => 'field_church_phone',
       6 => 'field_reference_request_church',
     ),
@@ -757,18 +757,18 @@ function novo_content_feature_field_group_info() {
     'weight' => '117',
     'children' => array(
       0 => 'field_pertinent_q1',
-      1 => 'field_pertinent_q2',
-      2 => 'field_pertinent_q3',
-      3 => 'field_pertinent_q4',
-      4 => 'field_pertinent_q5',
-      5 => 'field_pertinent_q6',
-      6 => 'field_pertinent_q7',
-      7 => 'field_pertinent_q8',
-      8 => 'field_pertinent_q9',
-      9 => 'field_pertinent_q10',
-      10 => 'field_pertinent_q11',
-      11 => 'field_pertinent_q12',
-      12 => 'field_pertinent_q13',
+      1 => 'field_pertinent_q10',
+      2 => 'field_pertinent_q11',
+      3 => 'field_pertinent_q12',
+      4 => 'field_pertinent_q13',
+      5 => 'field_pertinent_q2',
+      6 => 'field_pertinent_q3',
+      7 => 'field_pertinent_q4',
+      8 => 'field_pertinent_q5',
+      9 => 'field_pertinent_q6',
+      10 => 'field_pertinent_q7',
+      11 => 'field_pertinent_q8',
+      12 => 'field_pertinent_q9',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1323,6 +1323,258 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_beliefs|node|application|pdf';
+  $field_group->group_name = 'group_beliefs';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_4';
+  $field_group->data = array(
+    'label' => 'PERSONAL BELIEFS',
+    'weight' => '6',
+    'children' => array(
+      0 => 'field_beliefs_q1',
+      1 => 'field_beliefs_q2',
+      2 => 'field_beliefs_q3',
+      3 => 'field_beliefs_q4',
+      4 => 'field_beliefs_q5',
+      5 => 'field_beliefs_q6',
+      6 => 'field_beliefs_q7',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-beliefs field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_beliefs|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_church|node|application|pdf';
+  $field_group->group_name = 'group_church';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_4';
+  $field_group->data = array(
+    'label' => 'CHURCH ATTENDANCE AND BACKGROUND',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_church_email',
+      1 => 'field_church_home',
+      2 => 'field_church_how_long_attended',
+      3 => 'field_church_prev',
+      4 => 'field_church_phone',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-church field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_church|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_contact_info|node|application|pdf';
+  $field_group->group_name = 'group_contact_info';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_1';
+  $field_group->data = array(
+    'label' => 'CONTACT / PERSONAL INFORMATION',
+    'weight' => '114',
+    'children' => array(
+      0 => 'field_goes_by',
+      1 => 'field_middle',
+      2 => 'field_last_name',
+      3 => 'field_maiden_name_or_alias_names',
+      4 => 'field_address_1',
+      5 => 'field_address_2',
+      6 => 'field_city',
+      7 => 'field_state',
+      8 => 'field_zip',
+      9 => 'field_dob',
+      10 => 'field_email',
+      11 => 'field_t_shirt_size',
+      12 => 'field_color_preference',
+      13 => 'field_prefix',
+      14 => 'field_phone',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-contact-info field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_contact_info|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_education|node|application|pdf';
+  $field_group->group_name = 'group_education';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_1';
+  $field_group->data = array(
+    'label' => 'EDUCATION',
+    'weight' => '117',
+    'children' => array(
+      0 => 'field_edu_level',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-education field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_education|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_emergency_contact|node|application|pdf';
+  $field_group->group_name = 'group_emergency_contact';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_1';
+  $field_group->data = array(
+    'label' => 'Emergency Contact',
+    'weight' => '115',
+    'children' => array(
+      0 => 'field_emergency_name',
+      1 => 'field_how_did_you_hear_about_nov',
+      2 => 'field_relationship',
+      3 => 'field_masked_emergency_phone',
+      4 => 'field_what_site_you_want',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-emergency-contact field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_emergency_contact|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_employment|node|application|pdf';
+  $field_group->group_name = 'group_employment';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_1';
+  $field_group->data = array(
+    'label' => 'EMPLOYMENT / OCCUPATION',
+    'weight' => '116',
+    'children' => array(
+      0 => 'field_employer',
+      1 => 'field_empl_title',
+      2 => 'field_empl_length',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-employment field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_employment|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_final|node|application|pdf';
+  $field_group->group_name = 'group_final';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_7';
+  $field_group->data = array(
+    'label' => 'FINAL AUTHORIZATION',
+    'weight' => '22',
+    'children' => array(
+      0 => 'field_app_7_final_agree_1',
+      1 => 'field_app_7_final_agree_2',
+      2 => 'field_app_7_final_agree_3',
+      3 => 'field_app_7_final_agree_4',
+      4 => 'field_app_7_final_agree_5',
+      5 => 'field_app_7_final_agree_6',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-final field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_final|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_ministry|node|application|pdf';
+  $field_group->group_name = 'group_ministry';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_1';
+  $field_group->data = array(
+    'label' => 'MINISTRY / VOLUNTEER EXPERIENCE',
+    'weight' => '118',
+    'children' => array(
+      0 => 'field_ministry_experience',
+      1 => 'field_ministry_cert',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-ministry field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_ministry|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_p_group|field_collection_item|field_program_kids_list|form';
   $field_group->group_name = 'group_p_group';
   $field_group->entity_type = 'field_collection_item';
@@ -1357,6 +1609,513 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_parents|node|application|pdf';
+  $field_group->group_name = 'group_parents';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_references';
+  $field_group->data = array(
+    'label' => 'Parents',
+    'weight' => '141',
+    'children' => array(
+      0 => 'field_parent_prefix',
+      1 => 'field_parent_guardian_first_name',
+      2 => 'field_parent_guardian_last_name',
+      3 => 'field_parent_phone',
+      4 => 'field_parent_email',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-parents field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_parents|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_personal_beliefs|node|application|pdf';
+  $field_group->group_name = 'group_personal_beliefs';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_5';
+  $field_group->data = array(
+    'label' => 'PERSONAL BELIEFS',
+    'weight' => '17',
+    'children' => array(
+      0 => 'field_beliefs2_q1',
+      1 => 'field_beliefs2_q2',
+      2 => 'field_beliefs2_q3',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-personal-beliefs field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_personal_beliefs|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_pertinent_questions|node|application|pdf';
+  $field_group->group_name = 'group_pertinent_questions';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_4';
+  $field_group->data = array(
+    'label' => 'PERTINENT QUESTIONS',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_pertinent_q1',
+      1 => 'field_pertinent_q10',
+      2 => 'field_pertinent_q11',
+      3 => 'field_pertinent_q12',
+      4 => 'field_pertinent_q13',
+      5 => 'field_pertinent_q2',
+      6 => 'field_pertinent_q3',
+      7 => 'field_pertinent_q4',
+      8 => 'field_pertinent_q5',
+      9 => 'field_pertinent_q6',
+      10 => 'field_pertinent_q7',
+      11 => 'field_pertinent_q8',
+      12 => 'field_pertinent_q9',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-pertinent-questions field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_pertinent_questions|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_program_policies|node|application|pdf';
+  $field_group->group_name = 'group_program_policies';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_7';
+  $field_group->data = array(
+    'label' => 'PERTINENT PROGRAM POLICIES',
+    'weight' => '21',
+    'children' => array(
+      0 => 'field_program_policies_agree',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-program-policies field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_program_policies|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_reference_1|node|application|pdf';
+  $field_group->group_name = 'group_reference_1';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_references';
+  $field_group->data = array(
+    'label' => 'Reference 1',
+    'weight' => '138',
+    'children' => array(
+      0 => 'field_ref_1_email',
+      1 => 'field_ref_1_first_name',
+      2 => 'field_ref_1_last_name',
+      3 => 'field_ref_1_prefix',
+      4 => 'field_ref_2_how_long',
+      5 => 'field_ref_1_phone',
+      6 => 'field_ref_1_how_know',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-reference-1 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_reference_1|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_reference_2|node|application|pdf';
+  $field_group->group_name = 'group_reference_2';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_references';
+  $field_group->data = array(
+    'label' => 'Reference 2',
+    'weight' => '139',
+    'children' => array(
+      0 => 'field_ref_1_how_long',
+      1 => 'field_ref_2_email',
+      2 => 'field_ref_2_first_name',
+      3 => 'field_ref_2_last_name',
+      4 => 'field_ref_2_prefix',
+      5 => 'field_ref_2_phone',
+      6 => 'field_ref_2_how_know',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-reference-2 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_reference_2|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_reference_3|node|application|pdf';
+  $field_group->group_name = 'group_reference_3';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_references';
+  $field_group->data = array(
+    'label' => 'Standby Reference',
+    'weight' => '140',
+    'children' => array(
+      0 => 'field_ref_3_email',
+      1 => 'field_ref_3_first_name',
+      2 => 'field_ref_3_how_long',
+      3 => 'field_ref_3_last_name',
+      4 => 'field_ref_3_prefix',
+      5 => 'field_ref_3_phone',
+      6 => 'field_ref_3_how_know',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Standby Reference',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-reference-3 field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsible',
+    ),
+  );
+  $field_groups['group_reference_3|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_references|node|application|pdf';
+  $field_group->group_name = 'group_references';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_3';
+  $field_group->data = array(
+    'label' => 'REFERENCES',
+    'weight' => '86',
+    'children' => array(
+      0 => 'group_reference_1',
+      1 => 'group_reference_2',
+      2 => 'group_reference_3',
+      3 => 'group_parents',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-references field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_references|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_roles|node|application|pdf';
+  $field_group->group_name = 'group_roles';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_2';
+  $field_group->data = array(
+    'label' => 'VOLUNTEER INTERESTS / ROLES',
+    'weight' => '86',
+    'children' => array(
+      0 => 'field_volunteer_interests_roles',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-roles field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_roles|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_statement|node|application|pdf';
+  $field_group->group_name = 'group_statement';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_7';
+  $field_group->data = array(
+    'label' => 'OUR STATEMENT OF FAITH',
+    'weight' => '20',
+    'children' => array(
+      0 => 'field_app7_statement_agree',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-statement field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_statement|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_1|node|application|pdf';
+  $field_group->group_name = 'group_step_1';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 1',
+    'weight' => '0',
+    'children' => array(
+      0 => 'group_contact_info',
+      1 => 'group_emergency_contact',
+      2 => 'group_education',
+      3 => 'group_ministry',
+      4 => 'group_employment',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-1 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_1|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_2|node|application|pdf';
+  $field_group->group_name = 'group_step_2';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 2',
+    'weight' => '1',
+    'children' => array(
+      0 => 'group_roles',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-2 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_2|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_3|node|application|pdf';
+  $field_group->group_name = 'group_step_3';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 3',
+    'weight' => '2',
+    'children' => array(
+      0 => 'group_references',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-3 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_3|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_4|node|application|pdf';
+  $field_group->group_name = 'group_step_4';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 4',
+    'weight' => '3',
+    'children' => array(
+      0 => 'group_pertinent_questions',
+      1 => 'group_church',
+      2 => 'group_beliefs',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-4 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_4|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_5|node|application|pdf';
+  $field_group->group_name = 'group_step_5';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 5',
+    'weight' => '4',
+    'children' => array(
+      0 => 'group_personal_beliefs',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-5 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_5|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_6|node|application|pdf';
+  $field_group->group_name = 'group_step_6';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 6',
+    'weight' => '5',
+    'children' => array(
+      0 => 'group_things',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-6 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_6|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_step_7|node|application|pdf';
+  $field_group->group_name = 'group_step_7';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Step 7',
+    'weight' => '6',
+    'children' => array(
+      0 => 'group_statement',
+      1 => 'group_program_policies',
+      2 => 'group_final',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-step-7 field-group-fieldset',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_step_7|node|application|pdf'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_test|node|application|pdf';
   $field_group->group_name = 'group_test';
   $field_group->entity_type = 'node';
@@ -1384,6 +2143,39 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   );
   $field_groups['group_test|node|application|pdf'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_things|node|application|pdf';
+  $field_group->group_name = 'group_things';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'application';
+  $field_group->mode = 'pdf';
+  $field_group->parent_name = 'group_step_6';
+  $field_group->data = array(
+    'label' => 'THINGS TO KNOW ABOUT NOVO',
+    'weight' => '18',
+    'children' => array(
+      0 => 'field_things_q1',
+      1 => 'field_things_q2',
+      2 => 'field_things_q3',
+      3 => 'field_things_q4',
+      4 => 'field_things_q5',
+      5 => 'field_things_q6',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'THINGS TO KNOW ABOUT NOVO',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-things field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsible',
+    ),
+  );
+  $field_groups['group_things|node|application|pdf'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('ADDITIONAL INFORMATION');
@@ -1401,7 +2193,9 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   t('PERTINENT QUESTIONS');
   t('Parents');
   t('REFERENCES');
+  t('Reference 1');
   t('Reference 1:');
+  t('Reference 2');
   t('Reference 2:');
   t('Standby Reference');
   t('Step 1');

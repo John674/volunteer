@@ -1201,6 +1201,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_how_did_you_hear_about_nov',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1401,8 +1404,8 @@ function novo_content_feature_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Staff' => 'Staff',
-        'Volunteer' => 'Volunteer',
+        'staff' => 'Staff',
+        'volunteer' => 'Volunteer',
       ),
       'allowed_values_function' => '',
     ),
@@ -1680,6 +1683,7 @@ function novo_content_feature_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
+      'delete_on_parent_delete' => '',
       'handler' => 'base',
       'handler_settings' => array(
         'behaviors' => array(
@@ -2364,6 +2368,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_prefix',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -2378,6 +2385,7 @@ function novo_content_feature_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'delete_on_parent_delete' => '',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
