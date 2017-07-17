@@ -70,8 +70,46 @@ function novo_export_entity_print_css($entity_type, $entity) {
       case "reference_request":
         entity_print_add_css(drupal_get_path("module", "novo_export") . "/css/reference_request_pdf.css");
         break;
+
       case "application":
         entity_print_add_css(drupal_get_path("module", "novo_export") . "/css/application_pdf.css");
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function novo_export_preprocess_field(&$variables) {
+  $node = $variables['element']['#object'];
+  if (isset($node->type) && ($node->type == 'application')) {
+    switch ($variables['element']['#field_name']) {
+      case 'field_ref_1_how_long':
+        $field_ref_1_how_long_period = field_get_items('node', $node, 'field_ref_1_how_long_period');
+        if (!empty($field_ref_1_how_long_period)) {
+          $value_ref_1_how_long_period = field_view_value('node', $node, 'field_ref_1_how_long_period', $field_ref_1_how_long_period[0]);
+          $value_ref_1_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_1_how_long_period['#markup'];
+          $variables['items'][0]['#markup'] = !empty($value_ref_1_how_long) ? $value_ref_1_how_long : $variables['items'][0]['#markup'];
+        }
+        break;
+
+      case 'field_ref_2_how_long':
+        $field_ref_2_how_long_period = field_get_items('node', $node, 'field_ref_2_how_long_period');
+        if (!empty($field_ref_2_how_long_period)) {
+          $value_ref_2_how_long_period = field_view_value('node', $node, 'field_ref_2_how_long_period', $field_ref_2_how_long_period[0]);
+          $value_ref_2_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_2_how_long_period['#markup'];
+          $variables['items'][0]['#markup'] = !empty($value_ref_2_how_long) ? $value_ref_2_how_long : $variables['items'][0]['#markup'];
+        }
+        break;
+
+      case 'field_ref_3_how_long':
+        $field_ref_3_how_long_period = field_get_items('node', $node, 'field_ref_3_how_long_period');
+        if (!empty($field_ref_3_how_long_period)) {
+          $value_ref_3_how_long_period = field_view_value('node', $node, 'field_ref_3_how_long_period', $field_ref_3_how_long_period[0]);
+          $value_ref_3_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_3_how_long_period['#markup'];
+          $variables['items'][0]['#markup'] = !empty($value_ref_3_how_long) ? $value_ref_3_how_long : $variables['items'][0]['#markup'];
+        }
         break;
     }
   }

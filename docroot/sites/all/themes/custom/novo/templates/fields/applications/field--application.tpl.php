@@ -45,7 +45,7 @@
  */
 ?>
 
-<div class="row field">
+<div class="row field pdf-field">
     <div class="col-md-6">
       <?php if (!$label_hidden): ?>
           <div class="field-label">
