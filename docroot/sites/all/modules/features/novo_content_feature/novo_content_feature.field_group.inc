@@ -1845,10 +1845,10 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'label' => 'REFERENCES',
     'weight' => '86',
     'children' => array(
-      0 => 'group_reference_1',
-      1 => 'group_reference_2',
-      2 => 'group_reference_3',
-      3 => 'group_parents',
+      0 => 'group_parents',
+      1 => 'group_reference_1',
+      2 => 'group_reference_2',
+      3 => 'group_reference_3',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -1930,10 +1930,10 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'weight' => '0',
     'children' => array(
       0 => 'group_contact_info',
-      1 => 'group_emergency_contact',
-      2 => 'group_education',
-      3 => 'group_ministry',
-      4 => 'group_employment',
+      1 => 'group_education',
+      2 => 'group_emergency_contact',
+      3 => 'group_employment',
+      4 => 'group_ministry',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -2014,9 +2014,9 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'label' => 'Step 4',
     'weight' => '3',
     'children' => array(
-      0 => 'group_pertinent_questions',
+      0 => 'group_beliefs',
       1 => 'group_church',
-      2 => 'group_beliefs',
+      2 => 'group_pertinent_questions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -2097,9 +2097,9 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'label' => 'Step 7',
     'weight' => '6',
     'children' => array(
-      0 => 'group_statement',
+      0 => 'group_final',
       1 => 'group_program_policies',
-      2 => 'group_final',
+      2 => 'group_statement',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
