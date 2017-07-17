@@ -17,7 +17,8 @@ define("NOVO_REF_REQUEST_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
 define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
 
-define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
+//define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
+define("NOVO_REF_REQUEST_CRON_PERIOD", 1);
 
 // 72 hours.
 define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
@@ -398,10 +399,14 @@ function novo_ref_request_theme($existing, $type, $theme, $path) {
  * Implements hook_mail().
  */
 function novo_ref_request_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+
   switch ($key) {
     case 'referral_request':
       $html_email = theme("novo_ref_request_ref_email", array('params' => $params));
-      $message['subject'] = t(":vol_name Has Requested You As a Reference!", array(":vol_name" => $params['vol_name']));
+      $message['subject'] = strip_tags(t(":vol_name Has Requested You As a Reference!", array(":vol_name" => $params['vol_name'])));
       $message['from'] = NOVO_REF_REQUEST_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;

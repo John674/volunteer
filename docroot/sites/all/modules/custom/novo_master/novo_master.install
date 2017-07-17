@@ -392,3 +392,10 @@ function novo_master_update_7133() {
   field_purge_batch(1);
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_master_feature -> added smtp mail and mailsystem.
+ */
+function novo_master_update_7134() {
+  features_revert_module("novo_master_feature");
+}
