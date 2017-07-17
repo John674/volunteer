@@ -383,3 +383,12 @@ function novo_master_update_7131() {
 function novo_master_update_7132() {
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Revert novo_content_feature and delete field_parent_email_u.
+ */
+function novo_master_update_7133() {
+  field_delete_field('field_parent_email_u');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+}
