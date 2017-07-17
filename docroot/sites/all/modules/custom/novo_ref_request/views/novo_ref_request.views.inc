@@ -220,6 +220,20 @@ function novo_ref_request_views_data() {
     ),
   );
 
+  $data['novo_ref_tasks']['ref_name'] = array(
+    'title' => t('Referral name'),
+    'help' => t('The referral name.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+  );
+
   $data['novo_ref_tasks']['actions'] = array(
     'real field' => 'status',
     'field' => array(

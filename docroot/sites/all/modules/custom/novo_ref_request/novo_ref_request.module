@@ -13,6 +13,17 @@ define('NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME', 'Standby');
 define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
 define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
 
+define("NOVO_REF_REQUEST_BASE_EMAIL", "volunteer@novoministries.org");
+define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
+define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
+
+//define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
+define("NOVO_REF_REQUEST_CRON_PERIOD", 1);
+
+// 72 hours.
+define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
+
+
 define('NOVO_REF_REQUEST_TASK_STATUSES', serialize(array(
   0 => t("Not sent"),
   1 => t("Not responded"),
@@ -47,7 +58,7 @@ function novo_ref_request_menu() {
 function novo_ref_request_resend_callback($nid) {
   $task = novo_ref_request_task_get_last($nid);
   if (!empty($task)) {
-    novo_ref_request_task_add($task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->name, $task->email, $task->phone);
+    novo_ref_request_task_add($task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->ref_name, $task->name, $task->email, $task->phone);
     drupal_set_message(t("The request was sent to the queue for sending."));
     $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
     drupal_goto($url);
@@ -114,10 +125,20 @@ function novo_ref_request_preprocess_node(&$variables) {
     $node = $variables['node'];
     $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
     $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
-    if (!$responded || user_access("edit ref request with any status")) {
+    $task = novo_ref_request_task_get_last($node->nid);
+
+    if ((isset($task->status) && $task->status == 1 && !$responded) || user_access("edit ref request with any status")) {
       $save_form = drupal_get_form("novo_ref_request_save_form", $node);
       $variables['content'] = array();
       $variables['content']['save_form'] = $save_form;
+    }
+
+    if ($responded && !user_access("edit ref request with any status")) {
+      drupal_set_message(t("You have already answered."));
+    }
+
+    if (isset($task->status) && $task->status > 2 && !user_access("edit ref request with any status")) {
+      drupal_set_message(t("The response time has ended."));
     }
 
     $link = novo_ref_request_generate_hashed_link($variables['nid']);
@@ -173,7 +194,10 @@ function novo_ref_request_save_form($form, &$form_state, $node) {
   $form['actions']['cancel'] = array(
     '#type' => 'submit',
     '#value' => t('Cancel'),
-    '#submit' => array('novo_ref_request_save_form_cancel', 'node_form_submit_build_node'),
+    '#submit' => array(
+      'novo_ref_request_save_form_cancel',
+      'node_form_submit_build_node'
+    ),
     '#limit_validation_errors' => array(),
   );
 
@@ -357,4 +381,95 @@ function novo_ref_request_prepare_action_buttons($nid) {
   );
 
   return $buttons;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_ref_request_theme($existing, $type, $theme, $path) {
+  return array(
+    'novo_ref_request_ref_email' => array(
+      'variables' => array('params' => NULL),
+      'template' => 'templates//email/novo-ref-request-ref-email',
+    )
+  );
+}
+
+/**
+ * Implements hook_mail().
+ */
+function novo_ref_request_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+
+  switch ($key) {
+    case 'referral_request':
+      $html_email = theme("novo_ref_request_ref_email", array('params' => $params));
+      $message['subject'] = strip_tags(t(":vol_name Has Requested You As a Reference!", array(":vol_name" => $params['vol_name'])));
+      $message['from'] = NOVO_REF_REQUEST_BASE_EMAIL;
+      $message['body'][] = $html_email;
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function novo_ref_request_cron_queue_info() {
+  $queue['novo_ref_request_email_queue'] = array(
+    'worker callback' => 'novo_ref_request_email_queue_worker',
+    'time' => 60,
+  );
+
+  $queue['novo_ref_request_expired_queue'] = array(
+    'worker callback' => 'novo_ref_request_expired_queue_worker',
+    'time' => 60,
+  );
+
+  return $queue;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function novo_ref_request_cron() {
+  $cron_last = variable_get('novo_ref_request_cron_last');
+  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_PERIOD) {
+    $email_queue = DrupalQueue::get('novo_ref_request_email_queue');
+    $data = novo_ref_request_task_get_all_not_sent();
+    foreach ($data as $key => $task) {
+      $email_queue->createItem(array('nid' => $task->nid, 'id' => $task->id));
+    }
+
+    $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
+    $data = novo_ref_request_task_get_all_not_responded_expired();
+    foreach ($data as $key => $task) {
+      $expired_queue->createItem(array('id' => $task->id));
+    }
+
+    variable_set('novo_ref_request_cron_last', time());
+  }
+}
+
+/**
+ * Send emails worker.
+ */
+function novo_ref_request_email_queue_worker($data) {
+  $result = novo_ref_request_send_email($data['nid']);
+  if ($result && isset($result['result']) && $result['result']) {
+    novo_ref_request_task_update_status_by_id($data['id'], 1);
+  }
+  else {
+    watchdog("novo_ref_request", "Can't send email :nid", array(
+      ":nid" => $data['nid']
+    ), WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * Set expired tasks.
+ */
+function novo_ref_request_expired_queue_worker($data) {
+  novo_ref_request_task_update_status_by_id($data['id'], 3);
 }
