@@ -84,6 +84,13 @@ function novo_ref_request_install() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'ref_name' => array(
+        'description' => 'Referral name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      )
     ),
     'primary key' => array('id'),
     'indexes' => array(
@@ -195,4 +202,18 @@ function novo_ref_request_update_7102() {
     'default' => '',
   );
   db_add_field('novo_ref_tasks', 'volunteer_name', $spec);
+}
+
+/**
+ * Add fields "ref_name".
+ */
+function novo_ref_request_update_7103() {
+  $spec = array(
+    'description' => 'Referral name',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'ref_name', $spec);
 }

@@ -20,7 +20,7 @@
  * @return DatabaseStatementInterface|int
  *   Result.
  */
-function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, $name, $email, $phone) {
+function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, $ref_name, $name, $email, $phone) {
   $exist = novo_ref_request_task_get_all_active($nid);
   if ($exist) {
     foreach ($exist as $key => $value) {
@@ -39,6 +39,7 @@ function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, 
       'nid' => $nid,
       'volunteer_nid' => $volunteer_nid,
       'volunteer_name' => $volunteer_name,
+      'ref_name' => $ref_name,
       'name' => $name,
       'email' => $email,
       'phone' => $phone,
@@ -75,6 +76,26 @@ function novo_ref_request_task_get_all_active($nid) {
   return db_query("SELECT * FROM {novo_ref_tasks} WHERE nid = :nid AND status <> 4", array(
     ":nid" => $nid
   ))->fetchAll();
+}
+
+/**
+ * Get all not sent tasks.
+ *
+ * @return mixed
+ *   Result.
+ */
+function novo_ref_request_task_get_all_not_sent() {
+  return db_query("SELECT * FROM {novo_ref_tasks} WHERE status = 0")->fetchAll();
+}
+
+/**
+ * Get all not sent tasks.
+ *
+ * @return mixed
+ *   Result.
+ */
+function novo_ref_request_task_get_all_not_responded_expired() {
+  return db_query("SELECT * FROM {novo_ref_tasks} WHERE status = 1 AND created < :exp_time", array(":exp_time" => REQUEST_TIME - NOVO_REF_REQUEST_EXPIRED_TIME))->fetchAll();
 }
 
 /**
@@ -115,9 +136,34 @@ function novo_ref_request_task_update_status($nid, $status = 4) {
   }
   else {
     watchdog("novo_ref_request_task", "UPDATE status: Task not found nid: :nid", array(
-      ":nid",
-      $nid
+      ":nid" => $nid
     ), WATCHDOG_ERROR);
   }
   return NULL;
+}
+
+/**
+ * Update status for task.
+ *
+ * @param int $id
+ *   Task id.
+ *
+ * @return mixed
+ *   Result.
+ */
+function novo_ref_request_task_update_status_by_id($id, $status = 4) {
+  $result = db_update('novo_ref_tasks')
+    ->fields(array(
+      'status' => $status,
+      'updated' => REQUEST_TIME,
+    ))
+    ->condition('id', $id)
+    ->execute();
+  if (!$result) {
+    watchdog("novo_ref_request_task", "UPDATE status: Task not found id: :id", array(
+      ":id" => $id
+    ), WATCHDOG_ERROR);
+  }
+
+  return $result;
 }
