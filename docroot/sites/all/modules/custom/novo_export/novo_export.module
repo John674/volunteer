@@ -90,7 +90,11 @@ function novo_export_preprocess_field(&$variables) {
         if (!empty($field_ref_1_how_long_period)) {
           $value_ref_1_how_long_period = field_view_value('node', $node, 'field_ref_1_how_long_period', $field_ref_1_how_long_period[0]);
           $value_ref_1_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_1_how_long_period['#markup'];
-          $variables['items'][0]['#markup'] = !empty($value_ref_1_how_long) ? $value_ref_1_how_long : $variables['items'][0]['#markup'];
+
+          if (!empty($variables['items'][0]['#markup'])) {
+            $variables['items'][0]['#markup'] = !empty($value_ref_1_how_long) ? $value_ref_1_how_long : $variables['items'][0]['#markup'];
+          }
+
         }
         break;
 
@@ -99,7 +103,10 @@ function novo_export_preprocess_field(&$variables) {
         if (!empty($field_ref_2_how_long_period)) {
           $value_ref_2_how_long_period = field_view_value('node', $node, 'field_ref_2_how_long_period', $field_ref_2_how_long_period[0]);
           $value_ref_2_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_2_how_long_period['#markup'];
-          $variables['items'][0]['#markup'] = !empty($value_ref_2_how_long) ? $value_ref_2_how_long : $variables['items'][0]['#markup'];
+
+          if (!empty($variables['items'][0]['#markup'])) {
+            $variables['items'][0]['#markup'] = !empty($value_ref_2_how_long) ? $value_ref_2_how_long : $variables['items'][0]['#markup'];
+          }
         }
         break;
 
@@ -108,9 +115,94 @@ function novo_export_preprocess_field(&$variables) {
         if (!empty($field_ref_3_how_long_period)) {
           $value_ref_3_how_long_period = field_view_value('node', $node, 'field_ref_3_how_long_period', $field_ref_3_how_long_period[0]);
           $value_ref_3_how_long = $variables['items'][0]['#markup'] . ' ' . $value_ref_3_how_long_period['#markup'];
-          $variables['items'][0]['#markup'] = !empty($value_ref_3_how_long) ? $value_ref_3_how_long : $variables['items'][0]['#markup'];
+
+          if (!empty($variables['items'][0]['#markup'])) {
+            $variables['items'][0]['#markup'] = !empty($value_ref_3_how_long) ? $value_ref_3_how_long : $variables['items'][0]['#markup'];
+          }
         }
         break;
+
+      case 'field_beliefs2_q1':
+        $field_info = field_info_instance('node', 'field_beliefs2_q1', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_beliefs2_q2':
+        $field_info = field_info_instance('node', 'field_beliefs2_q2', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_beliefs2_q3':
+        $field_info = field_info_instance('node', 'field_beliefs2_q3', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_1':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_1', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_2':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_2', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_3':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_3', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_4':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_4', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_5':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_5', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
+      case 'field_app_7_final_agree_6':
+        $field_info = field_info_instance('node', 'field_app_7_final_agree_6', 'application');
+        $field_description = isset($field_info) && !empty($field_info['description']) ? $field_info['description'] : NULL;
+        if (!empty($field_description)) {
+          $variables['label'] = $field_description;
+        }
+
+        break;
+
     }
   }
 }
