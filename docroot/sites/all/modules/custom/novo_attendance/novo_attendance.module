@@ -29,8 +29,6 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
  * Attendance date validate.
  */
 function novo_attendance_field_attendance_date_validate($element, &$form_state, $form) {
-  //kpr($form);
-
   $values = isset($form_state['values']) ? $form_state['values'] : array();
 
   $year = isset($values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year']) ? $values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year'] : NULL;
