@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * PDF template for printing.

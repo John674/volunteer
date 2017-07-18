@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#attached']['js'][] = drupal_get_path("module", "novo_attendance") . "/js/novo_attendance.js";
+  $form['field_attendance_date'][LANGUAGE_NONE]['#element_validate'][] = 'novo_attendance_field_attendance_date_validate';
+
+  // Fix by https://www.drupal.org/node/2842043.
+  $year_copy = $form['field_attendance_year'];
+  $program_copy = $form['field_attendance_program_name'];
+  $kids_copy = $form['field_attendance_kids_list'];
+  unset($form['field_attendance_year']);
+  unset($form['field_attendance_program_name']);
+  unset($form['field_attendance_kids_list']);
+  $form['field_attendance_year'] = $year_copy;
+  $form['field_attendance_program_name'] = $program_copy;
+  $form['field_attendance_kids_list'] = $kids_copy;
+
+}
+
+/**
+ * Attendance date validate.
+ */
+function novo_attendance_field_attendance_date_validate($element, &$form_state, $form) {
+  $values = isset($form_state['values']) ? $form_state['values'] : array();
+
+  $year = isset($values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year']) ? $values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year'] : NULL;
+  $date = (isset($element[0]['#value']['value']['date'])) ? $element[0]['#value']['value']['date'] : NULL;
+
+  if (!$date) {
+    form_error($element, t('Date is not valid.'));
+  }
+
+  $date_year = date("Y", strtotime($date));
+
+  if ($date_year != $year && $date_year - 1 != $year) {
+    form_error($element, t('Date is not valid.'));
+  }
+}
+
+/**
+ * Implements hook_ddf_handle_args_alter().
+ */
+function novo_attendance_ddf_handle_args_alter(&$value, &$column, $field) {
+  if ($field['field_name'] == "field_attendance_year") {
+    if (is_array($value['value'])) {
+      $value = $value['value'];
+      $column = "year";
+    }
+    else {
+      // Original node has string value.
+      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
+      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
+        $value['value'] = date("Y", strtotime($value['value']));
+      }
+    }
+  }
+}

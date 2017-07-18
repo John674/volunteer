@@ -10,6 +10,15 @@
 function novo_content_feature_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'create field_app_status'.
+  $permissions['create field_app_status'] = array(
+    'name' => 'create field_app_status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_completed'.
   $permissions['create field_completed'] = array(
     'name' => 'create field_completed',
@@ -81,6 +90,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['create field_texting'] = array(
     'name' => 'create field_texting',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_app_status'.
+  $permissions['edit field_app_status'] = array(
+    'name' => 'edit field_app_status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -161,6 +179,15 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_app_status'.
+  $permissions['edit own field_app_status'] = array(
+    'name' => 'edit own field_app_status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_completed'.
   $permissions['edit own field_completed'] = array(
     'name' => 'edit own field_completed',
@@ -230,6 +257,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['edit own field_texting'] = array(
     'name' => 'edit own field_texting',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_app_status'.
+  $permissions['view field_app_status'] = array(
+    'name' => 'view field_app_status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -307,6 +343,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['view field_texting'] = array(
     'name' => 'view field_texting',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_app_status'.
+  $permissions['view own field_app_status'] = array(
+    'name' => 'view own field_app_status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
