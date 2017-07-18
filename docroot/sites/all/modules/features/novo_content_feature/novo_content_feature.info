@@ -24,6 +24,7 @@ dependencies[] = list
 dependencies[] = masked_input
 dependencies[] = multistep
 dependencies[] = novo_applications
+dependencies[] = novo_attendance
 dependencies[] = novo_export
 dependencies[] = novo_formatters
 dependencies[] = novo_ref_request
