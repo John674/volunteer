@@ -33,9 +33,11 @@ function novo_select($variables) {
   // @codingStandardsIgnoreEnd
 
   // Theme School year.
-  if (strpos($element['#name'], "field_program_school_year") === 0) {
+  if (strpos($element['#name'], "field_program_school_year") === 0 || strpos($element['#name'], "field_attendance_year") === 0) {
     foreach ($element['#options'] as $key => $value) {
-      $element['#options'][$key] = $value . " - " . ($value + 1);
+      if (is_numeric($value)) {
+        $element['#options'][$key] = $value . " - " . ($value + 1);
+      }
     }
   }
 

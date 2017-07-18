@@ -53,7 +53,10 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
           continue;
         }
 
-        if (($other_instance['widget']['type'] != 'options_select') && ($other_instance['widget']['type'] != 'options_buttons') && ($other_instance['widget']['type'] != 'date_select')) {
+        if (($other_instance['widget']['type'] != 'options_select') &&
+          ($other_instance['widget']['type'] != 'options_buttons') &&
+          ($other_instance['widget']['type'] != 'date_select')
+        ) {
           continue;
         }
         $other_field = field_info_field($other_instance['field_name']);

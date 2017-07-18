@@ -23,6 +23,13 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
   $form['field_attendance_program_name'] = $program_copy;
   $form['field_attendance_kids_list'] = $kids_copy;
 
+  $form['field_attendance_staff_list']['#attributes']['class'] = array('chosen-widget');
+  $form['field_attendance_volunteer_list']['#attributes']['class'] = array('chosen-widget');
+
+  $form['field_attendance_staff_list'][LANGUAGE_NONE]['#attributes']['class'] = array('chosen-widget');
+  $form['field_attendance_volunteer_list'][LANGUAGE_NONE]['#attributes']['class'] = array('chosen-widget');
+  //kpr($form);
+
 }
 
 /**

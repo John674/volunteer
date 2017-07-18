@@ -5,6 +5,26 @@
  * Helper functions.
  */
 
+define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize(array(
+  "program",
+  "kids",
+  "attendance",
+  "locations",
+  "mentors",
+  "partner",
+  "staff"
+)));
+
+define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
+  'kids',
+  'attendance',
+  'locations',
+  'partners',
+  'programs',
+  'staff',
+  'volunteers'
+)));
+
 /**
  * Preprocess page.
  */
@@ -38,7 +58,8 @@ function novo_master_menu_alter(&$items) {
  * Access node view tab callback.
  */
 function novo_master_disable_node_view($node) {
-  if ($node->type == 'program') {
+  $now_view_content_types = unserialize(NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES);
+  if (in_array($node->type, $now_view_content_types)) {
     return FALSE;
   }
 
@@ -47,4 +68,51 @@ function novo_master_disable_node_view($node) {
   }
 
   return user_access('access content');
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_master_preprocess_node($variables) {
+  $now_view_content_types = unserialize(NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES);
+  if (in_array($variables['type'], $now_view_content_types)) {
+    if (
+      isset($variables['node']) &&
+      isset($variables['view_mode']) &&
+      $variables['view_mode'] == "full" &&
+      node_access("update", $variables['node'])
+    ) {
+      drupal_goto("node/" . $variables['nid'] . "/edit");
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function novo_master_preprocess_views_view(&$vars) {
+  // Add "Add +" buttons to views.
+  $view_names = unserialize(NOVO_MASTER_ADD_BUTTON_VIEW_NAMES);
+  if (isset($vars['name']) && isset($vars['display_id']) && in_array($vars['name'], $view_names) && $vars['display_id'] == 'page') {
+    $type = (isset($vars['view']->filter['type']->value)) ? $vars['view']->filter['type']->value : array();
+    $type = reset($type);
+    if (!empty($type)) {
+      $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
+      $btn = l(t("Add !icon", array("!icon" => $icon)), "node/add/" . $type, array(
+        "query" => drupal_get_destination(),
+        "html" => TRUE,
+        "attributes" => array(
+          "class" => array(
+            "btn",
+            "btn-primary",
+            "btn-sm",
+            "novo-entity-add-btn"
+          )
+        )
+      ));
+
+      $vars['attachment_before'] .= $btn;
+      $vars['attachment_after'] .= $btn;
+    }
+  }
 }

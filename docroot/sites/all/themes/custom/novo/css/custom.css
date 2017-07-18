@@ -92,3 +92,26 @@ a.select2-search-choice-close:hover {
 #ui-datepicker-div {
   z-index: 2;
 }
+
+.novo-entity-add-btn {
+  float: right;
+  clear: both;
+  overflow: hidden;
+}
+
+.novo-entity-add-btn span {
+  margin-left: 3px;
+}
+
+.view-programs .views-field-field-program-day ul {
+  margin: 0px;
+}
+
+.view-programs .views-field-field-program-day .field-collection-item-field-program-day {
+  display: inline-block;
+}
+
+.view-programs .views-field-field-program-day .field-name-field-program-weekday,
+.view-programs .views-field-field-program-day .field-name-field-program-time {
+  display: inline-block;
+}
