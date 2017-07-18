@@ -408,8 +408,20 @@ function novo_master_update_7135() {
 }
 
 /**
- * Revert novo_content_feature.
+ * Remove field_program_staff_list and field_program_volunteers_list from program.
  */
 function novo_master_update_7136() {
+  field_delete_field('field_program_staff_list');
+  field_delete_field('field_program_volunteers_list ');
+  field_delete_field('field_active_inactive ');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_views_feature");
+}
+
+/**
+ * Revert novo_content_feature.
+ */
+function novo_master_update_7137() {
   features_revert_module("novo_content_feature");
 }

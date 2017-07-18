@@ -77,7 +77,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -374,8 +376,8 @@ function novo_content_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_plain',
-        'weight' => 0,
+        'type' => 'text_default',
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -415,8 +417,8 @@ function novo_content_feature_field_default_field_instances() {
         'label' => 'above',
         'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 1,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -429,7 +431,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 1,
     ),
@@ -502,7 +506,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 2,
     ),
@@ -597,7 +603,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 1,
     ),
@@ -632,7 +640,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 6,
     ),
@@ -668,7 +678,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 7,
     ),
@@ -819,7 +831,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 5,
     ),
@@ -930,7 +944,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -1003,7 +1019,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -1076,7 +1094,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -1193,7 +1213,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 1,
     ),
@@ -1719,7 +1741,9 @@ function novo_content_feature_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 74,
     ),
@@ -6022,7 +6046,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 59,
     ),
@@ -6615,12 +6641,19 @@ Friend',
       'active' => 1,
       'module' => 'date',
       'settings' => array(
+        'apply_chosen' => 0,
+        'fix_display' => 0,
         'increment' => 15,
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'no_fieldset' => 0,
+        'no_fieldset' => 1,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
         'text_parts' => array(),
+        'typing_placeholder' => 'Keep typing...',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
@@ -6662,7 +6695,15 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+        'fix_display' => 0,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
+        'typing_placeholder' => 'Keep typing...',
+      ),
       'type' => 'options_select',
       'weight' => 4,
     ),
@@ -6702,7 +6743,15 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+        'fix_display' => 0,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
+        'typing_placeholder' => 'Keep typing...',
+      ),
       'type' => 'options_select',
       'weight' => 2,
     ),
@@ -6711,6 +6760,7 @@ Friend',
   // Exported field_instance: 'node-attendance-field_attendance_staff_list'.
   $field_instances['node-attendance-field_attendance_staff_list'] = array(
     'bundle' => 'attendance',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -6742,9 +6792,12 @@ Friend',
       'active' => 1,
       'module' => 'select2widget',
       'settings' => array(
-        'hide_ids' => FALSE,
-        'match_operator' => 'CONTAINS',
-        'path' => '',
+        'apply_chosen' => 0,
+        'fix_display' => 0,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
         'select2widgetajax' => array(
           'match_limit' => 10,
           'match_operator' => 'STARTS_WITH',
@@ -6753,7 +6806,7 @@ Friend',
           'view_mode' => 'select2widget_labels',
           'width' => '',
         ),
-        'size' => 60,
+        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
       'weight' => 5,
@@ -6763,6 +6816,7 @@ Friend',
   // Exported field_instance: 'node-attendance-field_attendance_volunteer_list'.
   $field_instances['node-attendance-field_attendance_volunteer_list'] = array(
     'bundle' => 'attendance',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -6794,14 +6848,32 @@ Friend',
       'active' => 1,
       'module' => 'select2widget',
       'settings' => array(
+        'advanced' => array(
+          'pattern' => '/(.+) \\((\\d+)\\)/',
+          'replacement' => '${1}',
+        ),
+        'apply_chosen' => 0,
+        'fix_display' => 0,
+        'hide_ids' => 0,
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
         'select2widgetajax' => array(
+          'allow_new' => 0,
+          'delay' => 100,
           'match_limit' => 10,
           'match_operator' => 'STARTS_WITH',
           'min_char' => 1,
           'placeholder' => 'Search',
-          'view_mode' => 'select2widget_labels',
-          'width' => '',
+          'separator' => '|',
+          'set_level' => 0,
+          'view_mode' => 'default',
         ),
+        'size' => 60,
+        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
       'weight' => 6,
@@ -6850,57 +6922,23 @@ Friend',
       'active' => 1,
       'module' => 'date',
       'settings' => array(
+        'apply_chosen' => 0,
+        'fix_display' => 0,
         'increment' => 15,
         'input_format' => 'site-wide',
         'input_format_custom' => 'Y',
         'label_position' => 'above',
         'no_fieldset' => 1,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
         'text_parts' => array(),
+        'typing_placeholder' => 'Keep typing...',
         'year_range' => '-10:+3',
       ),
       'type' => 'date_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_active_inactive'.
-  $field_instances['node-kids-field_active_inactive'] = array(
-    'bundle' => 'kids',
-    'default_value' => array(
-      0 => array(
-        'value' => 1,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 24,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_active_inactive',
-    'label' => 'Active / Inactive',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 23,
     ),
   );
 
@@ -7223,7 +7261,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 21,
     ),
@@ -7381,7 +7421,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 20,
     ),
@@ -7464,46 +7506,6 @@ Friend',
       ),
       'type' => 'text_textfield',
       'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-kids-field_middle'.
-  $field_instances['node-kids-field_middle'] = array(
-    'bundle' => 'kids',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_middle',
-    'label' => 'Middle',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => -3,
     ),
   );
 
@@ -7866,7 +7868,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 11,
     ),
@@ -7994,47 +7998,6 @@ Friend',
       'settings' => array(),
       'type' => 'number',
       'weight' => 12,
-    ),
-  );
-
-  // Exported field_instance: 'node-locations-field_active_inactive'.
-  $field_instances['node-locations-field_active_inactive'] = array(
-    'bundle' => 'locations',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_active_inactive',
-    'label' => 'Active / Inactive',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 1,
     ),
   );
 
@@ -8307,7 +8270,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 7,
     ),
@@ -8393,7 +8358,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 8,
     ),
@@ -8433,7 +8400,9 @@ Friend',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 7,
     ),
@@ -8615,7 +8584,9 @@ Re-Dedication',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 6,
     ),
@@ -9034,7 +9005,9 @@ Re-Dedication',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 8,
     ),
@@ -9070,7 +9043,9 @@ Re-Dedication',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 5,
     ),
@@ -9237,7 +9212,15 @@ Re-Dedication',
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+        'fix_display' => 0,
+        'pattern' => '/(.+) \\((\\d+)\\)/',
+        'placeholder_text' => 'Choose an option',
+        'replacement' => '${1}',
+        'searching_placeholder' => 'Looking for',
+        'typing_placeholder' => 'Keep typing...',
+      ),
       'type' => 'options_select',
       'weight' => 2,
     ),
@@ -9295,95 +9278,6 @@ Re-Dedication',
       ),
       'type' => 'date_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-program-field_program_staff_list'.
-  $field_instances['node-program-field_program_staff_list'] = array(
-    'bundle' => 'program',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_program_staff_list',
-    'label' => 'Staff list',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(),
-      'type' => 'select2widget',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-program-field_program_volunteers_list'.
-  $field_instances['node-program-field_program_volunteers_list'] = array(
-    'bundle' => 'program',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_program_volunteers_list',
-    'label' => 'Volunteers list',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select2widget',
-      'settings' => array(
-        'select2widgetajax' => array(
-          'match_limit' => 10,
-          'match_operator' => 'CONTAINS',
-          'min_char' => 1,
-          'placeholder' => 'Search',
-          'view_mode' => 'select2widget_labels',
-          'width' => '',
-        ),
-      ),
-      'type' => 'select2widgetajax',
-      'weight' => 6,
     ),
   );
 
@@ -9761,7 +9655,6 @@ Re-Dedication',
   // Translatables
   // Included for use with string extractors like potx.
   t('A');
-  t('Active / Inactive');
   t('Address');
   t('Address 1');
   t('Address 2');
@@ -9912,7 +9805,6 @@ Re-Dedication',
   t('VOLUNTEER INTERESTS / ROLES');
   t('Volunteer Mentor Name');
   t('Volunteer list');
-  t('Volunteers list');
   t('Weekday');
   t('What did you talk about');
   t('What verses did you share');

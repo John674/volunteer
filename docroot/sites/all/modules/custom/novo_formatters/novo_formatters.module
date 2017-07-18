@@ -22,6 +22,10 @@ function novo_formatters_field_formatter_info() {
       'label' => t('Only age'),
       'field types' => array('date', 'datestamp', 'datetime'),
     ),
+    'school_year' => array(
+      'label' => t('School year'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
   );
 
   return $formatters;
@@ -43,6 +47,10 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
     'only_age' => array(
       'variables' => array('dob' => NULL, 'age' => NULL),
       'template' => 'templates/only_age',
+    ),
+    'school_year' => array(
+      'variables' => array('year' => NULL, 'to_year' => NULL),
+      'template' => 'templates/school_year',
     ),
   );
 }
@@ -87,6 +95,17 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
           '#theme' => 'only_age',
           '#dob' => $dob,
           '#age' => $age,
+        );
+      }
+      break;
+
+    case 'school_year':
+      $year = isset($items[0]['value']) ? format_date(strtotime($items[0]['value']), 'custom', 'Y') : NULL;
+      if (!empty($year)) {
+        $element[] = array(
+          '#theme' => 'school_year',
+          '#year' => $year,
+          '#to_year' => intval($year) + 1,
         );
       }
       break;

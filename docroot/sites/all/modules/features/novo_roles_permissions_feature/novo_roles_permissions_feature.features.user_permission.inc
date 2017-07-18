@@ -97,6 +97,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create attendance content'.
+  $permissions['create attendance content'] = array(
+    'name' => 'create attendance content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create kids content'.
   $permissions['create kids content'] = array(
     'name' => 'create kids content',
@@ -115,12 +124,37 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create mentors content'.
+  $permissions['create mentors content'] = array(
+    'name' => 'create mentors content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create partner content'.
+  $permissions['create partner content'] = array(
+    'name' => 'create partner content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create program content'.
   $permissions['create program content'] = array(
     'name' => 'create program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create reference_request content'.
+  $permissions['create reference_request content'] = array(
+    'name' => 'create reference_request content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -136,6 +170,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'delete any application content'.
   $permissions['delete any application content'] = array(
     'name' => 'delete any application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any attendance content'.
+  $permissions['delete any attendance content'] = array(
+    'name' => 'delete any attendance content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -160,12 +203,37 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any mentors content'.
+  $permissions['delete any mentors content'] = array(
+    'name' => 'delete any mentors content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any partner content'.
+  $permissions['delete any partner content'] = array(
+    'name' => 'delete any partner content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any program content'.
   $permissions['delete any program content'] = array(
     'name' => 'delete any program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any reference_request content'.
+  $permissions['delete any reference_request content'] = array(
+    'name' => 'delete any reference_request content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -181,6 +249,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'delete own application content'.
   $permissions['delete own application content'] = array(
     'name' => 'delete own application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own attendance content'.
+  $permissions['delete own attendance content'] = array(
+    'name' => 'delete own attendance content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -205,12 +282,35 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own mentors content'.
+  $permissions['delete own mentors content'] = array(
+    'name' => 'delete own mentors content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own partner content'.
+  $permissions['delete own partner content'] = array(
+    'name' => 'delete own partner content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own program content'.
   $permissions['delete own program content'] = array(
     'name' => 'delete own program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own reference_request content'.
+  $permissions['delete own reference_request content'] = array(
+    'name' => 'delete own reference_request content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -226,6 +326,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'edit any application content'.
   $permissions['edit any application content'] = array(
     'name' => 'edit any application content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any attendance content'.
+  $permissions['edit any attendance content'] = array(
+    'name' => 'edit any attendance content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -250,9 +359,36 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any mentors content'.
+  $permissions['edit any mentors content'] = array(
+    'name' => 'edit any mentors content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any partner content'.
+  $permissions['edit any partner content'] = array(
+    'name' => 'edit any partner content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any program content'.
   $permissions['edit any program content'] = array(
     'name' => 'edit any program content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any reference_request content'.
+  $permissions['edit any reference_request content'] = array(
+    'name' => 'edit any reference_request content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
@@ -278,6 +414,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own attendance content'.
+  $permissions['edit own attendance content'] = array(
+    'name' => 'edit own attendance content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own kids content'.
   $permissions['edit own kids content'] = array(
     'name' => 'edit own kids content',
@@ -296,12 +441,37 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own mentors content'.
+  $permissions['edit own mentors content'] = array(
+    'name' => 'edit own mentors content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own partner content'.
+  $permissions['edit own partner content'] = array(
+    'name' => 'edit own partner content',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own program content'.
   $permissions['edit own program content'] = array(
     'name' => 'edit own program content',
     'roles' => array(
       'siteadmin' => 'siteadmin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own reference_request content'.
+  $permissions['edit own reference_request content'] = array(
+    'name' => 'edit own reference_request content',
+    'roles' => array(),
     'module' => 'node',
   );
 

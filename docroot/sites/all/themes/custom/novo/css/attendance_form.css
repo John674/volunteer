@@ -1,4 +1,33 @@
-.node-attendance-form .select2-container.select2-container-multi {
+.node-attendance-form .select2-container.select2-container-multi,
+.node-attendance-form .chosen-container-multi {
   padding: 0px;
   height: auto;
+}
+
+.node-attendance-form .field-name-field-attendance-year .date-form-element-content-multiline,
+.node-attendance-form .field-name-field-attendance-date .date-form-element-content-multiline {
+  border: none;
+  padding: 0px;
+}
+
+.node-attendance-form .input-group-addon {
+  width: 0px;
+  border: none;
+  background: none;
+  padding: 0px;
+}
+
+.node-attendance-form .field-name-field-attendance-year,
+.node-attendance-form .field-name-field-attendance-program-name,
+.node-attendance-form .field-name-field-attendance-date {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.node-attendance-form .field-name-field-attendance-program-name {
+  margin-right: 10px;
+}
+
+.node-attendance-form .field-name-field-attendance-program-name select {
+  min-width: 300px;
 }
