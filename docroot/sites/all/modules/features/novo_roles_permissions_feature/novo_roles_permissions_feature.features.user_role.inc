@@ -16,12 +16,6 @@ function novo_roles_permissions_feature_user_default_roles() {
     'weight' => 4,
   );
 
-  // Exported role: Volunteer.
-  $roles['Volunteer'] = array(
-    'name' => 'Volunteer',
-    'weight' => 3,
-  );
-
   // Exported role: siteadmin.
   $roles['siteadmin'] = array(
     'name' => 'siteadmin',

@@ -11,6 +11,439 @@ function novo_views_feature_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'attendance';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Attendance';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Attendance';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => 'plain_text',
+        ),
+      ),
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
+    ),
+    'field_program_location_target_id_entityreference_filter' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_attendance_program_name_target_id_entityreference_filter' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'status' => 'status',
+    'nid' => 'nid',
+    'field_attendance_program_name' => 'field_attendance_program_name',
+    'field_attendance_date' => 'field_attendance_date',
+    'field_attendance_kids_list' => 'field_attendance_kids_list',
+    'field_attendance_staff_list' => 'field_attendance_staff_list',
+    'field_attendance_volunteer_list' => 'field_attendance_volunteer_list',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'status' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_attendance_program_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_attendance_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_attendance_kids_list' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_attendance_staff_list' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_attendance_volunteer_list' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['id'] = 'field_attendance_program_name_target_id';
+  $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['table'] = 'field_data_field_attendance_program_name';
+  $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['field'] = 'field_attendance_program_name_target_id';
+  $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['label'] = 'Program';
+  $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['relationship'] = 'field_attendance_program_name_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['label'] = 'Location';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['required'] = TRUE;
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = '';
+  $handler->display->display_options['fields']['status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['status']['type'] = 'boolean';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_attendance_program_name_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  /* Field: Content: Attendance date */
+  $handler->display->display_options['fields']['field_attendance_date']['id'] = 'field_attendance_date';
+  $handler->display->display_options['fields']['field_attendance_date']['table'] = 'field_data_field_attendance_date';
+  $handler->display->display_options['fields']['field_attendance_date']['field'] = 'field_attendance_date';
+  $handler->display->display_options['fields']['field_attendance_date']['label'] = 'Date';
+  $handler->display->display_options['fields']['field_attendance_date']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: COUNT(DISTINCT Content: Kids list) */
+  $handler->display->display_options['fields']['field_attendance_kids_list']['id'] = 'field_attendance_kids_list';
+  $handler->display->display_options['fields']['field_attendance_kids_list']['table'] = 'field_data_field_attendance_kids_list';
+  $handler->display->display_options['fields']['field_attendance_kids_list']['field'] = 'field_attendance_kids_list';
+  $handler->display->display_options['fields']['field_attendance_kids_list']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_attendance_kids_list']['label'] = 'Kids';
+  $handler->display->display_options['fields']['field_attendance_kids_list']['separator'] = ', ';
+  /* Field: COUNT(DISTINCT Content: Staff list) */
+  $handler->display->display_options['fields']['field_attendance_staff_list']['id'] = 'field_attendance_staff_list';
+  $handler->display->display_options['fields']['field_attendance_staff_list']['table'] = 'field_data_field_attendance_staff_list';
+  $handler->display->display_options['fields']['field_attendance_staff_list']['field'] = 'field_attendance_staff_list';
+  $handler->display->display_options['fields']['field_attendance_staff_list']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_attendance_staff_list']['label'] = 'Staff';
+  $handler->display->display_options['fields']['field_attendance_staff_list']['separator'] = ', ';
+  /* Field: COUNT(DISTINCT Content: Volunteer list) */
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['id'] = 'field_attendance_volunteer_list';
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['table'] = 'field_data_field_attendance_volunteer_list';
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['field'] = 'field_attendance_volunteer_list';
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['label'] = 'Volunteers';
+  $handler->display->display_options['fields']['field_attendance_volunteer_list']['separator'] = ', ';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Options';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'attendance' => 'attendance',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Program Location (field_program_location) (reference filter) */
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['id'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['field'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['relationship'] = 'field_attendance_program_name_target_id';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['group'] = 1;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator_id'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['identifier'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'attendance_filter_locations:entityreference_1';
+  /* Filter criterion: Content: Program name (field_attendance_program_name) (reference filter) */
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['id'] = 'field_attendance_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['table'] = 'field_data_field_attendance_program_name';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['field'] = 'field_attendance_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['group'] = 1;
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['operator_id'] = 'field_attendance_program_name_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['label'] = 'Filter by Program';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['operator'] = 'field_attendance_program_name_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['identifier'] = 'field_attendance_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['reference_display'] = 'attendance_filter_programs:entityreference_1';
+  $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['reference_arguments'] = '[field_program_location_target_id_entityreference_filter]';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'attendance';
+  $export['attendance'] = $view;
+
+  $view = new view();
+  $view->name = 'attendance_filter_locations';
+  $view->description = '';
+  $view->tag = 'REF';
+  $view->base_table = 'node';
+  $view->human_name = 'Attendance Filter Locations (REF)';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: In Program */
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['id'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['field'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['ui_name'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['label'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['required'] = TRUE;
+  /* Relationship: In Attendance */
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['id'] = 'reverse_field_attendance_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['field'] = 'reverse_field_attendance_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['relationship'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['ui_name'] = 'In Attendance';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['label'] = 'In Attendance';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'locations' => 'locations',
+  );
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $export['attendance_filter_locations'] = $view;
+
+  $view = new view();
+  $view->name = 'attendance_filter_programs';
+  $view->description = '';
+  $view->tag = 'REF';
+  $view->base_table = 'node';
+  $view->human_name = 'Attendance Filter Programs (REF)';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: School year */
+  $handler->display->display_options['fields']['field_program_school_year']['id'] = 'field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['table'] = 'field_data_field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['field'] = 'field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['label'] = '';
+  $handler->display->display_options['fields']['field_program_school_year']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_program_school_year']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'Y ',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Program Location (field_program_location) */
+  $handler->display->display_options['arguments']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'program' => 'program',
+  );
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $export['attendance_filter_programs'] = $view;
+
+  $view = new view();
   $view->name = 'attendance_kids_list';
   $view->description = '';
   $view->tag = 'REF';
