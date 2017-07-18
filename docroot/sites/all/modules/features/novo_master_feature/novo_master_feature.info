@@ -1,7 +1,8 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.9
+version = 7.x-1.10
+dependencies[] = chosen
 dependencies[] = ctools
 dependencies[] = entity_print
 dependencies[] = features

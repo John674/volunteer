@@ -416,4 +416,5 @@ function novo_master_update_7136() {
   field_delete_field('field_active_inactive ');
   field_purge_batch(1);
   features_revert_module("novo_content_feature");
+  features_revert_module("novo_views_feature");
 }

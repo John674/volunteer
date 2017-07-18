@@ -1,11 +1,12 @@
 name = Novo views feature
 core = 7.x
 package = Novo
-version = 7.x-1.16
+version = 7.x-1.17
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
 dependencies[] = date_views
 dependencies[] = entityreference
+dependencies[] = entityreference_filter
 dependencies[] = novo_ref_request
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
