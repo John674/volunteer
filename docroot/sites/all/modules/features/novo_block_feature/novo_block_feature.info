@@ -1,7 +1,7 @@
 name = Novo Block feature
 core = 7.x
 package = Novo
-version = 7.x-1.0
+version = 7.x-1.1
 dependencies[] = fe_block
 dependencies[] = menu
 dependencies[] = multistep

@@ -19,7 +19,8 @@ function novo_block_feature_default_fe_block_settings() {
     'module' => 'menu',
     'node_types' => array(),
     'pages' => 'locations
-programs',
+programs
+attendance',
     'roles' => array(),
     'themes' => array(
       'bootstrap' => array(
