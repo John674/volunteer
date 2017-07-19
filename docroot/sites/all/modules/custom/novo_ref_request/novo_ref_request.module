@@ -228,23 +228,22 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
   $node = node_load($nid);
   if ($node) {
     $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
-    $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
-    if (!$responded) {
-      $node->field_responded[$land][0]['value'] = 1;
-      novo_ref_request_task_update_status($node->nid, 2);
-      node_save($node);
+    $node->field_responded[$land][0]['value'] = 1;
+    node_save($node);
 
-      // Update answers FC.
-      foreach ($faq as $key => $value) {
-        $raw_collection = field_collection_item_load($value['fc_id']);
-        $collection = entity_metadata_wrapper('field_collection_item', $raw_collection);
-        $collection->field_faq_a = $value['a'];
-        $collection->save();
-      }
+    // Update answers FC.
+    foreach ($faq as $key => $value) {
+      $raw_collection = field_collection_item_load($value['fc_id']);
+      $collection = entity_metadata_wrapper('field_collection_item', $raw_collection);
+      $collection->field_faq_a = $value['a'];
+      $collection->save();
     }
+    novo_ref_request_task_update_status($node->nid, 2);
+    drupal_set_message(t("Your answers have been saved."));
   }
-
-  drupal_set_message(t("Your answers have been saved."));
+  else {
+    drupal_set_message(t("Can't save your answers."), "error");
+  }
 }
 
 /**
@@ -304,6 +303,12 @@ function novo_ref_request_preprocess_field(&$variables) {
       case 'field_reference_request_church':
         novo_ref_request_prepare_fields($variables, "Church reference request");
         break;
+    }
+  }
+
+  if (isset($node->field_name) && $node->field_name == 'field_ref_faq') {
+    if ($variables['element']['#field_name'] == "field_faq_a" && empty(trim($variables['items'][0]['#markup']))) {
+      $variables['items'][0]['#markup'] = t("no answer");
     }
   }
 }
