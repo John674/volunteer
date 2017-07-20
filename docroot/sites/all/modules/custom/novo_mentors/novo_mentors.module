@@ -10,6 +10,16 @@
  */
 function novo_mentors_form_mentors_node_form_alter(&$form, &$form_state) {
 
+  // Fix by https://www.drupal.org/node/2842043.
+  $location_copy = $form['field_program_location'];
+  $program_copy = $form['field_mentor_program_name'];
+  $kids_copy = $form['field_mentor_kid_name'];
+  unset($form['field_program_location']);
+  unset($form['field_mentor_program_name']);
+  unset($form['field_mentor_kid_name']);
+  $form['field_program_location'] = $location_copy;
+  $form['field_mentor_program_name'] = $program_copy;
+  $form['field_mentor_kid_name'] = $kids_copy;
 }
 
 /**

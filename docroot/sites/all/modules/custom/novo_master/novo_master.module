@@ -52,6 +52,8 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
 function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
   $items['node/%node/view']['access arguments'] = array(1);
+
+  $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
 }
 
 /**
@@ -68,6 +70,15 @@ function novo_master_disable_node_view($node) {
   }
 
   return user_access('access content');
+}
+
+/**
+ * Access to node/add page.
+ */
+function novo_master_disable_node_add_page() {
+  global $user;
+
+  return ($user->uid = 1) ? TRUE : FALSE;
 }
 
 /**

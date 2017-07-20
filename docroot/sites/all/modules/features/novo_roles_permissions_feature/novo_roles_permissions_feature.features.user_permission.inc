@@ -285,7 +285,9 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'delete own mentors content'.
   $permissions['delete own mentors content'] = array(
     'name' => 'delete own mentors content',
-    'roles' => array(),
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'node',
   );
 
@@ -321,6 +323,13 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'disable auto complete'.
+  $permissions['disable auto complete'] = array(
+    'name' => 'disable auto complete',
+    'roles' => array(),
+    'module' => 'novo_applications',
   );
 
   // Exported permission: 'edit any application content'.
@@ -404,6 +413,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit application with any status'.
+  $permissions['edit application with any status'] = array(
+    'name' => 'edit application with any status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'novo_applications',
+  );
+
   // Exported permission: 'edit own application content'.
   $permissions['edit own application content'] = array(
     'name' => 'edit own application content',
@@ -482,6 +500,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit ref request with any status'.
+  $permissions['edit ref request with any status'] = array(
+    'name' => 'edit ref request with any status',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'novo_ref_request',
   );
 
   // Exported permission: 'publish any content'.
