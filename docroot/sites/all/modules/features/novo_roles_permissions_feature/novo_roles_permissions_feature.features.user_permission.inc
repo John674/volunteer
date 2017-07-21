@@ -21,7 +21,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'system',
   );
@@ -30,7 +30,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -39,7 +39,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'system',
   );
@@ -48,7 +48,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'user',
   );
@@ -64,7 +64,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['administer users'] = array(
     'name' => 'administer users',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'user',
   );
@@ -73,7 +73,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['bypass entity print access'] = array(
     'name' => 'bypass entity print access',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'entity_print',
   );
@@ -82,7 +82,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['change own username'] = array(
     'name' => 'change own username',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'user',
   );
@@ -91,8 +91,8 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create application content'] = array(
     'name' => 'create application content',
     'roles' => array(
+      'Siteadmin' => 'Siteadmin',
       'authenticated user' => 'authenticated user',
-      'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
   );
@@ -101,7 +101,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create attendance content'] = array(
     'name' => 'create attendance content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -110,7 +110,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create kids content'] = array(
     'name' => 'create kids content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -119,7 +119,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create locations content'] = array(
     'name' => 'create locations content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -128,7 +128,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create mentors content'] = array(
     'name' => 'create mentors content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -137,7 +137,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create partner content'] = array(
     'name' => 'create partner content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -146,7 +146,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create program content'] = array(
     'name' => 'create program content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -162,7 +162,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create staff content'] = array(
     'name' => 'create staff content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -171,7 +171,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any application content'] = array(
     'name' => 'delete any application content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -180,7 +180,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any attendance content'] = array(
     'name' => 'delete any attendance content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -189,7 +189,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any kids content'] = array(
     'name' => 'delete any kids content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -198,7 +198,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any locations content'] = array(
     'name' => 'delete any locations content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -207,7 +207,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any mentors content'] = array(
     'name' => 'delete any mentors content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -216,7 +216,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any partner content'] = array(
     'name' => 'delete any partner content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -225,7 +225,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any program content'] = array(
     'name' => 'delete any program content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -241,7 +241,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any staff content'] = array(
     'name' => 'delete any staff content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -250,7 +250,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own application content'] = array(
     'name' => 'delete own application content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -259,7 +259,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own attendance content'] = array(
     'name' => 'delete own attendance content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -268,7 +268,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own kids content'] = array(
     'name' => 'delete own kids content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -277,7 +277,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own locations content'] = array(
     'name' => 'delete own locations content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -286,7 +286,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own mentors content'] = array(
     'name' => 'delete own mentors content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -295,7 +295,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own partner content'] = array(
     'name' => 'delete own partner content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -304,7 +304,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own program content'] = array(
     'name' => 'delete own program content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -320,7 +320,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own staff content'] = array(
     'name' => 'delete own staff content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -329,7 +329,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['disable auto complete'] = array(
     'name' => 'disable auto complete',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_applications',
   );
@@ -338,7 +338,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any application content'] = array(
     'name' => 'edit any application content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -347,7 +347,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any attendance content'] = array(
     'name' => 'edit any attendance content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -356,7 +356,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any kids content'] = array(
     'name' => 'edit any kids content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -365,7 +365,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any locations content'] = array(
     'name' => 'edit any locations content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -374,7 +374,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any mentors content'] = array(
     'name' => 'edit any mentors content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -383,7 +383,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any partner content'] = array(
     'name' => 'edit any partner content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -392,7 +392,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any program content'] = array(
     'name' => 'edit any program content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -401,7 +401,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any reference_request content'] = array(
     'name' => 'edit any reference_request content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -410,7 +410,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any staff content'] = array(
     'name' => 'edit any staff content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -419,7 +419,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit application with any status'] = array(
     'name' => 'edit application with any status',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_applications',
   );
@@ -428,8 +428,8 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own application content'] = array(
     'name' => 'edit own application content',
     'roles' => array(
+      'Siteadmin' => 'Siteadmin',
       'authenticated user' => 'authenticated user',
-      'siteadmin' => 'siteadmin',
     ),
     'module' => 'node',
   );
@@ -438,7 +438,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own attendance content'] = array(
     'name' => 'edit own attendance content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -447,7 +447,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own kids content'] = array(
     'name' => 'edit own kids content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -456,7 +456,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own locations content'] = array(
     'name' => 'edit own locations content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -465,7 +465,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own mentors content'] = array(
     'name' => 'edit own mentors content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -474,7 +474,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own partner content'] = array(
     'name' => 'edit own partner content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -483,7 +483,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own program content'] = array(
     'name' => 'edit own program content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -499,7 +499,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own staff content'] = array(
     'name' => 'edit own staff content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );
@@ -508,7 +508,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit ref request with any status'] = array(
     'name' => 'edit ref request with any status',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_ref_request',
   );
@@ -517,7 +517,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['novo master edit roles'] = array(
     'name' => 'novo master edit roles',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_master',
   );
@@ -526,7 +526,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['publish any content'] = array(
     'name' => 'publish any content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'publishcontent',
   );
@@ -535,7 +535,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['unpublish any content'] = array(
     'name' => 'unpublish any content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'publishcontent',
   );
@@ -544,7 +544,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
     'roles' => array(
-      'siteadmin' => 'siteadmin',
+      'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
   );

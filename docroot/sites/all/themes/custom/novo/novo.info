@@ -29,6 +29,7 @@ stylesheets[all][] = css/style.css
 stylesheets[all][] = css/application_form.css
 stylesheets[all][] = css/program_form.css
 stylesheets[all][] = css/attendance_form.css
+stylesheets[all][] = css/kids_form.css
 stylesheets[all][] = css/custom.css
 
 

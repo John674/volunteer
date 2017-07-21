@@ -10,6 +10,31 @@
 function novo_content_feature_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_active_inactive'.
+  $field_bases['field_active_inactive'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_active_inactive',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Inactive',
+        1 => 'Active',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_address_1'.
   $field_bases['field_address_1'] = array(
     'active' => 1,
@@ -1665,30 +1690,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
-  // Exported field_base: 'field_middle'.
-  $field_bases['field_middle'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_middle',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_middle_name'.
   $field_bases['field_middle_name'] = array(
     'active' => 1,
@@ -1696,6 +1697,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_middle_name',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1781,7 +1785,7 @@ function novo_content_feature_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_notes',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'format' => array(
@@ -3779,6 +3783,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_t_shirt_size',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -3793,6 +3800,7 @@ function novo_content_feature_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'delete_on_parent_delete' => '',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
