@@ -135,7 +135,6 @@ function novo_master_preprocess_views_view(&$vars) {
         $destination = drupal_get_destination();
       }
 
-
       $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
         "query" => $destination,
         "html" => TRUE,
