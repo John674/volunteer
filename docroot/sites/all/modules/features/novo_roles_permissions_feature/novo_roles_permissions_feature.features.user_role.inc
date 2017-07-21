@@ -13,13 +13,13 @@ function novo_roles_permissions_feature_user_default_roles() {
   // Exported role: Reviewer.
   $roles['Reviewer'] = array(
     'name' => 'Reviewer',
-    'weight' => 4,
+    'weight' => 3,
   );
 
   // Exported role: siteadmin.
   $roles['siteadmin'] = array(
     'name' => 'siteadmin',
-    'weight' => 2,
+    'weight' => 4,
   );
 
   return $roles;

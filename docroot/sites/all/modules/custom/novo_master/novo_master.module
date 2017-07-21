@@ -128,7 +128,7 @@ function novo_master_preprocess_views_view(&$vars) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       if ($vars['name'] == "volunteers") {
         $add_link = "admin/people/create";
-        $destination = "users";
+        $destination = array("destination" => "users");
       }
       else {
         $add_link = "node/add/" . $type;
