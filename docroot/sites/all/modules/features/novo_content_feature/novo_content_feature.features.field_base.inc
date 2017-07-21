@@ -10,31 +10,6 @@
 function novo_content_feature_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_active_inactive'.
-  $field_bases['field_active_inactive'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_active_inactive',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'Inactive',
-        1 => 'Active',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_boolean',
-  );
-
   // Exported field_base: 'field_address_1'.
   $field_bases['field_address_1'] = array(
     'active' => 1,

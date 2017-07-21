@@ -1,41 +1,151 @@
+.node-kids-form {
+  background: #f5f5f5;
+  border-color: #dddddd;
+  padding: 20px;
+}
+
+.node-kids-form .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+
+.node-kids-form .form-item-title,
+.node-kids-form .field-name-field-goes-by,
+.node-kids-form .field-name-field-middle-name,
+.node-kids-form .field-name-field-last-name,
+.node-kids-form .field-name-field-suffix,
+.node-kids-form .field-name-field-dob,
+.node-kids-form .field-name-field-gender,
+.node-kids-form .field-name-field-address-1,
+.node-kids-form .field-name-field-address-2,
+.node-kids-form .field-name-field-apt,
+.node-kids-form .field-name-field-city,
+.node-kids-form .field-name-field-state,
+.node-kids-form .field-name-field-zip,
+.node-kids-form .field-name-field-school,
+.node-kids-form .field-name-field-grade,
+.node-kids-form .field-name-field-teacher,
+.node-kids-form .field-name-field-church,
+.node-kids-form .field-name-field-attend-church-regularly,
+.node-kids-form .field-name-field-food-allergies,
+.node-kids-form .field-name-field-health-concerns,
+.node-kids-form .field-name-field-moved,
+.node-kids-form .field-name-field-ethnicity,
+.node-kids-form .field-name-field-t-shirt-size {
+  float: left;
+  margin-right: 10px;
+}
+
 .node-kids-form .form-item-title {
   max-width: 300px;
-  display: inline-block;
   margin-right: 7px;
 }
 
 .node-kids-form .field-name-field-goes-by {
   max-width: 200px;
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .node-kids-form .field-name-field-middle-name {
   max-width: 100px;
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .node-kids-form .field-name-field-last-name {
   max-width: 300px;
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .node-kids-form .field-name-field-suffix {
   max-width: 100px;
-  display: inline-block;
 }
 
 .node-kids-form .field-name-field-dob {
-  display: inline-block;
+  clear: left;
 }
 
-.node-kids-form .field-name-field-dob .date-form-element-content-multiline{
+.node-kids-form .field-name-field-dob .date-form-element-content-multiline {
   border: none;
   padding: 0px;
 }
 
-.node-kids-form .field-name-field-gender {
+.node-kids-form .field-name-field-gender .form-item.radio,
+.node-kids-form .field-name-field-attend-church-regularly .form-item.radio,
+.node-kids-form .field-name-field-t-shirt-size .form-item.radio {
   display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.node-kids-form .field-name-field-address-1 {
+  clear: left;
+}
+
+.node-kids-form .field-name-field-address-1,
+.node-kids-form .field-name-field-address-2 {
+  max-width: 300px;
+}
+
+.node-kids-form .field-name-field-apt {
+  max-width: 200px;
+}
+
+.node-kids-form .field-name-field-city {
+  clear: left;
+  max-width: 200px;
+}
+
+.node-kids-form .field-name-field-state {
+  max-width: 200px;
+}
+
+.node-kids-form .field-name-field-zip {
+  max-width: 100px;
+}
+
+.node-kids-form .field-name-field-school {
+  clear: left;
+  max-width: 500px;
+}
+
+.node-kids-form .field-name-field-grade {
+  clear: left;
+  max-width: 100px;
+}
+
+.node-kids-form .field-name-field-teacher,
+.node-kids-form .field-name-field-church,
+.node-kids-form .field-name-field-attend-church-regularly {
+  max-width: 200px;
+}
+
+.node-kids-form .field-name-field-food-allergies {
+  clear: left;
+  max-width: 300px;
+}
+
+.node-kids-form .field-name-field-health-concerns {
+  max-width: 300px;
+}
+
+.node-kids-form .field-name-field-moved {
+  margin-top: 31px;
+}
+
+.node-kids-form .field-name-field-moved label {
+  font-weight: bold;
+}
+
+.node-kids-form .field-name-field-ethnicity {
+  clear: left;
+  max-width: 200px;
+}
+
+.node-kids-form .field-name-field-parent-guardian {
+  clear: both;
+}
+
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-first-name,
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-last-name,
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-relation {
+  display: inline-block;
+  max-width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
 }
