@@ -425,3 +425,15 @@ function novo_master_update_7136() {
 function novo_master_update_7137() {
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Remove old fields.
+ */
+function novo_master_update_7138() {
+  field_delete_field('field_middle');
+  field_purge_batch(1);
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_menu_feature");
+  features_revert_module("novo_views_feature");
+  features_revert_module("novo_roles_permissions_feature");
+}

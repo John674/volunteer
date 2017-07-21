@@ -16,11 +16,5 @@ function novo_roles_permissions_feature_user_default_roles() {
     'weight' => 3,
   );
 
-  // Exported role: siteadmin.
-  $roles['siteadmin'] = array(
-    'name' => 'siteadmin',
-    'weight' => 4,
-  );
-
   return $roles;
 }
