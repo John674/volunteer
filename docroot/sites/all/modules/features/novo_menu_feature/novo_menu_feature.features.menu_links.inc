@@ -10,24 +10,75 @@
 function novo_menu_feature_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu_users:admin/people.
-  $menu_links['main-menu_users:admin/people'] = array(
+  // Exported menu link: main-menu_kids:kids.
+  $menu_links['main-menu_kids:kids'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'admin/people',
-    'router_path' => 'admin/people',
-    'link_title' => 'Users',
+    'link_path' => 'kids',
+    'router_path' => 'kids',
+    'link_title' => 'Kids',
+    'options' => array(
+      'identifier' => 'main-menu_kids:kids',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_programs:programs.
+  $menu_links['main-menu_programs:programs'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'programs',
+    'router_path' => 'programs',
+    'link_title' => 'Programs',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_users:admin/people',
+      'identifier' => 'main-menu_programs:programs',
     ),
     'module' => 'menu',
     'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -46,
+    'weight' => -49,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_staff:staff.
+  $menu_links['main-menu_staff:staff'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'staff',
+    'router_path' => 'staff',
+    'link_title' => 'Staff',
+    'options' => array(
+      'identifier' => 'main-menu_staff:staff',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+  );
+  // Exported menu link: main-menu_volunteers:volunteers.
+  $menu_links['main-menu_volunteers:volunteers'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'volunteers',
+    'router_path' => 'volunteers',
+    'link_title' => 'Volunteers',
+    'options' => array(
+      'identifier' => 'main-menu_volunteers:volunteers',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -47,
     'customized' => 1,
   );
   // Exported menu link: menu-program-menu_attendance:attendance.
@@ -89,8 +140,11 @@ function novo_menu_feature_menu_default_menu_links() {
   // Included for use with string extractors like potx.
   t('Attendance');
   t('Enrollment');
+  t('Kids');
   t('Locations');
-  t('Users');
+  t('Programs');
+  t('Staff');
+  t('Volunteers');
 
   return $menu_links;
 }

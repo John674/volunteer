@@ -382,6 +382,13 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: In attendance */
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['id'] = 'reverse_field_attendance_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['field'] = 'reverse_field_attendance_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['ui_name'] = 'In attendance';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['label'] = 'In attendance';
+  $handler->display->display_options['relationships']['reverse_field_attendance_program_name_node']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1163,6 +1170,168 @@ function novo_views_feature_views_default_views() {
   $export['locations'] = $view;
 
   $view = new view();
+  $view->name = 'mentor_filter_locations';
+  $view->description = '';
+  $view->tag = 'REF';
+  $view->base_table = 'node';
+  $view->human_name = 'Mentor Filter Locations (REF)';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: In Program */
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['id'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['field'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['ui_name'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['label'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['required'] = TRUE;
+  /* Relationship: In mentor */
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['id'] = 'reverse_field_mentor_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['field'] = 'reverse_field_mentor_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['relationship'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['ui_name'] = 'In mentor';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['label'] = 'In mentor';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'locations' => 'locations',
+  );
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $export['mentor_filter_locations'] = $view;
+
+  $view = new view();
+  $view->name = 'mentor_filter_programs';
+  $view->description = '';
+  $view->tag = 'REF';
+  $view->base_table = 'node';
+  $view->human_name = 'Mentor Filter Programs (REF)';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: In Mentors */
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['id'] = 'reverse_field_mentor_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['field'] = 'reverse_field_mentor_program_name_node';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['ui_name'] = 'In Mentors';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['label'] = 'In Mentors';
+  $handler->display->display_options['relationships']['reverse_field_mentor_program_name_node']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: School year */
+  $handler->display->display_options['fields']['field_program_school_year']['id'] = 'field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['table'] = 'field_data_field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['field'] = 'field_program_school_year';
+  $handler->display->display_options['fields']['field_program_school_year']['label'] = '';
+  $handler->display->display_options['fields']['field_program_school_year']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_program_school_year']['settings'] = array(
+    'format_type' => 'custom',
+    'custom_date_format' => 'Y ',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Program Location (field_program_location) */
+  $handler->display->display_options['arguments']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'program' => 'program',
+  );
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $export['mentor_filter_programs'] = $view;
+
+  $view = new view();
   $view->name = 'mentor_kids_list_ref';
   $view->description = '';
   $view->tag = 'REF';
@@ -1326,6 +1495,238 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $export['mentor_programs_ref'] = $view;
+
+  $view = new view();
+  $view->name = 'mentors';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Mentors';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Mentors';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_mentor_kid_name' => 'field_mentor_kid_name',
+    'field_mentoring_date' => 'field_mentoring_date',
+    'field_staff_mentor_name' => 'field_staff_mentor_name',
+    'field_volunteer_mentor_name' => 'field_volunteer_mentor_name',
+    'field_mentor_type' => 'field_mentor_type',
+    'views_conditional' => 'views_conditional',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_mentor_kid_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_mentoring_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_staff_mentor_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_volunteer_mentor_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_mentor_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_conditional' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['id'] = 'field_mentor_program_name_target_id';
+  $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['table'] = 'field_data_field_mentor_program_name';
+  $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['field'] = 'field_mentor_program_name_target_id';
+  $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['label'] = 'Program';
+  $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['relationship'] = 'field_mentor_program_name_target_id';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['label'] = 'Location';
+  $handler->display->display_options['relationships']['field_program_location_target_id']['required'] = TRUE;
+  /* Field: Content: Kid Name */
+  $handler->display->display_options['fields']['field_mentor_kid_name']['id'] = 'field_mentor_kid_name';
+  $handler->display->display_options['fields']['field_mentor_kid_name']['table'] = 'field_data_field_mentor_kid_name';
+  $handler->display->display_options['fields']['field_mentor_kid_name']['field'] = 'field_mentor_kid_name';
+  $handler->display->display_options['fields']['field_mentor_kid_name']['label'] = 'Kid name';
+  $handler->display->display_options['fields']['field_mentor_kid_name']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 1,
+  );
+  /* Field: Content: Mentoring Date */
+  $handler->display->display_options['fields']['field_mentoring_date']['id'] = 'field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['table'] = 'field_data_field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['field'] = 'field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['label'] = 'Date';
+  $handler->display->display_options['fields']['field_mentoring_date']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Staff Mentor Name */
+  $handler->display->display_options['fields']['field_staff_mentor_name']['id'] = 'field_staff_mentor_name';
+  $handler->display->display_options['fields']['field_staff_mentor_name']['table'] = 'field_data_field_staff_mentor_name';
+  $handler->display->display_options['fields']['field_staff_mentor_name']['field'] = 'field_staff_mentor_name';
+  $handler->display->display_options['fields']['field_staff_mentor_name']['label'] = '';
+  $handler->display->display_options['fields']['field_staff_mentor_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_staff_mentor_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_staff_mentor_name']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
+  /* Field: Content: Volunteer Mentor Name */
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['id'] = 'field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['table'] = 'field_data_field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['field'] = 'field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['label'] = '';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
+  /* Field: Content: Mentor Type */
+  $handler->display->display_options['fields']['field_mentor_type']['id'] = 'field_mentor_type';
+  $handler->display->display_options['fields']['field_mentor_type']['table'] = 'field_data_field_mentor_type';
+  $handler->display->display_options['fields']['field_mentor_type']['field'] = 'field_mentor_type';
+  $handler->display->display_options['fields']['field_mentor_type']['label'] = '';
+  $handler->display->display_options['fields']['field_mentor_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_mentor_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_mentor_type']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_mentor_type']['type'] = 'list_key';
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['label'] = 'Mentor name';
+  $handler->display->display_options['fields']['views_conditional']['if'] = 'field_mentor_type';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
+  $handler->display->display_options['fields']['views_conditional']['equalto'] = 'Staff';
+  $handler->display->display_options['fields']['views_conditional']['then'] = '[field_staff_mentor_name]';
+  $handler->display->display_options['fields']['views_conditional']['or'] = '[field_volunteer_mentor_name]';
+  $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Options';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'mentors' => 'mentors',
+  );
+  /* Filter criterion: Content: Program Location (field_program_location) (reference filter) */
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['id'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['field'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['relationship'] = 'field_mentor_program_name_target_id';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator_id'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['identifier'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'mentor_filter_locations:entityreference_1';
+  /* Filter criterion: Content: Program Name (field_mentor_program_name) (reference filter) */
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['id'] = 'field_mentor_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['table'] = 'field_data_field_mentor_program_name';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['field'] = 'field_mentor_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['operator_id'] = 'field_mentor_program_name_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['label'] = 'Filter by Program';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['operator'] = 'field_mentor_program_name_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['identifier'] = 'field_mentor_program_name_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['reference_display'] = 'mentor_filter_programs:entityreference_1';
+  $handler->display->display_options['filters']['field_mentor_program_name_target_id_entityreference_filter']['reference_arguments'] = '[field_program_location_target_id_entityreference_filter]';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'mentors';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Mentoring';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'menu-program-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $export['mentors'] = $view;
 
   $view = new view();
   $view->name = 'partners';
@@ -2231,6 +2632,189 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $export['training_list'] = $view;
+
+  $view = new view();
+  $view->name = 'users';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'users';
+  $view->human_name = 'Users';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Users';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => 'plain_text',
+        ),
+      ),
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
+    ),
+  );
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_u_first_name' => 'field_u_first_name',
+    'field_u_last_name' => 'field_u_last_name',
+    'mail' => 'mail',
+    'rid' => 'rid',
+    'status' => 'status',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_u_first_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_u_last_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'mail' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'rid' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: User: First Name */
+  $handler->display->display_options['fields']['field_u_first_name']['id'] = 'field_u_first_name';
+  $handler->display->display_options['fields']['field_u_first_name']['table'] = 'field_data_field_u_first_name';
+  $handler->display->display_options['fields']['field_u_first_name']['field'] = 'field_u_first_name';
+  /* Field: User: Last Name */
+  $handler->display->display_options['fields']['field_u_last_name']['id'] = 'field_u_last_name';
+  $handler->display->display_options['fields']['field_u_last_name']['table'] = 'field_data_field_u_last_name';
+  $handler->display->display_options['fields']['field_u_last_name']['field'] = 'field_u_last_name';
+  /* Field: User: E-mail */
+  $handler->display->display_options['fields']['mail']['id'] = 'mail';
+  $handler->display->display_options['fields']['mail']['table'] = 'users';
+  $handler->display->display_options['fields']['mail']['field'] = 'mail';
+  $handler->display->display_options['fields']['mail']['link_to_user'] = '0';
+  /* Field: User: Roles */
+  $handler->display->display_options['fields']['rid']['id'] = 'rid';
+  $handler->display->display_options['fields']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['fields']['rid']['field'] = 'rid';
+  $handler->display->display_options['fields']['rid']['label'] = 'Role';
+  /* Field: User: Active */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'users';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: User: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'users';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Options';
+  /* Sort criterion: User: Created date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'users';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: User: First Name (field_u_first_name) */
+  $handler->display->display_options['filters']['field_u_first_name_value']['id'] = 'field_u_first_name_value';
+  $handler->display->display_options['filters']['field_u_first_name_value']['table'] = 'field_data_field_u_first_name';
+  $handler->display->display_options['filters']['field_u_first_name_value']['field'] = 'field_u_first_name_value';
+  $handler->display->display_options['filters']['field_u_first_name_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['field_u_first_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_u_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_u_first_name_value']['expose']['operator_id'] = 'field_u_first_name_value_op';
+  $handler->display->display_options['filters']['field_u_first_name_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['field_u_first_name_value']['expose']['operator'] = 'field_u_first_name_value_op';
+  $handler->display->display_options['filters']['field_u_first_name_value']['expose']['identifier'] = 'field_u_first_name_value';
+  $handler->display->display_options['filters']['field_u_first_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: User: Last Name (field_u_last_name) */
+  $handler->display->display_options['filters']['field_u_last_name_value']['id'] = 'field_u_last_name_value';
+  $handler->display->display_options['filters']['field_u_last_name_value']['table'] = 'field_data_field_u_last_name';
+  $handler->display->display_options['filters']['field_u_last_name_value']['field'] = 'field_u_last_name_value';
+  $handler->display->display_options['filters']['field_u_last_name_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['field_u_last_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_u_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_u_last_name_value']['expose']['operator_id'] = 'field_u_last_name_value_op';
+  $handler->display->display_options['filters']['field_u_last_name_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['field_u_last_name_value']['expose']['operator'] = 'field_u_last_name_value_op';
+  $handler->display->display_options['filters']['field_u_last_name_value']['expose']['identifier'] = 'field_u_last_name_value';
+  $handler->display->display_options['filters']['field_u_last_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: User: E-mail */
+  $handler->display->display_options['filters']['mail']['id'] = 'mail';
+  $handler->display->display_options['filters']['mail']['table'] = 'users';
+  $handler->display->display_options['filters']['mail']['field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['operator'] = 'word';
+  $handler->display->display_options['filters']['mail']['group'] = 1;
+  $handler->display->display_options['filters']['mail']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['label'] = 'E-mail';
+  $handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
+  $handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    5 => 0,
+    6 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'users';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Users';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $export['users'] = $view;
 
   $view = new view();
   $view->name = 'volunteer_interests_roles';

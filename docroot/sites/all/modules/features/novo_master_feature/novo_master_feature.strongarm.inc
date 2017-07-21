@@ -13,6 +13,31 @@ function novo_master_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'autoassignrole_admin_active';
+  $strongarm->value = '0';
+  $export['autoassignrole_admin_active'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autoassignrole_auto_active';
+  $strongarm->value = '1';
+  $export['autoassignrole_auto_active'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'autoassignrole_auto_roles';
+  $strongarm->value = array(
+    6 => '6',
+    3 => 0,
+    5 => 0,
+  );
+  $export['autoassignrole_auto_roles'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'chosen_allow_single_deselect';
   $strongarm->value = 0;
   $export['chosen_allow_single_deselect'] = $strongarm;

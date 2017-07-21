@@ -22,7 +22,8 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'partners',
   'programs',
   'staff',
-  'volunteers'
+  'volunteers',
+  'mentors'
 )));
 
 /**
@@ -44,6 +45,22 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['publish']['#value'] = t("Not active");
     }
   }
+
+  if (($form_id == "user_profile_form" || $form_id == "user_register_form") && user_access("novo master edit roles")) {
+    $form['account']['roles']['#access'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_master_permission() {
+  return array(
+    'novo master edit roles' => array(
+      'title' => t('Allow edit roles for users'),
+      'description' => t('Allow edit roles for any user.'),
+    ),
+  );
 }
 
 /**
@@ -78,7 +95,7 @@ function novo_master_disable_node_view($node) {
 function novo_master_disable_node_add_page() {
   global $user;
 
-  return ($user->uid = 1) ? TRUE : FALSE;
+  return ($user->uid == 1) ? TRUE : FALSE;
 }
 
 /**
@@ -109,8 +126,17 @@ function novo_master_preprocess_views_view(&$vars) {
     $type = reset($type);
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
-      $btn = l(t("Add !icon", array("!icon" => $icon)), "node/add/" . $type, array(
-        "query" => drupal_get_destination(),
+      if ($vars['name'] == "volunteers") {
+        $add_link = "admin/people/create";
+        $destination = array("destination" => "users");
+      }
+      else {
+        $add_link = "node/add/" . $type;
+        $destination = drupal_get_destination();
+      }
+
+      $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
+        "query" => $destination,
         "html" => TRUE,
         "attributes" => array(
           "class" => array(
