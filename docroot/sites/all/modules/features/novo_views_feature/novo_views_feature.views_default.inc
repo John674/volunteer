@@ -3156,15 +3156,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'application' => 'application',
   );
-  /* Filter criterion: Content: Status (field_app_status) */
-  $handler->display->display_options['filters']['field_app_status_tid']['id'] = 'field_app_status_tid';
-  $handler->display->display_options['filters']['field_app_status_tid']['table'] = 'field_data_field_app_status';
-  $handler->display->display_options['filters']['field_app_status_tid']['field'] = 'field_app_status_tid';
-  $handler->display->display_options['filters']['field_app_status_tid']['value'] = array(
-    193 => '193',
-  );
-  $handler->display->display_options['filters']['field_app_status_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_app_status_tid']['vocabulary'] = 'application_status';
 
   /* Display: Entity Reference */
   $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');

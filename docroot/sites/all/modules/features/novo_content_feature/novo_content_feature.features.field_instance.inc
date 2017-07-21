@@ -7865,47 +7865,6 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-locations-field_active_inactive'.
-  $field_instances['node-locations-field_active_inactive'] = array(
-    'bundle' => 'locations',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_active_inactive',
-    'label' => 'Active / Inactive',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-locations-field_address_1'.
   $field_instances['node-locations-field_address_1'] = array(
     'bundle' => 'locations',
@@ -9561,7 +9520,6 @@ Re-Dedication',
   // Translatables
   // Included for use with string extractors like potx.
   t('A');
-  t('Active / Inactive');
   t('Address');
   t('Address 1');
   t('Address 2');
