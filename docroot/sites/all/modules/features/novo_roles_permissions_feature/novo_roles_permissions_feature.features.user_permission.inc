@@ -328,7 +328,9 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'disable auto complete'.
   $permissions['disable auto complete'] = array(
     'name' => 'disable auto complete',
-    'roles' => array(),
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
     'module' => 'novo_applications',
   );
 
@@ -509,6 +511,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'siteadmin' => 'siteadmin',
     ),
     'module' => 'novo_ref_request',
+  );
+
+  // Exported permission: 'novo master edit roles'.
+  $permissions['novo master edit roles'] = array(
+    'name' => 'novo master edit roles',
+    'roles' => array(
+      'siteadmin' => 'siteadmin',
+    ),
+    'module' => 'novo_master',
   );
 
   // Exported permission: 'publish any content'.

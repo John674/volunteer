@@ -123,3 +123,18 @@ a.select2-search-choice-close:hover {
 .field-name-field-faq-q {
   font-weight: bold;
 }
+
+.pane-user-login {
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 0px 40px 20px;
+}
+
+.pane-user-login .form-actions {
+  text-align: center;
+}
+
+.pane-user-login .form-actions button {
+  min-width: 200px;
+}

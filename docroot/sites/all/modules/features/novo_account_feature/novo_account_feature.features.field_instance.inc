@@ -55,7 +55,7 @@ function novo_account_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 9,
+      'weight' => 2,
     ),
   );
 
@@ -89,7 +89,7 @@ function novo_account_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 0,
     ),
   );
 
@@ -123,7 +123,7 @@ function novo_account_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 1,
     ),
   );
 

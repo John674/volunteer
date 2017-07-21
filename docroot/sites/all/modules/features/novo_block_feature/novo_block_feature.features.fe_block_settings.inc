@@ -20,7 +20,8 @@ function novo_block_feature_default_fe_block_settings() {
     'node_types' => array(),
     'pages' => 'locations
 programs
-attendance',
+attendance
+mentors',
     'roles' => array(),
     'themes' => array(
       'bootstrap' => array(
