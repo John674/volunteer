@@ -1,0 +1,41 @@
+.node-kids-form .form-item-title {
+  max-width: 300px;
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.node-kids-form .field-name-field-goes-by {
+  max-width: 200px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.node-kids-form .field-name-field-middle-name {
+  max-width: 100px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.node-kids-form .field-name-field-last-name {
+  max-width: 300px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.node-kids-form .field-name-field-suffix {
+  max-width: 100px;
+  display: inline-block;
+}
+
+.node-kids-form .field-name-field-dob {
+  display: inline-block;
+}
+
+.node-kids-form .field-name-field-dob .date-form-element-content-multiline{
+  border: none;
+  padding: 0px;
+}
+
+.node-kids-form .field-name-field-gender {
+  display: inline-block;
+}
