@@ -78,7 +78,7 @@ function novo_master_disable_node_view($node) {
 function novo_master_disable_node_add_page() {
   global $user;
 
-  return ($user->uid = 1) ? TRUE : FALSE;
+  return ($user->uid == 1) ? TRUE : FALSE;
 }
 
 /**
