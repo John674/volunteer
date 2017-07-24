@@ -35,6 +35,9 @@ function novo_program_menu() {
   return $items;
 }
 
+/**
+ * Get kid's data.
+ */
 function novo_program_get_kid_data($nid) {
   if (function_exists("_entityreference_autocomplete_validate") && preg_match(ENTITYREFERENCE_FIND_ID_REGEX, rtrim($nid), $matches)) {
     $nid = !empty($matches[ENTITYREFERENCE_ID_MATCH_INDEX]) ? $matches[ENTITYREFERENCE_ID_MATCH_INDEX] : '';
@@ -47,26 +50,30 @@ function novo_program_get_kid_data($nid) {
 
   $dob_items = field_get_items("node", $node, "field_dob");
   if (isset($dob_items[0])) {
-    $display = array('label' => 'hidden', 'type'=> 'only_age');
+    $display = array('label' => 'hidden', 'type' => 'only_age');
     $age = render(field_view_value("node", $node, "field_dob", $dob_items[0], $display));
     $output_data[] = '<span class="novo-program-kid-data-age">' . $age . ' </span>';
-  } else {
+  }
+  else {
     $output_data[] = '<span class="novo-program-kid-data-age"> - </span>';
   }
 
   $dob_items = field_get_items("node", $node, "field_grade");
   if (isset($dob_items[0])) {
-    $display = array('label' => 'hidden', 'type'=> 'taxonomy_term_reference_plain');
+    $display = array(
+      'label' => 'hidden',
+      'type' => 'taxonomy_term_reference_plain'
+    );
     $grade = render(field_view_value("node", $node, "field_grade", $dob_items[0], $display));
     $output_data[] = '<span class="novo-program-kid-data-grage">' . $grade . ' </span>';
-  } else {
+  }
+  else {
     $output_data[] = '<span class="novo-program-kid-data-grage"> - </span>';
   }
 
   if (!empty($output_data)) {
     $output .= '<span class="novo-program-kid-data">' . implode(" ", $output_data) . ' </span>';
   }
-
 
   drupal_json_output($output);
 }

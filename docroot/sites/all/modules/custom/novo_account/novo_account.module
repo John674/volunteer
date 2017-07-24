@@ -21,7 +21,6 @@ function novo_account_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-
 /**
  * Implements hook_permission().
  */

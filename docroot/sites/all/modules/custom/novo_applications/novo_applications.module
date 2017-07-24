@@ -289,7 +289,6 @@ function novo_applications_node_access($node, $op, $account) {
     $node_completed = isset($node->field_completed[$lang][0]['value']) ? $node->field_completed[$lang][0]['value'] : FALSE;
     $app_user_uid = isset($node->field_app_user[$lang][0]['value']) ? $node->field_app_user[$lang][0]['value'] : -1;
 
-
     return (!$node_completed && $app_user_uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
   }
 
