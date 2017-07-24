@@ -9,7 +9,7 @@
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
-
+  $form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program.js";
 }
 
 /**
@@ -17,4 +17,56 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
  */
 function novo_program_preprocess_field($variables) {
 
+}
+
+/**
+ * Implements hook_menu().
+ */
+function novo_program_menu() {
+  $items = array();
+
+  $items['novo-program/get-kid-data/%'] = array(
+    'title' => 'Get kids data',
+    'page callback' => 'novo_program_get_kid_data',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+function novo_program_get_kid_data($nid) {
+  if (function_exists("_entityreference_autocomplete_validate") && preg_match(ENTITYREFERENCE_FIND_ID_REGEX, rtrim($nid), $matches)) {
+    $nid = !empty($matches[ENTITYREFERENCE_ID_MATCH_INDEX]) ? $matches[ENTITYREFERENCE_ID_MATCH_INDEX] : '';
+  }
+
+  $node = node_load($nid);
+
+  $output = '';
+  $output_data = array();
+
+  $dob_items = field_get_items("node", $node, "field_dob");
+  if (isset($dob_items[0])) {
+    $display = array('label' => 'hidden', 'type'=> 'only_age');
+    $age = render(field_view_value("node", $node, "field_dob", $dob_items[0], $display));
+    $output_data[] = '<span class="novo-program-kid-data-age">' . $age . ' </span>';
+  } else {
+    $output_data[] = '<span class="novo-program-kid-data-age"> - </span>';
+  }
+
+  $dob_items = field_get_items("node", $node, "field_grade");
+  if (isset($dob_items[0])) {
+    $display = array('label' => 'hidden', 'type'=> 'taxonomy_term_reference_plain');
+    $grade = render(field_view_value("node", $node, "field_grade", $dob_items[0], $display));
+    $output_data[] = '<span class="novo-program-kid-data-grage">' . $grade . ' </span>';
+  } else {
+    $output_data[] = '<span class="novo-program-kid-data-grage"> - </span>';
+  }
+
+  if (!empty($output_data)) {
+    $output .= '<span class="novo-program-kid-data">' . implode(" ", $output_data) . ' </span>';
+  }
+
+
+  drupal_json_output($output);
 }

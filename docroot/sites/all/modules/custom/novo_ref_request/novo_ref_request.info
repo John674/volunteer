@@ -6,3 +6,4 @@ version = 7.x-1.0
 
 files[] = views/novo_ref_request_handler_status.inc
 files[] = views/novo_ref_request_handler_actions.inc
+files[] = views/novo_ref_request_handler_user_name.inc

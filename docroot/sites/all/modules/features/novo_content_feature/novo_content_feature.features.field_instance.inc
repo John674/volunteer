@@ -114,7 +114,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 7,
+      'weight' => 2,
     ),
   );
 
@@ -149,7 +149,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -184,7 +184,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 1,
     ),
   );
 
@@ -217,7 +217,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -714,14 +714,18 @@ function novo_content_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'select2widget',
       'settings' => array(
-        'hide_ids' => 1,
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
+        'select2widgetajax' => array(
+          'match_limit' => 10,
+          'match_operator' => 'STARTS_WITH',
+          'min_char' => 1,
+          'placeholder' => 'Search',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
+        ),
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'select2widgetajax',
       'weight' => 3,
     ),
   );
@@ -1262,7 +1266,7 @@ function novo_content_feature_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'no_fieldset' => 0,
+        'no_fieldset' => 1,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -1742,6 +1746,52 @@ function novo_content_feature_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 75,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_app_user'.
+  $field_instances['node-application-field_app_user'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 114,
+      ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_app_user',
+    'label' => 'User uid',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 183,
     ),
   );
 
@@ -6687,12 +6737,6 @@ Friend',
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
-        'fix_display' => 0,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
-        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'options_select',
       'weight' => 4,
@@ -6838,32 +6882,15 @@ Friend',
       'active' => 1,
       'module' => 'select2widget',
       'settings' => array(
-        'advanced' => array(
-          'pattern' => '/(.+) \\((\\d+)\\)/',
-          'replacement' => '${1}',
-        ),
         'apply_chosen' => 0,
-        'fix_display' => 0,
-        'hide_ids' => 0,
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
         'select2widgetajax' => array(
-          'allow_new' => 0,
-          'delay' => 100,
           'match_limit' => 10,
           'match_operator' => 'STARTS_WITH',
           'min_char' => 1,
           'placeholder' => 'Search',
-          'separator' => '|',
-          'set_level' => 0,
-          'view_mode' => 'default',
+          'view_mode' => 'select2widget_labels',
+          'width' => '',
         ),
-        'size' => 60,
-        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
       'weight' => 6,
@@ -7182,7 +7209,7 @@ Friend',
         'label' => 'above',
         'module' => 'novo_formatters',
         'settings' => array(),
-        'type' => 'date_age',
+        'type' => 'only_age',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -8149,6 +8176,46 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-mentors-field_decision_other_explained'.
+  $field_instances['node-mentors-field_decision_other_explained'] = array(
+    'bundle' => 'mentors',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_decision_other_explained',
+    'label' => 'Decision other explained',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'node-mentors-field_mentor_kid_name'.
   $field_instances['node-mentors-field_mentor_kid_name'] = array(
     'bundle' => 'mentors',
@@ -8187,7 +8254,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -8229,7 +8296,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -8316,7 +8383,7 @@ Re-Dedication',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -8413,7 +8480,7 @@ Re-Dedication',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -9035,7 +9102,7 @@ Re-Dedication',
       'active' => 1,
       'module' => 'field_collection_table',
       'settings' => array(
-        'nodragging' => 0,
+        'nodragging' => 1,
         'title_on_top' => 1,
       ),
       'type' => 'field_collection_table',
@@ -9543,6 +9610,7 @@ Re-Dedication',
   t('Completed');
   t('Contact List');
   t('Date of Birth');
+  t('Decision other explained');
   t('Dismissal');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
@@ -9663,6 +9731,7 @@ Re-Dedication',
   t('Training Completed Date');
   t('Training List');
   t('Type');
+  t('User uid');
   t('VOLUNTEER INTERESTS / ROLES');
   t('Volunteer Mentor Name');
   t('Volunteer list');

@@ -1,0 +1,11 @@
+.node-mentors-form .field-name-field-mentor-type .form-item.radio,
+.node-mentors-form .field-name-field-mentoring .form-item.radio {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.node-mentors-form .select2-container {
+  padding: 0px;
+  border: none;
+}

@@ -4,12 +4,6 @@
   height: auto;
 }
 
-.node-attendance-form .field-name-field-attendance-year .date-form-element-content-multiline,
-.node-attendance-form .field-name-field-attendance-date .date-form-element-content-multiline {
-  border: none;
-  padding: 0px;
-}
-
 .node-attendance-form .input-group-addon {
   width: 0px;
   border: none;

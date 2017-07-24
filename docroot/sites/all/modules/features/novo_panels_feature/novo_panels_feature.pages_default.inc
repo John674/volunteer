@@ -72,7 +72,7 @@ function novo_panels_feature_default_page_manager_pages() {
           'settings' => array(
             'rids' => array(
               0 => 2,
-              1 => 4,
+              1 => 6,
             ),
           ),
           'context' => 'logged-in-user',
@@ -192,8 +192,11 @@ function novo_panels_feature_default_page_manager_pages() {
     'admin_title' => '',
     'title' => 'Welcome admin.',
     'title_heading' => 'h2',
-    'body' => 'You are logged in!',
-    'format' => 'plain_text',
+    'body' => '<div class="container">
+<h3>Admin Dashboard <span class="label label-danger">Coming soon</span></h3>  
+<div class="bs-example" data-example-id="contextual-panels"> <div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-success"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-info"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-warning"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-danger"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> </div>
+</div>',
+    'format' => 'php_code',
     'substitute' => TRUE,
   );
   $pane->cache = array();

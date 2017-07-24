@@ -188,6 +188,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_attendance_program_name_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Attendance date */
   $handler->display->display_options['fields']['field_attendance_date']['id'] = 'field_attendance_date';
   $handler->display->display_options['fields']['field_attendance_date']['table'] = 'field_data_field_attendance_date';
@@ -836,6 +837,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
@@ -1129,6 +1131,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1603,7 +1606,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_mentor_kid_name']['label'] = 'Kid name';
   $handler->display->display_options['fields']['field_mentor_kid_name']['settings'] = array(
     'bypass_access' => 0,
-    'link' => 1,
+    'link' => 0,
   );
   /* Field: Content: Mentoring Date */
   $handler->display->display_options['fields']['field_mentoring_date']['id'] = 'field_mentoring_date';
@@ -1650,17 +1653,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_mentor_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_mentor_type']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_mentor_type']['type'] = 'list_key';
-  /* Field: Views: Views Conditional */
-  $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
-  $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
-  $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
-  $handler->display->display_options['fields']['views_conditional']['label'] = 'Mentor name';
-  $handler->display->display_options['fields']['views_conditional']['if'] = 'field_mentor_type';
-  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
-  $handler->display->display_options['fields']['views_conditional']['equalto'] = 'Staff';
-  $handler->display->display_options['fields']['views_conditional']['then'] = '[field_staff_mentor_name]';
-  $handler->display->display_options['fields']['views_conditional']['or'] = '[field_volunteer_mentor_name]';
-  $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1822,6 +1814,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1982,6 +1975,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: School year */
   $handler->display->display_options['fields']['field_program_school_year']['id'] = 'field_program_school_year';
   $handler->display->display_options['fields']['field_program_school_year']['table'] = 'field_data_field_program_school_year';
@@ -2002,7 +1996,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
     'bypass_access' => 0,
-    'link' => 1,
+    'link' => 0,
   );
   /* Field: Content: Program day */
   $handler->display->display_options['fields']['field_program_day']['id'] = 'field_program_day';
@@ -2235,7 +2229,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['updated']['field'] = 'updated';
   $handler->display->display_options['fields']['updated']['date_format'] = 'today time ago';
   $handler->display->display_options['fields']['updated']['second_date_format'] = 'short';
-  /* Field: Novo referral request tasks: Actions */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['actions']['id'] = 'actions';
   $handler->display->display_options['fields']['actions']['table'] = 'novo_ref_tasks';
   $handler->display->display_options['fields']['actions']['field'] = 'actions';
@@ -2451,6 +2445,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
@@ -2463,6 +2458,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['type'] = 'email_plain';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -2749,6 +2745,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'users';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: User: Novo application status */
+  $handler->display->display_options['fields']['novo_application_status']['id'] = 'novo_application_status';
+  $handler->display->display_options['fields']['novo_application_status']['table'] = 'users';
+  $handler->display->display_options['fields']['novo_application_status']['field'] = 'novo_application_status';
+  $handler->display->display_options['fields']['novo_application_status']['label'] = 'Application';
   /* Field: User: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'users';
@@ -2811,6 +2812,22 @@ function novo_views_feature_views_default_views() {
     1 => 0,
     3 => 0,
     5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid']['id'] = 'rid';
+  $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['rid']['expose']['operator_id'] = 'rid_op';
+  $handler->display->display_options['filters']['rid']['expose']['label'] = 'Roles';
+  $handler->display->display_options['filters']['rid']['expose']['operator'] = 'rid_op';
+  $handler->display->display_options['filters']['rid']['expose']['identifier'] = 'rid';
+  $handler->display->display_options['filters']['rid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    5 => 0,
+    3 => 0,
     6 => 0,
   );
 

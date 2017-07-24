@@ -1,0 +1,13 @@
+.node-staff-form .field-name-field-training-list .field-name-field-training-completed,
+.node-staff-form .field-name-field-training-list .field-name-field-training-completed-date
+ {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  vertical-align: top;
+}
+
+.node-staff-form .field-name-field-training-list button.form-submit {
+  vertical-align: bottom;
+}

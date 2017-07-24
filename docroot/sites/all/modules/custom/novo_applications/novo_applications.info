@@ -2,3 +2,5 @@ name = Novo Applications
 description = Applications module.
 core = 7.x
 package = Novo
+
+files[] = views/novo_applications_handler_app_status_btn.inc

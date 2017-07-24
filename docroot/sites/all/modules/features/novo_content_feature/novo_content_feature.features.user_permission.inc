@@ -17,6 +17,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_app_user'.
+  $permissions['create field_app_user'] = array(
+    'name' => 'create field_app_user',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_completed'.
   $permissions['create field_completed'] = array(
     'name' => 'create field_completed',
@@ -39,6 +46,13 @@ function novo_content_feature_user_default_permissions() {
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create field_notes'.
+  $permissions['create field_notes'] = array(
+    'name' => 'create field_notes',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -91,6 +105,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_app_user'.
+  $permissions['edit field_app_user'] = array(
+    'name' => 'edit field_app_user',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_completed'.
   $permissions['edit field_completed'] = array(
     'name' => 'edit field_completed',
@@ -116,6 +137,13 @@ function novo_content_feature_user_default_permissions() {
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_notes'.
+  $permissions['edit field_notes'] = array(
+    'name' => 'edit field_notes',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -168,6 +196,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_app_user'.
+  $permissions['edit own field_app_user'] = array(
+    'name' => 'edit own field_app_user',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_completed'.
   $permissions['edit own field_completed'] = array(
     'name' => 'edit own field_completed',
@@ -188,6 +223,13 @@ function novo_content_feature_user_default_permissions() {
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_notes'.
+  $permissions['edit own field_notes'] = array(
+    'name' => 'edit own field_notes',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -242,6 +284,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_app_user'.
+  $permissions['view field_app_user'] = array(
+    'name' => 'view field_app_user',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_completed'.
   $permissions['view field_completed'] = array(
     'name' => 'view field_completed',
@@ -267,6 +316,13 @@ function novo_content_feature_user_default_permissions() {
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_notes'.
+  $permissions['view field_notes'] = array(
+    'name' => 'view field_notes',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -329,6 +385,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view own field_app_user'.
+  $permissions['view own field_app_user'] = array(
+    'name' => 'view own field_app_user',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_completed'.
   $permissions['view own field_completed'] = array(
     'name' => 'view own field_completed',
@@ -349,6 +412,13 @@ function novo_content_feature_user_default_permissions() {
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_notes'.
+  $permissions['view own field_notes'] = array(
+    'name' => 'view own field_notes',
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
