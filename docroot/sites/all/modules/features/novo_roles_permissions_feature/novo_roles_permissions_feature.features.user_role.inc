@@ -13,7 +13,7 @@ function novo_roles_permissions_feature_user_default_roles() {
   // Exported role: Applicant US citizen.
   $roles['Applicant US citizen'] = array(
     'name' => 'Applicant US citizen',
-    'weight' => 5,
+    'weight' => 2,
   );
 
   // Exported role: Reviewer.

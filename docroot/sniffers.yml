@@ -24,6 +24,7 @@
       - sites/all/themes/custom/nonstandard,*/*.css
       - profiles/*
       - sites/all/modules/custom/novo_ref_request/views/*
+      - sites/all/modules/custom/novo_applications/views/*
     phpcs_features_ignore:
       - sites/all/features/nonstandard
     phpcs_features_ignore_path: sites/all/features,*.pages_default.inc,*.panelizer.inc,*.features.menu_custom.inc,*.features.webform.inc,*.features.filter.inc,*.strongarm.inc,*.fpp_content_declarations.inc,*.panels_default.inc

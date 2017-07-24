@@ -1,0 +1,4 @@
+name = Novo Account
+description = Account module.
+core = 7.x
+package = Novo

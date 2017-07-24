@@ -513,15 +513,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'novo_ref_request',
   );
 
-  // Exported permission: 'novo master edit roles'.
-  $permissions['novo master edit roles'] = array(
-    'name' => 'novo master edit roles',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'novo_master',
-  );
-
   // Exported permission: 'publish any content'.
   $permissions['publish any content'] = array(
     'name' => 'publish any content',
