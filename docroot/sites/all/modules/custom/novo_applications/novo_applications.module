@@ -60,7 +60,7 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         $uid = $loaded_user->uid;
       }
     }
-    $form['field_app_user']['#access'] = TRUE;
+    $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
   }
   else {
     $form['field_app_user']['#access'] = FALSE;
