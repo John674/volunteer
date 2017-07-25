@@ -21,6 +21,7 @@ function novo_menu_feature_menu_default_menu_links() {
         'title' => '',
       ),
       'identifier' => 'main-menu_programs:programs',
+      'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,

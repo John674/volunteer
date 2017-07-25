@@ -1583,7 +1583,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => '',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_p_canvassing_group',
       1 => 'field_p_small_group',
