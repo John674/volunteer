@@ -158,3 +158,54 @@ function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
     }
   }
 }
+
+/**
+ * Implements hook_menu_position_rule_alter().
+ */
+function novo_master_menu_position_rule_alter(&$rule, &$context, &$rule_matches, &$set_breadcrumb) {
+  switch ($rule->machine_name) {
+    case "programms_menu_active":
+      $content_types = array(
+        "attendance",
+        "program",
+        "class",
+        "mentors",
+        "locations"
+      );
+      if (isset($context['node']->type) && in_array($context['node']->type, $content_types)) {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "attendance_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "attendance") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "program_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "program") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "class_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "class") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "mentors_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "mentors") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "locations_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "locations") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+  }
+}

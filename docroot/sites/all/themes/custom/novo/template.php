@@ -208,6 +208,7 @@ function _novo_menu_menu_program_menu_block_visibility($block) {
   if ($arg0 == 'node' && is_numeric($arg1) && $arg2 == 'edit') {
     $node = node_load($arg1);
     if (isset($node->type)) {
+      // @codingStandardsIgnoreStart
       switch ($node->type) {
         case "program":
         case "locations":
@@ -216,7 +217,7 @@ function _novo_menu_menu_program_menu_block_visibility($block) {
           return TRUE;
           break;
       }
-
+      // @codingStandardsIgnoreEnd
     }
   }
 
