@@ -214,6 +214,7 @@ function _novo_menu_menu_program_menu_block_visibility($block) {
         case "locations":
         case "mentors":
         case "attendance":
+        case "class":
           return TRUE;
           break;
       }
