@@ -1,0 +1,16 @@
+Index: docroot/sites/all/modules/contrib/menu_position/menu_position.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/menu_position/menu_position.module	(revision 10f3b9027039024725773f5f0904850888bd3a64)
++++ docroot/sites/all/modules/contrib/menu_position/menu_position.module	(revision )
+@@ -363,7 +363,7 @@
+     // Retrieve the rules from the database. For speed, we don't call
+     // menu_position_read_rules() and unserialize the conditions only if needed.
+     $rules_query = db_select('menu_position_rules', 'm')
+-      ->fields('m', array('rid', 'conditions', 'menu_name', 'plid', 'mlid'))
++      ->fields('m', array('rid', 'conditions', 'menu_name', 'plid', 'mlid', 'machine_name'))
+       ->condition('m.enabled', 1, '=')
+       ->orderBy('m.weight')
+       ->orderBy('m.rid');

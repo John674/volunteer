@@ -363,7 +363,7 @@ function menu_position_evaluate_rules($context = array(), $use_static_cache = FA
     // Retrieve the rules from the database. For speed, we don't call
     // menu_position_read_rules() and unserialize the conditions only if needed.
     $rules_query = db_select('menu_position_rules', 'm')
-      ->fields('m', array('rid', 'conditions', 'menu_name', 'plid', 'mlid'))
+      ->fields('m', array('rid', 'conditions', 'menu_name', 'plid', 'mlid', 'machine_name'))
       ->condition('m.enabled', 1, '=')
       ->orderBy('m.weight')
       ->orderBy('m.rid');
