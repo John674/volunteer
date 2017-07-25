@@ -1,9 +1,3 @@
-.node-program-form {
-  background: #f5f5f5;
-  border-color: #dddddd;
-  padding: 20px;
-}
-
 .node-program-form .novo-select-color-block {
   width: 16px;
   height: 16px;
@@ -26,8 +20,13 @@
   border: none;
 }
 
+.node-program-form .field-p-kid-name {
+  width: 450px;
+}
+
 .node-program-form .field-name-field-p-kid-name {
   max-width: 300px;
+  min-width: 100px;
   display: inline-block;
   vertical-align: top;
   margin-bottom: 0px;
@@ -154,15 +153,15 @@
   padding: 0px 0px 7px 7px;
 }
 
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1),
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2),
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3),
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) {
   width: 50px;
 }
 
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1) label,
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2) label,
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label,
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label {
   -moz-transform: rotate(300deg);
   -webkit-transform: rotate(300deg);
   -o-transform: rotate(300deg);
@@ -180,4 +179,46 @@
 .node-program-form .field-name-field-program-kids-list .field-p-photo-release,
 .node-program-form .field-name-field-program-kids-list .field-p-text-parent {
   text-align: center;
+}
+
+.node-program-form .sticky-header {
+  z-index: 3 !important;
+}
+
+.node-program-form .select2-container {
+  padding: 0px;
+  border: none;
+}
+
+.node-program-form .select2-container .select2-choice {
+  height: 32px;
+}
+
+.node-program-form .select2-container .select2-chosen {
+  height: 100%;
+}
+
+.node-program-form .novo-program-kid-data {
+  float: right;
+  margin: 5px 25px 5px 0px;
+  width: 60px;
+}
+
+.node-program-form .novo-program-kid-data .novo-program-kid-data-age {
+  margin-right: 25px;
+}
+
+.node-program-form .novo-program-kid-data .novo-program-kid-data-age,
+.node-program-form .novo-program-kid-data .novo-program-kid-data-grade {
+  display: inline-block;
+  width: 15px;
+}
+
+.node-program-form .novo-program-kid-data-header {
+  width: 100px;
+  float: right;
+}
+
+.node-program-form .novo-program-kid-data-header .novo-program-kid-data-header-age {
+  margin-right: 10px;
 }

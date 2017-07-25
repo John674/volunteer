@@ -24,6 +24,12 @@
   background-color: #666;
 }
 
+.node-form.node-application-form {
+  background: none;
+  border: none;
+  padding: 0px;
+}
+
 .node-application-form .multistep {
   margin-top: 30px;
   font-family: proxima-nova, Helvetica, Arial, sans-serif;
@@ -177,7 +183,7 @@
 
 .node-application-form .multistep .group-app-7-statement .form-item .help-block,
 .node-application-form .multistep .group-app-7-program-policies .form-item .help-block,
-.node-application-form .multistep .group-app-7-final .form-item .help-block{
+.node-application-form .multistep .group-app-7-final .form-item .help-block {
   display: inline-block;
   width: 90%;
   vertical-align: middle;

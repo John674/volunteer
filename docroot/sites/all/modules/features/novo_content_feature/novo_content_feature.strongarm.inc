@@ -20,6 +20,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_mentors';
+  $strongarm->value = '1';
+  $export['auto_entitylabel_node_mentors'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_node_reference_request';
   $strongarm->value = '1';
   $export['auto_entitylabel_node_reference_request'] = $strongarm;
@@ -34,6 +41,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_mentors';
+  $strongarm->value = 'mentor';
+  $export['auto_entitylabel_pattern_node_mentors'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_reference_request';
   $strongarm->value = '';
   $export['auto_entitylabel_pattern_node_reference_request'] = $strongarm;
@@ -44,6 +58,13 @@ function novo_content_feature_strongarm() {
   $strongarm->name = 'auto_entitylabel_php_node_attendance';
   $strongarm->value = 0;
   $export['auto_entitylabel_php_node_attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_mentors';
+  $strongarm->value = 0;
+  $export['auto_entitylabel_php_node_mentors'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -112,6 +133,9 @@ function novo_content_feature_strongarm() {
         'custom_settings' => FALSE,
       ),
       'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'pdf' => array(
         'custom_settings' => FALSE,
       ),
     ),

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Definition of hr_promo_code_handler_status.
+ * Definition of novo_ref_request_handler_status.
  */
 
 /**

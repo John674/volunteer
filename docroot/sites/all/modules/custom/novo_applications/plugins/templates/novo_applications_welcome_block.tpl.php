@@ -8,7 +8,6 @@
 <div class="container">
     <div class="row">
       <?php
-      $already_created_app = isset($data['#content']['already_created_app']) ? $data['#content']['already_created_app'] : FALSE;
       $finished_app = isset($data['#content']['finished_app']) ? $data['#content']['finished_app'] : FALSE;
       $app_nid = isset($data['#content']['app_nid']) ? $data['#content']['app_nid'] : NULL;
       $user_name = isset($data['#content']['user_name']) ? $data['#content']['user_name'] : "";
@@ -20,7 +19,7 @@
 
             <div class="panel-body">
 
-              <?php if ($already_created_app && $finished_app) : ?>
+              <?php if ($app_nid && $finished_app) : ?>
                   <p>
                     <?php
                     print t("Your application will begin processing now! We will keep you updated on our progress by email, and please feel free to contact us at anytime for more information (!email or !phone)",
@@ -54,7 +53,7 @@
                           </div>
                       </div>
                   </div>
-              <?php elseif ($already_created_app && !$finished_app): ?>
+              <?php elseif ($app_nid && !$finished_app): ?>
 
                   <p>
                     <?php print t("Your are in progress of completing Application Form. Please continue."); ?>
@@ -152,7 +151,7 @@
         </div>
     </div>
 
-  <?php if ($already_created_app && $finished_app) : ?>
+  <?php if ($app_nid && $finished_app) : ?>
       <div class="row">
           <div class="col-md-10 col-md-offset-1">
               <div class="training-invite">
