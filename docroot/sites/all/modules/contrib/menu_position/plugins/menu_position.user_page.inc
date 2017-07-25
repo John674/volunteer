@@ -30,7 +30,7 @@ function menu_position_menu_position_condition_user_page($variables) {
     return FALSE;
   }
 
-  if (!empty($args[2])) {
+  if (!empty($args[2]) && ($args[2] == 'add' || $args[2] == 'edit')) {
     // Short circuit if we are on the add or edit page.
     return FALSE;
   }
