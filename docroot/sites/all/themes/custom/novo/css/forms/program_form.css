@@ -34,7 +34,8 @@
 
 .node-program-form .field-name-field-p-parent-sign,
 .node-program-form .field-name-field-p-photo-release,
-.node-program-form .field-name-field-p-text-parent {
+.node-program-form .field-name-field-p-text-parent,
+.node-program-form .field-name-field-p-bag {
   display: inline-block;
   margin-left: 0px;
   margin-bottom: 0px;
@@ -113,14 +114,14 @@
 
 .node-program-form .form-item-title {
   min-width: 300px;
-  display: inline-block;
+  display: block;
   vertical-align: top;
 }
 
 .node-program-form .field-name-field-program-school-year {
   display: inline-block;
   vertical-align: top;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .node-program-form .field-name-field-program-school-year .date-form-element-content {
@@ -132,12 +133,30 @@
 .node-program-form .field-name-field-program-location {
   display: inline-block;
   vertical-align: top;
-  min-width: 380px;
+  width: 310px;
   margin-left: 20px;
 }
 
 .node-program-form .field-name-field-program-location .form-control.form-select {
-  max-width: 300px;
+  width: 300px;
+}
+
+.node-program-form .field-name-field-program-class-name {
+  display: inline-block;
+  vertical-align: top;
+  width: 310px;
+  margin-left: 20px;
+}
+
+.node-program-form .field-name-field-program-class-name .form-control.form-select {
+  width: 300px;
+}
+
+.node-program-form .input-group-addon {
+  width: 0px;
+  border: none;
+  background: none;
+  padding: 0px;
 }
 
 .node-program-form .field-name-field-program-kids-list table .tabledrag,
@@ -155,13 +174,15 @@
 
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1),
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2),
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) {
   width: 50px;
 }
 
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1) label,
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2) label,
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label {
   -moz-transform: rotate(300deg);
   -webkit-transform: rotate(300deg);
   -o-transform: rotate(300deg);

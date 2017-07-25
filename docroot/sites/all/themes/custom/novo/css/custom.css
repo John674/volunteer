@@ -72,16 +72,16 @@ a.tabledrag-handle .handle {
   margin-left: 3px;
 }
 
-.view-programs .views-field-field-program-day ul {
+.view-class .views-field-field-program-day ul {
   margin: 0px;
 }
 
-.view-programs .views-field-field-program-day .field-collection-item-field-program-day {
+.view-class .views-field-field-program-day .field-collection-item-field-program-day {
   display: inline-block;
 }
 
-.view-programs .views-field-field-program-day .field-name-field-program-weekday,
-.view-programs .views-field-field-program-day .field-name-field-program-time {
+.view-class .views-field-field-program-day .field-name-field-program-weekday,
+.view-class .views-field-field-program-day .field-name-field-program-time {
   display: inline-block;
 }
 

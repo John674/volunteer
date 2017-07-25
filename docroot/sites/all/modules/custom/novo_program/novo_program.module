@@ -26,7 +26,7 @@ function novo_program_menu() {
   $items = array();
 
   $items['novo-program/get-kid-data/%'] = array(
-    'title' => 'Get kids data',
+    'title' => 'Get kid data',
     'page callback' => 'novo_program_get_kid_data',
     'page arguments' => array(2),
     'access arguments' => array('access content'),

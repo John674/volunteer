@@ -6,13 +6,14 @@
  */
 
 define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize(array(
-  "program",
-  "kids",
-  "attendance",
-  "locations",
-  "mentors",
-  "partner",
-  "staff"
+  'program',
+  'kids',
+  'attendance',
+  'locations',
+  'mentors',
+  'partner',
+  'staff',
+  'class'
 )));
 
 define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
@@ -23,7 +24,8 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'programs',
   'staff',
   'volunteers',
-  'mentors'
+  'mentors',
+  'class'
 )));
 
 /**
@@ -134,6 +136,25 @@ function novo_master_preprocess_views_view(&$vars) {
 
       $vars['attachment_before'] .= $btn;
       $vars['attachment_after'] .= $btn;
+    }
+  }
+}
+
+/**
+ * Implements hook_ddf_handle_args_alter().
+ */
+function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
+  if ($field['field_name'] == "field_attendance_year" || $field['field_name'] == "field_program_school_year") {
+    if (is_array($value['value'])) {
+      $value = $value['value'];
+      $column = "year";
+    }
+    else {
+      // Original node has string value.
+      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
+      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
+        $value['value'] = date("Y", strtotime($value['value']));
+      }
     }
   }
 }
