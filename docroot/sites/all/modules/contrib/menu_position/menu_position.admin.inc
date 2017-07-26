@@ -523,7 +523,7 @@ function menu_position_rule_form_submit($form, &$form_state) {
 function menu_position_add_rule(array $rule) {
   $fields = array(
     'admin_title' => $rule['admin_title'],
-    'conditions'  => serialize($rule['conditions']),
+    'conditions'  => base64_encode(serialize($rule['conditions'])),
     'menu_name'   => $rule['menu_name'],
     'plid'        => $rule['plid'],
     'machine_name' => $rule['machine_name'],
@@ -575,7 +575,7 @@ function menu_position_add_menu_link($rid, $plid, $admin_title) {
  */
 function menu_position_read_rule($rid) {
   $rule = db_query('SELECT * FROM {menu_position_rules} WHERE rid = :rid', array(':rid' => $rid))->fetchAssoc();
-  $rule['conditions'] = unserialize($rule['conditions']);
+  $rule['conditions'] = unserialize(base64_decode($rule['conditions']));
   return $rule;
 }
 
@@ -589,7 +589,7 @@ function menu_position_read_rules() {
   $query = db_query('SELECT * FROM {menu_position_rules} ORDER BY weight, rid');
   $rules = array();
   foreach ($query as $rule) {
-    $rule->conditions = unserialize($rule->conditions);
+    $rule->conditions = unserialize(base64_decode($rule->conditions));
     $rules[$rule->rid] = $rule;
   }
   return $rules;
@@ -612,7 +612,7 @@ function menu_position_read_rules() {
 function menu_position_edit_rule(array $rule) {
   $fields = array(
     'admin_title' => $rule['admin_title'],
-    'conditions'  => serialize($rule['conditions']),
+    'conditions'  => base64_encode(serialize($rule['conditions'])),
     'menu_name'   => $rule['menu_name'],
     'plid'        => $rule['plid'],
     'machine_name' => $rule['machine_name'],
