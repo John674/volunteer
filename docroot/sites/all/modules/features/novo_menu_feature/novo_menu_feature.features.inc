@@ -21,8 +21,7 @@ function novo_menu_feature_menu_position_default_menu_positions() {
     'attendance_menu_active' => array(
       'admin_title' => 'Attendance menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:31:"attendance
-node/add/attendance";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTk6Im5vZGUvYWRkL2F0dGVuZGFuY2UiO319',
       'menu_name' => 'menu-program-menu',
       'plid' => 1703,
       'mlid' => 1793,
@@ -32,8 +31,7 @@ node/add/attendance";}}',
     'class_menu_active' => array(
       'admin_title' => 'Class menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:21:"class
-node/add/class";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTQ6Im5vZGUvYWRkL2NsYXNzIjt9fQ==',
       'menu_name' => 'menu-program-menu',
       'plid' => 1788,
       'mlid' => 1797,
@@ -43,8 +41,7 @@ node/add/class";}}',
     'locations_menu_active' => array(
       'admin_title' => 'Locations menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:29:"locations
-node/add/locations";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTg6Im5vZGUvYWRkL2xvY2F0aW9ucyI7fX0=',
       'menu_name' => 'menu-program-menu',
       'plid' => 394,
       'mlid' => 1795,
@@ -54,8 +51,7 @@ node/add/locations";}}',
     'mentors_menu_active' => array(
       'admin_title' => 'Mentors menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:25:"mentors
-node/add/mentors";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTY6Im5vZGUvYWRkL21lbnRvcnMiO319',
       'menu_name' => 'menu-program-menu',
       'plid' => 1693,
       'mlid' => 1796,
@@ -65,8 +61,7 @@ node/add/mentors";}}',
     'program_menu_active' => array(
       'admin_title' => 'Program menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:26:"programs
-node/add/program";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTY6Im5vZGUvYWRkL3Byb2dyYW0iO319',
       'menu_name' => 'menu-program-menu',
       'plid' => 870,
       'mlid' => 1794,
@@ -76,16 +71,7 @@ node/add/program";}}',
     'programms_menu_active' => array(
       'admin_title' => 'Programms menu active',
       'enabled' => 1,
-      'conditions' => 'a:1:{s:5:"pages";a:1:{s:5:"pages";s:140:"locations
-programs
-attendance
-mentors
-class
-node/add/attendance
-node/add/program
-node/add/class
-node/add/mentors
-node/add/locations";}}',
+      'conditions' => 'YToxOntzOjU6InBhZ2VzIjthOjE6e3M6NToicGFnZXMiO3M6MTQwOiJsb2NhdGlvbnMNCnByb2dyYW1zDQphdHRlbmRhbmNlDQptZW50b3JzDQpjbGFzcw0Kbm9kZS9hZGQvYXR0ZW5kYW5jZQ0Kbm9kZS9hZGQvcHJvZ3JhbQ0Kbm9kZS9hZGQvY2xhc3MNCm5vZGUvYWRkL21lbnRvcnMNCm5vZGUvYWRkL2xvY2F0aW9ucyI7fX0=',
       'menu_name' => 'main-menu',
       'plid' => 1695,
       'mlid' => 1798,

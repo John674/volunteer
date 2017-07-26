@@ -1,7 +1,7 @@
 name = Novo menu feature
 core = 7.x
 package = Novo
-version = 7.x-1.10
+version = 7.x-1.11
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = menu
@@ -21,6 +21,7 @@ features[menu_position][] = locations_menu_active
 features[menu_position][] = mentors_menu_active
 features[menu_position][] = program_menu_active
 features[menu_position][] = programms_menu_active
+features[variable][] = menu_position_active_link_display
 features[variable][] = pathauto_node_application_pattern
 features[variable][] = pathauto_node_attendance_pattern
 features[variable][] = pathauto_node_class_pattern
