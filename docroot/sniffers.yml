@@ -71,7 +71,7 @@
 
     jshint_folders:
       - { name: 'modules', path: 'sites/all/modules/custom', exclude: [] }
-      - { name: 'themes', path: 'sites/all/themes/custom', exclude: ['bower'] }
+      - { name: 'themes', path: 'sites/all/themes/custom', exclude: ['bower', 'bootstrap'] }
       - { name: 'profile', path: "{{ installation_profile_path }}", exclude: [] }
 
     scsslint_folders:
