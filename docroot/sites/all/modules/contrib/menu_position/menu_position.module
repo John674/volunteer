@@ -393,7 +393,7 @@ function menu_position_evaluate_rules($context = array(), $use_static_cache = FA
 
       // The ones from cache are already unserialized.
       if (is_string($rule->conditions)) {
-        $rule->conditions = unserialize(base64_decode($rule->conditions));
+        $rule->conditions = unserialize($rule->conditions);
       }
 
       // Go through each condition, AND-ing each result.
