@@ -57,10 +57,20 @@ function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, 
  * @return mixed
  *   Result.
  */
-function novo_ref_request_task_get_last($nid) {
-  return db_query("SELECT * FROM {novo_ref_tasks} WHERE nid = :nid ORDER BY id DESC LIMIT 1", array(
+function novo_ref_request_task_get_last($nid, $recreate = FALSE) {
+  $result = db_query("SELECT * FROM {novo_ref_tasks} WHERE nid = :nid ORDER BY id DESC LIMIT 1", array(
     ":nid" => $nid
   ))->fetchObject();
+
+  if (!$result && $recreate && function_exists("novo_ref_request_add_tasks_callback")) {
+    novo_ref_request_add_tasks_callback(array($nid));
+    $result = db_query("SELECT * FROM {novo_ref_tasks} WHERE nid = :nid ORDER BY id DESC LIMIT 1", array(
+      ":nid" => $nid
+    ))->fetchObject();
+  }
+
+  return $result;
+
 }
 
 /**

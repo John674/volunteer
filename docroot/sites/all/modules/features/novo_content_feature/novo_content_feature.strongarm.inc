@@ -112,11 +112,17 @@ function novo_content_feature_strongarm() {
       'pdf' => array(
         'custom_settings' => TRUE,
       ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
           'weight' => '51',
+        ),
+        'path' => array(
+          'weight' => '8',
         ),
       ),
       'display' => array(),

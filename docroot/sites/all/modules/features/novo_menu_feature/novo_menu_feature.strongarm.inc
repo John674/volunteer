@@ -13,6 +13,13 @@ function novo_menu_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menu_position_active_link_display';
+  $strongarm->value = 'parent';
+  $export['menu_position_active_link_display'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_application_pattern';
   $strongarm->value = 'application/[node:nid]';
   $export['pathauto_node_application_pattern'] = $strongarm;

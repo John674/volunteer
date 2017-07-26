@@ -23,7 +23,7 @@ define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
 define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
 
 define('NOVO_REF_REQUEST_TASK_STATUSES', serialize(array(
-  0 => t("Not sent"),
+  0 => t("Pending"),
   1 => t("Not responded"),
   2 => t("Responded"),
   3 => t("Expired"),
@@ -123,9 +123,9 @@ function novo_ref_request_preprocess_node(&$variables) {
     $node = $variables['node'];
     $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
     $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
-    $task = novo_ref_request_task_get_last($node->nid);
+    $task = novo_ref_request_task_get_last($node->nid, TRUE);
 
-    if ((isset($task->status) && $task->status == 1 && !$responded) || user_access("edit ref request with any status")) {
+    if ((isset($task->status) && ($task->status == 1 || $task->status == 0) && !$responded) || user_access("edit ref request with any status")) {
       $save_form = drupal_get_form("novo_ref_request_save_form", $node);
       $variables['content'] = array();
       $variables['content']['save_form'] = $save_form;
@@ -331,20 +331,22 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
   $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
   if (!empty($entity->nid)) {
     $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
-    $ref_task = novo_ref_request_task_get_last($entity->nid);
+    $ref_task = novo_ref_request_task_get_last($entity->nid, TRUE);
+
     $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : 0;
     $status_label = $statuses[$status];
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
     $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));
+    $phone = isset($ref_task->phone) ? $ref_task->phone : "";
+    $status_buttons = novo_ref_request_render_action_buttons($entity->nid, $status, $phone);
 
-    $buttons = novo_ref_request_prepare_action_buttons($entity->nid);
-
-    $variables['ref_data'] = array_merge($buttons, array(
+    $variables['ref_data'] = array(
       'status' => $status,
       'status_label' => $status_label,
-      'title' => $label
-    ));
+      'title' => $label,
+      'status_buttons' => $status_buttons
+    );
   }
 }
 
@@ -384,6 +386,36 @@ function novo_ref_request_prepare_action_buttons($nid) {
   );
 
   return $buttons;
+}
+
+/**
+ * Render action buttons.
+ */
+function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
+  $buttons = novo_ref_request_prepare_action_buttons($nid);
+  $output = "";
+  switch ($status) {
+    case "0":
+      // Not send - show "Edit link".
+      $output = $buttons['edit_link'];
+      break;
+
+    case "1":
+      // Not responded - show phone number.
+      // Edit.
+      $output = $phone . " " . $buttons['edit_link'];
+      break;
+
+    case "4":
+      // Cancelled.
+      $output = "";
+      break;
+
+    default:
+      $output = $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'];
+      break;
+  }
+  return $output;
 }
 
 /**
