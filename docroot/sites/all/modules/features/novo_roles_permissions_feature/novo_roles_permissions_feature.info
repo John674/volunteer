@@ -1,7 +1,7 @@
 name = Novo roles/permissions feature
 core = 7.x
 package = Novo
-version = 7.x-1.14
+version = 7.x-1.15
 dependencies[] = admin_menu
 dependencies[] = ctools
 dependencies[] = entity_print
@@ -53,6 +53,7 @@ features[user_permission][] = delete own program content
 features[user_permission][] = delete own reference_request content
 features[user_permission][] = delete own staff content
 features[user_permission][] = disable auto complete
+features[user_permission][] = disable auto complete redirect
 features[user_permission][] = edit any application content
 features[user_permission][] = edit any attendance content
 features[user_permission][] = edit any kids content

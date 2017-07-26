@@ -9,11 +9,6 @@ define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
 
-define("NOVO_BASE_APPLICATION_STATUS_LABELS", serialize(array(
-  'approved' => 'success',
-  'not approved' => 'danger',
-)));
-
 novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
 
 /**
@@ -35,10 +30,45 @@ function novo_preprocess_node(&$variables) {
     $suffix = $field_suffix[0]['value'];
     $variables['suffix'] = $suffix;
   }
-  // @codingStandardsIgnoreStart
-  // kpr($variables);
-  // @codingStandardsIgnoreEnd
 
+  // Theme status and approve block.
+  if (isset($variables['type']) && $variables['type'] == 'application') {
+    if (isset($variables['content']['app_status']['#markup'])) {
+      switch (drupal_strtolower($variables['content']['app_status']['#markup'])) {
+        case "started" :
+        case "completed" :
+          $label = "info";
+          break;
+
+        case "approved" :
+          $label = "success";
+          break;
+
+        case "not approved" :
+          $label = "danger";
+          break;
+
+        default:
+          $label = "default";
+      }
+
+      if ($label) {
+        $label_html = theme('status_label', array(
+          'status' => $variables['content']['app_status']['#markup'],
+          'label' => $label,
+        ));
+        $variables['content']['app_status']['#markup'] = $label_html;
+      }
+    }
+    if (isset($variables['content']['app_approve_block'])) {
+      $options = array(
+        'weight' => 1000,
+        'scope' => 'footer'
+      );
+      drupal_add_js(drupal_get_path("theme", "novo") . "/js/bootstrap-confirmation.min.js", $options);
+      drupal_add_js(drupal_get_path("theme", "novo") . "/js/novo-application-approve.js", $options);
+    }
+  }
 }
 
 /**
@@ -62,14 +92,10 @@ function novo_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
 
   if (isset($node->type) && ($node->type == 'application' || $node->type == 'kids' || $node->type == 'partner')) {
+
     switch ($variables['element']['#field_name']) {
-      case 'field_masked_phone_1':
+      case 'field_phone':
         $variables['icon'] = 'phone';
-        $field_phone_2 = field_get_items('node', $node, 'field_masked_phone_2');
-        $value_phone_2 = field_view_value('node', $node, 'field_masked_phone_2', $field_phone_2[0]);
-        if (!empty($value_phone_2['#markup'])) {
-          $variables['items'][] = $value_phone_2;
-        }
         break;
 
       case 'field_email':
@@ -100,25 +126,6 @@ function novo_preprocess_field(&$variables) {
 
           $field_state_info = field_info_instance('node', 'field_state', 'application');
           $variables['label'] .= '/' . $field_state_info['label'];
-        }
-        break;
-
-      case 'field_app_status':
-        $variables['icon'] = 'file-text-o';
-        $variables['label'] = 'Application status';
-        $field_app_status = field_get_items('node', $node, 'field_app_status');
-        if (!empty($field_app_status)) {
-          $status_labels = unserialize(NOVO_BASE_APPLICATION_STATUS_LABELS);
-
-          $term_id = $field_app_status[0]['tid'];
-          $status_term = taxonomy_term_load($term_id);
-          $status = $status_term->name;
-          $label = !empty($status_labels[drupal_strtolower($status)]) ? $status_labels[drupal_strtolower($status)] : "default";
-          $label_html = theme('status_label', array(
-            'status' => $status,
-            'label' => $label,
-          ));
-          $variables['items'][0]['#markup'] = $label_html;
         }
         break;
 

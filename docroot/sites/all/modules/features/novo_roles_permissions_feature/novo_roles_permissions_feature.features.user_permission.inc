@@ -328,6 +328,13 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'disable auto complete'.
   $permissions['disable auto complete'] = array(
     'name' => 'disable auto complete',
+    'roles' => array(),
+    'module' => 'novo_applications',
+  );
+
+  // Exported permission: 'disable auto complete redirect'.
+  $permissions['disable auto complete redirect'] = array(
+    'name' => 'disable auto complete redirect',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),

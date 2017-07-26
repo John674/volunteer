@@ -23,35 +23,13 @@ class novo_ref_request_handler_actions extends views_handler_field {
    * Renders the field handler.
    */
   public function render($values) {
-    $value = $this->get_value($values);
+    $status = $this->get_value($values);
     $nid = $this->get_value($values, "nid");
+    $phone = $this->get_value($values, "phone");
     $output = "";
 
-    if (!empty($nid)) {
-      $buttons = novo_ref_request_prepare_action_buttons($nid);
-
-      switch ($value) {
-        case "0":
-          // Not send - show "Send to referer button".
-          $output = $buttons['send_link'];
-          break;
-
-        case "1":
-          // Not responded - show phone number.
-          // Edit.
-          $phone = $this->get_value($values, "phone");
-          $output = $phone . " " . $buttons['edit_link'];
-          break;
-
-        case "4":
-          // Cancelled.
-          $output = "";
-          break;
-
-        default:
-          $output = $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'];
-          break;
-      }
+    if (!empty($nid) && function_exists("novo_ref_request_render_action_buttons")) {
+      $output = novo_ref_request_render_action_buttons($nid, $status, $phone);
     }
 
     return $output;

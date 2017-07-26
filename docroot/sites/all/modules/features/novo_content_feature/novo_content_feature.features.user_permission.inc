@@ -27,9 +27,7 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'create field_completed'.
   $permissions['create field_completed'] = array(
     'name' => 'create field_completed',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -115,9 +113,7 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'edit field_completed'.
   $permissions['edit field_completed'] = array(
     'name' => 'edit field_completed',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
