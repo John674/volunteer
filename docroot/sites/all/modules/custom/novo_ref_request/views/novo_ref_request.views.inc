@@ -239,7 +239,7 @@ function novo_ref_request_views_data() {
     'field' => array(
       'title' => t('Actions'),
       'help' => t('Provide buttons.'),
-      'handler' => 'novo_account_handler_appstatusbtn',
+      'handler' => 'novo_ref_request_handler_actions',
     ),
   );
 

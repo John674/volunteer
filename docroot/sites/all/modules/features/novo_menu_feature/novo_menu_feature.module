@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Novo menu feature feature.
  */
+
+include_once 'novo_menu_feature.features.inc';

@@ -27,6 +27,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_program';
+  $strongarm->value = '0';
+  $export['auto_entitylabel_node_program'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_node_reference_request';
   $strongarm->value = '1';
   $export['auto_entitylabel_node_reference_request'] = $strongarm;
@@ -48,6 +55,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_program';
+  $strongarm->value = 'program';
+  $export['auto_entitylabel_pattern_node_program'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_reference_request';
   $strongarm->value = '';
   $export['auto_entitylabel_pattern_node_reference_request'] = $strongarm;
@@ -65,6 +79,13 @@ function novo_content_feature_strongarm() {
   $strongarm->name = 'auto_entitylabel_php_node_mentors';
   $strongarm->value = 0;
   $export['auto_entitylabel_php_node_mentors'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_program';
+  $strongarm->value = 0;
+  $export['auto_entitylabel_php_node_program'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -119,6 +140,23 @@ function novo_content_feature_strongarm() {
     ),
   );
   $export['field_bundle_settings_node__attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__class';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'title' => array(
+          'weight' => '-5',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__class'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -335,6 +373,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_class';
+  $strongarm->value = array();
+  $export['menu_options_class'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_kids';
   $strongarm->value = array();
   $export['menu_options_kids'] = $strongarm;
@@ -394,6 +439,13 @@ function novo_content_feature_strongarm() {
   $strongarm->name = 'menu_parent_attendance';
   $strongarm->value = 'main-menu:0';
   $export['menu_parent_attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_class';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_class'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -514,6 +566,15 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_class';
+  $strongarm->value = array(
+    0 => 'status',
+  );
+  $export['node_options_class'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_kids';
   $strongarm->value = array(
     0 => 'status',
@@ -591,6 +652,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_class';
+  $strongarm->value = '0';
+  $export['node_preview_class'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_kids';
   $strongarm->value = '0';
   $export['node_preview_kids'] = $strongarm;
@@ -654,6 +722,13 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_class';
+  $strongarm->value = 0;
+  $export['node_submitted_class'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_kids';
   $strongarm->value = 0;
   $export['node_submitted_kids'] = $strongarm;
@@ -699,6 +774,97 @@ function novo_content_feature_strongarm() {
   $strongarm->name = 'node_submitted_staff';
   $strongarm->value = 0;
   $export['node_submitted_staff'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_application_site_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_application_site_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_application_status_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_application_status_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_church_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_church_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_color_preference_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_color_preference_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_dismissal_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_dismissal_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ethnicity_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ethnicity_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_gender_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_gender_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_grade_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_grade_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_phone_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_phone_type_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_prefix_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_prefix_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_states_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_states_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_t_shirt_size_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_t_shirt_size_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_weekdays_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_weekdays_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -49,22 +49,3 @@ function novo_attendance_field_attendance_date_validate($element, &$form_state, 
     form_error($element, t('Date is not valid.'));
   }
 }
-
-/**
- * Implements hook_ddf_handle_args_alter().
- */
-function novo_attendance_ddf_handle_args_alter(&$value, &$column, $field) {
-  if ($field['field_name'] == "field_attendance_year") {
-    if (is_array($value['value'])) {
-      $value = $value['value'];
-      $column = "year";
-    }
-    else {
-      // Original node has string value.
-      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
-      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
-        $value['value'] = date("Y", strtotime($value['value']));
-      }
-    }
-  }
-}

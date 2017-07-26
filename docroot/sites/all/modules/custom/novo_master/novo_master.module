@@ -6,13 +6,14 @@
  */
 
 define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize(array(
-  "program",
-  "kids",
-  "attendance",
-  "locations",
-  "mentors",
-  "partner",
-  "staff"
+  'program',
+  'kids',
+  'attendance',
+  'locations',
+  'mentors',
+  'partner',
+  'staff',
+  'class'
 )));
 
 define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
@@ -23,7 +24,8 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'programs',
   'staff',
   'volunteers',
-  'mentors'
+  'mentors',
+  'class'
 )));
 
 /**
@@ -135,5 +137,75 @@ function novo_master_preprocess_views_view(&$vars) {
       $vars['attachment_before'] .= $btn;
       $vars['attachment_after'] .= $btn;
     }
+  }
+}
+
+/**
+ * Implements hook_ddf_handle_args_alter().
+ */
+function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
+  if ($field['field_name'] == "field_attendance_year" || $field['field_name'] == "field_program_school_year") {
+    if (is_array($value['value'])) {
+      $value = $value['value'];
+      $column = "year";
+    }
+    else {
+      // Original node has string value.
+      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
+      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
+        $value['value'] = date("Y", strtotime($value['value']));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_menu_position_rule_alter().
+ */
+function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_matches, &$set_breadcrumb) {
+  switch ($rule->machine_name) {
+    case "programms_menu_active":
+      $content_types = array(
+        "attendance",
+        "program",
+        "class",
+        "mentors",
+        "locations"
+      );
+      if (isset($context['node']->type) && in_array($context['node']->type, $content_types)) {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "attendance_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "attendance") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "program_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "program") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "class_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "class") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "mentors_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "mentors") {
+        $rule_matches = TRUE;
+      }
+      break;
+
+    case "locations_menu_active":
+      if (isset($context['node']->type) && $context['node']->type == "locations") {
+        $rule_matches = TRUE;
+      }
+      break;
+
   }
 }

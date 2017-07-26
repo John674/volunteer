@@ -21,7 +21,13 @@ function novo_block_feature_default_fe_block_settings() {
     'pages' => 'locations
 programs
 attendance
-mentors',
+mentors
+class
+node/add/attendance
+node/add/program
+node/add/class
+node/add/mentors
+node/add/locations',
     'roles' => array(),
     'themes' => array(
       'bootstrap' => array(

@@ -191,3 +191,39 @@ function novo_theme_load_include($type, $theme, $name = NULL) {
 function novo_menu_tree__menu_program_menu(&$variables) {
   return '<ul class="nav nav-tabs">' . $variables['tree'] . '</ul>';
 }
+
+/**
+ * Block visibility callback for the search form block.
+ *
+ * @param object $block
+ *   The block object.
+ *
+ * @return bool
+ *   TRUE if the block should be displayed on the current page.
+ */
+function _novo_menu_menu_program_menu_block_visibility($block) {
+  $arg0 = arg(0);
+  $arg1 = arg(1);
+  $arg2 = arg(2);
+  if ($arg0 == 'node' && is_numeric($arg1) && $arg2 == 'edit') {
+    $node = node_load($arg1);
+    if (isset($node->type)) {
+      // @codingStandardsIgnoreStart
+      switch ($node->type) {
+        case "program":
+        case "locations":
+        case "mentors":
+        case "attendance":
+        case "class":
+          return TRUE;
+          break;
+      }
+      // @codingStandardsIgnoreEnd
+    }
+  }
+
+  $pages = isset($block->pages) ? explode(PHP_EOL, $block->pages) : array();
+  $pages = array_map("trim", $pages);
+  return (in_array(trim($_GET['q']), $pages)) ? TRUE : FALSE;
+
+}
