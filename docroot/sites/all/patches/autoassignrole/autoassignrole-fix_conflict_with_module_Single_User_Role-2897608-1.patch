@@ -1,0 +1,26 @@
+Index: docroot/sites/all/modules/contrib/autoassignrole/autoassignrole.install
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/autoassignrole/autoassignrole.install	(revision fb1d87b00bdfe497ce5f69bb01cbbb3f3ce9dc80)
++++ docroot/sites/all/modules/contrib/autoassignrole/autoassignrole.install	(revision )
+@@ -257,3 +257,18 @@
+     variable_set('autoassignrole_user_description', $defaults);
+   }
+ }
++
++/**
++ * Update weight for fix conflict with "single_user_role".
++ */
++function autoassignrole_update_7105() {
++  $weight = db_query("SELECT weight FROM {system} WHERE type = 'module' AND name = 'single_user_role'")->fetchField();
++  if (!is_null($weight)) {
++    $weight++;
++    db_update('system')
++      ->fields(array('weight' => $weight))
++      ->condition('type', 'module')
++      ->condition('name', 'autoassignrole')
++      ->execute();
++  }
++}
