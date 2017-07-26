@@ -156,12 +156,14 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
 
   protected function handleDynamicArgs($args) {
     $dynamic_args = array();
+
     foreach ($args as $key => $arg) {
       $matches = array();
       if (preg_match('/^\{([^{}]+)\}$/', $arg, $matches)) {
         $dynamic_args[$key] = $matches[1];
       }
     }
+
     if (empty($dynamic_args)) {
       return $args;
     }
@@ -220,6 +222,7 @@ class EntityReference_SelectionHandler_DDF extends EntityReference_SelectionHand
         }
       }
     }
+
     return $args;
   }
 

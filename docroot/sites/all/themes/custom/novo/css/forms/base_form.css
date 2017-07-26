@@ -1,0 +1,25 @@
+.node-form {
+  background: #f5f5f5;
+  border-color: #dddddd;
+  padding: 20px;
+}
+
+.node-form .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+
+.node-form .field-name-field-contact .field-name-field-first-name,
+.node-form .field-name-field-contact .field-name-field-last-name,
+.node-form .field-name-field-contact .field-name-field-email {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  vertical-align: top;
+}
+
+.node-form .date-form-element-content-multiline,
+#user-profile-form .date-form-element-content-multiline {
+  border: none;
+  padding: 0px;
+}

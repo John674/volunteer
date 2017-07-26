@@ -21,7 +21,13 @@ function novo_block_feature_default_fe_block_settings() {
     'pages' => 'locations
 programs
 attendance
-mentors',
+mentors
+class
+node/add/attendance
+node/add/program
+node/add/class
+node/add/mentors
+node/add/locations',
     'roles' => array(),
     'themes' => array(
       'bootstrap' => array(
@@ -34,6 +40,12 @@ mentors',
         'region' => 'header',
         'status' => 1,
         'theme' => 'novo',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'seven',
         'weight' => 0,
       ),
     ),
@@ -64,6 +76,12 @@ mentors',
         'theme' => 'novo',
         'weight' => -7,
       ),
+      'seven' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'seven',
+        'weight' => -7,
+      ),
     ),
     'title' => ' ',
     'visibility' => 0,
@@ -90,6 +108,12 @@ mentors',
         'region' => '',
         'status' => 0,
         'theme' => 'novo',
+        'weight' => -8,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
         'weight' => -8,
       ),
     ),

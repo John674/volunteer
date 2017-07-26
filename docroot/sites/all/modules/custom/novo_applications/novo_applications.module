@@ -31,19 +31,49 @@ function novo_applications_node_update($node) {
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_applications_form_application_node_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
   if ($is_new) {
-    $nodes = novo_applications_get_app_node_for_user();
-    if (!empty($nodes)) {
-      // User already create application. Redirect.
-      drupal_set_message(t("You already submit application"));
-      drupal_goto("<front>");
+    $app_node_obj = novo_applications_get_user_app($user->uid);
+    $app_nid = (isset($app_node_obj->nid) && !empty($app_node_obj->nid)) ? $app_node_obj->nid : NULL;
+
+    if ($app_nid) {
+      $node = node_load($app_nid);
+      $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+      $finished_app = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+
+      if ($finished_app && !user_access("edit application with any status")) {
+        // User already create application. Redirect.
+        drupal_set_message(t("You already submit application"));
+        drupal_goto("<front>");
+      }
     }
   }
 
+  // Replace uid for admins.
+  if (user_access("edit application with any status")) {
+    $uid = 0;
+    $arg_uid = (isset($_GET['uid'])) ? $_GET['uid'] : NULL;
+    if (!empty($arg_uid)) {
+      $loaded_user = user_load($arg_uid);
+      if (isset($loaded_user->uid)) {
+        $uid = $loaded_user->uid;
+      }
+    }
+    $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
+  }
+  else {
+    $uid = $user->uid;
+    $form['field_app_user']['#access'] = FALSE;
+  }
+
+  if (empty($form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+    $form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'] = $uid;
+  }
+  $form['field_app_user'][LANGUAGE_NONE][0]['value']['#element_validate'][] = "novo_applications_user_unique_validate";
+
   $form['#submit'][] = "novo_applications_form_submit";
 
-  // kpr($form);
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
   $form['field_app_7_final_agree_1'][$lang][0]['value']['#smart_description'] = FALSE;
@@ -83,6 +113,55 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
       }
     }
   }
+}
+
+/**
+ * Validate app user.
+ */
+function novo_applications_user_unique_validate($element, &$form_state) {
+  $uid = isset($element['#value']) ? $element['#value'] : NULL;
+  $nid = isset($form_state['values']['nid']) ? $form_state['values']['nid'] : NULL;
+
+  if (empty($uid)) {
+    form_set_error("field_app_user", t("Error. Can't create application."));
+  }
+
+  $query = db_select('users', 'u');
+  $query->fields('u', array('uid'));
+  $query->condition('uid', $uid);
+  $query->leftJoin("field_data_field_app_user", "app_user", "app_user.field_app_user_value = u.uid");
+
+  if (!empty($nid)) {
+    $query->addExpression("CASE WHEN app_user.entity_id = :nid THEN null ELSE app_user.entity_id END", "app_nid", array(":nid" => $nid));
+  }
+  else {
+    $query->addField('app_user', 'entity_id', 'app_nid');
+  }
+
+  $exist = $query->range(0, 1)->execute()->fetchObject();
+
+  if (!isset($exist->uid)) {
+    form_set_error(NULL, t("User not exist"));
+  }
+  else {
+    if (isset($exist->app_nid)) {
+      $error_message = user_access("edit application with any status") ? t("Application for this user already exist. Please edit this !link", array("!link" => l(t("application"), "node/" . $exist->app_nid))) : t("You already submit application");
+      form_set_error("field_app_user", $error_message);
+    }
+  }
+}
+
+/**
+ * Get user application nid.
+ */
+function novo_applications_get_user_app($uid) {
+  $query = db_select('users', 'u');
+  $query->fields('u', array('uid'));
+  $query->condition('uid', $uid);
+  $query->leftJoin("field_data_field_app_user", "app_user", "app_user.field_app_user_value = u.uid");
+  $query->addField('app_user', 'entity_id', 'nid');
+
+  return $query->range(0, 1)->execute()->fetchObject();
 }
 
 /**
@@ -126,19 +205,6 @@ function novo_applications_get_status_tid($term_name) {
   $term = array_values($term);
   $term = isset($term[0]) ? $term[0] : -1;
   return (isset($term->tid)) ? $term->tid : NULL;
-}
-
-/**
- * Get application node for current user.
- */
-function novo_applications_get_app_node_for_user($account = NULL) {
-  global $user;
-  $uid = (isset($account->uid)) ? $account->uid : $user->uid;
-  $nodes = node_load_multiple(NULL, array(
-    'uid' => $uid,
-    'type' => 'application',
-  ));
-  return $nodes;
 }
 
 /**
@@ -207,6 +273,16 @@ function novo_applications_permission() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function novo_applications_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_applications') . '/views',
+  );
+}
+
+/**
  * Implements hook_node_access().
  */
 function novo_applications_node_access($node, $op, $account) {
@@ -215,9 +291,10 @@ function novo_applications_node_access($node, $op, $account) {
 
     // Disable edit access for volunteer for completed node.
     $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
-    $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? $node->field_completed[$lang][0]['value'] : FALSE;
+    $app_user_uid = isset($node->field_app_user[$lang][0]['value']) ? $node->field_app_user[$lang][0]['value'] : -1;
 
-    return (!$node_completed && $node->uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+    return (!$node_completed && $app_user_uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
   }
 
   return NODE_ACCESS_IGNORE;

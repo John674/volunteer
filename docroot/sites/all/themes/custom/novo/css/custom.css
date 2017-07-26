@@ -44,37 +44,6 @@ a.tabledrag-handle .handle {
   overflow: inherit;
 }
 
-.select2-container-multi .select2-choices .select2-search-choice {
-  background: none;
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
-  padding: 5px 5px 5px 18px;
-}
-
-.select2-search-choice-close {
-  font-family: 'Glyphicons Halflings';
-  -webkit-font-smoothing: antialiased;
-  background: none;
-  font-size: 12px;
-  color: white;
-  top: 5px;
-}
-
-.select2-search-choice-close:before {
-  content: "\e020";
-}
-
-a.select2-search-choice-close:visited {
-  color: #fff;
-  text-decoration: none;
-}
-
-a.select2-search-choice-close:hover {
-  color: #d9534f;
-  text-decoration: none;
-}
-
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   border-bottom: 1px solid #ddd;
 }
@@ -103,16 +72,16 @@ a.select2-search-choice-close:hover {
   margin-left: 3px;
 }
 
-.view-programs .views-field-field-program-day ul {
+.view-class .views-field-field-program-day ul {
   margin: 0px;
 }
 
-.view-programs .views-field-field-program-day .field-collection-item-field-program-day {
+.view-class .views-field-field-program-day .field-collection-item-field-program-day {
   display: inline-block;
 }
 
-.view-programs .views-field-field-program-day .field-name-field-program-weekday,
-.view-programs .views-field-field-program-day .field-name-field-program-time {
+.view-class .views-field-field-program-day .field-name-field-program-weekday,
+.view-class .views-field-field-program-day .field-name-field-program-time {
   display: inline-block;
 }
 
@@ -137,4 +106,17 @@ a.select2-search-choice-close:hover {
 
 .pane-user-login .form-actions button {
   min-width: 200px;
+}
+
+
+.select2-container-multi .select2-choices .select2-search-choice {
+  padding-left: 5px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice div {
+  margin-right: 15px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close {
+  left: inherit;
 }

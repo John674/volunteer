@@ -2,7 +2,7 @@
 
 /**
  * @file
- * HR not relevant report fields for views.
+ * Novo ref request fields for views.
  */
 
 /**

@@ -328,14 +328,13 @@ function novo_content_feature_field_group_info() {
       17 => 'field_texting',
       18 => 'field_ssn',
       19 => 'field_what_site_you_want',
-      20 => 'field_middle',
-      21 => 'field_church',
-      22 => 'field_completed',
-      23 => 'field_gender',
-      24 => 'field_training_list',
+      20 => 'field_church',
+      21 => 'field_completed',
+      22 => 'field_gender',
+      23 => 'field_training_list',
+      24 => 'field_middle_name',
       25 => 'title',
-      26 => 'field_middle_name',
-      27 => 'group_app_emergency_contact',
+      26 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1584,7 +1583,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => '',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_p_canvassing_group',
       1 => 'field_p_small_group',

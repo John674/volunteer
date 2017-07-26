@@ -1,13 +1,15 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.13
+version = 7.x-1.15
 dependencies[] = autoassignrole
 dependencies[] = chosen
 dependencies[] = ctools
 dependencies[] = entity_print
+dependencies[] = extended_block_visibility
 dependencies[] = features
 dependencies[] = mailsystem
+dependencies[] = novo_account
 dependencies[] = novo_account_feature
 dependencies[] = novo_block_feature
 dependencies[] = novo_content_feature

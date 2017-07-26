@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook__FORM_ID_form_alter().
+ */
+function novo_account_form_user_profile_form_alter(&$form, &$form_state) {
+  $form['account']['name']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function novo_account_form_alter(&$form, &$form_state, $form_id) {
+  if (($form_id == "user_profile_form" || $form_id == "user_register_form") && user_access("novo account edit roles")) {
+    $form['account']['roles']['#access'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_account_permission() {
+  return array(
+    'novo account edit roles' => array(
+      'title' => t('Allow edit roles for users'),
+      'description' => t('Allow edit roles for any user.'),
+    ),
+  );
+}

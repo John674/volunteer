@@ -26,10 +26,15 @@ regions[page_bottom]    = 'Page bottom'
 stylesheets[all][] = js/bootstrap_select/css/bootstrap-select.min.css
 
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/application_form.css
-stylesheets[all][] = css/program_form.css
-stylesheets[all][] = css/attendance_form.css
-stylesheets[all][] = css/kids_form.css
+stylesheets[all][] = css/forms/base_form.css
+stylesheets[all][] = css/forms/application_form.css
+stylesheets[all][] = css/forms/program_form.css
+stylesheets[all][] = css/forms/attendance_form.css
+stylesheets[all][] = css/forms/kids_form.css
+stylesheets[all][] = css/forms/staff_form.css
+stylesheets[all][] = css/forms/partner_form.css
+stylesheets[all][] = css/forms/locations_form.css
+stylesheets[all][] = css/forms/mentor_form.css
 stylesheets[all][] = css/custom.css
 
 
