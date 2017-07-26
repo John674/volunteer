@@ -5,7 +5,6 @@
  * Applications forms.
  */
 
-
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -151,7 +150,8 @@ function novo_applications_form_submit(&$form, &$form_state) {
         if (!user_access("disable auto complete redirect")) {
           drupal_set_message("Your application will begin processing now!");
           drupal_goto("<front>");
-        } else {
+        }
+        else {
           drupal_set_message("Application has been completed!");
         }
       }

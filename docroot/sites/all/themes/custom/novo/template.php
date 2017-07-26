@@ -35,16 +35,16 @@ function novo_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == 'application') {
     if (isset($variables['content']['app_status']['#markup'])) {
       switch (drupal_strtolower($variables['content']['app_status']['#markup'])) {
-        case "started" :
-        case "completed" :
+        case "started":
+        case "completed":
           $label = "info";
           break;
 
-        case "approved" :
+        case "approved":
           $label = "success";
           break;
 
-        case "not approved" :
+        case "not approved":
           $label = "danger";
           break;
 

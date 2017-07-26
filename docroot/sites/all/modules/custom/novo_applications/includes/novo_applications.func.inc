@@ -64,7 +64,7 @@ function novo_application_prepare_approve_block($nid, $app_status, $app_complete
       $approve_block = $not_approve_btn;
       break;
 
-    default :
+    default:
       $approve_block = $approve_btn . " " . $not_approve_btn;
   }
 
@@ -72,7 +72,7 @@ function novo_application_prepare_approve_block($nid, $app_status, $app_complete
 }
 
 /**
- * Change application status callback,
+ * Change application status callback.
  */
 function novo_application_update_status($node, $status = 0) {
   $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
@@ -93,5 +93,4 @@ function novo_application_update_status($node, $status = 0) {
   }
 
   drupal_goto("node/" . $node->nid);
-
 }
