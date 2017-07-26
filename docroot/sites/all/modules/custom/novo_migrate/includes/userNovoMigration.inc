@@ -32,9 +32,10 @@ class UserNovoMigration extends BaseNovoMigration {
     $query->addField("u", "id", "user_id");
     $query->leftJoin("role_user", "r_u", "r_u.user_id = u.id");
     $query->leftJoin("roles", "r", "r.id = r_u.role_id");
-    // Only volunteers.
-    $query->condition("r.name", "applicant");
+    $query->addField("r", "name", "role");
 
+    // Only volunteers.
+    /*$query->condition("r.name", "applicant");*/
     $this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
     $this->destination = new MigrateDestinationUser(array('md5_passwords' => TRUE));
 
@@ -44,7 +45,7 @@ class UserNovoMigration extends BaseNovoMigration {
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
-      )
+      ),
     );
     $this->map = new MigrateSQLMap($this->machineName, $source_key_schema, MigrateDestinationUser::getKeySchema());
 
@@ -55,11 +56,14 @@ class UserNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_u_first_name', 'first_name')
       ->defaultValue("User");
     $this->addFieldMapping('field_u_last_name', 'last_name');
-    $this->addFieldMapping('field_u_birthday', 'birthday');
+    $this->addFieldMapping('field_u_birthday', 'birthday')->callback(array(
+      $this,
+      'checkDob',
+    ));
     $this->addFieldMapping('status', 'active');
     $this->addFieldMapping('pass', 'password')->callback(array(
       $this,
-      'convertPassword'
+      'convertPassword',
     ));
 
     $this->addFieldMapping('roles')
@@ -87,6 +91,15 @@ class UserNovoMigration extends BaseNovoMigration {
   }
 
   /**
+   * Implements complete.
+   */
+  public function complete($entity, $row) {
+    $user = user_load($entity->uid);
+    $this->addRoleToUser($user, $row->role);
+    $this->uniqueUsername($user);
+  }
+
+  /**
    * Convert password.
    */
   protected function convertPassword($value) {
@@ -100,6 +113,70 @@ class UserNovoMigration extends BaseNovoMigration {
   public function prepareRow($row) {
     $row->name = "{$row->first_name} {$row->last_name}";
     return parent::prepareRow($row);
+  }
+
+  /**
+   * Add role to user.
+   */
+  public function addRoleToUser($user, $role) {
+
+    switch ($role) {
+      case "super_admin":
+        $role_name = 'Siteadmin';
+        break;
+
+      case "reviewer":
+        $role_name = 'Reviewer';
+        break;
+
+      case "applicant":
+        $role_name = 'Applicant US citizen';
+        break;
+    }
+    // Add new role to existing roles.
+    if (isset($user->uid) && $user->uid > 0) {
+      $user_roles = $new_role = [];
+      // If the user doesn't already have the role, add the role to that user.
+      $role_exist = array_search($role_name, $user->roles);
+      if (empty($role_exist)) {
+        // Get the rid from the roles table.
+        $roles = user_roles(TRUE);
+        $rid = array_search($role_name, $roles);
+        if (is_numeric($rid)) {
+          $new_role[$rid] = $role_name;
+          $user_roles['roles'] = $user->roles + $new_role;
+        }
+      }
+      user_save($user, $user_roles);
+    }
+  }
+
+  /**
+   * Check or create a unique username.
+   */
+  public function uniqueUsername($user) {
+    $user_name = $user->name;
+    $user_name = str_replace(" ", "_", $user_name);
+    $uid = $user->uid;
+    $i = 0;
+    do {
+      $new_name = empty($i) ? $user_name : $user_name . '_' . $i;
+
+      if ($uid) {
+        $found = db_query_range("SELECT uid from {users} WHERE uid <> :uid AND name = :name", 0, 1, array(':uid' => $uid, ':name' => $new_name))->fetchAssoc();
+      }
+      else {
+        $found = db_query_range("SELECT uid from {users} WHERE name = :name", 0, 1, array(':name' => $new_name))->fetchAssoc();
+      }
+
+      $i++;
+    } while (!empty($found));
+
+    // Replace with generated username.
+    db_update('users')
+      ->fields(array('name' => $new_name))
+      ->condition('uid', $user->uid)
+      ->execute();
   }
 
 }
