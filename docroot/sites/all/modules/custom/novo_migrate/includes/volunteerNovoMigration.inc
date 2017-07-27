@@ -649,7 +649,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     // $this->addFieldMapping('field_what_site_want', '');
     // $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
-    // $this->addFieldMapping('field_expired_date', '');
+    /*$this->addFieldMapping('field_expired_date', '');*/
 
     $this->addFieldMapping('field_ssn', 'social_security_number')
       ->callback(array($this, "formattingSsn"));
