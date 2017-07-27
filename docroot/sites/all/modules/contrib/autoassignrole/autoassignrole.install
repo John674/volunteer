@@ -257,3 +257,18 @@ function autoassignrole_update_7104() {
     variable_set('autoassignrole_user_description', $defaults);
   }
 }
+
+/**
+ * Update weight for fix conflict with "single_user_role".
+ */
+function autoassignrole_update_7105() {
+  $weight = db_query("SELECT weight FROM {system} WHERE type = 'module' AND name = 'single_user_role'")->fetchField();
+  if (!is_null($weight)) {
+    $weight++;
+    db_update('system')
+      ->fields(array('weight' => $weight))
+      ->condition('type', 'module')
+      ->condition('name', 'autoassignrole')
+      ->execute();
+  }
+}

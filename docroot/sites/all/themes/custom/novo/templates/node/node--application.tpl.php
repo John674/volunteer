@@ -129,8 +129,27 @@
               hide($content['field_reference_request_parents']);
               hide($content['field_reference_request_church']);
 
+              hide($content['field_app_status']);
+              hide($content['app_status']);
+              hide($content['app_approve_block']);
+
               print render($content);
               ?>
+
+                <div class="row field pdf-field">
+                    <div class="col-md-6">
+                        <div class="field-label">
+                            <i class="fa fa-file-text-o"></i>
+                          <?php print t("Application status"); ?>:
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p><?php print render($content['app_status']); ?></p>
+                    </div>
+                </div>
+                <hr>
+
+
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
@@ -212,20 +231,11 @@
                   <?php print (t('Generate Pdf')) ?>
                 </a>
 
-
-                <div class="pull-right"
-                     style="border: 1px solid #d9534f; padding: 5px">
-                    <a role="button" class="btn btn-success" href="#">
-                        <i class="fa fa-check"></i>
-                      <?php print (t('Approve')) ?>
-                    </a>
-                    <a role="button" class="btn btn-danger" href="#">
-                        <i class="fa fa-times"></i>
-                      <?php print (t('Not Approve')) ?>
-                    </a>
-                    -
-                    <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
-                </div>
+              <?php if (isset($content['app_approve_block'])) : ?>
+                  <div class="pull-right">
+                    <?php print render($content['app_approve_block']); ?>
+                  </div>
+              <?php endif; ?>
             </div>
         </div>
     </div>

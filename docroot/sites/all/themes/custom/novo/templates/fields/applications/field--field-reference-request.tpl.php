@@ -54,14 +54,9 @@
           <?php print $ref_data['status_label']; ?>
         </div>
         <div class="col-md-3">
-          <?php if ($ref_data['status'] > 0): ?>
-            <?php print $ref_data['resend_link']; ?>
-            <?php print $ref_data['pdf_link']; ?>
-          <?php else: ?>
-            <?php print $ref_data['send_link']; ?>
+          <?php if (isset($ref_data['status_buttons'])): ?>
+            <?php print $ref_data['status_buttons']; ?>
           <?php endif; ?>
-
-          <?php print $ref_data['edit_link']; ?>
         </div>
     </div>
     <hr>

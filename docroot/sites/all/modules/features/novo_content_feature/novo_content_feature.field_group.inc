@@ -100,7 +100,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 4',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'group_app_4_list',
     ),
@@ -126,7 +126,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 5',
-    'weight' => '5',
+    'weight' => '4',
     'children' => array(
       0 => 'group_app_5_list',
     ),
@@ -153,7 +153,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 6',
-    'weight' => '6',
+    'weight' => '5',
     'children' => array(
       0 => 'group_app_6_list',
     ),
@@ -180,7 +180,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 7',
-    'weight' => '7',
+    'weight' => '6',
     'children' => array(
       0 => 'group_app_7_list',
     ),
@@ -207,7 +207,7 @@ function novo_content_feature_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Step 8',
-    'weight' => '8',
+    'weight' => '7',
     'children' => array(
       0 => 'group_app_8_list',
     ),
@@ -321,20 +321,17 @@ function novo_content_feature_field_group_info() {
       10 => 'field_t_shirt_size',
       11 => 'field_color_preference',
       12 => 'field_how_did_you_hear_about_nov',
-      13 => 'field_app_status',
-      14 => 'field_prefix',
-      15 => 'field_phone',
-      16 => 'field_notes',
-      17 => 'field_texting',
-      18 => 'field_ssn',
-      19 => 'field_what_site_you_want',
-      20 => 'field_church',
-      21 => 'field_completed',
-      22 => 'field_gender',
-      23 => 'field_training_list',
-      24 => 'field_middle_name',
-      25 => 'title',
-      26 => 'group_app_emergency_contact',
+      13 => 'field_phone',
+      14 => 'field_notes',
+      15 => 'field_texting',
+      16 => 'field_ssn',
+      17 => 'field_what_site_you_want',
+      18 => 'field_church',
+      19 => 'field_gender',
+      20 => 'field_training_list',
+      21 => 'field_middle_name',
+      22 => 'title',
+      23 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1398,20 +1395,15 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'weight' => '114',
     'children' => array(
       0 => 'field_goes_by',
-      1 => 'field_middle',
-      2 => 'field_last_name',
-      3 => 'field_maiden_name_or_alias_names',
-      4 => 'field_address_1',
-      5 => 'field_address_2',
-      6 => 'field_city',
-      7 => 'field_state',
-      8 => 'field_zip',
-      9 => 'field_dob',
-      10 => 'field_email',
-      11 => 'field_t_shirt_size',
-      12 => 'field_color_preference',
-      13 => 'field_prefix',
-      14 => 'field_phone',
+      1 => 'field_last_name',
+      2 => 'field_maiden_name_or_alias_names',
+      3 => 'field_address_2',
+      4 => 'field_state',
+      5 => 'field_zip',
+      6 => 'field_t_shirt_size',
+      7 => 'field_color_preference',
+      8 => 'field_phone',
+      9 => 'field_gender',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -1619,10 +1611,10 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
     'label' => 'Parents',
     'weight' => '141',
     'children' => array(
-      0 => 'field_parent_prefix',
-      1 => 'field_parent_guardian_first_name',
-      2 => 'field_parent_guardian_last_name',
-      3 => 'field_parent_phone',
+      0 => 'field_parent_guardian_first_name',
+      1 => 'field_parent_guardian_last_name',
+      2 => 'field_parent_phone',
+      3 => 'field_parent_prefix',
       4 => 'field_parent_email',
     ),
     'format_type' => 'fieldset',
