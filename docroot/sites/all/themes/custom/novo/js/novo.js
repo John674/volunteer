@@ -18,6 +18,14 @@
                 });
             }
 
+            if ($(".field-name-field-u-birthday input", context).length) {
+                $(".field-name-field-u-birthday input", context).datepicker({
+                    maxDate: new Date(),
+                });
+            }
+
+
+
         }
     };
 })(window.jQuery);

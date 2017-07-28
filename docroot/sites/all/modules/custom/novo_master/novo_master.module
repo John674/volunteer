@@ -47,6 +47,13 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['publish']['#value'] = t("Not active");
     }
   }
+
+  if ($form_id == "kids_node_form") {
+    // Validate Date of Birth.
+    if (function_exists("novo_master_dob_validate")) {
+      $form['field_dob'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
+    }
+  }
 }
 
 /**
@@ -218,4 +225,19 @@ function novo_master_menu_position_rule_rules($context, $content_types, $paths) 
     (isset($context['node']->type) && in_array($context['node']->type, $content_types)) ||
     (isset($context['path']) && in_array($context['path'], $paths))
   ) ? TRUE : FALSE;
+}
+
+/**
+ * Validate app user.
+ */
+function novo_master_dob_validate($element, &$form_state) {
+  $dob = isset($element['#value']) ? $element['#value'] : NULL;
+
+  $date = isset($dob['value']['date']) ? $dob['value']['date'] : NULL;
+  if (!empty($date)) {
+    $date_time = strtotime($date);
+    if ($date_time > REQUEST_TIME) {
+      form_set_error($element['#field_name'], t("Date of birth can't be in feature"));
+    }
+  }
 }
