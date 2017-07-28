@@ -66,8 +66,10 @@ class UserNovoMigration extends BaseNovoMigration {
       'convertPassword',
     ));
 
-    $this->addFieldMapping('roles')
-      ->defaultValue(DRUPAL_AUTHENTICATED_RID);
+    $this->addFieldMapping('roles', 'role')->callback(array(
+      $this,
+      'addRoleToUser',
+    ));
     $this->addFieldMapping('is_new')
       ->defaultValue(TRUE);
 
@@ -91,15 +93,6 @@ class UserNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Implements complete.
-   */
-  public function complete($entity, $row) {
-    $user = user_load($entity->uid);
-    $this->addRoleToUser($user, $row->role);
-    $this->uniqueUsername($user);
-  }
-
-  /**
    * Convert password.
    */
   protected function convertPassword($value) {
@@ -118,65 +111,28 @@ class UserNovoMigration extends BaseNovoMigration {
   /**
    * Add role to user.
    */
-  public function addRoleToUser($user, $role) {
-
+  public function addRoleToUser($role) {
+    if (empty($role)) {
+      return DRUPAL_AUTHENTICATED_RID;
+    }
+    $role_id = DRUPAL_AUTHENTICATED_RID;
     switch ($role) {
       case "super_admin":
-        $role_name = 'Siteadmin';
+        $new_role = user_role_load_by_name('Siteadmin');
+        $role_id = $new_role->rid;
         break;
 
       case "reviewer":
-        $role_name = 'Reviewer';
+        $new_role = user_role_load_by_name('Reviewer');
+        $role_id = $new_role->rid;
         break;
 
       case "applicant":
-        $role_name = 'Applicant US citizen';
+        $new_role = user_role_load_by_name('Applicant US citizen');
+        $role_id = $new_role->rid;
         break;
     }
-    // Add new role to existing roles.
-    if (isset($user->uid) && $user->uid > 0) {
-      $user_roles = $new_role = [];
-      // If the user doesn't already have the role, add the role to that user.
-      $role_exist = array_search($role_name, $user->roles);
-      if (empty($role_exist)) {
-        // Get the rid from the roles table.
-        $roles = user_roles(TRUE);
-        $rid = array_search($role_name, $roles);
-        if (is_numeric($rid)) {
-          $new_role[$rid] = $role_name;
-          $user_roles['roles'] = $user->roles + $new_role;
-        }
-      }
-      user_save($user, $user_roles);
-    }
-  }
-
-  /**
-   * Check or create a unique username.
-   */
-  public function uniqueUsername($user) {
-    $user_name = $user->name;
-    $user_name = str_replace(" ", "_", $user_name);
-    $uid = $user->uid;
-    $i = 0;
-    do {
-      $new_name = empty($i) ? $user_name : $user_name . '_' . $i;
-
-      if ($uid) {
-        $found = db_query_range("SELECT uid from {users} WHERE uid <> :uid AND name = :name", 0, 1, array(':uid' => $uid, ':name' => $new_name))->fetchAssoc();
-      }
-      else {
-        $found = db_query_range("SELECT uid from {users} WHERE name = :name", 0, 1, array(':name' => $new_name))->fetchAssoc();
-      }
-
-      $i++;
-    } while (!empty($found));
-
-    // Replace with generated username.
-    db_update('users')
-      ->fields(array('name' => $new_name))
-      ->condition('uid', $user->uid)
-      ->execute();
+    return $role_id;
   }
 
 }

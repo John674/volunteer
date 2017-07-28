@@ -135,8 +135,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->attachPhone($node, $row, "church_background_", "field_church_phone");
     $this->attachPhone($node, $row, "parent_", "field_parent_phone");
 
+    // If there are reference request answers from old database, will update created reference node.
     $this->updateReferenceRequestNode($node, $row);
-    $this->setAppUserField($node);
 
     // Multistep.
     if (function_exists("_multistep_update_status")) {
@@ -150,7 +150,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   private function attachPhone($node, $row, $field, $ref_field) {
     $phone_arr = array();
     $additional_fields = array("phone_1", "phone_2");
-    $default_number = "000-000-0000";
 
     foreach ($additional_fields as $add_field) {
       $phone_field = $field . $add_field;
@@ -161,23 +160,15 @@ class VolunteerNovoMigration extends BaseNovoMigration {
           $phone_arr[] = $number;
         }
         else {
-          $phone_arr[] = $default_number;
-          watchdog("novo_migrate", 'Can\' convert phone :phone for nid :nid for field :field, phone number defined :default_number', array(
+          $changed_number = $this->changeNotCorrectNumber($row->{$phone_field});
+          $phone_arr[] = $changed_number;
+          watchdog("novo_migrate", 'Can\' convert phone :phone for nid :nid for field :field, phone number defined :changed_number', array(
             ":phone" => $row->{$phone_field},
             ":nid" => $node->nid,
             ":field" => $ref_field,
-            ":default_number" => $default_number,
+            ":changed_number" => $changed_number,
           ));
         }
-      }
-      else {
-        $phone_arr[] = $default_number;
-        watchdog("novo_migrate", 'Can\' find value phone from :phone_field   for nid :nid for field :field, phone number defined :default_number', array(
-          ":phone_field" => $phone_field,
-          ":nid" => $node->nid,
-          ":field" => $ref_field,
-          ":default_number" => $default_number,
-        ));
       }
 
     }
@@ -239,6 +230,28 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // if (preg_replace('/\D/', '', $s) != preg_replace('/\D/', '', $out)) return false;
     // @codingStandardsIgnoreEnd
     return $out;
+  }
+
+  /**
+   * Add zeros before not correct number.
+   */
+  protected function changeNotCorrectNumber($value) {
+    $clear_number = preg_replace("/\D*/", "", $value);
+    if (!empty($clear_number)) {
+      if (strlen($clear_number) < 10) {
+        $count_zero = 10 - strlen($clear_number);
+        $zeros = str_repeat("0", $count_zero);
+        $number = $zeros . $clear_number;
+        preg_match("/^(\d{3})(\d{3})(\d{4})$/", $number, $match);
+        array_shift($match);
+        $new_number = implode("-", $match);
+        return $new_number;
+      }
+      else {
+        return $value;
+      }
+    }
+    return "000-000-0000";
   }
 
   /**
@@ -328,7 +341,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("av", "template_data", "answer_variant");
     $query->addField("av", "id", "answer_variant_id");
 
-    /* $query->condition("u.id", 423);*/
 
     $result = $query->execute()->fetchAll();
 
@@ -489,6 +501,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       ->defaultValue('tid');
 
     $this->addFieldMapping('uid', 'id')
+      ->sourceMigration('Users');
+
+    $this->addFieldMapping('field_app_user', 'id')
       ->sourceMigration('Users');
 
     $this->addFieldMapping('promote')->defaultValue(FALSE);
@@ -812,7 +827,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       }
     }
 
-    return $default_number;
+    return $value;
   }
 
   /**
@@ -873,30 +888,12 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Define app user field.
-   */
-  protected function setAppUserField($node = NULL) {
-    if (!empty($node)) {
-      $node_wrapper = entity_metadata_wrapper('node', $node);
-      $node_wrapper->field_app_user->set(intval($node->uid));
-      $node_wrapper->save();
-    }
-  }
-
-  /**
    * Update questions and answers in created reference request nodes.
    */
   private function updateReferenceRequestNode($application_node, $row) {
     $lang = isset($application_node->language) ? $application_node->language : LANGUAGE_NONE;
-    $request_types = [
-      self::TYPE_REFERENCE_1 => 'field_reference_request_1',
-      self::TYPE_REFERENCE_2 => 'field_reference_request_2',
-      self::TYPE_STANDBY => 'field_reference_request_standby',
-      self::TYPE_CHURCH => 'field_reference_request_church',
-      self::TYPE_PARENT => 'field_reference_request_parents',
-    ];
 
-    foreach ($request_types as $type => $field) {
+    foreach ($this->getRequestTypesFields() as $type => $field) {
       if (isset($row->reference_request[$type]) && !empty($row->reference_request[$type])) {
         $reference_questions_answers = $row->reference_request[$type];
         if (isset($application_node->{$field}) && !empty($application_node->{$field})) {
@@ -949,6 +946,19 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
+   * Return request field names and types.
+   */
+  protected function getRequestTypesFields() {
+    return [
+      self::TYPE_REFERENCE_1 => 'field_reference_request_1',
+      self::TYPE_REFERENCE_2 => 'field_reference_request_2',
+      self::TYPE_STANDBY => 'field_reference_request_standby',
+      self::TYPE_CHURCH => 'field_reference_request_church',
+      self::TYPE_PARENT => 'field_reference_request_parents',
+    ];
+  }
+
+  /**
    * Request in old database.
    */
   protected function getReferenceRequests() {
@@ -963,7 +973,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->leftJoin("roles", "r", "r.id = r_u.role_id");
     // Only volunteers.
     $query->condition("r.name", "applicant");
-    $query->condition("u.id", 134);
 
     // Add source fields.
     $query->innerJoin("user_applications", "ua", "ua.user_id = u.id");
