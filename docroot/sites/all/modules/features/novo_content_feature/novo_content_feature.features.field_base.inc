@@ -1297,6 +1297,9 @@ function novo_content_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_expired_date',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -4316,31 +4319,17 @@ function novo_content_feature_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'target_id' => array(
-        0 => 'target_id',
+      'format' => array(
+        0 => 'format',
       ),
     ),
     'locked' => 0,
-    'module' => 'entityreference',
+    'module' => 'text',
     'settings' => array(
-      'delete_on_parent_delete' => '',
-      'handler' => 'views',
-      'handler_settings' => array(
-        'behaviors' => array(
-          'views-select-list' => array(
-            'status' => 0,
-          ),
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => 'entityreference_1',
-          'view_name' => 'what_want_site',
-        ),
-      ),
-      'target_type' => 'node',
+      'max_length' => 255,
     ),
     'translatable' => 0,
-    'type' => 'entityreference',
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_what_talk_about'.

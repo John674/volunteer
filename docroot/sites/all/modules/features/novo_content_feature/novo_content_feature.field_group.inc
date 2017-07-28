@@ -197,7 +197,7 @@ function novo_content_feature_field_group_info() {
   $field_groups['group_apl_step7|node|application|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_apl_step8|node|application|form';
   $field_group->group_name = 'group_apl_step8';
@@ -321,17 +321,18 @@ function novo_content_feature_field_group_info() {
       10 => 'field_t_shirt_size',
       11 => 'field_color_preference',
       12 => 'field_how_did_you_hear_about_nov',
-      13 => 'field_phone',
-      14 => 'field_notes',
-      15 => 'field_texting',
-      16 => 'field_ssn',
-      17 => 'field_what_site_you_want',
+      13 => 'field_expired_date',
+      14 => 'field_phone',
+      15 => 'field_notes',
+      16 => 'field_texting',
+      17 => 'field_ssn',
       18 => 'field_church',
       19 => 'field_gender',
       20 => 'field_training_list',
       21 => 'field_middle_name',
       22 => 'title',
-      23 => 'group_app_emergency_contact',
+      23 => 'field_what_site_you_want',
+      24 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1233,7 +1234,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_groups['group_app_7_statement|node|application|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_app_8_additional|node|application|form';
   $field_group->group_name = 'group_app_8_additional';
@@ -1261,7 +1262,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_groups['group_app_8_additional|node|application|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_app_8_list|node|application|form';
   $field_group->group_name = 'group_app_8_list';
@@ -1298,7 +1299,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '73',
+    'weight' => '72',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

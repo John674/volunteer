@@ -26,7 +26,11 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         drupal_goto("<front>");
       }
     }
+
   }
+
+  // Add sites virtual field.
+  novo_applications_add_sites_virtual_field($form, $form_state);
 
   // Validate Date of Birth.
   if (function_exists("novo_master_dob_validate")) {
@@ -198,6 +202,67 @@ function _custom_ref_how_long_field_validate($element, $form_state) {
     $field_how_long_value = isset($field_how_long_period_value) ? intval($element[$lang][0]['value']['#value']) : NULL;
     if (!empty($field_how_long_value) && ($field_how_long_value < 6)) {
       form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
+    }
+  }
+}
+
+/**
+ * Add site virtual field.
+ */
+function novo_applications_add_sites_virtual_field(&$form, &$form_state) {
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if ($is_new) {
+    $multi = (isset($form['field_what_site_you_want'][LANGUAGE_NONE]['#cardinality']) && $form['field_what_site_you_want'][LANGUAGE_NONE]['#cardinality'] == -1) ? TRUE : FALSE;
+    $weight = (isset($form['field_what_site_you_want']['#weight'])) ? $form['field_what_site_you_want']['#weight'] : 100;
+    $sites_voc = taxonomy_vocabulary_machine_name_load(NOVO_APPLICATION_SITES_VOC_NAME);
+    if (isset($sites_voc->vid)) {
+      $sites = taxonomy_get_tree($sites_voc->vid);
+      $options = array();
+      foreach ($sites as $key => $term) {
+        $options[$term->tid] = $term->name;
+      }
+      $form['field_what_site_you_want_virtual'] = array(
+        '#title' => t('At what site do you want to volunteer?'),
+        '#type' => ($multi) ? "checkboxes" : "radios",
+        '#options' => $options,
+        '#weight' => $weight,
+      );
+
+      $form['#validate'][] = 'novo_applications_add_sites_virtual_validate';
+      $form['#groups']['group_app_1_contact']->children[] = "field_what_site_you_want_virtual";
+      $form['#group_children']['field_what_site_you_want_virtual'] = 'group_app_1_contact';
+      $form['field_what_site_you_want']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Sites virtual field custom submit.
+ */
+function novo_applications_add_sites_virtual_validate(&$form, &$form_state) {
+  $virtual = (isset($form_state['values']['field_what_site_you_want_virtual'])) ? $form_state['values']['field_what_site_you_want_virtual'] : NULL;
+  $original_field = isset($form['field_what_site_you_want'][LANGUAGE_NONE]) ? $form['field_what_site_you_want'][LANGUAGE_NONE] : NULL;
+
+  if ($virtual && $original_field) {
+    if (is_array($virtual)) {
+      $names = array();
+      // Multi.
+      foreach ($virtual as $tid => $status) {
+        if ($status) {
+          $term = taxonomy_term_load($tid);
+          if (isset($term->name)) {
+            $names[] = array('value' => $term->name);
+          }
+        }
+      }
+      form_set_value($original_field, $names, $form_state);
+    }
+    else {
+      // Single.
+      $term = taxonomy_term_load(intval($virtual));
+      if (isset($term->name)) {
+        form_set_value($original_field[0]['value'], $term->name, $form_state);
+      }
     }
   }
 }
