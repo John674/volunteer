@@ -10,6 +10,8 @@
             //     selectedTextFormat: 'count > 3'
             // });
 
+            $("button.btn-success:not(.icon-before)").addClass("icon-before").prepend('<span class="icon glyphicon glyphicon-ok" aria-hidden="true"></span>');
+
         }
     };
 })(window.jQuery);

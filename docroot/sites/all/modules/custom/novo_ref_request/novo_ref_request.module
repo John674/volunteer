@@ -189,6 +189,14 @@ function novo_ref_request_save_form($form, &$form_state, $node) {
     '#value' => $node->nid
   );
 
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Send"),
+    '#attributes' => array(
+      'class' => array("btn", "btn-success")
+    )
+  );
+
   $form['actions']['cancel'] = array(
     '#type' => 'submit',
     '#value' => t('Cancel'),
@@ -197,11 +205,9 @@ function novo_ref_request_save_form($form, &$form_state, $node) {
       'node_form_submit_build_node'
     ),
     '#limit_validation_errors' => array(),
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t("Send")
+    '#attributes' => array(
+      'class' => array("btn", "btn-danger")
+    )
   );
 
   return $form;
