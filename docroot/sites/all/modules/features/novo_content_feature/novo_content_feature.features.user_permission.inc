@@ -31,6 +31,15 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_expired_date'.
+  $permissions['create field_expired_date'] = array(
+    'name' => 'create field_expired_date',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create field_faq_a'.
   $permissions['create field_faq_a'] = array(
     'name' => 'create field_faq_a',
@@ -114,6 +123,15 @@ function novo_content_feature_user_default_permissions() {
   $permissions['edit field_completed'] = array(
     'name' => 'edit field_completed',
     'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_expired_date'.
+  $permissions['edit field_expired_date'] = array(
+    'name' => 'edit field_expired_date',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -206,6 +224,13 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own field_expired_date'.
+  $permissions['edit own field_expired_date'] = array(
+    'name' => 'edit own field_expired_date',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own field_faq_a'.
   $permissions['edit own field_faq_a'] = array(
     'name' => 'edit own field_faq_a',
@@ -290,6 +315,15 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view field_completed'.
   $permissions['view field_completed'] = array(
     'name' => 'view field_completed',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_expired_date'.
+  $permissions['view field_expired_date'] = array(
+    'name' => 'view field_expired_date',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
@@ -391,6 +425,13 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view own field_completed'.
   $permissions['view own field_completed'] = array(
     'name' => 'view own field_completed',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_expired_date'.
+  $permissions['view own field_expired_date'] = array(
+    'name' => 'view own field_expired_date',
     'roles' => array(),
     'module' => 'field_permissions',
   );

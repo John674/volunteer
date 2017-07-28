@@ -1356,7 +1356,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 57,
+      'weight' => 56,
     ),
   );
 
@@ -1402,7 +1402,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 58,
+      'weight' => 57,
     ),
   );
 
@@ -2307,7 +2307,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 66,
+      'weight' => 65,
     ),
   );
 
@@ -2627,7 +2627,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 59,
+      'weight' => 58,
     ),
   );
 
@@ -2674,7 +2674,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -2784,7 +2784,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 65,
+      'weight' => 64,
     ),
   );
 
@@ -2882,7 +2882,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -3119,7 +3119,7 @@ College',
         'year_range' => '-0:+10',
       ),
       'type' => 'date_popup',
-      'weight' => 159,
+      'weight' => 74,
     ),
   );
 
@@ -3262,7 +3262,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 71,
+      'weight' => 70,
     ),
   );
 
@@ -3308,7 +3308,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 54,
     ),
   );
 
@@ -3355,7 +3355,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 56,
+      'weight' => 55,
     ),
   );
 
@@ -3442,7 +3442,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 53,
     ),
   );
 
@@ -3579,7 +3579,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 76,
+      'weight' => 73,
     ),
   );
 
@@ -4516,7 +4516,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 63,
+      'weight' => 62,
     ),
   );
 
@@ -6030,7 +6030,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 62,
+      'weight' => 61,
     ),
   );
 
@@ -6075,7 +6075,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 60,
+      'weight' => 59,
     ),
   );
 
@@ -6122,7 +6122,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -6170,7 +6170,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 64,
+      'weight' => 63,
     ),
   );
 
@@ -6470,7 +6470,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 67,
+      'weight' => 66,
     ),
   );
 
@@ -6535,21 +6535,12 @@ Friend',
     'display' => array(
       'default' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 107,
+        'type' => 'text_default',
+        'weight' => 114,
       ),
       'pdf' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 27,
-      ),
-      'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -6561,14 +6552,17 @@ Friend',
     'label' => 'At what site do you want to volunteer?',
     'required' => 0,
     'settings' => array(
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 72,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 71,
     ),
   );
 
@@ -6620,7 +6614,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 61,
+      'weight' => 60,
     ),
   );
 
