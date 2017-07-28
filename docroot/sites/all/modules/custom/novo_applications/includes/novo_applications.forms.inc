@@ -28,6 +28,11 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
     }
   }
 
+  // Validate Date of Birth.
+  if (function_exists("novo_master_dob_validate")) {
+    $form['field_dob'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
+  }
+
   // Replace uid for admins.
   if (user_access("edit application with any status")) {
     $uid = 0;

@@ -18,6 +18,11 @@ function novo_account_form_user_profile_form_alter(&$form, &$form_state) {
 function novo_account_form_alter(&$form, &$form_state, $form_id) {
   if (($form_id == "user_profile_form" || $form_id == "user_register_form") && user_access("novo account edit roles")) {
     $form['account']['roles']['#access'] = TRUE;
+
+    // Validate Date of Birth.
+    if (function_exists("novo_master_dob_validate")) {
+      $form['field_u_birthday'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
+    }
   }
 }
 
