@@ -876,21 +876,21 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_application';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_application'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_kids';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_kids'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_locations';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_locations'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -904,14 +904,14 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_partner';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_partner'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_program';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_program'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -925,7 +925,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'publishcontent_staff';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['publishcontent_staff'] = $strongarm;
 
   return $export;

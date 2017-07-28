@@ -57,6 +57,13 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
 
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
+  $form['field_app_7_final_agree_1'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+  $form['field_app_7_final_agree_2'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+  $form['field_app_7_final_agree_3'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+  $form['field_app_7_final_agree_4'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+  $form['field_app_7_final_agree_5'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+  $form['field_app_7_final_agree_6'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+
   $form['field_app_7_final_agree_1'][$lang][0]['value']['#smart_description'] = FALSE;
   $form['field_app_7_final_agree_2'][$lang][0]['value']['#smart_description'] = FALSE;
   $form['field_app_7_final_agree_3'][$lang][0]['value']['#smart_description'] = FALSE;
@@ -73,8 +80,11 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
 
   $form['field_app7_statement_agree'][$lang][0]['value']['#smart_description'] = FALSE;
   $form['field_app7_statement_agree'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_app7_statement_agree'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
+
   $form['field_program_policies_agree'][$lang][0]['value']['#smart_description'] = FALSE;
   $form['field_program_policies_agree'][$lang][0]['value']['#title_display'] = 'invisible';
+  $form['field_program_policies_agree'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
 
   $form['field_ref_1_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
   $form['field_ref_2_how_long']['#element_validate'][] = '_custom_ref_how_long_field_validate';
