@@ -197,3 +197,8 @@
 .node-application-form .multistep .group-app-7-program-policies .field-name-field-program-policies-agree {
   margin-top: 10px;
 }
+
+.node-application-form .form-item-field-what-site-you-want-virtual .form-item-field-what-site-you-want-virtual,
+.node-application-form .form-item-field-what-site-you-want-virtual .form-radios {
+  display: block !important;
+}

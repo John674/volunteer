@@ -241,3 +241,12 @@ function novo_master_dob_validate($element, &$form_state) {
     }
   }
 }
+
+/**
+ * Implements hook_custom_theme().
+ */
+function novo_master_custom_theme() {
+  if (current_path() == 'system/ajax') {
+    return variable_get('admin_theme');
+  }
+}
