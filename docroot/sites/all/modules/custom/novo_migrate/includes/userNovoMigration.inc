@@ -32,9 +32,10 @@ class UserNovoMigration extends BaseNovoMigration {
     $query->addField("u", "id", "user_id");
     $query->leftJoin("role_user", "r_u", "r_u.user_id = u.id");
     $query->leftJoin("roles", "r", "r.id = r_u.role_id");
-    // Only volunteers.
-    $query->condition("r.name", "applicant");
+    $query->addField("r", "name", "role");
 
+    // Only volunteers.
+    /*$query->condition("r.name", "applicant");*/
     $this->source = new MigrateSourceSQL($query, array(), NULL, array('map_joinable' => FALSE));
     $this->destination = new MigrateDestinationUser(array('md5_passwords' => TRUE));
 
@@ -44,7 +45,7 @@ class UserNovoMigration extends BaseNovoMigration {
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
-      )
+      ),
     );
     $this->map = new MigrateSQLMap($this->machineName, $source_key_schema, MigrateDestinationUser::getKeySchema());
 
@@ -55,15 +56,20 @@ class UserNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_u_first_name', 'first_name')
       ->defaultValue("User");
     $this->addFieldMapping('field_u_last_name', 'last_name');
-    $this->addFieldMapping('field_u_birthday', 'birthday');
+    $this->addFieldMapping('field_u_birthday', 'birthday')->callback(array(
+      $this,
+      'checkDob',
+    ));
     $this->addFieldMapping('status', 'active');
     $this->addFieldMapping('pass', 'password')->callback(array(
       $this,
-      'convertPassword'
+      'convertPassword',
     ));
 
-    $this->addFieldMapping('roles')
-      ->defaultValue(DRUPAL_AUTHENTICATED_RID);
+    $this->addFieldMapping('roles', 'role')->callback(array(
+      $this,
+      'addRoleToUser',
+    ));
     $this->addFieldMapping('is_new')
       ->defaultValue(TRUE);
 
@@ -100,6 +106,33 @@ class UserNovoMigration extends BaseNovoMigration {
   public function prepareRow($row) {
     $row->name = "{$row->first_name} {$row->last_name}";
     return parent::prepareRow($row);
+  }
+
+  /**
+   * Add role to user.
+   */
+  public function addRoleToUser($role) {
+    if (empty($role)) {
+      return DRUPAL_AUTHENTICATED_RID;
+    }
+    $role_id = DRUPAL_AUTHENTICATED_RID;
+    switch ($role) {
+      case "super_admin":
+        $new_role = user_role_load_by_name('Siteadmin');
+        $role_id = $new_role->rid;
+        break;
+
+      case "reviewer":
+        $new_role = user_role_load_by_name('Reviewer');
+        $role_id = $new_role->rid;
+        break;
+
+      case "applicant":
+        $new_role = user_role_load_by_name('Applicant US citizen');
+        $role_id = $new_role->rid;
+        break;
+    }
+    return $role_id;
   }
 
 }

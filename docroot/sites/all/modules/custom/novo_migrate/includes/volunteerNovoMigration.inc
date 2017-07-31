@@ -11,6 +11,17 @@
 class VolunteerNovoMigration extends BaseNovoMigration {
 
   /**
+   * General type include reference_1, reference_2, standby.
+   */
+  const TYPE_GENERAL = 'general';
+  const TYPE_REFERENCE_1 = 'reference_1';
+  const TYPE_REFERENCE_2 = 'reference_2';
+  const TYPE_STANDBY = 'standby';
+
+  const TYPE_CHURCH = 'church';
+  const TYPE_PARENT = 'parent';
+
+  /**
    * VolunteerNovoMigration constructor.
    */
   public function __construct($args) {
@@ -124,6 +135,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->attachPhone($node, $row, "church_background_", "field_church_phone");
     $this->attachPhone($node, $row, "parent_", "field_parent_phone");
 
+    // If there are reference request answers from old database, will update created reference node.
+    $this->updateReferenceRequestNode($node, $row);
+
     // Multistep.
     if (function_exists("_multistep_update_status")) {
       _multistep_update_status($node, "node", "submitted", "all");
@@ -141,17 +155,22 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       $phone_field = $field . $add_field;
       if (isset($row->{$phone_field}) && !empty($row->{$phone_field})) {
         $number = $this->formatPhoneNumber($row->{$phone_field});
-        if (!empty($number)) {
+        preg_match("/^\d{3}-\d{3}-\d{4}$/", $number, $matches);
+        if (!empty($number) && !empty($matches)) {
           $phone_arr[] = $number;
         }
         else {
-          watchdog("novo_migrate", 'Can\' convert phone :phone for nid :nid for field :field', array(
+          $changed_number = $this->changeNotCorrectNumber($row->{$phone_field});
+          $phone_arr[] = $changed_number;
+          watchdog("novo_migrate", 'Can\' convert phone :phone for nid :nid for field :field, phone number defined :changed_number', array(
             ":phone" => $row->{$phone_field},
             ":nid" => $node->nid,
-            ":field" => $ref_field
+            ":field" => $ref_field,
+            ":changed_number" => $changed_number,
           ));
         }
       }
+
     }
 
     if (!empty($phone_arr)) {
@@ -170,7 +189,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Convert phone number. @TODO: need test and change. To Vasya - finish it.
+   * Convert phone number.
    */
   protected function formatPhoneNumber($s) {
     if (strlen(preg_replace("/\D*/", "", $s)) < 10) {
@@ -211,6 +230,28 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     // if (preg_replace('/\D/', '', $s) != preg_replace('/\D/', '', $out)) return false;
     // @codingStandardsIgnoreEnd
     return $out;
+  }
+
+  /**
+   * Add zeros before not correct number.
+   */
+  protected function changeNotCorrectNumber($value) {
+    $clear_number = preg_replace("/\D*/", "", $value);
+    if (!empty($clear_number)) {
+      if (strlen($clear_number) < 10) {
+        $count_zero = 10 - strlen($clear_number);
+        $zeros = str_repeat("0", $count_zero);
+        $number = $zeros . $clear_number;
+        preg_match("/^(\d{3})(\d{3})(\d{4})$/", $number, $match);
+        array_shift($match);
+        $new_number = implode("-", $match);
+        return $new_number;
+      }
+      else {
+        return $value;
+      }
+    }
+    return "000-000-0000";
   }
 
   /**
@@ -300,7 +341,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("av", "template_data", "answer_variant");
     $query->addField("av", "id", "answer_variant_id");
 
-    /* $query->condition("u.id", 423);*/
 
     $result = $query->execute()->fetchAll();
 
@@ -332,8 +372,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       }
     }
 
+    $reference_requests = $this->getReferenceRequests();
+
     foreach ($users as $uid => $fields) {
       $users[$uid]["id"] = $uid;
+      $users[$uid]['reference_request'] = array();
       foreach ($fields as $key => $field_group) {
         foreach ($field_group as $section_name => $field) {
           $val = $this->getAnswer($field['answer'], $field['q_type'], $field['variants']);
@@ -361,6 +404,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
             }
           }
         }
+      }
+
+      if (isset($reference_requests[$uid]) && !empty($reference_requests[$uid])) {
+        $users[$uid]['reference_request'] = $reference_requests[$uid];
       }
     }
 
@@ -443,12 +490,20 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('status')->defaultValue(TRUE);
 
     $this->addFieldMapping('title', 'legal_first_name');
-    $this->addFieldMapping('field_prefix', 'prefix')
-      ->callback(array($this, "getPrefix"));
+    /*$this->addFieldMapping('field_prefix', 'prefix')
+    ->callback(array($this, "getPrefix"));*/
     $this->addFieldMapping('field_prefix:source_type')
       ->defaultValue('tid');
 
+    $this->addFieldMapping('field_gender', 'prefix')
+      ->callback(array($this, "getGender"));
+    $this->addFieldMapping('field_gender:source_type')
+      ->defaultValue('tid');
+
     $this->addFieldMapping('uid', 'id')
+      ->sourceMigration('Users');
+
+    $this->addFieldMapping('field_app_user', 'id')
       ->sourceMigration('Users');
 
     $this->addFieldMapping('promote')->defaultValue(FALSE);
@@ -458,7 +513,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('changed', 'updated_at');
 
     $this->addFieldMapping('field_goes_by', 'go_by');
-    $this->addFieldMapping('field_middle', 'middle_initial');
+    $this->addFieldMapping('field_middle_name', 'middle_initial');
     $this->addFieldMapping('field_last_name', 'last_name');
     $this->addFieldMapping('field_maiden_name_or_alias_names', 'alias');
     $this->addFieldMapping('field_address_1', 'address_1');
@@ -607,10 +662,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_app_7_final_agree_5', 'contact_any_person');
     $this->addFieldMapping('field_app_7_final_agree_6', 'background_inquiry');
 
-    // @todo: To Vasya - finish it.
     // $this->addFieldMapping('field_what_site_want', '');
     // $this->addFieldMapping('field_what_site_want:source_type')->defaultValue('target_id');
-    // $this->addFieldMapping('field_expired_date', '');
+    /*$this->addFieldMapping('field_expired_date', '');*/
 
     $this->addFieldMapping('field_ssn', 'social_security_number')
       ->callback(array($this, "formattingSsn"));
@@ -637,7 +691,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       else {
         Migration::displayMessage(t('Not found tid :tid for value :value', array(
           ":tid" => $tid,
-          ":value" => $value
+          ":value" => $value,
         )));
         return NULL;
       }
@@ -662,6 +716,18 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
+   * Gender by prefix callback function.
+   */
+  protected function getGender($value) {
+    if ($value == "Mr.") {
+      return $this->getTermTid("M", "gender");
+    }
+    elseif ($value == "Mrs." || $value == "Mrs.") {
+      return $this->getTermTid("F", "gender");
+    }
+  }
+
+  /**
    * How long callback function.
    */
   protected function getHowLong($value) {
@@ -681,7 +747,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         $source_user_id = $current_key['id'];
         watchdog("novo_migrate", 'Value :not_valid_value  should be equal months or years in user with source_user_id = :source_user_id', array(
           ":source_user_id" => $source_user_id,
-          ":not_valid_value" => $value['period']
+          ":not_valid_value" => $value['period'],
         ));
       }
     }
@@ -717,7 +783,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
         watchdog("novo_migrate", 'Not found tid :tid for value :value', array(
           ":tid" => $tid,
-          ":value" => $value
+          ":value" => $value,
         ));
         return NULL;
       }
@@ -745,15 +811,18 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Convert emergency phone.
    */
   protected function getEmergencyPhone($value) {
+    $default_number = "000-000-0000";
     if (!empty($value)) {
       $number = $this->formatPhoneNumber($value);
-      if (!empty($number)) {
+      preg_match("/^\d{3}-\d{3}-\d{4}$/", $number, $matches);
+      if (!empty($number) && !empty($matches)) {
         return $number;
       }
       else {
-        watchdog("novo_migrate", 'Can\' convert phone :phone for field :field', array(
+        watchdog("novo_migrate", 'Can\' convert phone :phone for field :field, phone number defined :default_number', array(
           ":phone" => $value,
-          ":field" => "field_masked_emergency_phone"
+          ":field" => "field_masked_emergency_phone",
+          ":default_number" => $default_number,
         ));
       }
     }
@@ -796,31 +865,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Check date of birthday.
-   */
-  protected function checkDob($value) {
-    if (!empty($value)) {
-      return NULL;
-    }
-    $value = trim($value);
-    $dob = \DateTime::createFromFormat("m/d/Y", $value);
-    $year = $dob->format("Y");
-
-    if ($year[0] == 0) {
-      $new_year = preg_replace("/^.{1}/", "1", $year);
-      $new_dob = $dob->format("m") . "/" . $dob->format("d") . "/" . $new_year;
-      watchdog("novo_migrate", 'Value field_value was changing from :value to :new_value', array(
-        ":value" => $value,
-        ":new_value" => $new_dob,
-      ));
-      return $new_dob;
-    }
-    else {
-      return $value;
-    }
-  }
-
-  /**
    * Check publish or not publish application.
    */
   protected function isCompleted($value) {
@@ -841,6 +885,220 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     else {
       return $this->getTermTid("Not Approved", "application_status");
     }
+  }
+
+  /**
+   * Update questions and answers in created reference request nodes.
+   */
+  private function updateReferenceRequestNode($application_node, $row) {
+    $lang = isset($application_node->language) ? $application_node->language : LANGUAGE_NONE;
+
+    foreach ($this->getRequestTypesFields() as $type => $field) {
+      if (isset($row->reference_request[$type]) && !empty($row->reference_request[$type])) {
+        $reference_questions_answers = $row->reference_request[$type];
+        if (isset($application_node->{$field}) && !empty($application_node->{$field})) {
+          $request_reference_id = $application_node->{$field}[$lang][0]['target_id'];
+          if (isset($request_reference_id) && !empty($request_reference_id)) {
+            $request_reference_node = node_load($request_reference_id);
+            $field_ref_faq = field_get_items('node', $request_reference_node, 'field_ref_faq');
+
+            if (!empty($field_ref_faq)) {
+              foreach ($field_ref_faq as $value) {
+                entity_delete_multiple('field_collection_item', [$value['value']]);
+              }
+            }
+
+            $request_reference_node_update = node_load($request_reference_id);
+            foreach ($reference_questions_answers as $reference_data) {
+              $values = array(
+                'field_name' => 'field_ref_faq',
+                'field_faq_q' => array(
+                  $lang => array(
+                    array(
+                      'value' => $reference_data['q'],
+                    ),
+                  ),
+                ),
+                'field_faq_a' => array(
+                  $lang => array(
+                    array(
+                      'value' => $reference_data['a'],
+                    ),
+                  ),
+                ),
+              );
+              $item = entity_create('field_collection_item', $values);
+              $item->setHostEntity('node', $request_reference_node_update);
+              $item->save();
+
+            }
+          }
+          else {
+            watchdog("novo_migrate", 'Not exist reference node for application application_id = :application_id , but reference requests for user user_id=:user_id exist', [
+              ":user_id" => $row->id,
+              ":application_id" => $application_node->nid,
+            ]);
+          }
+        }
+      }
+    }
+
+  }
+
+  /**
+   * Return request field names and types.
+   */
+  protected function getRequestTypesFields() {
+    return [
+      self::TYPE_REFERENCE_1 => 'field_reference_request_1',
+      self::TYPE_REFERENCE_2 => 'field_reference_request_2',
+      self::TYPE_STANDBY => 'field_reference_request_standby',
+      self::TYPE_CHURCH => 'field_reference_request_church',
+      self::TYPE_PARENT => 'field_reference_request_parents',
+    ];
+  }
+
+  /**
+   * Request in old database.
+   */
+  protected function getReferenceRequests() {
+    $query = Database::getConnection('default', $this->databaseKey)
+      ->select('users', 'u')
+      ->fields('u', ['id'])
+      ->isNull('u.deleted_at');
+    $query->addField("u", "id", "user_id");
+    $query->addField("u", "first_name", "first_name");
+    $query->addField("u", "last_name", "last_name");
+    $query->leftJoin("role_user", "r_u", "r_u.user_id = u.id");
+    $query->leftJoin("roles", "r", "r.id = r_u.role_id");
+    // Only volunteers.
+    $query->condition("r.name", "applicant");
+
+    // Add source fields.
+    $query->innerJoin("user_applications", "ua", "ua.user_id = u.id");
+    $query->addField("ua", "id", "application_id");
+    $query->isNull('ua.deleted_at');
+
+    $query->innerJoin("reference_forms", "rf", "rf.application_id = ua.id");
+    $query->addField("rf", "prefix", "type");
+    $query->addField("rf", "data", "data");
+    $query->isNotNull('rf.data');
+
+    $result = $query->execute()->fetchAll();
+
+    $reference_requests = [];
+
+    foreach ($result as $key => $value) {
+      $full_name = $value->first_name . ' ' . $value->last_name;
+      $questions_answers = $this->getReferenceQuestionsAnswers($value->data, $value->type, $full_name);
+      $reference_requests[$value->user_id][$value->type] = $questions_answers;
+    }
+    return $reference_requests;
+  }
+
+  /**
+   * Return array with qestions and answers data.
+   */
+  protected function getReferenceQuestionsAnswers($questions_answers_json, $type, $full_name) {
+    $questions_answers_data = $this->getReferenceQuestionsAnswersJson($questions_answers_json);
+    $questions_data = $this->getReferenceQuestionsData();
+    $questions_answers = [];
+
+    if (!empty($questions_answers_data)) {
+      switch ($type) {
+        case self::TYPE_REFERENCE_1:
+        case self::TYPE_REFERENCE_2:
+        case self::TYPE_STANDBY:
+          $questions = $questions_data[self::TYPE_GENERAL];
+          break;
+
+        case self::TYPE_CHURCH:
+          $questions = $questions_data[self::TYPE_CHURCH];
+          break;
+
+        case self::TYPE_PARENT:
+          $questions = $questions_data[self::TYPE_PARENT];
+          break;
+      }
+
+      if (!empty($questions)) {
+        foreach ($questions_answers_data as $key => $value) {
+          if (array_key_exists($key, $questions)) {
+            if ($type == self::TYPE_PARENT) {
+              $questions_answers[$key]['q'] = $questions[$key]['label'];
+              $questions_answers[$key]['a'] = !empty($value) ? 'Yes' : 'No';
+            }
+            else {
+              $questions_answers[$key]['q'] = sprintf($questions[$key], $full_name);
+              $questions_answers[$key]['a'] = trim($value);
+            }
+          }
+        }
+      }
+
+      return array_values($questions_answers);
+    }
+    return NULL;
+  }
+
+  /**
+   * Get question-answers data from json.
+   */
+  protected function getReferenceQuestionsAnswersJson($json) {
+    try {
+      return json_decode($json);
+    }
+    catch (Exception $ex) {
+      return NULL;
+    }
+  }
+
+  /**
+   * Old questions data.
+   */
+  protected function getReferenceQuestionsData() {
+    return [
+      self::TYPE_CHURCH => [
+        'how_long' => 'How long has %s been attending your church?',
+        'relationship' => 'What is your relationship with %s?',
+        'lord_and_savior' => 'Has he or she made the decision to make Jesus their Lord and Savior? ',
+        'within_your_church' => 'What involvement does this person have within your church?',
+        'how_have_you_seen_god' => 'How have you seen God use %s?',
+        'hesitations' => 'Do you have any hesitations for this person to volunteer working directly with children?',
+        'other_questions_or_comments' => 'Other Questions or Comments',
+      ],
+      self::TYPE_GENERAL => [
+        'how_long' => 'How long and in what capacity have you known %s?',
+        'god' => 'How have you seen God work in the life of %s?',
+        'characteristics' => 'How would you describe his/her personal characteristics, abilities, and experience?',
+        'children' => 'How would you say he/ she relates to children?',
+        'develop' => 'Given that no one is perfect what are some areas that he or she should continue to develop?',
+        'process' => 'Is there anything else that I should know about before moving this individual forward in the process?',
+        'other_questions_or_comments' => 'Other Questions or Comments:',
+      ],
+      self::TYPE_PARENT => [
+        'statement_of_faith_agreement' => [
+          'type' => 'checkbox',
+          'label' => 'I and my son / daughter have read and agrees he / she will abide by the Statement of Faith Agreement.',
+        ],
+        'pertinent_novo_program_policies' => [
+          'type' => 'checkbox',
+          'label' => 'I and my son / daughter have read and agrees he / she will abide by the Pertinent Novo Program Policies.',
+        ],
+        'legally_binding_agreement' => [
+          'type' => 'checkbox',
+          'label' => 'I and my son / daughter have carefully read this document and recognize that it is a legally-binding agreement.',
+        ],
+        'information_given_complete' => [
+          'type' => 'checkbox',
+          'label' => 'I certify that, to the best of my knowledge, all answers and information given are true and complete.',
+        ],
+        'testimony_for_promotional_materials' => [
+          'type' => 'checkbox',
+          'label' => 'I give Novo the right to use my son’s / daughter’s picture, voice, and / or testimony for promotional materials.',
+        ],
+      ],
+    ];
   }
 
 }
