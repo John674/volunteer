@@ -50,7 +50,7 @@ function novo_content_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('First Name'),
+      'title_label' => t('Full Name'),
       'help' => '',
     ),
     'locations' => array(
@@ -98,7 +98,7 @@ function novo_content_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('First Name'),
+      'title_label' => t('Full Name'),
       'help' => '',
     ),
   );

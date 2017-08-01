@@ -2711,7 +2711,7 @@ function novo_content_feature_field_default_field_bases() {
             1 => '{field_program_location}',
           ),
           'display_name' => 'entityreference_1',
-          'view_name' => 'class_filter_location',
+          'view_name' => 'programm_class_list',
         ),
       ),
       'target_type' => 'node',
@@ -2797,20 +2797,19 @@ function novo_content_feature_field_default_field_bases() {
     'module' => 'entityreference',
     'settings' => array(
       'delete_on_parent_delete' => '',
-      'handler' => 'base',
+      'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 1,
           ),
         ),
-        'sort' => array(
-          'direction' => 'ASC',
-          'property' => 'title',
-          'type' => 'property',
-        ),
-        'target_bundles' => array(
-          'locations' => 'locations',
+        'view' => array(
+          'args' => array(
+            0 => '{field_program_school_year}',
+          ),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'program_locations_list',
         ),
       ),
       'target_type' => 'node',
@@ -4311,7 +4310,7 @@ function novo_content_feature_field_default_field_bases() {
   // Exported field_base: 'field_what_site_you_want'.
   $field_bases['field_what_site_you_want'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_what_site_you_want',

@@ -1,0 +1,44 @@
+.node-class-form .field-name-field-program-weekday {
+  display: inline-block;
+  width: 210px;
+  margin-bottom: 0px;
+  margin-right: 30px;
+}
+
+.node-class-form .field-name-field-program-weekday .form-control.form-select {
+  display: inline-block;
+  max-width: 120px;
+  margin-left: 10px;
+}
+
+.node-class-form .field-name-field-program-day tr.draggable td button.form-submit {
+  margin-left: 20px;
+}
+
+.node-class-form .field-name-field-program-time .panel.form-wrapper {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.node-class-form .field-name-field-program-time .panel-heading {
+  display: none;
+}
+
+.node-class-form .field-name-field-program-time .panel-body {
+  padding: 0px;
+}
+
+.node-class-form .field-name-field-program-time .panel-body > .form-item {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.node-class-form .field-name-field-program-time .panel-body > .form-item:last-child {
+  margin-right: 0px;
+}
+
+.node-class-form .field-name-field-program-time {
+  display: inline-block;
+  margin-bottom: 0px;
+}

@@ -330,9 +330,10 @@ function novo_content_feature_field_group_info() {
       19 => 'field_gender',
       20 => 'field_training_list',
       21 => 'field_middle_name',
-      22 => 'title',
-      23 => 'field_what_site_you_want',
-      24 => 'group_app_emergency_contact',
+      22 => 'field_what_site_you_want',
+      23 => 'field_first_name',
+      24 => 'title',
+      25 => 'group_app_emergency_contact',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1299,7 +1300,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '72',
+    'weight' => '75',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

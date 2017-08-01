@@ -13,9 +13,23 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_application';
+  $strongarm->value = '1';
+  $export['auto_entitylabel_node_application'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_node_attendance';
   $strongarm->value = '1';
   $export['auto_entitylabel_node_attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_kids';
+  $strongarm->value = '1';
+  $export['auto_entitylabel_node_kids'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -28,7 +42,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_node_program';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['auto_entitylabel_node_program'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -41,9 +55,38 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_node_staff';
+  $strongarm->value = '1';
+  $export['auto_entitylabel_node_staff'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_application';
+  $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
+[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+<?php else: ?>
+[node:field_first_name] [node:field_last_name]
+<?php endif; ?>';
+  $export['auto_entitylabel_pattern_node_application'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_attendance';
   $strongarm->value = 'Attendance';
   $export['auto_entitylabel_pattern_node_attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_kids';
+  $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
+[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+<?php else: ?>
+[node:field_first_name] [node:field_last_name]
+<?php endif; ?>';
+  $export['auto_entitylabel_pattern_node_kids'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -56,7 +99,7 @@ function novo_content_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_program';
-  $strongarm->value = 'program';
+  $strongarm->value = '[node:field_program_class_name]';
   $export['auto_entitylabel_pattern_node_program'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -69,9 +112,34 @@ function novo_content_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_pattern_node_staff';
+  $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
+[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+<?php else: ?>
+[node:field_first_name] [node:field_last_name]
+<?php endif; ?>';
+  $export['auto_entitylabel_pattern_node_staff'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_application';
+  $strongarm->value = 1;
+  $export['auto_entitylabel_php_node_application'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_php_node_attendance';
   $strongarm->value = 0;
   $export['auto_entitylabel_php_node_attendance'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_kids';
+  $strongarm->value = 1;
+  $export['auto_entitylabel_php_node_kids'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -93,6 +161,13 @@ function novo_content_feature_strongarm() {
   $strongarm->name = 'auto_entitylabel_php_node_reference_request';
   $strongarm->value = 0;
   $export['auto_entitylabel_php_node_reference_request'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_php_node_staff';
+  $strongarm->value = 1;
+  $export['auto_entitylabel_php_node_staff'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -119,7 +194,7 @@ function novo_content_feature_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '51',
+          'weight' => '52',
         ),
         'path' => array(
           'weight' => '8',
@@ -187,6 +262,9 @@ function novo_content_feature_strongarm() {
       'form' => array(
         'title' => array(
           'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '25',
         ),
       ),
       'display' => array(),
@@ -354,7 +432,10 @@ function novo_content_feature_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '9',
         ),
       ),
       'display' => array(),

@@ -35,6 +35,7 @@ stylesheets[all][] = css/forms/staff_form.css
 stylesheets[all][] = css/forms/partner_form.css
 stylesheets[all][] = css/forms/locations_form.css
 stylesheets[all][] = css/forms/mentor_form.css
+stylesheets[all][] = css/forms/class_form.css
 stylesheets[all][] = css/custom.css
 
 
