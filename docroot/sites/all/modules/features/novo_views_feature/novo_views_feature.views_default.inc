@@ -3359,7 +3359,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'users';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: User: Novo application status */
+  /* Field: User: User's Novo application status */
   $handler->display->display_options['fields']['novo_application_status']['id'] = 'novo_application_status';
   $handler->display->display_options['fields']['novo_application_status']['table'] = 'users';
   $handler->display->display_options['fields']['novo_application_status']['field'] = 'novo_application_status';
@@ -3666,11 +3666,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status_1]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Status */
-  $handler->display->display_options['fields']['field_app_status']['id'] = 'field_app_status';
-  $handler->display->display_options['fields']['field_app_status']['table'] = 'field_data_field_app_status';
-  $handler->display->display_options['fields']['field_app_status']['field'] = 'field_app_status';
-  $handler->display->display_options['fields']['field_app_status']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Novo application status */
+  $handler->display->display_options['fields']['novo_application_status']['id'] = 'novo_application_status';
+  $handler->display->display_options['fields']['novo_application_status']['table'] = 'node';
+  $handler->display->display_options['fields']['novo_application_status']['field'] = 'novo_application_status';
+  $handler->display->display_options['fields']['novo_application_status']['label'] = 'Status';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
