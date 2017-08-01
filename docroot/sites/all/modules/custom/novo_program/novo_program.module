@@ -77,3 +77,25 @@ function novo_program_get_kid_data($nid) {
 
   drupal_json_output($output);
 }
+
+
+/**
+ * Implements hook_node_presave().
+ */
+function novo_program_node_presave($node) {
+  if ($node->type == "class") {
+    // Update programm name in class was updated
+    $query = db_select("field_data_field_program_class_name", "cn");
+    $query->fields("cn", array("entity_id"));
+    $query->condition("cn.bundle", "program");
+    $query->condition("cn.field_program_class_name_target_id", $node->nid);
+    $nids = $query->execute()->fetchAllKeyed(0, 0);
+    if (!empty($nids)) {
+      $nodes = node_load_multiple($nids);
+      foreach ($nodes as $node) {
+        $node->title = "%AutoEntityLabel%";
+        node_save($node);
+      }
+    }
+  }
+}

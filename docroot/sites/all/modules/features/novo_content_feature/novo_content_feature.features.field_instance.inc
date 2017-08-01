@@ -1356,7 +1356,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 56,
+      'weight' => 59,
     ),
   );
 
@@ -1402,7 +1402,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 57,
+      'weight' => 60,
     ),
   );
 
@@ -2307,7 +2307,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 65,
+      'weight' => 68,
     ),
   );
 
@@ -2627,7 +2627,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 58,
+      'weight' => 61,
     ),
   );
 
@@ -2674,7 +2674,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 69,
+      'weight' => 72,
     ),
   );
 
@@ -2784,7 +2784,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 64,
+      'weight' => 67,
     ),
   );
 
@@ -2882,7 +2882,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 67,
+      'weight' => 70,
     ),
   );
 
@@ -3119,7 +3119,47 @@ College',
         'year_range' => '-0:+10',
       ),
       'type' => 'date_popup',
-      'weight' => 74,
+      'weight' => 77,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_first_name'.
+  $field_instances['node-application-field_first_name'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 115,
+      ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_first_name',
+    'label' => 'Legal First Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 54,
     ),
   );
 
@@ -3162,7 +3202,7 @@ College',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 50,
+      'weight' => 53,
     ),
   );
 
@@ -3208,7 +3248,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 55,
     ),
   );
 
@@ -3262,7 +3302,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 70,
+      'weight' => 73,
     ),
   );
 
@@ -3308,7 +3348,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 57,
     ),
   );
 
@@ -3355,7 +3395,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 58,
     ),
   );
 
@@ -3442,7 +3482,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 53,
+      'weight' => 56,
     ),
   );
 
@@ -3579,7 +3619,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 73,
+      'weight' => 76,
     ),
   );
 
@@ -4516,7 +4556,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 62,
+      'weight' => 65,
     ),
   );
 
@@ -6030,7 +6070,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 61,
+      'weight' => 64,
     ),
   );
 
@@ -6075,7 +6115,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 59,
+      'weight' => 62,
     ),
   );
 
@@ -6122,7 +6162,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 68,
+      'weight' => 71,
     ),
   );
 
@@ -6170,7 +6210,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 63,
+      'weight' => 66,
     ),
   );
 
@@ -6470,7 +6510,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 66,
+      'weight' => 69,
     ),
   );
 
@@ -6562,7 +6602,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 71,
+      'weight' => 74,
     ),
   );
 
@@ -6614,7 +6654,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 60,
+      'weight' => 63,
     ),
   );
 
@@ -7114,7 +7154,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -7153,7 +7193,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -7193,7 +7233,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -7234,7 +7274,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -7274,7 +7314,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -7314,7 +7354,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -7362,7 +7402,7 @@ Friend',
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -7401,7 +7441,47 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance: 'node-kids-field_first_name'.
+  $field_instances['node-kids-field_first_name'] = array(
+    'bundle' => 'kids',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 38,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_first_name',
+    'label' => 'First Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
     ),
   );
 
@@ -7441,7 +7521,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -7482,7 +7562,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -7522,7 +7602,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -7561,7 +7641,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -7601,7 +7681,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -7644,7 +7724,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -7684,7 +7764,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -7727,7 +7807,7 @@ Friend',
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -7770,7 +7850,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 26,
+      'weight' => 24,
     ),
   );
 
@@ -7810,7 +7890,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -7848,7 +7928,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -7887,7 +7967,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -7924,7 +8004,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -7964,7 +8044,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -8010,7 +8090,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -9457,7 +9537,47 @@ Re-Dedication',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 3,
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-staff-field_first_name'.
+  $field_instances['node-staff-field_first_name'] = array(
+    'bundle' => 'staff',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_first_name',
+    'label' => 'First Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
     ),
   );
 
@@ -9497,7 +9617,7 @@ Re-Dedication',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -3,
+      'weight' => 2,
     ),
   );
 
@@ -9537,7 +9657,7 @@ Re-Dedication',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 5,
     ),
   );
 
@@ -9577,7 +9697,7 @@ Re-Dedication',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 4,
     ),
   );
 
@@ -9617,7 +9737,7 @@ Re-Dedication',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -1,
+      'weight' => 3,
     ),
   );
 
@@ -9656,7 +9776,7 @@ Re-Dedication',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 12,
+      'weight' => 7,
     ),
   );
 
@@ -9699,7 +9819,7 @@ Re-Dedication',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 14,
+      'weight' => 8,
     ),
   );
 
@@ -9794,6 +9914,7 @@ Re-Dedication',
   t('Kid name');
   t('Kids list');
   t('Last Name');
+  t('Legal First Name');
   t('Length of Current Employment');
   t('Location');
   t('Maiden name or Alias names used');

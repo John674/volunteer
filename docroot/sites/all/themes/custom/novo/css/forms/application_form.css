@@ -105,7 +105,7 @@
 
 .node-application-form .multistep .field-name-field-volunteer-interests-roles .form-item-field-volunteer-interests-roles-und .name,
 .node-application-form .multistep .field-name-field-volunteer-interests-roles .form-item-field-volunteer-interests-roles-und .field-vol-roles-time {
-  font-weight: bold;
+  font-family: "ProximaNovaBold";
 }
 
 .node-application-form .multistep .field-name-field-volunteer-interests-roles .form-item-field-volunteer-interests-roles-und .field-vol-roles-time {
@@ -177,8 +177,9 @@
   vertical-align: middle;
   color: red;
   text-transform: uppercase;
-  font-weight: bold;
-  width: 100px;
+  font-family: "ProximaNovaBold";
+  width: 120px;
+  font-size: 14px;
 }
 
 .node-application-form .multistep .group-app-7-statement .form-item .help-block,

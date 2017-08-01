@@ -45,6 +45,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->mapping();
 
     $this->addUnmigratedDestinations(array(
+      'title',
       'revision',
       'log',
       'language',
@@ -119,6 +120,10 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    */
   public function prepareRow($row) {
     $row->prepare_interests_roles = $this->prepareInterestsRoles($row);
+
+    if (empty(trim($row->legal_first_name))) {
+      watchdog("novo_migrate", var_export($row, TRUE));
+    }
     return parent::prepareRow($row);
   }
 
@@ -489,7 +494,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('comment')->defaultValue(FALSE);
     $this->addFieldMapping('status')->defaultValue(TRUE);
 
-    $this->addFieldMapping('title', 'legal_first_name');
+    $this->addFieldMapping('field_first_name', 'legal_first_name');
     /*$this->addFieldMapping('field_prefix', 'prefix')
     ->callback(array($this, "getPrefix"));*/
     $this->addFieldMapping('field_prefix:source_type')
@@ -673,10 +678,12 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('field_parent_guardian_last_name', 'parent_last_name');
     $this->addFieldMapping('field_parent_email', 'parent_email');
 
-    $this->addFieldMapping('field_app_status', 'application_approved')->callback(array($this, "getApplicationStatus"));
+    $this->addFieldMapping('field_app_status', 'application_approved')
+      ->callback(array($this, "getApplicationStatus"));
     $this->addFieldMapping('field_app_status:source_type')->defaultValue('tid');
 
-    $this->addFieldMapping('field_completed', "step_status")->callback(array($this, "isCompleted"));
+    $this->addFieldMapping('field_completed', "step_status")
+      ->callback(array($this, "isCompleted"));
   }
 
   /**
