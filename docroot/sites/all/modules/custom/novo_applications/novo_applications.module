@@ -61,22 +61,8 @@ function novo_applications_preprocess_node(&$variables) {
     $app_status_tid = (isset($variables['field_app_status'][0]['tid'])) ? $variables['field_app_status'][0]['tid'] : NULL;
     $lang = isset($variables['language']) ? $variables['language'] : LANGUAGE_NONE;
     $app_completed = (isset($variables['field_completed'][$lang][0]['value'])) ? $variables['field_completed'][$lang][0]['value'] : FALSE;
-    $app_status_output = ($app_completed) ? t("Completed") : t("Started");
-    $app_status = NULL;
 
-    if ($app_status_tid && $app_completed) {
-      $approved_term_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_APPROVED_NAME);
-      $not_approved_term_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_NOT_APPROVED_NAME);
-
-      if ($approved_term_tid && $approved_term_tid == $app_status_tid) {
-        $app_status_output = t("Approved");
-        $app_status = 1;
-      }
-      elseif ($not_approved_term_tid && $not_approved_term_tid == $app_status_tid) {
-        $app_status_output = t("Not approved");
-        $app_status = -1;
-      }
-    }
+    list($app_status_output, $app_status) = novo_application_get_status($app_completed, $app_status_tid);
 
     $variables['content']['app_status'] = array(
       "#markup" => $app_status_output,
