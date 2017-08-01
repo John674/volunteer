@@ -94,3 +94,26 @@ function novo_application_update_status($node, $status = 0) {
 
   drupal_goto("node/" . $node->nid);
 }
+
+/**
+ * Get status of application.
+ */
+function novo_application_get_status($app_completed, $app_status_tid) {
+  $app_status_output = ($app_completed) ? t("Completed") : t("Started");
+  $app_status = NULL;
+
+  if ($app_status_tid && $app_completed) {
+    $approved_term_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_APPROVED_NAME);
+    $not_approved_term_tid = novo_applications_get_status_tid(NOVO_APPLICATION_STATUS_NOT_APPROVED_NAME);
+
+    if ($approved_term_tid && $approved_term_tid == $app_status_tid) {
+      $app_status_output = t("Approved");
+      $app_status = 1;
+    }
+    elseif ($not_approved_term_tid && $not_approved_term_tid == $app_status_tid) {
+      $app_status_output = t("Not approved");
+      $app_status = -1;
+    }
+  }
+  return array($app_status_output, $app_status);
+}
