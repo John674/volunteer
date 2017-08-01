@@ -78,13 +78,12 @@ function novo_program_get_kid_data($nid) {
   drupal_json_output($output);
 }
 
-
 /**
  * Implements hook_node_presave().
  */
 function novo_program_node_presave($node) {
   if ($node->type == "class") {
-    // Update programm name in class was updated
+    // Update programm name in class was updated.
     $query = db_select("field_data_field_program_class_name", "cn");
     $query->fields("cn", array("entity_id"));
     $query->condition("cn.bundle", "program");
