@@ -252,3 +252,12 @@ function _novo_menu_menu_program_menu_block_visibility($block) {
   return (in_array(trim($_GET['q']), $pages)) ? TRUE : FALSE;
 
 }
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function novo_preprocess_block(&$variables) {
+  if ($variables['block']->module == "webform") {
+    $variables['theme_hook_suggestions'][] = "block__webform__contact_us";
+  }
+}
