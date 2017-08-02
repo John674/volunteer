@@ -64,7 +64,7 @@ function novo_content_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_application';
   $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
-[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+[node:field_goes_by] ([node:field_first_name]) [node:field_last_name]
 <?php else: ?>
 [node:field_first_name] [node:field_last_name]
 <?php endif; ?>';
@@ -82,7 +82,7 @@ function novo_content_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_kids';
   $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
-[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+[node:field_goes_by] ([node:field_first_name]) [node:field_last_name]
 <?php else: ?>
 [node:field_first_name] [node:field_last_name]
 <?php endif; ?>';
@@ -114,7 +114,7 @@ function novo_content_feature_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_staff';
   $strongarm->value = '<?php if(isset($entity->field_goes_by[$language][0][\'value\']) && !empty($entity->field_goes_by[$language][0][\'value\'])) :?>
-[node:field_first_name] [node:field_last_name] ([node:field_goes_by])
+[node:field_goes_by] ([node:field_first_name]) [node:field_last_name]
 <?php else: ?>
 [node:field_first_name] [node:field_last_name]
 <?php endif; ?>';
