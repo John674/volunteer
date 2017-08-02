@@ -13,6 +13,13 @@ function novo_master_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'additional_settings__active_tab_webform';
+  $strongarm->value = 'edit-webform';
+  $export['additional_settings__active_tab_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'autoassignrole_admin_active';
   $strongarm->value = '0';
   $export['autoassignrole_admin_active'] = $strongarm;
@@ -49,7 +56,6 @@ function novo_master_feature_strongarm() {
   $strongarm->value = array(
     'bootstrap' => 0,
     'novo' => 0,
-    'seven' => 0,
   );
   $export['chosen_disabled_themes'] = $strongarm;
 
@@ -163,6 +169,13 @@ function novo_master_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'publishcontent_webform';
+  $strongarm->value = 0;
+  $export['publishcontent_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_frontpage';
   $strongarm->value = 'front';
   $export['site_frontpage'] = $strongarm;
@@ -173,6 +186,26 @@ function novo_master_feature_strongarm() {
   $strongarm->name = 'smtp_allowhtml';
   $strongarm->value = 1;
   $export['smtp_allowhtml'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'webform_blocks';
+  $strongarm->value = array(
+    'client-block-6046' => array(
+      'display' => 'form',
+      'pages_block' => '1',
+      'confirmation_block' => '0',
+    ),
+  );
+  $export['webform_blocks'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'webform_node_webform';
+  $strongarm->value = 1;
+  $export['webform_node_webform'] = $strongarm;
 
   return $export;
 }
