@@ -250,3 +250,24 @@ function novo_master_custom_theme() {
     return variable_get('admin_theme');
   }
 }
+
+/**
+ * Implements hook_entity_print_pdf_alter().
+ */
+function novo_master_entity_print_pdf_alter(WkHtmlToPdf $pdf, $entity_type, $entity) {
+  // @codingStandardsIgnoreStart
+//  kpr($entity_type);
+//  kpr($entity);
+//  kpr($pdf);
+
+//  if (isset($entity->type) && $entity->type == "reference_request") {
+//    $pdf->setOptions(array(
+//      'title' => 'svip',
+//    ));
+//  }
+
+//  $pdf->setOptions(array(
+//    'page-size' => 'A5',
+//  ));
+  // @codingStandardsIgnoreEnd
+}
