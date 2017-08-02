@@ -121,8 +121,11 @@ function novo_ref_request_get_ref_data_by_ref_nid($ref_nid) {
   $query->addField("n", "nid", "parent_nid");
   $query->addField("n", "uid", "parent_uid");
 
+  // @codingStandardsIgnoreStart
   //$query->leftJoin("field_data_field_last_name", "last_name", "n.nid = last_name.entity_id");
   //$query->addExpression("CONCAT(n.title, ' ', last_name.field_last_name_value)", "parent_name");
+  // @codingStandardsIgnoreEnd
+
   $query->addField("n", "title", "parent_name");
 
   $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
