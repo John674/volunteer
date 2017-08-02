@@ -28,6 +28,8 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'class'
 )));
 
+define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
+
 /**
  * Preprocess page.
  */
@@ -63,6 +65,8 @@ function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
   $items['node/%node/view']['access arguments'] = array(1);
 
+  $items['user']['access callback'] = 'novo_master_disable_user_view';
+
   $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
 }
 
@@ -89,6 +93,17 @@ function novo_master_disable_node_add_page() {
   global $user;
 
   return ($user->uid == 1) ? TRUE : FALSE;
+}
+
+/**
+ * Disable user view link for volunteers.
+ */
+function novo_master_disable_user_view() {
+  $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
+  if (user_has_role($role->rid)) {
+    return FALSE;
+  }
+  return user_access('access content');
 }
 
 /**
