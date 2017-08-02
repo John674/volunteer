@@ -48,7 +48,7 @@
 ?>
 <section id="section-<?php print $block_html_id; ?>"
          class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-    <div class="modal slideup" id="<?php print $block_html_id; ?>" tabindex="-1"
+    <div class="modal slideup" id="novo-contact-us-block" tabindex="-1"
          role="dialog" aria-labelledby="label-modal-client-block-57824"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -72,7 +72,7 @@
      class="contact-us-container dialog-container col-md-2 col-md-offset-2"
      style="position: relative;">
     <div id="contact-us-btn" style="display: block;">
-        <a class="btn btn-default btn-contact" data-target="#block-webform-client-block-6046" data-toggle="modal"><i class="fa fa-envelope"></i>&nbsp;
+        <a class="btn btn-default btn-contact" data-target="#novo-contact-us-block" data-toggle="modal"><i class="fa fa-envelope"></i>&nbsp;
           <?php print t("Contact us"); ?> &nbsp;&nbsp; <i class="fa fa-chevron-up"></i></a>
     </div>
 </div>
