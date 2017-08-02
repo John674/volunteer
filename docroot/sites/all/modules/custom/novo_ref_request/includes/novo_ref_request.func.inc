@@ -42,8 +42,7 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
 
     // Tokens.
     foreach ($questions as $key => $q) {
-      $user_name = novo_ref_request_get_appl_user_name($node);
-      $questions[$key] = str_replace("[ref_name]", $user_name, $q);
+      $questions[$key] = str_replace("[ref_name]", $node->title, $q);
     }
 
     // Create ref node.
@@ -106,18 +105,6 @@ function novo_ref_request_add_tasks_callback($ref_nids) {
 }
 
 /**
- * Get application user first/last names.
- */
-function novo_ref_request_get_appl_user_name($node) {
-  $last_name = field_get_items("node", $node, "field_last_name");
-  $names = array($node->title);
-  if (isset($last_name[0]['value'])) {
-    $names[] = $last_name[0]['value'];
-  }
-  return implode(" ", $names);
-}
-
-/**
  * Get ref name by ref id.
  */
 function novo_ref_get_ref_name($ref_nid) {
@@ -134,8 +121,9 @@ function novo_ref_request_get_ref_data_by_ref_nid($ref_nid) {
   $query->addField("n", "nid", "parent_nid");
   $query->addField("n", "uid", "parent_uid");
 
-  $query->leftJoin("field_data_field_last_name", "last_name", "n.nid = last_name.entity_id");
-  $query->addExpression("CONCAT(n.title, ' ', last_name.field_last_name_value)", "parent_name");
+  //$query->leftJoin("field_data_field_last_name", "last_name", "n.nid = last_name.entity_id");
+  //$query->addExpression("CONCAT(n.title, ' ', last_name.field_last_name_value)", "parent_name");
+  $query->addField("n", "title", "parent_name");
 
   $query->leftJoin("field_data_field_reference_request_1", "ref_1", "n.nid = ref_1.entity_id");
   $query->leftJoin("field_data_field_reference_request_2", "ref_2", "n.nid = ref_2.entity_id");
