@@ -12,3 +12,4 @@ files[] = includes/userNovoMigration.inc
 files[] = includes/volunteerNovoMigration.inc
 
 files[] = includes/MigrateSourceApplication.inc
+files[] = includes/MigrateDestinationNodeApplication.inc

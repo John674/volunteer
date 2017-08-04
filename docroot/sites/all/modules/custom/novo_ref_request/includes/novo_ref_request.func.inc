@@ -61,7 +61,11 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
       $cwrapper->field_faq_q->set($q);
       $cwrapper->save();
     }
-    return isset($en->nid) ? $en->nid : NULL;
+
+    $ref = array();
+    $ref['nid'] = isset($en->nid) ? $en->nid : NULL;
+    $ref['status'] = 1;
+    return $ref;
   }
   return NULL;
 }
@@ -69,9 +73,11 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
 /**
  * Add tasks.
  */
-function novo_ref_request_add_tasks_callback($ref_nids) {
+function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
 
-  foreach ($ref_nids as $nid) {
+  foreach ($ref_nids_statuses as $data) {
+    $nid = $data['nid'];
+    $status = isset($data['status']) && !is_null($data['status']) ? $data['status'] : NULL;
     if ($nid) {
       // Create tasks.
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);
@@ -98,7 +104,7 @@ function novo_ref_request_add_tasks_callback($ref_nids) {
         }
 
         $task_name = $title . " " . $ref->ref_username;
-        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone);
+        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone, $status);
       }
     }
   }
