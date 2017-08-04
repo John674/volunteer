@@ -78,6 +78,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'approve application'.
+  $permissions['approve application'] = array(
+    'name' => 'approve application',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_applications',
+  );
+
   // Exported permission: 'bypass entity print access'.
   $permissions['bypass entity print access'] = array(
     'name' => 'bypass entity print access',
@@ -566,6 +575,24 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_ref_request',
+  );
+
+  // Exported permission: 'novo account edit roles'.
+  $permissions['novo account edit roles'] = array(
+    'name' => 'novo account edit roles',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_account',
+  );
+
+  // Exported permission: 'novo master userprotect check bypass'.
+  $permissions['novo master userprotect check bypass'] = array(
+    'name' => 'novo master userprotect check bypass',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_master',
   );
 
   // Exported permission: 'publish any content'.
