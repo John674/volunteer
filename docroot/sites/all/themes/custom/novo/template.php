@@ -34,31 +34,7 @@ function novo_preprocess_node(&$variables) {
   // Theme status and approve block.
   if (isset($variables['type']) && $variables['type'] == 'application') {
     if (isset($variables['content']['app_status']['#markup'])) {
-      switch (drupal_strtolower($variables['content']['app_status']['#markup'])) {
-        case "started":
-        case "completed":
-          $label = "info";
-          break;
-
-        case "approved":
-          $label = "success";
-          break;
-
-        case "not approved":
-          $label = "danger";
-          break;
-
-        default:
-          $label = "default";
-      }
-
-      if ($label) {
-        $label_html = theme('status_label', array(
-          'status' => $variables['content']['app_status']['#markup'],
-          'label' => $label,
-        ));
-        $variables['content']['app_status']['#markup'] = $label_html;
-      }
+      $variables['content']['app_status']['#markup'] = novo_wrap_app_status_label($variables['content']['app_status']['#markup']);
     }
     if (isset($variables['content']['app_approve_block'])) {
       $options = array(
@@ -68,6 +44,48 @@ function novo_preprocess_node(&$variables) {
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/bootstrap-confirmation.min.js", $options);
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/novo-application-approve.js", $options);
     }
+  }
+}
+
+/**
+ * Implements hook_hook_preprocess_views_view_field().
+ */
+function novo_preprocess_views_view_field(&$vars) {
+  if ($vars['view']->name == "volunteers" && $vars['view']->current_display == "page") {
+    if (isset($vars['field']->field) && $vars['field']->field == "novo_application_status") {
+      $vars['output'] = novo_wrap_app_status_label($vars['output']);
+    }
+  }
+}
+
+/**
+ * Get application status class.
+ */
+function novo_wrap_app_status_label($text) {
+  switch (drupal_strtolower($text)) {
+    case "started":
+    case "completed":
+      $label = "info";
+      break;
+
+    case "approved":
+      $label = "success";
+      break;
+
+    case "not approved":
+      $label = "danger";
+      break;
+
+    default:
+      $label = "default";
+  }
+
+  if ($label) {
+    $label_html = theme('status_label', array(
+      'status' => $text,
+      'label' => $label,
+    ));
+    return $label_html;
   }
 }
 
@@ -233,4 +251,13 @@ function _novo_menu_menu_program_menu_block_visibility($block) {
   $pages = array_map("trim", $pages);
   return (in_array(trim($_GET['q']), $pages)) ? TRUE : FALSE;
 
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function novo_preprocess_block(&$variables) {
+  if ($variables['block']->module == "webform") {
+    $variables['theme_hook_suggestions'][] = "block__webform__contact_us";
+  }
 }

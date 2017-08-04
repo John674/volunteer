@@ -1,7 +1,7 @@
 name = Novo views feature
 core = 7.x
 package = Novo
-version = 7.x-1.28
+version = 7.x-1.29
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
 dependencies[] = date_views
@@ -18,7 +18,6 @@ features[views_view][] = attendance_kids_list
 features[views_view][] = attendance_programs
 features[views_view][] = canvassing_group
 features[views_view][] = class
-features[views_view][] = class_filter_location
 features[views_view][] = kids
 features[views_view][] = kids_list
 features[views_view][] = locations

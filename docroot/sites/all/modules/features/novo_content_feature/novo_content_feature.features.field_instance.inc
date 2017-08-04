@@ -210,6 +210,14 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -353,6 +361,14 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Phone',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -2482,6 +2498,14 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -3790,6 +3814,14 @@ Church',
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -4549,6 +4581,14 @@ Church',
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -4923,6 +4963,14 @@ Church',
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -5296,6 +5344,14 @@ Church',
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -5669,6 +5725,14 @@ Church',
     'label' => 'Phone',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -6503,6 +6567,14 @@ Friend',
     'label' => 'Training List',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -6592,6 +6664,14 @@ Friend',
     'label' => 'At what site do you want to volunteer?',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -7107,6 +7187,14 @@ Friend',
     'label' => 'Program day',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -7843,6 +7931,14 @@ Friend',
     'label' => 'Parent / Guardian List',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -8282,6 +8378,14 @@ Friend',
     'label' => 'Multiple Contact',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -9054,6 +9158,14 @@ Re-Dedication',
     'label' => 'Contact List',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -9769,6 +9881,14 @@ Re-Dedication',
     'label' => 'Phone',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -9812,6 +9932,14 @@ Re-Dedication',
     'label' => 'Training List',
     'required' => 0,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 1,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
