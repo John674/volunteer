@@ -3876,11 +3876,7 @@ Church',
   // Exported field_instance: 'node-application-field_parent_prefix'.
   $field_instances['node-application-field_parent_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4880,11 +4876,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_1_how_long_period'.
   $field_instances['node-application-field_ref_1_how_long_period'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'value' => 'months:months',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5025,11 +5017,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_1_prefix'.
   $field_instances['node-application-field_ref_1_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5406,11 +5394,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_2_prefix'.
   $field_instances['node-application-field_ref_2_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5787,11 +5771,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_3_prefix'.
   $field_instances['node-application-field_ref_3_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
