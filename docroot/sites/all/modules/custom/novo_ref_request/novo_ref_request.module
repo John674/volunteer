@@ -103,7 +103,7 @@ function novo_ref_request_check_hash_access($node) {
     return TRUE;
   }
 
-  return user_access("access content");
+  return FALSE;
 }
 
 /**

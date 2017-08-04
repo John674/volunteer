@@ -14,12 +14,16 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
 
   // Fix by https://www.drupal.org/node/2842043.
   $year_copy = $form['field_attendance_year'];
+  $location_copy = $form['field_attendance_location'];
   $program_copy = $form['field_attendance_program_name'];
   $kids_copy = $form['field_attendance_kids_list'];
+
   unset($form['field_attendance_year']);
+  unset($form['field_attendance_location']);
   unset($form['field_attendance_program_name']);
   unset($form['field_attendance_kids_list']);
   $form['field_attendance_year'] = $year_copy;
+  $form['field_attendance_location'] = $location_copy;
   $form['field_attendance_program_name'] = $program_copy;
   $form['field_attendance_kids_list'] = $kids_copy;
 

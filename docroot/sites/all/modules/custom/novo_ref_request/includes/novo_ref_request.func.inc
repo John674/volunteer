@@ -14,7 +14,7 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
     $ref_nid = novo_ref_request_create_ref_entity($parent_term_name, $node);
     if ($ref_nid) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      $node->{$field}[$lang][0]['target_id'] = $ref_nid;
+      $node->{$field}[$lang][0]['target_id'] = $ref_nid['nid'];
       return $ref_nid;
     }
   }
