@@ -159,6 +159,10 @@ a.tabledrag-handle .handle {
   display: inline-block;
 }
 
-.views-exposed-form label, th{
+.views-exposed-form label, th {
   font-family: ProximaNovaBold;
+}
+
+.novo-no-data-found {
+  margin: 20px 0px;
 }
