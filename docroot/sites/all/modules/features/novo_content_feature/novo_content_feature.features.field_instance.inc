@@ -1372,7 +1372,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 59,
+      'weight' => 60,
     ),
   );
 
@@ -1418,7 +1418,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 60,
+      'weight' => 61,
     ),
   );
 
@@ -1840,6 +1840,46 @@ function novo_content_feature_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_apt'.
+  $field_instances['node-application-field_apt'] = array(
+    'bundle' => 'application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 116,
+      ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_apt',
+    'label' => 'Apt #',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 62,
     ),
   );
 
@@ -2323,7 +2363,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 68,
+      'weight' => 70,
     ),
   );
 
@@ -2651,7 +2691,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 61,
+      'weight' => 63,
     ),
   );
 
@@ -2698,7 +2738,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 73,
     ),
   );
 
@@ -2808,7 +2848,7 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 67,
+      'weight' => 58,
     ),
   );
 
@@ -2906,7 +2946,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 70,
+      'weight' => 67,
     ),
   );
 
@@ -3143,7 +3183,7 @@ College',
         'year_range' => '-0:+10',
       ),
       'type' => 'date_popup',
-      'weight' => 77,
+      'weight' => 78,
     ),
   );
 
@@ -3183,7 +3223,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 53,
     ),
   );
 
@@ -3226,7 +3266,7 @@ College',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 53,
+      'weight' => 59,
     ),
   );
 
@@ -3272,7 +3312,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 54,
     ),
   );
 
@@ -3326,7 +3366,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 73,
+      'weight' => 74,
     ),
   );
 
@@ -3372,7 +3412,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 57,
+      'weight' => 56,
     ),
   );
 
@@ -3419,7 +3459,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 58,
+      'weight' => 57,
     ),
   );
 
@@ -3506,7 +3546,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 56,
+      'weight' => 55,
     ),
   );
 
@@ -3643,7 +3683,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 76,
+      'weight' => 77,
     ),
   );
 
@@ -3836,11 +3876,7 @@ Church',
   // Exported field_instance: 'node-application-field_parent_prefix'.
   $field_instances['node-application-field_parent_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4234,7 +4270,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 118,
+      'weight' => 117,
     ),
   );
 
@@ -4285,7 +4321,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 119,
+      'weight' => 118,
     ),
   );
 
@@ -4336,7 +4372,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 120,
+      'weight' => 119,
     ),
   );
 
@@ -4387,7 +4423,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 121,
+      'weight' => 120,
     ),
   );
 
@@ -4438,7 +4474,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 122,
+      'weight' => 121,
     ),
   );
 
@@ -4489,7 +4525,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 123,
+      'weight' => 122,
     ),
   );
 
@@ -4596,7 +4632,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 65,
+      'weight' => 68,
     ),
   );
 
@@ -4840,11 +4876,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_1_how_long_period'.
   $field_instances['node-application-field_ref_1_how_long_period'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'value' => 'months:months',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4985,11 +5017,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_1_prefix'.
   $field_instances['node-application-field_ref_1_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5366,11 +5394,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_2_prefix'.
   $field_instances['node-application-field_ref_2_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5747,11 +5771,7 @@ Church',
   // Exported field_instance: 'node-application-field_ref_3_prefix'.
   $field_instances['node-application-field_ref_3_prefix'] = array(
     'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'tid' => 92,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -6134,7 +6154,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 64,
+      'weight' => 66,
     ),
   );
 
@@ -6179,7 +6199,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 62,
+      'weight' => 64,
     ),
   );
 
@@ -6226,7 +6246,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 71,
+      'weight' => 72,
     ),
   );
 
@@ -6274,7 +6294,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 66,
+      'weight' => 69,
     ),
   );
 
@@ -6582,7 +6602,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 69,
+      'weight' => 71,
     ),
   );
 
@@ -6682,7 +6702,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 74,
+      'weight' => 75,
     ),
   );
 
@@ -6734,7 +6754,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 63,
+      'weight' => 65,
     ),
   );
 
@@ -6796,7 +6816,7 @@ Friend',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -6838,7 +6858,49 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-attendance-field_attendance_location'.
+  $field_instances['node-attendance-field_attendance_location'] = array(
+    'bundle' => 'attendance',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_attendance_location',
+    'label' => 'Location',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 2,
     ),
   );
 
@@ -6878,15 +6940,9 @@ Friend',
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
-        'fix_display' => 0,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
-        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -6942,7 +6998,7 @@ Friend',
         'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -6992,7 +7048,7 @@ Friend',
         ),
       ),
       'type' => 'select2widgetajax',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -7028,7 +7084,7 @@ Friend',
     'label' => 'Year',
     'required' => 1,
     'settings' => array(
-      'default_value' => 'blank',
+      'default_value' => 'now',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -7039,18 +7095,12 @@ Friend',
       'module' => 'date',
       'settings' => array(
         'apply_chosen' => 0,
-        'fix_display' => 0,
         'increment' => 15,
         'input_format' => 'site-wide',
         'input_format_custom' => 'Y',
         'label_position' => 'above',
         'no_fieldset' => 1,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
         'text_parts' => array(),
-        'typing_placeholder' => 'Keep typing...',
         'year_range' => '-10:+3',
       ),
       'type' => 'date_select',
@@ -9964,6 +10014,7 @@ Re-Dedication',
   t('App 7 final agree 4');
   t('App 7 final agree 5');
   t('App 7 final agree 6');
+  t('Apt #');
   t('Are there any allergies, illnesses, or other health concerns we should be aware of?');
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');

@@ -99,6 +99,10 @@ function novo_applications_permission() {
       'title' => t('Disable auto complete redirect'),
       'description' => t('Disable auto complete redirect (for admins).'),
     ),
+    'disable multistep application form' => array(
+      'title' => t('Disable multistep application form.'),
+      'description' => t('Disable multistep (for reviewer).'),
+    ),
   );
 }
 
