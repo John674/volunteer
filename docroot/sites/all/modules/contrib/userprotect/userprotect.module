@@ -14,15 +14,24 @@ function userprotect_help($path, $arg) {
   switch ($path) {
     case 'admin/config/people/userprotect':
     case 'admin/config/people/userprotect/protected_users':
-      $output = t('These settings override any <a href="!protected_roles">role-based protections</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array('!help' => url('admin/help/userprotect'), '!protected_roles' => url('admin/config/people/userprotect/protected_roles')));
+      $output = t('These settings override any <a href="!protected_roles">role-based protections</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array(
+        '!help' => url('admin/help/userprotect'),
+        '!protected_roles' => url('admin/config/people/userprotect/protected_roles')
+      ));
       return $output;
 
     case 'admin/config/people/userprotect/protected_roles':
-      $output = t('These settings add protections to any user who is in the specified role. They are overridden by any <a href="!protected_users">per-user protections</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array('!help' => url('admin/help/userprotect'), '!protected_users' => url('admin/config/people/userprotect/protected_users')));
+      $output = t('These settings add protections to any user who is in the specified role. They are overridden by any <a href="!protected_users">per-user protections</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array(
+        '!help' => url('admin/help/userprotect'),
+        '!protected_users' => url('admin/config/people/userprotect/protected_users')
+      ));
       return $output;
 
     case 'admin/config/people/userprotect/administrator_bypass':
-      $output = t('These settings add bypasses to any user who has the \'administer users\' permission. They override the <a href="!protection_defaults">defaults</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array('!help' => url('admin/help/userprotect'), '!protection_defaults' => url('admin/config/people/userprotect/protection_defaults')));
+      $output = t('These settings add bypasses to any user who has the \'administer users\' permission. They override the <a href="!protection_defaults">defaults</a> for the user in question. For more information on how to configure userprotect settings, see the <a href="!help">help section</a>.', array(
+        '!help' => url('admin/help/userprotect'),
+        '!protection_defaults' => url('admin/config/people/userprotect/protection_defaults')
+      ));
       return $output;
 
     case 'admin/config/people/userprotect/protection_defaults':
@@ -507,6 +516,7 @@ function userprotect_user_cancel($edit, $account, $method) {
       break;
   }
 }
+
 /**
  * Implements hook_user_delete().
  */
@@ -555,7 +565,7 @@ function userprotect_user_admin_account_validate($form, &$form_state) {
     switch ($operation) {
       case 'block':
       case 'unblock':
-      // VBO module compatibility.
+        // VBO module compatibility.
       case 'action::user_block_user_action':
         // Check to see if any of the user's roles are protected from status
         // changes, then check to see if the user is protected.
@@ -573,7 +583,7 @@ function userprotect_user_admin_account_validate($form, &$form_state) {
         break;
 
       case 'cancel':
-      // VBO module compatibility.
+        // VBO module compatibility.
       case 'action::views_bulk_operations_delete_item':
       case 'action::views_bulk_operations_user_cancel_action':
         // Check to see if any of the user's roles are protected from
@@ -595,10 +605,10 @@ function userprotect_user_admin_account_validate($form, &$form_state) {
 
       case 'add_role':
       case 'remove_role':
-      // RoleAssign module compatibility hack.
+        // RoleAssign module compatibility hack.
       case 'roleassign_add_role':
       case 'roleassign_remove_role':
-      // VBO module compatibility.
+        // VBO module compatibility.
       case 'action::views_bulk_operations_user_roles_action':
         // Check to see if any of the user's roles are protected from status
         // changes, then check to see if the user is protected.
@@ -635,11 +645,20 @@ function userprotect_user_admin_account_validate($form, &$form_state) {
         // Check which properties are changed.
         $properties = array_keys(array_filter($form_state['values']['properties']['show_value']));
         foreach ($properties as $property) {
-          if (in_array($property, array('name', 'mail', 'status', 'roles', 'openid'))) {
+          if (in_array($property, array(
+            'name',
+            'mail',
+            'status',
+            'roles',
+            'openid'
+          ))) {
             // Check protection.
             $protection = 'up_' . $property;
             if (!userprotect_check_bypass($protection) && userprotect_get_user_protection($account, $protection)) {
-              drupal_set_message(t('%user is protected from @property changes, and was not updated.', array('%user' => $account->name, '@property' => $property)), 'error');
+              drupal_set_message(t('%user is protected from @property changes, and was not updated.', array(
+                '%user' => $account->name,
+                '@property' => $property
+              )), 'error');
               unset($uids[$key]);
               unset($form_state['selection'][$key]);
               unset($form_state['values']['views_bulk_operations'][$key]);
@@ -818,7 +837,11 @@ function userprotect_get_username($uid) {
  *   FALSE otherwise.
  */
 function userprotect_check_bypass($protection, $account = NULL) {
-
+  $access = FALSE;
+  drupal_alter("userprotect_check_bypass", $access, $account);
+  if ($access) {
+    return TRUE;
+  }
   $bypass = &drupal_static(__FUNCTION__, array());
   $bypass_defaults = &drupal_static(__FUNCTION__ . '_defaults', NULL);
 
@@ -882,7 +905,14 @@ function userprotect_get_user_protection($account, $protection) {
   // and password determined by the role-based setting in the userprotect
   // section at admin/config/people/permissions. This is done for consistency
   // with the way core handles the self-editing of usernames.
-  if ($uid == $GLOBALS['user']->uid && in_array($protection, array('up_name', 'up_mail', 'up_pass', 'up_openid', 'up_edit'))) {
+  if ($uid == $GLOBALS['user']->uid && in_array($protection, array(
+      'up_name',
+      'up_mail',
+      'up_pass',
+      'up_openid',
+      'up_edit'
+    ))
+  ) {
     switch ($protection) {
       case 'up_name':
         return !user_access('change own username');
