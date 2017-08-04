@@ -144,3 +144,8 @@ a.tabledrag-handle .handle {
 .novo-no-data-found {
   margin: 20px 0px;
 }
+
+.node-application .field-name-field-phone-number,
+.node-application .field-name-field-phone-type {
+  display: inline-block;
+}
