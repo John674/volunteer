@@ -418,6 +418,7 @@ abstract class MigrationBase {
     else {
       if (!is_numeric($limit)) {
         $last = drupal_strtolower($limit[strlen($limit)-1]);
+        $limit = substr($limit, 0, -1);
         switch ($last) {
           case 'g':
             $limit *= 1024;

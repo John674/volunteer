@@ -30,7 +30,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $items = $this->getList();
     // kpr($items);
     $this->source = new MigrateSourceApplication($items);
-    $this->destination = new MigrateDestinationNode("application");
+    $this->destination = new MigrateDestinationNodeApplication("application");
 
     // Key schema.
     $source_key_schema = array(
@@ -45,7 +45,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->mapping();
 
     $this->addUnmigratedDestinations(array(
-      'title',
       'revision',
       'log',
       'language',
@@ -123,6 +122,25 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     if (empty(trim($row->legal_first_name))) {
       watchdog("novo_migrate", var_export($row, TRUE));
+    }
+
+    if (empty($row->go_by)) {
+      if (!empty($row->legal_first_name) && !empty($row->last_name)) {
+        $row->title = (string) $row->legal_first_name . ' ' . $row->last_name;
+      } else{
+        watchdog("novo_migrate", 'This person, id=:id, don`t have legal_first_name or last_name ', array(
+          ":id" => $row->id
+        ));
+      }
+    }
+    else {
+      if (!empty($row->legal_first_name) && !empty($row->last_name)) {
+        $row->title = (string) $row->go_by . ' ' . (string) $row->legal_first_name . ' ' . (string) $row->last_name;
+      } else{
+        watchdog("novo_migrate", 'This person, id=:id, don`t have legal_first_name or last_name ', array(
+          ":id" => $row->id
+        ));
+      }
     }
     return parent::prepareRow($row);
   }
@@ -494,6 +512,9 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->addFieldMapping('status')->defaultValue(TRUE);
 
     $this->addFieldMapping('field_first_name', 'legal_first_name');
+
+    $this->addFieldMapping('title','title');
+
     /*$this->addFieldMapping('field_prefix', 'prefix')
     ->callback(array($this, "getPrefix"));*/
     $this->addFieldMapping('field_prefix:source_type')
@@ -988,6 +1009,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->innerJoin("reference_forms", "rf", "rf.application_id = ua.id");
     $query->addField("rf", "prefix", "type");
     $query->addField("rf", "data", "data");
+    $query->addField("rf", "status", "status");
     $query->isNotNull('rf.data');
 
     $result = $query->execute()->fetchAll();
@@ -998,6 +1020,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       $full_name = $value->first_name . ' ' . $value->last_name;
       $questions_answers = $this->getReferenceQuestionsAnswers($value->data, $value->type, $full_name);
       $reference_requests[$value->user_id][$value->type] = $questions_answers;
+      $reference_requests[$value->user_id][$value->type]['status'] = $value->status;
     }
     return $reference_requests;
   }
