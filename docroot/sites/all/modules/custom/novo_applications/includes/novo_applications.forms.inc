@@ -26,8 +26,10 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         drupal_goto("<front>");
       }
     }
-
   }
+
+  // Add exp date default value.
+  $form['#validate'][] = 'novo_applications_add_exp_date_validate';
 
   // Add sites virtual field.
   novo_applications_add_sites_virtual_field($form, $form_state);
@@ -176,6 +178,9 @@ function novo_applications_form_submit(&$form, &$form_state) {
       }
     }
   }
+
+  // Add default expiration date.
+  $exp_date = isset($form_state['values']) ? $form_state['values'] : NULL;
 }
 
 /**
@@ -264,5 +269,17 @@ function novo_applications_add_sites_virtual_validate(&$form, &$form_state) {
         form_set_value($original_field[0]['value'], $term->name, $form_state);
       }
     }
+  }
+}
+
+/**
+ * Add dafault expired date.
+ */
+function novo_applications_add_exp_date_validate(&$form, &$form_state) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  $exp_date_value = (isset($form_state['values']['field_expired_date'][$lang][0]['value'])) ? trim($form_state['values']['field_expired_date'][$lang][0]['value']) : NULL;
+  if (empty($exp_date_value)) {
+    $new_exp_date = strtotime('+3 year');
+    form_set_value($form['field_expired_date'][$lang][0]['value'], $new_exp_date, $form_state);
   }
 }

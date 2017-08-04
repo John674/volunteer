@@ -23,3 +23,32 @@
   border: none;
   padding: 0px;
 }
+
+.node-form .field-name-field-training-list .field-name-field-training-completed,
+.node-form .field-name-field-training-list .field-name-field-training-completed-date {
+  max-width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
+.node-form .field-name-field-training-list .field-multiple-table button {
+  margin-top: 26px;
+}
+
+.node-form .field-name-field-phone-number,
+.node-form .field-name-field-phone-type {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.node-form .field-name-field-phone-number input.form-text {
+  width: 200px;
+}
+
+.node-form .field-name-field-phone-type select.form-select {
+  width: 100px;
+  display: inline-block;
+}
