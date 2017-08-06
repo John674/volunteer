@@ -323,6 +323,9 @@ function novo_master_permission() {
   );
 }
 
+/**
+ * User protect check by pass.
+ */
 function novo_master_userprotect_check_bypass_alter(&$access, $account) {
   $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
 }

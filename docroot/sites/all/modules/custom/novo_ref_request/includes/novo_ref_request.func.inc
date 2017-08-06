@@ -112,17 +112,17 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
         }
       }
 
+      // Tokens.
+      foreach ($questions as $key => $q) {
+        $questions[$key] = str_replace("[ref_name]", $node->title, $q);
+      }
+
       // Create ref node.
       $new_reference_node = entity_create('node', array('type' => 'reference_request'));
       $new_reference_node->uid = $user->uid;
       $entity = entity_metadata_wrapper('node', $new_reference_node);
       $entity->save();
       $en = $entity->value();
-
-      // Tokens.
-      foreach ($questions as $key => $q) {
-        $questions[$key] = str_replace("[ref_name]", $node->title, $q);
-      }
 
       // Add questions to fc.
       foreach ($questions as $q) {
