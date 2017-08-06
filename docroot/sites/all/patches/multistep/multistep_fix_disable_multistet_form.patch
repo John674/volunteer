@@ -1,0 +1,18 @@
+Index: docroot/sites/all/modules/contrib/multistep/multistep.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/multistep/multistep.module	(date 1501858338000)
++++ docroot/sites/all/modules/contrib/multistep/multistep.module	(revision )
+@@ -713,7 +713,9 @@
+  * @param $form_state
+  */
+ function multistep_submit($form, &$form_state) {
+-
++  if (!isset($form['#multistep'])) {
++    return;
++  }
+   //Determine if it's a user or node
+   $node = !empty($form_state['node']) && is_object($form_state['node']);
+   $user = !empty($form_state['user']) && is_object($form_state['user']);

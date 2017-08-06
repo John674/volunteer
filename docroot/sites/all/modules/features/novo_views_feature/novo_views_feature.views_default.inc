@@ -154,6 +154,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['id'] = 'field_attendance_program_name_target_id';
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['table'] = 'field_data_field_attendance_program_name';
@@ -595,11 +601,102 @@ function novo_views_feature_views_default_views() {
   $export['attendance_kids_list'] = $view;
 
   $view = new view();
+  $view->name = 'attendance_locations_list';
+  $view->description = '';
+  $view->tag = 'REF';
+  $view->base_table = 'node';
+  $view->human_name = 'Attendance Locations list (REF)';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: In Program */
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['id'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['field'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['ui_name'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['label'] = 'In Program';
+  $handler->display->display_options['relationships']['reverse_field_program_location_node']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: School year (field_program_school_year) */
+  $handler->display->display_options['arguments']['field_program_school_year_value']['id'] = 'field_program_school_year_value';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['table'] = 'field_data_field_program_school_year';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['field'] = 'field_program_school_year_value';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['relationship'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['default_argument_type'] = 'date';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['year_range'] = '-50:+3';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['granularity'] = 'year';
+  $handler->display->display_options['arguments']['field_program_school_year_value']['granularity_reset'] = 0;
+  $handler->display->display_options['arguments']['field_program_school_year_value']['use_fromto'] = 'no';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'locations' => 'locations',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['relationship'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'program' => 'program',
+  );
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $export['attendance_locations_list'] = $view;
+
+  $view = new view();
   $view->name = 'attendance_programs';
   $view->description = '';
   $view->tag = 'REF';
   $view->base_table = 'node';
-  $view->human_name = 'Attendance Programs (REF)';
+  $view->human_name = 'Attendance Programs list(REF)';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -656,6 +753,14 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['arguments']['field_program_school_year_value']['granularity'] = 'year';
   $handler->display->display_options['arguments']['field_program_school_year_value']['granularity_reset'] = 0;
   $handler->display->display_options['arguments']['field_program_school_year_value']['use_fromto'] = 'no';
+  /* Contextual filter: Content: Location (field_program_location) */
+  $handler->display->display_options['arguments']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_location_target_id']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -765,7 +870,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Class';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -862,6 +970,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1049,6 +1163,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -1295,6 +1415,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -1857,6 +1983,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['id'] = 'field_mentor_program_name_target_id';
   $handler->display->display_options['relationships']['field_mentor_program_name_target_id']['table'] = 'field_data_field_mentor_program_name';
@@ -2068,6 +2200,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -2528,6 +2666,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: School year */
   $handler->display->display_options['fields']['field_program_school_year']['id'] = 'field_program_school_year';
   $handler->display->display_options['fields']['field_program_school_year']['table'] = 'field_data_field_program_school_year';
@@ -2718,13 +2862,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No tasks found.';
-  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Relationship: Novo referral request tasks: User ID */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'novo_ref_tasks';
@@ -2954,6 +3097,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -3099,7 +3248,7 @@ function novo_views_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -3295,6 +3444,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: User: First Name */
   $handler->display->display_options['fields']['field_u_first_name']['id'] = 'field_u_first_name';
   $handler->display->display_options['fields']['field_u_first_name']['table'] = 'field_data_field_u_first_name';
@@ -3591,6 +3746,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status_1']['id'] = 'status_1';
   $handler->display->display_options['fields']['status_1']['table'] = 'node';

@@ -80,7 +80,10 @@ function novo_master_disable_node_view($node) {
   }
 
   if ($node->type == 'reference_request' && function_exists("novo_ref_request_check_hash_access")) {
-    return novo_ref_request_check_hash_access($node);
+    $access = novo_ref_request_check_hash_access($node);
+    if ($access) {
+      return $access;
+    }
   }
 
   return user_access('access content');
@@ -229,16 +232,37 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
       $rule_matches = novo_master_menu_position_rule_rules($context, array("locations"), array("node/add/locations"));
       break;
 
+    case "kids_menu_active":
+      $rule_matches = novo_master_menu_position_rule_rules($context, array("kids"), array("node/add/kids"));
+      break;
+
+    case "staff_menu_active":
+      $rule_matches = novo_master_menu_position_rule_rules($context, array("staff"), array("node/add/staff"));
+      break;
+
+    case "volunteers_menu_active":
+      $rule_matches = novo_master_menu_position_rule_rules($context, array("application"), array("node/add/application"));
+      break;
+
+    case "partners_menu_active":
+      $rule_matches = novo_master_menu_position_rule_rules($context, array("partner"), array("node/add/partner"));
+      break;
+
+    case "users_menu_active":
+      $rule_matches = novo_master_menu_position_rule_rules($context, array(), array("admin/people/create"), TRUE);
+      break;
+
   }
 }
 
 /**
  * Menu position rules helper.
  */
-function novo_master_menu_position_rule_rules($context, $content_types, $paths) {
+function novo_master_menu_position_rule_rules($context, $content_types, $paths, $is_user = FALSE) {
   return (
     (isset($context['node']->type) && in_array($context['node']->type, $content_types)) ||
-    (isset($context['path']) && in_array($context['path'], $paths))
+    (isset($context['path']) && in_array($context['path'], $paths)) ||
+    ($is_user && isset($context['user']->uid))
   ) ? TRUE : FALSE;
 }
 
@@ -285,4 +309,20 @@ function novo_master_entity_print_pdf_alter(WkHtmlToPdf $pdf, $entity_type, $ent
 //    'page-size' => 'A5',
 //  ));
   // @codingStandardsIgnoreEnd
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_master_permission() {
+  return array(
+    'novo master userprotect check bypass' => array(
+      'title' => t('Novo Bypass access to edit protected users.'),
+      'description' => t('Allow edit users even if set protect users.'),
+    ),
+  );
+}
+
+function novo_master_userprotect_check_bypass_alter(&$access, $account) {
+  $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
 }

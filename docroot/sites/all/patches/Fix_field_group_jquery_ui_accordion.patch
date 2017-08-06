@@ -1,0 +1,16 @@
+Index: docroot/sites/all/modules/contrib/field_group/field_group.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/field_group/field_group.js	(date 1501858338000)
++++ docroot/sites/all/modules/contrib/field_group/field_group.js	(revision )
+@@ -76,7 +76,7 @@
+           if ($('.error', $(this)).length) {
+             // Save first error item, for focussing it.
+             if (!$firstErrorItem) {
+-              $firstErrorItem = $(this).parent().accordion("activate" , i);
++              $firstErrorItem = $(this).parent().accordion('option', "activate" , i);
+             }
+             $('h3.ui-accordion-header').eq(i).addClass('error');
+           }

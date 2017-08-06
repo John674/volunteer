@@ -713,7 +713,9 @@ function multistep_node_validate($node, $form, &$form_state) {
  * @param $form_state
  */
 function multistep_submit($form, &$form_state) {
-
+  if (!isset($form['#multistep'])) {
+    return;
+  }
   //Determine if it's a user or node
   $node = !empty($form_state['node']) && is_object($form_state['node']);
   $user = !empty($form_state['user']) && is_object($form_state['user']);
