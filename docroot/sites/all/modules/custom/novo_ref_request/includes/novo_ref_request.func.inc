@@ -11,11 +11,13 @@
 function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
   $ref_items = field_get_items("node", $node, $field);
   if (empty($ref_items)) {
-    $ref_nid = novo_ref_request_create_ref_entity($parent_term_name, $node);
-    if ($ref_nid) {
+    $array_ref_nid_status = novo_ref_request_create_ref_entity($parent_term_name, $node, $field);
+    if (!empty($array_ref_nid_status)) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      $node->{$field}[$lang][0]['target_id'] = $ref_nid;
-      return $ref_nid;
+      if($array_ref_nid_status['nid']){
+        $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
+      }
+      return $array_ref_nid_status;
     }
   }
   return NULL;
@@ -24,48 +26,118 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
 /**
  * Crete reference node with questions.
  */
-function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL) {
+function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field = NULL) {
   global $user;
-  if (!empty($q_type)) {
-    // Prepare questions from taxonomy.
-    $ref1_terms = taxonomy_get_term_by_name($q_type, NOVO_REF_QUESTIONS_VOC);
-    $ref1_terms = reset($ref1_terms);
-    $questions = array();
-    if (isset($ref1_terms->tid)) {
-      $term_childrens = taxonomy_get_children($ref1_terms->tid);
-      if ($term_childrens) {
-        foreach ($term_childrens as $child) {
-          $questions[] = $child->name;
+  if(!empty($q_type) && !empty($node)){
+
+    $array_nid_status = array();
+    $migrate_ref_type = '';
+
+    // Check is migration.
+    $is_migration_volunteers = isset($node->migrate) && ($node->migrate['machineName'] == 'Volunteers');
+    $is_migrate_ref_request = isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST});
+
+    if($is_migration_volunteers && !empty($field)){
+      switch ($field){
+        case NOVO_FIELD_REF_REQUEST_1:
+          $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_REFERENCE_1;
+          break;
+        case NOVO_FIELD_REF_REQUEST_2:
+          $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_REFERENCE_2;
+          break;
+        case NOVO_FIELD_REF_REQUEST_CHURCH:
+          $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_CHURCH;
+          break;
+        case NOVO_FIELD_REF_REQUEST_STANDBY:
+          $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_STANDBY;
+          break;
+        case NOVO_FIELD_REF_REQUEST_PARENTS:
+          $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_PARENT;
+          break;
+      }
+    }
+    $is_migrate_ref_request_data =  (isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])) && (!empty($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]));
+
+
+    if ($is_migration_volunteers && $is_migrate_ref_request && $is_migrate_ref_request_data) {
+
+        // Create ref node.
+        $new_reference_node = entity_create('node', array('type' => 'reference_request'));
+        $new_reference_node->uid = $user->uid;
+        $entity = entity_metadata_wrapper('node', $new_reference_node);
+        $entity->save();
+        $en = $entity->value();
+        foreach ($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type] as $reference_data) {
+          if (is_array($reference_data)) {
+            $collection = entity_create('field_collection_item', ['field_name' => 'field_ref_faq']);
+            $collection->setHostEntity('node', $en);
+
+            $wrapper = entity_metadata_wrapper('field_collection_item', $collection);
+            $wrapper->field_faq_q->set($reference_data['q']);
+            $wrapper->field_faq_a->set($reference_data['a']);
+            $wrapper->save();
+          }
         }
+
+        // Status from old database
+        $status = $node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]['status'];
+
+        if(isset($status) && !empty($status)){
+          switch ($status){
+            case 'completed':
+              $array_nid_status['status'] = 2;
+              break;
+            case 'expired':
+              $array_nid_status['status'] = 3;
+              break;
+          }
+        }
+
+    }
+    elseif (!empty($q_type)) {
+      // Prepare questions from taxonomy.
+      $ref1_terms = taxonomy_get_term_by_name($q_type, NOVO_REF_QUESTIONS_VOC);
+      $ref1_terms = reset($ref1_terms);
+      $questions = array();
+      if (isset($ref1_terms->tid)) {
+        $term_childrens = taxonomy_get_children($ref1_terms->tid);
+        if ($term_childrens) {
+          foreach ($term_childrens as $child) {
+            $questions[] = $child->name;
+          }
+        }
+      }
+
+      // Create ref node.
+      $new_reference_node = entity_create('node', array('type' => 'reference_request'));
+      $new_reference_node->uid = $user->uid;
+      $entity = entity_metadata_wrapper('node', $new_reference_node);
+      $entity->save();
+      $en = $entity->value();
+
+      // Tokens.
+      foreach ($questions as $key => $q) {
+        $questions[$key] = str_replace("[ref_name]", $node->title, $q);
+      }
+
+      // Add questions to fc.
+      foreach ($questions as $q) {
+        $collection = entity_create('field_collection_item', array('field_name' => 'field_ref_faq'));
+        $collection->setHostEntity('node', $en);
+
+        $wrapper = entity_metadata_wrapper('field_collection_item', $collection);
+        $wrapper->field_faq_q->set($q);
+        $wrapper->save();
+      }
+      if(!$is_migration_volunteers){
+        $array_nid_status['status'] = 0;
+      }elseif(!isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])){
+        $array_nid_status['status'] = 3;
       }
     }
 
-    // Tokens.
-    foreach ($questions as $key => $q) {
-      $questions[$key] = str_replace("[ref_name]", $node->title, $q);
-    }
-
-    // Create ref node.
-    $node = entity_create('node', array('type' => 'reference_request'));
-    $node->uid = $user->uid;
-    $entity = entity_metadata_wrapper('node', $node);
-    $entity->save();
-    $en = $entity->value();
-
-    // Add questions to fc.
-    foreach ($questions as $q) {
-      $collection = entity_create('field_collection_item', array('field_name' => 'field_ref_faq'));
-      $collection->setHostEntity('node', $en);
-
-      $cwrapper = entity_metadata_wrapper('field_collection_item', $collection);
-      $cwrapper->field_faq_q->set($q);
-      $cwrapper->save();
-    }
-
-    $ref = array();
-    $ref['nid'] = isset($en->nid) ? $en->nid : NULL;
-    $ref['status'] = 1;
-    return $ref;
+    $array_nid_status['nid'] = isset($en->nid) ? $en->nid : NULL;
+    return $array_nid_status;
   }
   return NULL;
 }
@@ -77,7 +149,7 @@ function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
 
   foreach ($ref_nids_statuses as $data) {
     $nid = $data['nid'];
-    $status = isset($data['status']) && !is_null($data['status']) ? $data['status'] : NULL;
+    $status = (isset($data['status']) && !is_null($data['status'])) ? $data['status'] : NULL;
     if ($nid) {
       // Create tasks.
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);

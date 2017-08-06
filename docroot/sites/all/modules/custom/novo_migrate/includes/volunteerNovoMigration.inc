@@ -13,13 +13,15 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   /**
    * General type include reference_1, reference_2, standby.
    */
-  const TYPE_GENERAL = 'general';
-  const TYPE_REFERENCE_1 = 'reference_1';
-  const TYPE_REFERENCE_2 = 'reference_2';
-  const TYPE_STANDBY = 'standby';
+  const NOVO_TYPE_GENERAL = 'general';
+  const NOVO_TYPE_REFERENCE_1 = 'reference_1';
+  const NOVO_TYPE_REFERENCE_2 = 'reference_2';
+  const NOVO_TYPE_STANDBY = 'standby';
 
-  const TYPE_CHURCH = 'church';
-  const TYPE_PARENT = 'parent';
+  const NOVO_TYPE_CHURCH = 'church';
+  const NOVO_TYPE_PARENT = 'parent';
+
+  const NOVO_MIGRATE_REF_REQUEST = 'migrate_ref_request';
 
   /**
    * VolunteerNovoMigration constructor.
@@ -157,9 +159,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $this->attachPhone($node, $row, "standby_", "field_ref_3_phone");
     $this->attachPhone($node, $row, "church_background_", "field_church_phone");
     $this->attachPhone($node, $row, "parent_", "field_parent_phone");
-
-    // If there are reference request answers from old database, will update created reference node.
-    $this->updateReferenceRequestNode($node, $row);
 
     // Multistep.
     if (function_exists("_multistep_update_status")) {
@@ -433,6 +432,17 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       }
     }
 
+
+    // Check empty volunteer
+    foreach ($users as $uid => $fields){
+      if(isset($fields['legal_first_name']) || isset($fields['last_name'])){
+        if(empty($fields['legal_first_name']) || empty($fields['last_name'])){
+          unset($users[$uid]);
+        }
+      } else {
+        unset($users[$uid]);
+      }
+    }
     return array_values($users);
   }
 
@@ -838,7 +848,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    * Convert emergency phone.
    */
   protected function getEmergencyPhone($value) {
-    $default_number = "000-000-0000";
     if (!empty($value)) {
       $number = $this->formatPhoneNumber($value);
       preg_match("/^\d{3}-\d{3}-\d{4}$/", $number, $matches);
@@ -846,10 +855,11 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         return $number;
       }
       else {
+        $changed_number = $this->changeNotCorrectNumber($value);
         watchdog("novo_migrate", 'Can\' convert phone :phone for field :field, phone number defined :default_number', array(
           ":phone" => $value,
           ":field" => "field_masked_emergency_phone",
-          ":default_number" => $default_number,
+          ":default_number" => $changed_number,
         ));
       }
     }
@@ -915,77 +925,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   }
 
   /**
-   * Update questions and answers in created reference request nodes.
-   */
-  private function updateReferenceRequestNode($application_node, $row) {
-    $lang = isset($application_node->language) ? $application_node->language : LANGUAGE_NONE;
-
-    foreach ($this->getRequestTypesFields() as $type => $field) {
-      if (isset($row->reference_request[$type]) && !empty($row->reference_request[$type])) {
-        $reference_questions_answers = $row->reference_request[$type];
-        if (isset($application_node->{$field}) && !empty($application_node->{$field})) {
-          $request_reference_id = $application_node->{$field}[$lang][0]['target_id'];
-          if (isset($request_reference_id) && !empty($request_reference_id)) {
-            $request_reference_node = node_load($request_reference_id);
-            $field_ref_faq = field_get_items('node', $request_reference_node, 'field_ref_faq');
-
-            if (!empty($field_ref_faq)) {
-              foreach ($field_ref_faq as $value) {
-                entity_delete_multiple('field_collection_item', [$value['value']]);
-              }
-            }
-
-            $request_reference_node_update = node_load($request_reference_id);
-            foreach ($reference_questions_answers as $reference_data) {
-              $values = array(
-                'field_name' => 'field_ref_faq',
-                'field_faq_q' => array(
-                  $lang => array(
-                    array(
-                      'value' => $reference_data['q'],
-                    ),
-                  ),
-                ),
-                'field_faq_a' => array(
-                  $lang => array(
-                    array(
-                      'value' => $reference_data['a'],
-                    ),
-                  ),
-                ),
-              );
-              $item = entity_create('field_collection_item', $values);
-              $item->setHostEntity('node', $request_reference_node_update);
-              $item->save();
-
-            }
-          }
-          else {
-            watchdog("novo_migrate", 'Not exist reference node for application application_id = :application_id , but reference requests for user user_id=:user_id exist', [
-              ":user_id" => $row->id,
-              ":application_id" => $application_node->nid,
-            ]);
-          }
-        }
-      }
-    }
-
-  }
-
-  /**
-   * Return request field names and types.
-   */
-  protected function getRequestTypesFields() {
-    return [
-      self::TYPE_REFERENCE_1 => 'field_reference_request_1',
-      self::TYPE_REFERENCE_2 => 'field_reference_request_2',
-      self::TYPE_STANDBY => 'field_reference_request_standby',
-      self::TYPE_CHURCH => 'field_reference_request_church',
-      self::TYPE_PARENT => 'field_reference_request_parents',
-    ];
-  }
-
-  /**
    * Request in old database.
    */
   protected function getReferenceRequests() {
@@ -1035,25 +974,25 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     if (!empty($questions_answers_data)) {
       switch ($type) {
-        case self::TYPE_REFERENCE_1:
-        case self::TYPE_REFERENCE_2:
-        case self::TYPE_STANDBY:
-          $questions = $questions_data[self::TYPE_GENERAL];
+        case self::NOVO_TYPE_REFERENCE_1:
+        case self::NOVO_TYPE_REFERENCE_2:
+        case self::NOVO_TYPE_STANDBY:
+          $questions = $questions_data[self::NOVO_TYPE_GENERAL];
           break;
 
-        case self::TYPE_CHURCH:
-          $questions = $questions_data[self::TYPE_CHURCH];
+        case self::NOVO_TYPE_CHURCH:
+          $questions = $questions_data[self::NOVO_TYPE_CHURCH];
           break;
 
-        case self::TYPE_PARENT:
-          $questions = $questions_data[self::TYPE_PARENT];
+        case self::NOVO_TYPE_PARENT:
+          $questions = $questions_data[self::NOVO_TYPE_PARENT];
           break;
       }
 
       if (!empty($questions)) {
         foreach ($questions_answers_data as $key => $value) {
           if (array_key_exists($key, $questions)) {
-            if ($type == self::TYPE_PARENT) {
+            if ($type == self::NOVO_TYPE_PARENT) {
               $questions_answers[$key]['q'] = $questions[$key]['label'];
               $questions_answers[$key]['a'] = !empty($value) ? 'Yes' : 'No';
             }
@@ -1087,7 +1026,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
    */
   protected function getReferenceQuestionsData() {
     return [
-      self::TYPE_CHURCH => [
+      self::NOVO_TYPE_CHURCH => [
         'how_long' => 'How long has %s been attending your church?',
         'relationship' => 'What is your relationship with %s?',
         'lord_and_savior' => 'Has he or she made the decision to make Jesus their Lord and Savior? ',
@@ -1096,7 +1035,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         'hesitations' => 'Do you have any hesitations for this person to volunteer working directly with children?',
         'other_questions_or_comments' => 'Other Questions or Comments',
       ],
-      self::TYPE_GENERAL => [
+      self::NOVO_TYPE_GENERAL => [
         'how_long' => 'How long and in what capacity have you known %s?',
         'god' => 'How have you seen God work in the life of %s?',
         'characteristics' => 'How would you describe his/her personal characteristics, abilities, and experience?',
@@ -1105,7 +1044,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         'process' => 'Is there anything else that I should know about before moving this individual forward in the process?',
         'other_questions_or_comments' => 'Other Questions or Comments:',
       ],
-      self::TYPE_PARENT => [
+      self::NOVO_TYPE_PARENT => [
         'statement_of_faith_agreement' => [
           'type' => 'checkbox',
           'label' => 'I and my son / daughter have read and agrees he / she will abide by the Statement of Faith Agreement.',

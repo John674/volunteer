@@ -15,7 +15,6 @@ class MigrateDestinationNodeApplication extends MigrateDestinationNode {
     parent::__construct($bundle, $options);
   }
 
-
   /**
    * Give handlers a shot at modifying the object before saving it.
    *
@@ -26,7 +25,10 @@ class MigrateDestinationNodeApplication extends MigrateDestinationNode {
    */
   public function prepare($entity, stdClass $source_row) {
     // Add source keys for debugging and identification of migrated data by hooks.
-    $entity->test_field = "test_seconds_tewffdsa";
+    $entity->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST} = array();
+    if (isset($source_row->reference_request) && !empty($source_row->reference_request)){
+      $entity->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST} = $source_row->reference_request;
+    }
     parent::prepare($entity, $source_row);
   }
 }
