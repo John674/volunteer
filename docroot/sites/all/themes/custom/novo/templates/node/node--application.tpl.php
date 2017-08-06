@@ -101,14 +101,14 @@
   <?php endif; ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php print(t('Application view')) ?></div>
+            <div class="panel-heading"><?php print (t('Application view')) ?></div>
             <div class="panel-body">
               <?php if (!empty($title)): ?>
                   <div class="row field">
                       <div class="col-md-6">
                           <div class="field-label">
                               <i class="fa fa-user"></i>
-                              <span><?php print(t('Applicant name')) ?>:</span>
+                              <span><?php print (t('Applicant name')) ?>:</span>
                           </div>
                       </div>
                       <div class="col-md-6">
@@ -154,7 +154,7 @@
                     <div class="col-md-6">
                         <div class="field-label">
                             <i class="fa fa-inbox"></i>
-                            <span><?php print(t('Created date')) ?>:</span>
+                            <span><?php print (t('Created date')) ?>:</span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -165,8 +165,8 @@
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
-                            <span><?php print(t('Request date')) ?>:</span>
-                            <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
+                            <span><?php print (t('Request date')) ?>:</span>
+                            <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -177,8 +177,8 @@
                 <div class="row field">
                     <div class="col-md-6">
                         <div class="field-label">
-                            <span><?php print(t('Response date')) ?>:</span>
-                            <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
+                            <span><?php print (t('Response date')) ?>:</span>
+                            <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -188,14 +188,14 @@
                 <hr>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php print(t('Application background tasks')); ?></div>
+                    <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
                     <div class="panel-body">
                         <div class="row field">
                             <div class="col-md-6">
                                 <div class="field-label">
-                                    <span><?php print(t('CIA Background Check')) ?>
+                                    <span><?php print (t('CIA Background Check')) ?>
                                         :</span>
-                                    <span class="label label-danger"><?php print(t('Coming soon')); ?></span>
+                                    <span class="label label-danger"><?php print (t('Coming soon')); ?></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -223,7 +223,7 @@
                       <?php print (t('Notify User About Expiration')) ?>
                     </a>
                     -
-                    <span class="label label-danger"><?php print(t('Coming soon')) ?></span>
+                    <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
                 </div>
                 <a role="button" class="btn btn-default"
                    href="<?php print url("entityprint/node/" . $node->nid); ?>">

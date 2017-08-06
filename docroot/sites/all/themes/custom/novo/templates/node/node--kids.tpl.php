@@ -101,14 +101,14 @@
   <?php endif; ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php print(t('Kid view')) ?></div>
+            <div class="panel-heading"><?php print (t('Kid view')) ?></div>
             <div class="panel-body">
               <?php if (!empty($title)): ?>
                   <div class="row field">
                       <div class="col-md-6">
                           <div class="field-label">
                               <i class="fa fa-user"></i>
-                              <span><?php print(t('Kid name')) ?>:</span>
+                              <span><?php print (t('Kid name')) ?>:</span>
                           </div>
                       </div>
                       <div class="col-md-6">
