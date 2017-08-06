@@ -129,7 +129,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     if (empty($row->go_by)) {
       if (!empty($row->legal_first_name) && !empty($row->last_name)) {
         $row->title = (string) $row->legal_first_name . ' ' . $row->last_name;
-      } else{
+      }
+      else {
         watchdog("novo_migrate", 'This person, id=:id, don`t have legal_first_name or last_name ', array(
           ":id" => $row->id
         ));
@@ -138,7 +139,8 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     else {
       if (!empty($row->legal_first_name) && !empty($row->last_name)) {
         $row->title = (string) $row->go_by . ' ' . (string) $row->legal_first_name . ' ' . (string) $row->last_name;
-      } else{
+      }
+      else {
         watchdog("novo_migrate", 'This person, id=:id, don`t have legal_first_name or last_name ', array(
           ":id" => $row->id
         ));
@@ -432,14 +434,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       }
     }
 
-
-    // Check empty volunteer
-    foreach ($users as $uid => $fields){
-      if(isset($fields['legal_first_name']) || isset($fields['last_name'])){
-        if(empty($fields['legal_first_name']) || empty($fields['last_name'])){
+    // Unset volunteer without Legal First Name or Last Name.
+    foreach ($users as $uid => $fields) {
+      if (isset($fields['legal_first_name']) || isset($fields['last_name'])) {
+        if (empty($fields['legal_first_name']) || empty($fields['last_name'])) {
           unset($users[$uid]);
         }
-      } else {
+      }
+      else {
         unset($users[$uid]);
       }
     }
@@ -523,7 +525,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
 
     $this->addFieldMapping('field_first_name', 'legal_first_name');
 
-    $this->addFieldMapping('title','title');
+    $this->addFieldMapping('title', 'title');
 
     /*$this->addFieldMapping('field_prefix', 'prefix')
     ->callback(array($this, "getPrefix"));*/

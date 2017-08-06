@@ -6,5 +6,5 @@
  */
 ?>
 <span class="label label-<?php print ($label) ?>" title="Status">
-  <?php print($status) ?>
+  <?php print ($status); ?>
 </span>

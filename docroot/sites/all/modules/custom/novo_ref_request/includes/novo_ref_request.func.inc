@@ -14,7 +14,7 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
     $array_ref_nid_status = novo_ref_request_create_ref_entity($parent_term_name, $node, $field);
     if (!empty($array_ref_nid_status)) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      if($array_ref_nid_status['nid']){
+      if ($array_ref_nid_status['nid']) {
         $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
       }
       return $array_ref_nid_status;
@@ -28,7 +28,7 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
  */
 function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field = NULL) {
   global $user;
-  if(!empty($q_type) && !empty($node)){
+  if (!empty($q_type) && !empty($node)) {
 
     $array_nid_status = array();
     $migrate_ref_type = '';
@@ -37,61 +37,65 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
     $is_migration_volunteers = isset($node->migrate) && ($node->migrate['machineName'] == 'Volunteers');
     $is_migrate_ref_request = isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST});
 
-    if($is_migration_volunteers && !empty($field)){
-      switch ($field){
+    if ($is_migration_volunteers && !empty($field)) {
+      switch ($field) {
         case NOVO_FIELD_REF_REQUEST_1:
           $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_REFERENCE_1;
           break;
+
         case NOVO_FIELD_REF_REQUEST_2:
           $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_REFERENCE_2;
           break;
+
         case NOVO_FIELD_REF_REQUEST_CHURCH:
           $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_CHURCH;
           break;
+
         case NOVO_FIELD_REF_REQUEST_STANDBY:
           $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_STANDBY;
           break;
+
         case NOVO_FIELD_REF_REQUEST_PARENTS:
           $migrate_ref_type = VolunteerNovoMigration::NOVO_TYPE_PARENT;
           break;
       }
     }
-    $is_migrate_ref_request_data =  (isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])) && (!empty($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]));
 
+    $isset_migrate_ref_request_data = (isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])) && (!empty($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]));
 
-    if ($is_migration_volunteers && $is_migrate_ref_request && $is_migrate_ref_request_data) {
+    if ($is_migration_volunteers && $is_migrate_ref_request && $isset_migrate_ref_request_data) {
 
-        // Create ref node.
-        $new_reference_node = entity_create('node', array('type' => 'reference_request'));
-        $new_reference_node->uid = $user->uid;
-        $entity = entity_metadata_wrapper('node', $new_reference_node);
-        $entity->save();
-        $en = $entity->value();
-        foreach ($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type] as $reference_data) {
-          if (is_array($reference_data)) {
-            $collection = entity_create('field_collection_item', ['field_name' => 'field_ref_faq']);
-            $collection->setHostEntity('node', $en);
+      // Create ref node.
+      $new_reference_node = entity_create('node', ['type' => 'reference_request']);
+      $new_reference_node->uid = $user->uid;
+      $entity = entity_metadata_wrapper('node', $new_reference_node);
+      $entity->save();
+      $en = $entity->value();
+      foreach ($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type] as $reference_data) {
+        if (is_array($reference_data)) {
+          $collection = entity_create('field_collection_item', ['field_name' => 'field_ref_faq']);
+          $collection->setHostEntity('node', $en);
 
-            $wrapper = entity_metadata_wrapper('field_collection_item', $collection);
-            $wrapper->field_faq_q->set($reference_data['q']);
-            $wrapper->field_faq_a->set($reference_data['a']);
-            $wrapper->save();
-          }
+          $wrapper = entity_metadata_wrapper('field_collection_item', $collection);
+          $wrapper->field_faq_q->set($reference_data['q']);
+          $wrapper->field_faq_a->set($reference_data['a']);
+          $wrapper->save();
         }
+      }
 
-        // Status from old database
-        $status = $node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]['status'];
+      // Status from old database.
+      $status = $node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]['status'];
+      if (isset($status) && !empty($status)) {
+        switch ($status) {
+          case 'completed':
+            $array_nid_status['status'] = 2;
+            break;
 
-        if(isset($status) && !empty($status)){
-          switch ($status){
-            case 'completed':
-              $array_nid_status['status'] = 2;
-              break;
-            case 'expired':
-              $array_nid_status['status'] = 3;
-              break;
-          }
+          case 'expired':
+            $array_nid_status['status'] = 3;
+            break;
         }
+      }
 
     }
     elseif (!empty($q_type)) {
@@ -129,9 +133,10 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
         $wrapper->field_faq_q->set($q);
         $wrapper->save();
       }
-      if(!$is_migration_volunteers){
+      if (!$is_migration_volunteers) {
         $array_nid_status['status'] = 0;
-      }elseif(!isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])){
+      }
+      elseif (!isset($node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type])) {
         $array_nid_status['status'] = 3;
       }
     }
