@@ -153,8 +153,9 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
 function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
 
   foreach ($ref_nids_statuses as $data) {
-    $nid = $data['nid'];
+    $nid = (isset($data['nid']) && !empty($data['nid'])) ? $data['nid'] : NULL;
     $status = (isset($data['status']) && !is_null($data['status'])) ? $data['status'] : NULL;
+
     if ($nid) {
       // Create tasks.
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);
