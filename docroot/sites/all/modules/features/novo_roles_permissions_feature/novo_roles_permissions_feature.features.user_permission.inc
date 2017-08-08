@@ -631,9 +631,7 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'novo account edit roles'.
   $permissions['novo account edit roles'] = array(
     'name' => 'novo account edit roles',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
+    'roles' => array(),
     'module' => 'novo_account',
   );
 
