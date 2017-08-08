@@ -20,10 +20,13 @@
                 $(".field-name-field-attendance-date input", context).datepicker("destroy");
                 var start_date = new Date(parseInt(selected_date), 0, 1);
                 var end_date = new Date(parseInt(selected_date) + 1, 11, 31);
+
                 $(".field-name-field-attendance-date input", context).datepicker({
                     minDate: start_date,
                     maxDate: end_date,
-                    defaultDate: start_date
+                    defaultDate: start_date,
+                    changeMonth: true,
+                    changeYear: true
                 });
             }
         }

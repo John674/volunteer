@@ -12,15 +12,23 @@
 
             $("button.btn-success:not(.icon-before)").addClass("icon-before").prepend('<span class="icon glyphicon glyphicon-ok" aria-hidden="true"></span>');
 
+            var current_year = new Date().getFullYear();
+
             if ($(".field-name-field-dob input", context).length) {
                 $(".field-name-field-dob input", context).datepicker({
                     maxDate: new Date(),
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: (current_year - 100) + ":" + current_year
                 });
             }
 
             if ($(".field-name-field-u-birthday input", context).length) {
                 $(".field-name-field-u-birthday input", context).datepicker({
                     maxDate: new Date(),
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: (current_year - 100) + ":" + current_year
                 });
             }
 
