@@ -24,7 +24,7 @@ class BaseNovoMigration extends Migration {
    * Check date of birthday.
    */
   protected function checkDob($value) {
-    if (!empty($value)) {
+    if (empty($value)) {
       return NULL;
     }
     $value = trim($value);
