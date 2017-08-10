@@ -11,6 +11,9 @@
  * @ingroup views_templates
  */
 ?>
+<?php if (!empty($title)): ?>
+  <<?php print $title; ?>>
+<?php endif; ?>
 <?php foreach ($themed_rows as $count => $row): ?>
   <<?php print $item_node; ?>>
 <?php foreach ($row as $field => $content): ?>
@@ -18,3 +21,6 @@
 <?php endforeach; ?>
   </<?php print $item_node; ?>>
 <?php endforeach; ?>
+<?php if (!empty($title)): ?>
+  </<?php print $title; ?>>
+<?php endif; ?>
