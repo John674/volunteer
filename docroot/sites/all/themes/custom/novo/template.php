@@ -261,3 +261,33 @@ function novo_preprocess_block(&$variables) {
     $variables['theme_hook_suggestions'][] = "block__webform__contact_us";
   }
 }
+
+function novo_preprocess_taxonomy_term(&$variables) {
+  //kpr($variables);
+}
+
+
+/**
+ * Implements hook_preprocess_views_view_table()
+ */
+function novo_preprocess_views_view_table(&$vars) {
+  // If this view is not the sort view, then stop here.
+  if (!isset($vars['view']->field['draggableviews'])) {
+    return;
+  }
+
+  // Check permissions.
+  if (!user_access('access draggableviews')) {
+    // Remove column "draggableviews" from results and header.
+    foreach ($vars['rows'] as &$row) {
+      unset($row['draggableviews']);
+    }
+    unset($vars['header']['draggableviews']);
+    return;
+  }
+
+  // Add JavaScript for auto-save functionality.
+  if ($vars['view']->field['draggableviews']->options['draggableviews']['ajax']) {
+    drupal_add_js(drupal_get_path('theme', 'novo') . '/js/novo_draggableviews_table.js', array('scope' => 'footer'));
+  }
+}

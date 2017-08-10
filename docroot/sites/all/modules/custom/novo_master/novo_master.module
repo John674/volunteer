@@ -102,11 +102,14 @@ function novo_master_disable_node_add_page() {
  * Disable user view link for volunteers.
  */
 function novo_master_disable_user_view() {
+  if (user_is_anonymous()) {
+    return TRUE;
+  }
   $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
   if (user_has_role($role->rid)) {
     return FALSE;
   }
-  return user_access('access content');
+  return user_access('access user profiles');
 }
 
 /**
@@ -251,6 +254,13 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
     case "users_menu_active":
       $rule_matches = novo_master_menu_position_rule_rules($context, array(), array("admin/people/create"), TRUE);
       break;
+
+    case "reports_menu_active":
+      //$rule_matches = novo_master_menu_position_rule_rules($context, array(), array("admin/people/create"), TRUE);
+      // @TODO: write code for getting path from views list.
+      $rule_matches = FALSE;
+      break;
+
 
   }
 }

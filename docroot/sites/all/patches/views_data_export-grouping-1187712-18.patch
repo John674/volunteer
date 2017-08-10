@@ -1,0 +1,110 @@
+From 5905664b76b961b4f76cdc5e654f101412584fbb Mon Sep 17 00:00:00 2001
+From: idebr <idebr@1879760.no-reply.drupal.org>
+Date: Mon, 13 Apr 2015 14:06:24 +0200
+Subject: [PATCH] Issue #1187712 by Steven Jones, Cottser, DeFr, idebr:
+ Grouping?
+
+---
+ plugins/views_data_export_plugin_style_export.inc |  2 +-
+ theme/views-data-export-xml-body.tpl.php          |  6 ++++
+ theme/views_data_export.theme.inc                 | 36 +++++++++++++++++++++++
+ 3 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/plugins/views_data_export_plugin_style_export.inc b/plugins/views_data_export_plugin_style_export.inc
+index 493796f..b07e45d 100644
+--- a/plugins/views_data_export_plugin_style_export.inc
++++ b/plugins/views_data_export_plugin_style_export.inc
+@@ -50,6 +50,7 @@ class views_data_export_plugin_style_export extends views_plugin_style {
+    * None.
+    */
+   function options_form(&$form, &$form_state) {
++    parent::options_form($form, $form_state);
+     $form['attach_text'] = array(
+       '#type' => 'textfield',
+       '#title' => t('Attach text'),
+@@ -273,7 +274,6 @@ class views_data_export_plugin_style_export extends views_plugin_style {
+         $rows = $records;
+       }
+ 
+-      $title = '';
+       $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_body'), array('view' => $this->view, 'options' => $this->options, 'rows' => $rows, 'title' => $title));
+     }
+     unset($this->view->row_index);
+diff --git a/theme/views-data-export-xml-body.tpl.php b/theme/views-data-export-xml-body.tpl.php
+index b97e8ad..1c5aab4 100644
+--- a/theme/views-data-export-xml-body.tpl.php
++++ b/theme/views-data-export-xml-body.tpl.php
+@@ -11,6 +11,9 @@
+  * @ingroup views_templates
+  */
+ ?>
++<?php if (!empty($title)): ?>
++  <<?php print $title; ?>>
++<?php endif; ?>
+ <?php foreach ($themed_rows as $count => $row): ?>
+   <<?php print $item_node; ?>>
+ <?php foreach ($row as $field => $content): ?>
+@@ -18,3 +21,6 @@
+ <?php endforeach; ?>
+   </<?php print $item_node; ?>>
+ <?php endforeach; ?>
++<?php if (!empty($title)): ?>
++  </<?php print $title; ?>>
++<?php endif; ?>
+diff --git a/theme/views_data_export.theme.inc b/theme/views_data_export.theme.inc
+index 8416d96..e18b97a 100644
+--- a/theme/views_data_export.theme.inc
++++ b/theme/views_data_export.theme.inc
+@@ -279,6 +279,18 @@ function template_preprocess_views_data_export_msoffice_body(&$vars) {
+     'odd' => 'even',
+   );
+   $class = 'even';
++
++  // Add grouping.
++  if (!empty($vars['title'])) {
++    $cell = array(
++      'data' => '<strong> ' . $vars['title'] . '</strong>',
++      'colspan' => count($vars['header']),
++    );
++    $output .= ' <tr>';
++    $output .= _theme_table_cell($cell);
++    $output .= " </tr>\n";
++  }
++
+   foreach ($vars['themed_rows'] as $number => $row) {
+     $attributes = array();
+ 
+@@ -435,6 +447,30 @@ function template_preprocess_views_data_export_xml_body(&$vars) {
+     // We should always try to output valid XML.
+     $vars['xml_tag'][$field] = _views_data_export_xml_tag_clean($vars['xml_tag'][$field]);
+   }
++
++  // Process the title, if the user has used grouping.
++  if (!empty($vars['title'])) {
++    if ($vars['options']['transform']) {
++      switch ($vars['options']['transform_type']) {
++        case 'dash':
++          $vars['title'] = str_replace(' ', '-', $vars['title']);
++          break;
++        case 'underline':
++          $vars['title'] = str_replace(' ', '_', $vars['title']);
++          break;
++        case 'camel':
++          $vars['title'] = str_replace(' ', '', ucwords(strtolower($vars['title'])));
++          // Convert the very first character of the string to lowercase.
++          $vars['title'][0] = strtolower($vars['title'][0]);
++          break;
++        case 'pascal':
++          $vars['title'] = str_replace(' ', '', ucwords(strtolower($vars['title'])));
++          break;
++      }
++    }
++    // We should always try to output valid XML.
++    $vars['title'] = _views_data_export_xml_tag_clean($vars['title']);
++  }
+ }
+ 
+ /**
+-- 
+2.1.0
+

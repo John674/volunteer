@@ -63,7 +63,11 @@ function novo_ref_request_task_get_last($nid, $recreate = FALSE) {
   ))->fetchObject();
 
   if (!$result && $recreate && function_exists("novo_ref_request_add_tasks_callback")) {
-    novo_ref_request_add_tasks_callback(array($nid));
+    $array_nid_status = array(
+      'nid' => $nid,
+      'status' => 0,
+    );
+    novo_ref_request_add_tasks_callback(array($array_nid_status));
     $result = db_query("SELECT * FROM {novo_ref_tasks} WHERE nid = :nid ORDER BY id DESC LIMIT 1", array(
       ":nid" => $nid
     ))->fetchObject();
