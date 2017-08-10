@@ -12,11 +12,9 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
   $ref_items = field_get_items("node", $node, $field);
   if (empty($ref_items)) {
     $array_ref_nid_status = novo_ref_request_create_ref_entity($parent_term_name, $node, $field);
-    if (!empty($array_ref_nid_status)) {
+    if (isset($array_ref_nid_status['nid']) && !empty($array_ref_nid_status['nid'])) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      if ($array_ref_nid_status['nid']) {
-        $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
-      }
+      $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
       return $array_ref_nid_status;
     }
   }
