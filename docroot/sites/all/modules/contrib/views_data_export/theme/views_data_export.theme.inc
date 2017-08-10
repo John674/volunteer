@@ -309,6 +309,18 @@ function template_process_views_data_export_msoffice_body(&$vars) {
     'odd' => 'even',
   );
   $class = 'even';
+
+  // Add grouping.
+  if (!empty($vars['title'])) {
+    $cell = array(
+      'data' => '<strong> ' . $vars['title'] . '</strong>',
+      'colspan' => count($vars['header']),
+    );
+    $output .= ' <tr>';
+    $output .= _theme_table_cell($cell);
+    $output .= " </tr>\n";
+  }
+
   foreach ($vars['themed_rows'] as $number => $row) {
     $attributes = array();
 
@@ -464,6 +476,30 @@ function template_preprocess_views_data_export_xml_body(&$vars) {
     }
     // We should always try to output valid XML.
     $vars['xml_tag'][$field] = _views_data_export_xml_tag_clean($vars['xml_tag'][$field]);
+  }
+
+  // Process the title, if the user has used grouping.
+  if (!empty($vars['title'])) {
+    if ($vars['options']['transform']) {
+      switch ($vars['options']['transform_type']) {
+        case 'dash':
+          $vars['title'] = str_replace(' ', '-', $vars['title']);
+          break;
+        case 'underline':
+          $vars['title'] = str_replace(' ', '_', $vars['title']);
+          break;
+        case 'camel':
+          $vars['title'] = str_replace(' ', '', ucwords(strtolower($vars['title'])));
+          // Convert the very first character of the string to lowercase.
+          $vars['title'][0] = strtolower($vars['title'][0]);
+          break;
+        case 'pascal':
+          $vars['title'] = str_replace(' ', '', ucwords(strtolower($vars['title'])));
+          break;
+      }
+    }
+    // We should always try to output valid XML.
+    $vars['title'] = _views_data_export_xml_tag_clean($vars['title']);
   }
 }
 
