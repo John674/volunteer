@@ -56,7 +56,10 @@ node/add/locations',
       0 => 'application',
     ),
     'pages' => '',
-    'roles' => array(),
+    'roles' => array(
+      'Applicant US citizen' => 6,
+      'Siteadmin' => 3,
+    ),
     'themes' => array(
       'bootstrap' => array(
         'region' => '',
@@ -97,32 +100,6 @@ node/add/locations',
         'status' => 0,
         'theme' => 'novo',
         'weight' => -8,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['webform-client-block-6046'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => 'client-block-6046',
-    'module' => 'webform',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'bootstrap' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bootstrap',
-        'weight' => 0,
-      ),
-      'novo' => array(
-        'region' => 'footer',
-        'status' => 1,
-        'theme' => 'novo',
-        'weight' => 0,
       ),
     ),
     'title' => '',

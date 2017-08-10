@@ -39,3 +39,15 @@ function novo_account_permission() {
     ),
   );
 }
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function novo_account_preprocess_page(&$variables) {
+  if (in_array("page__user__%", $variables['theme_hook_suggestions'])) {
+    $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
+    if (user_has_role($role->rid)) {
+      drupal_goto("<front>");
+    }
+  }
+}

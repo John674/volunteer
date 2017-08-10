@@ -36,6 +36,7 @@ stylesheets[all][] = css/forms/partner_form.css
 stylesheets[all][] = css/forms/locations_form.css
 stylesheets[all][] = css/forms/mentor_form.css
 stylesheets[all][] = css/forms/class_form.css
+stylesheets[all][] = css/reports.css
 stylesheets[all][] = css/custom.css
 
 
@@ -57,6 +58,7 @@ scripts[] = 'bootstrap/js/tab.js'
 scripts[] = 'bootstrap/js/transition.js'
 
 scripts[] = 'js/bootstrap_select/js/bootstrap-select.min.js'
+
 scripts[] = 'js/novo.js'
 
 

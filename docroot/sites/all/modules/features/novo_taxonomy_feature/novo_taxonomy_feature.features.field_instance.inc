@@ -18,7 +18,7 @@ function novo_taxonomy_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'color_field',
         'settings' => array(
           'height' => 16,
