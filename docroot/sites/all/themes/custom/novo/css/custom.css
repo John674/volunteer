@@ -150,6 +150,33 @@ a.tabledrag-handle .handle {
   display: inline-block;
 }
 
+.contact-us-container {
+  position: fixed;
+  bottom: 0;
+}
+.modal#novo-contact-us-block{
+  display: block!important;
+  visibility: hidden;
+}
+.modal.in#novo-contact-us-block{
+  visibility: visible;
+}
+.modal.in#novo-contact-us-block .modal-dialog {
+  transform: translateY(0);
+}
+.modal#novo-contact-us-block .modal-dialog {
+  transform: translateY(100%);
+}
+.modal#novo-contact-us-block .modal-dialog {
+  position: fixed;
+  bottom: 0;
+  left: 20%;
+  margin: 0;
+  max-width: 20em;
+  -webkit-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+}
 .novo-select-color-block {
   width: 16px;
   height: 16px;

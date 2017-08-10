@@ -48,7 +48,7 @@
 ?>
 <section id="section-<?php print $block_html_id; ?>"
          class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-    <div class="modal slideup" id="novo-contact-us-block" tabindex="-1"
+    <div class="modal" id="novo-contact-us-block" tabindex="-1"
          role="dialog" aria-labelledby="label-modal-client-block-57824"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -58,19 +58,20 @@
                             aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="label-modal-client-block-57824"><?php print $title; ?></h4>
+                        id="label-modal-client-block-57824">
+                        <i class="fa fa-envelope"></i>
+                      <?php print $title; ?>
+                    </h4>
                 </div>
                 <div class="modal-body">
                   <?php print $content ?>
                 </div>
             </div>
-        </div>
     </div>
 </section>
 
 <div id="contact-us-container"
-     class="contact-us-container dialog-container col-md-2 col-md-offset-2"
-     style="position: relative;">
+     class="contact-us-container dialog-container">
     <div id="contact-us-btn" style="display: block;">
         <a class="btn btn-default btn-contact" data-target="#novo-contact-us-block" data-toggle="modal"><i class="fa fa-envelope"></i>&nbsp;
           <?php print t("Contact us"); ?> &nbsp;&nbsp; <i class="fa fa-chevron-up"></i></a>
