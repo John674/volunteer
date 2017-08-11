@@ -5,7 +5,6 @@
  * Helper functions.
  */
 
-
 /**
  * Implements hook_menu().
  */
@@ -13,7 +12,9 @@ function novo_reports_menu() {
   $items = array();
 
   $items['novo-reports'] = array(
+    // @codingStandardsIgnoreStart
     'title' => t('Reports'),
+    // @codingStandardsIgnoreEnd
     'access arguments' => array('novo reports access'),
     'page callback' => 'novo_reports_list',
     'menu_name' => 'main-menu',
@@ -33,7 +34,7 @@ function novo_reports_list() {
     if (strtolower($view->tag) == "report") {
       $path = isset($view->display['page']->display_options['path']) ? $view->display['page']->display_options['path'] : NULL;
       if ($path) {
-        //$links[] = l($view->human_name, $path);
+        /*$links[] = l($view->human_name, $path);*/
         $links[] = array(
           'href' => $path,
           'title' => $view->human_name
