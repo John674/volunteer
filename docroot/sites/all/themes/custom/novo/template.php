@@ -177,6 +177,9 @@ function novo_theme($existing, $type, $theme, $path) {
       'variables' => array('status' => NULL, 'label' => NULL),
       'template' => 'templates/custom/status-label',
     ),
+    'textfield__date_of_birthday' => array(
+      'render element' => 'element',
+    ),
   );
 }
 
@@ -262,10 +265,137 @@ function novo_preprocess_block(&$variables) {
   }
 }
 
-function novo_preprocess_taxonomy_term(&$variables) {
-  //kpr($variables);
+/**
+ * Implements hook_elements_info_alter().
+ */
+function novo_element_info_alter(&$type) {
+  if (isset($type['textfield'])) {
+    $type['textfield']['#pre_render'][] = '_novo_pre_render_date_of_birthday';
+  }
 }
 
+/**
+ * Pre render for field_dob.
+ */
+function _novo_pre_render_date_of_birthday($variable) {
+  if (isset($variable['#parents']) && ($variable['#parents'][0] == 'field_dob')) {
+    $variable['#theme'] = ['textfield__date_of_birthday'];
+  }
+  return $variable;
+}
+
+/**
+ * Theme function for field_dob.
+ */
+function novo_textfield__date_of_birthday($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'text';
+  element_set_attributes($element, [
+    'id',
+    'name',
+    'value',
+    'size',
+    'maxlength',
+  ]);
+  _form_set_class($element, ['form-text']);
+
+  $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
+  $output .= '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>';
+  if (!isset($element['#input_group']) && !isset($element['#input_group_button'])) {
+    $input_group_attributes = isset($element['#input_group_attributes']) ? $element['#input_group_attributes'] : [];
+    if (!isset($input_group_attributes['class'])) {
+      $input_group_attributes['class'] = [];
+    }
+    if (!in_array('input-group', $input_group_attributes['class'])) {
+      $input_group_attributes['class'][] = 'input-group';
+      $input_group_attributes['class'][] = 'novo-input-group';
+    }
+    $output = '<div' . drupal_attributes($input_group_attributes) . '>' . $output . '</div>';
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_menu_link__user_menu().
+ */
+function novo_menu_link__user_menu(array $variables) {
+
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  $options = !empty($element['#localized_options']) ? $element['#localized_options'] : [];
+
+  // Check plain title if "html" is not set, otherwise, filter for XSS attacks.
+  $title = empty($options['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']);
+
+  // Ensure "html" is now enabled so l() doesn't double encode. This is now
+  // safe to do since both check_plain() and filter_xss_admin() encode HTML
+  // entities. See: https://www.drupal.org/node/2854978
+  $options['html'] = TRUE;
+
+  $href = $element['#href'];
+  $attributes = !empty($element['#attributes']) ? $element['#attributes'] : [];
+
+  if ($element['#below']) {
+    // Prevent dropdown functions from being added to management menu so it
+    // does not affect the navbar module.
+    if (($element['#original_link']['menu_name'] == 'management') && (module_exists('navbar'))) {
+      $sub_menu = drupal_render($element['#below']);
+    }
+    elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 1)) {
+      // Add our own wrapper.
+      unset($element['#below']['#theme_wrappers']);
+      $sub_menu = '<ul class="dropdown-menu">' . drupal_render($element['#below']) . '</ul>';
+
+      // Generate as standard dropdown.
+      $title .= ' <span class="caret"></span>';
+      $attributes['class'][] = 'dropdown';
+
+      // Set dropdown trigger element to # to prevent inadvertant page loading
+      // when a submenu link is clicked.
+      $options['attributes']['data-target'] = '#';
+      $options['attributes']['class'][] = 'dropdown-toggle';
+      $options['attributes']['data-toggle'] = 'dropdown';
+    }
+  }
+
+  if (trim(strtolower($title)) == 'my account') {
+    $title = '<span class="glyphicon novo-glyphicon glyphicon-user" aria-hidden="true"></span>';
+  }
+
+  if (trim(strtolower($title)) == 'log out') {
+    $title = '<span class="glyphicon novo-glyphicon glyphicon-arrow-right" aria-hidden="true"></span>';
+  }
+  $attributes['class'][] = 'novo-leaf';
+
+  return '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+}
+
+/**
+ * Implements hook_preprocess_button.
+ */
+function novo_preprocess_button(&$vars) {
+  if (isset($vars['element']['#value'])) {
+
+    if ($vars['element']['#value'] == 'Remove') {
+      $vars['element']['#icon'] = '<span class="glyphicon glyphicon-remove novo-glyphicon-remove" aria-hidden="true"></span>';
+      $vars['element']['#value'] = '';
+    }
+
+    if ($vars['element']['#value'] == 'Add another item') {
+      $vars['element']['#value'] = 'Add';
+      $vars['element']['#icon_position'] = 'after';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term().
+ */
+function novo_preprocess_taxonomy_term(&$variables) {
+  // kpr($variables);
+}
 
 /**
  * Implements hook_preprocess_views_view_table()

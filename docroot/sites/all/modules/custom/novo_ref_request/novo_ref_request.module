@@ -374,7 +374,7 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
     $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
     $ref_task = novo_ref_request_task_get_last($entity->nid, TRUE);
 
-    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : null;
+    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : NULL;
     $status_label = (!is_null($status)) ? $statuses[$status] : " - ";
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
