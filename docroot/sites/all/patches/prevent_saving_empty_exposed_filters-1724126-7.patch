@@ -1,0 +1,118 @@
+diff --git a/handlers/draggableviews_handler_native.inc b/handlers/draggableviews_handler_native.inc
+index 298f002..eeaf976 100644
+--- a/handlers/draggableviews_handler_native.inc
++++ b/handlers/draggableviews_handler_native.inc
+@@ -24,21 +24,32 @@ class draggableviews_handler_native extends draggableviews_handler {
+     $view_name = $view->name;
+     $view_display = $view->current_display;
+     // View arguments.
+-    $arguments = $view->args;
++    $views_arguments = $view->args;
++    $weight_key = _draggableviews_get_draggable_sort($view);
++    $ignore_empty = $view->sort[$weight_key]->options['draggableviews_setting_arguments_ignore_empty'];
+     if (isset($view->exposed_raw_input)) {
+-      $arguments += $view->exposed_raw_input;
+-      ksort($arguments);
++      $views_arguments += $view->exposed_raw_input;
++      ksort($views_arguments);
+       // Redirect view to the same page with exposed filters set.
+       $form_state['redirect'] = array(current_path(), array('query' => $view->exposed_raw_input));
+     }
+ 
+     // Give other modules a chance to alter saved arguments.
+-    drupal_alter('draggableviews_handler_native_arguments', $arguments, $view, $fv['draggableviews']);
++    drupal_alter('draggableviews_handler_native_arguments', $views_arguments, $view, $fv['draggableviews']);
+ 
+     // Never save 'items_per_page' argument added by exposed pager filter.
+-    unset($arguments['items_per_page']);
++    unset($views_arguments['items_per_page']);
+ 
+-    $args_string = json_encode($arguments);
++    if ($ignore_empty) {
++      // Unset empty arguments
++      foreach ($views_arguments as $name => $value) {
++        if (empty($value)) {
++          unset($views_arguments[$name]);
++        }
++      }
++    }
++
++    $args_string = json_encode($views_arguments);
+ 
+     // Save records to our custom table.
+     $weight = 0;
+diff --git a/views/draggableviews_handler_sort.inc b/views/draggableviews_handler_sort.inc
+index 0da30e8..594f4df 100644
+--- a/views/draggableviews_handler_sort.inc
++++ b/views/draggableviews_handler_sort.inc
+@@ -31,6 +31,7 @@ class draggableviews_handler_sort extends views_handler_sort {
+ 
+     $options['draggableviews_setting_view'] = array('default' => '');
+     $options['draggableviews_setting_arguments'] = array('default' => 'all');
++    $options['draggableviews_setting_arguments_ignore_empty'] = array('default' => FALSE);
+     $options['draggableviews_setting_arguments_php'] = array('default' => '');
+     $options['draggableviews_setting_new_items_bottom_list'] = array('default' => TRUE);
+ 
+@@ -81,7 +82,23 @@ class draggableviews_handler_sort extends views_handler_sort {
+       '#description' => t('When sorting order is saved all arguments passed are saved with order.
+           In display view we can choose how to use these arguments.')
+     );
+-    $form['draggableviews_setting_arguments_php'] = array(
++    // Put argument options into a fieldset so they are more visible.
++    $form['draggableviews_argument_options'] = array(
++      '#type' => 'fieldset',
++      '#title' => t('Augment Options'),
++    );
++    $form['draggableviews_argument_options']['draggableviews_setting_arguments_ignore_empty'] = array(
++      '#title' => t('Ignore empty arguments'),
++      '#type' => 'checkbox',
++      '#default_value' => $this->options['draggableviews_setting_arguments_ignore_empty'],
++      '#description' => t('Empty expose filters arguments are saved to the database. For example {title=""}.'),
++      '#states' => array(
++        'visible' => array(
++          'input[name="options[draggableviews_setting_arguments]"]' => array('value' => 'all'),
++        ),
++      ),
++    );
++    $form['draggableviews_argument_options']['draggableviews_setting_arguments_php'] = array(
+       '#title' => t('PHP code to prepare arguments'),
+       '#type' => 'textarea',
+       '#default_value' => $this->options['draggableviews_setting_arguments_php'],
+@@ -101,4 +118,14 @@ class draggableviews_handler_sort extends views_handler_sort {
+       '#default_value' => $this->options['draggableviews_setting_new_items_bottom_list'],
+     );
+   }
++  /**
++   * Simple submit handler for the options form.
++   */
++  function options_submit(&$form, &$form_state) {
++    // Two argument options are nested inside a fieldset.
++    $argument_option_values = $form_state['values']['options']['draggableviews_argument_options'];
++    $this->options['draggableviews_setting_arguments_ignore_empty'] = $argument_option_values['draggableviews_setting_arguments_ignore_empty'];
++    $this->options['draggableviews_setting_arguments_php'] = $argument_option_values['draggableviews_setting_arguments_php'];
++
++  }
+ }
+diff --git a/views/draggableviews_join_handler.inc b/views/draggableviews_join_handler.inc
+index 29dabd6..fd60a58 100644
+--- a/views/draggableviews_join_handler.inc
++++ b/views/draggableviews_join_handler.inc
+@@ -60,6 +60,18 @@ class draggableviews_join_handler extends views_join {
+         unset($view_arguments['items_per_page']);
+         ksort($view_arguments);
+       }
++      // If the sort ignore empty is set, remove empty arguments.
++      $weight_key = _draggableviews_get_draggable_sort($view);
++      $ignore_empty = $view->sort[$weight_key]->options['draggableviews_setting_arguments_ignore_empty'];
++      if ($ignore_empty) {
++        // Unset empty arguments
++        foreach ($view_arguments as $name => $value) {
++          if (empty($value)) {
++            unset($view_arguments[$name]);
++          }
++        }
++      }
++
+       // Alter arguments according to sort criteria settings.
+       if ($view->sort[$weight_key]->options['draggableviews_setting_arguments'] == 'none') {
+         $view_arguments = array();

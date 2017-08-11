@@ -12,11 +12,9 @@ function novo_ref_request_attach_ref(&$node, $field, $parent_term_name) {
   $ref_items = field_get_items("node", $node, $field);
   if (empty($ref_items)) {
     $array_ref_nid_status = novo_ref_request_create_ref_entity($parent_term_name, $node, $field);
-    if (!empty($array_ref_nid_status)) {
+    if (isset($array_ref_nid_status['nid']) && !empty($array_ref_nid_status['nid'])) {
       $lang = (isset($node->language)) ? $node->language : LANGUAGE_NONE;
-      if ($array_ref_nid_status['nid']) {
-        $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
-      }
+      $node->{$field}[$lang][0]['target_id'] = $array_ref_nid_status['nid'];
       return $array_ref_nid_status;
     }
   }
@@ -153,8 +151,9 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
 function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
 
   foreach ($ref_nids_statuses as $data) {
-    $nid = $data['nid'];
+    $nid = (isset($data['nid']) && !empty($data['nid'])) ? $data['nid'] : NULL;
     $status = (isset($data['status']) && !is_null($data['status'])) ? $data['status'] : NULL;
+
     if ($nid) {
       // Create tasks.
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);

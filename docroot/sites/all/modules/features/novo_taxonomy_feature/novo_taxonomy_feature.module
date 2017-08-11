@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the Novo Taxonomy Feature feature.
+ */
+
+include_once 'novo_taxonomy_feature.features.inc';
 
 /** Constants */
 define('NOVO_VOCABULARY_STATES', 'states');

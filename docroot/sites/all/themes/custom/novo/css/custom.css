@@ -177,3 +177,23 @@ a.tabledrag-handle .handle {
   -moz-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
 }
+.novo-select-color-block {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.novo-canvassing-group-wrapper {
+  color: #fff;
+  font-family: ProximaNovaBold;
+  margin: 0px 20px;
+  padding: 0px 10px;
+}
+
+.draggableviews-changed-notice {
+  color: red;
+}

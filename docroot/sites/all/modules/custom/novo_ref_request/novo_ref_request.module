@@ -271,14 +271,43 @@ function novo_ref_request_node_presave($node) {
     if (!$node_original_completed && $node_completed) {
       // Create and attach ref request nodes.
       $ref_nids_statuses = array();
-      $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_1, NOVO_REF_QUESTIONS_REF1_TERM_NAME);
-      $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_2, NOVO_REF_QUESTIONS_REF2_TERM_NAME);
-      $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_STANDBY, NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
-      $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_CHURCH, NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
-      $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_PARENTS, NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
-      drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids_statuses);
+
+      if (novo_ref_request_check_email($node, 'field_ref_1_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_1, NOVO_REF_QUESTIONS_REF1_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_ref_2_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_2, NOVO_REF_QUESTIONS_REF2_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_ref_3_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_STANDBY, NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_church_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_CHURCH, NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_parent_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_PARENTS, NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
+      }
+
+      if (!empty($ref_nids_statuses)) {
+        drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids_statuses);
+      }
     }
   }
+}
+
+/**
+ * Check email for references.
+ */
+function novo_ref_request_check_email($node, $field) {
+  $field_email = field_get_items('node', $node, $field);
+  if (isset($field_email) && !empty($field_email)) {
+    return (!empty($field_email[0]['email'])) ? TRUE : FALSE;
+  }
+  return FALSE;
 }
 
 /**
@@ -345,8 +374,8 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
     $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
     $ref_task = novo_ref_request_task_get_last($entity->nid, TRUE);
 
-    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : 0;
-    $status_label = $statuses[$status];
+    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : null;
+    $status_label = (!is_null($status)) ? $statuses[$status] : " - ";
 
     $ref_name = novo_ref_get_ref_name($entity->nid);
     $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));

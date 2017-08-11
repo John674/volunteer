@@ -1,13 +1,3 @@
-.node-program-form .novo-select-color-block {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  vertical-align: text-top;
-  margin-right: 5px;
-  text-align: center;
-  font-size: 12px;
-}
-
 .node-program-form .field-name-field-program-volunteers-list .select2-container.select2-container-multi,
 .node-program-form .field-name-field-program-staff-list .select2-container.select2-container-multi {
   padding: 0px;

@@ -1568,7 +1568,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_groups['group_ministry|node|application|pdf'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_p_group|field_collection_item|field_program_kids_list|form';
   $field_group->group_name = 'group_p_group';

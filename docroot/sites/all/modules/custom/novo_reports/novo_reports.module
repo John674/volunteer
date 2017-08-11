@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function novo_reports_menu() {
+  $items = array();
+
+  $items['novo-reports'] = array(
+    'title' => t('Reports'),
+    'access arguments' => array('novo reports access'),
+    'page callback' => 'novo_reports_list',
+    'menu_name' => 'main-menu',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Reports list from views list.
+ */
+function novo_reports_list() {
+  $views = views_get_all_views();
+  $links = array();
+  foreach ($views as $view_name => $view) {
+    if (strtolower($view->tag) == "report") {
+      $path = isset($view->display['page']->display_options['path']) ? $view->display['page']->display_options['path'] : NULL;
+      if ($path) {
+        //$links[] = l($view->human_name, $path);
+        $links[] = array(
+          'href' => $path,
+          'title' => $view->human_name
+        );
+      }
+    }
+  }
+
+  return theme("links", array(
+    "links" => $links,
+    "attributes" => array(),
+    "heading" => ""
+  ));
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_reports_permission() {
+  return array(
+    'novo reports access' => array(
+      'title' => t('Novo access to reports.'),
+      'description' => t('Novo access to reports.'),
+    ),
+  );
+}

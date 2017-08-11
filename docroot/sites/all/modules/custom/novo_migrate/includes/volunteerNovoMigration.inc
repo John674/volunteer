@@ -430,6 +430,14 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       }
 
       if (isset($reference_requests[$uid]) && !empty($reference_requests[$uid])) {
+
+        foreach ($this->getRefTypesArray() as $type) {
+          $field_email = $type . '_email';
+          if (isset($reference_requests[$uid][$type]) && !empty($reference_requests[$uid][$type])) {
+            $users[$uid][$field_email] = (isset($users[$uid][$field_email]) && !empty(isset($users[$uid][$field_email]))) ? $users[$uid][$field_email] : 'volunteer@novoministries.org';
+          }
+        }
+
         $users[$uid]['reference_request'] = $reference_requests[$uid];
       }
     }
@@ -1069,6 +1077,19 @@ class VolunteerNovoMigration extends BaseNovoMigration {
         ],
       ],
     ];
+  }
+
+  /**
+   * Get array references types.
+   */
+  protected function getRefTypesArray() {
+    return array(
+      self::NOVO_TYPE_REFERENCE_1,
+      self::NOVO_TYPE_REFERENCE_2,
+      self::NOVO_TYPE_STANDBY,
+      self::NOVO_TYPE_CHURCH,
+      self::NOVO_TYPE_PARENT,
+    );
   }
 
 }
