@@ -187,7 +187,8 @@ a.tabledrag-handle .handle {
   font-size: 12px;
 }
 
-.novo-canvassing-group-wrapper {
+.novo-canvassing-group-wrapper,
+.novo-small-group-wrapper{
   color: #fff;
   font-family: ProximaNovaBold;
   margin: 0px 20px;
@@ -196,4 +197,34 @@ a.tabledrag-handle .handle {
 
 .draggableviews-changed-notice {
   color: red;
+}
+
+.novo-glyphicon{
+  padding: 6px;
+  color: rgba(71, 73, 72, 0.85);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  font-size: 1.2em;
+}
+.novo-glyphicon.glyphicon-arrow-right{
+  padding-right: 5px;
+}
+
+li.novo-leaf a{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container-inline-date .form-item .novo-input-group input{
+margin-right: 0;
+}
+
+.novo-input-group .input-group-addon{
+  width: auto;
+  background-color: #ffffff;
+}
+
+.btn.icon-before .glyphicon.novo-glyphicon-remove {
+  top: 3px;
+  margin: 0;
 }
