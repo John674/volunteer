@@ -300,15 +300,16 @@ function novo_textfield__date_of_birthday($variables) {
   _form_set_class($element, ['form-text']);
 
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
-  $output .= '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>';
+  $output .= '<span class="glyphicon glyphicon-calendar form-control-feedback novo-form-control-feedback" aria-hidden="true"></span>';
   if (!isset($element['#input_group']) && !isset($element['#input_group_button'])) {
     $input_group_attributes = isset($element['#input_group_attributes']) ? $element['#input_group_attributes'] : [];
     if (!isset($input_group_attributes['class'])) {
       $input_group_attributes['class'] = [];
     }
     if (!in_array('input-group', $input_group_attributes['class'])) {
-      $input_group_attributes['class'][] = 'input-group';
-      $input_group_attributes['class'][] = 'novo-input-group';
+      $input_group_attributes['class'][] = 'form-group';
+      $input_group_attributes['class'][] = 'novo-form-group';
+      $input_group_attributes['class'][] = 'has-feedback';
     }
     $output = '<div' . drupal_attributes($input_group_attributes) . '>' . $output . '</div>';
   }

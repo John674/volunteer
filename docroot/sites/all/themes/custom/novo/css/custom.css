@@ -204,7 +204,7 @@ a.tabledrag-handle .handle {
   color: rgba(71, 73, 72, 0.85);
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 .novo-glyphicon.glyphicon-arrow-right{
   padding-right: 5px;
@@ -215,13 +215,13 @@ li.novo-leaf a{
   padding-right: 10px;
 }
 
-.container-inline-date .form-item .novo-input-group input{
-margin-right: 0;
+.container-inline-date .form-item .novo-form-group input{
+  margin-right: 0;
 }
 
-.novo-input-group .input-group-addon{
-  width: auto;
-  background-color: #ffffff;
+.novo-form-group .novo-form-control-feedback{
+  color: #777777;
+  border-left: 1px solid #CCCCCC;
 }
 
 .btn.icon-before .glyphicon.novo-glyphicon-remove {
