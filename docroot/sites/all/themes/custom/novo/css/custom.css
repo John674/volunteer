@@ -195,6 +195,10 @@ a.tabledrag-handle .handle {
   padding: 0px 10px;
 }
 
+.novo-small-group-wrapper {
+  color: #000;
+}
+
 .draggableviews-changed-notice {
   color: red;
 }

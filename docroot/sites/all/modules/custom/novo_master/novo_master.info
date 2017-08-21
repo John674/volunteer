@@ -12,3 +12,5 @@ dependencies[] = jquery_update
 dependencies[] = libraries
 dependencies[] = entity
 dependencies[] = entitycache
+
+files[] = views/novo_master_filters_handler_filter_school_year.inc

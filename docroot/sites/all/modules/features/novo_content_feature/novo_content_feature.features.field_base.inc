@@ -1106,6 +1106,26 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_class_school_year_new'.
+  $field_bases['field_class_school_year_new'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_class_school_year_new',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'novo_master',
+    'settings' => array(
+      'max_length' => 4,
+    ),
+    'translatable' => 0,
+    'type' => 'school_year',
+  );
+
   // Exported field_base: 'field_color_preference'.
   $field_bases['field_color_preference'] = array(
     'active' => 1,

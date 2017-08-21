@@ -34,10 +34,22 @@ function novo_reports_list() {
     if (strtolower($view->tag) == "report") {
       $path = isset($view->display['page']->display_options['path']) ? $view->display['page']->display_options['path'] : NULL;
       if ($path) {
-        /*$links[] = l($view->human_name, $path);*/
+        $title = $view->human_name;
+        $export_path = isset($view->display['views_data_export_1']->display_options['path']) ? $view->display['views_data_export_1']->display_options['path'] : NULL;
+        if (!empty($export_path)) {
+          $title .= " " . theme("views_data_export_feed_icon", array(
+                'image_path' => drupal_get_path('module', 'views_data_export') . '/images/xls.png',
+                'url' => $export_path,
+                'text' => $view->human_name,
+                'title' => $view->human_name
+              )
+            );
+        }
+
         $links[] = array(
           'href' => $path,
-          'title' => $view->human_name
+          'title' => $title,
+          'html' => TRUE
         );
       }
     }
@@ -45,7 +57,7 @@ function novo_reports_list() {
 
   return theme("links", array(
     "links" => $links,
-    "attributes" => array(),
+    "attributes" => array("class" => array("novo-reports-list-wrapper")),
     "heading" => ""
   ));
 }

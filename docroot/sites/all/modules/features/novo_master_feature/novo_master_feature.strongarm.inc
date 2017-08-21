@@ -197,11 +197,6 @@ function novo_master_feature_strongarm() {
       'pages_block' => '1',
       'confirmation_block' => '0',
     ),
-    'client-block-7950' => array(
-      'display' => 'form',
-      'pages_block' => '1',
-      'confirmation_block' => '0',
-    ),
   );
   $export['webform_blocks'] = $strongarm;
 

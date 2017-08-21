@@ -7201,6 +7201,53 @@ Friend',
     ),
   );
 
+  // Exported field_instance: 'node-class-field_class_school_year_new'.
+  $field_instances['node-class-field_class_school_year_new'] = array(
+    'bundle' => 'class',
+    'default_value' => array(
+      0 => array(
+        'school_year' => 2012,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => NULL,
+        'settings' => array(),
+        'type' => 'novo_master_options_list',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_class_school_year_new',
+    'label' => 'School year',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'strtotime',
+      'default_value_code' => '-5 year',
+      'end_year' => 2005,
+      'start_year' => 2000,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-class-field_program_day'.
   $field_instances['node-class-field_program_day'] = array(
     'bundle' => 'class',
