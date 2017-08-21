@@ -129,6 +129,7 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
 
         $wrapper = entity_metadata_wrapper('field_collection_item', $collection);
         $wrapper->field_faq_q->set($q);
+        $wrapper->field_faq_a->set('');
         $wrapper->save();
       }
       if (!$is_migration_volunteers) {

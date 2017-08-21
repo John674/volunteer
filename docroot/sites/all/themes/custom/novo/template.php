@@ -180,6 +180,9 @@ function novo_theme($existing, $type, $theme, $path) {
     'textfield__date_of_birthday' => array(
       'render element' => 'element',
     ),
+    'date_form_element__date_of_birthday' => array(
+      'render element' => 'element',
+    ),
   );
 }
 
@@ -285,7 +288,7 @@ function _novo_pre_render_date_of_birthday($variable) {
 }
 
 /**
- * Theme function for field_dob.
+ * Theme function for textfield__date_of_birthday.
  */
 function novo_textfield__date_of_birthday($variables) {
   $element = $variables['element'];
@@ -300,7 +303,9 @@ function novo_textfield__date_of_birthday($variables) {
   _form_set_class($element, ['form-text']);
 
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
-  $output .= '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>';
+  $input_id = isset($element['#attributes']['id']) ? $element['#attributes']['id'] : '';
+
+  $output .= '<label class="input-group-addon btn" for="' . $input_id . '"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></label>';
   if (!isset($element['#input_group']) && !isset($element['#input_group_button'])) {
     $input_group_attributes = isset($element['#input_group_attributes']) ? $element['#input_group_attributes'] : [];
     if (!isset($input_group_attributes['class'])) {
@@ -419,5 +424,54 @@ function novo_preprocess_views_view_table(&$vars) {
   // Add JavaScript for auto-save functionality.
   if ($vars['view']->field['draggableviews']->options['draggableviews']['ajax']) {
     drupal_add_js(drupal_get_path('theme', 'novo') . '/js/novo_draggableviews_table.js', array('scope' => 'footer'));
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function novo_form_alter(&$form, &$form_state, &$form_id) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if (isset($form['field_dob'])) {
+    $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
+  }
+}
+
+/**
+ * Theme function for date_form_element__date_of_birthday.
+ */
+function novo_date_form_element__date_of_birthday($variables) {
+  $element = &$variables['element'];
+
+  // Detect whether element is multiline.
+  $count = preg_match_all('`<(?:div|span)\b[^>]* class="[^"]*\b(?:date-no-float|date-clear)\b`', $element['#children'], $matches, PREG_OFFSET_CAPTURE);
+  $multiline = FALSE;
+  if ($count > 1) {
+    $multiline = TRUE;
+  }
+  elseif ($count) {
+    $before = substr($element['#children'], 0, $matches[0][0][1]);
+    if (preg_match('`<(?:div|span)\b[^>]* class="[^"]*\bdate-float\b`', $before)) {
+      $multiline = TRUE;
+    }
+  }
+
+  // Detect if there is more than one subfield.
+  $element['#title_display'] = 'none';
+
+  // Wrap children with a div and add an extra class if element is multiline.
+  $element['#children'] = '<div class="date-form-element-content' . ($multiline ? ' date-form-element-content-multiline' : '') . '">' . $element['#children'] . '</div>';
+
+  return theme('form_element', $variables);
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function novo_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name']) && ($element['#field_name'] == 'field_program_time')) {
+    if (isset($element['value'])) {
+      $element['value']['#title'] = t('Start Time');
+    }
   }
 }
