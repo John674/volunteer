@@ -464,3 +464,14 @@ function novo_date_form_element__date_of_birthday($variables) {
 
   return theme('form_element', $variables);
 }
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function novo_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name']) && ($element['#field_name'] == 'field_program_time')) {
+    if (isset($element['value'])) {
+      $element['value']['#title'] = t('Start Time');
+    }
+  }
+}

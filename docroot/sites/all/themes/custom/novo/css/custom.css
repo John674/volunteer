@@ -229,3 +229,11 @@ margin-right: 0;
   top: 3px;
   margin: 0;
 }
+
+.control-label .form-required{
+  color: #d9534f;
+}
+.field-name-field-program-time + .btn {
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
