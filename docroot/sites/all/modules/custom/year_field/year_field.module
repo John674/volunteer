@@ -192,14 +192,14 @@ function year_field_field_widget_info_alter(&$info) {
 }
 
 /**
- * Field options list
+ * Field options list.
  */
 function year_field_options_list($field, $instance, $entity_type, $entity) {
   return year_field_available_options_list($instance);
 }
 
 /**
- * Field available options list
+ * Field available options list.
  */
 function year_field_available_options_list($instance) {
   $start_year = isset($instance['settings']['start_year']) ? $instance['settings']['start_year'] : date("Y", strtotime("-50 year", time()));
@@ -238,8 +238,6 @@ function year_field_field_formatter_info() {
 function year_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
   $options = year_field_available_options_list($instance);
-  //Currently we only have one display option, use switch
-  //to prepare for future options.
   switch ($display['type']) {
     case 'year_default':
       foreach ($items as $delta => $item) {
