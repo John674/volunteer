@@ -22,6 +22,7 @@ dependencies[] = novo_roles_permissions_feature
 dependencies[] = novo_taxonomy_feature
 dependencies[] = novo_views_feature
 dependencies[] = page_manager
+dependencies[] = reroute_email
 dependencies[] = single_user_role
 dependencies[] = smtp
 dependencies[] = strongarm
