@@ -6,19 +6,6 @@
  */
 
 /**
- * Implements hook_field_schema().
- */
-function novo_master_field_schema($field) {
-  $schema = array();
-  $schema['columns']['school_year'] = array(
-    'type' => 'int',
-    'length' => 4,
-    'not null' => FALSE
-  );
-  return $schema;
-}
-
-/**
  * Implements hook_install().
  */
 function novo_master_install() {
@@ -457,4 +444,13 @@ function novo_master_update_7138() {
 function novo_master_update_7139() {
   module_enable(array("webform_ajax"));
   features_revert_module("novo_block_feature");
+}
+
+/**
+ * Remove old fields.
+ */
+function novo_master_update_7140() {
+  field_delete_field('field_class_school_year');
+  field_delete_field('field_program_school_year');
+  field_purge_batch(1);
 }

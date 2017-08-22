@@ -30,8 +30,6 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
 
-module_load_include("inc", "novo_master", "includes/novo_master.school_year");
-
 /**
  * Preprocess page.
  */
@@ -174,19 +172,7 @@ function novo_master_preprocess_views_view(&$vars) {
  * Implements hook_ddf_handle_args_alter().
  */
 function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
-  if ($field['field_name'] == "field_attendance_year" || $field['field_name'] == "field_program_school_year") {
-    if (is_array($value['value'])) {
-      $value = $value['value'];
-      $column = "year";
-    }
-    else {
-      // Original node has string value.
-      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
-      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
-        $value['value'] = date("Y", strtotime($value['value']));
-      }
-    }
-  }
+
 }
 
 /**
@@ -338,14 +324,4 @@ function novo_master_permission() {
  */
 function novo_master_userprotect_check_bypass_alter(&$access, $account) {
   $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
-}
-
-/**
- * Implements hook_views_api().
- */
-function novo_master_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'novo_master') . '/views',
-  );
 }

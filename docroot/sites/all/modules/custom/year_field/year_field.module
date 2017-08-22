@@ -2,23 +2,33 @@
 
 /**
  * @file
- * novo_master.school_year.
+ * Year field master functions.
  */
+
+/**
+ * Implements hook_views_api().
+ */
+function year_field_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'year_field') . '/views',
+  );
+}
 
 /**
  * Implements hook_field_info().
  */
-function novo_master_field_info() {
+function year_field_field_info() {
   return array(
-    'school_year' => array(
-      'label' => t('School Year'),
-      'description' => t('School Year'),
+    'year' => array(
+      'label' => t('Year'),
+      'description' => t('Year'),
       'settings' => array('max_length' => 4),
       'default_widget' => 'options_select',
-      'default_formatter' => 'novo_master_options_list',
+      'default_formatter' => 'year_field_options_list',
       'instance_settings' => array(
-        'start_year' => date("Y", strtotime("-50 year")),
-        'end_year' => date("Y"),
+        'start_year' => "-50 year",
+        'end_year' => "+2 year",
         'default_value' => 'now',
         'default_value_code' => '',
       ),
@@ -26,30 +36,39 @@ function novo_master_field_info() {
   );
 }
 
-
 /**
  * Implements hook_field_instance_settings_form().
  */
-function novo_master_field_instance_settings_form($field, $instance) {
+function year_field_field_instance_settings_form($field, $instance) {
   $instance_settings = $instance['settings'];
   $form = array();
 
+  $form['academic_year'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Academic year'),
+    '#description' => t('Academic year like (2017-2018)'),
+    '#default_value' => isset($instance_settings['academic_year']) ? $instance_settings['academic_year'] : FALSE,
+    '#weight' => 1,
+  );
+
+  $description = t("Describe a time by reference to the current day, like '+5 year' or '-10 year'. See !strtotime for more details.", array('!strtotime' => l(t('strtotime'), 'http://www.php.net/manual/en/function.strtotime.php')));
   $form['start_year'] = array(
     '#type' => 'textfield',
     '#title' => t('Start year'),
+    '#description' => $description,
     '#default_value' => isset($instance_settings['start_year']) ? $instance_settings['start_year'] : "",
-    '#weight' => 1,
+    '#weight' => 2,
     '#fieldset' => 'default_values',
   );
 
   $form['end_year'] = array(
     '#type' => 'textfield',
     '#title' => t('End year'),
+    '#description' => $description,
     '#default_value' => isset($instance_settings['end_year']) ? $instance_settings['end_year'] : "",
-    '#weight' => 2,
+    '#weight' => 3,
     '#fieldset' => 'default_values',
   );
-
 
   $form['default_value'] = array(
     '#type' => 'select',
@@ -60,7 +79,7 @@ function novo_master_field_instance_settings_form($field, $instance) {
       'now' => t('Now'),
       'strtotime' => t('Relative'),
     ),
-    '#weight' => 3,
+    '#weight' => 4,
     '#fieldset' => 'default_values',
   );
 
@@ -77,45 +96,54 @@ function novo_master_field_instance_settings_form($field, $instance) {
         ),
       ),
     ),
-    '#weight' => 3.1,
+    '#weight' => 4.1,
     '#fieldset' => 'default_values',
   );
 
-  $form['#element_validate'] = array('_novo_master_field_instance_settings_form_validate');
+  $form['#element_validate'] = array('year_field_field_instance_settings_form_validate');
 
   return $form;
 }
 
 /**
- * Form validation handler for _date_field_instance_settings_form().
+ * Form validation handler for year_field_field_instance_settings_form().
  */
-function _novo_master_field_instance_settings_form_validate(&$form, &$form_state) {
+function year_field_field_instance_settings_form_validate(&$form, &$form_state) {
   $settings = &$form_state['values']['instance']['settings'];
 
-  if (!empty($settings['start_year'])) {
-    $settings['start_year'] = intval($settings['start_year']);
-  }
-  if (!empty($settings['end_year'])) {
-    $settings['end_year'] = intval($settings['end_year']);
+  $start = isset($settings['start_year']) ? $settings['start_year'] : NULL;
+  $end = isset($settings['end_year']) ? $settings['end_year'] : NULL;
+  $start_error = FALSE;
+  $end_error = FALSE;
+
+  $start_year_value = year_field_get_default_year_value($start);
+  $end_year_value = year_field_get_default_year_value($end);
+
+  if (empty($start_year_value)) {
+    $start_error = TRUE;
   }
 
-  if (empty($settings['start_year']) || !checkdate(12, 31, $settings['start_year'])) {
+  if (empty($end_year_value)) {
+    $end_error = TRUE;
+  }
+
+  if (!empty($end_year_value) && empty($start_year_value)) {
+    $start_error = TRUE;
+  }
+
+  if (empty($end_year_value) && !empty($start_year_value)) {
+    $end_error = TRUE;
+  }
+
+  if ($end_year_value < $start_year_value) {
+    $end_error = TRUE;
+  }
+
+  if ($start_error) {
     form_set_error('instance][settings][start_year', t('The Start year value is invalid.'));
   }
 
-  if (empty($settings['end_year']) || !checkdate(12, 31, $settings['end_year'])) {
-    form_set_error('instance][settings][end_year', t('The End year value is invalid.'));
-  }
-
-  if (!empty($settings['end_year']) && empty($settings['start_year'])) {
-    form_set_error('instance][settings][end_year', t('The Start year value is invalid.'));
-  }
-
-  if (empty($settings['end_year']) && !empty($settings['start_year'])) {
-    form_set_error('instance][settings][end_year', t('The End year value is invalid.'));
-  }
-
-  if ($settings['end_year'] < $settings['start_year']) {
+  if ($end_error) {
     form_set_error('instance][settings][end_year', t('The End year value is invalid.'));
   }
 
@@ -128,11 +156,35 @@ function _novo_master_field_instance_settings_form_validate(&$form, &$form_state
 }
 
 /**
+ * Get default year value.
+ */
+function year_field_get_default_year_value($raw_default_year) {
+  if (empty(trim($raw_default_year))) {
+    return NULL;
+  }
+  if (is_numeric($raw_default_year) && checkdate(12, 31, $raw_default_year)) {
+    return intval($raw_default_year);
+  }
+  else {
+    if (is_string($raw_default_year)) {
+      $is_strtotime = @strtotime($raw_default_year);
+      if (!$is_strtotime) {
+        return NULL;
+      }
+      else {
+        return intval(date("Y", $is_strtotime));
+      }
+    }
+  }
+  return NULL;
+}
+
+/**
  * Implements hook_field_widget_info_alter().
  */
-function novo_master_field_widget_info_alter(&$info) {
+function year_field_field_widget_info_alter(&$info) {
   $widgets = array(
-    'options_select' => array('school_year'),
+    'options_select' => array('year'),
   );
   foreach ($widgets as $widget => $field_types) {
     $info[$widget]['field types'] = array_merge($info[$widget]['field types'], $field_types);
@@ -142,31 +194,40 @@ function novo_master_field_widget_info_alter(&$info) {
 /**
  * Field options list
  */
-function novo_master_options_list($field, $instance, $entity_type, $entity) {
-  return novo_master_available_options_list($instance);
+function year_field_options_list($field, $instance, $entity_type, $entity) {
+  return year_field_available_options_list($instance);
 }
 
 /**
  * Field available options list
  */
-function novo_master_available_options_list($instance) {
+function year_field_available_options_list($instance) {
   $start_year = isset($instance['settings']['start_year']) ? $instance['settings']['start_year'] : date("Y", strtotime("-50 year", time()));
   $end_year = isset($instance['settings']['end_year']) ? $instance['settings']['end_year'] : date("Y");
+  $is_academic_year = (isset($instance['settings']['academic_year']) && !empty($instance['settings']['academic_year'])) ? TRUE : FALSE;
+  $start_year_value = year_field_get_default_year_value($start_year);
+  $end_year_value = year_field_get_default_year_value($end_year);
+
   $years_list = array();
-  for ($i = $start_year; $i <= $end_year; $i++) {
-    $years_list[$i] = $i;
+  for ($i = $start_year_value; $i <= $end_year_value; $i++) {
+    $years_list[$i] = ($is_academic_year) ? ($i . " - " . ($i + 1)) : $i;
   }
+
   return $years_list;
 }
 
 /**
  * Implements hook_field_formatter_info().
  */
-function novo_master_field_formatter_info() {
+function year_field_field_formatter_info() {
   return array(
-    'school_year_default' => array(
+    'year_default' => array(
       'label' => t('Default'),
-      'field types' => array('school_year'),
+      'field types' => array('year'),
+    ),
+    'year_academic' => array(
+      'label' => t('Academic year'),
+      'field types' => array('year'),
     ),
   );
 }
@@ -174,15 +235,16 @@ function novo_master_field_formatter_info() {
 /**
  * Implements hook_field_formatter_view().
  */
-function novo_master_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+function year_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
+  $options = year_field_available_options_list($instance);
   //Currently we only have one display option, use switch
   //to prepare for future options.
   switch ($display['type']) {
-    case 'school_year_default':
+    case 'year_default':
       foreach ($items as $delta => $item) {
-        if (isset($options[$item['option']]['option'])) {
-          $output = field_filter_xss($options[$item['option']]['option']);
+        if (isset($options[$item['year']])) {
+          $output = field_filter_xss($options[$item['year']]);
         }
         else {
           $output = t("Not Supplied");
@@ -190,7 +252,19 @@ function novo_master_field_formatter_view($entity_type, $entity, $field, $instan
         $element[$delta] = array('#markup' => $output);
       }
       break;
-    default:
+
+    case 'year_academic':
+      foreach ($items as $delta => $item) {
+        if (isset($options[$item['year']])) {
+          $output = intval(field_filter_xss($options[$item['year']]));
+          $output = $output . " - " . ($output + 1);
+        }
+        else {
+          $output = t("Not Supplied");
+        }
+        $element[$delta] = array('#markup' => $output);
+      }
+      break;
   }
   return $element;
 }
@@ -198,8 +272,8 @@ function novo_master_field_formatter_view($entity_type, $entity, $field, $instan
 /**
  * Implements hook_content_is_empty().
  */
-function novo_master_field_is_empty($item, $field) {
-  if (empty($item['school_year'])) {
+function year_field_field_is_empty($item, $field) {
+  if (empty($item['year'])) {
     return TRUE;
   }
   return FALSE;
@@ -208,8 +282,8 @@ function novo_master_field_is_empty($item, $field) {
 /**
  * Implements hook_field_widget_form_alter().
  */
-function novo_master_field_widget_form_alter(&$element, &$form_state, $context) {
-  if (isset($context['field']['type']) && $context['field']['type'] == "school_year") {
+function year_field_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($context['field']['type']) && $context['field']['type'] == "year") {
     $settings_default_value = isset($context['instance']['settings']['default_value']) ? $context['instance']['settings']['default_value'] : NULL;
     $element_default_value = NULL;
     if (!empty($context['instance']['widget']['is_new'])) {
@@ -240,8 +314,8 @@ function novo_master_field_widget_form_alter(&$element, &$form_state, $context) 
  * Alters the widget properties of a field instance before it gets displayed.
  * Used here to flag new entities so we can later tell if they need default values.
  */
-function novo_master_field_widget_properties_alter(&$widget, $context) {
-  if (isset($context['field']['type']) && $context['field']['type'] == "school_year") {
+function year_field_field_widget_properties_alter(&$widget, $context) {
+  if (isset($context['field']['type']) && $context['field']['type'] == "year") {
     $entity_type = $context['entity_type'];
     $entity = $context['entity'];
     $info = entity_get_info($entity_type);
@@ -256,12 +330,12 @@ function novo_master_field_widget_properties_alter(&$widget, $context) {
 /**
  * Implements hook_form_FORM_ID_alter() for field_ui_field_edit_form().
  */
-function novo_master_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
+function year_field_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
   $form['instance']['default_value_widget']['#access'] = FALSE;
   $field = $form['#field'];
   $instance = $form['#instance'];
 
-  if (!in_array($field['type'], array('school_year'))) {
+  if (!in_array($field['type'], array('year'))) {
     return;
   }
 
@@ -274,13 +348,13 @@ function novo_master_form_field_ui_field_edit_form_alter(&$form, &$form_state, $
     '#collapsed' => FALSE,
   );
 
-  $form['instance']['#pre_render'][] = 'novo_master_field_ui_field_edit_form_pre_render';
+  $form['instance']['#pre_render'][] = 'year_field_field_ui_field_edit_form_pre_render';
 }
 
 /**
  * Rearrange form elements into fieldsets for presentation only.
  */
-function novo_master_field_ui_field_edit_form_pre_render($form) {
+function year_field_field_ui_field_edit_form_pre_render($form) {
   foreach ($form as $name => $element) {
     if (is_array($element) && isset($element['#fieldset'])) {
       $fieldset = $element['#fieldset'];
