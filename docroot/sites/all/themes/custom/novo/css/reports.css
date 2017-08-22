@@ -18,4 +18,10 @@
 .view-roster-report caption {
   font-family: ProximaNovaBold;
   color: #000;
+  background-color: #CCCCCC;
+  padding: 5px 10px;
+}
+
+.view-canvassing-report .tabledrag-toggle-weight-wrapper {
+  display: none;
 }

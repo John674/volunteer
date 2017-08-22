@@ -1017,6 +1017,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Relationship: Content: Kids list (field_program_kids_list) */
   $handler->display->display_options['relationships']['field_program_kids_list_value']['id'] = 'field_program_kids_list_value';
   $handler->display->display_options['relationships']['field_program_kids_list_value']['table'] = 'field_data_field_program_kids_list';
@@ -1145,24 +1151,45 @@ function novo_views_feature_views_default_views() {
     'program' => 'program',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Location (field_program_location) */
-  $handler->display->display_options['filters']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
-  $handler->display->display_options['filters']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
-  $handler->display->display_options['filters']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
-  $handler->display->display_options['filters']['field_program_location_target_id']['group'] = 1;
-  $handler->display->display_options['filters']['field_program_location_target_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['operator_id'] = 'field_program_location_target_id_op';
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['label'] = 'Filter by Location';
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['operator'] = 'field_program_location_target_id_op';
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['identifier'] = 'field_program_location_target_id';
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_program_location_target_id']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: School year (field_program_year) */
+  $handler->display->display_options['filters']['field_program_year_year']['id'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['table'] = 'field_data_field_program_year';
+  $handler->display->display_options['filters']['field_program_year_year']['field'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['group'] = 1;
+  $handler->display->display_options['filters']['field_program_year_year']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['operator_id'] = 'field_program_year_year_op';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['label'] = 'Filter by School year';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['operator'] = 'field_program_year_year_op';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['identifier'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['remember_roles'] = array(
     2 => 0,
     5 => '5',
     3 => '3',
     1 => 0,
     6 => 0,
   );
+  /* Filter criterion: Content: Location (field_program_location) (reference filter) */
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['id'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['field'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['group'] = 1;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator_id'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator'] = 'field_program_location_target_id_entityreference_filter_op';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['identifier'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember_roles'] = array(
+    2 => 0,
+    5 => '5',
+    3 => '3',
+    1 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'program_locations_list:entityreference_1';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_arguments'] = '[field_program_year_year]';
   /* Filter criterion: Content: Nid (reference filter) */
   $handler->display->display_options['filters']['nid_entityreference_filter']['id'] = 'nid_entityreference_filter';
   $handler->display->display_options['filters']['nid_entityreference_filter']['table'] = 'node';
@@ -1181,8 +1208,9 @@ function novo_views_feature_views_default_views() {
     1 => 0,
     6 => 0,
   );
+  $handler->display->display_options['filters']['nid_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['nid_entityreference_filter']['reference_display'] = 'canvassing_report_filter_program:entityreference_1';
-  $handler->display->display_options['filters']['nid_entityreference_filter']['reference_arguments'] = '[field_program_location_target_id]';
+  $handler->display->display_options['filters']['nid_entityreference_filter']['reference_arguments'] = '[field_program_year_year]/[field_program_location_target_id]';
   /* Filter criterion: Field collection item: Canvassing Group (field_p_canvassing_group) (reference filter) */
   $handler->display->display_options['filters']['field_p_canvassing_group_target_id_entityreference_filter']['id'] = 'field_p_canvassing_group_target_id_entityreference_filter';
   $handler->display->display_options['filters']['field_p_canvassing_group_target_id_entityreference_filter']['table'] = 'field_data_field_p_canvassing_group';
@@ -1207,7 +1235,6 @@ function novo_views_feature_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'canvassing-report';
-  $handler->display->display_options['menu']['title'] = 'Canvassing Report';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
@@ -1269,6 +1296,14 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['sorts']['title']['order'] = 'DESC';
+  /* Contextual filter: Content: School year (field_program_year) */
+  $handler->display->display_options['arguments']['field_program_year_year']['id'] = 'field_program_year_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['table'] = 'field_data_field_program_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['field'] = 'field_program_year_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary_options']['items_per_page'] = '25';
   /* Contextual filter: Content: Location (field_program_location) */
   $handler->display->display_options['arguments']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
   $handler->display->display_options['arguments']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
@@ -3673,6 +3708,12 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div class="novo-no-data-found">No data found.</div>';
   /* Relationship: Content: Kids list (field_program_kids_list) */
   $handler->display->display_options['relationships']['field_program_kids_list_value']['id'] = 'field_program_kids_list_value';
   $handler->display->display_options['relationships']['field_program_kids_list_value']['table'] = 'field_data_field_program_kids_list';
@@ -3799,23 +3840,18 @@ function novo_views_feature_views_default_views() {
     'program' => 'program',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['field_program_school_year_value']['id'] = 'field_program_school_year_value';
-  $handler->display->display_options['filters']['field_program_school_year_value']['table'] = 'field_data_field_program_school_year';
-  $handler->display->display_options['filters']['field_program_school_year_value']['field'] = 'field_program_school_year_value';
-  $handler->display->display_options['filters']['field_program_school_year_value']['value'] = array(
-    'min' => NULL,
-    'max' => NULL,
-    'value' => NULL,
-    'type' => 'date',
-  );
-  $handler->display->display_options['filters']['field_program_school_year_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_program_school_year_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_program_school_year_value']['expose']['operator_id'] = 'field_program_school_year_value_op';
-  $handler->display->display_options['filters']['field_program_school_year_value']['expose']['label'] = 'Filter by School year';
-  $handler->display->display_options['filters']['field_program_school_year_value']['expose']['operator'] = 'field_program_school_year_value_op';
-  $handler->display->display_options['filters']['field_program_school_year_value']['expose']['identifier'] = 'field_program_school_year_value';
-  $handler->display->display_options['filters']['field_program_school_year_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: School year (field_program_year) */
+  $handler->display->display_options['filters']['field_program_year_year']['id'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['table'] = 'field_data_field_program_year';
+  $handler->display->display_options['filters']['field_program_year_year']['field'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['group'] = 1;
+  $handler->display->display_options['filters']['field_program_year_year']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['operator_id'] = 'field_program_year_year_op';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['label'] = 'Filter by School year';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['operator'] = 'field_program_year_year_op';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['identifier'] = 'field_program_year_year';
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_program_year_year']['expose']['remember_roles'] = array(
     2 => 0,
     5 => '5',
     3 => '3',
@@ -3842,6 +3878,7 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'roster_report_program_locations_list:entityreference_1';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_arguments'] = '[field_program_year_year]';
   /* Filter criterion: Content: Nid (reference filter) */
   $handler->display->display_options['filters']['nid_entityreference_filter']['id'] = 'nid_entityreference_filter';
   $handler->display->display_options['filters']['nid_entityreference_filter']['table'] = 'node';
@@ -3862,7 +3899,7 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['nid_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['nid_entityreference_filter']['reference_display'] = 'canvassing_report_filter_program:entityreference_1';
-  $handler->display->display_options['filters']['nid_entityreference_filter']['reference_arguments'] = '[field_program_location_target_id_entityreference_filter]';
+  $handler->display->display_options['filters']['nid_entityreference_filter']['reference_arguments'] = '[field_program_year_year]/[field_program_location_target_id_entityreference_filter]';
   /* Filter criterion: Field collection item: Canvassing Group (field_p_canvassing_group) (reference filter) */
   $handler->display->display_options['filters']['field_p_canvassing_group_target_id_entityreference_filter']['id'] = 'field_p_canvassing_group_target_id_entityreference_filter';
   $handler->display->display_options['filters']['field_p_canvassing_group_target_id_entityreference_filter']['table'] = 'field_data_field_p_canvassing_group';
@@ -3983,6 +4020,15 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: School year (field_program_year) */
+  $handler->display->display_options['arguments']['field_program_year_year']['id'] = 'field_program_year_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['table'] = 'field_data_field_program_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['field'] = 'field_program_year_year';
+  $handler->display->display_options['arguments']['field_program_year_year']['relationship'] = 'reverse_field_program_location_node';
+  $handler->display->display_options['arguments']['field_program_year_year']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_program_year_year']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
