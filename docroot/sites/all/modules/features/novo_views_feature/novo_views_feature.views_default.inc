@@ -1355,6 +1355,86 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Address */
+  $handler->display->display_options['fields']['field_address_1']['id'] = 'field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['table'] = 'field_data_field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['field'] = 'field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_address_1']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_address_1']['settings'] = array(
+    'trim_length' => '50',
+  );
+  /* Field: Content: Address Apartment number */
+  $handler->display->display_options['fields']['field_apt']['id'] = 'field_apt';
+  $handler->display->display_options['fields']['field_apt']['table'] = 'field_data_field_apt';
+  $handler->display->display_options['fields']['field_apt']['field'] = 'field_apt';
+  $handler->display->display_options['fields']['field_apt']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_apt']['label'] = 'Apt #';
+  $handler->display->display_options['fields']['field_apt']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_apt']['settings'] = array(
+    'trim_length' => '50',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Children name';
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Content: Parent / Guardian List */
+  $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['table'] = 'field_data_field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['field'] = 'field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
+  $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
+    'view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['label'] = 'Program Location';
+  $handler->display->display_options['fields']['field_program_location']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Field collection item: Canvassing Group */
+  $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['table'] = 'field_data_field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['field'] = 'field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['label'] = '';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_p_canvassing_group']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_p_canvassing_group']['empty'] = 'No group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['field_p_canvassing_group']['type'] = 'entityreference_entity_view';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['settings'] = array(
+    'view_mode' => 'default',
+    'links' => 0,
+    'use_content_language' => 0,
+  );
+  /* Field: Draggableviews: Field collection item */
+  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['table'] = 'field_collection_item';
+  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
+  $handler->display->display_options['fields']['draggableviews']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['fields']['draggableviews']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 1;
   $handler->display->display_options['path'] = 'canvassing-report/export-pdf';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
