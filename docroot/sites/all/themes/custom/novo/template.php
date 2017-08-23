@@ -477,7 +477,7 @@ function novo_field_widget_form_alter(&$element, &$form_state, $context) {
 }
 
 /**
- * theme_views_data_export_feed_icon__xls().
+ * Implements theme_views_data_export_feed_icon__xls().
  */
 function novo_views_data_export_feed_icon__xls($variables) {
   extract($variables, EXTR_SKIP);
@@ -493,7 +493,7 @@ function novo_views_data_export_feed_icon__xls($variables) {
 }
 
 /**
- * theme_views_data_export_feed_icon__pdf().
+ * Implements theme_views_data_export_feed_icon__pdf().
  */
 function novo_views_data_export_feed_icon__pdf($variables) {
   extract($variables, EXTR_SKIP);

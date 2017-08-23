@@ -21,7 +21,6 @@ function template_process_views_data_export_pdf_body(&$vars) {
   $output = '';
 
   $already_added_group_titles = (isset($vars['group_titles'])) ? $vars['group_titles'] : array();
-  //dsm($vars);
 
   // Construct the tbody of a table, see theme_table().
   $ts = tablesort_init($vars['header']);
@@ -47,7 +46,7 @@ function template_process_views_data_export_pdf_body(&$vars) {
   foreach ($vars['themed_rows'] as $number => $row) {
     $attributes = array();
 
-    // Check if we're dealing with a simple or complex row
+    // Check if we're dealing with a simple or complex row.
     if (isset($row['data'])) {
       foreach ($row as $key => $value) {
         if ($key == 'data') {
@@ -62,7 +61,7 @@ function template_process_views_data_export_pdf_body(&$vars) {
       $cells = $row;
     }
     if (count($cells)) {
-      // Add odd/even class
+      // Add odd/even class.
       $class = $flip[$class];
       if (isset($attributes['class'])) {
         $attributes['class'] .= ' ' . $class;
@@ -71,7 +70,7 @@ function template_process_views_data_export_pdf_body(&$vars) {
         $attributes['class'] = $class;
       }
 
-      // Build row
+      // Build row.
       $output .= ' <tr' . drupal_attributes($attributes) . '>';
       $i = 0;
       foreach ($cells as $cell) {
@@ -82,8 +81,7 @@ function template_process_views_data_export_pdf_body(&$vars) {
     }
   }
 
-
-  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
+  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
 }
 
 /**
@@ -106,7 +104,7 @@ function template_preprocess_views_data_export_pdf_header(&$vars) {
 
   $vars['header_row'] .= '</tr></thead>';
 
-  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // strip 'a' and 'span' tags
+  $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']);
 }
 
 /**
