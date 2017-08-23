@@ -30,20 +30,59 @@ function novo_reports_menu() {
 function novo_reports_list() {
   $views = views_get_all_views();
   $links = array();
+
   foreach ($views as $view_name => $view) {
     if (strtolower($view->tag) == "report") {
       $path = isset($view->display['page']->display_options['path']) ? $view->display['page']->display_options['path'] : NULL;
       if ($path) {
         $title = $view->human_name;
-        $export_path = isset($view->display['views_data_export_1']->display_options['path']) ? $view->display['views_data_export_1']->display_options['path'] : NULL;
-        if (!empty($export_path)) {
-          $title .= " " . theme("views_data_export_feed_icon", array(
-                'image_path' => drupal_get_path('module', 'views_data_export') . '/images/xls.png',
-                'url' => $export_path,
-                'text' => $view->human_name,
-                'title' => $view->human_name
-              )
-            );
+
+        $export_links = array();
+        foreach ($view->display as $key => $display) {
+          if (in_array($display->display_plugin, array(
+            "views_data_export_pdf",
+            "views_data_export"
+          ))) {
+            $export_path = isset($view->display[$key]->display_options['path']) ? $view->display[$key]->display_options['path'] : NULL;
+            $style_plugin = isset($view->display[$key]->display_options['style_plugin']) ? $view->display[$key]->display_options['style_plugin'] : NULL;
+
+            switch ($style_plugin) {
+              case "views_data_export_xls":
+                $image_path = drupal_get_path("module", "views_data_export") . "/images/xls.png";
+                $type = "xls";
+                break;
+
+              case "views_data_export_pdf":
+                $image_path = drupal_get_path("module", "views_data_export_pdf") . "/images/pdf.png";
+                $type = "pdf";
+                break;
+
+              default:
+                $type = "";
+                $image_path = "";
+            }
+
+            if (!empty($export_path)) {
+              $theme_pattern = array(
+                'views_data_export_feed_icon__' . $type,
+                'views_data_export_feed_icon',
+              );
+
+              $export_links[] = theme($theme_pattern, array(
+                  'image_path' => $image_path,
+                  'url' => $export_path,
+                  'text' => $view->human_name,
+                  'title' => $view->human_name,
+                  'style_plugin' => $style_plugin
+                )
+              );
+            }
+
+          }
+        }
+
+        if (!empty($export_links)) {
+          $title .= " " . implode(" ", $export_links);
         }
 
         $links[] = array(

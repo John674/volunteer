@@ -26,6 +26,7 @@
       - sites/all/modules/custom/novo_ref_request/views/*
       - sites/all/modules/custom/novo_applications/views/*
       - sites/all/modules/custom/year_field/views/*
+      - sites/all/modules/custom/views_data_export_pdf/plugins/*
     phpcs_features_ignore:
       - sites/all/features/nonstandard
       - sites/all/modules/features
