@@ -17,7 +17,8 @@ define("NOVO_REF_REQUEST_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
 define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
 
-define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
+define("NOVO_REF_REQUEST_CRON_EMAIL_PERIOD", 60 * 5);
+define("NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD", 60 * 60);
 
 // 72 hours.
 define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
@@ -510,21 +511,24 @@ function novo_ref_request_cron_queue_info() {
  * Implements hook_cron().
  */
 function novo_ref_request_cron() {
-  $cron_last = variable_get('novo_ref_request_cron_last');
-  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_PERIOD) {
+  $cron_last = variable_get('novo_ref_request_cron_email_last');
+  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_EMAIL_PERIOD) {
     $email_queue = DrupalQueue::get('novo_ref_request_email_queue');
     $data = novo_ref_request_task_get_all_not_sent();
     foreach ($data as $key => $task) {
       $email_queue->createItem(array('nid' => $task->nid, 'id' => $task->id));
     }
+    variable_set('novo_ref_request_cron_email_last', time());
+  }
 
+  $cron_last = variable_get('novo_ref_request_cron_expired_last');
+  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
     $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
     $data = novo_ref_request_task_get_all_not_responded_expired();
     foreach ($data as $key => $task) {
       $expired_queue->createItem(array('id' => $task->id));
     }
-
-    variable_set('novo_ref_request_cron_last', time());
+    variable_set('novo_ref_request_cron_expired_last', time());
   }
 }
 

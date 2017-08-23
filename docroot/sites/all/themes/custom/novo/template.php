@@ -475,3 +475,35 @@ function novo_field_widget_form_alter(&$element, &$form_state, $context) {
     }
   }
 }
+
+/**
+ * Implements theme_views_data_export_feed_icon__xls().
+ */
+function novo_views_data_export_feed_icon__xls($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("XLS");
+  return l($text, $url, $url_options);
+}
+
+/**
+ * Implements theme_views_data_export_feed_icon__pdf().
+ */
+function novo_views_data_export_feed_icon__pdf($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
+  return l($text, $url, $url_options);
+}

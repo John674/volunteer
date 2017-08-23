@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * All hook_update()'s.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function year_field_field_schema($field) {
+  $schema = array();
+  $schema['columns']['year'] = array(
+    'type' => 'int',
+    'length' => 4,
+    'not null' => FALSE
+  );
+  return $schema;
+}
