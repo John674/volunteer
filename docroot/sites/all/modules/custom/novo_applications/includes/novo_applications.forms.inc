@@ -229,26 +229,71 @@ function novo_applications_add_sites_virtual_field(&$form, &$form_state) {
   if ($is_new) {
     $multi = (isset($form['field_what_site_you_want'][LANGUAGE_NONE]['#cardinality']) && $form['field_what_site_you_want'][LANGUAGE_NONE]['#cardinality'] == -1) ? TRUE : FALSE;
     $weight = (isset($form['field_what_site_you_want']['#weight'])) ? $form['field_what_site_you_want']['#weight'] : 100;
-    $sites_voc = taxonomy_vocabulary_machine_name_load(NOVO_APPLICATION_SITES_VOC_NAME);
-    if (isset($sites_voc->vid)) {
-      $sites = taxonomy_get_tree($sites_voc->vid);
-      $options = array();
-      foreach ($sites as $key => $term) {
-        $options[$term->tid] = $term->name;
-      }
+    $options = novo_applications_get_sites_for_virtual_field();
+    if (!empty($options)) {
       $form['field_what_site_you_want_virtual'] = array(
         '#title' => t('At what site do you want to volunteer?'),
         '#type' => ($multi) ? "checkboxes" : "radios",
         '#options' => $options,
         '#weight' => $weight,
       );
+    }
 
-      $form['#validate'][] = 'novo_applications_add_sites_virtual_validate';
-      $form['#groups']['group_app_1_contact']->children[] = "field_what_site_you_want_virtual";
-      $form['#group_children']['field_what_site_you_want_virtual'] = 'group_app_1_contact';
-      $form['field_what_site_you_want']['#access'] = FALSE;
+    $form['#validate'][] = 'novo_applications_add_sites_virtual_validate';
+    $form['#groups']['group_app_1_contact']->children[] = "field_what_site_you_want_virtual";
+    $form['#group_children']['field_what_site_you_want_virtual'] = 'group_app_1_contact';
+    $form['field_what_site_you_want']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Get options for site field.
+ */
+function novo_applications_get_sites_for_virtual_field() {
+  $options = array();
+  $result = views_get_view_result("site_field_options_list");
+  // Distinct.
+  $new_results = array();
+  if (!empty($result)) {
+    foreach ($result as $item) {
+      $new_results[$item->nid] = $item;
     }
   }
+
+  if (!empty($new_results)) {
+    foreach ($new_results as $item) {
+      $class = $item->node_title;
+      $location = (isset($item->field_field_class_location[0]['rendered']['#label'])) ? $item->field_field_class_location[0]['rendered']['#label'] : "";
+      $fc_items = (isset($item->field_field_program_day)) ? $item->field_field_program_day : array();
+      $p_date = array();
+      foreach ($fc_items as $item) {
+        $fc_item = reset($item['rendered']['entity']['field_collection_item']);
+        $w = isset($fc_item['field_program_weekday'][0]['#markup']) ? $fc_item['field_program_weekday'][0]['#markup'] : "";
+        $t_from = isset($fc_item['field_program_time'][0]['#time']['value_formatted']) ? $fc_item['field_program_time'][0]['#time']['value_formatted'] : "";
+        $t_to = isset($fc_item['field_program_time'][0]['#time']['value2_formatted']) ? $fc_item['field_program_time'][0]['#time']['value2_formatted'] : "";
+        $p_date[$w][] = $t_from . " - " . $t_to;
+      }
+      $p_date = novo_applications_field_weekday_sort($p_date);
+      foreach ($p_date as $weekday => $time_arr) {
+        $options[] = $weekday . ", " . $location . ", " . implode(", ", $time_arr) . " (" . $class . ")";
+      }
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Sort weekdays for site virtual field.
+ */
+function novo_applications_field_weekday_sort($p_date) {
+  $week_order = unserialize(NOVO_APPLICATION_WEEKDAY_ORDER);
+
+  uksort($p_date,
+    function ($a, $b) use ($week_order) {
+      return $week_order[$a] - $week_order[$b];
+    });
+  return $p_date;
 }
 
 /**
