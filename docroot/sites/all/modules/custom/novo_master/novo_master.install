@@ -437,3 +437,30 @@ function novo_master_update_7138() {
   features_revert_module("novo_views_feature");
   features_revert_module("novo_roles_permissions_feature");
 }
+
+/**
+ * Revert novo_block_feature and enable webform_ajax.
+ */
+function novo_master_update_7139() {
+  module_enable(array("webform_ajax"));
+  features_revert_module("novo_block_feature");
+}
+
+/**
+ * Remove old fields.
+ */
+function novo_master_update_7140() {
+  field_delete_field('field_class_school_year');
+  field_delete_field('field_program_school_year');
+  field_purge_batch(1);
+}
+
+/**
+ * Remove application_site voc.
+ */
+function novo_master_update_7141() {
+  $voc = taxonomy_vocabulary_machine_name_load("application_site");
+  if (isset($voc->vid)) {
+    taxonomy_vocabulary_delete($voc->vid);
+  }
+}

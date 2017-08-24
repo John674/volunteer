@@ -19,6 +19,7 @@
   vertical-align: top;
 }
 
+.node-attendance-form .field-name-field-attendance-year,
 .node-attendance-form .field-name-field-attendance-location,
 .node-attendance-form .field-name-field-attendance-program-name {
   margin-right: 10px;

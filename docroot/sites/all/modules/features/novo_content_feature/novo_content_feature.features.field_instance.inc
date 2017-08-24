@@ -7051,22 +7051,20 @@ Friend',
   // Exported field_instance: 'node-attendance-field_attendance_year'.
   $field_instances['node-attendance-field_attendance_year'] = array(
     'bundle' => 'attendance',
+    'default_value' => array(
+      0 => array(
+        'year' => 2017,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 4,
+        'module' => NULL,
+        'settings' => array(),
+        'type' => 'year_field_options_list',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -7080,26 +7078,20 @@ Friend',
     'label' => 'Year',
     'required' => 1,
     'settings' => array(
+      'academic_year' => 1,
       'default_value' => 'now',
-      'default_value2' => 'same',
       'default_value_code' => '',
-      'default_value_code2' => '',
+      'end_year' => '+2 year',
+      'start_year' => '-50 year',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'date',
+      'module' => 'options',
       'settings' => array(
-        'apply_chosen' => 0,
-        'increment' => 15,
-        'input_format' => 'site-wide',
-        'input_format_custom' => 'Y',
-        'label_position' => 'above',
-        'no_fieldset' => 1,
-        'text_parts' => array(),
-        'year_range' => '-10:+3',
+        'apply_chosen' => '',
       ),
-      'type' => 'date_select',
+      'type' => 'options_select',
       'weight' => 1,
     ),
   );
@@ -7142,29 +7134,27 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => -3,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'node-class-field_class_school_year'.
-  $field_instances['node-class-field_class_school_year'] = array(
+  // Exported field_instance: 'node-class-field_class_year'.
+  $field_instances['node-class-field_class_year'] = array(
     'bundle' => 'class',
+    'default_value' => array(
+      0 => array(
+        'year' => 2017,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 0,
+        'module' => 'year_field',
+        'settings' => array(),
+        'type' => 'year_academic',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -7174,30 +7164,25 @@ Friend',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_class_school_year',
+    'field_name' => 'field_class_year',
     'label' => 'School year',
     'required' => 1,
     'settings' => array(
+      'academic_year' => 1,
       'default_value' => 'now',
-      'default_value2' => 'same',
       'default_value_code' => '',
-      'default_value_code2' => '',
+      'end_year' => '+2 year',
+      'start_year' => '-50 year',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'date',
+      'module' => 'options',
       'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 1,
-        'text_parts' => array(),
-        'year_range' => '-50:+3',
+        'apply_chosen' => '',
       ),
-      'type' => 'date_select',
-      'weight' => -4,
+      'type' => 'options_select',
+      'weight' => 2,
     ),
   );
 
@@ -7248,7 +7233,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => -1,
+      'weight' => 4,
     ),
   );
 
@@ -9427,7 +9412,7 @@ Re-Dedication',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -9469,7 +9454,7 @@ Re-Dedication',
         'title_on_top' => 1,
       ),
       'type' => 'field_collection_table',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -9511,29 +9496,27 @@ Re-Dedication',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'node-program-field_program_school_year'.
-  $field_instances['node-program-field_program_school_year'] = array(
+  // Exported field_instance: 'node-program-field_program_year'.
+  $field_instances['node-program-field_program_year'] = array(
     'bundle' => 'program',
+    'default_value' => array(
+      0 => array(
+        'year' => 2017,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'short',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => 0,
-        ),
-        'type' => 'date_default',
-        'weight' => 1,
+        'module' => 'year_field',
+        'settings' => array(),
+        'type' => 'year_academic',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -9543,30 +9526,25 @@ Re-Dedication',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_program_school_year',
+    'field_name' => 'field_program_year',
     'label' => 'School year',
     'required' => 1,
     'settings' => array(
+      'academic_year' => 1,
       'default_value' => 'now',
-      'default_value2' => 'same',
       'default_value_code' => '',
-      'default_value_code2' => '',
+      'end_year' => '+2 year',
+      'start_year' => '-50 year',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'date',
+      'module' => 'options',
       'settings' => array(
-        'increment' => 30,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 1,
-        'text_parts' => array(),
-        'year_range' => '-50:+3',
+        'apply_chosen' => '',
       ),
-      'type' => 'date_select',
-      'weight' => 1,
+      'type' => 'options_select',
+      'weight' => 2,
     ),
   );
 

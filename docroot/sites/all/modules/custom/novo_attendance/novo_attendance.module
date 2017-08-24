@@ -40,7 +40,7 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
 function novo_attendance_field_attendance_date_validate($element, &$form_state, $form) {
   $values = isset($form_state['values']) ? $form_state['values'] : array();
 
-  $year = isset($values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year']) ? $values['field_attendance_year'][LANGUAGE_NONE][0]['value']['year'] : NULL;
+  $year = isset($values['field_attendance_year'][LANGUAGE_NONE]) ? $values['field_attendance_year'][LANGUAGE_NONE] : NULL;
   $date = (isset($element[0]['#value']['value']['date'])) ? $element[0]['#value']['value']['date'] : NULL;
 
   if (!$date) {
