@@ -1,7 +1,7 @@
 name = Novo views feature
 core = 7.x
 package = Novo
-version = 7.x-1.39
+version = 7.x-1.40
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
 dependencies[] = date_views
@@ -43,6 +43,7 @@ features[views_view][] = programs
 features[views_view][] = ref_request_tasks
 features[views_view][] = roster_report
 features[views_view][] = roster_report_program_locations_list
+features[views_view][] = site_field_options_list
 features[views_view][] = small_groups
 features[views_view][] = staff
 features[views_view][] = staff_ref
