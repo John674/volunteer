@@ -99,8 +99,7 @@
         <?php endif; ?>
       </header>
   <?php endif; ?>
-    <div class="container">
-        <div class="panel panel-default">
+    <div class="panel panel-default">
             <div class="panel-heading"><?php print (t('Application view')) ?></div>
             <div class="panel-body">
               <?php if (!empty($title)): ?>
@@ -128,6 +127,7 @@
               hide($content['field_reference_request_standby']);
               hide($content['field_reference_request_parents']);
               hide($content['field_reference_request_church']);
+              hide($content['pseudo_field_request_cia']);
 
               hide($content['field_app_status']);
               hide($content['app_status']);
@@ -190,20 +190,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
                     <div class="panel-body">
-                        <div class="row field">
-                            <div class="col-md-6">
-                                <div class="field-label">
-                                    <span><?php print (t('CIA Background Check')) ?>
-                                        :</span>
-                                    <span class="label label-danger"><?php print (t('Coming soon')); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <span>N/A</span>
-                            </div>
-                        </div>
-                        <hr>
-
+                      <?php print render($content['pseudo_field_request_cia']); ?>
                       <?php print render($content['field_reference_request_1']); ?>
                       <?php print render($content['field_reference_request_2']); ?>
                       <?php print render($content['field_reference_request_standby']); ?>
@@ -238,7 +225,6 @@
               <?php endif; ?>
             </div>
         </div>
-    </div>
   <?php
   // Only display the wrapper div if there are tags or links.
   $field_tags = render($content['field_tags']);
