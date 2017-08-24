@@ -8873,6 +8873,7 @@ Re-Dedication',
   // Exported field_instance: 'node-mentors-field_volunteer_mentor_name'.
   $field_instances['node-mentors-field_volunteer_mentor_name'] = array(
     'bundle' => 'mentors',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(

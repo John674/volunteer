@@ -209,9 +209,37 @@
                       <?php print render($content['field_reference_request_standby']); ?>
                       <?php print render($content['field_reference_request_church']); ?>
                       <?php print render($content['field_reference_request_parents']); ?>
+
                     </div>
                 </div>
 
+                <div class="panel panel-default">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+                      <?php if (isset($dynamic_fields)): ?>
+                        <?php foreach ($dynamic_fields as $key => $dyn_group): ?>
+                          <?php if (!empty($key)) : ?>
+                                  <hr>
+                          <?php endif; ?>
+                          <?php foreach ($dyn_group as $dyn_field): ?>
+                                  <div class="row field">
+                                      <div class="col-md-6">
+                                        <?php if (!empty($dyn_field['title'])): ?>
+                                            <div class="field-label">
+                                                <span><?php print $dyn_field['title']; ?>
+                                                    :</span>
+                                            </div>
+                                        <?php endif; ?>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <span><?php print $dyn_field['content']; ?></span>
+                                      </div>
+                                  </div>
+                          <?php endforeach; ?>
+                        <?php endforeach; ?>
+                      <?php endif; ?>
+                    </div>
+                </div>
 
             </div>
             <div class="panel-footer clearfix">
