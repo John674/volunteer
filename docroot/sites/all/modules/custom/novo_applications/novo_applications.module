@@ -8,8 +8,15 @@
 define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
 define('NOVO_APPLICATION_STATUS_APPROVED_NAME', 'Approved');
 define('NOVO_APPLICATION_STATUS_NOT_APPROVED_NAME', 'Not Approved');
-
-define("NOVO_APPLICATION_SITES_VOC_NAME", "application_site");
+define('NOVO_APPLICATION_WEEKDAY_ORDER', serialize(array_flip(array(
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+))));
 
 module_load_include("inc", "novo_applications", "includes/novo_applications.func");
 module_load_include("inc", "novo_applications", "includes/novo_applications.forms");
