@@ -11,7 +11,6 @@
 function novo_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
-
   // @codingStandardsIgnoreStart
   // Theme Color selects.
   if (isset($element['#field_name'])) {
@@ -30,6 +29,18 @@ function novo_select($variables) {
       break;
     }
   }
+
+  if (isset($element['#name'])) {
+    switch ($element['#name']) {
+      case "field_p_canvassing_group_target_id_entityreference_filter":
+      case "field_p_small_group_target_id_entityreference_filter":
+        _form_set_class($element, array('form-select', 'selectpicker'));
+        return '<select' . drupal_attributes($element['#attributes']) . '>' . novo_form_select_options_color($element, NULL, FALSE) . '</select>';
+
+        break;
+    }
+  }
+
   // @codingStandardsIgnoreEnd
 
   // Theme School year.

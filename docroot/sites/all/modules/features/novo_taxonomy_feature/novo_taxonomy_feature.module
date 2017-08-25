@@ -1,10 +1,15 @@
 <?php
+/**
+ * @file
+ * Code for the Novo Taxonomy Feature feature.
+ */
+
+include_once 'novo_taxonomy_feature.features.inc';
 
 /** Constants */
 define('NOVO_VOCABULARY_STATES', 'states');
 define('NOVO_VOCABULARY_GENDER', 'gender');
 define('NOVO_VOCABULARY_GRADE', 'grade');
-define('NOVO_VOCABULARY_APPLICATION_SITE', 'application_site');
 define('NOVO_VOCABULARY_COLOR_PREFERENCE', 'color_preference');
 define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
 define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
@@ -36,10 +41,6 @@ function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
 
     case NOVO_VOCABULARY_GRADE:
       _novo_taxonomy_feature_add_grade($vocabulary);
-      break;
-
-    case NOVO_VOCABULARY_APPLICATION_SITE:
-      _novo_taxonomy_feature_add_application_site($vocabulary);
       break;
 
     case NOVO_VOCABULARY_COLOR_PREFERENCE:
@@ -203,28 +204,6 @@ function _novo_taxonomy_feature_add_grade($vocabulary) {
     $term = new stdClass();
     $term->name = $abbr;
     $term->description = $name;
-    $term->vid = $vocabulary->vid;
-    taxonomy_term_save($term);
-  }
-}
-
-/**
- * Import application_site.
- */
-function _novo_taxonomy_feature_add_application_site($vocabulary) {
-  $list = array(
-    'Monday, Ambassador Courts Apartments, 4:15pm - 7:15pm',
-    'Monday, Fred Factory Gardens, 4:30pm - 7:00pm',
-    'Tuesday, Edwards Elementary School, 3:00pm - 5:30pm',
-    'Tuesday, Northeast Scattered Sites, 4:30pm - 7:30pm',
-    'Tuesday, Oak Grove Apartments, 5:00pm - 8:15pm',
-    'Thursday, Tulakes Elementary School, 3:00pm - 5:30pm',
-    'Thursday, Sooner Haven Apartments, 5:00pm - 8:00pm',
-    'Thursday, Forest Creek Apartments, 5:15pm - 8:15pm'
-  );
-  foreach ($list as $key => $value) {
-    $term = new stdClass();
-    $term->name = $value;
     $term->vid = $vocabulary->vid;
     taxonomy_term_save($term);
   }

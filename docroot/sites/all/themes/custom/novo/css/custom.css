@@ -149,3 +149,115 @@ a.tabledrag-handle .handle {
 .node-application .field-name-field-phone-type {
   display: inline-block;
 }
+
+.contact-us-container {
+  position: fixed;
+  bottom: 0;
+}
+
+.modal#novo-contact-us-block {
+  display: block !important;
+  visibility: hidden;
+}
+
+.modal.in#novo-contact-us-block {
+  visibility: visible;
+}
+
+.modal.in#novo-contact-us-block .modal-dialog {
+  transform: translateY(0);
+}
+
+.modal#novo-contact-us-block .modal-dialog {
+  transform: translateY(100%);
+}
+
+.modal#novo-contact-us-block .modal-dialog {
+  position: fixed;
+  bottom: 0;
+  left: 20%;
+  margin: 0;
+  max-width: 20em;
+  -webkit-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+
+.novo-select-color-block {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.novo-canvassing-group-wrapper,
+.novo-small-group-wrapper {
+  color: #fff;
+  font-family: ProximaNovaBold;
+  margin: 0px 20px;
+  padding: 0px 10px;
+}
+
+.novo-small-group-wrapper {
+  color: #000;
+}
+
+.draggableviews-changed-notice {
+  color: red;
+}
+
+.novo-glyphicon {
+  padding: 6px;
+  color: rgba(71, 73, 72, 0.85);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  font-size: 0.9em;
+}
+
+.novo-glyphicon.glyphicon-arrow-right {
+  padding-right: 5px;
+}
+
+li.novo-leaf a {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container-inline-date .form-item .novo-input-group input {
+  margin-right: 0;
+}
+
+.novo-input-group .input-group-addon {
+  width: auto;
+  color: #777777;
+  background-color: #ffffff;
+}
+
+.btn.icon-before .glyphicon.novo-glyphicon-remove {
+  top: 3px;
+  margin: 0;
+}
+
+.control-label .form-required {
+  color: #d9534f;
+}
+
+.field-name-field-program-time + .btn {
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.novo-export-feed-icon {
+  margin-right: 5px;
+}
+
+.novo-export-feed-icon i {
+  margin-right: 2px;
+}
+
+.novo-export-feed-icon:last-child {
+  margin-right: 0px;
+}

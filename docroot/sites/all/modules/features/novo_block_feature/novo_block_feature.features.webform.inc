@@ -26,7 +26,7 @@ $webforms = array();
     'pathauto' => 1,
   ),
   'webform' => array(
-    'confirmation' => 'Your comment has beed send.',
+    'confirmation' => 'Your comment has been sent.',
     'confirmation_format' => 'plain_text',
     'redirect_url' => '<none>',
     'status' => 1,
@@ -55,6 +55,7 @@ $webforms = array();
     'preview_message_format' => 'plain_text',
     'preview_excluded_components' => array(),
     'machine_name' => 'contact_us',
+    'webform_ajax' => 1,
     'record_exists' => TRUE,
     'roles' => array(
       0 => 1,

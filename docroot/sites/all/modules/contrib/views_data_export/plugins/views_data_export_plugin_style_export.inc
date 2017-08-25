@@ -50,6 +50,7 @@ class views_data_export_plugin_style_export extends views_plugin_style {
    * None.
    */
   function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
     $form['attach_text'] = array(
       '#type' => 'textfield',
       '#title' => t('Attach text'),
@@ -273,7 +274,6 @@ class views_data_export_plugin_style_export extends views_plugin_style {
         $rows = $records;
       }
 
-      $title = '';
       $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_body'), array('view' => $this->view, 'options' => $this->options, 'rows' => $rows, 'title' => $title));
     }
     unset($this->view->row_index);

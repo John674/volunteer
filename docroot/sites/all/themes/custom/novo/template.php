@@ -177,6 +177,12 @@ function novo_theme($existing, $type, $theme, $path) {
       'variables' => array('status' => NULL, 'label' => NULL),
       'template' => 'templates/custom/status-label',
     ),
+    'textfield__date_of_birthday' => array(
+      'render element' => 'element',
+    ),
+    'date_form_element__date_of_birthday' => array(
+      'render element' => 'element',
+    ),
   );
 }
 
@@ -260,4 +266,244 @@ function novo_preprocess_block(&$variables) {
   if ($variables['block']->module == "webform") {
     $variables['theme_hook_suggestions'][] = "block__webform__contact_us";
   }
+}
+
+/**
+ * Implements hook_elements_info_alter().
+ */
+function novo_element_info_alter(&$type) {
+  if (isset($type['textfield'])) {
+    $type['textfield']['#pre_render'][] = '_novo_pre_render_date_of_birthday';
+  }
+}
+
+/**
+ * Pre render for field_dob.
+ */
+function _novo_pre_render_date_of_birthday($variable) {
+  if (isset($variable['#parents']) && ($variable['#parents'][0] == 'field_dob')) {
+    $variable['#theme'] = ['textfield__date_of_birthday'];
+  }
+  return $variable;
+}
+
+/**
+ * Theme function for textfield__date_of_birthday.
+ */
+function novo_textfield__date_of_birthday($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'text';
+  element_set_attributes($element, [
+    'id',
+    'name',
+    'value',
+    'size',
+    'maxlength',
+  ]);
+  _form_set_class($element, ['form-text']);
+
+  $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
+  $input_id = isset($element['#attributes']['id']) ? $element['#attributes']['id'] : '';
+
+  $output .= '<label class="input-group-addon btn" for="' . $input_id . '"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></label>';
+  if (!isset($element['#input_group']) && !isset($element['#input_group_button'])) {
+    $input_group_attributes = isset($element['#input_group_attributes']) ? $element['#input_group_attributes'] : [];
+    if (!isset($input_group_attributes['class'])) {
+      $input_group_attributes['class'] = [];
+    }
+    if (!in_array('input-group', $input_group_attributes['class'])) {
+      $input_group_attributes['class'][] = 'input-group';
+      $input_group_attributes['class'][] = 'novo-input-group';
+    }
+    $output = '<div' . drupal_attributes($input_group_attributes) . '>' . $output . '</div>';
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_menu_link__user_menu().
+ */
+function novo_menu_link__user_menu(array $variables) {
+
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  $options = !empty($element['#localized_options']) ? $element['#localized_options'] : [];
+
+  // Check plain title if "html" is not set, otherwise, filter for XSS attacks.
+  $title = empty($options['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']);
+
+  // Ensure "html" is now enabled so l() doesn't double encode. This is now
+  // safe to do since both check_plain() and filter_xss_admin() encode HTML
+  // entities. See: https://www.drupal.org/node/2854978
+  $options['html'] = TRUE;
+
+  $href = $element['#href'];
+  $attributes = !empty($element['#attributes']) ? $element['#attributes'] : [];
+
+  if ($element['#below']) {
+    // Prevent dropdown functions from being added to management menu so it
+    // does not affect the navbar module.
+    if (($element['#original_link']['menu_name'] == 'management') && (module_exists('navbar'))) {
+      $sub_menu = drupal_render($element['#below']);
+    }
+    elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 1)) {
+      // Add our own wrapper.
+      unset($element['#below']['#theme_wrappers']);
+      $sub_menu = '<ul class="dropdown-menu">' . drupal_render($element['#below']) . '</ul>';
+
+      // Generate as standard dropdown.
+      $title .= ' <span class="caret"></span>';
+      $attributes['class'][] = 'dropdown';
+
+      // Set dropdown trigger element to # to prevent inadvertant page loading
+      // when a submenu link is clicked.
+      $options['attributes']['data-target'] = '#';
+      $options['attributes']['class'][] = 'dropdown-toggle';
+      $options['attributes']['data-toggle'] = 'dropdown';
+    }
+  }
+
+  if (trim(strtolower($title)) == 'my account') {
+    $title = '<span class="glyphicon novo-glyphicon glyphicon-user" aria-hidden="true"></span>';
+  }
+
+  if (trim(strtolower($title)) == 'log out') {
+    $title = '<span class="glyphicon novo-glyphicon glyphicon-arrow-right" aria-hidden="true"></span>';
+  }
+  $attributes['class'][] = 'novo-leaf';
+
+  return '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+}
+
+/**
+ * Implements hook_preprocess_button.
+ */
+function novo_preprocess_button(&$vars) {
+  if (isset($vars['element']['#value'])) {
+
+    if ($vars['element']['#value'] == 'Remove') {
+      $vars['element']['#icon'] = '<span class="glyphicon glyphicon-remove novo-glyphicon-remove" aria-hidden="true"></span>';
+      $vars['element']['#value'] = '';
+    }
+
+    if ($vars['element']['#value'] == 'Add another item') {
+      $vars['element']['#value'] = 'Add';
+      $vars['element']['#icon_position'] = 'after';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term().
+ */
+function novo_preprocess_taxonomy_term(&$variables) {
+  // kpr($variables);
+}
+
+/**
+ * Implements hook_preprocess_views_view_table()
+ */
+function novo_preprocess_views_view_table(&$vars) {
+  // If this view is not the sort view, then stop here.
+  if (!isset($vars['view']->field['draggableviews'])) {
+    return;
+  }
+
+  // Check permissions.
+  if (!user_access('access draggableviews')) {
+    // Remove column "draggableviews" from results and header.
+    foreach ($vars['rows'] as &$row) {
+      unset($row['draggableviews']);
+    }
+    unset($vars['header']['draggableviews']);
+    return;
+  }
+
+  // Add JavaScript for auto-save functionality.
+  if ($vars['view']->field['draggableviews']->options['draggableviews']['ajax']) {
+    drupal_add_js(drupal_get_path('theme', 'novo') . '/js/novo_draggableviews_table.js', array('scope' => 'footer'));
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function novo_form_alter(&$form, &$form_state, &$form_id) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if (isset($form['field_dob'])) {
+    $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
+  }
+}
+
+/**
+ * Theme function for date_form_element__date_of_birthday.
+ */
+function novo_date_form_element__date_of_birthday($variables) {
+  $element = &$variables['element'];
+
+  // Detect whether element is multiline.
+  $count = preg_match_all('`<(?:div|span)\b[^>]* class="[^"]*\b(?:date-no-float|date-clear)\b`', $element['#children'], $matches, PREG_OFFSET_CAPTURE);
+  $multiline = FALSE;
+  if ($count > 1) {
+    $multiline = TRUE;
+  }
+  elseif ($count) {
+    $before = substr($element['#children'], 0, $matches[0][0][1]);
+    if (preg_match('`<(?:div|span)\b[^>]* class="[^"]*\bdate-float\b`', $before)) {
+      $multiline = TRUE;
+    }
+  }
+
+  // Detect if there is more than one subfield.
+  $element['#title_display'] = 'none';
+
+  // Wrap children with a div and add an extra class if element is multiline.
+  $element['#children'] = '<div class="date-form-element-content' . ($multiline ? ' date-form-element-content-multiline' : '') . '">' . $element['#children'] . '</div>';
+
+  return theme('form_element', $variables);
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function novo_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name']) && ($element['#field_name'] == 'field_program_time')) {
+    if (isset($element['value'])) {
+      $element['value']['#title'] = t('Start Time');
+    }
+  }
+}
+
+/**
+ * Implements theme_views_data_export_feed_icon__xls().
+ */
+function novo_views_data_export_feed_icon__xls($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("XLS");
+  return l($text, $url, $url_options);
+}
+
+/**
+ * Implements theme_views_data_export_feed_icon__pdf().
+ */
+function novo_views_data_export_feed_icon__pdf($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
+  return l($text, $url, $url_options);
 }

@@ -1,0 +1,27 @@
+.form-item-field-p-canvassing-group-target-id-entityreference-filter .btn.dropdown-toggle,
+.form-item-field-p-small-group-target-id-entityreference-filter .btn.dropdown-toggle {
+  margin: 0px;
+}
+
+.novo-reports-list-wrapper li a {
+  display: inline-block;
+}
+
+.novo-reports-list-wrapper li a:first-child {
+  width: 300px;
+}
+
+.view-roster-report .views-field-field-p-small-group {
+  min-width: 130px;
+}
+
+.view-roster-report caption {
+  font-family: ProximaNovaBold;
+  color: #000;
+  background-color: #CCCCCC;
+  padding: 5px 10px;
+}
+
+.view-canvassing-report .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
