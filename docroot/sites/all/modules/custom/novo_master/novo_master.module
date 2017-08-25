@@ -26,7 +26,9 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'volunteers',
   'mentors',
   'class',
-  'list_kids_mentored'
+  'list_kids_mentored',
+  'attendance_records_of_volunteer',
+  'programm_participated'
 )));
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
@@ -36,9 +38,16 @@ define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
  */
 function novo_master_preprocess_page(&$vars) {
   // Set breadcrumbs.
-  if (in_array("page__list_kids_mentored", $vars['theme_hook_suggestions'])) {
-    $vol_nid = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['field_volunteer_mentor_name_target_id'][0]['target_id']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['field_volunteer_mentor_name_target_id'][0]['target_id'] : NULL;
-    $vol_node = node_load($vol_nid);
+  if (in_array("page__list_kids_mentored", $vars['theme_hook_suggestions']) ||
+    in_array("page__attendance_records", $vars['theme_hook_suggestions']) ||
+    in_array("page__list_programm_participated", $vars['theme_hook_suggestions'])
+  ) {
+    $vol_name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+    $vol_nodes = node_load_multiple(array(), array(
+      'title' => $vol_name,
+      'type' => 'application'
+    ));
+    $vol_node = reset($vol_nodes);
     if ($vol_node) {
       $b = drupal_get_breadcrumb();
       $b[] = l($vol_node->title, "node/" . $vol_node->nid);
@@ -150,6 +159,7 @@ function novo_master_preprocess_views_view(&$vars) {
     $type = reset($type);
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
+      $destination = drupal_get_destination();
 
       switch ($vars['name']) {
         case "volunteers":
@@ -158,13 +168,19 @@ function novo_master_preprocess_views_view(&$vars) {
           break;
 
         case "list_kids_mentored":
-          $add_link = "/node/add/mentors";
-          $destination = drupal_get_destination();
+          $add_link = "node/add/mentors";
+          break;
+
+        case "attendance_records_of_volunteer":
+          $add_link = "node/add/attendance";
+          break;
+
+        case "list_programm_participated":
+          $add_link = "node/add/program";
           break;
 
         default:
           $add_link = "node/add/" . $type;
-          $destination = drupal_get_destination();
       }
 
       $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
@@ -252,7 +268,9 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
     case "volunteers_menu_active":
       $rule_matches = novo_master_menu_position_rule_rules($context, array("application"), array(
         "node/add/application",
-        "list-kids-mentored"
+        "list-kids-mentored",
+        "attendance-records",
+        "list-programm-participated"
       ));
       break;
 

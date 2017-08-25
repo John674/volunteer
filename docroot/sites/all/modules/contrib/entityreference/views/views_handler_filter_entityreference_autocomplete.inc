@@ -49,6 +49,7 @@ class views_handler_filter_entityreference_autocomplete extends views_handler_fi
       '#type' => 'textfield',
       '#default_value' => $default,
       '#autocomplete_path' => $autocomplete_path,
+      '#field_name' => $this->definition['field_name'],
       '#element_validate' => array('_entityreference_autocomplete_tags_validate'),
     );
 

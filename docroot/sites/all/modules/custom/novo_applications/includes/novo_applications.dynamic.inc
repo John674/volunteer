@@ -9,23 +9,23 @@ function novo_applications_attach_dynamic_fields(&$variables) {
   $variables['dynamic_fields'] = array();
 
   $dyn1 = array();
-  $dyn1[] = array(
-    "title" => t("Attendance Records"),
-    //"content" => l(t("History attendancy dates (123)"), "<front>")
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
-  );
 
-  $exposed_value = array("field_volunteer_mentor_name_target_id" => $variables['title'] . " (" . $variables['nid'] . ")");
+  $exposed_value = array("title" => $variables['title']);
+
+  $attendance_field = novo_applications_build_view_dyn_field("Attendance Records", "History attendancy dates", "attendance_records_of_volunteer", array(), $exposed_value);
+  if (!empty($attendance_field)) {
+    $dyn1[] = $attendance_field;
+  }
+
   $mentored_field = novo_applications_build_view_dyn_field("Mentoring Records", "List Kids mentored", "list_kids_mentored", array(), $exposed_value);
   if (!empty($mentored_field)) {
     $dyn1[] = $mentored_field;
   }
 
-  $dyn1[] = array(
-    "title" => t("Program history"),
-    //"content" => l(t("List Program Paticipated (2)"), "<front>")
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
-  );
+  $mentored_field = novo_applications_build_view_dyn_field("Program history", "List Program Paticipated", "programm_participated", array(), $exposed_value);
+  if (!empty($mentored_field)) {
+    $dyn1[] = $mentored_field;
+  }
 
   $variables['dynamic_fields'][] = $dyn1;
 
@@ -71,7 +71,6 @@ function novo_applications_build_view_dyn_field($label, $link_label, $view_machi
       "@link_label" => $link_label,
       "@count" => $count
     )), $path, array(
-      "attributes" => array("target" => "_blank"),
       "query" => $exposed_value
     ))
   );
