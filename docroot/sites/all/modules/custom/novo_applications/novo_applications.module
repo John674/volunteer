@@ -20,6 +20,7 @@ define('NOVO_APPLICATION_WEEKDAY_ORDER', serialize(array_flip(array(
 
 module_load_include("inc", "novo_applications", "includes/novo_applications.func");
 module_load_include("inc", "novo_applications", "includes/novo_applications.forms");
+module_load_include("inc", "novo_applications", "includes/novo_applications.dynamic");
 
 /**
  * Implements hook_menu().
@@ -82,6 +83,9 @@ function novo_applications_preprocess_node(&$variables) {
         "#markup" => $approve_block,
       );
     }
+
+    // Dynamic fields.
+    novo_applications_attach_dynamic_fields($variables);
   }
 }
 
