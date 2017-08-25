@@ -5,6 +5,9 @@
  * Applications dynamic fields.
  */
 
+/**
+ * Attach dynamic fields to node.
+ */
 function novo_applications_attach_dynamic_fields(&$variables) {
   $variables['dynamic_fields'] = array();
 
@@ -47,6 +50,9 @@ function novo_applications_attach_dynamic_fields(&$variables) {
 
 }
 
+/**
+ * Build view for dynamic field.
+ */
 function novo_applications_build_view_dyn_field($label, $link_label, $view_machine_name, $args = array(), $exposed_value = array(), $display = "page") {
   $view = views_get_view($view_machine_name);
   if ($view) {
