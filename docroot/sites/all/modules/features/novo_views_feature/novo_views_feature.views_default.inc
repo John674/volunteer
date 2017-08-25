@@ -2165,25 +2165,26 @@ function novo_views_feature_views_default_views() {
     'field_mentoring_date' => 'field_mentoring_date',
     'field_mentoring' => 'field_mentoring',
     'field_volunteer_mentor_name' => 'field_volunteer_mentor_name',
+    'edit_node' => 'edit_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_mentoring_date' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_mentoring' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -2192,6 +2193,11 @@ function novo_views_feature_views_default_views() {
     'field_volunteer_mentor_name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2218,6 +2224,37 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Mentoring Date */
+  $handler->display->display_options['fields']['field_mentoring_date']['id'] = 'field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['table'] = 'field_data_field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['field'] = 'field_mentoring_date';
+  $handler->display->display_options['fields']['field_mentoring_date']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['fields']['field_mentoring_date']['label'] = 'Date';
+  $handler->display->display_options['fields']['field_mentoring_date']['settings'] = array(
+    'format_type' => 'long',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Mentoring */
+  $handler->display->display_options['fields']['field_mentoring']['id'] = 'field_mentoring';
+  $handler->display->display_options['fields']['field_mentoring']['table'] = 'field_data_field_mentoring';
+  $handler->display->display_options['fields']['field_mentoring']['field'] = 'field_mentoring';
+  $handler->display->display_options['fields']['field_mentoring']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['fields']['field_mentoring']['label'] = 'Status';
+  /* Field: Content: Volunteer Mentor Name */
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['id'] = 'field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['table'] = 'field_data_field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['field'] = 'field_volunteer_mentor_name';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_volunteer_mentor_name']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -2245,6 +2282,44 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_mentor_type_value']['value'] = array(
     'Volunteer' => 'Volunteer',
   );
+  /* Filter criterion: Content: Volunteer Mentor Name (field_volunteer_mentor_name) */
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['id'] = 'field_volunteer_mentor_name_target_id';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['table'] = 'field_data_field_volunteer_mentor_name';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['field'] = 'field_volunteer_mentor_name_target_id';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['value'] = '';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['expose']['operator_id'] = 'field_volunteer_mentor_name_target_id_op';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['expose']['label'] = 'Volunteer Mentor Name (field_volunteer_mentor_name)';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['expose']['operator'] = 'field_volunteer_mentor_name_target_id_op';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['expose']['identifier'] = 'field_volunteer_mentor_name_target_id';
+  $handler->display->display_options['filters']['field_volunteer_mentor_name_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Content: Mentoring Date (field_mentoring_date) */
+  $handler->display->display_options['filters']['field_mentoring_date_value']['id'] = 'field_mentoring_date_value';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['table'] = 'field_data_field_mentoring_date';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['field'] = 'field_mentoring_date_value';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator_id'] = 'field_mentoring_date_value_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['label'] = 'Mentoring Date (field_mentoring_date)';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator'] = 'field_mentoring_date_value_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['identifier'] = 'field_mentoring_date_value';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_mentoring_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['year_range'] = '-50:+3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -2369,6 +2444,46 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_mentoring_date_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_mentoring_date_value']['year_range'] = '-50:+2';
   $handler->display->display_options['path'] = 'list-kids-mentored';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_volunteer_mentor_name',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'list-kids-mentored/export-xls';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+
+  /* Display: Data export PDF */
+  $handler = $view->new_display('views_data_export_pdf', 'Data export PDF', 'views_data_export_pdf_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_volunteer_mentor_name',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'list-kids-mentored/export-pdf';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
   $export['list_kids_mentored'] = $view;
 
   $view = new view();
