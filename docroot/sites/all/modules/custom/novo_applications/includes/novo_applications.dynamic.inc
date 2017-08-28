@@ -10,43 +10,50 @@
  */
 function novo_applications_attach_dynamic_fields(&$variables) {
   $variables['dynamic_fields'] = array();
-
-  $dyn1 = array();
-
   $exposed_value = array("title" => $variables['title']);
 
   $attendance_field = novo_applications_build_view_dyn_field("Attendance Records", "History attendancy dates", "attendance_records_of_volunteer", array(), $exposed_value);
   if (!empty($attendance_field)) {
-    $dyn1[] = $attendance_field;
+    $variables['dynamic_fields'][0][] = $attendance_field;
   }
 
   $mentored_field = novo_applications_build_view_dyn_field("Mentoring Records", "List Kids mentored", "list_kids_mentored", array(), $exposed_value);
   if (!empty($mentored_field)) {
-    $dyn1[] = $mentored_field;
+    $variables['dynamic_fields'][0][] = $mentored_field;
   }
 
   $mentored_field = novo_applications_build_view_dyn_field("Program history", "List Program Paticipated", "programm_participated", array(), $exposed_value);
   if (!empty($mentored_field)) {
-    $dyn1[] = $mentored_field;
+    $variables['dynamic_fields'][0][] = $mentored_field;
   }
 
-  $variables['dynamic_fields'][] = $dyn1;
+  // GEt min/max volunter attached to attendance dates.
+  $dates = novo_application_get_serving_dates($variables['nid']);
+  $activity = t("Inactive");
 
-  $dyn2 = array();
-  $dyn2[] = array(
+  if (isset($dates->max_date)) {
+    $sec = $dates->max_date - REQUEST_TIME;
+    $diff_days = $sec * 60 * 60 * 24;
+    if ($diff_days <= 6) {
+      $activity = t("Current");
+    }
+    elseif ($diff_days < 18) {
+      $activity = t("Lapsed");
+    }
+  }
+
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("First date serving"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => (isset($dates->min_date) ? format_date($dates->min_date, "short") : " - ")
   );
-  $dyn2[] = array(
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("Last date serving"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => (isset($dates->max_date) ? format_date($dates->max_date, "short") : " - ")
   );
-  $dyn2[] = array(
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("Activity"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => $activity
   );
-
-  $variables['dynamic_fields'][] = $dyn2;
 
 }
 
@@ -82,4 +89,21 @@ function novo_applications_build_view_dyn_field($label, $link_label, $view_machi
   );
 
   return NULL;
+}
+
+/**
+ * Get min/max serving dates.
+ */
+function novo_application_get_serving_dates($nid) {
+  $subquery = db_select("field_revision_field_attendance_volunteer_list", "rev_av");
+  $subquery->fields("rev_av", array("entity_id", "revision_id"));
+  $subquery->innerJoin("node_revision", "n_rev", "n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id");
+  $subquery->fields("n_rev", array("timestamp"));
+  $subquery->condition("rev_av.field_attendance_volunteer_list_target_id", $nid);
+
+  $query = db_select($subquery, "sub");
+  $query->addExpression("MIN(timestamp)", "min_date");
+  $query->addExpression("MAX(timestamp)", "max_date");
+
+  return $query->execute()->fetchObject();
 }

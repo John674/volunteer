@@ -201,7 +201,7 @@
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading"></div>
+<!--                    <div class="panel-heading"></div>-->
                     <div class="panel-body">
                       <?php if (isset($dynamic_fields)): ?>
                         <?php foreach ($dynamic_fields as $key => $dyn_group): ?>
