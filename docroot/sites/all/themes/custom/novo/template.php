@@ -406,6 +406,15 @@ function novo_preprocess_taxonomy_term(&$variables) {
  * Implements hook_preprocess_views_view_table()
  */
 function novo_preprocess_views_view_table(&$vars) {
+  // Moved kids.
+  if ($vars['view']->name == "kids") {
+    foreach ($vars['rows'] as $key => $value) {
+      if (strpos($value['title'], "novo-title-moved-1") !== FALSE) {
+        $vars['row_classes'][$key][] = "novo-title-moved-wrapper";
+      }
+    }
+  }
+
   // If this view is not the sort view, then stop here.
   if (!isset($vars['view']->field['draggableviews'])) {
     return;
@@ -486,7 +495,10 @@ function novo_views_data_export_feed_icon__xls($variables) {
     $url_options['query'] = $query;
   }
   $url_options['attributes']['class'] = array(
-    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+    "btn",
+    "btn-default",
+    "btn-xs",
+    "novo-export-feed-icon"
   );
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("XLS");
   return l($text, $url, $url_options);
@@ -502,7 +514,10 @@ function novo_views_data_export_feed_icon__pdf($variables) {
     $url_options['query'] = $query;
   }
   $url_options['attributes']['class'] = array(
-    "btn", "btn-default", "btn-xs", "novo-export-feed-icon"
+    "btn",
+    "btn-default",
+    "btn-xs",
+    "novo-export-feed-icon"
   );
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
   return l($text, $url, $url_options);

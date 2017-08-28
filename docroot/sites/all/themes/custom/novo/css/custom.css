@@ -261,3 +261,7 @@ li.novo-leaf a {
 .novo-export-feed-icon:last-child {
   margin-right: 0px;
 }
+
+.novo-title-moved-wrapper {
+  background-color: #ccc!important;
+}
