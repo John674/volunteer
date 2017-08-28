@@ -1,0 +1,229 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.constants');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.db');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.api');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.func');
+
+/**
+ * Implements hook_node_view().
+ */
+function novo_cia_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'application') {
+    $node->content['pseudo_field_request_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_request_cia',
+      '#theme' => 'pseudo_field__request_cia',
+    );
+    $cia_data = novo_cia_get_render_data($node->nid);
+    if (!empty($cia_data)) {
+      $node->content['pseudo_field_request_cia']['#cia_data'] = $cia_data;
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function novo_cia_menu() {
+  $items['novo-cia-request/send/%node'] = array(
+    // @codingStandardsIgnoreStart
+    'title' => t('CIA Request'),
+    // @codingStandardsIgnoreEnd
+    'page callback' => 'novo_cia_add_request_for_search',
+    'page arguments' => array(2),
+    'access arguments' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/config/novo-cia'] = array(
+    'title' => 'CIA',
+    'description' => 'Cia administration tools.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'position' => 'right',
+  );
+  $items['admin/config/novo-cia/novo-cia-api-credentials'] = array(
+    'title' => 'API credentials',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('novo_cia_api_credentials'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/novo_cia.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_cia_theme() {
+  return array(
+    'pseudo_field__request_cia' => array(
+      'variables' => array('cia_data' => NULL),
+      'template' => 'templates/novo-cia-pseudo-field--request-cia',
+    ),
+
+    'cia_request_by_ssn' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'first_name' => NULL,
+        'middle_initial' => NULL,
+        'last_name' => NULL,
+        'alias_first_name' => NULL,
+        'alias_last_name' => NULL,
+        'suffix' => NULL,
+        'address' => NULL,
+        'city' => NULL,
+        'state' => NULL,
+        'zip_code' => NULL,
+        'dob' => NULL,
+        'ssn' => NULL,
+        'ref_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/request_by_ssn',
+    ),
+
+    'cia_request_by_address' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'first_name' => NULL,
+        'middle_initial' => NULL,
+        'last_name' => NULL,
+        'alias_first_name' => NULL,
+        'alias_last_name' => NULL,
+        'suffix' => NULL,
+        'address' => NULL,
+        'city' => NULL,
+        'state' => NULL,
+        'zip_code' => NULL,
+        'dob' => NULL,
+        'ref_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/request_by_address',
+    ),
+
+    'cia_query_report' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'tracking_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/query_report',
+    ),
+  );
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function novo_cia_cron_queue_info() {
+  $queue['novo_cia_search_queue'] = array(
+    'worker callback' => 'novo_cia_search_queue_worker',
+    'time' => 60,
+  );
+
+  $queue['novo_cia_pull_report_queue'] = array(
+    'worker callback' => 'novo_cia_pull_report_queue_worker',
+    'time' => 60,
+  );
+
+  return $queue;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function novo_cia_cron() {
+  $cron_last_search = variable_get(NOVO_CIA_CRON_LAST_SEARCH_REQUEST);
+  $cron_last_pull_report = variable_get(NOVO_CIA_CRON_LAST_PULL_REPORT_REQUEST);
+
+  if (time() - $cron_last_search > NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST) {
+    $search_queue = DrupalQueue::get('novo_cia_search_queue');
+    $pending_search_requests = novo_cia_get_pending_search_requests();
+    foreach ($pending_search_requests as $request) {
+      $search_queue->createItem(array('id' => $request->id));
+    }
+    variable_set(NOVO_CIA_CRON_LAST_SEARCH_REQUEST, time());
+  }
+
+  if (time() - $cron_last_pull_report > NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST) {
+    $pull_report_queue = DrupalQueue::get('novo_cia_pull_report_queue');
+    $pending_pull_report_requests = novo_cia_get_pending_pull_report_requests();
+    foreach ($pending_pull_report_requests as $request) {
+      $pull_report_queue->createItem(array('id' => $request->id));
+    }
+    variable_set(NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST, time());
+  }
+}
+
+/**
+ * Send search request to CIA.
+ */
+function novo_cia_search_queue_worker($data) {
+  $result = novo_cia_send_search_request($data['id']);
+  if (!empty($result)) {
+    watchdog("novo_cia", "Search request :id have error", array(
+      ":id" => $data['id'],
+    ), WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * Send pull report request to CIA.
+ */
+function novo_cia_pull_report_queue_worker($data) {
+  $result = novo_cia_send_pull_report_request($data['id']);
+  if (!empty($result)) {
+    watchdog("novo_cia", "Pull report request :id have error", array(
+      ":id" => $data['id']
+    ), WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * Add search request to CIA.
+ */
+function novo_cia_add_request_for_search($node) {
+  if ($node->type == 'application') {
+    $nid = $node->nid;
+    $uid = $node->uid;
+    if (isset($nid) && !empty($nid)) {
+      $search_request_id = novo_cia_add_to_queue_search_request($nid, $uid);
+      if (!empty($search_request_id)) {
+        if(!empty(novo_cia_send_search_request($search_request_id))){
+          drupal_set_message(t("The request was added to the queue for getting report from CIA."));
+        } else {
+          drupal_set_message(t("The request was added to the queue for sending to CIA."));
+        }
+      }
+      else {
+        drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
+      }
+    }
+  }
+  else {
+    drupal_set_message(t('Node type should be application'), 'error');
+  }
+  $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+  drupal_goto($url);
+}
