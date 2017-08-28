@@ -644,6 +644,16 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'novo_master',
   );
 
+  // Exported permission: 'novo reports access'.
+  $permissions['novo reports access'] = array(
+    'name' => 'novo reports access',
+    'roles' => array(
+      'Reviewer' => 'Reviewer',
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_reports',
+  );
+
   // Exported permission: 'publish any content'.
   $permissions['publish any content'] = array(
     'name' => 'publish any content',
