@@ -153,7 +153,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create attendance content'] = array(
     'name' => 'create attendance content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -173,7 +172,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create locations content'] = array(
     'name' => 'create locations content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -183,7 +181,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create mentors content'] = array(
     'name' => 'create mentors content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -193,7 +190,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create partner content'] = array(
     'name' => 'create partner content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -203,7 +199,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['create program content'] = array(
     'name' => 'create program content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -239,7 +234,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any attendance content'] = array(
     'name' => 'delete any attendance content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -259,7 +253,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any locations content'] = array(
     'name' => 'delete any locations content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -269,7 +262,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any mentors content'] = array(
     'name' => 'delete any mentors content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -279,7 +271,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any partner content'] = array(
     'name' => 'delete any partner content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -289,7 +280,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete any program content'] = array(
     'name' => 'delete any program content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -325,7 +315,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own attendance content'] = array(
     'name' => 'delete own attendance content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -345,7 +334,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own locations content'] = array(
     'name' => 'delete own locations content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -355,7 +343,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own mentors content'] = array(
     'name' => 'delete own mentors content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -365,7 +352,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own partner content'] = array(
     'name' => 'delete own partner content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -375,7 +361,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['delete own program content'] = array(
     'name' => 'delete own program content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -438,7 +423,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any attendance content'] = array(
     'name' => 'edit any attendance content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -458,7 +442,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any locations content'] = array(
     'name' => 'edit any locations content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -468,7 +451,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any mentors content'] = array(
     'name' => 'edit any mentors content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -478,7 +460,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any partner content'] = array(
     'name' => 'edit any partner content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -488,7 +469,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit any program content'] = array(
     'name' => 'edit any program content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -545,7 +525,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own attendance content'] = array(
     'name' => 'edit own attendance content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -565,7 +544,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own locations content'] = array(
     'name' => 'edit own locations content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -575,7 +553,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own mentors content'] = array(
     'name' => 'edit own mentors content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -585,7 +562,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own partner content'] = array(
     'name' => 'edit own partner content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -595,7 +571,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit own program content'] = array(
     'name' => 'edit own program content',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'node',
@@ -622,7 +597,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['edit ref request with any status'] = array(
     'name' => 'edit ref request with any status',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_ref_request',
@@ -648,7 +622,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
   $permissions['novo reports access'] = array(
     'name' => 'novo reports access',
     'roles' => array(
-      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_reports',

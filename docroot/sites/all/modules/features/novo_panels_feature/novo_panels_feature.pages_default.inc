@@ -82,7 +82,8 @@ function novo_panels_feature_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 3,
+              0 => 5,
+              1 => 3,
             ),
           ),
           'context' => 'logged-in-user',
@@ -156,7 +157,8 @@ function novo_panels_feature_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 3,
+              0 => 5,
+              1 => 3,
             ),
           ),
           'context' => 'logged-in-user',

@@ -22,6 +22,10 @@ function novo_formatters_field_formatter_info() {
       'label' => t('Only age'),
       'field types' => array('date', 'datestamp', 'datetime'),
     ),
+    'advanced_dob' => array(
+      'label' => t('Advanced date of birth'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
     'school_year' => array(
       'label' => t('School year'),
       'field types' => array('date', 'datestamp', 'datetime'),
@@ -47,6 +51,14 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
     'only_age' => array(
       'variables' => array('dob' => NULL, 'age' => NULL),
       'template' => 'templates/only_age',
+    ),
+    'advanced_dob' => array(
+      'variables' => array(
+        'dob' => NULL,
+        'age' => NULL,
+        'advanced_text' => NULL
+      ),
+      'template' => 'templates/advanced_dob',
     ),
     'school_year' => array(
       'variables' => array('year' => NULL, 'to_year' => NULL),
@@ -94,7 +106,44 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
         $element[] = array(
           '#theme' => 'only_age',
           '#dob' => $dob,
+          '#age' => $age
+        );
+      }
+      break;
+
+    case 'advanced_dob':
+      $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
+      if (!empty($dob)) {
+        $dob_obj = new DateTime($dob);
+        $now_obj = new DateTime();
+        $date_diff = date_diff($dob_obj, $now_obj);
+        $age = $date_diff->y;
+
+        $dob_m = $dob_obj->format("n");
+        $dob_d = $dob_obj->format("j");
+
+        $dob_diff = date_diff(new DateTime($dob_m . "/" . $dob_d . "/" . $now_obj->format("Y")), $now_obj);
+        $advanced_text = "";
+        if (empty($dob_diff->m) && $dob_diff->invert) {
+          if (empty($dob_diff->d)) {
+            $advanced_text = t("Today!");
+          }
+          elseif ($dob_diff->d < 2) {
+            $advanced_text = t("Tomorrow!");
+          }
+          elseif ($dob_diff->d < 8) {
+            $advanced_text = t("This week!");
+          }
+          elseif ($dob_diff->d < 15) {
+            $advanced_text = t("Next week!");
+          }
+        }
+
+        $element[] = array(
+          '#theme' => 'advanced_dob',
+          '#dob' => $dob,
           '#age' => $age,
+          '#advanced_text' => $advanced_text
         );
       }
       break;

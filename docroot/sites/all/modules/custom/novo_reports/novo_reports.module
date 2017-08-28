@@ -45,16 +45,25 @@ function novo_reports_list() {
           ))) {
             $export_path = isset($view->display[$key]->display_options['path']) ? $view->display[$key]->display_options['path'] : NULL;
             $style_plugin = isset($view->display[$key]->display_options['style_plugin']) ? $view->display[$key]->display_options['style_plugin'] : NULL;
+            $display_plugin = isset($view->display[$key]->display_plugin) ? $view->display[$key]->display_plugin : NULL;
 
-            switch ($style_plugin) {
-              case "views_data_export_xls":
-                $image_path = drupal_get_path("module", "views_data_export") . "/images/xls.png";
-                $type = "xls";
-                break;
-
+            switch ($display_plugin) {
               case "views_data_export_pdf":
                 $image_path = drupal_get_path("module", "views_data_export_pdf") . "/images/pdf.png";
                 $type = "pdf";
+                break;
+
+              case "views_data_export":
+                switch ($style_plugin) {
+                  case "views_data_export_xls":
+                    $image_path = drupal_get_path("module", "views_data_export") . "/images/xls.png";
+                    $type = "xls";
+                    break;
+
+                  default:
+                    $type = "";
+                    $image_path = "";
+                }
                 break;
 
               default:
