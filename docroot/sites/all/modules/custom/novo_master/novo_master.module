@@ -152,6 +152,7 @@ function novo_master_preprocess_node($variables) {
  * Implements hook_preprocess_views_view().
  */
 function novo_master_preprocess_views_view(&$vars) {
+  global $user;
   // Add "Add +" buttons to views.
   $view_names = unserialize(NOVO_MASTER_ADD_BUTTON_VIEW_NAMES);
   if (isset($vars['name']) && isset($vars['display_id']) && in_array($vars['name'], $view_names) && $vars['display_id'] == 'page') {
@@ -160,44 +161,51 @@ function novo_master_preprocess_views_view(&$vars) {
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       $destination = drupal_get_destination();
-
+      $access = FALSE;
       switch ($vars['name']) {
         case "volunteers":
           $add_link = "admin/people/create";
           $destination = array("destination" => "users");
+          $access = (user_access('access user profiles') && user_access('administer users'));
           break;
 
         case "list_kids_mentored":
           $add_link = "node/add/mentors";
+          $access = node_access("create", "mentors", $user);
           break;
 
         case "attendance_records_of_volunteer":
           $add_link = "node/add/attendance";
+          $access = node_access("create", "attendance", $user);
           break;
 
         case "list_programm_participated":
           $add_link = "node/add/program";
+          $access = node_access("create", "program", $user);
           break;
 
         default:
           $add_link = "node/add/" . $type;
+          $access = node_access("create", $type, $user);
       }
 
-      $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
-        "query" => $destination,
-        "html" => TRUE,
-        "attributes" => array(
-          "class" => array(
-            "btn",
-            "btn-primary",
-            "btn-sm",
-            "novo-entity-add-btn"
+      if ($access) {
+        $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
+          "query" => $destination,
+          "html" => TRUE,
+          "attributes" => array(
+            "class" => array(
+              "btn",
+              "btn-primary",
+              "btn-sm",
+              "novo-entity-add-btn"
+            )
           )
-        )
-      ));
+        ));
 
-      $vars['attachment_before'] .= $btn;
-      $vars['attachment_after'] .= $btn;
+        $vars['attachment_before'] .= $btn;
+        $vars['attachment_after'] .= $btn;
+      }
     }
   }
 }
@@ -286,7 +294,8 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
       $set_breadcrumb = TRUE;
       $rule_matches = novo_master_menu_position_rule_rules($context, [], [
         "canvassing-report",
-        "roster-report"
+        "roster-report",
+        "volunteer-birthdays-report"
       ], TRUE);
       break;
   }

@@ -26,7 +26,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -803,12 +806,13 @@ function novo_views_feature_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Attendance Records of Volunteers';
+  $handler->display->display_options['title'] = 'Attendance Records of Volunteer';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'input_required' => 0,
@@ -821,25 +825,6 @@ function novo_views_feature_views_default_views() {
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
       'secondary_collapse_override' => '0',
-    ),
-    'field_volunteer_mentor_name_target_id' => array(
-      'bef_format' => 'default',
-      'more_options' => array(
-        'bef_select_all_none' => FALSE,
-        'bef_collapsible' => 0,
-        'autosubmit' => 0,
-        'is_secondary' => 0,
-        'any_label' => '',
-        'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
-        'rewrite' => array(
-          'filter_rewrite_values' => '',
-        ),
-      ),
     ),
     'title' => array(
       'bef_format' => 'default',
@@ -858,7 +843,25 @@ function novo_views_feature_views_default_views() {
         ),
       ),
     ),
-    'field_mentoring_date_value' => array(
+    'field_attendance_date_value' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+        'datepicker_options' => '',
+      ),
+    ),
+    'field_attendance_date_value_1' => array(
       'bef_format' => 'default',
       'more_options' => array(
         'autosubmit' => 0,
@@ -894,7 +897,6 @@ function novo_views_feature_views_default_views() {
     'field_attendance_program_name' => 'field_attendance_program_name',
     'field_attendance_date' => 'field_attendance_date',
     'edit_node' => 'edit_node',
-    'field_attendance_volunteer_list' => 'field_attendance_volunteer_list',
     'title' => 'title',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -916,12 +918,7 @@ function novo_views_feature_views_default_views() {
     'edit_node' => array(
       'align' => '',
       'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_attendance_volunteer_list' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
+      'empty_column' => 1,
     ),
     'title' => array(
       'sortable' => 0,
@@ -1032,10 +1029,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_attendance_date_value']['id'] = 'field_attendance_date_value';
   $handler->display->display_options['filters']['field_attendance_date_value']['table'] = 'field_data_field_attendance_date';
   $handler->display->display_options['filters']['field_attendance_date_value']['field'] = 'field_attendance_date_value';
-  $handler->display->display_options['filters']['field_attendance_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_attendance_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_attendance_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['operator_id'] = 'field_attendance_date_value_op';
-  $handler->display->display_options['filters']['field_attendance_date_value']['expose']['label'] = 'Filter by Date';
+  $handler->display->display_options['filters']['field_attendance_date_value']['expose']['label'] = 'Filter by start date';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['operator'] = 'field_attendance_date_value_op';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['identifier'] = 'field_attendance_date_value';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['remember_roles'] = array(
@@ -1047,6 +1044,25 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_attendance_date_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_attendance_date_value']['year_range'] = '-50:+3';
+  /* Filter criterion: Content: Attendance date (field_attendance_date) */
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['id'] = 'field_attendance_date_value_1';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['table'] = 'field_data_field_attendance_date';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['field'] = 'field_attendance_date_value';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['operator_id'] = 'field_attendance_date_value_1_op';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['label'] = 'Filter by end date';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['operator'] = 'field_attendance_date_value_1_op';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['identifier'] = 'field_attendance_date_value_1';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['year_range'] = '-50:+3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1078,8 +1094,8 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['relationship'] = 'reverse_field_mentor_kid_name_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Options';
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1136,11 +1152,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_attendance_date_value']['id'] = 'field_attendance_date_value';
   $handler->display->display_options['filters']['field_attendance_date_value']['table'] = 'field_data_field_attendance_date';
   $handler->display->display_options['filters']['field_attendance_date_value']['field'] = 'field_attendance_date_value';
-  $handler->display->display_options['filters']['field_attendance_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_attendance_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_attendance_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_attendance_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['operator_id'] = 'field_attendance_date_value_op';
-  $handler->display->display_options['filters']['field_attendance_date_value']['expose']['label'] = 'Filter by';
+  $handler->display->display_options['filters']['field_attendance_date_value']['expose']['label'] = 'Filter by start date';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['operator'] = 'field_attendance_date_value_op';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['identifier'] = 'field_attendance_date_value';
   $handler->display->display_options['filters']['field_attendance_date_value']['expose']['remember_roles'] = array(
@@ -1152,6 +1168,25 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_attendance_date_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_attendance_date_value']['year_range'] = '-50:+3';
+  /* Filter criterion: Content: Attendance date (field_attendance_date) */
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['id'] = 'field_attendance_date_value_1';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['table'] = 'field_data_field_attendance_date';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['field'] = 'field_attendance_date_value';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['operator_id'] = 'field_attendance_date_value_1_op';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['label'] = 'Filter by end date';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['operator'] = 'field_attendance_date_value_1_op';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['identifier'] = 'field_attendance_date_value_1';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_attendance_date_value_1']['year_range'] = '-50:+3';
   $handler->display->display_options['path'] = 'attendance-records';
 
   /* Display: Data export */
@@ -2460,6 +2495,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'input_required' => 0,
@@ -2472,25 +2508,6 @@ function novo_views_feature_views_default_views() {
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
       'secondary_collapse_override' => '0',
-    ),
-    'field_volunteer_mentor_name_target_id' => array(
-      'bef_format' => 'default',
-      'more_options' => array(
-        'bef_select_all_none' => FALSE,
-        'bef_collapsible' => 0,
-        'autosubmit' => 0,
-        'is_secondary' => 0,
-        'any_label' => '',
-        'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
-        'rewrite' => array(
-          'filter_rewrite_values' => '',
-        ),
-      ),
     ),
     'title' => array(
       'bef_format' => 'default',
@@ -2512,7 +2529,25 @@ function novo_views_feature_views_default_views() {
     'field_mentoring_date_value' => array(
       'bef_format' => 'default',
       'more_options' => array(
-        'autosubmit' => 0,
+        'autosubmit' => 1,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+        'datepicker_options' => '',
+      ),
+    ),
+    'field_mentoring_date_value_1' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'autosubmit' => 1,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -2545,7 +2580,6 @@ function novo_views_feature_views_default_views() {
     'title' => 'title',
     'field_mentoring_date' => 'field_mentoring_date',
     'field_mentoring' => 'field_mentoring',
-    'field_volunteer_mentor_name' => 'field_volunteer_mentor_name',
     'edit_node' => 'edit_node',
     'title_1' => 'title_1',
   );
@@ -2572,17 +2606,10 @@ function novo_views_feature_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_volunteer_mentor_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'edit_node' => array(
       'align' => '',
       'separator' => '',
-      'empty_column' => 0,
+      'empty_column' => 1,
     ),
     'title_1' => array(
       'sortable' => 0,
@@ -2716,11 +2743,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_mentoring_date_value']['table'] = 'field_data_field_mentoring_date';
   $handler->display->display_options['filters']['field_mentoring_date_value']['field'] = 'field_mentoring_date_value';
   $handler->display->display_options['filters']['field_mentoring_date_value']['relationship'] = 'reverse_field_mentor_kid_name_node';
-  $handler->display->display_options['filters']['field_mentoring_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_mentoring_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_mentoring_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator_id'] = 'field_mentoring_date_value_op';
-  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['label'] = 'Mentoring Date (field_mentoring_date)';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['label'] = 'Filter by start date';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator'] = 'field_mentoring_date_value_op';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['identifier'] = 'field_mentoring_date_value';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['remember_roles'] = array(
@@ -2732,6 +2759,26 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_mentoring_date_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_mentoring_date_value']['year_range'] = '-50:+3';
+  /* Filter criterion: Content: Mentoring Date (field_mentoring_date) */
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['id'] = 'field_mentoring_date_value_1';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['table'] = 'field_data_field_mentoring_date';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['field'] = 'field_mentoring_date_value';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['operator_id'] = 'field_mentoring_date_value_1_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['label'] = 'Filter by end date';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['operator'] = 'field_mentoring_date_value_1_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['identifier'] = 'field_mentoring_date_value_1';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['year_range'] = '-50:+3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -2838,11 +2885,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_mentoring_date_value']['table'] = 'field_data_field_mentoring_date';
   $handler->display->display_options['filters']['field_mentoring_date_value']['field'] = 'field_mentoring_date_value';
   $handler->display->display_options['filters']['field_mentoring_date_value']['relationship'] = 'reverse_field_mentor_kid_name_node';
-  $handler->display->display_options['filters']['field_mentoring_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_mentoring_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_mentoring_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator_id'] = 'field_mentoring_date_value_op';
-  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['label'] = 'Filter by Date';
+  $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['label'] = 'Filter by start date';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['operator'] = 'field_mentoring_date_value_op';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['identifier'] = 'field_mentoring_date_value';
   $handler->display->display_options['filters']['field_mentoring_date_value']['expose']['remember_roles'] = array(
@@ -2862,6 +2909,26 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_mentoring_date_value']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_mentoring_date_value']['year_range'] = '-50:+2';
+  /* Filter criterion: Content: Mentoring Date (field_mentoring_date) */
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['id'] = 'field_mentoring_date_value_1';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['table'] = 'field_data_field_mentoring_date';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['field'] = 'field_mentoring_date_value';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['relationship'] = 'reverse_field_mentor_kid_name_node';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['operator_id'] = 'field_mentoring_date_value_1_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['label'] = 'Filter by end date';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['operator'] = 'field_mentoring_date_value_1_op';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['identifier'] = 'field_mentoring_date_value_1';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    6 => 0,
+    5 => 0,
+    3 => 0,
+  );
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_mentoring_date_value_1']['year_range'] = '-50:+3';
   $handler->display->display_options['path'] = 'list-kids-mentored';
 
   /* Display: Data export */
@@ -2920,7 +2987,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Locations';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -3453,7 +3523,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Mentors';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -3734,7 +3807,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Partners';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -4197,7 +4273,7 @@ function novo_views_feature_views_default_views() {
     'edit_node' => array(
       'align' => '',
       'separator' => '',
-      'empty_column' => 0,
+      'empty_column' => 1,
     ),
   );
   /* Footer: Global: Result summary */
@@ -4424,7 +4500,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Enrollments';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -4649,7 +4728,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    5 => '5',
     3 => '3',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -5850,8 +5928,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Users';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -6115,6 +6195,170 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['menu']['title'] = 'Users';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $export['users'] = $view;
+
+  $view = new view();
+  $view->name = 'volunteer_birthdays_report';
+  $view->description = '';
+  $view->tag = 'Report';
+  $view->base_table = 'node';
+  $view->human_name = 'Volunteer Birthdays Report';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Volunteer Birthdays Report';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_dob' => 'field_dob',
+    'field_dob_1' => 'field_dob_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dob' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dob_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Full name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Date of Birth */
+  $handler->display->display_options['fields']['field_dob']['id'] = 'field_dob';
+  $handler->display->display_options['fields']['field_dob']['table'] = 'field_data_field_dob';
+  $handler->display->display_options['fields']['field_dob']['field'] = 'field_dob';
+  $handler->display->display_options['fields']['field_dob']['type'] = 'advanced_dob';
+  $handler->display->display_options['fields']['field_dob']['settings'] = array(
+    'format_type' => 'short',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Date of Birth */
+  $handler->display->display_options['fields']['field_dob_1']['id'] = 'field_dob_1';
+  $handler->display->display_options['fields']['field_dob_1']['table'] = 'field_data_field_dob';
+  $handler->display->display_options['fields']['field_dob_1']['field'] = 'field_dob';
+  $handler->display->display_options['fields']['field_dob_1']['label'] = 'Age';
+  $handler->display->display_options['fields']['field_dob_1']['type'] = 'only_age';
+  $handler->display->display_options['fields']['field_dob_1']['settings'] = array(
+    'format_type' => 'long',
+    'custom_date_format' => '',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'application' => 'application',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Search by name';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => 0,
+    5 => '5',
+    3 => '3',
+    1 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_min_chars'] = '0';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'volunteer-birthdays-report';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'volunteer-birthdays-report/export-xls';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+
+  /* Display: Data export PDF */
+  $handler = $view->new_display('views_data_export_pdf', 'Data export PDF', 'views_data_export_pdf_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'volunteer-birthdays-report/export-pdf';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $export['volunteer_birthdays_report'] = $view;
 
   $view = new view();
   $view->name = 'volunteer_interests_roles';
