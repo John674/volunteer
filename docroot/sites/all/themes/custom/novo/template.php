@@ -406,6 +406,14 @@ function novo_preprocess_taxonomy_term(&$variables) {
  * Implements hook_preprocess_views_view_table()
  */
 function novo_preprocess_views_view_table(&$vars) {
+  if ($vars['view']->name == "kids") {
+    foreach($vars['rows'] as $key => $value) {
+      if (strpos($value['title'], "novo-title-moved-1") !== FALSE) {
+        $vars['row_classes'][$key][] = "novo-title-moved-wrapper";
+      }
+    }
+  }
+
   // If this view is not the sort view, then stop here.
   if (!isset($vars['view']->field['draggableviews'])) {
     return;
