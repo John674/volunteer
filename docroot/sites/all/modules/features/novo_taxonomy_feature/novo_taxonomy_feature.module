@@ -357,17 +357,23 @@ function _novo_taxonomy_feature_add_phone_type($vocabulary) {
  */
 function _novo_taxonomy_feature_add_ethnicity($vocabulary) {
   $list = array(
-    'african american',
-    'asian american',
-    'native american',
-    'latino',
-    'white',
-    'other'
+    'African American',
+    'African American/Latino',
+    'Asian American',
+    'Indian',
+    'Latino',
+    'Middle Eastern American',
+    'Native American',
+    'Native Hawaiians',
+    'Other',
+    'Two or more races',
+    'White American'
   );
   foreach ($list as $key => $value) {
     $term = new stdClass();
     $term->name = $value;
     $term->vid = $vocabulary->vid;
+    $term->weight = $key;
     taxonomy_term_save($term);
   }
 }
@@ -517,7 +523,7 @@ function _novo_taxonomy_feature_add_ref_questions($vocabulary) {
     taxonomy_term_save($term);
     if (!empty($childs)) {
       $w_c = 0;
-      foreach($childs as $child_name) {
+      foreach ($childs as $child_name) {
         $term_child = new stdClass();
         $term_child->name = $child_name;
         $term_child->vid = $vocabulary->vid;
