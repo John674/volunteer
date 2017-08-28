@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements hook_install().
+ * Implements hook_schema().
  */
-function novo_ref_request_install() {
+function novo_ref_request_schema() {
   $schema['novo_ref_tasks'] = array(
     'description' => 'Referral request tasks.',
     'fields' => array(

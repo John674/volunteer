@@ -5,48 +5,61 @@
  * Applications dynamic fields.
  */
 
+/**
+ * Attach dynamic fields to node.
+ */
 function novo_applications_attach_dynamic_fields(&$variables) {
   $variables['dynamic_fields'] = array();
+  $exposed_value = array("title" => $variables['title']);
 
-  $dyn1 = array();
-  $dyn1[] = array(
-    "title" => t("Attendance Records"),
-    //"content" => l(t("History attendancy dates (123)"), "<front>")
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
-  );
-
-  $exposed_value = array("field_volunteer_mentor_name_target_id" => $variables['title'] . " (" . $variables['nid'] . ")");
-  $mentored_field = novo_applications_build_view_dyn_field("Mentoring Records", "List Kids mentored", "list_kids_mentored", array(), $exposed_value);
-  if (!empty($mentored_field)) {
-    $dyn1[] = $mentored_field;
+  $attendance_field = novo_applications_build_view_dyn_field("Attendance Records", "History attendancy dates", "attendance_records_of_volunteer", array(), $exposed_value);
+  if (!empty($attendance_field)) {
+    $variables['dynamic_fields'][0][] = $attendance_field;
   }
 
-  $dyn1[] = array(
-    "title" => t("Program history"),
-    //"content" => l(t("List Program Paticipated (2)"), "<front>")
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
-  );
+  $mentored_field = novo_applications_build_view_dyn_field("Mentoring Records", "List Kids mentored", "list_kids_mentored", array(), $exposed_value);
+  if (!empty($mentored_field)) {
+    $variables['dynamic_fields'][0][] = $mentored_field;
+  }
 
-  $variables['dynamic_fields'][] = $dyn1;
+  $mentored_field = novo_applications_build_view_dyn_field("Program history", "List Program Paticipated", "programm_participated", array(), $exposed_value);
+  if (!empty($mentored_field)) {
+    $variables['dynamic_fields'][0][] = $mentored_field;
+  }
 
-  $dyn2 = array();
-  $dyn2[] = array(
+  // GEt min/max volunter attached to attendance dates.
+  $dates = novo_application_get_serving_dates($variables['nid']);
+  $activity = t("Inactive");
+
+  if (isset($dates->max_date)) {
+    $sec = $dates->max_date - REQUEST_TIME;
+    $diff_days = $sec * 60 * 60 * 24;
+    if ($diff_days <= 6) {
+      $activity = t("Current");
+    }
+    elseif ($diff_days < 18) {
+      $activity = t("Lapsed");
+    }
+  }
+
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("First date serving"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => (isset($dates->min_date) ? format_date($dates->min_date, "short") : " - ")
   );
-  $dyn2[] = array(
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("Last date serving"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => (isset($dates->max_date) ? format_date($dates->max_date, "short") : " - ")
   );
-  $dyn2[] = array(
+  $variables['dynamic_fields'][1][] = array(
     "title" => t("Activity"),
-    "content" => '<span class="label label-danger">' . t('Coming soon') . '</span>'
+    "content" => $activity
   );
-
-  $variables['dynamic_fields'][] = $dyn2;
 
 }
 
+/**
+ * Build view for dynamic field.
+ */
 function novo_applications_build_view_dyn_field($label, $link_label, $view_machine_name, $args = array(), $exposed_value = array(), $display = "page") {
   $view = views_get_view($view_machine_name);
   if ($view) {
@@ -71,10 +84,26 @@ function novo_applications_build_view_dyn_field($label, $link_label, $view_machi
       "@link_label" => $link_label,
       "@count" => $count
     )), $path, array(
-      "attributes" => array("target" => "_blank"),
       "query" => $exposed_value
     ))
   );
 
   return NULL;
+}
+
+/**
+ * Get min/max serving dates.
+ */
+function novo_application_get_serving_dates($nid) {
+  $subquery = db_select("field_revision_field_attendance_volunteer_list", "rev_av");
+  $subquery->fields("rev_av", array("entity_id", "revision_id"));
+  $subquery->innerJoin("node_revision", "n_rev", "n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id");
+  $subquery->fields("n_rev", array("timestamp"));
+  $subquery->condition("rev_av.field_attendance_volunteer_list_target_id", $nid);
+
+  $query = db_select($subquery, "sub");
+  $query->addExpression("MIN(timestamp)", "min_date");
+  $query->addExpression("MAX(timestamp)", "max_date");
+
+  return $query->execute()->fetchObject();
 }

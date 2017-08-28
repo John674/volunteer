@@ -144,3 +144,28 @@ function novo_applications_node_access($node, $op, $account) {
 
   return NODE_ACCESS_IGNORE;
 }
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function novo_applications_views_query_alter(&$view, &$query) {
+  // Not show classes used in other programs.
+  if ($view->name == 'site_field_options_list') {
+
+    $year = novo_applications_get_academic_current_year();
+    $alias = $query->add_table('field_data_field_class_year');
+    $query->add_where(0, "$alias.field_class_year_year", $year, '=');
+
+  }
+}
+
+/**
+ * Get current academic year;
+ */
+function novo_applications_get_academic_current_year() {
+  $time = time();
+  $year = date("Y", $time);
+  $month = date("n", $time);
+
+  return ($month >= 8) ? $year : $year - 1;
+}
