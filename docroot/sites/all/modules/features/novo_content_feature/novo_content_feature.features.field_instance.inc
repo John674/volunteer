@@ -8702,7 +8702,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_mentoring',
     'label' => 'Mentoring',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -8712,7 +8712,7 @@ Friend',
       'module' => 'select_or_other',
       'settings' => array(
         'available_options' => 'Salvation
-Re-Dedication',
+Discipline',
         'other' => 'Other',
         'other_size' => 60,
         'other_title' => '',
