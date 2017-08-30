@@ -28,7 +28,28 @@ function novo_applications_attach_dynamic_fields(&$variables) {
   }
 
   // GEt min/max volunter attached to attendance dates.
-  $dates = novo_application_get_serving_dates($variables['nid']);
+  list($activity, $min_date, $max_date) = novo_applications_get_app_active_status($variables['nid']);
+
+  $variables['dynamic_fields'][1][] = array(
+    "title" => t("First date serving"),
+    "content" => (!empty($min_date) ? format_date($min_date, "short") : " - ")
+  );
+  $variables['dynamic_fields'][1][] = array(
+    "title" => t("Last date serving"),
+    "content" => (empty($max_date) ? format_date($max_date, "short") : " - ")
+  );
+  $variables['dynamic_fields'][1][] = array(
+    "title" => t("Activity"),
+    "content" => $activity
+  );
+
+}
+
+/**
+ * Get application Active status.
+ */
+function novo_applications_get_app_active_status($nid) {
+  $dates = novo_application_get_serving_dates($nid);
   $activity = t("Inactive");
 
   if (isset($dates->max_date)) {
@@ -41,20 +62,11 @@ function novo_applications_attach_dynamic_fields(&$variables) {
       $activity = t("Lapsed");
     }
   }
-
-  $variables['dynamic_fields'][1][] = array(
-    "title" => t("First date serving"),
-    "content" => (isset($dates->min_date) ? format_date($dates->min_date, "short") : " - ")
+  return array(
+    $activity,
+    isset($dates->min_date) ? $dates->min_date : NULL,
+    isset($dates->max_date) ? $dates->max_date : NULL
   );
-  $variables['dynamic_fields'][1][] = array(
-    "title" => t("Last date serving"),
-    "content" => (isset($dates->max_date) ? format_date($dates->max_date, "short") : " - ")
-  );
-  $variables['dynamic_fields'][1][] = array(
-    "title" => t("Activity"),
-    "content" => $activity
-  );
-
 }
 
 /**
