@@ -36,7 +36,7 @@ function novo_applications_attach_dynamic_fields(&$variables) {
   );
   $variables['dynamic_fields'][1][] = array(
     "title" => t("Last date serving"),
-    "content" => (empty($max_date) ? format_date($max_date, "short") : " - ")
+    "content" => (!empty($max_date) ? format_date($max_date, "short") : " - ")
   );
   $variables['dynamic_fields'][1][] = array(
     "title" => t("Activity"),
@@ -49,23 +49,21 @@ function novo_applications_attach_dynamic_fields(&$variables) {
  * Get application Active status.
  */
 function novo_applications_get_app_active_status($nid) {
-  $dates = novo_application_get_serving_dates($nid);
-  $activity = t("Inactive");
+  $activity_subquery = novo_applications_get_app_active_status_formula();
+  $max_date_subquery = novo_applications_get_last_date_serving_formula();
+  $min_date_subquery = novo_applications_get_first_date_serving_formula();
 
-  if (isset($dates->max_date)) {
-    $sec = $dates->max_date - REQUEST_TIME;
-    $diff_days = $sec * 60 * 60 * 24;
-    if ($diff_days <= 6) {
-      $activity = t("Current");
-    }
-    elseif ($diff_days < 18) {
-      $activity = t("Lapsed");
-    }
-  }
+  $query = db_select("node", "node");
+  $query->addExpression($activity_subquery, "activity");
+  $query->addExpression($max_date_subquery, "max_date");
+  $query->addExpression($min_date_subquery, "min_date");
+  $query->condition("node.nid", $nid);
+  $result = $query->execute()->fetchObject();
+
   return array(
-    $activity,
-    isset($dates->min_date) ? $dates->min_date : NULL,
-    isset($dates->max_date) ? $dates->max_date : NULL
+    t($result->activity),
+    isset($result->min_date) ? $result->min_date : NULL,
+    isset($result->max_date) ? $result->max_date : NULL
   );
 }
 
@@ -101,21 +99,4 @@ function novo_applications_build_view_dyn_field($label, $link_label, $view_machi
   );
 
   return NULL;
-}
-
-/**
- * Get min/max serving dates.
- */
-function novo_application_get_serving_dates($nid) {
-  $subquery = db_select("field_revision_field_attendance_volunteer_list", "rev_av");
-  $subquery->fields("rev_av", array("entity_id", "revision_id"));
-  $subquery->innerJoin("node_revision", "n_rev", "n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id");
-  $subquery->fields("n_rev", array("timestamp"));
-  $subquery->condition("rev_av.field_attendance_volunteer_list_target_id", $nid);
-
-  $query = db_select($subquery, "sub");
-  $query->addExpression("MIN(timestamp)", "min_date");
-  $query->addExpression("MAX(timestamp)", "max_date");
-
-  return $query->execute()->fetchObject();
 }

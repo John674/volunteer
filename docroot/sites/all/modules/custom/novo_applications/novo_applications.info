@@ -8,5 +8,6 @@ files[] = views/novo_applications_handler_app_node_status.inc
 
 files[] = views/novo_applications_handler_app_active_status.inc
 files[] = views/novo_applications_handler_app_active_status_sort.inc
+files[] = views/novo_applications_handler_app_active_status_filter.inc
 files[] = views/novo_applications_handler_app_last_date_serving.inc
 files[] = views/novo_applications_handler_app_last_date_serving_sort.inc

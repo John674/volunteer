@@ -12,12 +12,8 @@ class novo_applications_handler_app_last_date_serving_sort extends views_handler
 
   function query() {
     $this->ensure_my_table();
-    $formula = '(SELECT MAX(n_rev.timestamp)
-    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
-    INNER JOIN {node_revision} AS n_rev ON n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id
-    WHERE rev_av.field_attendance_volunteer_list_target_id = {' . $this->table_alias . '}.nid)';
+    $formula = novo_applications_get_last_date_serving_formula();
     $this->query->add_orderby(NULL, $formula, $this->options['order'], 'subquery');
-
 
   }
 }

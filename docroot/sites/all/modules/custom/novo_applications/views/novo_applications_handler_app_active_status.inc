@@ -9,15 +9,6 @@
  * Render a novo_applications_handler_app_active_status as a field.
  */
 class novo_applications_handler_app_active_status extends views_handler_field {
-
-  /**
-   * Override init function to add uid and homepage fields.
-   */
-  public function init(&$view, &$data) {
-    parent::init($view, $data);
-    $this->additional_fields['nid'] = 'nid';
-  }
-
   /**
    * Called to add the field to a query.
    */
@@ -25,29 +16,22 @@ class novo_applications_handler_app_active_status extends views_handler_field {
     parent::query();
     $this->ensure_my_table();
     $this->add_additional_fields();
+    $formula = novo_applications_get_app_active_status_formula();
+    $this->query->add_field(NULL, $formula, "active_status");
   }
 
   /**
    * Renders the field handler.
    */
   public function render($values) {
-    $nid = $this->get_value($values, "nid");
+    $active_status = (isset($values->active_status)) ? $values->active_status : " - ";
 
-    list($activity, $min_date, $max_date) = novo_applications_get_app_active_status($nid);
-
-    return $activity;
+    return $active_status;
   }
 
 
   function click_sort($order) {
-    $formula = "(IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
-    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
-    INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
-    WHERE rev_av.field_attendance_volunteer_list_target_id = {" . $this->table_alias . "}.nid) <= 6, 'Current', IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
-    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
-    INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
-    WHERE rev_av.field_attendance_volunteer_list_target_id = {" . $this->table_alias . "}.nid) <= 18, 'Lapsed', 'Inactive')))";
-
+    $formula = novo_applications_get_app_active_status_formula();
     $this->query->add_orderby(NULL, $formula, $order, 'subquery');
   }
 }
