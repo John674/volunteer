@@ -43,7 +43,6 @@ function novo_cia_add_to_queue_pull_report_request($nid, $uid, $search_request_i
     ->condition('request_status', 0)
     ->execute();
 
-
   return db_insert('novo_cia_checks')
     ->fields(array(
       'uid' => $uid,

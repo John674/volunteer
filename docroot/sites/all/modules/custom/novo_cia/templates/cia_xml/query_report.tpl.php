@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Cia query report theme.
