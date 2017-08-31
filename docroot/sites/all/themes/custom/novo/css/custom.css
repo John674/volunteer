@@ -280,3 +280,7 @@ li.novo-leaf a {
   color: #777777;
   margin-top: 1.8em;
 }
+
+.views-field .img-responsive{
+  display: inline-block;
+}
