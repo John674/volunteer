@@ -6197,6 +6197,177 @@ function novo_views_feature_views_default_views() {
   $export['users'] = $view;
 
   $view = new view();
+  $view->name = 'volunteer_activity_report';
+  $view->description = '';
+  $view->tag = 'Report';
+  $view->base_table = 'node';
+  $view->human_name = 'Volunteer Activity Report';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Volunteer Activity Report';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => 'plain_text',
+        ),
+      ),
+      'allow_secondary' => 0,
+      'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
+    ),
+    'novo_application_active_status' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'novo_application_active_status' => 'novo_application_active_status',
+    'novo_application_last_date_serving' => 'novo_application_last_date_serving',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'novo_application_active_status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'novo_application_last_date_serving' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Full name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Novo application active status */
+  $handler->display->display_options['fields']['novo_application_active_status']['id'] = 'novo_application_active_status';
+  $handler->display->display_options['fields']['novo_application_active_status']['table'] = 'node';
+  $handler->display->display_options['fields']['novo_application_active_status']['field'] = 'novo_application_active_status';
+  $handler->display->display_options['fields']['novo_application_active_status']['label'] = 'Activity';
+  $handler->display->display_options['fields']['novo_application_active_status']['element_label_colon'] = FALSE;
+  /* Field: Content: Novo application Last date serving */
+  $handler->display->display_options['fields']['novo_application_last_date_serving']['id'] = 'novo_application_last_date_serving';
+  $handler->display->display_options['fields']['novo_application_last_date_serving']['table'] = 'node';
+  $handler->display->display_options['fields']['novo_application_last_date_serving']['field'] = 'novo_application_last_date_serving';
+  $handler->display->display_options['fields']['novo_application_last_date_serving']['label'] = 'Last date serving';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'application' => 'application',
+  );
+  /* Filter criterion: Content: Novo application active status */
+  $handler->display->display_options['filters']['novo_application_active_status']['id'] = 'novo_application_active_status';
+  $handler->display->display_options['filters']['novo_application_active_status']['table'] = 'node';
+  $handler->display->display_options['filters']['novo_application_active_status']['field'] = 'novo_application_active_status';
+  $handler->display->display_options['filters']['novo_application_active_status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['label'] = 'Filter by month activity';
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['operator'] = 'novo_application_active_status_op';
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['identifier'] = 'novo_application_active_status';
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['novo_application_active_status']['expose']['remember_roles'] = array(
+    2 => 0,
+    5 => '5',
+    3 => '3',
+    1 => 0,
+    6 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'volunteer-activity-report';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'volunteer-activity-report/export-xls';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+
+  /* Display: Data export PDF */
+  $handler = $view->new_display('views_data_export_pdf', 'Data export PDF', 'views_data_export_pdf_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'volunteer-activity-report/export-pdf';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $export['volunteer_activity_report'] = $view;
+
+  $view = new view();
   $view->name = 'volunteer_birthdays_report';
   $view->description = '';
   $view->tag = 'Report';
