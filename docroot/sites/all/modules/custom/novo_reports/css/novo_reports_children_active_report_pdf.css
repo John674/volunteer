@@ -1,0 +1,11 @@
+.field-collection-item-field-parent-guardian {
+  min-width: 200px;
+}
+
+.field-collection-item-field-parent-guardian div {
+  display: inline-block;
+}
+.field-collection-item-field-parent-guardian .field-name-field-phone,
+.field-collection-item-field-parent-guardian .field-name-field-phone .field-item{
+  display: block;
+}
