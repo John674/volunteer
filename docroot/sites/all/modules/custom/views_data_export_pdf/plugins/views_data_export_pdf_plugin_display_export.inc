@@ -22,7 +22,15 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
   public function generate_pdf($html, $filename = NULL) {
     if (($library = libraries_load('phpwkhtmltopdf')) && !empty($library['loaded'])) {
       try {
-        $pdf = new WkHtmlToPdf(array('binary' => variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf')));
+        $options = array('binary' => variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf'));
+
+        $is_landscape = (isset($this->options['style_options']['landscape']) && $this->options['style_options']['landscape']) ? TRUE : FALSE;
+        if ($is_landscape) {
+          $options['orientation'] = 'landscape';
+        }
+
+        $pdf = new WkHtmlToPdf($options);
+
         $pdf->addPage($html);
         if (!empty($filename)) {
           if ($pdf->saveAs($filename)) {
