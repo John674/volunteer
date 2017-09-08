@@ -1,0 +1,5 @@
+.view-list-kids-mentored .views-table caption,
+.view-attendance-records-of-volunteer .views-table caption,
+.view-programm-participated .views-table caption {
+  display: none;
+}

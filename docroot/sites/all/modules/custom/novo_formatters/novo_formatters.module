@@ -115,14 +115,18 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
       $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
       if (!empty($dob)) {
         $dob_obj = new DateTime($dob);
+
         $now_obj = new DateTime();
+        $now_obj->setTime(23, 59, 59);
         $date_diff = date_diff($dob_obj, $now_obj);
         $age = $date_diff->y;
 
         $dob_m = $dob_obj->format("n");
         $dob_d = $dob_obj->format("j");
 
-        $dob_diff = date_diff(new DateTime($dob_m . "/" . $dob_d . "/" . $now_obj->format("Y")), $now_obj);
+        $new_dob_obj = $dob_obj->setDate($now_obj->format("Y"), $dob_m, $dob_d)->setTime(23, 59, 59);
+        $dob_diff = date_diff($new_dob_obj, $now_obj);
+
         $advanced_text = "";
         if (empty($dob_diff->m) && $dob_diff->invert) {
           if (empty($dob_diff->d)) {
@@ -130,12 +134,6 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
           }
           elseif ($dob_diff->d < 2) {
             $advanced_text = t("Tomorrow!");
-          }
-          elseif ($dob_diff->d < 8) {
-            $advanced_text = t("This week!");
-          }
-          elseif ($dob_diff->d < 15) {
-            $advanced_text = t("Next week!");
           }
         }
 

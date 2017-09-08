@@ -5,6 +5,8 @@
  * Helper functions.
  */
 
+module_load_include("inc", "novo_reports", "includes/novo_reports.handlers_func");
+
 /**
  * Implements hook_menu().
  */
@@ -149,4 +151,14 @@ function novo_reports_get_report_view_list_paths() {
   cache_set('novo_reports:get_report_view_list_paths', $paths);
 
   return $paths;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function novo_reports_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_reports') . '/views',
+  );
 }
