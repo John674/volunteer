@@ -5,9 +5,8 @@
  * Novo reports novo_reports.handlers_func.
  */
 
-
 /**
- * Select .
+ * Get attendance enrolled formula.
  */
 function novo_reports_get_attendance_enrolled_formula() {
   $formula = "(SELECT COUNT(*)
@@ -17,6 +16,9 @@ function novo_reports_get_attendance_enrolled_formula() {
   return $formula;
 }
 
+/**
+ * Get attendance NEW formula.
+ */
 function novo_reports_get_attendance_new_formula() {
   $formula = "SELECT (
   (
@@ -47,6 +49,9 @@ function novo_reports_get_attendance_new_formula() {
   return "(" . $formula . ")";
 }
 
+/**
+ * Get attendance formula.
+ */
 function novo_reports_get_attendance_formula() {
   $formula = "(SELECT COUNT(*)
     FROM {field_data_field_attendance_kids_list} AS a_kids_list
