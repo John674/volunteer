@@ -33,6 +33,12 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
 
+define("NOVO_MASTER_ROLE_ANON", 1);
+define("NOVO_MASTER_ROLE_AUTH", 2);
+define("NOVO_MASTER_ROLE_VOLUNTEER", 6);
+define("NOVO_MASTER_ROLE_REVIEWER", 5);
+define("NOVO_MASTER_ROLE_ADMIN", 3);
+
 /**
  * Preprocess page.
  */
@@ -98,14 +104,12 @@ function novo_master_disable_node_view($node) {
     return FALSE;
   }
 
-  if ($node->type == 'reference_request' && function_exists("novo_ref_request_check_hash_access")) {
-    $access = novo_ref_request_check_hash_access($node);
-    if ($access) {
-      return $access;
-    }
+  $access = novo_ref_request_check_hash_access($node);
+  if ($access) {
+    return $access;
   }
 
-  return user_access('access content');
+  return node_access('view', $node);
 }
 
 /**
@@ -371,4 +375,95 @@ function novo_master_permission() {
  */
 function novo_master_userprotect_check_bypass_alter(&$access, $account) {
   $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function novo_master_node_grants($account, $op) {
+  $grants = array();
+  if ($op == 'view') {
+
+    $rids = array();
+    foreach ($account->roles as $rid => $role) {
+      $rids[] = $rid;
+    }
+    $grants["novo_master_access_webform"] = $rids;
+    $grants["novo_master_access_reviewer"] = $rids;
+  }
+  return $grants;
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function novo_master_node_access_records($node) {
+  $grants = array();
+
+  if ($node->type == 'webform') {
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_ANON,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_AUTH,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_VOLUNTEER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  // Allow reviewer access.
+  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application') {
+    $grants[] = array(
+      'realm' => "novo_master_access_reviewer",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  $grants[] = array(
+    'realm' => "novo_master_access_reviewer",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  );
+
+  $grants[] = array(
+    'realm' => "novo_master_access_webform",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  );
+
+  return $grants;
 }

@@ -36,7 +36,7 @@ function novo_applications_views_data() {
     'field' => array(
       'title' => t('Novo application active status'),
       'help' => t('Provide application active status Current/Lapsed/Inactive.'),
-      'handler' => 'novo_applications_handler_app_active_status',
+      'handler' => 'novo_reports_handler_attendanceenrolled',
       'click sortable' => TRUE,
     ),
     'sort' => array(

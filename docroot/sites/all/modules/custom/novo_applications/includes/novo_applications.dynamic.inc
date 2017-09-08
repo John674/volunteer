@@ -88,15 +88,24 @@ function novo_applications_build_view_dyn_field($label, $link_label, $view_machi
     $count = (isset($view->total_rows)) ? $view->total_rows : 0;
   }
 
-  return array(
-    "title" => t("@label", array("@label" => $label)),
-    "content" => l(t("@link_label (@count)", array(
-      "@link_label" => $link_label,
-      "@count" => $count
-    )), $path, array(
-      "query" => $exposed_value
-    ))
-  );
-
-  return NULL;
+  if (!empty($count)) {
+    return array(
+      "title" => t("@label", array("@label" => $label)),
+      "content" => l(t("@link_label (@count)", array(
+        "@link_label" => $link_label,
+        "@count" => $count
+      )), $path, array(
+        "query" => $exposed_value
+      ))
+    );
+  }
+  else {
+    return array(
+      "title" => t("@label", array("@label" => $label)),
+      "content" => t("@link_label (@count)", array(
+        "@link_label" => $link_label,
+        "@count" => $count
+      ))
+    );
+  }
 }
