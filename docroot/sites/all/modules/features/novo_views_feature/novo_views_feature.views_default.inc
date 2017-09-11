@@ -2211,10 +2211,14 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['field'] = 'field_parent_guardian';
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
-    'view_mode' => 'full',
+    'view_mode' => 'only_first_row',
+    'field_multiple_limit' => '1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
+  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

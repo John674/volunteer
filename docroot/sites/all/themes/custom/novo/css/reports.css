@@ -25,3 +25,11 @@
 .view-canvassing-report .tabledrag-toggle-weight-wrapper {
   display: none;
 }
+
+.view-children-active-report th.views-field-field-parent-guardian {
+  min-width: 300px;
+}
+
+.view-children-active-report td.views-field-field-parent-guardian div.field{
+  display: inline-block;
+}
