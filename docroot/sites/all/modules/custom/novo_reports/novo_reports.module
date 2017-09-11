@@ -164,7 +164,7 @@ function novo_reports_views_api() {
 }
 
 /**
- * @param $view
+ * Implements hook_views_pre_render().
  */
 function novo_reports_views_pre_render(&$view) {
   if (isset($view->live_preview) && $view->live_preview) {
