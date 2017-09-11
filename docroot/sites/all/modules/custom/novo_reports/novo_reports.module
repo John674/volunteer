@@ -162,3 +162,40 @@ function novo_reports_views_api() {
     'path' => drupal_get_path('module', 'novo_reports') . '/views',
   );
 }
+
+/**
+ * @param $view
+ */
+function novo_reports_views_pre_render(&$view) {
+  if (isset($view->live_preview) && $view->live_preview) {
+    return TRUE;
+  }
+
+  if ($view->name == 'enrollment_report') {
+    $tmp_result = array();
+    foreach ($view->result as $key => $row) {
+      $tmp_result[$row->field_data_field_program_location_field_program_location_tar][] = $row;
+    }
+
+    foreach ($tmp_result as $loc_id => $rows) {
+      $count = 0;
+      foreach ($rows as $key => $row) {
+        $count += $row->field_data_field_program_kids_list_field_program_kids_list_v;
+      }
+      $total_row = clone $row;
+      $total_row->nid = "total-label";
+      $total_row->node_title = t("Total");
+      $total_row->field_data_field_program_kids_list_field_program_kids_list_v = $count;
+      $tmp_result[$loc_id][] = $total_row;
+    }
+
+    $new_result = array();
+    foreach ($tmp_result as $loc_id => $rows) {
+      foreach ($rows as $key => $row) {
+        $new_result[] = $row;
+      }
+    }
+
+    $view->result = $new_result;
+  }
+}
