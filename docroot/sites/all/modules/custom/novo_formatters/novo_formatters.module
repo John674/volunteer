@@ -128,11 +128,14 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
         $dob_diff = date_diff($new_dob_obj, $now_obj);
 
         $advanced_text = "";
-        if (empty($dob_diff->m) && $dob_diff->invert) {
-          if (empty($dob_diff->d)) {
+        $m = $dob_diff->m;
+        $d = $dob_diff->d;
+
+        if (empty($m)) {
+          if (empty($d)) {
             $advanced_text = t("Today!");
           }
-          elseif ($dob_diff->d < 2) {
+          elseif ($d < 2) {
             $advanced_text = t("Tomorrow!");
           }
         }
