@@ -5638,7 +5638,7 @@ function novo_views_feature_views_default_views() {
   $view = new view();
   $view->name = 'report_general';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'Report';
   $view->base_table = 'node';
   $view->human_name = 'Report General';
   $view->core = 7;
@@ -5655,7 +5655,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
-  $handler->display->display_options['style_plugin'] = 'tablesummarized';
+  $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
       'field' => 'field_program_location',
@@ -5664,6 +5664,7 @@ function novo_views_feature_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['columns'] = array(
+    'nid' => 'nid',
     'field_program_location' => 'field_program_location',
     'field_attendance_date' => 'field_attendance_date',
     'novo_reports_enrolled' => 'novo_reports_enrolled',
@@ -5671,13 +5672,19 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'nid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_program_location' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-      'summarize' => 'none',
     ),
     'field_attendance_date' => array(
       'sortable' => 0,
@@ -5685,19 +5692,16 @@ function novo_views_feature_views_default_views() {
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-      'summarize' => 'none',
     ),
     'novo_reports_enrolled' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-      'summarize' => 'average',
     ),
     'novo_reports_attendance' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-      'summarize' => 'total',
     ),
   );
   /* Relationship: Program */
@@ -5707,10 +5711,20 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['ui_name'] = 'Program';
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['label'] = 'Program';
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['required'] = TRUE;
+  /* Field: Content: Program name */
+  $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
+  $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
+  $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
+  $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Program name (t)';
+  $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Attendance Nid (t)';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
@@ -5748,6 +5762,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['novo_reports_attendance']['field'] = 'novo_reports_attendance';
   $handler->display->display_options['fields']['novo_reports_attendance']['ui_name'] = 'Attendance';
   $handler->display->display_options['fields']['novo_reports_attendance']['label'] = 'Attendance';
+  /* Field: Novo reports: Novo reports attendance new kids number */
+  $handler->display->display_options['fields']['novo_reports_attendance_new']['id'] = 'novo_reports_attendance_new';
+  $handler->display->display_options['fields']['novo_reports_attendance_new']['table'] = 'node';
+  $handler->display->display_options['fields']['novo_reports_attendance_new']['field'] = 'novo_reports_attendance_new';
+  $handler->display->display_options['fields']['novo_reports_attendance_new']['label'] = 'New';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

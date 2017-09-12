@@ -23,6 +23,13 @@ function novo_reports_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
+  $items['novo-reports/test'] = array(
+    'title' => t('Test'),
+    'access callback' => TRUE,
+    'page callback' => 'novo_reports_test',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -198,4 +205,21 @@ function novo_reports_views_pre_render(&$view) {
 
     $view->result = $new_result;
   }
+}
+
+function novo_reports_test() {
+  $nid = 11176; // 14 sept
+  //$nid = 7946;
+
+  $subquery = novo_reports_get_attendance_new_formula();
+
+  $query = db_select("node");
+  $query->addExpression($subquery, "subquery");
+
+  $query->condition("{node}.nid", $nid);
+  $result = $query->execute()->fetchAll();
+
+  kpr($result);
+
+  return "xxx";
 }
