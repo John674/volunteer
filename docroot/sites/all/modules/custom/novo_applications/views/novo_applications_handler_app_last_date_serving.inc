@@ -10,24 +10,27 @@
  */
 class novo_applications_handler_app_last_date_serving extends views_handler_field {
 
+  var $field_alias = "last_date_serving";
+
   /**
    * Called to add the field to a query.
    */
   function query() {
     parent::query();
     $this->ensure_my_table();
-    $this->add_additional_fields();
 
     $formula = novo_applications_get_last_date_serving_formula();
-    $this->query->add_field(NULL, $formula, "last_date_serving");
-
+    $this->field_alias = $this->query->add_field(NULL, $formula, $this->field_alias);
+    $this->add_additional_fields();
   }
 
   /**
    * Renders the field handler.
    */
   public function render($values) {
-    return (isset($values->last_date_serving)) ? format_date($values->last_date_serving, "short") : " - ";
+    $value = $this->get_value($values);
+    $time = $this->sanitize_value($value);
+    return (!empty($time)) ? format_date($time, "short") : " - ";
   }
 
 
