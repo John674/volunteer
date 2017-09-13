@@ -221,7 +221,7 @@ function novo_reports_test() {
   $query->condition("{node}.nid", $nid);
   $result = $query->execute()->fetchAll();
 
-  //kpr($result);
+  // kpr($result);
 
   return "xxx";
 }
