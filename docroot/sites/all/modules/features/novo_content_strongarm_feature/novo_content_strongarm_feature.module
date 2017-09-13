@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo content STRONGARM feature feature.
+ */
+
+include_once 'novo_content_strongarm_feature.features.inc';
