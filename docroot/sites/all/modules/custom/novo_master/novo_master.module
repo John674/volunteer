@@ -28,7 +28,10 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'class',
   'list_kids_mentored',
   'attendance_records_of_volunteer',
-  'programm_participated'
+  'programm_participated',
+  'attendance_records_of_kids',
+  'list_staff_mentors',
+  'list_programm_participated_kids'
 )));
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
@@ -48,18 +51,39 @@ function novo_master_preprocess_page(&$vars) {
     in_array("page__attendance_records", $vars['theme_hook_suggestions']) ||
     in_array("page__list_programm_participated", $vars['theme_hook_suggestions'])
   ) {
-    $vol_name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
-    $vol_nodes = node_load_multiple(array(), array(
-      'title' => $vol_name,
-      'type' => 'application'
+    $name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+    $nodes = node_load_multiple(array(), array(
+      'title' => $name,
+      'type' => "application"
     ));
-    $vol_node = reset($vol_nodes);
-    if ($vol_node) {
+    $node = reset($nodes);
+    if ($node) {
       $b = drupal_get_breadcrumb();
-      $b[] = l($vol_node->title, "node/" . $vol_node->nid);
+      $b[] = l($node->title, "node/" . $node->nid);
       drupal_set_breadcrumb($b);
     }
   }
+
+
+  if (in_array("page__kids_attendance_records", $vars['theme_hook_suggestions']) ||
+    in_array("page__list_staff_mentors", $vars['theme_hook_suggestions']) ||
+    in_array("page__list_programm_participated_kids", $vars['theme_hook_suggestions'])
+  ) {
+
+    $name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+    $nodes = node_load_multiple(array(), array(
+      'title' => $name,
+      'type' => "kids"
+    ));
+    $node = reset($nodes);
+    if ($node) {
+      $b = drupal_get_breadcrumb();
+      $b[] = l(t("Kids"), "kids");
+      $b[] = l($node->title, "node/" . $node->nid);
+      drupal_set_breadcrumb($b);
+    }
+  }
+
 }
 
 /**
@@ -184,6 +208,21 @@ function novo_master_preprocess_views_view(&$vars) {
           break;
 
         case "list_programm_participated":
+          $add_link = "node/add/program";
+          $access = node_access("create", "program", $user);
+          break;
+
+        case "attendance_records_of_kids":
+          $add_link = "node/add/attendance";
+          $access = node_access("create", "attendance", $user);
+          break;
+
+        case "list_staff_mentors":
+          $add_link = "node/add/mentors";
+          $access = node_access("create", "mentors", $user);
+          break;
+
+        case "list_programm_participated_kids":
           $add_link = "node/add/program";
           $access = node_access("create", "program", $user);
           break;
