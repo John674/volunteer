@@ -1,0 +1,115 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+module_load_include("inc", "novo_dynamic_fields", "includes/novo_dynamic_fields.applications");
+module_load_include("inc", "novo_dynamic_fields", "includes/novo_dynamic_fields.kids");
+module_load_include("inc", "novo_dynamic_fields", "includes/novo_dynamic_fields.staff");
+
+/**
+ * Implements hook_theme().
+ */
+function novo_dynamic_fields_theme($existing, $type, $theme, $path) {
+  return array(
+    'novo_dynamic_fields_pane' => array(
+      'variables' => array('title' => NULL, 'content' => NULL),
+      'template' => 'templates/novo-dynamic-fields-pane',
+    ),
+    'novo_dynamic_fields_row' => array(
+      'variables' => array('title' => NULL, 'content' => NULL),
+      'template' => 'templates/novo-dynamic-fields-row',
+    )
+  );
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_dynamic_fields_preprocess_node(&$variables) {
+  if (isset($variables['type']) && $variables['type'] == 'application') {
+    // Dynamic fields.
+    switch ($variables['type']) {
+      case 'application':
+        $dyn_fields = novo_dynamic_fields_attach_dynamic_fields_applications($variables);
+
+        $variables['dynamic_fields'] = array(
+          "#weight" => 100,
+          "#markup" => theme("novo_dynamic_fields_pane", array(
+            "title" => NULL,
+            "content" => $dyn_fields
+          ))
+        );
+
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function novo_dynamic_fields_form_alter(&$form, &$form_state) {
+  switch ($form['#form_id']) {
+    case "kids_node_form":
+      $nid = (isset($form_state['node']->nid)) ? $form_state['node']->nid : NULL;
+      if (!empty($nid)) {
+        $dyn_fields = novo_dynamic_fields_attach_dynamic_fields_kids($nid);
+
+        $form['dynamic_fields'] = array(
+          "#weight" => 100,
+          "#markup" => theme("novo_dynamic_fields_pane", array(
+            "title" => NULL,
+            "content" => $dyn_fields
+          ))
+        );
+      }
+      break;
+
+  }
+}
+
+/**
+ * Build view for dynamic field.
+ */
+function novo_dynamic_fields_build_view_dyn_field($label, $link_label, $view_machine_name, $args = array(), $exposed_value = array(), $display = "page") {
+  $view = views_get_view($view_machine_name);
+  if ($view) {
+    $path = isset($view->display[$display]->display_options['path']) ? $view->display[$display]->display_options['path'] : NULL;
+    if (!empty($args)) {
+      $view->set_arguments($args);
+    }
+
+    if ($exposed_value) {
+      foreach ($exposed_value as $key => $value) {
+        $view->exposed_input[$key] = $value;
+      }
+    }
+
+    $view->execute($display);
+    $count = (isset($view->total_rows)) ? $view->total_rows : 0;
+  }
+
+  if (!empty($count)) {
+    return array(
+      "title" => t("@label", array("@label" => $label)),
+      "content" => l(t("@link_label (@count)", array(
+        "@link_label" => $link_label,
+        "@count" => $count
+      )), $path, array(
+        "query" => $exposed_value
+      ))
+    );
+  }
+  else {
+    return array(
+      "title" => t("@label", array("@label" => $label)),
+      "content" => t("@link_label (@count)", array(
+        "@link_label" => $link_label,
+        "@count" => $count
+      ))
+    );
+  }
+}
