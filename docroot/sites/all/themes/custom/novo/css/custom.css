@@ -263,5 +263,29 @@ li.novo-leaf a {
 }
 
 .novo-title-moved-wrapper {
-  background-color: #ccc!important;
+  background-color: #ccc !important;
+}
+
+.ctools-use-ajax.btn.js-hide {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.ctools-use-ajax.btn.js-hide .ajax-progress.ajax-progress-throbber {
+  font-size: 14px;
+  color: #777777;
+  margin-top: 1.8em;
+}
+
+.views-field .img-responsive{
+  display: inline-block;
+}
+
+.novo-report-class-total-label {
+  font-family: "ProximaNovaBold";
+  color: #777777;
 }

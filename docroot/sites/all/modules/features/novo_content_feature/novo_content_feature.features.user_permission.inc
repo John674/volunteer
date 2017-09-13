@@ -285,7 +285,6 @@ function novo_content_feature_user_default_permissions() {
   $permissions['create field_email'] = array(
     'name' => 'create field_email',
     'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'field_permissions',
@@ -2062,7 +2061,6 @@ function novo_content_feature_user_default_permissions() {
   $permissions['edit own field_email'] = array(
     'name' => 'edit own field_email',
     'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'field_permissions',
@@ -3859,7 +3857,6 @@ function novo_content_feature_user_default_permissions() {
   $permissions['view own field_email'] = array(
     'name' => 'view own field_email',
     'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'field_permissions',

@@ -5,6 +5,8 @@
  * Helper functions.
  */
 
+module_load_include("inc", "novo_reports", "includes/novo_reports.handlers_func");
+
 /**
  * Implements hook_menu().
  */
@@ -21,6 +23,13 @@ function novo_reports_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
+  $items['novo-reports/test'] = array(
+    'title' => t('Test'),
+    'access callback' => TRUE,
+    'page callback' => 'novo_reports_test',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -28,6 +37,10 @@ function novo_reports_menu() {
  * Reports list from views list.
  */
 function novo_reports_list() {
+  if ($cached = cache_get('novo_reports:list')) {
+    return $cached->data;
+  }
+
   $views = views_get_all_views();
   $links = array();
 
@@ -103,11 +116,14 @@ function novo_reports_list() {
     }
   }
 
-  return theme("links", array(
+  $links = theme("links", array(
     "links" => $links,
     "attributes" => array("class" => array("novo-reports-list-wrapper")),
     "heading" => ""
   ));
+  cache_set('novo_reports:list', $links);
+
+  return $links;
 }
 
 /**
@@ -120,4 +136,90 @@ function novo_reports_permission() {
       'description' => t('Novo access to reports.'),
     ),
   );
+}
+
+/**
+ * Get all reports paths.
+ */
+function novo_reports_get_report_view_list_paths() {
+  if ($cached = cache_get('novo_reports:get_report_view_list_paths')) {
+    return $cached->data;
+  }
+
+  $views = views_get_all_views();
+  $paths = array();
+  foreach ($views as $view_name => $view) {
+    if (strtolower($view->tag) == "report") {
+      if (isset($view->display['page']->display_options['path'])) {
+        $paths[] = $view->display['page']->display_options['path'];
+      }
+    }
+  }
+  cache_set('novo_reports:get_report_view_list_paths', $paths);
+
+  return $paths;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function novo_reports_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_reports') . '/views',
+  );
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function novo_reports_views_pre_render(&$view) {
+  if (isset($view->live_preview) && $view->live_preview) {
+    return TRUE;
+  }
+
+  if ($view->name == 'enrollment_report') {
+    $tmp_result = array();
+    foreach ($view->result as $key => $row) {
+      $tmp_result[$row->field_data_field_program_location_field_program_location_tar][] = $row;
+    }
+
+    foreach ($tmp_result as $loc_id => $rows) {
+      $count = 0;
+      foreach ($rows as $key => $row) {
+        $count += $row->field_data_field_program_kids_list_field_program_kids_list_v;
+      }
+      $total_row = clone $row;
+      $total_row->nid = "total-label";
+      $total_row->node_title = t("Total");
+      $total_row->field_data_field_program_kids_list_field_program_kids_list_v = $count;
+      $tmp_result[$loc_id][] = $total_row;
+    }
+
+    $new_result = array();
+    foreach ($tmp_result as $loc_id => $rows) {
+      foreach ($rows as $key => $row) {
+        $new_result[] = $row;
+      }
+    }
+
+    $view->result = $new_result;
+  }
+}
+
+function novo_reports_test() {
+  $nid = 11176; // 14 sept
+  //$nid = 7946;
+
+  $subquery = novo_reports_get_attendance_new_formula();
+
+  $query = db_select("node");
+  $query->addExpression($subquery, "subquery");
+
+  $query->condition("{node}.nid", $nid);
+  $result = $query->execute()->fetchAll();
+
+  kpr($result);
+
+  return "xxx";
 }

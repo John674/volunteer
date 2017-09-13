@@ -1,7 +1,7 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.18
+version = 7.x-1.19
 dependencies[] = autoassignrole
 dependencies[] = chosen
 dependencies[] = ctools

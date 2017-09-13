@@ -5,11 +5,99 @@
  * PDF style plugin.
  */
 class views_data_export_pdf_plugin_style_export extends views_data_export_plugin_style_export {
+
   /**
-   * Render the display in this style.
+   * Set options fields and default values.
+   *
+   * @return
+   * An array of options information.
    */
-  function render() {
-    return parent::render();
+  function option_definition() {
+    $options = parent::option_definition();
+
+    $options['landscape'] = array(
+      'default' => FALSE,
+      'translatable' => FALSE,
+    );
+
+    $options['user_style_sheet'] = array(
+      'default' => "",
+      'translatable' => FALSE,
+    );
+    return $options;
+  }
+
+  /**
+   * Options form mini callback.
+   *
+   * @param $form
+   * Form array to add additional fields to.
+   * @param $form_state
+   * State of the form.
+   * @return
+   * None.
+   */
+  function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
+
+    $form['landscape'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Landscape'),
+      '#default_value' => $this->options['landscape'],
+      '#description' => t('PDF Landscape format.'),
+    );
+    $form['user_style_sheet'] = array(
+      '#type' => 'textfield',
+      '#title' => t('User style sheet path'),
+      '#default_value' => $this->options['user_style_sheet'],
+      '#description' => t('Add user style sheet from path. Example sites/default/files/pdf_style.css'),
+    );
+
+  }
+
+  function render_header() {
+    $rows = array();
+    $title = '';
+    $output = '';
+    $head = '';
+
+    $is_style_sheet = (isset($this->options['user_style_sheet'])) ? $this->options['user_style_sheet'] : "";
+    if (!empty($is_style_sheet)) {
+      $path = ltrim($is_style_sheet, "/");
+      if (!empty($path) && file_exists($path)) {
+        $styles = array(
+          '#type' => 'styles',
+          '#items' => array(
+            $path => array(
+              'type' => 'file',
+              'group' => CSS_DEFAULT,
+              'weight' => 0,
+              'every_page' => FALSE,
+              'media' => 'all',
+              'preprocess' => FALSE,
+              'data' => $path,
+              'browsers' => array(
+                'IE' => TRUE,
+                '!IE' => TRUE,
+              ),
+            )
+          ),
+        );
+        $head = drupal_render($styles);
+      }
+      else {
+        watchdog("views_data_export_pdf", "File not found :path", array(":path" => $is_style_sheet));
+      }
+    }
+
+    $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_header'), array(
+      'view' => $this->view,
+      'options' => $this->options,
+      'rows' => $rows,
+      'title' => $title,
+      'head' => $head
+    ));
+    return $output;
   }
 
   function render_body(&$batch_sandbox = NULL) {

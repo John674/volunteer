@@ -160,7 +160,7 @@ function novo_applications_views_query_alter(&$view, &$query) {
 }
 
 /**
- * Get current academic year;
+ * Get current academic year.
  */
 function novo_applications_get_academic_current_year() {
   $time = time();

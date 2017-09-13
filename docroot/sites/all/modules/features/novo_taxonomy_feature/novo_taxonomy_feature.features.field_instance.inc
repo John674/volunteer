@@ -21,6 +21,9 @@ function novo_taxonomy_feature_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'color_field',
         'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
           'height' => 16,
           'width' => 16,
         ),
@@ -72,6 +75,9 @@ function novo_taxonomy_feature_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'color_field',
         'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
           'height' => 16,
           'width' => 16,
         ),
@@ -129,6 +135,9 @@ function novo_taxonomy_feature_field_default_field_instances() {
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
           'prefix_suffix' => TRUE,
           'scale' => 0,
           'thousand_separator' => '',

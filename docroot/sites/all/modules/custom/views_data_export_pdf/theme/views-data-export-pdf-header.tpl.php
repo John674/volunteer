@@ -14,6 +14,7 @@
             border: 1px solid #ccc;
         }
     </style>
+  <?php print (isset($head) && !empty($head)) ? $head : ""; ?>
 </head>
 <body>
 <table border="0" cellpadding="5" cellspacing="0">

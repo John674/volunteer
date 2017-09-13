@@ -94,6 +94,10 @@ function novo_wrap_app_status_label($text) {
  */
 function novo_preprocess_page(&$variables) {
 
+  if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
+    $variables['container_class'] = "container-fluid";
+  }
+
 }
 
 /**
