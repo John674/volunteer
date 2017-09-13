@@ -71,7 +71,6 @@ function novo_dynamic_fields_form_alter(&$form, &$form_state) {
   }
 }
 
-
 /**
  * Build view for dynamic field.
  */

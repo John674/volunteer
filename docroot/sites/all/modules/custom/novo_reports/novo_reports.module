@@ -207,6 +207,9 @@ function novo_reports_views_pre_render(&$view) {
   }
 }
 
+/**
+ * Test.
+ */
 function novo_reports_test() {
   $nid = 11176;
 
