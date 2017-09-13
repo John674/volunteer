@@ -33,7 +33,16 @@ function novo_dynamic_fields_preprocess_node(&$variables) {
     // Dynamic fields.
     switch ($variables['type']) {
       case 'application':
-        novo_dynamic_fields_attach_dynamic_fields_applications($variables);
+        $dyn_fields = novo_dynamic_fields_attach_dynamic_fields_applications($variables);
+
+        $variables['dynamic_fields'] = array(
+          "#weight" => 100,
+          "#markup" => theme("novo_dynamic_fields_pane", array(
+            "title" => NULL,
+            "content" => $dyn_fields
+          ))
+        );
+
         break;
     }
   }
