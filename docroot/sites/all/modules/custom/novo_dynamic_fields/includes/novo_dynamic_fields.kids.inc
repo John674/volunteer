@@ -5,6 +5,9 @@
  * Kids dynamic fields.
  */
 
+/**
+ * Dyn fields for kids.
+ */
 function novo_dynamic_fields_attach_dynamic_fields_kids($nid) {
   $output = "";
 

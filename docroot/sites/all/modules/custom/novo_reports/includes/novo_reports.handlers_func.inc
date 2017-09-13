@@ -29,7 +29,6 @@ LIMIT 1";
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
 }
 
-
 /**
  * Get attendance formula.
  */

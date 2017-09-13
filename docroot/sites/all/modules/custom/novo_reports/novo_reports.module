@@ -24,7 +24,7 @@ function novo_reports_menu() {
   );
 
   $items['novo-reports/test'] = array(
-    'title' => t('Test'),
+    'title' => 'Test',
     'access callback' => TRUE,
     'page callback' => 'novo_reports_test',
     'type' => MENU_CALLBACK,
@@ -208,8 +208,7 @@ function novo_reports_views_pre_render(&$view) {
 }
 
 function novo_reports_test() {
-  $nid = 11176; // 14 sept
-  //$nid = 7946;
+  $nid = 11176;
 
   $subquery = novo_reports_get_attendance_new_formula();
 
@@ -219,7 +218,7 @@ function novo_reports_test() {
   $query->condition("{node}.nid", $nid);
   $result = $query->execute()->fetchAll();
 
-  kpr($result);
+  //kpr($result);
 
   return "xxx";
 }

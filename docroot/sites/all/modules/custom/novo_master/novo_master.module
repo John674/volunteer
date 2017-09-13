@@ -64,7 +64,6 @@ function novo_master_preprocess_page(&$vars) {
     }
   }
 
-
   if (in_array("page__kids_attendance_records", $vars['theme_hook_suggestions']) ||
     in_array("page__list_staff_mentors", $vars['theme_hook_suggestions']) ||
     in_array("page__list_programm_participated_kids", $vars['theme_hook_suggestions'])
