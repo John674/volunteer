@@ -21,7 +21,7 @@ function novo_dynamic_fields_attach_dynamic_fields_kids($nid) {
 
   $output .= theme("novo_dynamic_fields_row", novo_dynamic_fields_build_view_dyn_field("Attendance Records", "History attendancy dates", "attendance_records_of_kids", array(), $exposed_value));
   $output .= theme("novo_dynamic_fields_row", novo_dynamic_fields_build_view_dyn_field("Mentoring Records", "List staff mentors", "list_staff_mentors", array(), $exposed_value));
-  $output .= theme("novo_dynamic_fields_row", novo_dynamic_fields_build_view_dyn_field("Program history", "List Program Paticipated", "list_programm_participated_kids", array(), $exposed_value));
+  $output .= theme("novo_dynamic_fields_row", novo_dynamic_fields_build_view_dyn_field("Program history", "List Program Participated", "list_programm_participated_kids", array(), $exposed_value));
 
   return $output;
 

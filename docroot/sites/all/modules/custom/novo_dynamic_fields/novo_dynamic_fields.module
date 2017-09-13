@@ -68,6 +68,21 @@ function novo_dynamic_fields_form_alter(&$form, &$form_state) {
       }
       break;
 
+    case "staff_node_form":
+      $nid = (isset($form_state['node']->nid)) ? $form_state['node']->nid : NULL;
+      if (!empty($nid)) {
+        $dyn_fields = novo_dynamic_fields_attach_dynamic_fields_staff($nid);
+
+        $form['dynamic_fields'] = array(
+          "#weight" => 100,
+          "#markup" => theme("novo_dynamic_fields_pane", array(
+            "title" => NULL,
+            "content" => $dyn_fields
+          ))
+        );
+      }
+      break;
+
   }
 }
 
