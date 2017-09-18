@@ -11,9 +11,9 @@
   sudo: yes
   shell: mv /tmp/behat.yml {{ behat_root }}/behat.yml
 
-- name: Ensure that xvfb is run
-  service: name=xvfb state=started
-  when: behat_run_javascript_tests == 'yes'
+#- name: Ensure that xvfb is run
+#  service: name=xvfb state=started
+#  when: behat_run_javascript_tests == 'yes'
 
 - name: Export display and enable Chrome
   shell: firefox & # Add exclusion for firefox
@@ -47,10 +47,12 @@
   ignore_errors: yes
   environment:
     DISPLAY: ':99'
-  shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }} {{ features_dir }}'
+  #shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }} {{ features_dir }}'
+  shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }}'
   when: behat_run_javascript_tests == 'yes'
 
 - name: Run headless Behat tests
   ignore_errors: yes
-  shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }} {{ features_dir }} --tags "~@javascript"'
+  #shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }} {{ features_dir }} --tags "~@javascript"'
+  shell: 'echo "Behat tests: standard file {{ base_url }}/{{ build_reports_dir }}/report.html" >> {{ workspace_root }}/{{ artifacts_file }} && cd {{ behat_root }} && bin/behat --config {{ config_file }} --tags "~@javascript"'
   when: behat_run_javascript_tests == 'no'

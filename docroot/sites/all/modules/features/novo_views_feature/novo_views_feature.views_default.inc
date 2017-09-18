@@ -8234,6 +8234,18 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Footer: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<br><br><hr>Revisions<hr><br>';
+  /* Footer: Global: View area */
+  $handler->display->display_options['footer']['view']['id'] = 'view';
+  $handler->display->display_options['footer']['view']['table'] = 'views';
+  $handler->display->display_options['footer']['view']['field'] = 'view';
+  $handler->display->display_options['footer']['view']['label'] = 'Revisions';
+  $handler->display->display_options['footer']['view']['empty'] = TRUE;
+  $handler->display->display_options['footer']['view']['view_to_insert'] = 'test_enrolled:block_1';
   /* Relationship: Program */
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['id'] = 'field_attendance_program_name_target_id';
   $handler->display->display_options['relationships']['field_attendance_program_name_target_id']['table'] = 'field_data_field_attendance_program_name';
@@ -9317,6 +9329,102 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $export['staff_ref'] = $view;
+
+  $view = new view();
+  $view->name = 'test_enrolled';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node_revision';
+  $view->human_name = 'test enrolled';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'test enrolled';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'timestamp' => 'timestamp',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'timestamp' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Content revision: Content */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  /* Field: Content revision: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node_revision'] = TRUE;
+  /* Field: Content revision: Updated date */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['alter']['ellipsis'] = FALSE;
+  /* Field: Content (historical data): Kids list */
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['id'] = 'field_program_kids_list-revision_id';
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['table'] = 'field_revision_field_program_kids_list';
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['field'] = 'field_program_kids_list-revision_id';
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['type'] = 'field_collection_table_view';
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['settings'] = array(
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'translate' => '',
+    'delete' => 'Delete',
+    'description' => 1,
+    'view_mode' => 'full',
+    'hide_empty' => 0,
+    'empty' => 0,
+  );
+  $handler->display->display_options['fields']['field_program_kids_list-revision_id']['delta_offset'] = '0';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'nid';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'program' => 'program',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'test-enrolled';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $export['test_enrolled'] = $view;
 
   $view = new view();
   $view->name = 'training_list';

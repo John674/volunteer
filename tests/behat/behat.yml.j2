@@ -23,7 +23,7 @@ default:
               CURLOPT_CONNECTTIMEOUT: 0
       selenium2:
         wd_host: {{ selenium_url }}
-        #browser: {{ browser }}
+        browser: {{ browser }}
       base_url: {{ behat_base_url }}
       files_path: {{ resources_path }}
     Drupal\DrupalExtension:
@@ -39,10 +39,10 @@ default:
         username_field: Username
         password_field: Password
       selectors:
-        message_selector: .messages
-        error_message_selector: .messages.error
-        success_message_selector: .messages.status
-        warning_message_selector: .messages.warning
+        message_selector: .alert
+        error_message_selector: .alert.alert-danger
+        success_message_selector: .alert.alert-success
+        warning_message_selector: .alert.alert-warning
       region_map:
         content: "#content"
         sidebar: "#sidebar"
