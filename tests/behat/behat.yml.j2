@@ -12,6 +12,7 @@ default:
         - Drupal\DrupalExtension\Context\DrupalContext: ~
         - Drupal\DrupalExtension\Context\MarkupContext: ~
         - Drupal\DrupalExtension\Context\MessageContext: ~
+        - Behat\Drupal\Propeople\PropeopleContext: ~
   extensions:
     emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
       name: html
@@ -49,3 +50,6 @@ default:
       region_map:
         content: "#content"
         sidebar: "#sidebar"
+        navbar: "#navbar"
+        views_attachment: ".view .attachment"
+        field_parent_guardian_values: "#field-parent-guardian-values"

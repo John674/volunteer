@@ -31,7 +31,7 @@ Feature: Account feature
     When I press "edit-submit"
     And I should see the heading "siteadmin"
 
-  @javascript @dev
+  @javascript
   Scenario: Login volunteer
     When I am logged in as a user with the "Applicant US citizen" role
     Then I should see the link "Create Application"
