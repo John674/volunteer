@@ -7,7 +7,7 @@
     "behat/drupal-propeople-context": "~1.1",
     "behat/behat": "dev-master",
     "behat/mink-selenium2-driver": "*",
-    "behat/mink-extension":         "*"
+    "behat/mink-extension": "*"
   },
   "config": {
     "bin-dir": "bin"
