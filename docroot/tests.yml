@@ -18,7 +18,7 @@
     browser: 'chrome'
     selenium_url: 127.0.0.1:4444/wd/hub
     run_javascript_tests: 'no'
-    behat_run_javascript_tests: 'no
+    behat_run_javascript_tests: 'no'
     update_dependencies: 'yes'
     selenium_jar_path: /var/lib/selenium/selenium.jar
     chrome_driver_path: /var/lib/chrome-driver/chromedriver
