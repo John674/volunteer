@@ -4,8 +4,7 @@ Feature: Kids feature
   Background:
     Given I am logged in as a user with the "Siteadmin" role
 
-
-  @javascript @dev
+  @javascript
   Scenario: Create kid.
     Given I follow "Kids" in the "navbar"
     Then I wait until AJAX is finished
