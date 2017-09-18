@@ -5,6 +5,7 @@ default:
       output_path: {{ behat_drupal_root }}/build_reports
   suites:
     default:
+      paths: [ %paths.base%/features ]
       contexts:
         - FeatureContext: ~
         - Drupal\DrupalExtension\Context\MinkContext: ~
@@ -14,6 +15,7 @@ default:
   extensions:
     emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
       name: html
+      renderer: Twig,Behat2
     Behat\MinkExtension:
       goutte:
         guzzle_parameters:
@@ -36,8 +38,8 @@ default:
       text:
         log_in: Log in
         log_out: Log out
-        username_field: Username
-        password_field: Password
+        username_field: edit-name
+        password_field: edit-pass
       selectors:
         message_selector: .alert
         error_message_selector: .alert.alert-danger

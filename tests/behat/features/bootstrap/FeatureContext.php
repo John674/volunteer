@@ -28,6 +28,13 @@ class FeatureContext extends RawDrupalContext implements Context {
 
   }
 
+  /**
+   * @BeforeScenario
+   */
+  public function resizeWindow() {
+    $this->getSession()->resizeWindow(1440, 900, 'current');
+  }
+
 
   /**
    * @AfterStep
@@ -38,7 +45,7 @@ class FeatureContext extends RawDrupalContext implements Context {
       if (!($driver instanceof Selenium2Driver)) {
         return;
       }
-      file_put_contents(__DIR__ . '/../../../tmp/debug.png', $this->getSession()
+      file_put_contents(__DIR__ . '/../../../tmp/error.png', $this->getSession()
         ->getDriver()
         ->getScreenshot());
     }
