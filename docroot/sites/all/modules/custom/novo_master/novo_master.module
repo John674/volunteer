@@ -28,7 +28,12 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'class',
   'list_kids_mentored',
   'attendance_records_of_volunteer',
-  'programm_participated'
+  'programm_participated',
+  'attendance_records_of_kids',
+  'list_staff_mentors',
+  'list_programm_participated_kids',
+  'attendance_records_of_staff',
+  'list_kids_mentored_for_staff'
 )));
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
@@ -44,23 +49,58 @@ define("NOVO_MASTER_ROLE_ADMIN", 3);
  */
 function novo_master_preprocess_page(&$vars) {
   // Set breadcrumbs.
-  if (in_array("page__list_kids_mentored", $vars['theme_hook_suggestions']) ||
-    in_array("page__attendance_records", $vars['theme_hook_suggestions']) ||
-    in_array("page__list_programm_participated", $vars['theme_hook_suggestions'])
-  ) {
-    $vol_name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
-    $vol_nodes = node_load_multiple(array(), array(
-      'title' => $vol_name,
-      'type' => 'application'
-    ));
-    $vol_node = reset($vol_nodes);
-    if ($vol_node) {
-      $b = drupal_get_breadcrumb();
-      $b[] = l($vol_node->title, "node/" . $vol_node->nid);
-      drupal_set_breadcrumb($b);
-    }
+
+  $app_dyn_pages = array(
+    "page__list_kids_mentored",
+    "page__attendance_records",
+    "page__list_programm_participated"
+  );
+
+  $kid_dyn_pages = array(
+    "page__kids_attendance_records",
+    "page__list_staff_mentors",
+    "page__list_programm_participated_kids"
+  );
+
+  $staff_dyn_pages = array(
+    "page__staff_attendance_records",
+    "page__list_kids_mentored_staff",
+    "page__list_programm_participated_staff"
+  );
+
+  if (array_intersect($app_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "application");
+  }
+
+  if (array_intersect($kid_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "kids", t("Kids"), "kids");
+  }
+
+  if (array_intersect($staff_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "staff", t("Staff"), "staff");
   }
 }
+
+/**
+ * Add breadcrumbs on dynamic views.
+ */
+function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NULL, $list_uri = NULL) {
+  $name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+  $nodes = node_load_multiple(array(), array(
+    'title' => $name,
+    'type' => $type
+  ));
+  $node = reset($nodes);
+  if ($node) {
+    $b = drupal_get_breadcrumb();
+    if (!empty($list_title) && !empty($list_uri)) {
+      $b[] = l($list_title, $list_uri);
+    }
+    $b[] = l($node->title, "node/" . $node->nid);
+    drupal_set_breadcrumb($b);
+  }
+}
+
 
 /**
  * Implements hook_form_alter().
@@ -165,7 +205,6 @@ function novo_master_preprocess_views_view(&$vars) {
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       $destination = drupal_get_destination();
-      $access = FALSE;
       switch ($vars['name']) {
         case "volunteers":
           $add_link = "admin/people/create";
@@ -174,16 +213,21 @@ function novo_master_preprocess_views_view(&$vars) {
           break;
 
         case "list_kids_mentored":
+        case "list_staff_mentors":
+        case "list_kids_mentored_for_staff":
           $add_link = "node/add/mentors";
           $access = node_access("create", "mentors", $user);
           break;
 
         case "attendance_records_of_volunteer":
+        case "attendance_records_of_kids":
+        case "attendance_records_of_staff":
           $add_link = "node/add/attendance";
           $access = node_access("create", "attendance", $user);
           break;
 
         case "list_programm_participated":
+        case "list_programm_participated_kids":
           $add_link = "node/add/program";
           $access = node_access("create", "program", $user);
           break;
