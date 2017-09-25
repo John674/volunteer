@@ -15,15 +15,25 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
   function option_definition() {
     $options = parent::option_definition();
 
-    $options['landscape'] = array(
+    $options['landscape'] = [
       'default' => FALSE,
       'translatable' => FALSE,
-    );
+    ];
 
-    $options['user_style_sheet'] = array(
+    $options['page_width'] = [
       'default' => "",
       'translatable' => FALSE,
-    );
+    ];
+
+    $options['page_height'] = [
+      'default' => "",
+      'translatable' => FALSE,
+    ];
+
+    $options['user_style_sheet'] = [
+      'default' => "",
+      'translatable' => FALSE,
+    ];
     return $options;
   }
 
@@ -34,29 +44,43 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
    * Form array to add additional fields to.
    * @param $form_state
    * State of the form.
+   *
    * @return
    * None.
    */
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
-    $form['landscape'] = array(
+    $form['landscape'] = [
       '#type' => 'checkbox',
       '#title' => t('Landscape'),
       '#default_value' => $this->options['landscape'],
       '#description' => t('PDF Landscape format.'),
-    );
-    $form['user_style_sheet'] = array(
+    ];
+
+    $form['page_width'] = [
+      '#type' => 'textfield',
+      '#title' => t('Page width'),
+      '#default_value' => $this->options['page_width'],
+      '#description' => t('Page width in mm. Left empty for default A4 format.'),
+    ];
+    $form['page_height'] = [
+      '#type' => 'textfield',
+      '#title' => t('Page height'),
+      '#default_value' => $this->options['page_height'],
+      '#description' => t('Page height in mm. Left empty for default A4 format.'),
+    ];
+    $form['user_style_sheet'] = [
       '#type' => 'textfield',
       '#title' => t('User style sheet path'),
       '#default_value' => $this->options['user_style_sheet'],
       '#description' => t('Add user style sheet from path. Example sites/default/files/pdf_style.css'),
-    );
+    ];
 
   }
 
   function render_header() {
-    $rows = array();
+    $rows = [];
     $title = '';
     $output = '';
     $head = '';
@@ -65,10 +89,10 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
     if (!empty($is_style_sheet)) {
       $path = ltrim($is_style_sheet, "/");
       if (!empty($path) && file_exists($path)) {
-        $styles = array(
+        $styles = [
           '#type' => 'styles',
-          '#items' => array(
-            $path => array(
+          '#items' => [
+            $path => [
               'type' => 'file',
               'group' => CSS_DEFAULT,
               'weight' => 0,
@@ -76,27 +100,27 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
               'media' => 'all',
               'preprocess' => FALSE,
               'data' => $path,
-              'browsers' => array(
+              'browsers' => [
                 'IE' => TRUE,
                 '!IE' => TRUE,
-              ),
-            )
-          ),
-        );
+              ],
+            ],
+          ],
+        ];
         $head = drupal_render($styles);
       }
       else {
-        watchdog("views_data_export_pdf", "File not found :path", array(":path" => $is_style_sheet));
+        watchdog("views_data_export_pdf", "File not found :path", [":path" => $is_style_sheet]);
       }
     }
 
-    $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_header'), array(
+    $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_header'), [
       'view' => $this->view,
       'options' => $this->options,
       'rows' => $rows,
       'title' => $title,
-      'head' => $head
-    ));
+      'head' => $head,
+    ]);
     return $output;
   }
 
@@ -114,14 +138,14 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
     $output = '';
 
     if (!isset($batch_sandbox['group_titles'])) {
-      $batch_sandbox['group_titles'] = array();
+      $batch_sandbox['group_titles'] = [];
     }
 
-    $group_titles = (isset($batch_sandbox['group_titles'])) ? $batch_sandbox['group_titles'] : array();
+    $group_titles = (isset($batch_sandbox['group_titles'])) ? $batch_sandbox['group_titles'] : [];
 
     foreach ($sets as $title => $records) {
       if ($this->uses_row_plugin()) {
-        $rows = array();
+        $rows = [];
         foreach ($records as $row_index => $row) {
           $this->view->row_index = $row_index;
           $rows[] = $this->row_plugin->render($row);
@@ -131,13 +155,13 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
         $rows = $records;
       }
 
-      $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_body'), array(
+      $output .= theme($this->theme_functions($this->definition['additional themes base'] . '_body'), [
         'view' => $this->view,
         'options' => $this->options,
         'rows' => $rows,
         'title' => $title,
-        'group_titles' => $group_titles
-      ));
+        'group_titles' => $group_titles,
+      ]);
 
       if (!in_array($title, $batch_sandbox['group_titles'])) {
         $batch_sandbox['group_titles'][] = $title;
