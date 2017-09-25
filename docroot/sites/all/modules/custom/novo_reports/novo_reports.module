@@ -11,26 +11,38 @@ module_load_include("inc", "novo_reports", "includes/novo_reports.handlers_func"
  * Implements hook_menu().
  */
 function novo_reports_menu() {
-  $items = array();
+  $items = [];
 
-  $items['novo-reports'] = array(
+  $items['novo-reports'] = [
     // @codingStandardsIgnoreStart
     'title' => t('Reports'),
     // @codingStandardsIgnoreEnd
-    'access arguments' => array('novo reports access'),
+    'access arguments' => ['novo reports access'],
     'page callback' => 'novo_reports_list',
     'menu_name' => 'main-menu',
     'type' => MENU_NORMAL_ITEM,
-  );
+  ];
 
-  $items['novo-reports/test'] = array(
+  $items['novo-reports/test'] = [
     'title' => 'Test',
     'access callback' => TRUE,
     'page callback' => 'novo_reports_test',
     'type' => MENU_CALLBACK,
-  );
+  ];
 
   return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_reports_theme() {
+  return [
+    'novo_reports_nametag_kid' => [
+      'variables' => ['data' => NULL],
+      'template' => 'templates/novo-reports-nametag-kid',
+    ],
+  ];
 }
 
 /**
@@ -42,7 +54,7 @@ function novo_reports_list() {
   }
 
   $views = views_get_all_views();
-  $links = array();
+  $links = [];
 
   foreach ($views as $view_name => $view) {
     if (strtolower($view->tag) == "report") {
@@ -50,12 +62,12 @@ function novo_reports_list() {
       if ($path) {
         $title = $view->human_name;
 
-        $export_links = array();
+        $export_links = [];
         foreach ($view->display as $key => $display) {
-          if (in_array($display->display_plugin, array(
+          if (in_array($display->display_plugin, [
             "views_data_export_pdf",
-            "views_data_export"
-          ))) {
+            "views_data_export",
+          ])) {
             $export_path = isset($view->display[$key]->display_options['path']) ? $view->display[$key]->display_options['path'] : NULL;
             $style_plugin = isset($view->display[$key]->display_options['style_plugin']) ? $view->display[$key]->display_options['style_plugin'] : NULL;
             $display_plugin = isset($view->display[$key]->display_plugin) ? $view->display[$key]->display_plugin : NULL;
@@ -85,18 +97,18 @@ function novo_reports_list() {
             }
 
             if (!empty($export_path)) {
-              $theme_pattern = array(
+              $theme_pattern = [
                 'views_data_export_feed_icon__' . $type,
                 'views_data_export_feed_icon',
-              );
+              ];
 
-              $export_links[] = theme($theme_pattern, array(
+              $export_links[] = theme($theme_pattern, [
                   'image_path' => $image_path,
                   'url' => $export_path,
                   'text' => $view->human_name,
                   'title' => $view->human_name,
-                  'style_plugin' => $style_plugin
-                )
+                  'style_plugin' => $style_plugin,
+                ]
               );
             }
 
@@ -107,20 +119,20 @@ function novo_reports_list() {
           $title .= " " . implode(" ", $export_links);
         }
 
-        $links[] = array(
+        $links[] = [
           'href' => $path,
           'title' => $title,
-          'html' => TRUE
-        );
+          'html' => TRUE,
+        ];
       }
     }
   }
 
-  $links = theme("links", array(
+  $links = theme("links", [
     "links" => $links,
-    "attributes" => array("class" => array("novo-reports-list-wrapper")),
-    "heading" => ""
-  ));
+    "attributes" => ["class" => ["novo-reports-list-wrapper"]],
+    "heading" => "",
+  ]);
   cache_set('novo_reports:list', $links);
 
   return $links;
@@ -130,12 +142,12 @@ function novo_reports_list() {
  * Implements hook_permission().
  */
 function novo_reports_permission() {
-  return array(
-    'novo reports access' => array(
+  return [
+    'novo reports access' => [
       'title' => t('Novo access to reports.'),
       'description' => t('Novo access to reports.'),
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -147,7 +159,7 @@ function novo_reports_get_report_view_list_paths() {
   }
 
   $views = views_get_all_views();
-  $paths = array();
+  $paths = [];
   foreach ($views as $view_name => $view) {
     if (strtolower($view->tag) == "report") {
       if (isset($view->display['page']->display_options['path'])) {
@@ -164,10 +176,10 @@ function novo_reports_get_report_view_list_paths() {
  * Implements hook_views_api().
  */
 function novo_reports_views_api() {
-  return array(
+  return [
     'api' => 3,
     'path' => drupal_get_path('module', 'novo_reports') . '/views',
-  );
+  ];
 }
 
 /**
@@ -179,7 +191,7 @@ function novo_reports_views_pre_render(&$view) {
   }
 
   if ($view->name == 'enrollment_report') {
-    $tmp_result = array();
+    $tmp_result = [];
     foreach ($view->result as $key => $row) {
       $tmp_result[$row->field_data_field_program_location_field_program_location_tar][] = $row;
     }
@@ -196,7 +208,7 @@ function novo_reports_views_pre_render(&$view) {
       $tmp_result[$loc_id][] = $total_row;
     }
 
-    $new_result = array();
+    $new_result = [];
     foreach ($tmp_result as $loc_id => $rows) {
       foreach ($rows as $key => $row) {
         $new_result[] = $row;
@@ -205,6 +217,90 @@ function novo_reports_views_pre_render(&$view) {
 
     $view->result = $new_result;
   }
+}
+
+/**
+ * Implements hook_preprocess_views_data_export_pdf_header().
+ */
+function novo_reports_preprocess_views_data_export_pdf_header(&$vars) {
+  if ($vars['view']->name == "report_nametag") {
+    $vars['header_row'] = "";
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_data_export_pdf_body().
+ */
+function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
+  if ($vars['view']->name == "report_nametag") {
+    $rows = $vars['rows'];
+    $vars['themed_rows'] = [];
+    $vars['themed_rows'][0] = [];
+    $c = 0;
+    $col_num = 0;
+
+    //kpr($rows);
+    // --disable-smart-shrinking
+
+    foreach ($rows as $row) {
+      if ($c > 3) {
+        $col_num++;
+        $c = 0;
+      }
+
+      $no_photo_icon = (isset($row->field_field_p_photo_release[0]['raw']['value']) && !empty($row->field_field_p_photo_release[0]['raw']['value'])) ? FALSE : TRUE;
+      $no_photo = (!$no_photo_icon) ? "" : theme("image", [
+        "path" => drupal_get_path("module", "novo_reports") . "/images/icon_no_photo.png",
+        "width" => 50,
+        "height" => 50,
+        "attributes" => ["style" => "margin-top:3px;"],
+      ]);
+
+      $canvassing_group_entity = (isset($row->field_field_p_canvassing_group[0]['raw']['entity'])) ? $row->field_field_p_canvassing_group[0]['raw']['entity'] : NULL;
+      $canvassing_group_color = isset($canvassing_group_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $canvassing_group_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+
+      $data = [
+        'first_name' => novo_reports_render_field_for_report($row, "field_field_first_name"),
+        'last_name' => novo_reports_render_field_for_report($row, "field_field_last_name"),
+        'canvassing_group' => novo_reports_render_field_for_report_color($row, "field_field_p_canvassing_group"),
+        'canvassing_group_color' => $canvassing_group_color,
+        'small_group' => novo_reports_render_field_for_report_color($row, "field_field_p_small_group"),
+        'dismissal' => novo_reports_render_field_for_report($row, "field_field_p_dismissal"),
+        'no_photo' => $no_photo,
+        'location' => novo_reports_render_field_for_report($row, "field_field_program_location"),
+        'food_allergies' => novo_reports_render_field_for_report($row, "field_field_food_allergies"),
+        'address_1' => novo_reports_render_field_for_report($row, "field_field_address_1"),
+        'address_2' => novo_reports_render_field_for_report($row, "field_field_address_2"),
+        'apt' => novo_reports_render_field_for_report($row, "field_field_apt"),
+        'city' => novo_reports_render_field_for_report($row, "field_field_city"),
+        'state' => novo_reports_render_field_for_report($row, "field_field_state"),
+        'zip' => novo_reports_render_field_for_report($row, "field_field_zip"),
+        'parent' => novo_reports_render_field_for_report($row, "field_field_parent_guardian"),
+      ];
+
+      //kpr($data);
+      $rendered_kid_date = theme("novo_reports_nametag_kid", ['data' => $data]);
+      $vars['themed_rows'][$col_num][] = $rendered_kid_date;
+      $c++;
+    }
+  }
+}
+
+/**
+ * Render field for reports.
+ */
+function novo_reports_render_field_for_report($row, $field) {
+  return isset($row->{$field}[0]['rendered']) ? drupal_render($row->{$field}[0]['rendered']) : '';
+}
+
+/**
+ * Render field for reports.
+ */
+function novo_reports_render_field_for_report_color($row, $field) {
+  $color_entity = (isset($row->{$field}[0]['raw']['entity'])) ? $row->{$field}[0]['raw']['entity'] : NULL;
+  $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+
+  return isset($row->{$field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{$field}[0]['raw']['entity']->name . '</div>' : '';
 }
 
 /**

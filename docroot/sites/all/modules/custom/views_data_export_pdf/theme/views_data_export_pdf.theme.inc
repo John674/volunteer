@@ -88,6 +88,8 @@ function template_process_views_data_export_pdf_body(&$vars) {
  * Preprocess views_data_export_pdf_header.
  */
 function template_preprocess_views_data_export_pdf_header(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_header__" . $vars['view']->name;
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_header__" . $vars['view']->name . "_" . $vars['view']->current_display;
   module_load_include("inc", "views_data_export", "theme/views_data_export.theme");
   _views_data_export_header_shared_preprocess($vars);
 
