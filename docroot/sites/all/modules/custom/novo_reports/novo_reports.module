@@ -303,6 +303,16 @@ function novo_reports_render_field_for_report_color($row, $field) {
   return isset($row->{$field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{$field}[0]['raw']['entity']->name . '</div>' : '';
 }
 
+
+/**
+ * Implements hook_views_data_export_wkhtmltopdf_options_alter();
+ */
+function novo_reports_views_data_export_wkhtmltopdf_options_alter(&$options, $plugin) {
+  if (isset($plugin->view->name) && $plugin->view->name == "report_nametag") {
+    $options[] = "disable-smart-shrinking";
+  }
+}
+
 /**
  * Test.
  */

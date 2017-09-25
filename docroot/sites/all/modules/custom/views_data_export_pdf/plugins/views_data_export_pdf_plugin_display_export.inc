@@ -37,6 +37,8 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
           $options['page-height'] = $page_height;
         }
 
+        drupal_alter("views_data_export_wkhtmltopdf_options", $options, $this);
+
         $pdf = new WkHtmlToPdf($options);
 
         $pdf->addPage($html);
