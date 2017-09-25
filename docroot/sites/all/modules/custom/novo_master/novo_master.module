@@ -101,7 +101,6 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
   }
 }
 
-
 /**
  * Implements hook_form_alter().
  */

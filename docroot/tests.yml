@@ -15,11 +15,11 @@
     behat_root: '../tests/behat'
     config_file: behat.yml
     features_dir: /var/www/tests/behat/features
-    browser: 'chrome'
+    browser: 'firefox'
     selenium_url: 127.0.0.1:4444/wd/hub
     run_javascript_tests: 'yes'
     behat_run_javascript_tests: 'yes'
-    update_dependencies: 'yes'
+    update_dependencies: 'no'
     selenium_jar_path: /var/lib/selenium/selenium.jar
     chrome_driver_path: /var/lib/chrome-driver/chromedriver
     drupal_core_test_group: 'group,groups,separated,by,comma'
