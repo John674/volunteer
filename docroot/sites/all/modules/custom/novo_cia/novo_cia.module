@@ -11,19 +11,44 @@ module_load_include('inc', 'novo_cia', 'includes/novo_cia.api');
 module_load_include('inc', 'novo_cia', 'includes/novo_cia.func');
 
 /**
+ * Implements hook_views_api().
+ */
+function novo_cia_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_cia') . '/views',
+  );
+}
+
+/**
  * Implements hook_node_view().
  */
 function novo_cia_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'application') {
-    $node->content['pseudo_field_request_cia'] = array(
-      '#type' => 'item',
-      '#field_name' => 'pseudo_field_request_cia',
-      '#theme' => 'pseudo_field__request_cia',
-    );
     $cia_data = novo_cia_get_render_data($node->nid);
     if (!empty($cia_data)) {
-      $node->content['pseudo_field_request_cia']['#cia_data'] = $cia_data;
+      $node->content['pseudo_field_request_cia'] = array(
+        '#type' => 'item',
+        '#field_name' => 'pseudo_field_request_cia',
+        '#theme' => 'pseudo_field__request_cia',
+        '#cia_data' => $cia_data,
+      );
     }
+
+    $node->content['pseudo_field_request_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_request_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('Request date'),
+      '#date' => novo_cia_date($node->nid, 'request_date'),
+    );
+    $node->content['pseudo_field_response_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_response_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('Response date'),
+      '#date' => novo_cia_date($node->nid, 'response_date'),
+    );
   }
 }
 
@@ -56,6 +81,15 @@ function novo_cia_menu() {
     'access arguments' => array('administer site configuration'),
     'file' => 'includes/novo_cia.admin.inc',
   );
+  $items['novo-cia/view_report/%'] = array(
+    // @codingStandardsIgnoreStart
+    'title' => t('CIA View Report'),
+    // @codingStandardsIgnoreEnd
+    'page callback' => 'novo_cia_get_report_doc',
+    'page arguments' => array(2),
+    'access arguments' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+  );
   return $items;
 }
 
@@ -67,6 +101,10 @@ function novo_cia_theme() {
     'pseudo_field__request_cia' => array(
       'variables' => array('cia_data' => NULL),
       'template' => 'templates/novo-cia-pseudo-field--request-cia',
+    ),
+    'pseudo_field__date_cia' => array(
+      'variables' => array('date' => NULL, 'date_type' => NULL),
+      'template' => 'templates/novo-cia-pseudo-field-date',
     ),
 
     'cia_request_by_ssn' => array(
@@ -195,7 +233,7 @@ function novo_cia_pull_report_queue_worker($data) {
   $result = novo_cia_send_pull_report_request($data['id']);
   if (!empty($result)) {
     watchdog("novo_cia", "Pull report request :id have error", array(
-      ":id" => $data['id']
+      ":id" => $data['id'],
     ), WATCHDOG_ERROR);
   }
 }
@@ -227,4 +265,33 @@ function novo_cia_add_request_for_search($node) {
   }
   $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
   drupal_goto($url);
+}
+
+/**
+ * Get report document.
+ */
+function novo_cia_get_report_doc($nid) {
+  $completed_pull_request = novo_cia_get_completed_pull_request($nid);
+  $tracking_number = !empty($completed_pull_request) ? $completed_pull_request->tracking_number : NULL;
+  if (!empty($tracking_number)) {
+    $respond_html_report = novo_cia_pull_report_doc($tracking_number);
+    print $respond_html_report;
+  }
+  else {
+    drupal_set_message(t('Could`t get report.'), 'error');
+    $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+    drupal_goto($url);
+  }
+
+}
+
+/**
+ * Get request or response date for CIA.
+ */
+function novo_cia_date($nid = NULL, $date_type = NULL) {
+  if (!empty($nid)) {
+    $request = novo_cia_get_last_success_request($nid);
+    return !empty($request->{$date_type}) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
+  }
+  return NULL;
 }

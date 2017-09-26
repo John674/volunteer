@@ -128,6 +128,8 @@
           hide($content['field_reference_request_parents']);
           hide($content['field_reference_request_church']);
           hide($content['pseudo_field_request_cia']);
+          hide($content['pseudo_field_request_date_cia']);
+          hide($content['pseudo_field_response_date_cia']);
 
           hide($content['field_app_status']);
           hide($content['app_status']);
@@ -162,31 +164,8 @@
                 </div>
             </div>
             <hr>
-            <div class="row field">
-                <div class="col-md-6">
-                    <div class="field-label">
-                        <span><?php print (t('Request date')) ?>:</span>
-                        <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <span>N/A</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row field">
-                <div class="col-md-6">
-                    <div class="field-label">
-                        <span><?php print (t('Response date')) ?>:</span>
-                        <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <span>N/A</span>
-                </div>
-            </div>
-            <hr>
-
+            <?php print render($content['pseudo_field_request_date_cia'])?>
+            <?php print render($content['pseudo_field_response_date_cia'])?>
             <div class="panel panel-default">
                 <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
                 <div class="panel-body">

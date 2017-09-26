@@ -9,17 +9,10 @@
  * Data for render node.
  */
 function novo_cia_get_render_data($nid) {
-  $cia_request_data = db_select('novo_cia_checks', 'cc')
-    ->fields('cc')
-    ->condition('cc.application_nid', $nid)
-    ->orderBy('cc.id', 'DESC')->range(0, 1)
-    ->execute()
-    ->fetchAll();
+  $last_request = novo_cia_get_last_success_request($nid);
 
-  $cia_request_data = reset($cia_request_data);
-
-  $status_request = !empty($cia_request_data) ? novo_cia_get_request_status($cia_request_data) : t('Not Requested');
-  $status_buttons = !empty($cia_request_data) ? novo_cia_render_action_buttons($nid) : novo_cia_render_action_buttons($nid, TRUE);
+  $status_request = !empty($last_request) ? novo_cia_get_request_status($last_request) : t('Not Requested');
+  $status_buttons = !empty($last_request) ? novo_cia_render_action_buttons($nid) : novo_cia_render_action_buttons($nid, TRUE);
   return array(
     'title' => t('CIA Background Check:'),
     'status_label' => $status_request,
@@ -54,7 +47,8 @@ function novo_cia_prepare_action_buttons($nid) {
         'role' => 'button',
       ),
     )),
-    'view_report_enable' => l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "novo-cia-request/view_report/" . $nid, array(
+    'view_report_enabled' => l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "novo-cia/view_report/" . $nid, array(
+      'query' => drupal_get_destination(),
       'html' => TRUE,
       'attributes' => array(
         'class' => array("btn", "btn-default", "btn-xs"),
@@ -69,10 +63,17 @@ function novo_cia_prepare_action_buttons($nid) {
 /**
  * Render action buttons.
  */
-function novo_cia_render_action_buttons($nid, $first_send = FALSE) {
+function novo_cia_render_action_buttons($nid, $first_request = FALSE) {
   $buttons = novo_cia_prepare_action_buttons($nid);
-  if (!$first_send) {
-    $output = $buttons['resend_link'] . ' ' . $buttons['view_report_disabled'];
+  $completed_pull_request = novo_cia_get_completed_pull_request($nid);
+  if (!$first_request) {
+    $output = $buttons['resend_link'];
+    if (!empty($completed_pull_request)) {
+      $output = $output . ' ' . $buttons['view_report_enabled'];
+    }
+    else {
+      $output = $output . ' ' . $buttons['view_report_disabled'];
+    }
   }
   else {
     $output = $buttons['send_link'] . ' ' . $buttons['view_report_disabled'];
@@ -83,15 +84,22 @@ function novo_cia_render_action_buttons($nid, $first_send = FALSE) {
 /**
  * Get request status.
  */
-function novo_cia_get_request_status($cia_request_data = NULL) {
-  if (!empty($cia_request_data)) {
+function novo_cia_get_request_status($last_request = NULL) {
+  if (!empty($last_request)) {
     $request_statuses = unserialize(NOVO_CIA_REQUEST_STATUSES);
-    $request_types = unserialize(NOVO_CIA_REQUEST_TYPES);
+    if ($last_request->request_status == 1 && $last_request->request_type == 1) {
+      $output = $request_statuses[$last_request->request_status];
+    }
+    elseif (empty($last_request->request_type)) {
+      $output = $request_statuses[0] . '  request to CIA';
+    }
+    else {
+      $output = $request_statuses[0];
+    }
 
-    $output = $request_statuses[$cia_request_data->request_status] . ' for ' . $request_types[$cia_request_data->request_type];
     return $output;
   }
-
+  return NULL;
 }
 
 /**
@@ -208,7 +216,7 @@ function novo_cia_check_report_status($report) {
     $status = 1;
     $request_details = $report['RequestDetails'];
     foreach ($request_details as $record) {
-      if (isset($record['NumberRecords']) && !empty($record['NumberRecords'])) {
+      if (isset($record['NumberRecords']) && !empty(trim($record['NumberRecords']))) {
         if (isset($record['RequestType']) && !empty($record['RequestType'])) {
           if ($record['RequestType'] == 'Sexual Offender Registry') {
             $status = 2;
@@ -217,7 +225,6 @@ function novo_cia_check_report_status($report) {
           else {
             $status = 3;
           }
-
         }
       }
     }
