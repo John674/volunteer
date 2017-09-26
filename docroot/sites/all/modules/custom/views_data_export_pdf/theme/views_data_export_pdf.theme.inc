@@ -43,23 +43,8 @@ function template_process_views_data_export_pdf_body(&$vars) {
     $output .= " </tr>\n";
   }
 
-  foreach ($vars['themed_rows'] as $number => $row) {
+  foreach ($vars['themed_rows'] as $number => $cells) {
     $attributes = array();
-
-    // Check if we're dealing with a simple or complex row.
-    if (isset($row['data'])) {
-      foreach ($row as $key => $value) {
-        if ($key == 'data') {
-          $cells = $value;
-        }
-        else {
-          $attributes[$key] = $value;
-        }
-      }
-    }
-    else {
-      $cells = $row;
-    }
     if (count($cells)) {
       // Add odd/even class.
       $class = $flip[$class];

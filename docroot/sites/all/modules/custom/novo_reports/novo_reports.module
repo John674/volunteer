@@ -229,18 +229,110 @@ function novo_reports_preprocess_views_data_export_pdf_header(&$vars) {
 }
 
 /**
+ * Implements hook_preprocess_views_view_table().
+ */
+function novo_reports_preprocess_views_view_table(&$vars) {
+  if ($vars['view']->name == "roster_report") {
+    //kpr($vars['result']);
+    foreach ($vars['rows'] as $row_id => &$row) {
+      if (isset($row['views_conditional_2']) && !empty($row['views_conditional_2'])) {
+        $field_field = "field_field_p_canvassing_group";
+        $color_entity = (isset($vars['result'][$row_id]->{$field_field}[0]['raw']['entity'])) ? $vars['result'][$row_id]->{$field_field}[0]['raw']['entity'] : NULL;
+        $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+
+
+        if (!empty($color)) {
+          $row['views_conditional_2'] = '<div style="background: ' . $color . '">' . $row['views_conditional_2'] . '</div>';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
+function novo_reports_preprocess_views_view_field(&$vars) {
+  if ($vars['view']->name == "roster_report" && $vars['field']->field == "field_p_canvassing_group") {
+    $field_field = "field_" . $vars['field']->field;
+    $color_entity = (isset($vars['row']->{$field_field}[0]['raw']['entity'])) ? $vars['row']->{$field_field}[0]['raw']['entity'] : NULL;
+    $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+
+    $vars['row']->{$field_field}[0]['rendered'] = [
+      "#markup" => $color,
+    ];
+
+    $vars['output'] = $color;
+  }
+}
+
+/**
  * Implements hook_preprocess_views_data_export_pdf_body().
  */
 function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
+
+  $colored_fields = [
+    "field_p_small_group",
+    "field_p_canvassing_group",
+  ];
+
+  foreach ($colored_fields as $field) {
+    foreach ($vars['themed_rows'] as $row_id => &$row) {
+      if (isset($row[$field]) && !is_array($row[$field])) {
+
+        $raw_row = (isset($vars['rows'][$row_id])) ? $vars['rows'][$row_id] : NULL;
+        $field_field = "field_$field";
+        $color_entity = (isset($raw_row->{$field_field}[0]['raw']['entity'])) ? $raw_row->{$field_field}[0]['raw']['entity'] : NULL;
+        $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+        $row[$field] = [
+          "data" => strip_tags($row[$field]),
+          "style" => "background:$color;",
+        ];
+      }
+    }
+  }
+
+
+  if ($vars['view']->name == "roster_report") {
+
+    // Dismissal conditional fields.
+    foreach ($vars['themed_rows'] as $row_id => &$row) {
+      if (isset($row['views_conditional']) && !empty($row['views_conditional'])) {
+        $row['views_conditional'] = [
+          "data" => $row['views_conditional'],
+          "style" => "background:#DECDDB;",
+        ];
+      }
+
+      if (isset($row['views_conditional_1']) && !empty($row['views_conditional_1'])) {
+        $row['views_conditional_1'] = [
+          "data" => $row['views_conditional_1'],
+          "style" => "background:#EBD6B6;",
+        ];
+      }
+
+      if (isset($row['views_conditional_2']) && !empty($row['views_conditional_2'])) {
+        $raw_row = (isset($vars['rows'][$row_id])) ? $vars['rows'][$row_id] : NULL;
+        $field_field = "field_field_p_canvassing_group";
+        $color_entity = (isset($raw_row->{$field_field}[0]['raw']['entity'])) ? $raw_row->{$field_field}[0]['raw']['entity'] : NULL;
+        $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
+
+        $row['views_conditional_2'] = [
+          "data" => $row['views_conditional_2'],
+          "style" => "background:$color;",
+        ];
+      }
+    }
+
+  }
+
+
   if ($vars['view']->name == "report_nametag") {
     $rows = $vars['rows'];
     $vars['themed_rows'] = [];
     $vars['themed_rows'][0] = [];
     $c = 0;
     $col_num = 0;
-
-    //kpr($rows);
-    // --disable-smart-shrinking
 
     foreach ($rows as $row) {
       if ($c > 3) {

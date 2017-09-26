@@ -33,3 +33,9 @@
 .view-children-active-report td.views-field-field-parent-guardian div.field{
   display: inline-block;
 }
+
+.view-roster-report .views-field-views-conditional > div,
+.view-roster-report .views-field-views-conditional-1 > div,
+.view-roster-report .views-field-views-conditional-2 > div {
+  padding: 5px 10px;
+}

@@ -2861,6 +2861,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
@@ -2874,6 +2875,80 @@ function novo_views_feature_views_default_views() {
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
       'secondary_collapse_override' => '0',
+    ),
+    'title' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_program_year_year' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_program_location_target_id_entityreference_filter' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field_attendance_program_name_target_id_entityreference_filter' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'autosubmit' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'tokens' => array(
+          'available' => array(
+            0 => 'global_types',
+          ),
+        ),
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -9000,27 +9075,8 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Children name';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Name';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Content: Address */
-  $handler->display->display_options['fields']['field_address_1']['id'] = 'field_address_1';
-  $handler->display->display_options['fields']['field_address_1']['table'] = 'field_data_field_address_1';
-  $handler->display->display_options['fields']['field_address_1']['field'] = 'field_address_1';
-  $handler->display->display_options['fields']['field_address_1']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['field_address_1']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['field_address_1']['settings'] = array(
-    'trim_length' => '50',
-  );
-  /* Field: Content: Address Apartment number */
-  $handler->display->display_options['fields']['field_apt']['id'] = 'field_apt';
-  $handler->display->display_options['fields']['field_apt']['table'] = 'field_data_field_apt';
-  $handler->display->display_options['fields']['field_apt']['field'] = 'field_apt';
-  $handler->display->display_options['fields']['field_apt']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['field_apt']['label'] = 'Apt #';
-  $handler->display->display_options['fields']['field_apt']['type'] = 'text_trimmed';
-  $handler->display->display_options['fields']['field_apt']['settings'] = array(
-    'trim_length' => '50',
-  );
   /* Field: Content: Date of Birth */
   $handler->display->display_options['fields']['field_dob']['id'] = 'field_dob';
   $handler->display->display_options['fields']['field_dob']['table'] = 'field_data_field_dob';
@@ -9043,24 +9099,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_grade']['field'] = 'field_grade';
   $handler->display->display_options['fields']['field_grade']['relationship'] = 'field_p_kid_name_target_id';
   $handler->display->display_options['fields']['field_grade']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Parent / Guardian List */
-  $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
-  $handler->display->display_options['fields']['field_parent_guardian']['table'] = 'field_data_field_parent_guardian';
-  $handler->display->display_options['fields']['field_parent_guardian']['field'] = 'field_parent_guardian';
-  $handler->display->display_options['fields']['field_parent_guardian']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian';
-  $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
-  $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
-    'view_mode' => 'full',
-  );
-  $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
-  /* Field: Field collection item: Dismissal */
-  $handler->display->display_options['fields']['field_p_dismissal']['id'] = 'field_p_dismissal';
-  $handler->display->display_options['fields']['field_p_dismissal']['table'] = 'field_data_field_p_dismissal';
-  $handler->display->display_options['fields']['field_p_dismissal']['field'] = 'field_p_dismissal';
-  $handler->display->display_options['fields']['field_p_dismissal']['relationship'] = 'field_program_kids_list_value';
-  $handler->display->display_options['fields']['field_p_dismissal']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Field collection item: Small Group */
   $handler->display->display_options['fields']['field_p_small_group']['id'] = 'field_p_small_group';
   $handler->display->display_options['fields']['field_p_small_group']['table'] = 'field_data_field_p_small_group';
@@ -9073,6 +9111,47 @@ function novo_views_feature_views_default_views() {
     'links' => 0,
     'use_content_language' => 0,
   );
+  /* Field: Content: Parent / Guardian List */
+  $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['table'] = 'field_data_field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['field'] = 'field_parent_guardian';
+  $handler->display->display_options['fields']['field_parent_guardian']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian / Phone';
+  $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
+  $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
+    'view_mode' => 'full',
+    'field_multiple_limit' => '-1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
+  );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
+  /* Field: Content: Address */
+  $handler->display->display_options['fields']['field_address_1']['id'] = 'field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['table'] = 'field_data_field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['field'] = 'field_address_1';
+  $handler->display->display_options['fields']['field_address_1']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_address_1']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_address_1']['settings'] = array(
+    'trim_length' => '50',
+  );
+  /* Field: Content: Address Apartment number */
+  $handler->display->display_options['fields']['field_apt']['id'] = 'field_apt';
+  $handler->display->display_options['fields']['field_apt']['table'] = 'field_data_field_apt';
+  $handler->display->display_options['fields']['field_apt']['field'] = 'field_apt';
+  $handler->display->display_options['fields']['field_apt']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_apt']['label'] = 'Apt #';
+  $handler->display->display_options['fields']['field_apt']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_apt']['settings'] = array(
+    'trim_length' => '50',
+  );
+  /* Field: Field collection item: Dismissal */
+  $handler->display->display_options['fields']['field_p_dismissal']['id'] = 'field_p_dismissal';
+  $handler->display->display_options['fields']['field_p_dismissal']['table'] = 'field_data_field_p_dismissal';
+  $handler->display->display_options['fields']['field_p_dismissal']['field'] = 'field_p_dismissal';
+  $handler->display->display_options['fields']['field_p_dismissal']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['fields']['field_p_dismissal']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_p_dismissal']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
@@ -9082,6 +9161,48 @@ function novo_views_feature_views_default_views() {
     'bypass_access' => 0,
     'link' => 0,
   );
+  /* Field: Field collection item: Canvassing Group */
+  $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['table'] = 'field_data_field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['field'] = 'field_p_canvassing_group';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_p_canvassing_group']['type'] = 'entityreference_entity_view';
+  $handler->display->display_options['fields']['field_p_canvassing_group']['settings'] = array(
+    'view_mode' => 'pdf',
+    'links' => 0,
+    'use_content_language' => 0,
+  );
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['label'] = 'Alone';
+  $handler->display->display_options['fields']['views_conditional']['if'] = 'field_p_dismissal';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '7';
+  $handler->display->display_options['fields']['views_conditional']['equalto'] = 'Alone';
+  $handler->display->display_options['fields']['views_conditional']['then'] = '<div style="background:#DECDDB;">Alone</div>';
+  $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional_1']['id'] = 'views_conditional_1';
+  $handler->display->display_options['fields']['views_conditional_1']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_1']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_1']['label'] = 'Picked Up';
+  $handler->display->display_options['fields']['views_conditional_1']['if'] = 'field_p_dismissal';
+  $handler->display->display_options['fields']['views_conditional_1']['condition'] = '7';
+  $handler->display->display_options['fields']['views_conditional_1']['equalto'] = 'Picked';
+  $handler->display->display_options['fields']['views_conditional_1']['then'] = '<div style="background:#EBD6B6;">Picked Up</div>';
+  $handler->display->display_options['fields']['views_conditional_1']['strip_tags'] = 0;
+  /* Field: Views: Views Conditional */
+  $handler->display->display_options['fields']['views_conditional_2']['id'] = 'views_conditional_2';
+  $handler->display->display_options['fields']['views_conditional_2']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_2']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional_2']['label'] = 'Walked';
+  $handler->display->display_options['fields']['views_conditional_2']['if'] = 'field_p_dismissal';
+  $handler->display->display_options['fields']['views_conditional_2']['condition'] = '7';
+  $handler->display->display_options['fields']['views_conditional_2']['equalto'] = 'Walked';
+  $handler->display->display_options['fields']['views_conditional_2']['then'] = 'Walked';
+  $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -9253,6 +9374,7 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['landscape'] = 1;
   $handler->display->display_options['path'] = 'roster-report/export-pdf';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
