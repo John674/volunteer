@@ -5,15 +5,19 @@ default:
       output_path: {{ behat_drupal_root }}/build_reports
   suites:
     default:
+      paths: [ %paths.base%/features ]
       contexts:
         - FeatureContext: ~
         - Drupal\DrupalExtension\Context\MinkContext: ~
         - Drupal\DrupalExtension\Context\DrupalContext: ~
         - Drupal\DrupalExtension\Context\MarkupContext: ~
         - Drupal\DrupalExtension\Context\MessageContext: ~
+        - Behat\Drupal\Propeople\PropeopleContext: ~
   extensions:
     emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
       name: html
+      file_name: report
+      renderer: Twig,Behat2
     Behat\MinkExtension:
       goutte:
         guzzle_parameters:
@@ -36,8 +40,8 @@ default:
       text:
         log_in: Log in
         log_out: Log out
-        username_field: Username
-        password_field: Password
+        username_field: edit-name
+        password_field: edit-pass
       selectors:
         message_selector: .alert
         error_message_selector: .alert.alert-danger
@@ -46,3 +50,6 @@ default:
       region_map:
         content: "#content"
         sidebar: "#sidebar"
+        navbar: "#navbar"
+        views_attachment: ".view .attachment"
+        field_parent_guardian_values: "#field-parent-guardian-values"

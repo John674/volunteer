@@ -22,12 +22,22 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
   public function generate_pdf($html, $filename = NULL) {
     if (($library = libraries_load('phpwkhtmltopdf')) && !empty($library['loaded'])) {
       try {
-        $options = array('binary' => variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf'));
+        $options = ['binary' => variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf')];
 
         $is_landscape = (isset($this->options['style_options']['landscape']) && $this->options['style_options']['landscape']) ? TRUE : FALSE;
         if ($is_landscape) {
           $options['orientation'] = 'landscape';
         }
+
+        $page_width = (isset($this->options['style_options']['page_width'])) ? $this->options['style_options']['page_width'] : "";
+        $page_height = (isset($this->options['style_options']['page_height'])) ? $this->options['style_options']['page_height'] : "";
+
+        if (!empty($page_width) && !empty($page_height)) {
+          $options['page-width'] = $page_width;
+          $options['page-height'] = $page_height;
+        }
+
+        drupal_alter("views_data_export_wkhtmltopdf_options", $options, $this);
 
         $pdf = new WkHtmlToPdf($options);
 
@@ -130,9 +140,9 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
     if (empty($this->view->live_preview) && isset($this->options['style_options']['provide_file']) && $this->options['style_options']['provide_file']) {
       $this->add_http_headers();
     }
-    $headers = array(
+    $headers = [
       'Content-Length' => $this->outputfile_entity()->filesize,
-    );
+    ];
 
     file_transfer($this->outputfile_path(), $headers);
   }
@@ -143,9 +153,9 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
    */
   function option_definition() {
     $options = parent::option_definition();
-    $options['use_batch'] = array('default' => 'no_batch');
-    $options['items_per_page'] = array('default' => '0');
-    $options['return_path'] = array('default' => '');
+    $options['use_batch'] = ['default' => 'no_batch'];
+    $options['items_per_page'] = ['default' => '0'];
+    $options['return_path'] = ['default' => ''];
     $options['style_plugin']['default'] = 'views_data_export_pdf';
 
     // This is the default size of a segment when doing a batched export.
