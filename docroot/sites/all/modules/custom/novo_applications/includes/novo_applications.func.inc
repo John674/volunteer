@@ -122,10 +122,10 @@ function novo_application_get_status($app_completed, $app_status_tid) {
  * Select active app status for views and dyn fields.
  */
 function novo_applications_get_app_active_status_formula() {
-  $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
+  $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24 / 30)
     FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
     INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
-    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6, 'Current', IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
+    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6, 'Current', IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24 / 30)
     FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
     INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
     WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18, 'Lapsed', 'Inactive'))";
