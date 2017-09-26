@@ -103,13 +103,12 @@ function novo_reports_list() {
               ];
 
               $export_links[] = theme($theme_pattern, [
-                  'image_path' => $image_path,
-                  'url' => $export_path,
-                  'text' => $view->human_name,
-                  'title' => $view->human_name,
-                  'style_plugin' => $style_plugin,
-                ]
-              );
+                'image_path' => $image_path,
+                'url' => $export_path,
+                'text' => $view->human_name,
+                'title' => $view->human_name,
+                'style_plugin' => $style_plugin,
+              ]);
             }
 
           }
@@ -239,7 +238,7 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
     $c = 0;
     $col_num = 0;
 
-    //kpr($rows);
+    // kpr($rows);
     // --disable-smart-shrinking
 
     foreach ($rows as $row) {
@@ -278,7 +277,7 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
         'parent' => novo_reports_render_field_for_report($row, "field_field_parent_guardian"),
       ];
 
-      //kpr($data);
+      // kpr($data);
       $rendered_kid_date = theme("novo_reports_nametag_kid", ['data' => $data]);
       $vars['themed_rows'][$col_num][] = $rendered_kid_date;
       $c++;
@@ -303,9 +302,8 @@ function novo_reports_render_field_for_report_color($row, $field) {
   return isset($row->{$field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{$field}[0]['raw']['entity']->name . '</div>' : '';
 }
 
-
 /**
- * Implements hook_views_data_export_wkhtmltopdf_options_alter();
+ * Implements hook_views_data_export_wkhtmltopdf_options_alter().
  */
 function novo_reports_views_data_export_wkhtmltopdf_options_alter(&$options, $plugin) {
   if (isset($plugin->view->name) && $plugin->view->name == "report_nametag") {

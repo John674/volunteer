@@ -6,7 +6,7 @@
  */
 ?>
 
-<?php print '<?xml version="1.0" encoding="UTF-8"?>' ; ?>
+<?php print '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <NewRequest>
     <Login>
         <UserName><?php print $username; ?></UserName>

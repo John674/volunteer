@@ -10,7 +10,6 @@
  */
 class novo_cia_handler_status extends views_handler_field {
 
-
   /**
    * Override init function to add uid and homepage fields.
    */
@@ -29,4 +28,5 @@ class novo_cia_handler_status extends views_handler_field {
 
     return $status;
   }
+
 }
