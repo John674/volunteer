@@ -1,7 +1,7 @@
 name = Novo views feature
 core = 7.x
 package = Novo
-version = 7.x-1.61
+version = 7.x-1.62
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
 dependencies[] = date_views
@@ -12,6 +12,7 @@ dependencies[] = novo_ref_request
 dependencies[] = novo_reports
 dependencies[] = views
 dependencies[] = views_autocomplete_filters
+dependencies[] = views_bulk_operations
 dependencies[] = views_conditional
 dependencies[] = views_data_export
 dependencies[] = views_data_export_pdf

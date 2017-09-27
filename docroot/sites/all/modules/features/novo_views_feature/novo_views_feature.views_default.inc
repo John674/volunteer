@@ -8521,8 +8521,8 @@ function novo_views_feature_views_default_views() {
       ),
     ),
   );
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'field_p_kid_name' => 'field_p_kid_name',
@@ -8621,6 +8621,30 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['ui_name'] = 'Kid';
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['label'] = 'Kid';
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['required'] = TRUE;
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations_1']['id'] = 'views_bulk_operations_1';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['label'] = '';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_settings']['enable_select_all_pages'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations_1']['vbo_operations'] = array(
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 1,
+      'skip_confirmation' => 1,
+      'skip_permission_check' => 1,
+      'override_label' => 1,
+      'label' => 'Print name tag',
+      'settings' => array(
+        'url' => 'report-nametag/export-pdf/',
+      ),
+    ),
+  );
   /* Field: Field collection item: Kid name */
   $handler->display->display_options['fields']['field_p_kid_name']['id'] = 'field_p_kid_name';
   $handler->display->display_options['fields']['field_p_kid_name']['table'] = 'field_data_field_p_kid_name';
@@ -8815,18 +8839,38 @@ function novo_views_feature_views_default_views() {
 
   /* Display: Data export PDF */
   $handler = $view->new_display('views_data_export_pdf', 'Data export PDF', 'views_data_export_pdf_1');
-  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['each_group_separate_table'] = 0;
   $handler->display->display_options['style_options']['landscape'] = 0;
   $handler->display->display_options['style_options']['page_width'] = '279.4';
   $handler->display->display_options['style_options']['page_height'] = '215.9';
   $handler->display->display_options['style_options']['user_style_sheet'] = 'sites/all/modules/custom/novo_reports/css/novo_reports_nametag_pdf.css';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'kids' => 'kids',
+  );
+  $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
+  $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
   $handler->display->display_options['path'] = 'report-nametag/export-pdf';
   $handler->display->display_options['displays'] = array(
-    'page' => 'page',
     'default' => 0,
+    'page' => 0,
   );
   $export['report_nametag'] = $view;
 
@@ -9093,12 +9137,6 @@ function novo_views_feature_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Grade */
-  $handler->display->display_options['fields']['field_grade']['id'] = 'field_grade';
-  $handler->display->display_options['fields']['field_grade']['table'] = 'field_data_field_grade';
-  $handler->display->display_options['fields']['field_grade']['field'] = 'field_grade';
-  $handler->display->display_options['fields']['field_grade']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['field_grade']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Field collection item: Small Group */
   $handler->display->display_options['fields']['field_p_small_group']['id'] = 'field_p_small_group';
   $handler->display->display_options['fields']['field_p_small_group']['table'] = 'field_data_field_p_small_group';
@@ -9156,7 +9194,9 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['label'] = '';
   $handler->display->display_options['fields']['field_program_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_program_location']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
     'bypass_access' => 0,
     'link' => 0,
@@ -9374,7 +9414,9 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['each_group_separate_table'] = 1;
   $handler->display->display_options['style_options']['landscape'] = 1;
+  $handler->display->display_options['style_options']['user_style_sheet'] = 'sites/all/modules/custom/novo_reports/css/novo_reports_roster_pdf.css';
   $handler->display->display_options['path'] = 'roster-report/export-pdf';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',

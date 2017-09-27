@@ -37,7 +37,10 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
           $options['page-height'] = $page_height;
         }
 
-        drupal_alter("views_data_export_wkhtmltopdf_options", $options, $this);
+        $options['header-html'] = url("views_data_export_pdf/header-html/" . $this->view->name, array("absolute" => TRUE));
+        $options['footer-html'] = url("views_data_export_pdf/footer-html/" . $this->view->name, array("absolute" => TRUE));
+
+        drupal_alter("views_data_export_wkhtmltopdf_options", $options);
 
         $pdf = new WkHtmlToPdf($options);
 
