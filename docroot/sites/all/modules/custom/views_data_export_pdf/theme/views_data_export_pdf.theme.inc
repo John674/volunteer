@@ -19,32 +19,47 @@ function template_preprocess_views_data_export_pdf_body(&$vars) {
  */
 function template_process_views_data_export_pdf_body(&$vars) {
   $output = '';
+  static $i;
 
-  $already_added_group_titles = (isset($vars['group_titles'])) ? $vars['group_titles'] : array();
+  $i++;
+  $already_added_group_titles = (isset($vars['group_titles'])) ? $vars['group_titles'] : [];
 
   // Construct the tbody of a table, see theme_table().
   $ts = tablesort_init($vars['header']);
 
-  $flip = array(
+  $flip = [
     'even' => 'odd',
     'odd' => 'even',
-  );
+  ];
   $class = 'even';
 
   // Add grouping.
   if (!empty($vars['title']) && !in_array($vars['title'], $already_added_group_titles)) {
     $_already_added_groups[] = $vars['title'];
-    $cell = array(
-      'data' => '<strong> ' . $vars['title'] . '</strong>',
-      'colspan' => count($vars['header']),
-    );
-    $output .= ' <tr>';
-    $output .= _theme_table_cell($cell);
-    $output .= " </tr>\n";
+
+    if ($vars['options']['each_group_separate_table']) {
+      $output .= '<div class="group-title"><strong> ' . $vars['title'] . '</strong></div>';
+    }
+    else {
+      $cell = [
+        'data' => '<div class="group-title"><strong> ' . $vars['title'] . '</strong></div>',
+        'colspan' => count($vars['header']),
+      ];
+      $output .= ' <tr>';
+      $output .= _theme_table_cell($cell);
+      $output .= " </tr>\n";
+    }
+
+    if ($vars['options']['each_group_separate_table']) {
+      if ($i > 1) {
+        $output .= theme("views_data_export_pdf_tfooter", $vars);
+      }
+      $output .= theme("views_data_export_pdf_theader", $vars);
+    }
   }
 
   foreach ($vars['themed_rows'] as $number => $cells) {
-    $attributes = array();
+    $attributes = [];
     if (count($cells)) {
       // Add odd/even class.
       $class = $flip[$class];
@@ -66,16 +81,19 @@ function template_process_views_data_export_pdf_body(&$vars) {
     }
   }
 
+  if ($vars['options']['each_group_separate_table']) {
+    $output .= theme("views_data_export_pdf_tfooter", $vars);
+  }
+
   $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
 }
 
 /**
- * Preprocess views_data_export_pdf_header.
+ * Preprocess views_data_export_pdf_theader.
  */
-function template_preprocess_views_data_export_pdf_header(&$vars) {
-  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_header__" . $vars['view']->name;
-  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_header__" . $vars['view']->name . "_" . $vars['view']->current_display;
-  module_load_include("inc", "views_data_export", "theme/views_data_export.theme");
+function template_preprocess_views_data_export_pdf_theader(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_theader__" . $vars['view']->name;
+
   _views_data_export_header_shared_preprocess($vars);
 
   // Need to do a little work to construct the table header, see theme_table().
@@ -90,8 +108,28 @@ function template_preprocess_views_data_export_pdf_header(&$vars) {
   }
 
   $vars['header_row'] .= '</tr></thead>';
-
   $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']);
+}
+
+/**
+ * Preprocess views_data_export_pdf_tfooter.
+ */
+function template_preprocess_views_data_export_pdf_tfooter(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_tfooter__" . $vars['view']->name;
+}
+
+/**
+ * Preprocess views_data_export_pdf_pheader.
+ */
+function template_preprocess_views_data_export_pdf_pheader(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_pheader__" . $vars['view']->name;
+}
+
+/**
+ * Preprocess views_data_export_pdf_pfooter.
+ */
+function template_preprocess_views_data_export_pdf_pfooter(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_pfooter__" . $vars['view']->name;
 }
 
 /**
@@ -99,6 +137,16 @@ function template_preprocess_views_data_export_pdf_header(&$vars) {
  */
 function template_preprocess_views_data_export_pdf(&$vars) {
   $vars['header'] = $vars['rows']['header'];
-  $vars['body'] = $vars['rows']['body'];
+
+  if (!$vars['options']['each_group_separate_table']) {
+    $output = theme("views_data_export_pdf_theader", $vars);
+    $output .= $vars['rows']['body'];
+    $output .= theme("views_data_export_pdf_tfooter", $vars);
+    $vars['body'] = $output;
+  }
+  else {
+    $vars['body'] = $vars['rows']['body'];
+  }
+
   $vars['footer'] = $vars['rows']['footer'];
 }

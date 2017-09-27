@@ -15,6 +15,11 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
   function option_definition() {
     $options = parent::option_definition();
 
+    $options['each_group_separate_table'] = [
+      'default' => FALSE,
+      'translatable' => FALSE,
+    ];
+
     $options['landscape'] = [
       'default' => FALSE,
       'translatable' => FALSE,
@@ -50,6 +55,13 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
    */
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
+
+    $form['each_group_separate_table'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Each group as separate table'),
+      '#default_value' => $this->options['each_group_separate_table'],
+      '#description' => t('If used grouping, this option provide rendering each group as separate table.'),
+    ];
 
     $form['landscape'] = [
       '#type' => 'checkbox',
