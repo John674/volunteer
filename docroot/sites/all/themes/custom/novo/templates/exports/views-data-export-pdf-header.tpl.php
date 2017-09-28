@@ -32,11 +32,6 @@
             display: inline-block;
             margin-right: 5px;
         }
-
-        table {
-            display: block;
-        }
-
     </style>
   <?php print (isset($head) && !empty($head)) ? $head : ""; ?>
 </head>
