@@ -12,4 +12,3 @@
   <?php print (isset($head) && !empty($head)) ? $head : ""; ?>
 </head>
 <body>
-

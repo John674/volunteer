@@ -102,7 +102,8 @@ function novo_reports_list() {
                 'views_data_export_feed_icon',
               ];
 
-              $export_links[] = theme($theme_pattern, [
+              $export_links[] = theme($theme_pattern,
+                [
                   'image_path' => $image_path,
                   'url' => $export_path,
                   'text' => $view->human_name,
@@ -233,13 +234,11 @@ function novo_reports_preprocess_views_data_export_pdf_header(&$vars) {
  */
 function novo_reports_preprocess_views_view_table(&$vars) {
   if ($vars['view']->name == "roster_report") {
-    //kpr($vars['result']);
     foreach ($vars['rows'] as $row_id => &$row) {
       if (isset($row['views_conditional_2']) && !empty($row['views_conditional_2'])) {
         $field_field = "field_field_p_canvassing_group";
         $color_entity = (isset($vars['result'][$row_id]->{$field_field}[0]['raw']['entity'])) ? $vars['result'][$row_id]->{$field_field}[0]['raw']['entity'] : NULL;
         $color = isset($color_entity->field_color[LANGUAGE_NONE][0]['rgb']) ? $color_entity->field_color[LANGUAGE_NONE][0]['rgb'] : NULL;
-
 
         if (!empty($color)) {
           $row['views_conditional_2'] = '<div style="background: ' . $color . '">' . $row['views_conditional_2'] . '</div>';
@@ -292,7 +291,6 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
     }
   }
 
-
   if ($vars['view']->name == "roster_report") {
 
     // Dismissal conditional fields.
@@ -325,7 +323,6 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
     }
 
   }
-
 
   if ($vars['view']->name == "report_nametag") {
     $rows = $vars['rows'];
@@ -370,7 +367,6 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
         'parent' => novo_reports_render_field_for_report($row, "field_field_parent_guardian"),
       ];
 
-      //kpr($data);
       $rendered_kid_date = theme("novo_reports_nametag_kid", ['data' => $data]);
       $vars['themed_rows'][$col_num][] = $rendered_kid_date;
       $c++;
@@ -395,9 +391,8 @@ function novo_reports_render_field_for_report_color($row, $field) {
   return isset($row->{$field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{$field}[0]['raw']['entity']->name . '</div>' : '';
 }
 
-
 /**
- * Implements hook_views_data_export_wkhtmltopdf_options_alter();
+ * Implements hook_views_data_export_wkhtmltopdf_options_alter().
  */
 function novo_reports_views_data_export_wkhtmltopdf_options_alter(&$options, $plugin) {
   if (isset($plugin->view->name) && $plugin->view->name == "report_nametag") {
