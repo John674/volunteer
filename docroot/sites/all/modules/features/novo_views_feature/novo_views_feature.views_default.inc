@@ -2672,6 +2672,9 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['each_group_separate_table'] = 1;
+  $handler->display->display_options['style_options']['landscape'] = 0;
+  $handler->display->display_options['style_options']['user_style_sheet'] = 'sites/all/modules/custom/novo_reports/css/novo_canvassing_pdf.css';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Address */
   $handler->display->display_options['fields']['field_address_1']['id'] = 'field_address_1';
@@ -8752,6 +8755,21 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_order' => '0',
   );
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  /* Field: Field collection item: Pickup Contacts */
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['id'] = 'field_p_kids_pickup_contacts';
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['table'] = 'field_data_field_p_kids_pickup_contacts';
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['field'] = 'field_p_kids_pickup_contacts';
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['label'] = '';
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['type'] = 'field_collection_fields';
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['settings'] = array(
+    'view_mode' => 'full',
+    'field_multiple_limit' => '-1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
+  );
+  $handler->display->display_options['fields']['field_p_kids_pickup_contacts']['delta_offset'] = '0';
   /* Field: Content: State */
   $handler->display->display_options['fields']['field_state']['id'] = 'field_state';
   $handler->display->display_options['fields']['field_state']['table'] = 'field_data_field_state';
@@ -8769,6 +8787,11 @@ function novo_views_feature_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_p_kid_name_target_id';
   /* Filter criterion: Content: School year (field_program_year) */
   $handler->display->display_options['filters']['field_program_year_year']['id'] = 'field_program_year_year';
   $handler->display->display_options['filters']['field_program_year_year']['table'] = 'field_data_field_program_year';

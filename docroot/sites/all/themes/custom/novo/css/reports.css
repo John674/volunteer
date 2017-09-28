@@ -2,40 +2,35 @@
 .form-item-field-p-small-group-target-id-entityreference-filter .btn.dropdown-toggle {
   margin: 0px;
 }
-
 .novo-reports-list-wrapper li a {
   display: inline-block;
 }
-
 .novo-reports-list-wrapper li a:first-child {
   width: 300px;
 }
-
 .view-roster-report .views-field-field-p-small-group {
   min-width: 130px;
 }
-
 .view-roster-report caption {
   font-family: ProximaNovaBold;
   color: #000;
   background-color: #CCCCCC;
   padding: 5px 10px;
 }
-
 .view-canvassing-report .tabledrag-toggle-weight-wrapper {
   display: none;
 }
-
 .view-children-active-report th.views-field-field-parent-guardian {
   min-width: 300px;
 }
-
-.view-children-active-report td.views-field-field-parent-guardian div.field{
+.view-children-active-report td.views-field-field-parent-guardian div.field {
   display: inline-block;
 }
-
 .view-roster-report .views-field-views-conditional > div,
 .view-roster-report .views-field-views-conditional-1 > div,
 .view-roster-report .views-field-views-conditional-2 > div {
   padding: 5px 10px;
+}
+.view-roster-report .field-collection-item-field-parent-guardian .field {
+  display: inline-block;
 }

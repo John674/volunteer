@@ -253,6 +253,143 @@ function novo_content_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_p_kids_pickup_contacts-field_pc_full_name'.
+  $field_instances['field_collection_item-field_p_kids_pickup_contacts-field_pc_full_name'] = array(
+    'bundle' => 'field_p_kids_pickup_contacts',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'only_first_row' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_pc_full_name',
+    'label' => 'Full name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_p_kids_pickup_contacts-field_pc_phone'.
+  $field_instances['field_collection_item-field_p_kids_pickup_contacts-field_pc_phone'] = array(
+    'bundle' => 'field_p_kids_pickup_contacts',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'only_first_row' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_pc_phone',
+    'label' => 'Phone',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'masked_input',
+      'settings' => array(
+        'mask' => '999-999-9999',
+        'placeholder' => '_',
+        'size' => 60,
+      ),
+      'type' => 'masked_input',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_p_kids_pickup_contacts-field_pc_relationship'.
+  $field_instances['field_collection_item-field_p_kids_pickup_contacts-field_pc_relationship'] = array(
+    'bundle' => 'field_p_kids_pickup_contacts',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'only_first_row' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_pc_relationship',
+    'label' => 'Relationship',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_parent_guardian-field_parent_guardian_first_name'.
   $field_instances['field_collection_item-field_parent_guardian-field_parent_guardian_first_name'] = array(
     'bundle' => 'field_parent_guardian',
@@ -916,7 +1053,7 @@ function novo_content_feature_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -964,6 +1101,43 @@ function novo_content_feature_field_default_field_instances() {
       ),
       'type' => 'select2widgetajax',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_program_kids_list-field_p_kids_pickup_contacts'.
+  $field_instances['field_collection_item-field_program_kids_list-field_p_kids_pickup_contacts'] = array(
+    'bundle' => 'field_program_kids_list',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_p_kids_pickup_contacts',
+    'label' => 'Pickup Contacts',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 7,
     ),
   );
 
@@ -8699,10 +8873,10 @@ Friend',
         'label' => 'above',
         'module' => 'field_collection',
         'settings' => array(
-          'field_multiple_limit' => 1,
+          'field_multiple_limit' => -1,
           'field_multiple_limit_offset' => 0,
           'field_multiple_limit_order' => 0,
-          'view_mode' => 'only_first_row',
+          'view_mode' => 'full',
         ),
         'type' => 'field_collection_fields',
         'weight' => 36,
@@ -10928,6 +11102,7 @@ Discipline',
   t('FAQ');
   t('First Name');
   t('Food Allergies');
+  t('Full name');
   t('Gender');
   t('Goes By');
   t('Grade');
@@ -10999,6 +11174,7 @@ Discipline',
   t('Pertinent Certifcation or Training (e.g. CPR, First Aid, etc.)');
   t('Phone');
   t('Photo Release');
+  t('Pickup Contacts');
   t('Please list all ministry / volunteer experience');
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');

@@ -29,4 +29,5 @@ Follow the instructions from README.txt of the Views Data Export module.
 
 Credits
 -------
+
 Sergey Grigorenko <https://www.drupal.org/u/svipsa>
