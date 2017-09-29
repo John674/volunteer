@@ -4,13 +4,14 @@
   -o-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
   transform: rotate(-180deg);
+  margin-top: 0.5in;
 }
 .nametag-block {
   width: 2.25in;
   height: 3.5in;
   font-size: 0.1458in;
   text-align: center;
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
   font-family: sans-serif;
 }
 .nametag-row {

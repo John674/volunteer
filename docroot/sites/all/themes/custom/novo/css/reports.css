@@ -14,7 +14,7 @@
 .view-roster-report caption {
   font-family: ProximaNovaBold;
   color: #000;
-  background-color: #CCCCCC;
+  background-color: #ccc;
   padding: 5px 10px;
 }
 .view-canvassing-report .tabledrag-toggle-weight-wrapper {
@@ -33,4 +33,14 @@
 }
 .view-roster-report .field-collection-item-field-parent-guardian .field {
   display: inline-block;
+}
+.novo-report--nametag-vbo-operation-wrapper {
+  border: none;
+}
+.novo-report--nametag-vbo-operation-wrapper legend {
+  display: none;
+}
+.novo-report--nametag-vbo-operation-wrapper .panel-body {
+  text-align: right;
+  padding-right: 0px;
 }

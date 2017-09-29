@@ -2398,6 +2398,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
     'bypass_access' => 0,
     'link' => 0,
@@ -2497,6 +2498,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Location';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator'] = 'field_program_location_target_id_entityreference_filter_op';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['identifier'] = 'field_program_location_target_id_entityreference_filter';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember_roles'] = array(
     2 => 0,
@@ -2614,6 +2616,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
     'bypass_access' => 0,
     'link' => 0,
@@ -2672,6 +2675,7 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['disable_smart_shrinking'] = 0;
   $handler->display->display_options['style_options']['each_group_separate_table'] = 1;
   $handler->display->display_options['style_options']['landscape'] = 0;
   $handler->display->display_options['style_options']['user_style_sheet'] = 'sites/all/modules/custom/novo_reports/css/novo_canvassing_pdf.css';
@@ -2717,6 +2721,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
+  $handler->display->display_options['fields']['field_program_location']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
     'bypass_access' => 0,
     'link' => 0,
@@ -8528,8 +8533,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations_1' => 'views_bulk_operations_1',
     'field_p_kid_name' => 'field_p_kid_name',
     'field_p_photo_release' => 'field_p_photo_release',
+    'views_conditional' => 'views_conditional',
     'field_p_small_group' => 'field_p_small_group',
     'field_p_canvassing_group' => 'field_p_canvassing_group',
     'field_p_dismissal' => 'field_p_dismissal',
@@ -8537,39 +8544,58 @@ function novo_views_feature_views_default_views() {
     'field_last_name' => 'field_last_name',
     'field_program_location' => 'field_program_location',
     'field_food_allergies' => 'field_food_allergies',
+    'field_address_1' => 'field_address_1',
+    'field_address_2' => 'field_address_2',
+    'field_apt' => 'field_apt',
+    'field_city' => 'field_city',
+    'field_parent_guardian' => 'field_parent_guardian',
+    'field_p_kids_pickup_contacts' => 'field_p_kids_pickup_contacts',
+    'field_state' => 'field_state',
+    'field_zip' => 'field_zip',
+    'nid' => 'nid',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_p_kid_name' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_p_photo_release' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
+    'views_conditional' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_p_small_group' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_p_canvassing_group' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_p_dismissal' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -8597,6 +8623,65 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
     'field_food_allergies' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_address_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_address_2' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_apt' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_city' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_parent_guardian' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_p_kids_pickup_contacts' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_state' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_zip' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -8642,7 +8727,7 @@ function novo_views_feature_views_default_views() {
       'skip_confirmation' => 1,
       'skip_permission_check' => 1,
       'override_label' => 1,
-      'label' => 'Print name tag',
+      'label' => 'Name tag',
       'settings' => array(
         'url' => 'report-nametag/export-pdf/',
       ),
@@ -8662,8 +8747,20 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_p_photo_release']['table'] = 'field_data_field_p_photo_release';
   $handler->display->display_options['fields']['field_p_photo_release']['field'] = 'field_p_photo_release';
   $handler->display->display_options['fields']['field_p_photo_release']['label'] = 'Photo';
+  $handler->display->display_options['fields']['field_p_photo_release']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_p_photo_release']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_p_photo_release']['alter']['text'] = '[field_p_photo_release-value]';
+  /* Field: Photo (yes/no) */
+  $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
+  $handler->display->display_options['fields']['views_conditional']['ui_name'] = 'Photo (yes/no)';
+  $handler->display->display_options['fields']['views_conditional']['label'] = 'Photo';
+  $handler->display->display_options['fields']['views_conditional']['if'] = 'field_p_photo_release';
+  $handler->display->display_options['fields']['views_conditional']['condition'] = '1';
+  $handler->display->display_options['fields']['views_conditional']['equalto'] = '1';
+  $handler->display->display_options['fields']['views_conditional']['or'] = 'No';
+  $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
   /* Field: Field collection item: Small Group */
   $handler->display->display_options['fields']['field_p_small_group']['id'] = 'field_p_small_group';
   $handler->display->display_options['fields']['field_p_small_group']['table'] = 'field_data_field_p_small_group';
@@ -8787,11 +8884,6 @@ function novo_views_feature_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'field_p_kid_name_target_id';
   /* Filter criterion: Content: School year (field_program_year) */
   $handler->display->display_options['filters']['field_program_year_year']['id'] = 'field_program_year_year';
   $handler->display->display_options['filters']['field_program_year_year']['table'] = 'field_data_field_program_year';
@@ -8867,6 +8959,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['disable_smart_shrinking'] = 1;
   $handler->display->display_options['style_options']['each_group_separate_table'] = 0;
   $handler->display->display_options['style_options']['landscape'] = 0;
   $handler->display->display_options['style_options']['page_width'] = '279.4';

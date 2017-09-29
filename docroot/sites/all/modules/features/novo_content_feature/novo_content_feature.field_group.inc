@@ -1011,152 +1011,184 @@ function novo_content_feature_field_group_info() {
 
 <p><b>Child Abuse and Neglect Policy</b><br>
 <ul>
-<li>You have a moral and legal responsibility to report suspicion of abuse or neglect.</li>
+    <li>You have a moral and legal responsibility to report suspicion of abuse or neglect.</li>
     <li>As a Novo volunteer, you are required by our policies to notify us.</li>
     <li>As a resident of the state of Oklahoma, you are required by law to notify DHS.</li>
 </ul>
 </p>
 
 <p><b>Child Information Policy</b><br>
-    <ul>
-        <li>Be careful with confdential information.</li>
-        <li>Always let parents or guardians know who you are and what your role is so as to prevent any concerns and instead to build trust.</li>
+<ul>
+    <li>Be careful with confdential information.</li>
+    <li>All records with confidential information should be returned to the office after programming.</li>
+    <li>Requests for information regarding parents, guardians, or children should be sent to the Community Outreach
+        Coordinator.
+    </li>
 </ul>
 </p>
 
 
 <p><b>Photo and Video Policy</b><br>
-    <ul>
-        <li>Do not publish an image and include:
-            <ul>
-                <li>First and last name of a child and his or her image.</li>
-                <li>First and last name of a child and his or her location (with or without image).</li>
-                <li>First name only, image and location.</li>
-                <li>Child’s name tag in readable format (frst and last name).</li>
-            </ul>
-        </li>
-        <li>Check and ensure photo permission before you photograph any children!</li>
+<ul>
+    <li>Do not publish an image and include:
+        <ul>
+            <li>First and last name of a child and his or her image.</li>
+            <li>First and last name of a child and his or her location (with or without image).</li>
+            <li>First name only, image and location.</li>
+            <li>Child’s name tag in readable format (frst and last name).</li>
+        </ul>
+    </li>
+    <li>Check and ensure photo permission before you photograph any children!</li>
 </ul>
 </p>
 
 
 <p><b>Permission Slip Policy</b><br>
-    <ul>
-        <li>Every child must have a completed, signed, and permission slip in order to attend programming!</li>
+<ul>
+    <li>All children seeking to participate in any Novo Program or event must turn in a completed permission slip.</li>
+    <li>All permission slips must be signed by a legal guardian and in the Site Coordinators possession prior to the
+        child attending the program.
+    </li>
+    <li>If a parent does not with to give photo/video release then they will need to write it on the permission slip.
+    </li>
 </ul>
 </p>
 
-
-<h3>Child-Related Policies</h3>
-<p><b>Permission Slip Policy</b><br>
-
-    <ul>
-        <li>Every child must have a completed, signed, and permission slip in order to attend programming!</li>
-</ul>
-</p>
 
 <p><b>Check-In / Check-Out Policy</b><br>
-    <ul>
-        <li>Parent or guardian permission is an absolute must before releasing a child early from the program!</li>
+<ul>
+    <li>Parent or guardian permission is an absolute must before releasing a child early from the program!</li>
 </ul>
 </p>
 
 
 <p><b>Child Pick-Up Policy</b><br>
-    <ul>
-        <li>Children may only be released to those designated on the permission slip.</li>
+<ul>
+    <li>Children may only be released to those designated on the permission slip.</li>
 </ul>
 </p>
 
 <p><b>Child Drop-Off Policy</b><br>
-    <ul>
-        <li>Never leave a child unattended at home or anywhere else!</li>
+<ul>
+    <li>Never leave a child unattended at home or anywhere else!</li>
 </ul>
 </p>
-        
+
+
+<p><b>Child Enrollment Policy</b><br>
+<ul>
+    <li>In order to enroll in Bible Club, a child must be attending a Pre-K/K4 through 6th grade program on or before
+        the time of enrollment and be at least 4 years old. Sit Coordinators may make an exception to enroll children in
+        grades higher than 6th grade.
+    </li>
+</ul>
+</p>
 
 <h3>Discipline Policies</h3>
 
 <p><b>Physical Restraint Policy</b><br>
-    <ul>
-        <li>Get your program leadership if a child is in danger of hurting himself or others.</li>
-        <li>Never physically restrain a child without appropriate training!</li>
+<ul>
+    <li>Get your program leadership if a child is in danger of hurting himself or others.</li>
+    <li>Never physically restrain a child without appropriate training!</li>
 </ul>
 </p>
 
 <p><b>Anti-Bullying Policy</b><br>
-    <ul>
-        <li>Bullying is unacceptable and must be addressed in order to protect our children!</li>
+<ul>
+    <li>Bullying is unacceptable and must be addressed in order to protect our children!</li>
 </ul>
 </p>
 
 
 <h3>Health and Safety Policies</h3>
 <p><b>Contagious Illness or Condition Policy</b><br>
-    <ul>
-        <li>Children who may have contagious illness or condition should not attend a Novo program.</li>
-        <li>If ill or contagious children arrive at the program or become sick while there, treat them with love and understanding and make arrangements for them discreetly.</li>
+<ul>
+    <li>Children who may have contagious illness or condition should not attend a Novo program.</li>
+    <li>If ill or contagious children arrive at the program or become sick while there, treat them with love and
+        understanding and make arrangements for them discreetly.
+    </li>
 </ul>
-   </p>
+</p>
 
 <p><b>Inclement Weather Policy</b><br>
-    <ul>
-    <li>Do not allow children to walk home when there is visible lightning or audible thunder, hail, and / or other weather conditions which might jeopardize their safety.</li>
+<ul>
+    <li>Do not allow children to walk home when there is visible lightning or audible thunder, hail, and / or other
+        weather conditions which might jeopardize their safety.
+    </li>
     <li>Familiarize yourself with your site’s emergency procedures in case of severe weather.</li>
 </ul>
 </p>
 
 
 <p><b>Weapons Policy</b><br>
-    <ul>
-        <li>Toy weapons should be turned over to the Novo program leadership.</li>
-        <li>Real weapons should be confscated from children and emergency procedures followed.</li>
-        <li>Volunteers should leave any personal weapons in a locked vehicle or at home.</li>
+<ul>
+    <li>Toy weapons should be turned over to the Novo program leadership.</li>
+    <li>Real weapons should be confscated from children and emergency procedures followed.</li>
+    <li>Volunteers should leave any personal weapons in a locked vehicle or at home.</li>
 </ul>
 </p>
 
 
 <p><b>Violence Policy</b><br>
-    <ul>
-        <li>The senior-most Novo staff member will assume operational command in case of an emergency.</li>
+<ul>
+    <li>The senior-most Novo staff member will assume operational command in case of an emergency.</li>
     <li>Familiarize yourself with your site’s emergency procedures in case of violence</li>
 </ul>
 </p>
-            
 
-<h3>Volunteer Protection Policies</h3>
+
+<h3>Volunteer & Staff Protection Policies</h3>
+
+<p><b>Volunteer Under 18 Protection Policy</b><br>
+<ul>
+    <li>You must be 14 years or older to volunteer at Bible club programming.</li>
+    <li>Volunteers under 18 years of age are considered minors.</li>
+    <li>Minor volunteers should be present with at least two adult volunteers or staff members while indoors.</li>
+    <li>They may be present with one adult volunteer or staff member while engaged in outdoor activities.</li>
+</ul>
+</p>
+
 
 <p><b>Volunteer Protection Policy</b><br>
-    <ul>
-        <li>Make sure there are always two non-related individuals present whenever you are with children or anywhere children might be present.</li>
-        <li>Never ever be alone with a child.</li>
+<ul>
+    <li>Always have two non-related adults (18 or over) volunteers or staff members present whenever you are with
+        children or anywhere children might be present.
+    </li>
+    <li>Never ever be alone with a child.</li>
 </ul>
 </p>
 
 <p><b>Bathroom Policy</b><br>
-    <ul>
-        <li>Never go into a bathroom with a child or children — notify your program leadership.</li>
+<ul>
+    <li>Never go into a bathroom with a child or children — notify your program leadership.</li>
 </ul>
 </p>
 
 <p><b>Volunteer Screening Policy</b><br>
-    <ul>
-        <li>All volunteers must complete a volunteer application and the screening process must be complete before serving.</li>
+<ul>
+    <li>All volunteers must complete a volunteer application and the screening process must be complete before
+        serving.
+    </li>
 </ul>
 </p>
 
-<p><b>Physical Contact Policy</b><br>
-    <ul>
-        <li>Always avoid any inappropriate contact or communication.</li>
-        <li>Report any accidental contact or communication to your Novo program leadership immediately for direction and guidance.</li>
+<p><b>Physical Contact and Restraint Policies</b><br>
+<ul>
+    <li>Always avoid any inappropriate contact or communication.</li>
+    <li>Volunteers must never physically discipline a child.</li>
+    <li>Physical discipline includes, but not limited to: spanking, slapping, grabbing faces, poking, pinching, etc.
+    </li>
+    <li>Report any accidental contact or communication to your Novo program leadership immediately for direction and
+        guidance.
+    </li>
 </ul>
 </p>
-
 
 <p><b>Personal Activities Policy</b><br>
-    <ul>
-        <li>We encourage you to plan and participate in personal activities with your children!</li>
-        <li>Notifcation of your plans helps us help you with ideas or any questions or concerns from parents or guardians!</li>
+<ul>
+    <li>We encourage you to plan and participate in personal activities with your children!</li>
+    <li>Notifcation of your plans helps us help you with ideas or any questions or concerns from parents or guardians!
+    </li>
 </ul>
 </p>
 

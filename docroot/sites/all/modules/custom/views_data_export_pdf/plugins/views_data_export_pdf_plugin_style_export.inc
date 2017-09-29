@@ -15,6 +15,11 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
   function option_definition() {
     $options = parent::option_definition();
 
+    $options['disable_smart_shrinking'] = [
+      'default' => FALSE,
+      'translatable' => FALSE,
+    ];
+
     $options['each_group_separate_table'] = [
       'default' => FALSE,
       'translatable' => FALSE,
@@ -55,6 +60,13 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
    */
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
+
+    $form['disable_smart_shrinking'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Disable smart shrinking'),
+      '#default_value' => $this->options['disable_smart_shrinking'],
+      '#description' => t('Disable the intelligent shrinking strategy used by WebKit that makes the pixel/dpi ratio none constant.'),
+    ];
 
     $form['each_group_separate_table'] = [
       '#type' => 'checkbox',

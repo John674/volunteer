@@ -105,6 +105,9 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  // Disable autofill form for browsers.
+  $form['#attributes']['autocomplete'] = 'off';
+
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
       $form['actions']['publish']['#value'] = t("Active");

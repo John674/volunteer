@@ -27,18 +27,18 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
   $form['field_attendance_program_name'] = $program_copy;
   $form['field_attendance_kids_list'] = $kids_copy;
 
-  $form['field_attendance_staff_list']['#attributes']['class'] = array('chosen-widget');
-  $form['field_attendance_volunteer_list']['#attributes']['class'] = array('chosen-widget');
+  $form['field_attendance_staff_list']['#attributes']['class'] = ['chosen-widget'];
+  $form['field_attendance_volunteer_list']['#attributes']['class'] = ['chosen-widget'];
 
-  $form['field_attendance_staff_list'][LANGUAGE_NONE]['#attributes']['class'] = array('chosen-widget');
-  $form['field_attendance_volunteer_list'][LANGUAGE_NONE]['#attributes']['class'] = array('chosen-widget');
+  $form['field_attendance_staff_list'][LANGUAGE_NONE]['#attributes']['class'] = ['chosen-widget'];
+  $form['field_attendance_volunteer_list'][LANGUAGE_NONE]['#attributes']['class'] = ['chosen-widget'];
 }
 
 /**
  * Attendance date validate.
  */
 function novo_attendance_field_attendance_date_validate($element, &$form_state, $form) {
-  $values = isset($form_state['values']) ? $form_state['values'] : array();
+  $values = isset($form_state['values']) ? $form_state['values'] : [];
 
   $year = isset($values['field_attendance_year'][LANGUAGE_NONE]) ? $values['field_attendance_year'][LANGUAGE_NONE] : NULL;
   $date = (isset($element[0]['#value']['value']['date'])) ? $element[0]['#value']['value']['date'] : NULL;
@@ -46,10 +46,24 @@ function novo_attendance_field_attendance_date_validate($element, &$form_state, 
   if (!$date) {
     form_error($element, t('Date is not valid.'));
   }
+  $unix_date = strtotime($date);
+  // Set end of day.
+  $unix_date += 23*59*59;
 
-  $date_year = date("Y", strtotime($date));
+  $date_year = date("Y", $unix_date);
 
   if ($date_year != $year && $date_year - 1 != $year) {
+    form_error($element, t('Date is not valid.'));
+  }
+
+  $program_nid = isset($values['field_attendance_program_name'][$values['language']]) ? $values['field_attendance_program_name'][$values['language']] : NULL;
+  $program = node_load($program_nid);
+  if (isset($program->created)) {
+    if ($program->created > $unix_date) {
+      form_error($element, t('Date must be greater than the date of creation of the enrollment. (:date)', [":date" => format_date($program->created, 'short')]));
+    }
+  }
+  else {
     form_error($element, t('Date is not valid.'));
   }
 }
