@@ -44,9 +44,13 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
   $rows = $vars['rows'];
   $first_row = reset($rows);
   $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
+  $location = isset($first_row->field_field_program_location[0]['rendered']['#label']) ? $first_row->field_field_program_location[0]['rendered']['#label'] : "";
 
-  $vars['header_row'] = '';
-  $vars['header_row'] .= '<thead><tr style="background: ' . $color . '">';
+  $vars['header_row'] = '<thead>';
+  if (!empty($location)) {
+    $vars['header_row'] .= '<tr class="location-header"><th colspan="' . count($vars['header']) . '">' . $location . '</th></tr>';
+  }
+  $vars['header_row'] .= '<tr style="background: ' . $color . '">';
 
   $ts = tablesort_init($vars['header']);
 
@@ -64,7 +68,6 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
  */
 function novo_reports_preprocess_body_canvassing_report(&$vars) {
   // Dismissal conditional fields.
-
   $rows = $vars['rows'];
   $first_row = reset($rows);
   $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
@@ -107,9 +110,9 @@ function novo_reports_preprocess_body_report_nametag(&$vars) {
 
     $parent_guardian_new = [];
     $pickup_contacts_new = [];
-    $cc=0;
+    $cc = 0;
     for ($i = 0; $i < 4; $i++) {
-      if ($cc >= 4 ) {
+      if ($cc >= 4) {
         break;
       }
 

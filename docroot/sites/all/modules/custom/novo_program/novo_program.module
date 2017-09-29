@@ -15,16 +15,17 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
   // Pickup contacts modal form theming.
   $kids_list = &$form['field_program_kids_list'][$form['field_program_class_name']['#language']];
 
-  for ($i = 0; $i < $kids_list['#max_delta']; $i++) {
-    $pc = &$kids_list[$i]['field_p_kids_pickup_contacts'][$kids_list[$i]['field_p_kids_pickup_contacts']['#language']];
-    for ($j = 0; $j <= $pc['#max_delta']; $j++) {
-      $pc[$j]['#prefix'] = '<div class="field-p-kids-pickup-contacts-wrapper">';
-      $pc[$j]['#suffix'] = '</div>';
-      $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
-    }
+  for ($i = 0; $i <= $kids_list['#max_delta']; $i++) {
+    if (isset($kids_list[$i])) {
+      $pc = &$kids_list[$i]['field_p_kids_pickup_contacts'][$kids_list[$i]['field_p_kids_pickup_contacts']['#language']];
+      for ($j = 0; $j <= $pc['#max_delta']; $j++) {
+        $pc[$j]['#prefix'] = '<div class="field-p-kids-pickup-contacts-wrapper">';
+        $pc[$j]['#suffix'] = '</div>';
+        $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
+      }
 
-    $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] = '<a href="#field-p-kids-pc-' . $i . '" class="btn btn-primary" data-toggle="modal"> <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>';
-    $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] .= '
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] = '<a href="#field-p-kids-pc-' . $i . '" class="btn btn-primary" data-toggle="modal"> <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] .= '
     <div class="modal fade" id="field-p-kids-pc-' . $i . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document"><div class="modal-content">
       <div class="modal-header">
@@ -35,12 +36,13 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
       </div>
       <div class="modal-body">';
 
-    $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] = '</div>';
-    $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] .= '
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] = '</div>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] .= '
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">' . t("Ok") . '</button>
       </div>
       </div></div></div>';
+    }
   }
 }
 

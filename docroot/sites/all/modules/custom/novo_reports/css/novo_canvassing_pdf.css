@@ -10,5 +10,12 @@
 }
 table thead tr th {
   background: none;
+  page-break-inside: avoid;
 }
-
+table thead tr {
+  page-break-inside: avoid;
+}
+tr.location-header th {
+  text-align: right;
+  border: none;
+}

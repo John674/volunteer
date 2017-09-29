@@ -213,7 +213,7 @@ function novo_reports_render_field_for_report($row, $field) {
 function novo_reports_render_field_for_report_color($row, $field) {
   $color = novo_reports_get_group_color_value($row, $field);
 
-  return isset($row->{"field_" . $field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{"field_".$field}[0]['raw']['entity']->name . '</div>' : '';
+  return isset($row->{"field_" . $field}[0]['raw']['entity']->name) ? '<div style="color:' . $color . '">' . $row->{"field_" . $field}[0]['raw']['entity']->name . '</div>' : '';
 }
 
 /**
@@ -222,6 +222,19 @@ function novo_reports_render_field_for_report_color($row, $field) {
 function novo_reports_views_data_export_wkhtmltopdf_options_alter(&$options, $plugin) {
   if (isset($plugin->view->name) && $plugin->view->name == "report_nametag") {
     $options[] = "disable-smart-shrinking";
+  }
+}
+
+/**
+ * Implements hook_views_bulk_operations_form_alter().
+ */
+function novo_reports_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
+  if ($vbo->view->name == "report_nametag") {
+    // Theme VBO button and add clone btn to footer of view.
+    $form['select']['#attributes']['class'][] = 'novo-report--nametag-vbo-operation-wrapper';
+    $form['select']['action::views_bulk_operations_argument_selector_action']['#value'] = '<i class="fa fa-print" aria-hidden="true"></i> ' . $form['select']['action::views_bulk_operations_argument_selector_action']['#value'];
+    $form['select2'] = $form['select'];
+    $form['select2']['#weight'] = 100;
   }
 }
 
