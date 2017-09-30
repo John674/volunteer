@@ -44,3 +44,12 @@
   text-align: right;
   padding-right: 0px;
 }
+.novo-program-report-wrapper {
+  position: absolute;
+  margin-left: 500px;
+  left: 0px;
+}
+.novo-program-report-link {
+  list-style: none;
+  padding-left: 0px;
+}

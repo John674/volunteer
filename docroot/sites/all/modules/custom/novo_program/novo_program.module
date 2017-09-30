@@ -44,6 +44,13 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
       </div></div></div>';
     }
   }
+
+  // Add report links.
+  $form['report_links'] = [
+    '#type' => 'markup',
+    '#markup' => novo_program_render_report_links(),
+    '#weight' => -10,
+  ];
 }
 
 /**
@@ -156,4 +163,33 @@ function novo_program_views_query_alter(&$view, &$query) {
       ->condition('field_program_class_name_node.nid', $nid, '=');
     $query->add_where(0, $condition);
   }
+}
+
+/**
+ * Render report links.
+ */
+function novo_program_render_report_links() {
+  $reports = [
+    'canvassing-report' => t('Canvasing'),
+    'roster-report' => t('Roster'),
+    'report-nametag' => t('Nametag'),
+  ];
+
+  $links = [];
+  foreach ($reports as $url => $title) {
+    $links[] = [
+      'title' => $title,
+      'href' => url($url),
+    ];
+  }
+
+  return '<div class="novo-program-report-wrapper">' . theme("links", [
+      'heading' => [
+        'level' => 'h4',
+        'class' => 'novo-program-report-links-heading',
+        'text' => t("Reports"),
+      ],
+      'links' => $links,
+      'attributes' => ['class' => ['novo-program-report-links']],
+    ]) . '</div>';
 }
