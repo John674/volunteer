@@ -25,9 +25,7 @@
                 $(".field-name-field-attendance-date input", context).datepicker({
                     minDate: start_date,
                     maxDate: end_date,
-                    defaultDate: end_date,
-                    changeMonth: true,
-                    changeYear: true
+                    defaultDate: end_date
                 });
             }
         }
