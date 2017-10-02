@@ -30,8 +30,6 @@ function novo_reports_enrollment_report_get_filters_form() {
   list($years, $years_default_value) = novo_reports_enrollment_report_get_year_filter_data();
   list($classes, $classes_default_value) = novo_reports_enrollment_report_get_class_filter_data();
 
-  $form['#attributes']['class'][] = "novo-report-enrollment-report-form";
-
   $form['novo_reports_filters'] = [
     '#type' => 'container',
     '#attributes' => [
@@ -82,6 +80,7 @@ function novo_reports_enrollment_report_get_filters_form() {
     ],
   ];
 
+  $form['#attributes']['class'][] = "novo-report-enrollment-report-form";
   $form['#submit'][] = 'novo_reports_enrollment_report_get_filters_form_submit';
 
   return $form;
