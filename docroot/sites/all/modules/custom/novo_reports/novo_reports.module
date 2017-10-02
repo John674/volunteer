@@ -8,6 +8,7 @@
 module_load_include("inc", "novo_reports", "includes/novo_reports.func");
 module_load_include("inc", "novo_reports", "includes/novo_reports.handlers_func");
 module_load_include("inc", "novo_reports", "includes/novo_reports.preprocess");
+module_load_include("inc", "novo_reports", "includes/novo_reports.enrollments");
 
 /**
  * Implements hook_menu().
@@ -20,6 +21,13 @@ function novo_reports_menu() {
     'access arguments' => ['novo reports access'],
     'page callback' => 'novo_reports_list',
     'menu_name' => 'main-menu',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['enrollment-report'] = [
+    'title' => 'Enrollment report',
+    'access callback' => novo_reports_enrollment_report_access(),
+    'page callback' => 'novo_reports_enrollment_report',
     'type' => MENU_NORMAL_ITEM,
   ];
 
@@ -236,6 +244,14 @@ function novo_reports_views_bulk_operations_form_alter(&$form, &$form_state, $vb
     $form['select2'] = $form['select'];
     $form['select2']['#weight'] = 100;
   }
+}
+
+/**
+ * Enrollment report access callback.
+ */
+function novo_reports_enrollment_report_access() {
+  $role = user_role_load_by_name('Siteadmin');
+  return (user_has_role($role->rid)) ? TRUE : FALSE;
 }
 
 /**

@@ -53,3 +53,15 @@
   list-style: none;
   padding-left: 0px;
 }
+.novo-reports-enrolment-total-row {
+  border-top: 2px solid black !important;
+  font-family: "ProximaNovaBold";
+}
+.novo-report-enrollment-report-form .form-item {
+  width: 300px;
+  float: left;
+  margin-right: 10px;
+}
+.novo-report-enrollment-report-reset-btn {
+  margin-top: 25px;
+}
