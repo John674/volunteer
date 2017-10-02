@@ -35,7 +35,6 @@ features[views_view][] = canvassing_report_filter_program
 features[views_view][] = children_active_report
 features[views_view][] = class
 features[views_view][] = class_filter_locations
-features[views_view][] = enrollment_report
 features[views_view][] = kids
 features[views_view][] = kids_list
 features[views_view][] = list_kids_mentored

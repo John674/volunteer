@@ -39,7 +39,9 @@ function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $
     $form['field_attendance_date'][$form['field_attendance_date']['#language']]['#disabled'] = TRUE;
   }
 
+  // @codingStandardsIgnoreStart
   $form['field_attendance_program_name'][$form['field_attendance_program_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Enrolment"), "node/add/program", ['query' => drupal_get_destination()])]);
+  // @codingStandardsIgnoreEnd
 }
 
 /**

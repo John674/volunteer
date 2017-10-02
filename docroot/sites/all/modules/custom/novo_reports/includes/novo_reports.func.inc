@@ -88,6 +88,12 @@ function novo_reports_list() {
     }
   }
 
+  $links[] = [
+    'href' => "enrollment-report",
+    'title' => t("Enrollment report"),
+    'html' => TRUE,
+  ];
+
   $links = theme("links", [
     "links" => $links,
     "attributes" => ["class" => ["novo-reports-list-wrapper"]],
