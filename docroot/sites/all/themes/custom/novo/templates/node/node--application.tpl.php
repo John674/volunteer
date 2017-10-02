@@ -100,159 +100,135 @@
       </header>
   <?php endif; ?>
     <div class="panel panel-default">
-            <div class="panel-heading"><?php print (t('Application view')) ?></div>
-            <div class="panel-body">
-              <?php if (!empty($title)): ?>
-                  <div class="row field">
-                      <div class="col-md-6">
-                          <div class="field-label">
-                              <i class="fa fa-user"></i>
-                              <span><?php print (t('Applicant name')) ?>:</span>
-                          </div>
-                      </div>
-                      <div class="col-md-6">
-                          <span><?php print $title; ?></span>
+        <div class="panel-heading"><?php print (t('Application view')) ?></div>
+        <div class="panel-body">
+          <?php if (!empty($title)): ?>
+              <div class="row field">
+                  <div class="col-md-6">
+                      <div class="field-label">
+                          <i class="fa fa-user"></i>
+                          <span><?php print (t('Applicant name')) ?>:</span>
                       </div>
                   </div>
-                  <hr>
-              <?php endif; ?>
-              <?php
-              // Hide comments, tags, and links now so that we can render them later.
-              hide($content['comments']);
-              hide($content['links']);
-              hide($content['field_tags']);
-
-              hide($content['field_reference_request_1']);
-              hide($content['field_reference_request_2']);
-              hide($content['field_reference_request_standby']);
-              hide($content['field_reference_request_parents']);
-              hide($content['field_reference_request_church']);
-              hide($content['pseudo_field_request_cia']);
-
-              hide($content['field_app_status']);
-              hide($content['app_status']);
-              hide($content['app_approve_block']);
-
-              print render($content);
-              ?>
-
-                <div class="row field pdf-field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <i class="fa fa-file-text-o"></i>
-                          <?php print t("Application status"); ?>:
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <p><?php print render($content['app_status']); ?></p>
-                    </div>
-                </div>
-                <hr>
-
-
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <i class="fa fa-inbox"></i>
-                            <span><?php print (t('Created date')) ?>:</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span><?php print format_date($node->created, 'custom', 'Y-m-d  H:i:s'); ?></span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <span><?php print (t('Request date')) ?>:</span>
-                            <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span>N/A</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row field">
-                    <div class="col-md-6">
-                        <div class="field-label">
-                            <span><?php print (t('Response date')) ?>:</span>
-                            <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <span>N/A</span>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
-                    <div class="panel-body">
-                      <?php print render($content['pseudo_field_request_cia']); ?>
-                      <?php print render($content['field_reference_request_1']); ?>
-                      <?php print render($content['field_reference_request_2']); ?>
-                      <?php print render($content['field_reference_request_standby']); ?>
-                      <?php print render($content['field_reference_request_church']); ?>
-                      <?php print render($content['field_reference_request_parents']); ?>
-
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-<!--                    <div class="panel-heading"></div>-->
-                    <div class="panel-body">
-                      <?php if (isset($dynamic_fields)): ?>
-                        <?php foreach ($dynamic_fields as $key => $dyn_group): ?>
-                          <?php if (!empty($key)) : ?>
-                                  <hr>
-                          <?php endif; ?>
-                          <?php foreach ($dyn_group as $dyn_field): ?>
-                                  <div class="row field">
-                                      <div class="col-md-6">
-                                        <?php if (!empty($dyn_field['title'])): ?>
-                                            <div class="field-label">
-                                                <span><?php print $dyn_field['title']; ?>
-                                                    :</span>
-                                            </div>
-                                        <?php endif; ?>
-                                      </div>
-                                      <div class="col-md-6">
-                                          <span><?php print $dyn_field['content']; ?></span>
-                                      </div>
-                                  </div>
-                          <?php endforeach; ?>
-                        <?php endforeach; ?>
-                      <?php endif; ?>
-                    </div>
-                </div>
-
-            </div>
-            <div class="panel-footer clearfix">
-
-                <div class="pull-left"
-                     style="border: 1px solid #d9534f; padding: 5px">
-                    <a role="button" class="btn btn-default" href="#">
-                        <i class="fa fa-envelope-o"></i>
-                      <?php print (t('Notify User About Expiration')) ?>
-                    </a>
-                    -
-                    <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-                </div>
-                <a role="button" class="btn btn-default"
-                   href="<?php print url("entityprint/node/" . $node->nid); ?>">
-                    <i class="fa fa-download"></i>
-                  <?php print (t('Generate Pdf')) ?>
-                </a>
-
-              <?php if (isset($content['app_approve_block'])) : ?>
-                  <div class="pull-right">
-                    <?php print render($content['app_approve_block']); ?>
+                  <div class="col-md-6">
+                      <span><?php print $title; ?></span>
                   </div>
-              <?php endif; ?>
+              </div>
+              <hr>
+          <?php endif; ?>
+          <?php
+          // Hide comments, tags, and links now so that we can render them later.
+          hide($content['comments']);
+          hide($content['links']);
+          hide($content['field_tags']);
+
+          hide($content['field_reference_request_1']);
+          hide($content['field_reference_request_2']);
+          hide($content['field_reference_request_standby']);
+          hide($content['field_reference_request_parents']);
+          hide($content['field_reference_request_church']);
+          hide($content['pseudo_field_request_cia']);
+
+          hide($content['field_app_status']);
+          hide($content['app_status']);
+          hide($content['app_approve_block']);
+
+          print render($content);
+          ?>
+
+            <div class="row field pdf-field">
+                <div class="col-md-6">
+                    <div class="field-label">
+                        <i class="fa fa-file-text-o"></i>
+                      <?php print t("Application status"); ?>:
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p><?php print render($content['app_status']); ?></p>
+                </div>
             </div>
+            <hr>
+
+
+            <div class="row field">
+                <div class="col-md-6">
+                    <div class="field-label">
+                        <i class="fa fa-inbox"></i>
+                        <span><?php print (t('Created date')) ?>:</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <span><?php print format_date($node->created, 'custom', 'Y-m-d  H:i:s'); ?></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row field">
+                <div class="col-md-6">
+                    <div class="field-label">
+                        <span><?php print (t('Request date')) ?>:</span>
+                        <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <span>N/A</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row field">
+                <div class="col-md-6">
+                    <div class="field-label">
+                        <span><?php print (t('Response date')) ?>:</span>
+                        <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <span>N/A</span>
+                </div>
+            </div>
+            <hr>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
+                <div class="panel-body">
+                  <?php print render($content['pseudo_field_request_cia']); ?>
+                  <?php print render($content['field_reference_request_1']); ?>
+                  <?php print render($content['field_reference_request_2']); ?>
+                  <?php print render($content['field_reference_request_standby']); ?>
+                  <?php print render($content['field_reference_request_church']); ?>
+                  <?php print render($content['field_reference_request_parents']); ?>
+
+                </div>
+            </div>
+
+          <?php if (isset($dynamic_fields)): ?>
+            <?php print render($dynamic_fields); ?>
+          <?php endif; ?>
+
         </div>
+        <div class="panel-footer clearfix">
+
+            <div class="pull-left"
+                 style="border: 1px solid #d9534f; padding: 5px">
+                <a role="button" class="btn btn-default" href="#">
+                    <i class="fa fa-envelope-o"></i>
+                  <?php print (t('Notify User About Expiration')) ?>
+                </a>
+                -
+                <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
+            </div>
+            <a role="button" class="btn btn-default"
+               href="<?php print url("entityprint/node/" . $node->nid); ?>">
+                <i class="fa fa-download"></i>
+              <?php print (t('Generate Pdf')) ?>
+            </a>
+
+          <?php if (isset($content['app_approve_block'])) : ?>
+              <div class="pull-right">
+                <?php print render($content['app_approve_block']); ?>
+              </div>
+          <?php endif; ?>
+        </div>
+    </div>
   <?php
   // Only display the wrapper div if there are tags or links.
   $field_tags = render($content['field_tags']);

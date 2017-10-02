@@ -32,6 +32,8 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'roles' => array(
       'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );

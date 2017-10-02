@@ -284,3 +284,8 @@ li.novo-leaf a {
 .views-field .img-responsive{
   display: inline-block;
 }
+
+.novo-report-class-total-label {
+  font-family: "ProximaNovaBold";
+  color: #777777;
+}

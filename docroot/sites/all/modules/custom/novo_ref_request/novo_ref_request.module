@@ -469,7 +469,7 @@ function novo_ref_request_theme($existing, $type, $theme, $path) {
   return array(
     'novo_ref_request_ref_email' => array(
       'variables' => array('params' => NULL),
-      'template' => 'templates//email/novo-ref-request-ref-email',
+      'template' => 'templates/email/novo-ref-request-ref-email',
     )
   );
 }

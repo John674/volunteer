@@ -28,31 +28,76 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'class',
   'list_kids_mentored',
   'attendance_records_of_volunteer',
-  'programm_participated'
+  'programm_participated',
+  'attendance_records_of_kids',
+  'list_staff_mentors',
+  'list_programm_participated_kids',
+  'attendance_records_of_staff',
+  'list_kids_mentored_for_staff'
 )));
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
+
+define("NOVO_MASTER_ROLE_ANON", 1);
+define("NOVO_MASTER_ROLE_AUTH", 2);
+define("NOVO_MASTER_ROLE_VOLUNTEER", 6);
+define("NOVO_MASTER_ROLE_REVIEWER", 5);
+define("NOVO_MASTER_ROLE_ADMIN", 3);
 
 /**
  * Preprocess page.
  */
 function novo_master_preprocess_page(&$vars) {
   // Set breadcrumbs.
-  if (in_array("page__list_kids_mentored", $vars['theme_hook_suggestions']) ||
-    in_array("page__attendance_records", $vars['theme_hook_suggestions']) ||
-    in_array("page__list_programm_participated", $vars['theme_hook_suggestions'])
-  ) {
-    $vol_name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
-    $vol_nodes = node_load_multiple(array(), array(
-      'title' => $vol_name,
-      'type' => 'application'
-    ));
-    $vol_node = reset($vol_nodes);
-    if ($vol_node) {
-      $b = drupal_get_breadcrumb();
-      $b[] = l($vol_node->title, "node/" . $vol_node->nid);
-      drupal_set_breadcrumb($b);
+
+  $app_dyn_pages = array(
+    "page__list_kids_mentored",
+    "page__attendance_records",
+    "page__list_programm_participated"
+  );
+
+  $kid_dyn_pages = array(
+    "page__kids_attendance_records",
+    "page__list_staff_mentors",
+    "page__list_programm_participated_kids"
+  );
+
+  $staff_dyn_pages = array(
+    "page__staff_attendance_records",
+    "page__list_kids_mentored_staff",
+    "page__list_programm_participated_staff"
+  );
+
+  if (array_intersect($app_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "application");
+  }
+
+  if (array_intersect($kid_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "kids", t("Kids"), "kids");
+  }
+
+  if (array_intersect($staff_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "staff", t("Staff"), "staff");
+  }
+}
+
+/**
+ * Add breadcrumbs on dynamic views.
+ */
+function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NULL, $list_uri = NULL) {
+  $name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+  $nodes = node_load_multiple(array(), array(
+    'title' => $name,
+    'type' => $type
+  ));
+  $node = reset($nodes);
+  if ($node) {
+    $b = drupal_get_breadcrumb();
+    if (!empty($list_title) && !empty($list_uri)) {
+      $b[] = l($list_title, $list_uri);
     }
+    $b[] = l($node->title, "node/" . $node->nid);
+    drupal_set_breadcrumb($b);
   }
 }
 
@@ -60,6 +105,9 @@ function novo_master_preprocess_page(&$vars) {
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  // Disable autofill form for browsers.
+  $form['#attributes']['autocomplete'] = 'off';
+
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
       $form['actions']['publish']['#value'] = t("Active");
@@ -98,14 +146,12 @@ function novo_master_disable_node_view($node) {
     return FALSE;
   }
 
-  if ($node->type == 'reference_request' && function_exists("novo_ref_request_check_hash_access")) {
-    $access = novo_ref_request_check_hash_access($node);
-    if ($access) {
-      return $access;
-    }
+  $access = novo_ref_request_check_hash_access($node);
+  if ($access) {
+    return $access;
   }
 
-  return user_access('access content');
+  return node_access('view', $node);
 }
 
 /**
@@ -161,7 +207,6 @@ function novo_master_preprocess_views_view(&$vars) {
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       $destination = drupal_get_destination();
-      $access = FALSE;
       switch ($vars['name']) {
         case "volunteers":
           $add_link = "admin/people/create";
@@ -170,16 +215,21 @@ function novo_master_preprocess_views_view(&$vars) {
           break;
 
         case "list_kids_mentored":
+        case "list_staff_mentors":
+        case "list_kids_mentored_for_staff":
           $add_link = "node/add/mentors";
           $access = node_access("create", "mentors", $user);
           break;
 
         case "attendance_records_of_volunteer":
+        case "attendance_records_of_kids":
+        case "attendance_records_of_staff":
           $add_link = "node/add/attendance";
           $access = node_access("create", "attendance", $user);
           break;
 
         case "list_programm_participated":
+        case "list_programm_participated_kids":
           $add_link = "node/add/program";
           $access = node_access("create", "program", $user);
           break;
@@ -293,6 +343,7 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
     case "reports_menu_active":
       $set_breadcrumb = TRUE;
       $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : array();
+      $paths[] = 'enrollment-report';
       $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
       break;
   }
@@ -371,4 +422,95 @@ function novo_master_permission() {
  */
 function novo_master_userprotect_check_bypass_alter(&$access, $account) {
   $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function novo_master_node_grants($account, $op) {
+  $grants = array();
+  if ($op == 'view') {
+
+    $rids = array();
+    foreach ($account->roles as $rid => $role) {
+      $rids[] = $rid;
+    }
+    $grants["novo_master_access_webform"] = $rids;
+    $grants["novo_master_access_reviewer"] = $rids;
+  }
+  return $grants;
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function novo_master_node_access_records($node) {
+  $grants = array();
+
+  if ($node->type == 'webform') {
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_ANON,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_AUTH,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_VOLUNTEER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+    $grants[] = array(
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  // Allow reviewer access.
+  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application') {
+    $grants[] = array(
+      'realm' => "novo_master_access_reviewer",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    );
+  }
+
+  $grants[] = array(
+    'realm' => "novo_master_access_reviewer",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  );
+
+  $grants[] = array(
+    'realm' => "novo_master_access_webform",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  );
+
+  return $grants;
 }

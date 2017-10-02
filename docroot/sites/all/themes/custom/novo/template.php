@@ -93,6 +93,10 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
+  if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
+    $variables['container_class'] = "container-fluid";
+    $variables['navbar_classes_array'][] = "container-fluid";
+  }
 
 }
 

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Theme export DPF body.
+ * Theme export PDF body.
  */
 ?>
 

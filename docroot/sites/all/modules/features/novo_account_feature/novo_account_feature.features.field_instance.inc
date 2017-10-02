@@ -20,6 +20,9 @@ function novo_account_feature_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
           'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
@@ -69,7 +72,11 @@ function novo_account_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
-        'settings' => array(),
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
         'type' => 'text_default',
         'weight' => 0,
       ),
@@ -103,7 +110,11 @@ function novo_account_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
-        'settings' => array(),
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
         'type' => 'text_default',
         'weight' => 1,
       ),

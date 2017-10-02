@@ -2,26 +2,66 @@
 .form-item-field-p-small-group-target-id-entityreference-filter .btn.dropdown-toggle {
   margin: 0px;
 }
-
 .novo-reports-list-wrapper li a {
   display: inline-block;
 }
-
 .novo-reports-list-wrapper li a:first-child {
   width: 300px;
 }
-
 .view-roster-report .views-field-field-p-small-group {
   min-width: 130px;
 }
-
 .view-roster-report caption {
   font-family: ProximaNovaBold;
   color: #000;
-  background-color: #CCCCCC;
+  background-color: #ccc;
   padding: 5px 10px;
 }
-
 .view-canvassing-report .tabledrag-toggle-weight-wrapper {
   display: none;
+}
+.view-children-active-report th.views-field-field-parent-guardian {
+  min-width: 300px;
+}
+.view-children-active-report td.views-field-field-parent-guardian div.field {
+  display: inline-block;
+}
+.view-roster-report .views-field-views-conditional > div,
+.view-roster-report .views-field-views-conditional-1 > div,
+.view-roster-report .views-field-views-conditional-2 > div {
+  padding: 5px 10px;
+}
+.view-roster-report .field-collection-item-field-parent-guardian .field {
+  display: inline-block;
+}
+.novo-report--nametag-vbo-operation-wrapper {
+  border: none;
+}
+.novo-report--nametag-vbo-operation-wrapper legend {
+  display: none;
+}
+.novo-report--nametag-vbo-operation-wrapper .panel-body {
+  text-align: right;
+  padding-right: 0px;
+}
+.novo-program-report-wrapper {
+  position: absolute;
+  margin-left: 500px;
+  left: 0px;
+}
+.novo-program-report-link {
+  list-style: none;
+  padding-left: 0px;
+}
+.novo-reports-enrolment-total-row {
+  border-top: 2px solid black !important;
+  font-family: "ProximaNovaBold";
+}
+.novo-report-enrollment-report-form .form-item {
+  width: 300px;
+  float: left;
+  margin-right: 10px;
+}
+.novo-report-enrollment-report-reset-btn {
+  margin-top: 25px;
 }

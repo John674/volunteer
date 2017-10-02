@@ -10,6 +10,47 @@
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program.js";
+  $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Class"), "node/add/class", ['query' => drupal_get_destination()])]);
+
+  // Pickup contacts modal form theming.
+  $kids_list = &$form['field_program_kids_list'][$form['field_program_class_name']['#language']];
+
+  for ($i = 0; $i <= $kids_list['#max_delta']; $i++) {
+    if (isset($kids_list[$i])) {
+      $pc = &$kids_list[$i]['field_p_kids_pickup_contacts'][$kids_list[$i]['field_p_kids_pickup_contacts']['#language']];
+      for ($j = 0; $j <= $pc['#max_delta']; $j++) {
+        $pc[$j]['#prefix'] = '<div class="field-p-kids-pickup-contacts-wrapper">';
+        $pc[$j]['#suffix'] = '</div>';
+        $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
+      }
+
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] = '<a href="#field-p-kids-pc-' . $i . '" class="btn btn-primary" data-toggle="modal"> <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] .= '
+    <div class="modal fade" id="field-p-kids-pc-' . $i . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document"><div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="' . t("Close") . '">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">' . t("Pickup Contacts") . '</h4>
+      </div>
+      <div class="modal-body">';
+
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] = '</div>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] .= '
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">' . t("Ok") . '</button>
+      </div>
+      </div></div></div>';
+    }
+  }
+
+  // Add report links.
+  $form['report_links'] = [
+    '#type' => 'markup',
+    '#markup' => novo_program_render_report_links(),
+    '#weight' => -10,
+  ];
 }
 
 /**
@@ -23,14 +64,14 @@ function novo_program_preprocess_field($variables) {
  * Implements hook_menu().
  */
 function novo_program_menu() {
-  $items = array();
+  $items = [];
 
-  $items['novo-program/get-kid-data/%'] = array(
+  $items['novo-program/get-kid-data/%'] = [
     'title' => 'Get kid data',
     'page callback' => 'novo_program_get_kid_data',
-    'page arguments' => array(2),
-    'access arguments' => array('access content'),
-  );
+    'page arguments' => [2],
+    'access arguments' => ['access content'],
+  ];
 
   return $items;
 }
@@ -46,11 +87,11 @@ function novo_program_get_kid_data($nid) {
   $node = node_load($nid);
 
   $output = '';
-  $output_data = array();
+  $output_data = [];
 
   $dob_items = field_get_items("node", $node, "field_dob");
   if (isset($dob_items[0])) {
-    $display = array('label' => 'hidden', 'type' => 'only_age');
+    $display = ['label' => 'hidden', 'type' => 'only_age'];
     $age = render(field_view_value("node", $node, "field_dob", $dob_items[0], $display));
     $output_data[] = '<span class="novo-program-kid-data-age">' . $age . ' </span>';
   }
@@ -60,10 +101,10 @@ function novo_program_get_kid_data($nid) {
 
   $dob_items = field_get_items("node", $node, "field_grade");
   if (isset($dob_items[0])) {
-    $display = array(
+    $display = [
       'label' => 'hidden',
-      'type' => 'taxonomy_term_reference_plain'
-    );
+      'type' => 'taxonomy_term_reference_plain',
+    ];
     $grade = render(field_view_value("node", $node, "field_grade", $dob_items[0], $display));
     $output_data[] = '<span class="novo-program-kid-data-grage">' . $grade . ' </span>';
   }
@@ -85,7 +126,7 @@ function novo_program_node_presave($node) {
   if ($node->type == "class") {
     // Update programm name in class was updated.
     $query = db_select("field_data_field_program_class_name", "cn");
-    $query->fields("cn", array("entity_id"));
+    $query->fields("cn", ["entity_id"]);
     $query->condition("cn.bundle", "program");
     $query->condition("cn.field_program_class_name_target_id", $node->nid);
     $nids = $query->execute()->fetchAllKeyed(0, 0);
@@ -122,4 +163,33 @@ function novo_program_views_query_alter(&$view, &$query) {
       ->condition('field_program_class_name_node.nid', $nid, '=');
     $query->add_where(0, $condition);
   }
+}
+
+/**
+ * Render report links.
+ */
+function novo_program_render_report_links() {
+  $reports = [
+    'canvassing-report' => t('Canvasing'),
+    'roster-report' => t('Roster'),
+    'report-nametag' => t('Nametag'),
+  ];
+
+  $links = [];
+  foreach ($reports as $url => $title) {
+    $links[] = [
+      'title' => $title,
+      'href' => url($url),
+    ];
+  }
+
+  return '<div class="novo-program-report-wrapper">' . theme("links", [
+      'heading' => [
+        'level' => 'h4',
+        'class' => 'novo-program-report-links-heading',
+        'text' => t("Reports"),
+      ],
+      'links' => $links,
+      'attributes' => ['class' => ['novo-program-report-links']],
+    ]) . '</div>';
 }
