@@ -193,9 +193,7 @@ function novo_reports_preprocess_views_data_export_pdf_body(&$vars) {
       break;
 
   }
-
 }
-
 
 /**
  * Preprocess views_data_export_pdf_theader.

@@ -10,7 +10,9 @@
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program.js";
+  // @codingStandardsIgnoreStart
   $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Class"), "node/add/class", ['query' => drupal_get_destination()])]);
+  // @codingStandardsIgnoreEnd
 
   // Pickup contacts modal form theming.
   $kids_list = &$form['field_program_kids_list'][$form['field_program_class_name']['#language']];
@@ -182,7 +184,7 @@ function novo_program_render_report_links() {
       'href' => url($url),
     ];
   }
-
+  // @codingStandardsIgnoreStart
   return '<div class="novo-program-report-wrapper">' . theme("links", [
       'heading' => [
         'level' => 'h4',
@@ -192,4 +194,5 @@ function novo_program_render_report_links() {
       'links' => $links,
       'attributes' => ['class' => ['novo-program-report-links']],
     ]) . '</div>';
+  // @codingStandardsIgnoreEnd
 }

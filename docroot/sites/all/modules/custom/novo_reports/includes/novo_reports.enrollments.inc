@@ -193,7 +193,6 @@ function novo_reports_enrollment_report_get_data() {
   return [$header, $rows];
 }
 
-
 /**
  * Get enrollment class years.
  */

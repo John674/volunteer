@@ -6,7 +6,7 @@
  */
 
 /**
- * Preprocess pdf body for roster_report
+ * Preprocess pdf body for roster_report.
  */
 function novo_reports_preprocess_body_roster_report(&$vars) {
   // Dismissal conditional fields.
@@ -38,7 +38,7 @@ function novo_reports_preprocess_body_roster_report(&$vars) {
 }
 
 /**
- * Preprocess pdf table header for canvassing_report
+ * Preprocess pdf table header for canvassing_report.
  */
 function novo_reports_preprocess_theader_canvassing_report(&$vars) {
   $rows = $vars['rows'];
@@ -64,7 +64,7 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
 }
 
 /**
- * Preprocess pdf body for canvassing_report
+ * Preprocess pdf body for canvassing_report.
  */
 function novo_reports_preprocess_body_canvassing_report(&$vars) {
   // Dismissal conditional fields.
@@ -79,7 +79,7 @@ function novo_reports_preprocess_body_canvassing_report(&$vars) {
 }
 
 /**
- * Preprocess pdf body for report_nametag
+ * Preprocess pdf body for report_nametag.
  */
 function novo_reports_preprocess_body_report_nametag(&$vars) {
   $rows = $vars['rows'];
