@@ -925,16 +925,6 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_what_site_you_want'.
-  $permissions['create field_what_site_you_want'] = array(
-    'name' => 'create field_what_site_you_want',
-    'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit field_app7_statement_agree'.
   $permissions['edit field_app7_statement_agree'] = array(
     'name' => 'edit field_app7_statement_agree',
@@ -1771,15 +1761,6 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'edit field_volunteer_interests_roles'.
   $permissions['edit field_volunteer_interests_roles'] = array(
     'name' => 'edit field_volunteer_interests_roles',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit field_what_site_you_want'.
-  $permissions['edit field_what_site_you_want'] = array(
-    'name' => 'edit field_what_site_you_want',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
@@ -2699,16 +2680,6 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit own field_what_site_you_want'.
-  $permissions['edit own field_what_site_you_want'] = array(
-    'name' => 'edit own field_what_site_you_want',
-    'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view field_app7_statement_agree'.
   $permissions['view field_app7_statement_agree'] = array(
     'name' => 'view field_app7_statement_agree',
@@ -2779,13 +2750,6 @@ function novo_content_feature_user_default_permissions() {
       'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view field_app_user'.
-  $permissions['view field_app_user'] = array(
-    'name' => 'view field_app_user',
-    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -3567,15 +3531,6 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view field_volunteer_interests_roles'.
   $permissions['view field_volunteer_interests_roles'] = array(
     'name' => 'view field_volunteer_interests_roles',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view field_what_site_you_want'.
-  $permissions['view field_what_site_you_want'] = array(
-    'name' => 'view field_what_site_you_want',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
@@ -4488,16 +4443,6 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view own field_volunteer_interests_roles'.
   $permissions['view own field_volunteer_interests_roles'] = array(
     'name' => 'view own field_volunteer_interests_roles',
-    'roles' => array(
-      'Applicant US citizen' => 'Applicant US citizen',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_what_site_you_want'.
-  $permissions['view own field_what_site_you_want'] = array(
-    'name' => 'view own field_what_site_you_want',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
