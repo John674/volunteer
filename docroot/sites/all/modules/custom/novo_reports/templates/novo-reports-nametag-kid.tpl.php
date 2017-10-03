@@ -19,14 +19,15 @@
       <?php print $data['zip']; ?>
     </div>
 
-    <div class="nametag-row-label"><?php print t("Parent / Guardian"); ?></div>
-    <div class="nametag-row"><?php print $data['parent']; ?></div>
-    <div class="nametag-row"><?php print $data['parent']; ?></div>
-    <div class="nametag-row-label"><?php print t("Parent / Guardian"); ?></div>
-    <div class="nametag-row-label"><?php print t("Parent / Guardian"); ?></div>
-    <div class="nametag-row"><?php print $data['parent']; ?></div>
-    <div class="nametag-row"><?php print $data['parent']; ?></div>
+    <div class="nametag-row-parent-pickup">
+        <div class="nametag-row-label"><?php print t("Parent / Guardian"); ?></div>
+        <div class=""><?php print $data['parent']; ?></div>
 
+      <?php if (!empty($data['pickup_contacts'])): ?>
+          <div class="nametag-row-label nametag-row-label-second"><?php print t("Pickup / Emergency"); ?></div>
+          <div class=""><?php print $data['pickup_contacts']; ?></div>
+      <?php endif; ?>
+    </div>
     <div class="nametag-row"><?php print $data['location']; ?></div>
 
 </div>

@@ -1,16 +1,17 @@
-/*.rotatable {*/
-  /*-webkit-transform: rotate(-180deg);*/
-  /*-moz-transform: rotate(-180deg);*/
-  /*-o-transform: rotate(-180deg);*/
-  /*-ms-transform: rotate(-180deg);*/
-  /*transform: rotate(-180deg);*/
-/*}*/
+.rotatable {
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  margin-top: 0.5in;
+}
 .nametag-block {
   width: 2.25in;
   height: 3.5in;
-  font-size: 14px;
+  font-size: 0.1458in;
   text-align: center;
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
   font-family: sans-serif;
 }
 .nametag-row {
@@ -18,27 +19,47 @@
   /*border: 1px solid red;*/
   overflow: hidden;
 }
+.nametag-row-parent-pickup {
+  height: 2.2in;
+  /*border: 1px solid red;*/
+  overflow: hidden;
+}
+.nametag-row-parent-pickup .field {
+  display: inline-block;
+  margin-top: 0.02in;
+}
+.nametag-row-parent-pickup .entity {
+  display: block;
+  margin-top: 0.02in;
+}
+.nametag-row-parent-pickup .entity:first-child {
+  margin-top: 0in;
+}
 .nametag-row-big {
   height: 0.6in;
-  padding-top: 5px;
+  padding-top: 0.1in;
 }
 .nametag-row-b1 {
-  font-size: 26px;
+  font-size: 0.27in;
 }
 .nametag-row-b2 {
-  font-size: 18px;
+  font-size: 0.1875in;
 }
 .nametag-row-label {
   font-weight: bold;
+  margin: 0.1in 0 0.05in 0;
+}
+.nametag-row-label-second {
+  margin-top: 0.2in;
 }
 .nametag-dismissal {
-  padding-top: 36px;
+  padding-top: 0.36in;
 }
 .nametag-canvassing {
-  font-size: 16px;
+  font-size: 0.1667in;
   text-transform: uppercase;
   font-weight: bold;
-  padding-top: 5px;
+  padding-top: 0.05in;
 }
 .nametag-row-allergies {
   color: gray;
@@ -47,7 +68,13 @@
 }
 .nametag-row-allergies-wrapper {
   position: absolute;
-  bottom: 0px;
-  margin: 0px auto;
+  bottom: 0in;
+  margin: 0in auto;
   width: 100%;
+}
+table tbody tr {
+  page-break-inside: avoid;
+}
+table tbody tr {
+  page-break-before: always;
 }

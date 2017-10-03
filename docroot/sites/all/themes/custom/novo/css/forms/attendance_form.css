@@ -3,28 +3,37 @@
   padding: 0px;
   height: auto;
 }
-
 .node-attendance-form .input-group-addon {
   width: 0px;
   border: none;
   background: none;
   padding: 0px;
 }
-
 .node-attendance-form .field-name-field-attendance-year,
 .node-attendance-form .field-name-field-attendance-location,
 .node-attendance-form .field-name-field-attendance-program-name,
 .node-attendance-form .field-name-field-attendance-date {
-  display: inline-block;
+  display: block;
   vertical-align: top;
+  width: 400px;
 }
-
+.node-attendance-form .field-name-field-attendance-program-name {
+  width: 800px;
+}
+.node-attendance-form .field-name-field-attendance-program-name .form-item {
+  width: 400px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+.node-attendance-form .field-name-field-attendance-date .form-text {
+  width: 400px;
+}
 .node-attendance-form .field-name-field-attendance-year,
 .node-attendance-form .field-name-field-attendance-location,
 .node-attendance-form .field-name-field-attendance-program-name {
   margin-right: 10px;
 }
-
 .node-attendance-form .field-name-field-attendance-location select,
 .node-attendance-form .field-name-field-attendance-program-name select {
   min-width: 300px;

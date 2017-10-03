@@ -105,6 +105,9 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  // Disable autofill form for browsers.
+  $form['#attributes']['autocomplete'] = 'off';
+
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
       $form['actions']['publish']['#value'] = t("Active");
@@ -340,6 +343,7 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
     case "reports_menu_active":
       $set_breadcrumb = TRUE;
       $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : array();
+      $paths[] = 'enrollment-report';
       $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
       break;
   }

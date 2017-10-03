@@ -2,10 +2,9 @@
 
 /**
  * @file
- * Theme export DPF footer.
+ * Theme export PDF footer.
  */
 ?>
-      </tbody>
-    </table>
+
   </body>
 </html>

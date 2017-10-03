@@ -11,7 +11,7 @@
 }
 
 .node-program-form .field-p-kid-name {
-  width: 450px;
+  width: 370px;
 }
 
 .node-program-form .field-name-field-p-kid-name {
@@ -76,21 +76,31 @@
 }
 
 .node-program-form .field-name-field-program-location {
-  display: inline-block;
+  display: block;
   vertical-align: top;
   width: 310px;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .node-program-form .field-name-field-program-location .form-control.form-select {
   width: 300px;
 }
 
+.node-program-form .field-name-field-program-year select {
+  width: 300px;
+}
+
 .node-program-form .field-name-field-program-class-name {
-  display: inline-block;
+  display: block;
   vertical-align: top;
-  width: 310px;
-  margin-left: 20px;
+  width: 610px;
+  margin-left: 0px;
+}
+
+.node-program-form .field-name-field-program-class-name .form-type-select.form-item {
+  width: 300px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .node-program-form .field-name-field-program-class-name .form-control.form-select {
@@ -120,14 +130,16 @@
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1),
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2),
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3),
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(8) {
   width: 50px;
 }
 
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1) label,
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2) label,
 .node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label,
-.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label {
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(8) label {
   -moz-transform: rotate(300deg);
   -webkit-transform: rotate(300deg);
   -o-transform: rotate(300deg);
@@ -187,4 +199,34 @@
 
 .node-program-form .novo-program-kid-data-header .novo-program-kid-data-header-age {
   margin-right: 10px;
+}
+
+.node-program-form .field-name-field-p-kids-pickup-contacts thead tr th label{
+  display: none;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper {
+  position: relative;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper .form-group {
+  margin-bottom: 5px;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper label {
+  width: 100px;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper input {
+  width: 350px;
+  display: inline-block;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper button {
+  float: right;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-top: 39px;
+  margin-right: 25px;
 }

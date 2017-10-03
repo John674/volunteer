@@ -30,6 +30,17 @@ function novo_taxonomy_feature_field_default_field_instances() {
         'type' => 'color_field_swatch',
         'weight' => 0,
       ),
+      'pdf' => array(
+        'label' => 'hidden',
+        'module' => 'color_field',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'color_field_default_formatter',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_color',
