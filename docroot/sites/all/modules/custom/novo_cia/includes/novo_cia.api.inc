@@ -16,10 +16,10 @@ function novo_cia_send_search_request($request_id) {
   $api_urls = unserialize(NOVO_CIA_API_URLS);
   $search_url = $api_urls['search'];
   if (!empty($request_data['ssn'])) {
-    $request_body = theme('cia_request_by_ssn', $request_data);
+    $request_body = theme('novo_cia_request_by_ssn', $request_data);
   }
   else {
-    $request_body = theme('cia_request_by_address', $request_data);
+    $request_body = theme('novo_cia_request_by_address', $request_data);
   }
   $request_body = trim(preg_replace('/<!--(.*)-->/Uis', '', $request_body));
 
@@ -92,7 +92,7 @@ function novo_cia_send_pull_report_request($request_id = NULL) {
   $request_data = novo_cia_get_api_credentials();
   $request_data['tracking_number'] = $tracking_number;
 
-  $request_body = theme('cia_query_report', $request_data);
+  $request_body = theme('novo_cia_query_report', $request_data);
   $request_body = trim(preg_replace('/<!--(.*)-->/Uis', '', $request_body));
 
   if (!empty($pull_report_url) && !empty($request_body)) {
@@ -114,14 +114,15 @@ function novo_cia_send_pull_report_request($request_id = NULL) {
           $report = $feed_array['Report'];
           $report_status = novo_cia_check_report_status($report);
           $report_data = array(
-            'response_date' => time(),
+            'response_date' => REQUEST_TIME,
             'report_status' => $report_status,
           );
           if (!empty($report_status)) {
             $report_data['request_status'] = 1;
           }
           novo_cia_update_request($request_id, $report_data);
-          return TRUE;
+          $request = novo_cia_get_request($request_id);
+          return $request;
         }
       }
     }
@@ -143,22 +144,9 @@ function novo_cia_pull_report_doc($tracking_number) {
     '@tracking_number' => $tracking_number,
   ));
 
-  $curlOptions = array(
-    CURLOPT_COOKIEJAR => drupal_get_path('module', 'novo_cia') . '/cookie.txt',
-    CURLOPT_RETURNTRANSFER => 1,
-    CURLOPT_AUTOREFERER => TRUE,
-    CURLOPT_SSL_VERIFYPEER => FALSE,
-    CURLOPT_SSL_VERIFYHOST => 2,
-    CURLOPT_SSLVERSION => 1,
-    CURLOPT_HEADER => FALSE,
-    CURLOPT_FOLLOWLOCATION => TRUE,
-    CURLOPT_MAXREDIRS => 20,
-  );
-  $ch = curl_init($get_report_url);
-  curl_setopt_array($ch, $curlOptions);
-  $content = curl_exec($ch);
-  curl_close($ch);
-  return $content;
+  $result = novo_cia_drupal_http_request($get_report_url);
+  $context = isset($result->data) && !empty($result->data) ? $result->data : '';
+  return $context;
 }
 
 /**

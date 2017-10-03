@@ -5,6 +5,8 @@
  * Novo cia constants.
  */
 
+define("NOVO_CIA_BASE_EMAIL", "volunteer@novoministries.org");
+
 define("NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST", 60 * 15);
 define("NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST", 60 * 60);
 

@@ -15,7 +15,6 @@ class novo_cia_handler_type extends views_handler_field {
    */
   public function init(&$view, &$data) {
     parent::init($view, $data);
-    $this->additional_fields['id'] = 'id';
   }
 
   /**
@@ -24,7 +23,7 @@ class novo_cia_handler_type extends views_handler_field {
   public function render($values) {
     $value = $this->get_value($values);
     $statuses = unserialize(NOVO_CIA_REQUEST_TYPES);
-    $status = (isset($statuses[$value])) ? $statuses[$value] : $value;
+    $status = (isset($statuses[$value])) ? $statuses[$value] : '';
 
     return $status;
   }

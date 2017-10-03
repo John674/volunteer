@@ -15,16 +15,15 @@ class novo_cia_handler_actions extends views_handler_field {
    */
   public function init(&$view, &$data) {
     parent::init($view, $data);
-    $this->additional_fields['id'] = 'id';
   }
 
   /**
    * Renders the field handler.
    */
-  public function render($values) {
-    $last_request = novo_cia_get_last_success_request($values->nid);
+  public function render($request) {
+    $last_success_request = novo_cia_get_last_success_request($request->nid);
 
-    $output = !empty($last_request) ? novo_cia_render_action_buttons($values->nid) : novo_cia_render_action_buttons($values->nid, TRUE);
+    $output = !empty($last_success_request) ? novo_cia_render_action_buttons($request->nid) : '';
 
     return $output;
   }

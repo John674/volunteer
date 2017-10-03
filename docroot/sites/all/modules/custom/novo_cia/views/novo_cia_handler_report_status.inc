@@ -15,7 +15,6 @@ class novo_cia_handler_report_status extends views_handler_field {
    */
   public function init(&$view, &$data) {
     parent::init($view, $data);
-    $this->additional_fields['id'] = 'id';
   }
 
   /**

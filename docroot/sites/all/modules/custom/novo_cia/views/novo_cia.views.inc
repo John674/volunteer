@@ -167,6 +167,22 @@ function novo_cia_views_data() {
       'handler' => 'views_handler_filter_date',
     ),
   );
+
+  $data['novo_cia_checks']['log'] = array(
+    'title' => t('Cia Log message'),
+    'help' => t('Cia Log message'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+  );
+
   $data['novo_cia_checks']['tracking_number'] = array(
     'title' => t('Tracking number'),
     'help' => t('Tracking number'),
