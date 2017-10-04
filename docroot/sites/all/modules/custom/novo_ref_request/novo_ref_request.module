@@ -514,23 +514,23 @@ function novo_ref_request_cron_queue_info() {
  */
 function novo_ref_request_cron() {
   $cron_last = variable_get('novo_ref_request_cron_email_last');
-  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_EMAIL_PERIOD) {
+  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EMAIL_PERIOD) {
     $email_queue = DrupalQueue::get('novo_ref_request_email_queue');
     $data = novo_ref_request_task_get_all_not_sent();
     foreach ($data as $key => $task) {
       $email_queue->createItem(array('nid' => $task->nid, 'id' => $task->id));
     }
-    variable_set('novo_ref_request_cron_email_last', time());
+    variable_set('novo_ref_request_cron_email_last', REQUEST_TIME);
   }
 
   $cron_last = variable_get('novo_ref_request_cron_expired_last');
-  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
+  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
     $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
     $data = novo_ref_request_task_get_all_not_responded_expired();
     foreach ($data as $key => $task) {
       $expired_queue->createItem(array('id' => $task->id));
     }
-    variable_set('novo_ref_request_cron_expired_last', time());
+    variable_set('novo_ref_request_cron_expired_last', REQUEST_TIME);
   }
 }
 

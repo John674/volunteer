@@ -5,6 +5,8 @@
  * Novo cia constants.
  */
 
+define("NOVO_CIA_BASE_EMAIL", "volunteer@novoministries.org");
+
 define("NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST", 60 * 15);
 define("NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST", 60 * 60);
 
@@ -23,7 +25,7 @@ define('NOVO_CIA_REQUEST_STATUSES', serialize(
 define('NOVO_CIA_REQUEST_TYPES', serialize(
   array(
     0 => t('Search'),
-    1 => t('Pull report')
+    1 => t('Pull report'),
   )
 ));
 
@@ -50,7 +52,7 @@ define('NOVO_CIA_REPORT_STATUSES', serialize(
     0 => t('Pending'),
     1 => t('Approved'),
     2 => t('Not Approved'),
-    3 => t('Conditional')
+    3 => t('Conditional'),
   )
 ));
 
@@ -58,7 +60,7 @@ define('NOVO_CIA_API_URLS', serialize(
   array(
     'search' => 'https://www.ciaresearch.com/system/center.nsf/(RequestBackgroundCheck)?OpenAgent',
     'pull_report' => 'https://www.ciaresearch.com/system/center.nsf/(QueryXMLResults)?OpenAgent',
-    'get_report' => 'https://www.ciaresearch.com/system/center.nsf?Login&Username={username}&Password={password}&RedirectTo=/system/center.nsf/BackgroundFullReport?OpenForm%26TNUM={tracking_number}',
+    'get_report' => 'https://www.ciaresearch.com/system/center.nsf?Login&Username=@username&Password=@password&RedirectTo=/system/center.nsf/BackgroundFullReport?OpenForm%26TNUM=@tracking_number',
   )
 ));
 

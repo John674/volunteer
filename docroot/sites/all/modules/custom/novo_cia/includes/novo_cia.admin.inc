@@ -53,7 +53,7 @@ function novo_cia_api_credentials($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Client contact email'),
     '#description' => t('Client contact email for request to API.'),
-    '#default_value' => variable_get(NOVO_CIA_API_CLIENT_CONTACT_EMAIL),
+    '#default_value' => variable_get(NOVO_CIA_API_CLIENT_CONTACT_EMAIL) ,
     '#required' => TRUE,
   );
 
