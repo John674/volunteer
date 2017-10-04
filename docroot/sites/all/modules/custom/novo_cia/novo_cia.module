@@ -166,14 +166,9 @@ function novo_cia_theme() {
       'template' => 'templates/cia_xml/query_report',
     ),
 
-    'novo_cia_approve_report' => array(
+    'novo_cia_answer_report' => array(
       'variables' => array('params' => NULL),
-      'template' => 'templates/email/novo-cia-approve-report',
-    ),
-
-    'novo_cia_not_approve_report' => array(
-      'variables' => array('params' => NULL),
-      'template' => 'templates/email/novo-cia-not-approve-report',
+      'template' => 'templates/email/novo-cia-answer-report',
     ),
   );
 }
@@ -283,14 +278,9 @@ function novo_cia_add_request_for_search($node) {
     $nid = $node->nid;
     $uid = $node->uid;
     if (isset($nid) && !empty($nid)) {
-      $search_request_id = novo_cia_add_to_queue_search_request($nid, $uid);
+      $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
       if (!empty($search_request_id)) {
-        if (!empty(novo_cia_send_search_request($search_request_id))) {
-          drupal_set_message(t("The request was added to the queue for getting report from CIA."));
-        }
-        else {
-          drupal_set_message(t("The request was added to the queue for sending to CIA."));
-        }
+        drupal_set_message(t("The request was added to the queue for sending to CIA."));
       }
       else {
         drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
@@ -328,7 +318,7 @@ function novo_cia_get_report_doc($nid) {
 function novo_cia_date($nid = NULL, $date_type = NULL) {
   if (!empty($nid)) {
     $request = novo_cia_get_last_success_request($nid);
-    return !empty($request->{$date_type}) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
+    return !empty($request->{$date_type}) && !empty($request->traking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
   }
   return NULL;
 }
@@ -684,18 +674,12 @@ function novo_cia_mail($key, &$message, $params) {
   $message['headers']['Content-Type'] = 'text/html;';
 
   switch ($key) {
-    case 'approve_report':
-      $html_email = theme("novo_cia_approve_report", array('params' => $params));
-      $message['subject'] = strip_tags(t(":vol_name Has Approved from CIA!", array(":vol_name" => $params['vol_name'])));
+    case 'answer_report':
+      $html_email = theme("novo_cia_answer_report", array('params' => $params));
+      $message['subject'] = t("Volunteer reviewed by CIA");
       $message['from'] = NOVO_CIA_BASE_EMAIL;
       $message['body'][] = $html_email;
-      break;
-
-    case 'not_approve_report':
-      $html_email = theme("novo_cia_not_approve_report", array('params' => $params));
-      $message['subject'] = strip_tags(t(":vol_name Has Not Approved from CIA!", array(":vol_name" => $params['vol_name'])));
-      $message['from'] = NOVO_CIA_BASE_EMAIL;
-      $message['body'][] = $html_email;
+      $a = 1;
       break;
   }
 }
@@ -705,9 +689,13 @@ function novo_cia_mail($key, &$message, $params) {
  */
 function novo_cia_send_email($uid = NULL, $request_id = NULL) {
   if (!empty($uid) && !empty($request_id)) {
+    $request = novo_cia_get_request($request_id);
+    if ($request->request_type != 1 && $request->request_status != 1 && empty($request->tracking_number)) {
+      return NULL;
+    }
     $reviewer_first_name = '';
     $reviewer_last_name = '';
-    $request = novo_cia_get_request($request_id);
+
     $nid = $request->application_nid;
     $reviewer = user_load($uid);
     $wrapper = entity_metadata_wrapper('user', $reviewer);
@@ -731,14 +719,14 @@ function novo_cia_send_email($uid = NULL, $request_id = NULL) {
     );
 
     if ($report_status == 1 || $report_status == 3) {
-      $message_template = 'approve_report';
+      $data['cia_answer'] = 'positive';
     }
 
     if ($report_status == 2) {
-      $message_template = 'not_approve_report';
+      $data['cia_answer'] = 'negative';
     }
 
-    return drupal_mail('novo_cia', $message_template, $reviewer->mail, language_default(), $data);
+    return drupal_mail('novo_cia', 'answer_report', $reviewer->mail, language_default(), $data);
   }
   return NULL;
 }
