@@ -26,6 +26,11 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
         $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
       }
 
+      // Limit to max 3 pickup_contacts.
+      if ($pc['#max_delta'] > 1) {
+        $pc['add_more']['#access'] = FALSE;
+      }
+
       $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] = '<a href="#field-p-kids-pc-' . $i . '" class="btn btn-primary" data-toggle="modal"> <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>';
       $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] .= '
     <div class="modal fade" id="field-p-kids-pc-' . $i . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -54,6 +59,15 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
     '#weight' => -10,
   ];
 }
+
+//function novo_program_pickup_contacts_element_validate($element, &$form_state) {
+//  kpr($element);
+//  kpr($form_state);
+//
+//  $form_state['values']['field_program_kids_list']
+//  die();
+//  form_error($element, t('The "!name" must be x'));
+//}
 
 /**
  * Implements hook_preprocess_field().
