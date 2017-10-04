@@ -464,3 +464,10 @@ function novo_master_update_7141() {
     taxonomy_vocabulary_delete($voc->vid);
   }
 }
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7142() {
+  features_revert_module("novo_views_feature");
+}
