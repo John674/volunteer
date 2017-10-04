@@ -10,8 +10,8 @@
  */
 function novo_cia_get_render_data($nid) {
   $last_request = novo_cia_get_last_success_request($nid);
-
-  $status_request = !empty($last_request) ? novo_cia_get_request_status($last_request) : t('Not Requested');
+  $request_statuses = unserialize(NOVO_CIA_REQUEST_STATUSES);
+  $status_request = !empty($last_request) ? $request_statuses[$last_request->request_status] : t('Not Sent');
   $status_buttons = !empty($last_request) ? novo_cia_render_action_buttons($nid) : novo_cia_render_action_buttons($nid, TRUE);
   return array(
     'title' => t('CIA Background Check:'),
@@ -79,27 +79,6 @@ function novo_cia_render_action_buttons($nid, $first_request = FALSE) {
     $output = $buttons['send_link'] . ' ' . $buttons['view_report_disabled'];
   }
   return $output;
-}
-
-/**
- * Get request status.
- */
-function novo_cia_get_request_status($last_request = NULL) {
-  if (!empty($last_request)) {
-    $request_statuses = unserialize(NOVO_CIA_REQUEST_STATUSES);
-    if ($last_request->request_status == 1 && $last_request->request_type == 1) {
-      $output = $request_statuses[$last_request->request_status];
-    }
-    elseif (empty($last_request->request_type)) {
-      $output = $request_statuses[0] . '  request to CIA';
-    }
-    else {
-      $output = $request_statuses[0];
-    }
-
-    return $output;
-  }
-  return NULL;
 }
 
 /**

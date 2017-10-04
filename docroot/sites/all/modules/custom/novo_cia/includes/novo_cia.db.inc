@@ -8,7 +8,7 @@
 /**
  * Add search request to queue.
  */
-function novo_cia_add_to_queue_search_request($nid, $uid) {
+function novo_cia_add_search_request_to_queue($nid, $uid) {
   db_update('novo_cia_checks')
     ->fields(array(
       'request_status' => 3,
@@ -32,7 +32,7 @@ function novo_cia_add_to_queue_search_request($nid, $uid) {
 /**
  * Add pull report request to queue.
  */
-function novo_cia_add_to_queue_pull_report_request($nid, $uid, $search_request_id, $tracking_number) {
+function novo_cia_add_pull_report_request_to_queue($nid, $uid, $search_request_id, $tracking_number) {
   db_update('novo_cia_checks')
     ->fields([
       'request_status' => 3,
