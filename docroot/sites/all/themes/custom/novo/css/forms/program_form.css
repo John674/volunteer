@@ -123,6 +123,11 @@
   display: none;
 }
 
+.node-program-form .tabledrag-hide {
+  display: none;
+}
+
+
 .node-program-form .field-name-field-program-kids-list table thead tr th {
   padding: 0px 0px 7px 7px;
 }

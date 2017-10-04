@@ -281,7 +281,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_pc_full_name',
     'label' => 'Full name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -326,7 +326,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_pc_phone',
     'label' => 'Phone',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -1128,8 +1128,16 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_p_kids_pickup_contacts',
     'label' => 'Pickup Contacts',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'disable_reorder' => 0,
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -10486,6 +10494,13 @@ Discipline',
     'label' => 'Kids list',
     'required' => 1,
     'settings' => array(
+      'field_lock_multi_values' => array(
+        'hide_add_more' => 0,
+        'hide_previous' => 0,
+        'hide_remove' => 0,
+        'lock_previous' => 0,
+        'remove_header' => 0,
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
