@@ -281,7 +281,8 @@ function novo_cia_add_request_for_search($node) {
       $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
       if (!empty($search_request_id)) {
         drupal_set_message(t("The request was added to the queue for sending to CIA."));
-      } else {
+      }
+      else {
         drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
       }
     }
@@ -689,7 +690,7 @@ function novo_cia_mail($key, &$message, $params) {
 function novo_cia_send_email($uid = NULL, $request_id = NULL) {
   if (!empty($uid) && !empty($request_id)) {
     $request = novo_cia_get_request($request_id);
-    if($request->request_type != 1 && $request->request_status != 1 && empty($request->tracking_number)){
+    if ($request->request_type != 1 && $request->request_status != 1 && empty($request->tracking_number)) {
       return NULL;
     }
     $reviewer_first_name = '';
