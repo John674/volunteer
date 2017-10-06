@@ -172,7 +172,6 @@ function novo_cia_theme() {
       'template' => 'templates/email/novo-cia-answer-report',
     ),
 
-
     'novo_cia_expired_date' => array(
       'variables' => array('params' => NULL),
       'template' => 'templates/email/novo-cia-expired-date',

@@ -330,7 +330,6 @@ if (function_exists("novo_cia_drupal_http_request")) {
 /**
  * Performs an HTTP request with Coockies.
  */
-
 function novo_cia_drupal_http_request($url, array $options = []) {
   // Allow an alternate HTTP client library to replace Drupal's default
   // implementation.
@@ -702,7 +701,6 @@ function novo_cia_send_email_to_reviewer($uid = NULL, $request_id = NULL) {
     if ($request->request_status == 4) {
       $mail_key = 'expired_date';
     }
-
 
     return drupal_mail('novo_cia', $mail_key, $reviewer->mail, language_default(), $data);
   }
