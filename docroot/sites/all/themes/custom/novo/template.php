@@ -39,7 +39,7 @@ function novo_preprocess_node(&$variables) {
     if (isset($variables['content']['app_approve_block'])) {
       $options = array(
         'weight' => 1000,
-        'scope' => 'footer'
+        'scope' => 'footer',
       );
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/bootstrap-confirmation.min.js", $options);
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/novo-application-approve.js", $options);
@@ -181,7 +181,7 @@ function novo_theme($existing, $type, $theme, $path) {
       'variables' => array('status' => NULL, 'label' => NULL),
       'template' => 'templates/custom/status-label',
     ),
-    'textfield__date_of_birthday' => array(
+    'textfield__calendar_icon' => array(
       'render element' => 'element',
     ),
     'date_form_element__date_of_birthday' => array(
@@ -277,24 +277,29 @@ function novo_preprocess_block(&$variables) {
  */
 function novo_element_info_alter(&$type) {
   if (isset($type['textfield'])) {
-    $type['textfield']['#pre_render'][] = '_novo_pre_render_date_of_birthday';
+    $type['textfield']['#pre_render'][] = '_novo_pre_render_textfield';
   }
 }
 
 /**
- * Pre render for field_dob.
+ * Pre render for text field.
  */
-function _novo_pre_render_date_of_birthday($variable) {
-  if (isset($variable['#parents']) && ($variable['#parents'][0] == 'field_dob')) {
-    $variable['#theme'] = ['textfield__date_of_birthday'];
-  }
+function _novo_pre_render_textfield($variable) {
+  $fields_calendar_icon = array(
+    'field_dob',
+    'field_attendance_date_value',
+    'field_attendance_date_value_1',
+  );
+  if (isset($variable['#array_parents']) && (!empty(array_intersect($fields_calendar_icon, $variable['#array_parents'])))) {
+    $variable['#theme'] = ['textfield__calendar_icon'];
+  };
   return $variable;
 }
 
 /**
- * Theme function for textfield__date_of_birthday.
+ * Theme function for textfield__calendar_icon.
  */
-function novo_textfield__date_of_birthday($variables) {
+function novo_textfield__calendar_icon($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'text';
   element_set_attributes($element, [
@@ -382,7 +387,7 @@ function novo_menu_link__user_menu(array $variables) {
 }
 
 /**
- * Implements hook_preprocess_button.
+ * Implements hook_preprocess_button().
  */
 function novo_preprocess_button(&$vars) {
   if (isset($vars['element']['#value'])) {
@@ -407,7 +412,7 @@ function novo_preprocess_taxonomy_term(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_views_view_table()
+ * Implements hook_preprocess_views_view_table().
  */
 function novo_preprocess_views_view_table(&$vars) {
   // Moved kids.
@@ -502,7 +507,7 @@ function novo_views_data_export_feed_icon__xls($variables) {
     "btn",
     "btn-default",
     "btn-xs",
-    "novo-export-feed-icon"
+    "novo-export-feed-icon",
   );
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("XLS");
   return l($text, $url, $url_options);
@@ -521,7 +526,7 @@ function novo_views_data_export_feed_icon__pdf($variables) {
     "btn",
     "btn-default",
     "btn-xs",
-    "novo-export-feed-icon"
+    "novo-export-feed-icon",
   );
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
   return l($text, $url, $url_options);
