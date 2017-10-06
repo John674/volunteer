@@ -289,3 +289,6 @@ li.novo-leaf a {
   font-family: "ProximaNovaBold";
   color: #777777;
 }
+.nav > li > a{
+  padding: 10px 8px;
+}
