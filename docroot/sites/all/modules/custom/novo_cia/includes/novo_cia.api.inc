@@ -10,7 +10,7 @@
  */
 function novo_cia_send_search_request($request_id) {
   $search_request = novo_cia_get_request($request_id);
-  $application_data = novo_cia_get_application_data($search_request->application_nid);
+  $application_data = novo_cia_get_data_for_cia_request($search_request->application_nid);
   $api_credentials = novo_cia_get_api_credentials();
   $request_data = array_merge($api_credentials, $application_data);
   $api_urls = unserialize(NOVO_CIA_API_URLS);
@@ -118,6 +118,8 @@ function novo_cia_send_pull_report_request($request_id = NULL) {
             'report_status' => $report_status,
           );
           if (!empty($report_status)) {
+            $nid = $pull_report_request->application_nid;
+            $result = novo_cia_set_expiration_date($nid);
             $report_data['request_status'] = 1;
           }
           novo_cia_update_request($request_id, $report_data);
