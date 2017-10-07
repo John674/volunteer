@@ -97,6 +97,9 @@ function novo_preprocess_page(&$variables) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
   }
+  if (isset($variables['navbar_classes_array']) && is_array($variables['navbar_classes_array'])) {
+    $variables['navbar_classes_array'][] = 'novo-header';
+  }
 
 }
 
