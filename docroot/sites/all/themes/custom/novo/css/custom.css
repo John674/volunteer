@@ -297,9 +297,15 @@ li.novo-leaf a {
 .novo-header .nav > li > a,
 .novo-header .navbar-nav > li > a {
   padding: 15px 8px;
-  line-height: 25px;
+  line-height: 27px;
 }
 .novo-header .navbar-brand {
   height: auto;
-  line-height: 26px;
+  line-height: 27px
+}
+
+.navbar.container.novo-header,
+.navbar.container-fluid.novo-header{
+  border: none;
+  margin-top: 0;
 }
