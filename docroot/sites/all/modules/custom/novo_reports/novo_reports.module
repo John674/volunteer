@@ -9,6 +9,7 @@ module_load_include("inc", "novo_reports", "includes/novo_reports.func");
 module_load_include("inc", "novo_reports", "includes/novo_reports.handlers_func");
 module_load_include("inc", "novo_reports", "includes/novo_reports.preprocess");
 module_load_include("inc", "novo_reports", "includes/novo_reports.enrollments");
+module_load_include("inc", "novo_reports", "includes/novo_reports.general_report");
 
 /**
  * Implements hook_menu().
@@ -26,8 +27,15 @@ function novo_reports_menu() {
 
   $items['enrollment-report'] = [
     'title' => 'Enrollment report',
-    'access callback' => novo_reports_enrollment_report_access(),
+    'access callback' => novo_reports_reports_access(),
     'page callback' => 'novo_reports_enrollment_report',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['general-report'] = [
+    'title' => 'General report',
+    'access callback' => novo_reports_reports_access(),
+    'page callback' => 'novo_reports_general_report',
     'type' => MENU_NORMAL_ITEM,
   ];
 
@@ -112,6 +120,18 @@ function novo_reports_views_pre_render(&$view) {
   }
 }
 
+function novo_reports_views_pre_view(&$view, &$display_id, &$args) {
+  //  kpr($view);
+  //  kpr($display_id);
+  //  kpr($args);
+}
+
+function novo_reports_views_post_render(&$view, &$output, &$cache) {
+  //  kpr($view);
+  //  kpr($output);
+  //  kpr($cache);
+}
+
 /**
  * Implements hook_preprocess_views_data_export_pdf_header().
  */
@@ -125,17 +145,24 @@ function novo_reports_preprocess_views_data_export_pdf_header(&$vars) {
  * Implements hook_preprocess_views_view_table().
  */
 function novo_reports_preprocess_views_view_table(&$vars) {
-  if ($vars['view']->name == "roster_report") {
-    foreach ($vars['rows'] as $row_id => &$row) {
-      if (isset($row['views_conditional_2']) && !empty($row['views_conditional_2'])) {
-        $color = novo_reports_get_group_color_value($vars['result'][$row_id], "field_p_canvassing_group");
+  switch ($vars['view']->name) {
+    case "roster_report":
+      foreach ($vars['rows'] as $row_id => &$row) {
+        if (isset($row['views_conditional_2']) && !empty($row['views_conditional_2'])) {
+          $color = novo_reports_get_group_color_value($vars['result'][$row_id], "field_p_canvassing_group");
 
-        if (!empty($color)) {
-          $row['views_conditional_2'] = '<div style="background: ' . $color . '">' . $row['views_conditional_2'] . '</div>';
+          if (!empty($color)) {
+            $row['views_conditional_2'] = '<div style="background: ' . $color . '">' . $row['views_conditional_2'] . '</div>';
+          }
         }
       }
-    }
+      break;
+
+//    case "report_general":
+//      novo_reports_preprocess_views_view_table_report_general($vars);
+//      break;
   }
+
 }
 
 /**
@@ -247,7 +274,7 @@ function novo_reports_views_bulk_operations_form_alter(&$form, &$form_state, $vb
 /**
  * Enrollment report access callback.
  */
-function novo_reports_enrollment_report_access() {
+function novo_reports_reports_access() {
   $role = user_role_load_by_name('Siteadmin');
   return (user_has_role($role->rid)) ? TRUE : FALSE;
 }
@@ -1732,7 +1759,8 @@ function _novo_reports_pdf_using_mpdf_generator($html, $options = [], $filename 
 
   if (isset($options['font_size'])) {
     $font_size = $options['font_size'];
-  } else {
+  }
+  else {
     $font_size = variable_get('pdf_using_mpdf_pdf_font_size');
   }
 
