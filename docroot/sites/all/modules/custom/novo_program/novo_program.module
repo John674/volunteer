@@ -60,14 +60,14 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
   ];
 }
 
-//function novo_program_pickup_contacts_element_validate($element, &$form_state) {
-//  kpr($element);
-//  kpr($form_state);
+// Function novo_program_pickup_contacts_element_validate($element, &$form_state) {
+// kpr($element);
+// kpr($form_state);
 //
-//  $form_state['values']['field_program_kids_list']
-//  die();
-//  form_error($element, t('The "!name" must be x'));
-//}
+// $form_state['values']['field_program_kids_list']
+// die();
+// form_error($element, t('The "!name" must be x'));
+// }.
 
 /**
  * Implements hook_preprocess_field().
