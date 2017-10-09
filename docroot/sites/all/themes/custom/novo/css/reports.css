@@ -65,3 +65,12 @@
 .novo-report-enrollment-report-reset-btn {
   margin-top: 25px;
 }
+.novo-reports-general-header-row {
+  font-family: "ProximaNovaBold";
+  background-color: #d9d9d9;
+}
+.novo-reports-general-total-row,
+.novo-reports-general-average-row {
+  font-family: "ProximaNovaBold";
+  background-color: yellow;
+}
