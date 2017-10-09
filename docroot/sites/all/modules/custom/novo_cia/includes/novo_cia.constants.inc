@@ -9,9 +9,11 @@ define("NOVO_CIA_BASE_EMAIL", "volunteer@novoministries.org");
 
 define("NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST", 60 * 15);
 define("NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST", 60 * 60);
+define("NOVO_CIA_CRON_CHECK_EXPIRED_REQUEST", 60 * 60);
 
 define("NOVO_CIA_CRON_LAST_PULL_REPORT_REQUEST", 'novo_cia_last_pull_report_request');
 define("NOVO_CIA_CRON_LAST_SEARCH_REQUEST", 'novo_cia_last_pull_report_request');
+define("NOVO_CIA_CRON_LAST_CHECK_EXPIRED", 'novo_cia_last_check_expired');
 
 define('NOVO_CIA_REQUEST_STATUSES', serialize(
   array(
@@ -19,6 +21,7 @@ define('NOVO_CIA_REQUEST_STATUSES', serialize(
     1 => t('Completed'),
     2 => t('Error'),
     3 => t('Canceled'),
+    4 => t('Expired'),
   )
 ));
 
