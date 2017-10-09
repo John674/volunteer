@@ -97,6 +97,9 @@ function novo_preprocess_page(&$variables) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
   }
+  if (isset($variables['navbar_classes_array']) && is_array($variables['navbar_classes_array'])) {
+    $variables['navbar_classes_array'][] = 'novo-header';
+  }
 
 }
 
@@ -382,7 +385,7 @@ function novo_menu_link__user_menu(array $variables) {
 }
 
 /**
- * Implements hook_preprocess_button.
+ * Implements hook_preprocess_button().
  */
 function novo_preprocess_button(&$vars) {
   if (isset($vars['element']['#value'])) {
@@ -396,6 +399,9 @@ function novo_preprocess_button(&$vars) {
       $vars['element']['#value'] = 'Add';
       $vars['element']['#icon_position'] = 'after';
     }
+    if (isset($vars['element']['#attributes']['class'])) {
+      $vars['element']['#attributes']['class'][] = 'btn-sm';
+    }
   }
 }
 
@@ -407,7 +413,7 @@ function novo_preprocess_taxonomy_term(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_views_view_table()
+ * Implements hook_preprocess_views_view_table().
  */
 function novo_preprocess_views_view_table(&$vars) {
   // Moved kids.
@@ -447,6 +453,9 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
   if (isset($form['field_dob'])) {
     $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
+  }
+  if (isset($form['#attributes']['class'])) {
+    $form['#attributes']['class'][] = 'novo-form';
   }
 }
 
