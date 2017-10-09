@@ -60,8 +60,20 @@ function novo_cia_add_pull_report_request_to_queue($nid, $uid, $search_request_i
  * Get all pending pull reports requests.
  */
 function novo_cia_get_pending_pull_report_requests() {
-  return db_select('novo_cia_checks', 'cc')->fields('cc', array('id'))->condition('request_type', 1)
+  return db_select('novo_cia_checks', 'cc')->fields('cc', array('id'))
+    ->condition('request_type', 1)
     ->condition('request_status', 0)
+    ->execute()
+    ->fetchAll();
+}
+
+/**
+ * Get all completed pull reports requests.
+ */
+function novo_cia_get_completed_pull_report_requests() {
+  return db_select('novo_cia_checks', 'cc')->fields('cc', array('id'))
+    ->condition('request_type', 1)
+    ->condition('request_status', 1)
     ->execute()
     ->fetchAll();
 }
@@ -129,7 +141,7 @@ function novo_cia_update_request($request_id, $data = array()) {
 function novo_cia_get_last_success_request($nid) {
   return db_select('novo_cia_checks', 'cc')
     ->fields('cc')
-    ->condition('request_status', array(0, 1))
+    ->condition('request_status', array(0, 1, 4))
     ->condition('application_nid', $nid)
     ->orderBy('cc.created', 'DESC')
     ->range(0, 1)
@@ -138,7 +150,7 @@ function novo_cia_get_last_success_request($nid) {
 }
 
 /**
- * Get completed pull request.
+ * Get completed pull request for one node.
  */
 function novo_cia_get_completed_pull_request($nid) {
   return db_select('novo_cia_checks', 'cc')
@@ -162,10 +174,13 @@ function novo_cia_get_completed_pull_request($nid) {
  */
 function novo_cia_get_user_by_role($role_name) {
   $role = user_role_load_by_name($role_name);
-  $query = 'SELECT ur.uid
-    FROM {users_roles} AS ur
-    WHERE ur.rid = :rid';
-  $result = db_query($query, array(':rid' => $role->rid));
-  $uids = $result->fetchCol();
+  $uids = db_select('users_roles', 'ur')
+    ->fields('ur', array(
+      'uid',
+    ))
+    ->condition('rid', $role->rid)
+    ->execute()
+    ->fetchCol();
+
   return user_load_multiple($uids);
 }
