@@ -8235,11 +8235,20 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['novo_reports_attendance_new']['table'] = 'node';
   $handler->display->display_options['fields']['novo_reports_attendance_new']['field'] = 'novo_reports_attendance_new';
   $handler->display->display_options['fields']['novo_reports_attendance_new']['label'] = 'New';
+  /* Field: programm_days */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['ui_name'] = 'programm_days';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'Programm Days';
+  /* Sort criterion: Content: Attendance date (field_attendance_date) */
+  $handler->display->display_options['sorts']['field_attendance_date_value']['id'] = 'field_attendance_date_value';
+  $handler->display->display_options['sorts']['field_attendance_date_value']['table'] = 'field_data_field_attendance_date';
+  $handler->display->display_options['sorts']['field_attendance_date_value']['field'] = 'field_attendance_date_value';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
