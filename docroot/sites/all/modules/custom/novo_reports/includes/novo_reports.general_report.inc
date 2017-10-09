@@ -207,7 +207,7 @@ function novo_reports_genera_report_get_data() {
             $val = 0;
           }
 
-          $sum[$h_key] = (isset($sum[$h_key])) ? $sum[$h_key] + $val : $val;
+          $sum[$h_key] = (isset($sum[$h_key])) ? $sum[$h_key] + intval($val) : intval($val);
           if ($h_key == "attendance") {
             $val .= " (" . $attendance_percent . "%)";
           }
