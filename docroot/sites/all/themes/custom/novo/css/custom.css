@@ -336,26 +336,22 @@ li.novo-leaf a {
 .novo-form .form-item{
   position: relative;
 }
-.novo-form table[id*="training-list"],
-.novo-form table[id*="field-phone-values"] {
+
+.novo-form .field-name-field-phone .field-multiple-table {
   width: 70%;
   float: left;
-}
-
-.novo-form table[id*="field-phone-values"]{
   margin-top: 10px;
 }
-.novo-form table[id*="field-phone-values"] thead {
+
+.novo-form .field-name-field-phone .field-multiple-table thead {
   display: none;
 }
-
-.novo-form button[name$="add_more"] {
+.novo-form .field-name-field-parent-guardian .field-add-more-submit{
   position: absolute;
   bottom: 9px;
   left: 50px;
 }
-.novo-form button[name*="training_list_add_more"],
-.novo-form button[name*="phone_add_more"] {
+.novo-form .field-name-field-phone .field-add-more-submit {
   position: absolute;
   bottom: 10px;
   left: auto;
