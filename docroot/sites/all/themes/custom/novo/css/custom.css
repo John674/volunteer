@@ -75,9 +75,9 @@ a.tabledrag-handle .handle {
   width: 200px;
 }
 
-#ui-datepicker-div {
-  z-index: 2 !important;
-}
+  /*#ui-datepicker-div {
+    z-index: 2 !important;
+  }*/
 
 .novo-entity-add-btn {
   float: right;
@@ -288,4 +288,76 @@ li.novo-leaf a {
 .novo-report-class-total-label {
   font-family: "ProximaNovaBold";
   color: #777777;
+}
+
+.pane-frontpage-volunteer-welcome .panel{
+  max-width: 1140px;
+}
+
+.novo-header .nav > li > a,
+.novo-header .navbar-nav > li > a {
+  padding: 15px 8px;
+  line-height: 27px;
+}
+.novo-header .navbar-brand {
+  height: auto;
+  line-height: 27px
+}
+
+.navbar.container.novo-header,
+.navbar.container-fluid.novo-header{
+  border: none;
+  margin-top: 0;
+}
+
+.novo-entity-add-btn,
+.novo-form .btn-sm {
+  padding: 3px 8px;
+  line-height: 1.45;
+  font-size: 12px;
+}
+
+.novo-form .input-group-addon{
+  padding: 3px 8px;
+}
+.novo-form .input-group-addon .icon{
+  font-size: 100%;
+}
+
+.novo-form select.form-control,
+.novo-form input.form-control{
+  padding: 2px 12px;
+  height: 25px;
+}
+.novo-form label{
+  margin-bottom: 2px;
+}
+
+.novo-form .form-item{
+  position: relative;
+}
+.novo-form table[id*="training-list"],
+.novo-form table[id*="field-phone-values"] {
+  width: 70%;
+  float: left;
+}
+
+.novo-form table[id*="field-phone-values"]{
+  margin-top: 10px;
+}
+.novo-form table[id*="field-phone-values"] thead {
+  display: none;
+}
+
+.novo-form button[name$="add_more"] {
+  position: absolute;
+  bottom: 9px;
+  left: 50px;
+}
+.novo-form button[name*="training_list_add_more"],
+.novo-form button[name*="phone_add_more"] {
+  position: absolute;
+  bottom: 10px;
+  left: auto;
+  margin-left: 15px;
 }

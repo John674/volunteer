@@ -18,7 +18,7 @@ function novo_cia_api_credentials($form, &$form_state) {
   );
 
   $form[NOVO_CIA_API_PASSWORD] = array(
-    '#type' => 'textfield',
+    '#type' => 'password',
     '#title' => t('Password'),
     '#required' => TRUE,
     '#default_value' => variable_get(NOVO_CIA_API_PASSWORD),
