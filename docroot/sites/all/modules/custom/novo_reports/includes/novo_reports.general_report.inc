@@ -113,7 +113,7 @@ function novo_reports_genera_report_get_data() {
   // Att date.
   $select->addExpression("DATE_FORMAT(att_date.field_attendance_date_value, '%m/%d/%Y')", "att_date_value");
 
-  //Location.
+  // Location.
   $select->innerJoin("field_data_field_attendance_location", "att_loc", "att_date.entity_id = att_loc.entity_id");
   $select->innerJoin("node", "n_loc", "n_loc.nid = att_loc.field_attendance_location_target_id");
   $select->condition("n_loc.status", 1);
@@ -167,7 +167,6 @@ function novo_reports_genera_report_get_data() {
 
   $select->orderBy("att_date_value");
   $result = $select->execute()->fetchAll();
-
 
   $new_result = [];
   $header = [
