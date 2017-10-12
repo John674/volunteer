@@ -83,3 +83,37 @@ function novo_attendance_field_attendance_date_validate($element, &$form_state, 
     form_error($element, t('Date is not valid.'));
   }
 }
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function novo_attendance_views_query_alter(&$view, &$query) {
+  if ($view->name == 'attendance_kids_list') {
+
+    // Add filter kids by Attendance date.
+    $program_nid = isset($view->args[0]) ? $view->args[0] : NULL;
+    $date = isset($view->args[1]) ? $view->args[1] : NULL;
+
+    if ($time_str = strstr($date, " 00:00:00")) {
+      $date = str_replace($time_str, "", $date);
+      $format = "YYYY-MM-DD";
+    } else {
+      $format = "MM/DD/YYYY";
+    }
+
+    $start_time = (function_exists("_novo_master_datetotime")) ? _novo_master_datetotime($date, $format) : strtotime($date);
+    $end_time = $start_time + 60 * 60 * 24 - 1;
+
+    $subquery = "SELECT n_kid.nid
+FROM field_revision_field_program_kids_list AS r_kids_list
+  INNER JOIN field_data_field_p_kid_name AS p_kid_name
+    ON p_kid_name.entity_id = r_kids_list.field_program_kids_list_value
+  INNER JOIN node AS n_kid ON n_kid.nid = p_kid_name.field_p_kid_name_target_id
+WHERE
+  r_kids_list.revision_id = (SELECT MAX(n_r.vid)
+                           FROM node_revision AS n_r
+                           WHERE n_r.timestamp <= $end_time AND n_r.nid = $program_nid) AND
+  r_kids_list.entity_id = $program_nid";
+    $query->add_where_expression('AND', "(node.nid IN ($subquery))");
+  }
+}
