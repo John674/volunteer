@@ -353,3 +353,8 @@ li.novo-leaf a {
   left: auto;
   margin-left: 15px;
 }
+
+.novo-web-form .btn-primary{
+  background: #EC1E24 none;
+  border: 1px solid transparent;
+}

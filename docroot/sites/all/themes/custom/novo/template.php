@@ -93,7 +93,7 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
-  $a = 2;
+
   if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
@@ -108,7 +108,6 @@ function novo_preprocess_page(&$variables) {
       'page__user',
     );
     if (!empty(array_intersect($login_pages, $variables['theme_hook_suggestions']))) {
-      $a = 1;
       drupal_add_js(drupal_get_path('theme', 'novo') . "/js/login-page.js");
       drupal_add_css(drupal_get_path('theme', 'novo') . "/css/login-page.css", array('group' => CSS_THEME));
       if (isset($variables['tabs']['#theme']) && $variables['tabs']['#theme'] == 'menu_local_tasks') {
@@ -132,18 +131,47 @@ function novo_menu_local_tasks__login_user(&$variables) {
 
   if (!empty($variables['primary'])) {
     foreach ($variables['primary'] as $key => $item) {
-      if (isset($item['#link']['href']) && $item['#link']['href'] == 'user') {
-        unset($variables['primary'][$key]);
-        break;
-      }
+        $theme_array = array (
+            'menu_local_task__login_user',
+            $variables['primary'][$key]['#theme']
+        );
+        $variables['primary'][$key]['#theme'] = $theme_array;
+        if (isset($item['#active']) && !empty($item['#active']) ) {
+            unset($variables['primary'][$key]);
+        }
     }
-    $variables['primary']['#prefix'] = '<ul>';
-    $variables['primary']['#suffix'] = '</ul>';
-    $output .= drupal_render($variables['primary']);
+      $output .= drupal_render($variables['primary']);
   }
   return $output;
 }
 
+function novo_menu_local_task__login_user (&$variables) {
+    $element = $variables['element'];
+    $output = '';
+    switch ($element['#link']['href']) {
+        case 'user/register' :
+            $output = l(t('Register'), $element['#link']['href'],array(
+                'attributes' => array(
+                    'class' => array(
+                        'btn',
+                        'btn-primary'
+                    )
+                )));
+            break;
+        case 'user/password' :
+            $output = l(t('Restore Password'), $element['#link']['href'],array(
+                'attributes' => array(
+                    'class' => array(
+                        'btn',
+                        'btn-restß'
+                    )
+                )));
+            break;
+            break;
+    }
+return $output;
+
+}
 /**
  * Implements hook_preprocess_form().
  */
@@ -445,7 +473,7 @@ function novo_preprocess_button(&$vars) {
       $vars['element']['#value'] = 'Add';
       $vars['element']['#icon_position'] = 'after';
     }
-    if (isset($vars['element']['#attributes']['class'])) {
+    if (isset($vars['element']['#attributes']['class']) && $vars['element']['#value'] != 'Log in') {
       $vars['element']['#attributes']['class'][] = 'btn-sm';
     }
   }
@@ -496,11 +524,21 @@ function novo_preprocess_views_view_table(&$vars) {
  * Implements hook_form_alter().
  */
 function novo_form_alter(&$form, &$form_state, &$form_id) {
+    $login_forms = array(
+        'user_login',
+        'user_login_block',
+        'user_register_form',
+    );
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if($form_id == 'webform_client_form_7950'){
+      if (isset($form['#attributes']['class'])) {
+          $form['#attributes']['class'][] = 'novo-web-form';
+      }
+  }
   if (isset($form['field_dob'])) {
     $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
   }
-  if (isset($form['#attributes']['class'])) {
+  if (isset($form['#attributes']['class']) && !in_array($form_id,$login_forms)) {
     $form['#attributes']['class'][] = 'novo-form';
   }
   if ($form_id == "user_login_block") {
@@ -509,7 +547,7 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       unset($form['links']);
     }
   }
-  if ($form_id == "user_login" || $form_id == "user_login_block") {
+  if (in_array($form_id,$login_forms)) {
     $form['name']['#title'] = '';
     $form['pass']['#title'] = '';
     $form['#attributes']['class'][] = 'novo-login-form';
@@ -605,4 +643,3 @@ function novo_views_data_export_feed_icon__pdf($variables) {
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
   return l($text, $url, $url_options);
 }
-cache_clear_all();
