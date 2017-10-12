@@ -97,7 +97,8 @@ function novo_attendance_views_query_alter(&$view, &$query) {
     if ($time_str = strstr($date, " 00:00:00")) {
       $date = str_replace($time_str, "", $date);
       $format = "YYYY-MM-DD";
-    } else {
+    }
+    else {
       $format = "MM/DD/YYYY";
     }
 
