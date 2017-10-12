@@ -553,19 +553,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['separator'] = '-';
-  /* Relationship: In Program */
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['id'] = 'reverse_field_p_kid_name_field_collection_item';
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['field'] = 'reverse_field_p_kid_name_field_collection_item';
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['ui_name'] = 'In Program';
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['label'] = 'In Program';
-  $handler->display->display_options['relationships']['reverse_field_p_kid_name_field_collection_item']['required'] = TRUE;
-  /* Relationship: Field collection item: Entity with the Kids list (field_program_kids_list) */
-  $handler->display->display_options['relationships']['field_program_kids_list_node']['id'] = 'field_program_kids_list_node';
-  $handler->display->display_options['relationships']['field_program_kids_list_node']['table'] = 'field_collection_item';
-  $handler->display->display_options['relationships']['field_program_kids_list_node']['field'] = 'field_program_kids_list_node';
-  $handler->display->display_options['relationships']['field_program_kids_list_node']['relationship'] = 'reverse_field_p_kid_name_field_collection_item';
-  $handler->display->display_options['relationships']['field_program_kids_list_node']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -581,16 +568,6 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_program_kids_list_node';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -624,6 +601,11 @@ function novo_views_feature_views_default_views() {
     'title_1' => 'title_1',
   );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['path'] = 'testview';
   $export['attendance_kids_list'] = $view;
 
   $view = new view();
@@ -3365,16 +3347,18 @@ function novo_views_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Cia requests';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    3 => '3',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Relationship: Novo CIA requests: User ID */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -3382,6 +3366,25 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = 'User';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Novo CIA requests: Type */
+  $handler->display->display_options['fields']['request_type']['id'] = 'request_type';
+  $handler->display->display_options['fields']['request_type']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['request_type']['field'] = 'request_type';
+  $handler->display->display_options['fields']['request_type']['label'] = 'Request Type';
+  /* Field: Novo CIA requests: Status */
+  $handler->display->display_options['fields']['request_status']['id'] = 'request_status';
+  $handler->display->display_options['fields']['request_status']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['request_status']['field'] = 'request_status';
+  $handler->display->display_options['fields']['request_status']['label'] = 'Request Status';
+  /* Field: Novo CIA requests: Cia Log message */
+  $handler->display->display_options['fields']['log']['id'] = 'log';
+  $handler->display->display_options['fields']['log']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['log']['field'] = 'log';
+  $handler->display->display_options['fields']['log']['label'] = 'Log message';
+  /* Field: Novo CIA requests: Actions */
+  $handler->display->display_options['fields']['actions']['id'] = 'actions';
+  $handler->display->display_options['fields']['actions']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['actions']['field'] = 'actions';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
