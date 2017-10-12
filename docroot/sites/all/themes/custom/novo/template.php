@@ -4,7 +4,7 @@
  * @file
  * The primary PHP file for this theme.
  */
-
+    cache_clear_all();
 define("NOVO_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_BASE_PHONE", "4052084255");
 define("NOVO_BASE_PHONE_LABEL", "405.208.4255");
@@ -93,6 +93,7 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
+  $a = 2;
   if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
@@ -101,6 +102,46 @@ function novo_preprocess_page(&$variables) {
     $variables['navbar_classes_array'][] = 'novo-header';
   }
 
+  if (user_is_anonymous()) {
+    $login_pages = array(
+      'page__front',
+      'page__user',
+    );
+    if (!empty(array_intersect($login_pages, $variables['theme_hook_suggestions']))) {
+      $a = 1;
+      drupal_add_js(drupal_get_path('theme', 'novo') . "/js/login-page.js");
+      drupal_add_css(drupal_get_path('theme', 'novo') . "/css/login-page.css", array('group' => CSS_THEME));
+      if (isset($variables['tabs']['#theme']) && $variables['tabs']['#theme'] == 'menu_local_tasks') {
+        $themes = array(
+          'menu_local_tasks__login_user',
+          $variables['tabs']['#theme'],
+        );
+        $variables['tabs']['#theme'] = $themes;
+        $variables['page']['content']['system_main']['actions']['links'] = $variables['tabs'];
+        $variables['page']['content']['system_main']['actions']['links']['#weight'] = 6;
+        $variables['logo'] = drupal_get_path('theme', 'novo') . "/images/novo-logo-gray.png";
+        unset($variables['tabs']['#primary']);
+      }
+    }
+  }
+
+}
+
+function novo_menu_local_tasks__login_user(&$variables) {
+  $output = '';
+
+  if (!empty($variables['primary'])) {
+    foreach ($variables['primary'] as $key => $item) {
+      if (isset($item['#link']['href']) && $item['#link']['href'] == 'user') {
+        unset($variables['primary'][$key]);
+        break;
+      }
+    }
+    $variables['primary']['#prefix'] = '<ul>';
+    $variables['primary']['#suffix'] = '</ul>';
+    $output .= drupal_render($variables['primary']);
+  }
+  return $output;
 }
 
 /**
@@ -462,6 +503,30 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
   if (isset($form['#attributes']['class'])) {
     $form['#attributes']['class'][] = 'novo-form';
   }
+  if ($form_id == "user_login_block") {
+    if (isset($form['actions']) && isset($form['links'])) {
+      $form['actions']['links'] = $form['links'];
+      unset($form['links']);
+    }
+  }
+  if ($form_id == "user_login" || $form_id == "user_login_block") {
+    $form['name']['#title'] = '';
+    $form['pass']['#title'] = '';
+    $form['#attributes']['class'][] = 'novo-login-form';
+    $form['help'] = array(
+      '#markup' => l('<span class="glyphicon glyphicon-question-sign "></span>' . t('Need help logging in?'), '/\#', array(
+        'attributes' => array(
+          'data-target' => '#novo-contact-us-block',
+          'data-toggle' => 'modal',
+          'class' => array(
+            'novo-login-help',
+          ),
+        ),
+        'html' => TRUE,
+      )),
+    );
+    $form['help']['#weight'] = 110;
+  }
 }
 
 /**
@@ -540,3 +605,4 @@ function novo_views_data_export_feed_icon__pdf($variables) {
   $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
   return l($text, $url, $url_options);
 }
+cache_clear_all();
