@@ -83,7 +83,7 @@
     </div>
 </div>
 <div class="novo-login-logo">
-    <img class="img-responsive" src="<?php print $logo ?>" alt="">
+    <img class="img-responsive" src="/<?php print $logo ?>" alt="">
 </div>
 <div class="main-container <?php print $container_class; ?>">
 

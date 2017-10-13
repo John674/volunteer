@@ -91,6 +91,10 @@ html {
 .page-user-register .novo-login-header{
     max-width: 600px;
 }
+
+.page-user-register .novo-login-form #edit-account.form-group{
+    margin-bottom: 0;
+}
 .novo-login-form{
     max-width: 500px;
     padding: 5px 25px;
@@ -108,13 +112,14 @@ html {
     padding-right: 46px;
 }
 
+.novo-login-form .form-item .form-control-feedback:after,
 .novo-login-form .form-item:after{
     content: '';
     position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 34px;
-    width: 34px;
+    bottom: 1px;
+    right: 1px;
+    height: 32px;
+    width: 32px;
     font: normal normal normal 14px/1 FontAwesome;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
@@ -122,21 +127,38 @@ html {
     color: #555555;
     text-align: center;
     background-color: #eeeeee;
-    border: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
 }
 
+.novo-login-form .form-item-pass-pass1:after,
+.novo-login-form .form-item-pass-pass2:after,
 .novo-login-form .form-item.form-type-password-confirm:after,
 .novo-login-form .form-item.form-item-field-u-birthday-und-0:after,
 .novo-login-form .form-item.form-item-field-u-birthday-und-0-value:after{
     content: none;
 }
+.novo-login-form .form-item-mail:after,
 .novo-login-form .form-item-name:after{
     content: '\f0e0';
     font-size: 11px;
     padding: 10px;
 }
+.novo-login-form .form-item-pass-pass2 .form-control-feedback:after,
 .novo-login-form .form-item-pass:after{
     content: '\f023';
+}
+.novo-login-form .form-item-field-u-last-name-und-0-value:after,
+.novo-login-form .form-item-field-u-first-name-und-0-value:after{
+    content: '\f007';
+    padding-left: 10px;
+}
+.novo-login-form .form-item-pass-pass1 .form-control-feedback:after{
+    content: '\f09c';
+}
+
+.novo-login-form .form-item-field-u-birthday-und-0-value-date:after{
+    content: '\f073';
+    padding-left: 9px;
 }
 
 .novo-login-form .form-actions ul,
@@ -193,4 +215,60 @@ html {
 .novo-login-form .date-form-element-content-multiline{
     padding: 0;
     border: none;
+}
+
+.novo-login-form .form-item-pass-pass2,
+.novo-login-form .form-item-pass-pass1 {
+    width: 100%;
+}
+.novo-login-form .glyphicon-warning-sign.form-control-feedback:after,
+.novo-login-form .glyphicon-ok.form-control-feedback:after,
+.novo-login-form .glyphicon-remove.form-control-feedback:after{
+    content: none;
+}
+
+.novo-login-form .form-control-feedback{
+    top: 1px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.novo-login-form .form-control-feedback:after{
+    top: 0;
+    right: 0;
+}
+
+.novo-login-form .form-control-feedback.glyphicon-remove{
+    background: #f2dede;
+    border-left: 1px #a94442 solid;
+}
+
+.novo-login-form .form-control-feedback.glyphicon-warning-sign{
+    background: #fcf8e3;
+    border-left: 1px #66512c solid;
+}
+
+.novo-login-form .form-control-feedback.glyphicon-ok{
+    background: #dff0d8;
+    border-left: 1px #3c763d solid;
+}
+.novo-login-form .form-item-field-u-birthday-und-0-value-date,
+.novo-login-form .form-item-field-u-birthday-und-0-value-date input,
+.novo-login-form #edit-field-u-birthday-und-0-value,
+.novo-login-form .date-no-float{
+    width: 100%;
+}
+
+.novo-login-form .help-block.password-help{
+    left: 100%;
+    color: white;
+}
+.novo-login-form .btn-login{
+    margin-right: 8px;
+}
+.novo-login-form .btn-submit{
+    margin-left: 8px;
 }
