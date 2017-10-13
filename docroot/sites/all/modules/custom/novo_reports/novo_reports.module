@@ -120,16 +120,22 @@ function novo_reports_views_pre_render(&$view) {
   }
 }
 
+/**
+ * Implement hook_views_pre_view().
+ */
 function novo_reports_views_pre_view(&$view, &$display_id, &$args) {
-  //  kpr($view);
-  //  kpr($display_id);
-  //  kpr($args);
+  // kpr($view);
+  // kpr($display_id);
+  // kpr($args);
 }
 
+/**
+ * Implement hook_reports_views_post_render().
+ */
 function novo_reports_views_post_render(&$view, &$output, &$cache) {
-  //  kpr($view);
-  //  kpr($output);
-  //  kpr($cache);
+  // kpr($view);
+  // kpr($output);
+  // kpr($cache);
 }
 
 /**
@@ -157,10 +163,6 @@ function novo_reports_preprocess_views_view_table(&$vars) {
         }
       }
       break;
-
-//    case "report_general":
-//      novo_reports_preprocess_views_view_table_report_general($vars);
-//      break;
   }
 
 }

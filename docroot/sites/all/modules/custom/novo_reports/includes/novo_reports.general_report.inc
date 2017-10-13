@@ -9,18 +9,18 @@
  * General report: prerender view.
  */
 function novo_reports_views_pre_render_report_general(&$view) {
-  //  //kpr($view->result);
+  /*// kpr($view->result);
   //
   //  $tmp_result = [];
   //  foreach ($view->result as $key => $row) {
-  //    $location = $row->field_field_program_location[0]['raw']['target_id'];
-  //    $tmp_result[$location][] = $row;
+  //  $location = $row->field_field_program_location[0]['raw']['target_id'];
+  //  $tmp_result[$location][] = $row;
   //  }
   //
   //  //kpr($tmp_result);
   //
   //  foreach ($tmp_result as $loc_id => $rows) {
-  //    $total_row = $rows[0];
+  //  $total_row = $rows[0];
   //
   //    $total_row->nid = NULL;
   //    $total_row->node_field_data_field_attendance_program_name_nid = NULL;
@@ -75,12 +75,12 @@ function novo_reports_views_pre_render_report_general(&$view) {
   //
   //  $new_result = [];
   //  foreach ($tmp_result as $loc_id => $rows) {
-  //    foreach ($rows as $key => $row) {
-  //      $new_result[] = $row;
-  //    }
+  //  foreach ($rows as $key => $row) {
+  //  $new_result[] = $row;
+  //  }
   //  }
   //
-  //  $view->result = $new_result;
+  //  $view->result = $new_result;*/
 }
 
 /**
@@ -89,8 +89,8 @@ function novo_reports_views_pre_render_report_general(&$view) {
 function novo_reports_general_report() {
   list($header, $rows) = novo_reports_genera_report_get_data();
 
-  //  $filters_form = drupal_get_form("novo_reports_enrollment_report_get_filters_form");
-  //  $output = drupal_render($filters_form);
+  // $filters_form = drupal_get_form("novo_reports_enrollment_report_get_filters_form");
+  // $output = drupal_render($filters_form);
   $output = "";
   $output .= theme('table', [
     'header' => $header,
@@ -106,10 +106,10 @@ function novo_reports_general_report() {
  */
 function novo_reports_genera_report_get_data() {
   $select = db_select("field_data_field_attendance_date", "att_date");
-  // Att date
+  // Att date.
   $select->addExpression("DATE_FORMAT(att_date.field_attendance_date_value, '%m/%d/%Y')", "att_date_value");
 
-  //Location
+  // Location.
   $select->innerJoin("field_data_field_attendance_location", "att_loc", "att_date.entity_id = att_loc.entity_id");
   $select->innerJoin("node", "n_loc", "n_loc.nid = att_loc.field_attendance_location_target_id");
   $select->condition("n_loc.status", 1);
@@ -137,27 +137,27 @@ function novo_reports_genera_report_get_data() {
   $select->condition("n_program.type", "program");
   $select->addField("n_program", "title", "program");
 
-  // Add Mentoring Conversation
+  // Add Mentoring Conversation.
   $ment_conv_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid");
   $select->addExpression($ment_conv_subquery, "mentoring_conversation");
 
-  // Add Mentoring Salvation
+  // Add Mentoring Salvation.
   $ment_salvation_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid", 'salvation');
   $select->addExpression($ment_salvation_subquery, "mentoring_salvation");
 
-  // Add Mentoring Discipline
+  // Add Mentoring Discipline.
   $ment_discipline_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid", 'discipline');
   $select->addExpression($ment_discipline_subquery, "mentoring_disciplined");
 
-  // Add Mentoring Other
+  // Add Mentoring Other.
   $ment_other_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid", 'other');
   $select->addExpression($ment_other_subquery, "mentoring_other");
 
-  // Attendance total staff
+  // Attendance total staff.
   $staff_number_subquery = novo_reports_get_staff_number_formula("n_att.nid");
   $select->addExpression($staff_number_subquery, "att_staff_list");
 
-  // Attendance total volunteers
+  // Attendance total volunteers.
   $volunteers_number_subquery = novo_reports_get_volunteers_number_formula("n_att.nid");
   $select->addExpression($volunteers_number_subquery, "volunteers");
 
@@ -191,7 +191,7 @@ function novo_reports_genera_report_get_data() {
 
     $num_rows = count($data);
     if (!empty($num_rows)) {
-      // Location row
+      // Location row.
       $rows[] = novo_reports_genera_report_get_location_row($location, $header);
 
       $attendance_percent_sum = 0;
@@ -236,9 +236,9 @@ function novo_reports_genera_report_get_data() {
         'attendance' => ($attendance_percent_sum / $num_rows) . "%",
       ];
 
-      // Total for location
+      // Total for location.
       $rows[] = novo_reports_genera_report_get_total_row(t("Totals"), "novo-reports-general-total-row", $header, $totals);
-      // Average for location
+      // Average for location.
       $rows[] = novo_reports_genera_report_get_total_row(t("Average"), "novo-reports-general-average-row", $header, $average);
     }
   }
@@ -257,7 +257,7 @@ function novo_reports_genera_report_get_location_row($location, $header) {
     [
       'data' => $location,
       'class' => ["novo-reports-general-header-row"],
-      'colspan' => count($header)
+      'colspan' => count($header),
     ],
   ];
   return $header_row;
