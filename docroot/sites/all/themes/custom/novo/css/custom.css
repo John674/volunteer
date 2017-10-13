@@ -84,11 +84,9 @@ a.tabledrag-handle .handle {
   display: block;
   width: 200px;
 }
-
-  /*#ui-datepicker-div {
-    z-index: 2 !important;
-  }*/
-
+#ui-datepicker-div {
+  z-index: 2 !important;
+}
 .novo-entity-add-btn {
   float: right;
   clear: both;
@@ -119,7 +117,18 @@ a.tabledrag-handle .handle {
 .field-name-field-faq-q {
   font-family: "ProximaNovaBold";
 }
-
+/*.pane-user-login {
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 0px 40px 20px;
+}
+.pane-user-login .form-actions {
+  text-align: center;
+}
+.pane-user-login .form-actions button {
+  min-width: 200px;
+}*/
 .select2-container-multi .select2-choices .select2-search-choice {
   padding-left: 5px;
 }
@@ -315,6 +324,11 @@ li.novo-leaf a {
 
 .novo-form .input-group-addon{
   padding: 3px 8px;
+  width: 25px;
+  position: absolute;
+  right: 0px;
+  height: 25px;
+  z-index: 100;
 }
 .novo-form .input-group-addon .icon{
   font-size: 100%;

@@ -9,18 +9,19 @@
  * General report: prerender view.
  */
 function novo_reports_views_pre_render_report_general(&$view) {
-  /*// kpr($view->result);
+  // @codingStandardsIgnoreStart
+  //  //kpr($view->result);
   //
   //  $tmp_result = [];
   //  foreach ($view->result as $key => $row) {
-  //  $location = $row->field_field_program_location[0]['raw']['target_id'];
-  //  $tmp_result[$location][] = $row;
+  //    $location = $row->field_field_program_location[0]['raw']['target_id'];
+  //    $tmp_result[$location][] = $row;
   //  }
   //
   //  //kpr($tmp_result);
   //
   //  foreach ($tmp_result as $loc_id => $rows) {
-  //  $total_row = $rows[0];
+  //    $total_row = $rows[0];
   //
   //    $total_row->nid = NULL;
   //    $total_row->node_field_data_field_attendance_program_name_nid = NULL;
@@ -75,12 +76,13 @@ function novo_reports_views_pre_render_report_general(&$view) {
   //
   //  $new_result = [];
   //  foreach ($tmp_result as $loc_id => $rows) {
-  //  foreach ($rows as $key => $row) {
-  //  $new_result[] = $row;
-  //  }
+  //    foreach ($rows as $key => $row) {
+  //      $new_result[] = $row;
+  //    }
   //  }
   //
-  //  $view->result = $new_result;*/
+  //  $view->result = $new_result;
+  // @codingStandardsIgnoreEnd
 }
 
 /**
@@ -89,8 +91,10 @@ function novo_reports_views_pre_render_report_general(&$view) {
 function novo_reports_general_report() {
   list($header, $rows) = novo_reports_genera_report_get_data();
 
-  // $filters_form = drupal_get_form("novo_reports_enrollment_report_get_filters_form");
-  // $output = drupal_render($filters_form);
+  // @codingStandardsIgnoreStart
+  //  $filters_form = drupal_get_form("novo_reports_enrollment_report_get_filters_form");
+  //  $output = drupal_render($filters_form);
+  // @codingStandardsIgnoreEnd
   $output = "";
   $output .= theme('table', [
     'header' => $header,
@@ -163,7 +167,6 @@ function novo_reports_genera_report_get_data() {
 
   $select->orderBy("att_date_value");
   $result = $select->execute()->fetchAll();
-
 
   $new_result = [];
   $header = [
@@ -243,7 +246,6 @@ function novo_reports_genera_report_get_data() {
     }
   }
 
-
   return [$header, $rows];
 
 }
@@ -257,7 +259,7 @@ function novo_reports_genera_report_get_location_row($location, $header) {
     [
       'data' => $location,
       'class' => ["novo-reports-general-header-row"],
-      'colspan' => count($header),
+      'colspan' => count($header)
     ],
   ];
   return $header_row;

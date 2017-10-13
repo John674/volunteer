@@ -1128,7 +1128,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_p_kids_pickup_contacts',
     'label' => 'Pickup Contacts',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'field_lock_multi_values' => array(
         'disable_reorder' => 0,
@@ -7944,7 +7944,7 @@ Friend',
       'academic_year' => 1,
       'default_value' => 'now',
       'default_value_code' => '',
-      'end_year' => '+2 year',
+      'end_year' => '+0 year',
       'start_year' => '-50 year',
       'user_register_form' => FALSE,
     ),

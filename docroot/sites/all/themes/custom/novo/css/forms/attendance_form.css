@@ -14,8 +14,14 @@
 .node-attendance-form .field-name-field-attendance-program-name,
 .node-attendance-form .field-name-field-attendance-date {
   display: block;
-  vertical-align: top;
+  vertical-align: bottom;
   width: 400px;
+}
+.node-attendance-form .field-name-field-attendance-year .form-item,
+.node-attendance-form .field-name-field-attendance-location .form-item,
+.node-attendance-form .field-name-field-attendance-program-name .form-item,
+.node-attendance-form .field-name-field-attendance-date .form-item {
+  vertical-align: bottom;
 }
 .node-attendance-form .field-name-field-attendance-program-name {
   width: 800px;
@@ -37,4 +43,8 @@
 .node-attendance-form .field-name-field-attendance-location select,
 .node-attendance-form .field-name-field-attendance-program-name select {
   min-width: 300px;
+}
+.node-attendance-form .select2-container {
+  padding: 0px;
+  border: none;
 }
