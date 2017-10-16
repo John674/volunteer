@@ -140,6 +140,7 @@ function novo_preprocess_page(&$variables) {
         $date_of_birthday = &$variables['page']['content']['system_main']['field_u_birthday']['und'][0];
 
         $date_of_birthday['value']['date']['#attributes']['placeholder'] = $date_of_birthday['value']['date']['#title'];
+
         $date_of_birthday['#title'] = '';
         $date_of_birthday['value']['date']['#title'] = '';
         $date_of_birthday['value']['date']['#default_value'] = '';
@@ -579,7 +580,9 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
   }
   if ($form_id == "user_login_block") {
     if (isset($form['actions']) && isset($form['links'])) {
-      $form['actions']['links'] = $form['links'];
+      $items[] = l(t('Register'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
+      $items[] = l(t('Restore Password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
       unset($form['links']);
     }
   }
