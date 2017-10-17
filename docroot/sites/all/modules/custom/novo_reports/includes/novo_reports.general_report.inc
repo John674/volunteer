@@ -166,8 +166,8 @@ function novo_reports_general_report_get_data() {
         'volunteers' => $sum['volunteers'],
       ];
       $average = [
-        'enrolled' => $sum['enrolled'] / $num_rows,
-        'attendance' => ($attendance_percent_sum / $num_rows) . "%",
+        'enrolled' => round($sum['enrolled'] / $num_rows, 2),
+        'attendance' => round($attendance_percent_sum / $num_rows, 2) . "%",
       ];
 
       // Total for location.
