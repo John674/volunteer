@@ -567,7 +567,8 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     'user_pass',
   );
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
-  if ($form_id == 'webform_client_form_7950') {
+
+  if (strpos($form_id, 'webform_client_form') !== FALSE) {
     if (isset($form['#attributes']['class'])) {
       $form['#attributes']['class'][] = 'novo-web-form';
     }
