@@ -24,7 +24,7 @@ function novo_reports_enrollment_report() {
 }
 
 /**
- * Buidl filters form.
+ * Build filters form.
  */
 function novo_reports_enrollment_report_get_filters_form() {
   list($years, $years_default_value) = novo_reports_enrollment_report_get_year_filter_data();
@@ -38,7 +38,7 @@ function novo_reports_enrollment_report_get_filters_form() {
     '#weight' => 1,
   ];
 
-  $form['novo_reports_filter_years'] = [
+  $form['novo_reports_filters']['novo_reports_filter_years'] = [
     '#type' => 'select',
     '#title' => t('Filter by School Year'),
     '#options' => $years,
@@ -48,7 +48,7 @@ function novo_reports_enrollment_report_get_filters_form() {
     ],
   ];
 
-  $form['novo_reports_filter_class'] = [
+  $form['novo_reports_filters']['novo_reports_filter_class'] = [
     '#type' => 'select',
     '#title' => t('Filter by Class'),
     '#options' => $classes,
@@ -58,7 +58,15 @@ function novo_reports_enrollment_report_get_filters_form() {
     ],
   ];
 
-  $form['reset'] = [
+  $form['novo_reports_filters']['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Apply'),
+    '#attributes' => [
+      'style' => ['display: none;'],
+    ],
+  ];
+
+  $form['novo_reports_filters']['reset'] = [
     '#type' => 'submit',
     '#btn_type' => 'reset',
     '#value' => t('Reset'),
@@ -69,14 +77,6 @@ function novo_reports_enrollment_report_get_filters_form() {
         'btn-default',
         'novo-report-enrollment-report-reset-btn',
       ],
-    ],
-  ];
-
-  $form['submit'] = [
-    '#type' => 'submit',
-    '#value' => t('Apply'),
-    '#attributes' => [
-      'style' => ['display: none;'],
     ],
   ];
 
@@ -99,7 +99,7 @@ function novo_reports_enrollment_report_get_filters_form_submit($form, &$form_st
   }
 
   $form_state['redirect'] = [
-    'novo-reports/enrollment-report',
+    'enrollment-report',
     [
       'query' => [
         'filter_by_years' => $filter_by_years,
