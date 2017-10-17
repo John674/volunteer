@@ -7,6 +7,7 @@
   font-style: normal;
   font-weight: normal;
 }
+
 @font-face {
   font-family: "ProximaNovaBold";
   src: url("../fonts/ProximaNova/ProximaNovaBold/ProximaNovaBold.eot");
@@ -16,6 +17,7 @@
   font-style: normal;
   font-weight: normal;
 }
+
 @font-face {
   font-family: "ProximaNovaBlack";
   src: url("../fonts/ProximaNova/ProximaNovaBlack/ProximaNovaBlack.eot");
@@ -25,37 +27,58 @@
   font-style: normal;
   font-weight: normal;
 }
+
+@font-face {
+  font-family: "BebasNeue";
+  src: url('../fonts/BebasNeue/BebasNeue-webfont.eot');
+  src: url('../fonts/BebasNeue/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.woff') format('woff'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.ttf') format('truetype'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.svg#glyphicons_halflingsregular') format('svg');
+
+}
+
 body {
   font-family: "ProximaNovaRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 .navbar-default {
   background-color: rgba(71, 73, 72, 0.85);
 }
+
 .navbar-default .navbar-brand {
   color: white;
 }
+
 .navbar-default .navbar-nav > li > a {
   color: rgba(255, 255, 255, 0.8)
 }
+
 .navbar-default .navbar-nav > li > a:hover {
   color: white;
 }
+
 .ui-timepicker-table td a {
   width: 2em;
 }
+
 a.tabledrag-handle .handle {
   height: 23px;
   width: 23px;
 }
+
 .table-responsive {
   overflow: inherit;
 }
+
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   border-bottom: 1px solid #ddd;
 }
+
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #fff;
 }
+
 .novo-applications-create-edit-form-btn {
   margin: 20px auto;
   display: block;
@@ -69,26 +92,32 @@ a.tabledrag-handle .handle {
   clear: both;
   overflow: hidden;
 }
+
 .novo-entity-add-btn span {
   margin-left: 3px;
 }
+
 .view-class .views-field-field-program-day ul {
   margin: 0px;
 }
+
 .view-class .views-field-field-program-day .field-collection-item-field-program-day {
   display: inline-block;
 }
+
 .view-class .views-field-field-program-day .field-name-field-program-weekday,
 .view-class .views-field-field-program-day .field-name-field-program-time {
   display: inline-block;
 }
+
 .novo-title-published-0 {
   color: gray;
 }
+
 .field-name-field-faq-q {
   font-family: "ProximaNovaBold";
 }
-.pane-user-login {
+/*.pane-user-login {
   max-width: 500px;
   margin: 0 auto;
   border: 1px solid lightgray;
@@ -99,43 +128,55 @@ a.tabledrag-handle .handle {
 }
 .pane-user-login .form-actions button {
   min-width: 200px;
-}
+}*/
 .select2-container-multi .select2-choices .select2-search-choice {
   padding-left: 5px;
 }
+
 .select2-container-multi .select2-choices .select2-search-choice div {
   margin-right: 15px;
 }
+
 .select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close {
   left: inherit;
 }
+
 .views-exposed-form label, th {
   font-family: ProximaNovaBold;
 }
+
 .novo-no-data-found {
   margin: 20px 0px;
 }
+
 .node-application .field-name-field-phone-number,
 .node-application .field-name-field-phone-type {
   display: inline-block;
 }
+
 .contact-us-container {
   position: fixed;
   bottom: 0;
+  left: 20%;
 }
+
 .modal#novo-contact-us-block {
   display: block !important;
   visibility: hidden;
 }
+
 .modal.in#novo-contact-us-block {
   visibility: visible;
 }
+
 .modal.in#novo-contact-us-block .modal-dialog {
   transform: translateY(0);
 }
+
 .modal#novo-contact-us-block .modal-dialog {
   transform: translateY(100%);
 }
+
 .modal#novo-contact-us-block .modal-dialog {
   position: fixed;
   bottom: 0;
@@ -146,6 +187,7 @@ a.tabledrag-handle .handle {
   -moz-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
 }
+
 .novo-select-color-block {
   width: 16px;
   height: 16px;
@@ -155,6 +197,7 @@ a.tabledrag-handle .handle {
   text-align: center;
   font-size: 12px;
 }
+
 .novo-canvassing-group-wrapper,
 .novo-small-group-wrapper {
   color: #fff;
@@ -162,12 +205,15 @@ a.tabledrag-handle .handle {
   margin: 0px 20px;
   padding: 0px 10px;
 }
+
 .novo-small-group-wrapper {
   color: #000;
 }
+
 .draggableviews-changed-notice {
   color: red;
 }
+
 .novo-glyphicon {
   padding: 6px;
   color: rgba(71, 73, 72, 0.85);
@@ -175,44 +221,56 @@ a.tabledrag-handle .handle {
   border-radius: 50%;
   font-size: 0.9em;
 }
+
 .novo-glyphicon.glyphicon-arrow-right {
   padding-right: 5px;
 }
+
 li.novo-leaf a {
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .container-inline-date .form-item .novo-input-group input {
   margin-right: 0;
 }
+
 .novo-input-group .input-group-addon {
   width: auto;
-  color: #777;
-  background-color: #fff;
+  color: #777777;
+  background-color: #ffffff;
 }
+
 .btn.icon-before .glyphicon.novo-glyphicon-remove {
   top: 3px;
   margin: 0;
 }
+
 .control-label .form-required {
   color: #d9534f;
 }
+
 .field-name-field-program-time + .btn {
   margin-left: 10px;
   margin-bottom: 2px;
 }
+
 .novo-export-feed-icon {
   margin-right: 5px;
 }
+
 .novo-export-feed-icon i {
   margin-right: 2px;
 }
+
 .novo-export-feed-icon:last-child {
   margin-right: 0px;
 }
+
 .novo-title-moved-wrapper {
   background-color: #ccc !important;
 }
+
 .ctools-use-ajax.btn.js-hide {
   display: block;
   background: none;
@@ -221,21 +279,26 @@ li.novo-leaf a {
   padding-left: 0px;
   padding-right: 0px;
 }
+
 .ctools-use-ajax.btn.js-hide .ajax-progress.ajax-progress-throbber {
   font-size: 14px;
-  color: #777;
+  color: #777777;
   margin-top: 1.8em;
 }
-.views-field .img-responsive {
+
+.views-field .img-responsive{
   display: inline-block;
 }
+
 .novo-report-class-total-label {
   font-family: "ProximaNovaBold";
-  color: #777;
+  color: #777777;
 }
-.pane-frontpage-volunteer-welcome .panel {
+
+.pane-frontpage-volunteer-welcome .panel{
   max-width: 1140px;
 }
+
 .novo-header .nav > li > a,
 .novo-header .navbar-nav > li > a {
   padding: 15px 8px;
@@ -245,18 +308,21 @@ li.novo-leaf a {
   height: auto;
   line-height: 27px
 }
+
 .navbar.container.novo-header,
-.navbar.container-fluid.novo-header {
+.navbar.container-fluid.novo-header{
   border: none;
   margin-top: 0;
 }
+
 .novo-entity-add-btn,
 .novo-form .btn-sm {
   padding: 3px 8px;
   line-height: 1.45;
   font-size: 12px;
 }
-.novo-form .input-group-addon {
+
+.novo-form .input-group-addon{
   padding: 3px 8px;
   width: 25px;
   position: absolute;
@@ -264,29 +330,33 @@ li.novo-leaf a {
   height: 25px;
   z-index: 100;
 }
-.novo-form .input-group-addon .icon {
+.novo-form .input-group-addon .icon{
   font-size: 100%;
 }
+
 .novo-form select.form-control,
-.novo-form input.form-control {
+.novo-form input.form-control{
   padding: 2px 12px;
   height: 25px;
 }
-.novo-form label {
+.novo-form label{
   margin-bottom: 2px;
 }
-.novo-form .form-item {
+
+.novo-form .form-item{
   position: relative;
 }
+
 .novo-form .field-name-field-phone .field-multiple-table {
   width: 70%;
   float: left;
   margin-top: 10px;
 }
+
 .novo-form .field-name-field-phone .field-multiple-table thead {
   display: none;
 }
-.novo-form .field-name-field-parent-guardian .field-add-more-submit {
+.novo-form .field-name-field-parent-guardian .field-add-more-submit{
   position: absolute;
   bottom: 9px;
   left: 50px;
@@ -296,4 +366,9 @@ li.novo-leaf a {
   bottom: 10px;
   left: auto;
   margin-left: 15px;
+}
+
+.novo-web-form .btn-primary{
+  background: #EC1E24 none;
+  border: 1px solid transparent;
 }
