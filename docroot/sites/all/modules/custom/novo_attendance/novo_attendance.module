@@ -93,6 +93,9 @@ function novo_attendance_views_query_alter(&$view, &$query) {
     // Add filter kids by Attendance date.
     $program_nid = isset($view->args[0]) ? $view->args[0] : NULL;
     $date = isset($view->args[1]) ? $view->args[1] : NULL;
+    if (is_array($date) && isset($date['date'])) {
+      $date = $date['date'];
+    }
 
     if ($time_str = strstr($date, " 00:00:00")) {
       $date = str_replace($time_str, "", $date);

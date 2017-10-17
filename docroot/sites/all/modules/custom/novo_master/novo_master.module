@@ -344,6 +344,7 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
       $set_breadcrumb = TRUE;
       $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : [];
       $paths[] = 'enrollment-report';
+      $paths[] = 'general-report';
       $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
       break;
   }
