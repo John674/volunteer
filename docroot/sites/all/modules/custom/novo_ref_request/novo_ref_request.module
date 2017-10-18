@@ -17,7 +17,8 @@ define("NOVO_REF_REQUEST_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
 define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
 
-define("NOVO_REF_REQUEST_CRON_PERIOD", 60 * 60);
+define("NOVO_REF_REQUEST_CRON_EMAIL_PERIOD", 60 * 5);
+define("NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD", 60 * 60);
 
 // 72 hours.
 define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
@@ -396,7 +397,7 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
  */
 function novo_ref_request_prepare_action_buttons($nid) {
   $buttons = array(
-    'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('Pdf'), "entityprint/node/" . $nid, array(
+    'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('View Response'), "entityprint/node/" . $nid, array(
       'html' => TRUE,
       'attributes' => array(
         'target' => '_blank',
@@ -424,6 +425,7 @@ function novo_ref_request_prepare_action_buttons($nid) {
         'class' => array("btn", "btn-default", "btn-xs")
       )
     )),
+    'disabled' => '<button class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-file"></i> ' . t('View Response') . '</button>'
   );
 
   return $buttons;
@@ -438,13 +440,13 @@ function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
   switch ($status) {
     case "0":
       // Not send - show "Edit link".
-      $output = $buttons['edit_link'];
+      $output = (user_access("edit ref request with any status")) ? $buttons['edit_link'] : $buttons['disabled'];
       break;
 
     case "1":
       // Not responded - show phone number.
       // Edit.
-      $output = $phone . " " . $buttons['edit_link'];
+      $output = $phone . " " . (user_access("edit ref request with any status")) ? $buttons['edit_link'] : $buttons['disabled'];
       break;
 
     case "4":
@@ -454,6 +456,7 @@ function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
 
     default:
       $output = $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'];
+      $output = (user_access("edit ref request with any status")) ? $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'] : $buttons['pdf_link'];
       break;
   }
   return $output;
@@ -466,7 +469,7 @@ function novo_ref_request_theme($existing, $type, $theme, $path) {
   return array(
     'novo_ref_request_ref_email' => array(
       'variables' => array('params' => NULL),
-      'template' => 'templates//email/novo-ref-request-ref-email',
+      'template' => 'templates/email/novo-ref-request-ref-email',
     )
   );
 }
@@ -510,21 +513,24 @@ function novo_ref_request_cron_queue_info() {
  * Implements hook_cron().
  */
 function novo_ref_request_cron() {
-  $cron_last = variable_get('novo_ref_request_cron_last');
-  if (time() - $cron_last > NOVO_REF_REQUEST_CRON_PERIOD) {
+  $cron_last = variable_get('novo_ref_request_cron_email_last');
+  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EMAIL_PERIOD) {
     $email_queue = DrupalQueue::get('novo_ref_request_email_queue');
     $data = novo_ref_request_task_get_all_not_sent();
     foreach ($data as $key => $task) {
       $email_queue->createItem(array('nid' => $task->nid, 'id' => $task->id));
     }
+    variable_set('novo_ref_request_cron_email_last', REQUEST_TIME);
+  }
 
+  $cron_last = variable_get('novo_ref_request_cron_expired_last');
+  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
     $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
     $data = novo_ref_request_task_get_all_not_responded_expired();
     foreach ($data as $key => $task) {
       $expired_queue->createItem(array('id' => $task->id));
     }
-
-    variable_set('novo_ref_request_cron_last', time());
+    variable_set('novo_ref_request_cron_expired_last', REQUEST_TIME);
   }
 }
 

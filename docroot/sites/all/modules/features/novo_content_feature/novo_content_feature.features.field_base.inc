@@ -370,6 +370,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -377,6 +380,7 @@ function novo_content_feature_field_default_field_bases() {
         'view' => array(
           'args' => array(
             0 => '{field_attendance_program_name}',
+            1 => '{field_attendance_date}',
           ),
           'display_name' => 'entityreference_1',
           'view_name' => 'attendance_kids_list',
@@ -529,6 +533,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -557,24 +564,12 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'indexes' => array(),
     'locked' => 0,
-    'module' => 'date',
+    'module' => 'year_field',
     'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'granularity' => array(
-        'day' => 0,
-        'hour' => 0,
-        'minute' => 0,
-        'month' => 0,
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'timezone_db' => '',
-      'todate' => '',
-      'tz_handling' => 'none',
+      'max_length' => 4,
     ),
     'translatable' => 0,
-    'type' => 'datetime',
+    'type' => 'year',
   );
 
   // Exported field_base: 'field_beliefs2_q1'.
@@ -1074,36 +1069,24 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_class_school_year'.
-  $field_bases['field_class_school_year'] = array(
+  // Exported field_base: 'field_class_year'.
+  $field_bases['field_class_year'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_class_school_year',
+    'field_name' => 'field_class_year',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(),
     'locked' => 0,
-    'module' => 'date',
+    'module' => 'year_field',
     'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'granularity' => array(
-        'day' => 0,
-        'hour' => 0,
-        'minute' => 0,
-        'month' => 0,
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'timezone_db' => '',
-      'todate' => '',
-      'tz_handling' => 'none',
+      'max_length' => 4,
     ),
     'translatable' => 0,
-    'type' => 'datetime',
+    'type' => 'year',
   );
 
   // Exported field_base: 'field_color_preference'.
@@ -2151,6 +2134,35 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_p_kids_pickup_contacts'.
+  $field_bases['field_p_kids_pickup_contacts'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_p_kids_pickup_contacts',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_p_parent_sign'.
   $field_bases['field_p_parent_sign'] = array(
     'active' => 1,
@@ -2198,8 +2210,8 @@ function novo_content_feature_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => '',
-        1 => '',
+        0 => 0,
+        1 => 1,
       ),
       'allowed_values_function' => '',
     ),
@@ -2448,6 +2460,78 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_pc_full_name'.
+  $field_bases['field_pc_full_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pc_full_name',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_pc_phone'.
+  $field_bases['field_pc_phone'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pc_phone',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_pc_relationship'.
+  $field_bases['field_pc_relationship'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_pc_relationship',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_pertinent_q1'.
@@ -2873,7 +2957,7 @@ function novo_content_feature_field_default_field_bases() {
         ),
         'view' => array(
           'args' => array(
-            0 => '{field_program_school_year}',
+            0 => '{field_program_year}',
             1 => '{field_program_location}',
           ),
           'display_name' => 'entityreference_1',
@@ -2972,7 +3056,7 @@ function novo_content_feature_field_default_field_bases() {
         ),
         'view' => array(
           'args' => array(
-            0 => '{field_program_school_year}',
+            0 => '{field_program_year}',
           ),
           'display_name' => 'entityreference_1',
           'view_name' => 'program_locations_list',
@@ -3006,38 +3090,6 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_program_school_year'.
-  $field_bases['field_program_school_year'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_program_school_year',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'date',
-    'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'granularity' => array(
-        'day' => 0,
-        'hour' => 0,
-        'minute' => 0,
-        'month' => 0,
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'timezone_db' => '',
-      'todate' => '',
-      'tz_handling' => 'none',
-    ),
-    'translatable' => 0,
-    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_program_time'.
@@ -3089,6 +3141,26 @@ function novo_content_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_program_year'.
+  $field_bases['field_program_year'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_program_year',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'year_field',
+    'settings' => array(
+      'max_length' => 4,
+    ),
+    'translatable' => 0,
+    'type' => 'year',
   );
 
   // Exported field_base: 'field_ref_1_email'.
@@ -4527,6 +4599,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),

@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @file
+ * All hook_update()'s.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function novo_cia_schema() {
+  $schema['novo_cia_checks'] = array(
+    'description' => 'CIA request checks.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a record.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user.uid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'application_nid' => array(
+        'description' => 'The application node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'request_type' => array(
+        'description' => 'Type cia request.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_status' => array(
+        'description' => 'Request status.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ),
+      'report_status' => array(
+        'description' => 'Report status.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ),
+      'tracking_number' => array(
+        'description' => 'Tracking number for report request.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'attempts_number' => array(
+        'description' => 'Count attempts.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'log' => array(
+        'description' => 'Log request.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'response' => array(
+        'description' => 'Response text.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'search_request_id' => array(
+        'description' => 'Find search request for report request.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'expiration_checked' => array(
+        'description' => 'Expiration.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_date' => array(
+        'description' => 'The Unix timestamp when the request was sand.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'response_date' => array(
+        'description' => 'The Unix timestamp when the request was got.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the task was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'updated' => array(
+        'description' => 'The Unix timestamp when the task was updated.',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+      'user_nid' => array('uid'),
+      'application_id' => array('application_nid'),
+    ),
+  );
+
+  return $schema;
+}

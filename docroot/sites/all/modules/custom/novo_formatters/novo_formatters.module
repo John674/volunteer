@@ -22,6 +22,10 @@ function novo_formatters_field_formatter_info() {
       'label' => t('Only age'),
       'field types' => array('date', 'datestamp', 'datetime'),
     ),
+    'advanced_dob' => array(
+      'label' => t('Advanced date of birth'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
     'school_year' => array(
       'label' => t('School year'),
       'field types' => array('date', 'datestamp', 'datetime'),
@@ -47,6 +51,14 @@ function novo_formatters_theme($existing, $type, $theme, $path) {
     'only_age' => array(
       'variables' => array('dob' => NULL, 'age' => NULL),
       'template' => 'templates/only_age',
+    ),
+    'advanced_dob' => array(
+      'variables' => array(
+        'dob' => NULL,
+        'age' => NULL,
+        'advanced_text' => NULL
+      ),
+      'template' => 'templates/advanced_dob',
     ),
     'school_year' => array(
       'variables' => array('year' => NULL, 'to_year' => NULL),
@@ -94,7 +106,45 @@ function novo_formatters_field_formatter_view($entity_type, $entity, $field, $in
         $element[] = array(
           '#theme' => 'only_age',
           '#dob' => $dob,
+          '#age' => $age
+        );
+      }
+      break;
+
+    case 'advanced_dob':
+      $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
+      if (!empty($dob)) {
+        $dob_obj = new DateTime($dob);
+
+        $now_obj = new DateTime();
+        $now_obj->setTime(23, 59, 59);
+        $date_diff = date_diff($dob_obj, $now_obj);
+        $age = $date_diff->y;
+
+        $dob_m = $dob_obj->format("n");
+        $dob_d = $dob_obj->format("j");
+
+        $new_dob_obj = $dob_obj->setDate($now_obj->format("Y"), $dob_m, $dob_d)->setTime(23, 59, 59);
+        $dob_diff = date_diff($new_dob_obj, $now_obj);
+
+        $advanced_text = "";
+        $m = $dob_diff->m;
+        $d = $dob_diff->d;
+
+        if (empty($m)) {
+          if (empty($d)) {
+            $advanced_text = t("Today!");
+          }
+          elseif ($d < 2) {
+            $advanced_text = t("Tomorrow!");
+          }
+        }
+
+        $element[] = array(
+          '#theme' => 'advanced_dob',
+          '#dob' => $dob,
           '#age' => $age,
+          '#advanced_text' => $advanced_text
         );
       }
       break;

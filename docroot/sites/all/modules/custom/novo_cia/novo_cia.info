@@ -1,0 +1,10 @@
+name = Novo CIA
+description = Request to CIA.
+core = 7.x
+package = Novo
+version = 7.x-1.0
+
+files[] = views/novo_cia_handler_status.inc
+files[] = views/novo_cia_handler_type.inc
+files[] = views/novo_cia_handler_report_status.inc
+files[] = views/novo_cia_handler_actions.inc

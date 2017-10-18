@@ -117,3 +117,39 @@ function novo_application_get_status($app_completed, $app_status_tid) {
   }
   return array($app_status_output, $app_status);
 }
+
+/**
+ * Select active app status for views and dyn fields.
+ */
+function novo_applications_get_app_active_status_formula() {
+  $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24 / 30)
+    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
+    INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
+    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6, 'Current', IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24 / 30)
+    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
+    INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id)
+    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18, 'Lapsed', 'Inactive'))";
+  return "(" . $formula . ")";
+}
+
+/**
+ * Select last date serving (max date) for views and dyn fields.
+ */
+function novo_applications_get_last_date_serving_formula() {
+  $formula = "SELECT MAX(n_rev.timestamp)
+    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
+    INNER JOIN {node_revision} AS n_rev ON n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id
+    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid";
+  return "(" . $formula . ")";
+}
+
+/**
+ * Select first date serving (min date) for views and dyn fields.
+ */
+function novo_applications_get_first_date_serving_formula() {
+  $formula = "SELECT MIN(n_rev.timestamp)
+    FROM {field_revision_field_attendance_volunteer_list} AS rev_av 
+    INNER JOIN {node_revision} AS n_rev ON n_rev.nid = rev_av.entity_id AND n_rev.vid = rev_av.revision_id
+    WHERE rev_av.field_attendance_volunteer_list_target_id = {node}.nid";
+  return "(" . $formula . ")";
+}

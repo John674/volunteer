@@ -39,7 +39,7 @@ function novo_preprocess_node(&$variables) {
     if (isset($variables['content']['app_approve_block'])) {
       $options = array(
         'weight' => 1000,
-        'scope' => 'footer'
+        'scope' => 'footer',
       );
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/bootstrap-confirmation.min.js", $options);
       drupal_add_js(drupal_get_path("theme", "novo") . "/js/novo-application-approve.js", $options);
@@ -93,6 +93,118 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
+
+  if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
+    $variables['container_class'] = "container-fluid";
+    $variables['navbar_classes_array'][] = "container-fluid";
+  }
+  if (isset($variables['navbar_classes_array']) && is_array($variables['navbar_classes_array'])) {
+    $variables['navbar_classes_array'][] = 'novo-header';
+  }
+
+  if (user_is_anonymous()) {
+    $login_pages = array(
+      'page__front',
+      'page__user',
+    );
+    if (!empty(array_intersect($login_pages, $variables['theme_hook_suggestions']))) {
+      drupal_add_js(drupal_get_path('theme', 'novo') . "/js/login-page.js");
+      drupal_add_css(drupal_get_path('theme', 'novo') . "/css/login-page.css", array('group' => CSS_THEME));
+      if (isset($variables['page']['content']['system_main']['actions'])) {
+        if (isset($variables['tabs'])) {
+          $themes = array(
+            'menu_local_tasks__login_user',
+            $variables['tabs']['#theme'],
+          );
+          $variables['tabs']['#theme'] = $themes;
+          $variables['page']['content']['system_main']['actions']['links'] = $variables['tabs'];
+          $variables['page']['content']['system_main']['actions']['links']['#weight'] = 6;
+          unset($variables['tabs']['#primary']);
+        }
+      }
+      $variables['logo'] = drupal_get_path('theme', 'novo') . "/images/novo-logo-gray.png";
+      if (isset($variables['page']['content']['system_main']['account']['pass']['pass1'])) {
+        $pass_1 = &$variables['page']['content']['system_main']['account']['pass']['pass1'];
+
+        $pass_1['#attributes']['placeholder'] = $pass_1['#title'];
+        $pass_1['#title'] = '';
+      }
+
+      if (isset($variables['page']['content']['system_main']['account']['pass']['pass2'])) {
+        $pass_2 = &$variables['page']['content']['system_main']['account']['pass']['pass2'];
+
+        $pass_2['#attributes']['placeholder'] = $pass_2['#title'];
+        $pass_2['#title'] = '';
+      }
+      if (isset($variables['page']['content']['system_main']['field_u_birthday']['und'][0])) {
+        $date_of_birthday = &$variables['page']['content']['system_main']['field_u_birthday']['und'][0];
+
+        $date_of_birthday['value']['date']['#attributes']['placeholder'] = $date_of_birthday['value']['date']['#title'];
+
+        $date_of_birthday['#title'] = '';
+        $date_of_birthday['value']['date']['#title'] = '';
+        $date_of_birthday['value']['date']['#default_value'] = '';
+        $date_of_birthday['value']['#date_title'] = '';
+        $date_of_birthday['value']['date']['#value'] = '';
+
+      }
+    }
+  }
+
+}
+
+/**
+ * Theme theme_menu_local_tasks().
+ */
+function novo_menu_local_tasks__login_user(&$variables) {
+  $output = '';
+
+  if (!empty($variables['primary'])) {
+    foreach ($variables['primary'] as $key => $item) {
+      $theme_array = array(
+        'menu_local_task__login_user',
+        $variables['primary'][$key]['#theme'],
+      );
+      $variables['primary'][$key]['#theme'] = $theme_array;
+      if (isset($item['#active']) && !empty($item['#active'])) {
+        unset($variables['primary'][$key]);
+      }
+    }
+    $output .= drupal_render($variables['primary']);
+  }
+  return $output;
+}
+
+/**
+ * Theme theme_menu_local_task().
+ */
+function novo_menu_local_task__login_user(&$variables) {
+  $element = $variables['element'];
+  $output = '';
+  switch ($element['#link']['href']) {
+    case 'user/register':
+      $output = l(t('Register'), $element['#link']['href'], array(
+        'attributes' => array(
+          'class' => array(
+            'btn',
+            'btn-primary',
+          ),
+        ),
+      ));
+      break;
+
+    case 'user/password':
+      $output = l(t('Restore Password'), $element['#link']['href'], array(
+        'attributes' => array(
+          'class' => array(
+            'btn',
+            'btn-rest',
+          ),
+        ),
+      ));
+      break;
+  }
+  return $output;
 
 }
 
@@ -177,7 +289,7 @@ function novo_theme($existing, $type, $theme, $path) {
       'variables' => array('status' => NULL, 'label' => NULL),
       'template' => 'templates/custom/status-label',
     ),
-    'textfield__date_of_birthday' => array(
+    'textfield__calendar_icon' => array(
       'render element' => 'element',
     ),
     'date_form_element__date_of_birthday' => array(
@@ -273,24 +385,29 @@ function novo_preprocess_block(&$variables) {
  */
 function novo_element_info_alter(&$type) {
   if (isset($type['textfield'])) {
-    $type['textfield']['#pre_render'][] = '_novo_pre_render_date_of_birthday';
+    $type['textfield']['#pre_render'][] = '_novo_pre_render_textfield';
   }
 }
 
 /**
- * Pre render for field_dob.
+ * Pre render for text field.
  */
-function _novo_pre_render_date_of_birthday($variable) {
-  if (isset($variable['#parents']) && ($variable['#parents'][0] == 'field_dob')) {
-    $variable['#theme'] = ['textfield__date_of_birthday'];
-  }
+function _novo_pre_render_textfield($variable) {
+  $fields_calendar_icon = array(
+    'field_dob',
+    'field_attendance_date_value',
+    'field_attendance_date_value_1',
+  );
+  if (isset($variable['#array_parents']) && (!empty(array_intersect($fields_calendar_icon, $variable['#array_parents'])))) {
+    $variable['#theme'] = ['textfield__calendar_icon'];
+  };
   return $variable;
 }
 
 /**
- * Theme function for textfield__date_of_birthday.
+ * Theme function for textfield__calendar_icon.
  */
-function novo_textfield__date_of_birthday($variables) {
+function novo_textfield__calendar_icon($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'text';
   element_set_attributes($element, [
@@ -378,7 +495,7 @@ function novo_menu_link__user_menu(array $variables) {
 }
 
 /**
- * Implements hook_preprocess_button.
+ * Implements hook_preprocess_button().
  */
 function novo_preprocess_button(&$vars) {
   if (isset($vars['element']['#value'])) {
@@ -392,6 +509,9 @@ function novo_preprocess_button(&$vars) {
       $vars['element']['#value'] = 'Add';
       $vars['element']['#icon_position'] = 'after';
     }
+    if (isset($vars['element']['#attributes']['class']) && !user_is_anonymous()) {
+      $vars['element']['#attributes']['class'][] = 'btn-sm';
+    }
   }
 }
 
@@ -403,9 +523,18 @@ function novo_preprocess_taxonomy_term(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_views_view_table()
+ * Implements hook_preprocess_views_view_table().
  */
 function novo_preprocess_views_view_table(&$vars) {
+  // Moved kids.
+  if ($vars['view']->name == "kids") {
+    foreach ($vars['rows'] as $key => $value) {
+      if (strpos($value['title'], "novo-title-moved-1") !== FALSE) {
+        $vars['row_classes'][$key][] = "novo-title-moved-wrapper";
+      }
+    }
+  }
+
   // If this view is not the sort view, then stop here.
   if (!isset($vars['view']->field['draggableviews'])) {
     return;
@@ -431,9 +560,108 @@ function novo_preprocess_views_view_table(&$vars) {
  * Implements hook_form_alter().
  */
 function novo_form_alter(&$form, &$form_state, &$form_id) {
+  $login_forms = array(
+    'user_login',
+    'user_login_block',
+    'user_register_form',
+    'user_pass',
+  );
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+
+  if (strpos($form_id, 'webform_client_form') !== FALSE) {
+    if (isset($form['#attributes']['class'])) {
+      $form['#attributes']['class'][] = 'novo-web-form';
+    }
+  }
   if (isset($form['field_dob'])) {
     $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
+  }
+  if (isset($form['#attributes']['class']) && !in_array($form_id, $login_forms)) {
+    $form['#attributes']['class'][] = 'novo-form';
+  }
+  if ($form_id == "user_login_block") {
+    if (isset($form['actions']) && isset($form['links'])) {
+      $items[] = l(t('Register'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
+      $items[] = l(t('Restore Password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
+      unset($form['links']);
+    }
+  }
+  if (in_array($form_id, $login_forms)) {
+    $form['#attributes']['class'][] = 'novo-login-form';
+    if (isset($form['pass'])) {
+      $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+      $form['pass']['#title'] = '';
+    }
+
+    if (isset($form['name'])) {
+      $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+      $form['name']['#title'] = '';
+    }
+
+    $form['help'] = array(
+      '#markup' => l('<span class="glyphicon glyphicon-question-sign "></span>' . t('Need help logging in?'), '/\#', array(
+        'attributes' => array(
+          'data-target' => '#novo-contact-us-block',
+          'data-toggle' => 'modal',
+          'class' => array(
+            'novo-login-help',
+          ),
+        ),
+        'html' => TRUE,
+      )),
+    );
+    $form['help']['#weight'] = 110;
+    if (($form_id == 'user_register_form' || $form_id == 'user_pass') && isset($form['actions'])) {
+
+      if ($form_id == 'user_register_form') {
+        $form['actions']['submit']['#value'] = t('Register');
+        $form['actions']['submit']['#weight'] = 5;
+      }
+
+      if ($form_id == 'user_pass') {
+        $form['actions']['submit']['#value'] = t('Send password');
+        $form['actions']['submit']['#weight'] = 10;
+      }
+
+      $form['actions']['submit']['#attributes']['class'] = array(
+        'btn',
+        'btn-primary',
+        'btn-submit',
+      );
+      $login_txt = '<span class="icon glyphicon glyphicon-log-in" aria-hidden="true"></span>  ' . t('Log in');
+      $form['actions']['login']['#markup'] = l($login_txt, '/', array(
+        'attributes' => array(
+          'class' => array(
+            'btn',
+            'btn-primary',
+            'btn-login',
+          ),
+        ),
+        'html' => TRUE,
+      ));
+    }
+
+    $form_fields = array(
+      'field_u_first_name',
+      'field_u_last_name',
+    );
+    foreach ($form_fields as $field) {
+      if (array_key_exists($field, $form)) {
+        if (isset($form[$field][$lang][0]['value'])) {
+          $form[$field][$lang][0]['value']['#attributes']['placeholder'] = $form[$field][$lang][0]['#title'];
+          $form[$field][$lang][0]['value']['#title'] = '';
+        }
+      }
+    }
+
+    if (isset($form['field_u_birthday'])) {
+      $form['field_u_birthday']['#weight'] = 10;
+    }
+    if (isset($form['account']['mail'])) {
+      $form['account']['mail']['#attributes']['placeholder'] = $form['account']['mail']['#title'];
+      $form['account']['mail']['#title'] = '';
+    }
   }
 }
 
@@ -474,4 +702,42 @@ function novo_field_widget_form_alter(&$element, &$form_state, $context) {
       $element['value']['#title'] = t('Start Time');
     }
   }
+}
+
+/**
+ * Implements theme_views_data_export_feed_icon__xls().
+ */
+function novo_views_data_export_feed_icon__xls($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn",
+    "btn-default",
+    "btn-xs",
+    "novo-export-feed-icon",
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("XLS");
+  return l($text, $url, $url_options);
+}
+
+/**
+ * Implements theme_views_data_export_feed_icon__pdf().
+ */
+function novo_views_data_export_feed_icon__pdf($variables) {
+  extract($variables, EXTR_SKIP);
+  $url_options = array('html' => TRUE);
+  if ($query) {
+    $url_options['query'] = $query;
+  }
+  $url_options['attributes']['class'] = array(
+    "btn",
+    "btn-default",
+    "btn-xs",
+    "novo-export-feed-icon",
+  );
+  $text = '<i class="glyphicon glyphicon-file"></i>' . t("PDF");
+  return l($text, $url, $url_options);
 }

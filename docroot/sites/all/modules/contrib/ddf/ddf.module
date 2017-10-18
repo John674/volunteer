@@ -365,6 +365,13 @@ function ddf_selector_element_process($element, &$form_state, $form) {
     return $element;
   }
 
+  if($element['#multiple'] == true) {
+    $element['#attributes'] = array(
+      'multiple' => 'multiple',
+      'name' => $element['#name'].'[]',
+    );
+  }
+
   if ($form_state['process_input']) {
     $entity_type = $element['#entity_type'];
     $bundle = $element['#bundle'];

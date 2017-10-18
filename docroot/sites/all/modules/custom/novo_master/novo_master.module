@@ -5,7 +5,7 @@
  * Helper functions.
  */
 
-define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize(array(
+define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize([
   'program',
   'kids',
   'attendance',
@@ -13,10 +13,10 @@ define("NOVO_MASTER_NOT_VIEW_DISPLAY_CONTENT_TYPES", serialize(array(
   'mentors',
   'partner',
   'staff',
-  'class'
-)));
+  'class',
+]));
 
-define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
+define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize([
   'kids',
   'attendance',
   'locations',
@@ -25,22 +25,89 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize(array(
   'staff',
   'volunteers',
   'mentors',
-  'class'
-)));
+  'class',
+  'list_kids_mentored',
+  'attendance_records_of_volunteer',
+  'programm_participated',
+  'attendance_records_of_kids',
+  'list_staff_mentors',
+  'list_programm_participated_kids',
+  'attendance_records_of_staff',
+  'list_kids_mentored_for_staff',
+]));
 
 define("NOVO_MASTER_VOLUNTEER_ROLE_MANE", 'Applicant US citizen');
+
+define("NOVO_MASTER_ROLE_ANON", 1);
+define("NOVO_MASTER_ROLE_AUTH", 2);
+define("NOVO_MASTER_ROLE_VOLUNTEER", 6);
+define("NOVO_MASTER_ROLE_REVIEWER", 5);
+define("NOVO_MASTER_ROLE_ADMIN", 3);
 
 /**
  * Preprocess page.
  */
-function novo_master_preprocess_page() {
+function novo_master_preprocess_page(&$vars) {
+  // Set breadcrumbs.
 
+  $app_dyn_pages = [
+    "page__list_kids_mentored",
+    "page__attendance_records",
+    "page__list_programm_participated",
+  ];
+
+  $kid_dyn_pages = [
+    "page__kids_attendance_records",
+    "page__list_staff_mentors",
+    "page__list_programm_participated_kids",
+  ];
+
+  $staff_dyn_pages = [
+    "page__staff_attendance_records",
+    "page__list_kids_mentored_staff",
+    "page__list_programm_participated_staff",
+  ];
+
+  if (array_intersect($app_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "application");
+  }
+
+  if (array_intersect($kid_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "kids", t("Kids"), "kids");
+  }
+
+  if (array_intersect($staff_dyn_pages, $vars['theme_hook_suggestions'])) {
+    novo_master_add_breadcrumb_on_dyn_views($vars, "staff", t("Staff"), "staff");
+  }
+}
+
+/**
+ * Add breadcrumbs on dynamic views.
+ */
+function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NULL, $list_uri = NULL) {
+  $name = isset($vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title']) ? $vars['page']['#views_contextual_links_info']['views_ui']['view']->exposed_data['title'] : "";
+  $nodes = node_load_multiple([], [
+    'title' => $name,
+    'type' => $type,
+  ]);
+  $node = reset($nodes);
+  if ($node) {
+    $b = drupal_get_breadcrumb();
+    if (!empty($list_title) && !empty($list_uri)) {
+      $b[] = l($list_title, $list_uri);
+    }
+    $b[] = l($node->title, "node/" . $node->nid);
+    drupal_set_breadcrumb($b);
+  }
 }
 
 /**
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  // Disable autofill form for browsers.
+  $form['#attributes']['autocomplete'] = 'off';
+
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
       $form['actions']['publish']['#value'] = t("Active");
@@ -63,7 +130,7 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
  */
 function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
-  $items['node/%node/view']['access arguments'] = array(1);
+  $items['node/%node/view']['access arguments'] = [1];
 
   $items['user']['access callback'] = 'novo_master_disable_user_view';
 
@@ -79,14 +146,12 @@ function novo_master_disable_node_view($node) {
     return FALSE;
   }
 
-  if ($node->type == 'reference_request' && function_exists("novo_ref_request_check_hash_access")) {
-    $access = novo_ref_request_check_hash_access($node);
-    if ($access) {
-      return $access;
-    }
+  $access = novo_ref_request_check_hash_access($node);
+  if ($access) {
+    return $access;
   }
 
-  return user_access('access content');
+  return node_access('view', $node);
 }
 
 /**
@@ -133,37 +198,64 @@ function novo_master_preprocess_node($variables) {
  * Implements hook_preprocess_views_view().
  */
 function novo_master_preprocess_views_view(&$vars) {
+  global $user;
   // Add "Add +" buttons to views.
   $view_names = unserialize(NOVO_MASTER_ADD_BUTTON_VIEW_NAMES);
   if (isset($vars['name']) && isset($vars['display_id']) && in_array($vars['name'], $view_names) && $vars['display_id'] == 'page') {
-    $type = (isset($vars['view']->filter['type']->value)) ? $vars['view']->filter['type']->value : array();
+    $type = (isset($vars['view']->filter['type']->value)) ? $vars['view']->filter['type']->value : [];
     $type = reset($type);
     if (!empty($type)) {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
-      if ($vars['name'] == "volunteers") {
-        $add_link = "admin/people/create";
-        $destination = array("destination" => "users");
-      }
-      else {
-        $add_link = "node/add/" . $type;
-        $destination = drupal_get_destination();
+      $destination = drupal_get_destination();
+      switch ($vars['name']) {
+        case "volunteers":
+          $add_link = "admin/people/create";
+          $destination = ["destination" => "users"];
+          $access = (user_access('access user profiles') && user_access('administer users'));
+          break;
+
+        case "list_kids_mentored":
+        case "list_staff_mentors":
+        case "list_kids_mentored_for_staff":
+          $add_link = "node/add/mentors";
+          $access = node_access("create", "mentors", $user);
+          break;
+
+        case "attendance_records_of_volunteer":
+        case "attendance_records_of_kids":
+        case "attendance_records_of_staff":
+          $add_link = "node/add/attendance";
+          $access = node_access("create", "attendance", $user);
+          break;
+
+        case "list_programm_participated":
+        case "list_programm_participated_kids":
+          $add_link = "node/add/program";
+          $access = node_access("create", "program", $user);
+          break;
+
+        default:
+          $add_link = "node/add/" . $type;
+          $access = node_access("create", $type, $user);
       }
 
-      $btn = l(t("Add !icon", array("!icon" => $icon)), $add_link, array(
-        "query" => $destination,
-        "html" => TRUE,
-        "attributes" => array(
-          "class" => array(
-            "btn",
-            "btn-primary",
-            "btn-sm",
-            "novo-entity-add-btn"
-          )
-        )
-      ));
+      if ($access) {
+        $btn = l(t("Add !icon", ["!icon" => $icon]), $add_link, [
+          "query" => $destination,
+          "html" => TRUE,
+          "attributes" => [
+            "class" => [
+              "btn",
+              "btn-primary",
+              "btn-sm",
+              "novo-entity-add-btn",
+            ],
+          ],
+        ]);
 
-      $vars['attachment_before'] .= $btn;
-      $vars['attachment_after'] .= $btn;
+        $vars['attachment_before'] .= $btn;
+        $vars['attachment_after'] .= $btn;
+      }
     }
   }
 }
@@ -172,19 +264,7 @@ function novo_master_preprocess_views_view(&$vars) {
  * Implements hook_ddf_handle_args_alter().
  */
 function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
-  if ($field['field_name'] == "field_attendance_year" || $field['field_name'] == "field_program_school_year") {
-    if (is_array($value['value'])) {
-      $value = $value['value'];
-      $column = "year";
-    }
-    else {
-      // Original node has string value.
-      $d = DateTime::createFromFormat("Y-m-d H:i:s", $value['value']);
-      if ($d && $d->format("Y-m-d H:i:s") == $value['value']) {
-        $value['value'] = date("Y", strtotime($value['value']));
-      }
-    }
-  }
+
 }
 
 /**
@@ -193,14 +273,14 @@ function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
 function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_matches, &$set_breadcrumb) {
   switch ($rule->machine_name) {
     case "programms_menu_active":
-      $content_types = array(
+      $content_types = [
         "attendance",
         "program",
         "class",
         "mentors",
-        "locations"
-      );
-      $paths = array(
+        "locations",
+      ];
+      $paths = [
         "node/add/attendance",
         "node/add/program",
         "node/add/class",
@@ -210,55 +290,62 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
         "programs",
         "mentors",
         "class",
-      );
+      ];
 
       $rule_matches = novo_master_menu_position_rule_rules($context, $content_types, $paths);
       break;
 
     case "attendance_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("attendance"), array("node/add/attendance"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["attendance"], ["node/add/attendance"]);
       break;
 
     case "program_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("program"), array("node/add/program"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["program"], ["node/add/program"]);
       break;
 
     case "class_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("class"), array("node/add/class"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["class"], ["node/add/class"]);
       break;
 
     case "mentors_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("mentors"), array("node/add/mentors"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["mentors"], ["node/add/mentors"]);
       break;
 
     case "locations_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("locations"), array("node/add/locations"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["locations"], ["node/add/locations"]);
       break;
 
     case "kids_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("kids"), array("node/add/kids"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["kids"], ["node/add/kids"]);
       break;
 
     case "staff_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("staff"), array("node/add/staff"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["staff"], ["node/add/staff"]);
       break;
 
     case "volunteers_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("application"), array("node/add/application"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["application"], [
+        "node/add/application",
+        "list-kids-mentored",
+        "attendance-records",
+        "list-programm-participated",
+      ]);
       break;
 
     case "partners_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array("partner"), array("node/add/partner"));
+      $rule_matches = novo_master_menu_position_rule_rules($context, ["partner"], ["node/add/partner"]);
       break;
 
     case "users_menu_active":
-      $rule_matches = novo_master_menu_position_rule_rules($context, array(), array("admin/people/create"), TRUE);
+      $rule_matches = novo_master_menu_position_rule_rules($context, [], ["admin/people/create"], TRUE);
       break;
 
     case "reports_menu_active":
-      /*$rule_matches = novo_master_menu_position_rule_rules($context, [], ["admin/people/create"], TRUE);*/
-      // @TODO: write code for getting path from views list.
-      $rule_matches = FALSE;
+      $set_breadcrumb = TRUE;
+      $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : [];
+      $paths[] = 'enrollment-report';
+      $paths[] = 'general-report';
+      $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
       break;
   }
 }
@@ -268,8 +355,8 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
  */
 function novo_master_menu_position_rule_rules($context, $content_types, $paths, $is_user = FALSE) {
   return (
-    (isset($context['node']->type) && in_array($context['node']->type, $content_types)) ||
-    (isset($context['path']) && in_array($context['path'], $paths)) ||
+    (!empty($content_types) && isset($context['node']->type) && in_array($context['node']->type, $content_types)) ||
+    (!empty($paths) && isset($context['path']) && in_array($context['path'], $paths)) ||
     ($is_user && isset($context['user']->uid))
   ) ? TRUE : FALSE;
 }
@@ -303,19 +390,19 @@ function novo_master_custom_theme() {
  */
 function novo_master_entity_print_pdf_alter(WkHtmlToPdf $pdf, $entity_type, $entity) {
   // @codingStandardsIgnoreStart
-//  kpr($entity_type);
-//  kpr($entity);
-//  kpr($pdf);
+  //  kpr($entity_type);
+  //  kpr($entity);
+  //  kpr($pdf);
 
-//  if (isset($entity->type) && $entity->type == "reference_request") {
-//    $pdf->setOptions(array(
-//      'title' => 'svip',
-//    ));
-//  }
+  //  if (isset($entity->type) && $entity->type == "reference_request") {
+  //    $pdf->setOptions(array(
+  //      'title' => 'svip',
+  //    ));
+  //  }
 
-//  $pdf->setOptions(array(
-//    'page-size' => 'A5',
-//  ));
+  //  $pdf->setOptions(array(
+  //    'page-size' => 'A5',
+  //  ));
   // @codingStandardsIgnoreEnd
 }
 
@@ -323,12 +410,12 @@ function novo_master_entity_print_pdf_alter(WkHtmlToPdf $pdf, $entity_type, $ent
  * Implements hook_permission().
  */
 function novo_master_permission() {
-  return array(
-    'novo master userprotect check bypass' => array(
+  return [
+    'novo master userprotect check bypass' => [
       'title' => t('Novo Bypass access to edit protected users.'),
       'description' => t('Allow edit users even if set protect users.'),
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -336,4 +423,140 @@ function novo_master_permission() {
  */
 function novo_master_userprotect_check_bypass_alter(&$access, $account) {
   $access = (user_access("novo master userprotect check bypass")) ? TRUE : FALSE;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function novo_master_node_grants($account, $op) {
+  $grants = [];
+  if ($op == 'view') {
+
+    $rids = [];
+    foreach ($account->roles as $rid => $role) {
+      $rids[] = $rid;
+    }
+    $grants["novo_master_access_webform"] = $rids;
+    $grants["novo_master_access_reviewer"] = $rids;
+  }
+  return $grants;
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function novo_master_node_access_records($node) {
+  $grants = [];
+
+  if ($node->type == 'webform') {
+    $grants[] = [
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_ANON,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+    $grants[] = [
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_AUTH,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+    $grants[] = [
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_VOLUNTEER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+    $grants[] = [
+      'realm' => "novo_master_access_webform",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+  }
+
+  // Allow reviewer access.
+  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application') {
+    $grants[] = [
+      'realm' => "novo_master_access_reviewer",
+      'gid' => NOVO_MASTER_ROLE_REVIEWER,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+  }
+
+  $grants[] = [
+    'realm' => "novo_master_access_reviewer",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  ];
+
+  $grants[] = [
+    'realm' => "novo_master_access_webform",
+    'gid' => NOVO_MASTER_ROLE_ADMIN,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 1,
+  ];
+
+  return $grants;
+}
+
+/**
+ * Analog strtotime with format.
+ */
+function _novo_master_datetotime($date, $format = 'YYYY-MM-DD') {
+  if (empty($date)) {
+    return 0;
+  }
+
+  if ($format == 'YYYY-MM-DD') {
+    list($year, $month, $day) = explode('-', $date);
+  }
+  if ($format == 'YYYY/MM/DD') {
+    list($year, $month, $day) = explode('/', $date);
+  }
+  if ($format == 'YYYY.MM.DD') {
+    list($year, $month, $day) = explode('.', $date);
+  }
+
+  if ($format == 'DD-MM-YYYY') {
+    list($day, $month, $year) = explode('-', $date);
+  }
+  if ($format == 'DD/MM/YYYY') {
+    list($day, $month, $year) = explode('/', $date);
+  }
+  if ($format == 'DD.MM.YYYY') {
+    list($day, $month, $year) = explode('.', $date);
+  }
+
+  if ($format == 'MM-DD-YYYY') {
+    list($month, $day, $year) = explode('-', $date);
+  }
+  if ($format == 'MM/DD/YYYY') {
+    list($month, $day, $year) = explode('/', $date);
+  }
+  if ($format == 'MM.DD.YYYY') {
+    list($month, $day, $year) = explode('.', $date);
+  }
+
+  if (!empty($month) && !empty($day) && !empty($year)) {
+    return mktime(0, 0, 0, $month, $day, $year);
+  }
+  return 0;
+
 }

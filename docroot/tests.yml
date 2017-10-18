@@ -8,20 +8,23 @@
     artifacts_file: commentinfo.md
     build_reports_dir: build_reports
     base_url: http://drupal.192.168.56.132.xip.io # WITHOUT TRAILING SLASH
+    behat_base_url: http://drupal.192.168.56.132.xip.io # WITHOUT TRAILING SLASH
     drupal_root: /var/www/docroot
+    behat_drupal_root: /var/www/docroot
     resources_path: /var/www/tests/behat/resources
     behat_root: '../tests/behat'
     config_file: behat.yml
-    features_dir: features
-    browser: 'chrome'
+    features_dir: /var/www/tests/behat/features
+    browser: 'firefox'
     selenium_url: 127.0.0.1:4444/wd/hub
-    run_javascript_tests: 'no'
-    update_dependencies: 'yes'
+    run_javascript_tests: 'yes'
+    behat_run_javascript_tests: 'yes'
+    update_dependencies: 'no'
     selenium_jar_path: /var/lib/selenium/selenium.jar
     chrome_driver_path: /var/lib/chrome-driver/chromedriver
     drupal_core_test_group: 'group,groups,separated,by,comma'
     run_behat_tests: 'no'
-    run_drupal_core_tests: 'yes'
+    run_drupal_core_tests: 'no'
 
   pre_tasks:
   - include: devops/tests/behat/pre_tasks/behat.yml

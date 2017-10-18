@@ -75,7 +75,7 @@ function single_user_role_permission() {
  * Implements hook_user_presave().
  */
 function single_user_role_user_presave(&$edit, $account, $category) {
-  if (!is_array($edit['roles'])) {
+  if (isset($edit['roles']) && !is_array($edit['roles'])) {
     // Set authenticated user role with single role selected.
     $edit['roles'] = array(
       $edit['roles'] => $edit['roles'],
