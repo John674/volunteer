@@ -397,7 +397,9 @@ function _novo_pre_render_textfield($variable) {
     'field_dob',
     'field_attendance_date_value',
     'field_attendance_date_value_1',
+    'field_mentoring_date',
   );
+
   if (isset($variable['#array_parents']) && (!empty(array_intersect($fields_calendar_icon, $variable['#array_parents'])))) {
     $variable['#theme'] = ['textfield__calendar_icon'];
   };
@@ -662,6 +664,9 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       $form['account']['mail']['#attributes']['placeholder'] = $form['account']['mail']['#title'];
       $form['account']['mail']['#title'] = '';
     }
+  }
+  if (isset($form['field_mentoring_date'])) {
+    $form['field_mentoring_date'][$lang][0]['#title'] = '';
   }
 }
 

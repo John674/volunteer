@@ -11,7 +11,6 @@
 function novo_reports_general_report() {
   list($header, $rows) = novo_reports_general_report_get_data();
 
-
   $filters_form = drupal_get_form("novo_reports_general_report_get_filters_form");
   $output = drupal_render($filters_form);
 
