@@ -126,3 +126,28 @@ WHERE att_vol_list.entity_id = $att_nid";
 
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
 }
+
+
+/**
+ * Get volunteers number formula.
+ */
+function novo_reports_get_active_volunteers_number_formula($att_nid) {
+
+  $formula = "
+  SELECT count(DISTINCT att_vol_list.field_attendance_volunteer_list_target_id)
+
+FROM field_data_field_attendance_location AS att_orig_loc
+  INNER JOIN field_data_field_attendance_date AS att_date_orig ON (att_date_orig.entity_id = att_orig_loc.entity_id)
+
+  INNER JOIN field_data_field_attendance_location AS att_loc
+    ON att_loc.field_attendance_location_target_id = att_orig_loc.field_attendance_location_target_id
+  INNER JOIN field_revision_field_attendance_volunteer_list AS att_vol_list
+    ON att_vol_list.entity_id = att_loc.entity_id
+  INNER JOIN node_revision AS n_rev ON (n_rev.nid = att_vol_list.entity_id AND n_rev.vid = att_vol_list.revision_id)
+
+WHERE att_orig_loc.entity_id = $att_nid AND
+  n_rev.timestamp < UNIX_TIMESTAMP(att_date_orig.field_attendance_date_value) AND
+  n_rev.timestamp > UNIX_TIMESTAMP(att_date_orig.field_attendance_date_value) - (60 * 60 * 24 * 30 * 18)";
+
+  return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
+}
