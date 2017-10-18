@@ -12,7 +12,7 @@ function novo_dynamic_fields_attach_dynamic_fields_kids($nid) {
   $output = "";
 
   $node = node_load($nid);
-  $exposed_value = array("title" => $node->title);
+  $exposed_value = array("title" => htmlspecialchars_decode($node->title));
 
   $output .= theme("novo_dynamic_fields_row", array(
     "title" => t("Activity Record"),
