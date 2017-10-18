@@ -61,7 +61,7 @@ function novo_cia_menu() {
     'title' => 'CIA Request',
     'page callback' => 'novo_cia_add_request_for_search',
     'page arguments' => array(2),
-    'access arguments' => TRUE,
+    'access arguments' => array('access administration pages'),
     'type' => MENU_LOCAL_TASK,
   );
   $items['admin/config/novo-cia'] = array(
@@ -84,7 +84,7 @@ function novo_cia_menu() {
     'title' => 'CIA View Report',
     'page callback' => 'novo_cia_get_report_doc',
     'page arguments' => array(2),
-    'access arguments' => TRUE,
+    'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
   );
   return $items;
