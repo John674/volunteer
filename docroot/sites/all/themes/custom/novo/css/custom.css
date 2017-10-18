@@ -28,6 +28,16 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: "BebasNeue";
+  src: url('../fonts/BebasNeue/BebasNeue-webfont.eot');
+  src: url('../fonts/BebasNeue/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.woff') format('woff'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.ttf') format('truetype'),
+  url('../fonts/BebasNeue/BebasNeue-webfont.svg#glyphicons_halflingsregular') format('svg');
+
+}
+
 body {
   font-family: "ProximaNovaRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -74,11 +84,9 @@ a.tabledrag-handle .handle {
   display: block;
   width: 200px;
 }
-
-  /*#ui-datepicker-div {
-    z-index: 2 !important;
-  }*/
-
+#ui-datepicker-div {
+  z-index: 2 !important;
+}
 .novo-entity-add-btn {
   float: right;
   clear: both;
@@ -109,22 +117,18 @@ a.tabledrag-handle .handle {
 .field-name-field-faq-q {
   font-family: "ProximaNovaBold";
 }
-
-.pane-user-login {
+/*.pane-user-login {
   max-width: 500px;
   margin: 0 auto;
   border: 1px solid lightgray;
   padding: 0px 40px 20px;
 }
-
 .pane-user-login .form-actions {
   text-align: center;
 }
-
 .pane-user-login .form-actions button {
   min-width: 200px;
-}
-
+}*/
 .select2-container-multi .select2-choices .select2-search-choice {
   padding-left: 5px;
 }
@@ -153,6 +157,7 @@ a.tabledrag-handle .handle {
 .contact-us-container {
   position: fixed;
   bottom: 0;
+  left: 20%;
 }
 
 .modal#novo-contact-us-block {
@@ -319,6 +324,11 @@ li.novo-leaf a {
 
 .novo-form .input-group-addon{
   padding: 3px 8px;
+  width: 25px;
+  position: absolute;
+  right: 0px;
+  height: 25px;
+  z-index: 100;
 }
 .novo-form .input-group-addon .icon{
   font-size: 100%;
@@ -356,4 +366,9 @@ li.novo-leaf a {
   bottom: 10px;
   left: auto;
   margin-left: 15px;
+}
+
+.novo-web-form .btn-primary{
+  background: #EC1E24 none;
+  border: 1px solid transparent;
 }

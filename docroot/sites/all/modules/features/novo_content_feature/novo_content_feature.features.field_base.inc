@@ -370,6 +370,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -377,6 +380,7 @@ function novo_content_feature_field_default_field_bases() {
         'view' => array(
           'args' => array(
             0 => '{field_attendance_program_name}',
+            1 => '{field_attendance_date}',
           ),
           'display_name' => 'entityreference_1',
           'view_name' => 'attendance_kids_list',

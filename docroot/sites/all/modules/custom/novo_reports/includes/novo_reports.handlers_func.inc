@@ -126,4 +126,3 @@ WHERE att_vol_list.entity_id = $att_nid";
 
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
 }
-

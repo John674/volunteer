@@ -94,6 +94,12 @@ function novo_reports_list() {
     'html' => TRUE,
   ];
 
+  $links[] = [
+    'href' => "general-report",
+    'title' => t("General report"),
+    'html' => TRUE,
+  ];
+
   $links = theme("links", [
     "links" => $links,
     "attributes" => ["class" => ["novo-reports-list-wrapper"]],

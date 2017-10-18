@@ -62,8 +62,20 @@
   float: left;
   margin-right: 10px;
 }
+.novo-report-general-report-form .container-inline-date {
+  width: 200px;
+  float: left;
+  margin-right: 10px;
+  clear: none;
+}
+.novo-report-general-report-form .container-inline-date .form-text {
+  width: 200px;
+}
 .novo-report-enrollment-report-reset-btn {
   margin-top: 25px;
+}
+.novo-report-general-report-reset-btn {
+  margin-top: 22px;
 }
 .novo-reports-general-header-row {
   font-family: "ProximaNovaBold";
@@ -73,4 +85,24 @@
 .novo-reports-general-average-row {
   font-family: "ProximaNovaBold";
   background-color: yellow;
+}
+.novo-reports-general-report-table thead tr th {
+  border-top: 1px solid #ccc !important;
+  border-bottom: 1px solid #ccc !important;
+  padding: 5px 8px;
+  vertical-align: middle;
+}
+.novo-report-general-report-form .form-item-novo-reports-filter-start-date-date label,
+.novo-report-general-report-form .form-item-novo-reports-filter-end-date-date label {
+  display: none;
+}
+.novo-report-general-report-form .container-inline-date .date-padding {
+  float: none;
+}
+.novo-report-general-report-form .novo-reports-general-filter-date-icon {
+  top: 0px;
+  margin-top: 22px;
+}
+.novo-report-general-report-form  #edit-novo-reports-filters {
+  margin-bottom: 10px;
 }
