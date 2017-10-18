@@ -266,6 +266,15 @@ function novo_cia_is_expired_request($request_id = NULL) {
  */
 function novo_cia_add_request_for_search($node) {
   if ($node->type == 'application') {
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $app_completed = (isset($node->field_completed[$lang][0]['value'])) ? $node->field_completed[$lang][0]['value'] : FALSE;
+
+    if (empty($app_completed)) {
+      drupal_set_message(t("Application must be completed for CIA request."), 'error');
+      $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+      drupal_goto($url);
+    }
+
     $nid = $node->nid;
     $uid = $node->uid;
     if (isset($nid) && !empty($nid)) {
