@@ -174,7 +174,7 @@
 }
 
 .node-program-form .select2-container .select2-choice {
-  height: 32px;
+  height: 25px;
 }
 
 .node-program-form .select2-container .select2-chosen {
@@ -228,10 +228,33 @@
 }
 
 .field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper button {
-  float: right;
   position: absolute;
-  top: 0px;
-  right: 0px;
-  margin-top: 39px;
-  margin-right: 25px;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+.field-p-kid-name .select2-container.select2-allowclear .select2-choice abbr {
+  top: 5px;
+}
+
+.field-p-canvassing-group button,
+.field-p-small-group button {
+  max-height: 25px;
+  padding: 3px 12px;
+}
+
+.field-p-kid-name .select2-container .select2-choice .select2-arrow b{
+  background-position: 0 -1px;
+}
+.field-p-kids-pickup-contacts .btn {
+  padding: 3px 8px;
+  line-height: 1.45;
+  font-size: 12px;
+}
+.field-p-kids-pickup-contacts .btn i{
+  top: 2px;
+}
+.select2-drop-active {
+  margin-top: -10px;
+  padding-top: 8px;
 }

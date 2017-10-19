@@ -568,6 +568,10 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     'user_register_form',
     'user_pass',
   );
+  $collection_fields = array(
+    'field_contact',
+    'field_parent_guardian',
+  );
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
   if (strpos($form_id, 'webform_client_form') !== FALSE) {
@@ -668,6 +672,18 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
   if (isset($form['field_mentoring_date'])) {
     $form['field_mentoring_date'][$lang][0]['#title'] = '';
   }
+
+  foreach ($collection_fields as $field) {
+    if (isset($form[$field])) {
+      foreach ($form[$field][$lang] as $key => $item) {
+        if (is_int($key)) {
+          $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
+          $form[$field][$lang][$key]['#suffix'] = '</div>';
+        }
+      }
+    }
+  }
+
 }
 
 /**

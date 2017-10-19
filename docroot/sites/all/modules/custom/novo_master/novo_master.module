@@ -189,7 +189,7 @@ function novo_master_preprocess_node($variables) {
       $variables['view_mode'] == "full" &&
       node_access("update", $variables['node'])
     ) {
-      //drupal_goto("node/" . $variables['nid'] . "/edit");
+      // drupal_goto("node/" . $variables['nid'] . "/edit").
     }
   }
 }

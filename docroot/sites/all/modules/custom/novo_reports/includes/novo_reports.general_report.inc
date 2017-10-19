@@ -95,7 +95,6 @@ function novo_reports_general_report_get_data() {
   $volunteers_number_subquery = novo_reports_get_volunteers_number_formula("n_att.nid");
   $select->addExpression($volunteers_number_subquery, "volunteers");
 
-
   // Attendance active volunteers.
   $active_volunteers_number_subquery = novo_reports_get_active_volunteers_number_formula("n_att.nid");
   $select->addExpression($active_volunteers_number_subquery, "active_volunteers");
