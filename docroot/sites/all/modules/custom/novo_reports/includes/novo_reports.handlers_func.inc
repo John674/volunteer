@@ -125,8 +125,8 @@ FROM {field_data_field_attendance_volunteer_list} AS att_vol_list
 WHERE att_vol_list.entity_id = $att_nid";
 
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
-}
 
+}
 
 /**
  * Get volunteers number formula.
