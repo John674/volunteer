@@ -11,7 +11,6 @@
 function novo_reports_general_report() {
   list($header, $rows) = novo_reports_general_report_get_data();
 
-
   $filters_form = drupal_get_form("novo_reports_general_report_get_filters_form");
   $output = drupal_render($filters_form);
 
@@ -96,6 +95,11 @@ function novo_reports_general_report_get_data() {
   $volunteers_number_subquery = novo_reports_get_volunteers_number_formula("n_att.nid");
   $select->addExpression($volunteers_number_subquery, "volunteers");
 
+
+  // Attendance active volunteers.
+  $active_volunteers_number_subquery = novo_reports_get_active_volunteers_number_formula("n_att.nid");
+  $select->addExpression($active_volunteers_number_subquery, "active_volunteers");
+
   $select->orderBy("att_date_value");
   $result = $select->execute()->fetchAll();
 
@@ -114,6 +118,7 @@ function novo_reports_general_report_get_data() {
     'incident_reports' => t('Incident Reports'),
     'att_staff_list' => t('Paid Staff'),
     'volunteers' => t('Volunteers'),
+    'active_volunteers' => t('Active Volunteers'),
   ];
 
   foreach ($result as $key => $item) {
@@ -132,6 +137,7 @@ function novo_reports_general_report_get_data() {
       $sum = [];
       foreach ($data as $key => $item) {
         $attendance_percent = (!empty($item->enrolled)) ? round($item->attendance * 100 / $item->enrolled, 0) : 0;
+        $volunteers_percent = (!empty($item->active_volunteers)) ? round($item->volunteers * 100 / $item->active_volunteers, 0) : 0;
 
         $row = [];
         foreach ($header as $h_key => $h_value) {
@@ -144,6 +150,9 @@ function novo_reports_general_report_get_data() {
           $sum[$h_key] = (isset($sum[$h_key])) ? $sum[$h_key] + intval($val) : intval($val);
           if ($h_key == "attendance") {
             $val .= " (" . $attendance_percent . "%)";
+          }
+          if ($h_key == "volunteers") {
+            $val .= " (" . $volunteers_percent . "%)";
           }
           $row[] = $val;
 

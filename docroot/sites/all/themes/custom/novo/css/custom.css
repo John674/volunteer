@@ -85,7 +85,7 @@ a.tabledrag-handle .handle {
   width: 200px;
 }
 #ui-datepicker-div {
-  z-index: 2 !important;
+  z-index: 100 !important;
 }
 .novo-entity-add-btn {
   float: right;
