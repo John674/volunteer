@@ -133,6 +133,20 @@ function template_preprocess_views_data_export_pdf_pfooter(&$vars) {
 }
 
 /**
+ * Preprocess views_data_export_pdf_pheader.
+ */
+function template_preprocess_views_data_export_pdf_pheader_wrapper(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_pheader_wrapper__" . $vars['view']->name;
+}
+
+/**
+ * Preprocess views_data_export_pdf_pfooter.
+ */
+function template_preprocess_views_data_export_pdf_pfooter_wrapper(&$vars) {
+  $vars['theme_hook_suggestions'][] = "views_data_export_pdf_pfooter_wrapper__" . $vars['view']->name;
+}
+
+/**
  * Preprocess views_data_export_pdf.
  */
 function template_preprocess_views_data_export_pdf(&$vars) {

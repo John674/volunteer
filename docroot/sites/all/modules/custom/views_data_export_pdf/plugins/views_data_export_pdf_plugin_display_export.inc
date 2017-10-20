@@ -20,66 +20,96 @@ class views_data_export_pdf_plugin_display_export extends views_data_export_plug
    * Generate pdf file.
    */
   public function generate_pdf($html, $filename = NULL) {
-    if (($library = libraries_load('phpwkhtmltopdf')) && !empty($library['loaded'])) {
-      try {
-        $options = ['binary' => variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf')];
-
-        $is_landscape = (isset($this->options['style_options']['landscape']) && $this->options['style_options']['landscape']) ? TRUE : FALSE;
-        if ($is_landscape) {
-          $options['orientation'] = 'landscape';
-        }
-
-        $page_width = (isset($this->options['style_options']['page_width'])) ? $this->options['style_options']['page_width'] : "";
-        $page_height = (isset($this->options['style_options']['page_height'])) ? $this->options['style_options']['page_height'] : "";
-
-        if (!empty($page_width) && !empty($page_height)) {
-          $options['page-width'] = $page_width;
-          $options['page-height'] = $page_height;
-        }
-
-        $options['header-html'] = url("views_data_export_pdf/header-html/" . $this->view->name, array("absolute" => TRUE));
-        $options['footer-html'] = url("views_data_export_pdf/footer-html/" . $this->view->name, array("absolute" => TRUE));
-
-        $disable_smart_shrinking = (isset($this->options['style_options']['disable_smart_shrinking']) && $this->options['style_options']['disable_smart_shrinking']) ? TRUE : FALSE;
-        if ($disable_smart_shrinking) {
-          $options[] = 'disable-smart-shrinking';
-        }
-
-        drupal_alter("views_data_export_wkhtmltopdf_options", $options);
-
-        $pdf = new WkHtmlToPdf($options);
-
-        $pdf->addPage($html);
-        if (!empty($filename)) {
-          if ($pdf->saveAs($filename)) {
-            return TRUE;
-          }
-          else {
-            watchdog("views_data_export_pdf", $pdf->getError());
-            return FALSE;
-          }
-        }
-        else {
-          ob_start();
-          if ($pdf->send('php://output')) {
-            $this->add_http_headers();
-            return ob_get_clean();
-          }
-          else {
-            watchdog("views_data_export_pdf", $pdf->getError());
-            return $pdf->getError();
-          }
-        }
-
-      }
-      catch (Exception $exception) {
-        watchdog("views_data_export_pdf", $exception->getMessage());
-        return $exception->getMessage();
-      }
+    $use_mpdf = (isset($this->options['style_options']['use_mpdf']) && $this->options['style_options']['use_mpdf']) ? TRUE : FALSE;
+    $options = [];
+    $is_landscape = (isset($this->options['style_options']['landscape']) && $this->options['style_options']['landscape']) ? TRUE : FALSE;
+    if ($is_landscape) {
+      $options['orientation'] = 'landscape';
     }
-    else {
-      watchdog("views_data_export_pdf", $library['error message']);
-      return $library['error message'];
+
+    $page_width = (isset($this->options['style_options']['page_width'])) ? $this->options['style_options']['page_width'] : "";
+    $page_height = (isset($this->options['style_options']['page_height'])) ? $this->options['style_options']['page_height'] : "";
+
+    if (!empty($page_width) && !empty($page_height)) {
+      $options['page-width'] = $page_width;
+      $options['page-height'] = $page_height;
+    }
+
+    if ($use_mpdf) {
+      module_load_include("inc", "views_data_export_pdf", "includes/views_data_export_pdf.mpdf");
+      if (!views_data_export_pdf_mpdf_exist()) {
+        drupal_set_message(t("mpdf does not installed properly"), "error");
+        return $html;
+      }
+
+      $options['font-size'] = 12;
+
+      $options['header-html'] = theme("views_data_export_pdf_pheader", ['view' => $this->view]);;
+      $options['footer-html'] = theme("views_data_export_pdf_pfooter", ['view' => $this->view]);;
+
+      $is_style_sheet = (isset($this->options['style_options']['user_style_sheet'])) ? $this->options['style_options']['user_style_sheet'] : "";
+      if (!empty($is_style_sheet)) {
+        $path = ltrim($is_style_sheet, "/");
+        if (!empty($path) && file_exists($path)) {
+          $options['user_style_sheet'] = file_get_contents($path);
+        }
+      }
+
+      if (empty($filename)) {
+        $filename = $this->view->name;
+      }
+      drupal_alter("views_data_export_wkhtmltopdf_options", $options);
+
+      views_data_export_pdf_mpdf_generator($html, $options, $filename);
+    } else {
+      if (($library = libraries_load('phpwkhtmltopdf')) && !empty($library['loaded'])) {
+        try {
+          $options['binary'] = variable_get('views_data_export_pdf_wkhtmltopdf', '/usr/local/bin/wkhtmltopdf');
+
+          $disable_smart_shrinking = (isset($this->options['style_options']['disable_smart_shrinking']) && $this->options['style_options']['disable_smart_shrinking']) ? TRUE : FALSE;
+          if ($disable_smart_shrinking) {
+            $options[] = 'disable-smart-shrinking';
+          }
+
+          $options['header-html'] = url("views_data_export_pdf/header-html/" . $this->view->name, array("absolute" => TRUE));
+          $options['footer-html'] = url("views_data_export_pdf/footer-html/" . $this->view->name, array("absolute" => TRUE));
+
+          drupal_alter("views_data_export_wkhtmltopdf_options", $options);
+
+          $pdf = new WkHtmlToPdf($options);
+
+          $pdf->addPage($html);
+          if (!empty($filename)) {
+            if ($pdf->saveAs($filename)) {
+              return TRUE;
+            }
+            else {
+              watchdog("views_data_export_pdf", $pdf->getError());
+              return FALSE;
+            }
+          }
+          else {
+            ob_start();
+            if ($pdf->send('php://output')) {
+              $this->add_http_headers();
+              return ob_get_clean();
+            }
+            else {
+              watchdog("views_data_export_pdf", $pdf->getError());
+              return $pdf->getError();
+            }
+          }
+
+        }
+        catch (Exception $exception) {
+          watchdog("views_data_export_pdf", $exception->getMessage());
+          return $exception->getMessage();
+        }
+      }
+      else {
+        watchdog("views_data_export_pdf", $library['error message']);
+        return $library['error message'];
+      }
     }
 
     return $html;
