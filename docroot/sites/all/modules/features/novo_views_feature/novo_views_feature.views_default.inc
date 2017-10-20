@@ -2672,6 +2672,7 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['use_mpdf'] = 1;
   $handler->display->display_options['style_options']['disable_smart_shrinking'] = 0;
   $handler->display->display_options['style_options']['each_group_separate_table'] = 1;
   $handler->display->display_options['style_options']['landscape'] = 0;
@@ -9161,6 +9162,8 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['use_mpdf'] = 1;
+  $handler->display->display_options['style_options']['disable_smart_shrinking'] = 0;
   $handler->display->display_options['style_options']['each_group_separate_table'] = 1;
   $handler->display->display_options['style_options']['landscape'] = 1;
   $handler->display->display_options['style_options']['user_style_sheet'] = 'sites/all/modules/custom/novo_reports/css/novo_reports_roster_pdf.css';

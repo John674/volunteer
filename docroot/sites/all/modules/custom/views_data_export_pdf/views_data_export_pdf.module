@@ -45,7 +45,8 @@ function views_data_export_pdf_menu() {
  */
 function views_data_export_pdf_header_html($view_name) {
   $view = views_get_view($view_name);
-  return theme("views_data_export_pdf_pheader", ['view' => $view]);
+  $content = theme("views_data_export_pdf_pheader", ['view' => $view]);
+  return theme("views_data_export_pdf_pheader_wrapper", ['content' => $content]);
 }
 
 /**
@@ -53,7 +54,8 @@ function views_data_export_pdf_header_html($view_name) {
  */
 function views_data_export_pdf_footer_html($view_name) {
   $view = views_get_view($view_name);
-  return theme("views_data_export_pdf_pfooter", ['view' => $view]);
+  $content = theme("views_data_export_pdf_pfooter", ['view' => $view]);
+  return theme("views_data_export_pdf_pfooter_wrapper", ['content' => $content]);
 }
 
 /**
@@ -118,6 +120,18 @@ function views_data_export_pdf_theme($existing, $type, $theme, $path) {
     'variables' => [],
     'file' => 'theme/views_data_export_pdf.theme.inc',
     'template' => 'theme/views-data-export-pdf-pfooter',
+  ];
+
+  $hooks['views_data_export_pdf_pheader_wrapper'] = [
+    'variables' => ['content' => ''],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pheader-wrapper',
+  ];
+
+  $hooks['views_data_export_pdf_pfooter_wrapper'] = [
+    'variables' => ['content' => ''],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pfooter-wrapper',
   ];
 
   return $hooks;
