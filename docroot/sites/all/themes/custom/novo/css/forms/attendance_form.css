@@ -48,3 +48,31 @@
   padding: 0px;
   border: none;
 }
+
+.node-attendance-form .select2-container-multi .select2-choices .select2-search-choice,
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice{
+  padding: 1px 20px 1px 5px;
+}
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice{
+  margin: 2px 5px 2px 0;
+}
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
+  top: 2px;
+}
+.node-attendance-form .select2-container-multi .select2-choices .select2-search-field input{
+  max-height: 25px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  margin: 0;
+}
+.node-attendance-form .select2-container-multi .select2-choices{
+  min-height: 10px;
+  max-height: 25px;
+  border-radius: 4px;
+}
+.node-attendance-form .select2-search-choice-close{
+  top: 2px;
+}
+.node-attendance-form .chosen-container-multi input {
+  vertical-align: middle;
+}

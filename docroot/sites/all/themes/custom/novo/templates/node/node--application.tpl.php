@@ -185,16 +185,6 @@
 
         </div>
         <div class="panel-footer clearfix">
-
-            <div class="pull-left"
-                 style="border: 1px solid #d9534f; padding: 5px">
-                <a role="button" class="btn btn-default" href="#">
-                    <i class="fa fa-envelope-o"></i>
-                  <?php print (t('Notify User About Expiration')) ?>
-                </a>
-                -
-                <span class="label label-danger"><?php print (t('Coming soon')) ?></span>
-            </div>
             <a role="button" class="btn btn-default"
                href="<?php print url("entityprint/node/" . $node->nid); ?>">
                 <i class="fa fa-download"></i>

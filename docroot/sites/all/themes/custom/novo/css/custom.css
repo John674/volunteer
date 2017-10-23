@@ -384,8 +384,10 @@ li.novo-leaf a {
 .novo-collection .field-name-field-phone {
   padding-left: 30px;
 }
+
+.field-name-field-ssn input,
 .field-name-field-phone-number input {
-  display: block;
+  display: inline-block;
   width: 100%;
   padding: 2px 12px;
   height: 25px;
@@ -404,6 +406,11 @@ li.novo-leaf a {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
+.field-name-field-ssn input{
+  width: auto;
+}
+
+.field-name-field-ssn input:focus,
 .field-name-field-phone-number input:focus{
   border-color: #66afe9;
   outline: 0;
@@ -411,11 +418,26 @@ li.novo-leaf a {
   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
-.field-name-field-phone-number label{
-  float: left;
-  margin-right: 10px;
-}
 
 .field-p-kid-name .select2-arrow{
   display: none;
+}
+
+
+.form-item-field-p-small-group-target-id-entityreference-filter button,
+#edit-actionviews-bulk-operations-argument-selector-action,
+#edit-actionviews-bulk-operations-argument-selector-action--2,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter {
+   max-height: 25px;
+}
+
+.form-item-field-p-small-group-target-id-entityreference-filter button,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button{
+  padding: 2px 12px;
+}
+
+#edit-actionviews-bulk-operations-argument-selector-action--2,
+#edit-actionviews-bulk-operations-argument-selector-action{
+  padding: 4px 10px;
 }
