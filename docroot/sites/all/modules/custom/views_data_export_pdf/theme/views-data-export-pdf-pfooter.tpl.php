@@ -5,4 +5,3 @@
  * Theme export page footer.
  */
 ?>
-

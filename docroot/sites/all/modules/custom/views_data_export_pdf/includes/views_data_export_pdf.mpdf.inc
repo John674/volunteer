@@ -75,18 +75,20 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
   global $theme_path;
 
   if (isset($options['page-width']) && isset($options['page-height'])) {
-    if(isset($options['orientation']) && $options['orientation'] == "landscape") {
+    if (isset($options['orientation']) && $options['orientation'] == "landscape") {
       $page_size = [$options['page-height'], $options['page-width']];
-    } else {
+    }
+    else {
       $page_size = [$options['page-width'], $options['page-height']];
     }
 
   }
   else {
     $page = variable_get('pdf_using_mpdf_pdf_page_size');
-    if(isset($options['orientation']) && $options['orientation'] == "landscape") {
+    if (isset($options['orientation']) && $options['orientation'] == "landscape") {
       $page_size = [$paper_size[$page]['h'], $paper_size[$page]['w']];
-    } else {
+    }
+    else {
       $page_size = [$paper_size[$page]['w'], $paper_size[$page]['h']];
     }
   }
@@ -122,10 +124,10 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
     $margin_footer
   );
 
-  // set document DPI
+  // Set document DPI.
   $mpdf->dpi = (int) variable_get('pdf_using_mpdf_dpi', 96);
 
-  // Set image DPI
+  // Set image DPI.
   $mpdf->img_dpi = (int) variable_get('pdf_using_mpdf_img_dpi', 96);
 
   // Enabling header option if available.
@@ -209,12 +211,13 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
   if (isset($stylesheet) && $stylesheet != NULL) {
     $css_file_module = file_scan_directory($module_path, '/.*\.css$/');
     $css_file_theme = file_scan_directory($theme_path, '/.*\.css$/');
-    // Check module directory
+
+    // Check module directory.
     if (isset($css_file_module[$module_path . '/' . $stylesheet])) {
       $stylesheet_content = file_get_contents($module_path . '/' . $stylesheet);
       $mpdf->WriteHTML($stylesheet_content, 1);
     }
-    // Check theme directory
+    // Check theme directory.
     elseif (isset($css_file_theme[$theme_path . '/' . $stylesheet])) {
       $stylesheet_content = file_get_contents($theme_path . '/' . $stylesheet);
       $mpdf->WriteHTML($stylesheet_content, 1);
@@ -238,7 +241,9 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
       // Dialog box for Download as PDF.
       $mpdf->Output($filename . '.pdf', 'D');
       exit;
-      break;
+
+    break;
+
     case 2:
       $folder = pdf_using_mpdf_get_folder();
       if (is_dir(drupal_realpath($folder))) {
@@ -251,6 +256,7 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
           else {
             drupal_set_message(t("Please ensure that public folder is writable."));
             exit;
+
           }
         }
       }
@@ -262,6 +268,7 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
         else {
           drupal_set_message(t("Please ensure that public folder is writable."));
           exit;
+
         }
       }
       // Save to server 'Public file system path'.
@@ -269,13 +276,16 @@ function views_data_export_pdf_mpdf_generator($html, $options = [], $filename = 
       $mpdf->Output($path, 'F');
       drupal_goto($_SERVER['HTTP_REFERER']);
       exit;
-      break;
+
+    break;
+
     case 0:
     default:
       // Open in same browser.
       $mpdf->Output($filename . '.pdf', 'I');
       exit;
-      break;
+
+    break;
   }
 
   return TRUE;
