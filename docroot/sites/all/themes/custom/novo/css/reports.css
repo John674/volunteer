@@ -30,6 +30,8 @@
 .view-roster-report .views-field-views-conditional-1 > div,
 .view-roster-report .views-field-views-conditional-2 > div {
   padding: 5px 10px;
+  line-height: 1.1;
+  text-align: center;
 }
 .view-roster-report .field-collection-item-field-parent-guardian .field {
   display: inline-block;
