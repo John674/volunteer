@@ -53,7 +53,7 @@ function novo_content_strongarm_feature_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_attendance';
-  $strongarm->value = 'Attendance';
+  $strongarm->value = '[node:field_attendance_program_name]';
   $export['auto_entitylabel_pattern_node_attendance'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -266,6 +266,15 @@ function novo_content_strongarm_feature_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'only_first_row' => array(
+        'custom_settings' => FALSE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'pdf' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
         'custom_settings' => FALSE,
       ),
     ),

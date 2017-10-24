@@ -55,7 +55,7 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
   // Add report links.
   $form['report_links'] = [
     '#type' => 'markup',
-    '#markup' => novo_program_render_report_links(),
+    '#markup' => novo_program_render_report_links($form, $form_state),
     '#weight' => -10,
   ];
 }
@@ -184,20 +184,58 @@ function novo_program_views_query_alter(&$view, &$query) {
 /**
  * Render report links.
  */
-function novo_program_render_report_links() {
+function novo_program_render_report_links($form, $form_state) {
+  $year = isset($form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0]) ? $form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0] : NULL;
+  $location = isset($form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0]) ? $form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0] : NULL;
+  $class = isset($form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0]) ? $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0] : NULL;
+  $program = isset($form['nid']['#value']) ? $form['nid']['#value'] : NULL;
+
+  $nametag_options = [];
+  $canvassing_options = [];
+  $roster_options = [];
+  if (!empty($year)) {
+    $nametag_options['field_program_year_year'] = $year;
+    $canvassing_options['field_program_year_year'] = $year;
+    $roster_options['field_program_year_year'] = $year;
+  }
+  if (!empty($location)) {
+    $nametag_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $canvassing_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $roster_options['field_program_location_target_id_entityreference_filter'] = $location;
+  }
+  if (!empty($class)) {
+    $nametag_options['nid_entityreference_filter'] = $class;
+  }
+  if (!empty($program)) {
+    $canvassing_options['nid_entityreference_filter'] = $program;
+    $roster_options['nid_entityreference_filter'] = $program;
+  }
+
   $reports = [
-    'canvassing-report' => t('Canvasing'),
-    'roster-report' => t('Roster'),
-    'report-nametag' => t('Nametag'),
+    'canvassing-report' => [
+      'title' => t('Canvasing'),
+      'options' => $canvassing_options,
+    ],
+    'roster-report' => [
+      'title' => t('Roster'),
+      'options' => $roster_options,
+    ],
+    'report-nametag' => [
+      'title' => t('Nametag'),
+      'options' => $nametag_options,
+    ],
   ];
 
   $links = [];
-  foreach ($reports as $url => $title) {
+  foreach ($reports as $url => $link_data) {
     $links[] = [
-      'title' => $title,
+      'title' => $link_data['title'],
       'href' => url($url),
+      'attributes' => ['target' => '_blank'],
+      'query' => isset($link_data['options']) ? $link_data['options'] : [],
     ];
   }
+
   // @codingStandardsIgnoreStart
   return '<div class="novo-program-report-wrapper">' . theme("links", [
       'heading' => [
