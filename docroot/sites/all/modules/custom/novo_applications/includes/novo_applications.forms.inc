@@ -34,6 +34,8 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         // User already create application. Redirect.
         drupal_set_message(t("You already submit application"));
         drupal_goto("<front>");
+      } else {
+        drupal_goto("node/$app_nid/edit");
       }
     }
   }
