@@ -2378,7 +2378,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Children name';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Children';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: Content: Parent / Guardian List */
   $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
@@ -2389,8 +2389,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
     'view_mode' => 'full',
+    'field_multiple_limit' => '-1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
   );
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
@@ -2404,7 +2408,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  $handler->display->display_options['fields']['title']['label'] = 'Program';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
@@ -2447,6 +2451,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_arguments'] = 'none';
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_arguments_ignore_empty'] = 0;
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
+  /* Sort criterion: Content: Address Apartment number (field_apt) */
+  $handler->display->display_options['sorts']['field_apt_value']['id'] = 'field_apt_value';
+  $handler->display->display_options['sorts']['field_apt_value']['table'] = 'field_data_field_apt';
+  $handler->display->display_options['sorts']['field_apt_value']['field'] = 'field_apt_value';
+  $handler->display->display_options['sorts']['field_apt_value']['relationship'] = 'field_p_kid_name_target_id';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -2596,7 +2605,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Children name';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Children';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: Content: Parent / Guardian List */
   $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
@@ -2607,8 +2616,13 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
     'view_mode' => 'full',
+    'field_multiple_limit' => '-1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
   );
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_parent_guardian']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
@@ -2622,7 +2636,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  $handler->display->display_options['fields']['title']['label'] = 'Program';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
@@ -2702,7 +2716,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Children name';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Children';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
   /* Field: Content: Parent / Guardian List */
   $handler->display->display_options['fields']['field_parent_guardian']['id'] = 'field_parent_guardian';
@@ -2713,8 +2727,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
     'view_mode' => 'full',
+    'field_multiple_limit' => '-1',
+    'field_multiple_limit_offset' => '0',
+    'field_multiple_limit_order' => '0',
   );
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_program_location']['id'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
@@ -2728,7 +2746,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program name';
+  $handler->display->display_options['fields']['title']['label'] = 'Program';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
