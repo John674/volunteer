@@ -108,3 +108,14 @@
 .novo-report-general-report-form  #edit-novo-reports-filters {
   margin-bottom: 10px;
 }
+.view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian {
+  margin-top: 10px;
+}
+
+.view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian:first-child {
+  margin-top: 0px;
+}
+
+.group-title .placeholder {
+  font-style: normal;
+}
