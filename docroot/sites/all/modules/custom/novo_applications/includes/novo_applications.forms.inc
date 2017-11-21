@@ -79,6 +79,8 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['actions']['next']['#submit'][] = "novo_applications_form_submit";
   $form['actions']['done']['#submit'][] = "novo_applications_form_submit";
 
+  $form['actions']['save']['#access'] = FALSE;
+
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
   $form['field_app_7_final_agree_1'][$lang][0]['value']['#attributes']['placeholder'] = t("INITIALS HERE");
