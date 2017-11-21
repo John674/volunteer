@@ -210,7 +210,7 @@ function _novo_application_hide_parent_section(&$form) {
  * Validate 'How do you know this reference?' fields, value should be minimum 6 months.
  */
 function _custom_ref_how_long_field_validate($element, $form_state) {
-  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  $lang = isset($form_state['language']['#value']) ? $form_state['language']['#value'] : LANGUAGE_NONE;
   $field_how_long_name = $element[$lang]['#field_name'];
   $field_how_long_period_name = $field_how_long_name . '_period';
   $field_how_long_period_value = isset($form_state['values'][$field_how_long_period_name][$lang]) ? $form_state['values'][$field_how_long_period_name][$lang] : NULL;
@@ -277,7 +277,8 @@ function novo_applications_get_sites_for_virtual_field() {
       }
       $p_date = novo_applications_field_weekday_sort($p_date);
       foreach ($p_date as $weekday => $time_arr) {
-        $options[] = $weekday . ", " . $location . ", " . implode(", ", $time_arr) . " (" . $class . ")";
+        $key = $weekday . ", " . $location . ", " . implode(", ", $time_arr) . " (" . $class . ")";
+        $options[$key] = $key;
       }
     }
   }
@@ -307,24 +308,18 @@ function novo_applications_add_sites_virtual_validate(&$form, &$form_state) {
 
   if ($virtual && $original_field) {
     if (is_array($virtual)) {
-      $names = array();
+      $names = [];
       // Multi.
-      foreach ($virtual as $tid => $status) {
+      foreach ($virtual as $key => $status) {
         if ($status) {
-          $term = taxonomy_term_load($tid);
-          if (isset($term->name)) {
-            $names[] = array('value' => $term->name);
-          }
+          $names[] = ['value' => $key];
         }
       }
       form_set_value($original_field, $names, $form_state);
     }
     else {
       // Single.
-      $term = taxonomy_term_load(intval($virtual));
-      if (isset($term->name)) {
-        form_set_value($original_field[0]['value'], $term->name, $form_state);
-      }
+      form_set_value($original_field[0]['value'], $virtual, $form_state);
     }
   }
 }
