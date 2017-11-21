@@ -1,7 +1,7 @@
 name = Novo content STRONGARM feature
 core = 7.x
 package = Novo
-version = 7.x-1.3
+version = 7.x-1.4
 dependencies[] = ctools
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
@@ -24,6 +24,7 @@ features[variable][] = auto_entitylabel_php_node_mentors
 features[variable][] = auto_entitylabel_php_node_program
 features[variable][] = auto_entitylabel_php_node_reference_request
 features[variable][] = auto_entitylabel_php_node_staff
+features[variable][] = auto_entitylabel_strip_node_application
 features[variable][] = field_bundle_settings_field_collection_item__field_church_phone
 features[variable][] = field_bundle_settings_field_collection_item__field_contact
 features[variable][] = field_bundle_settings_field_collection_item__field_parent_guardian
