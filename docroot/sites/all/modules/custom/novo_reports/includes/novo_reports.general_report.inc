@@ -125,6 +125,7 @@ function novo_reports_general_report_get_data() {
   }
 
   $rows = [];
+
   foreach ($new_result as $location => $data) {
 
     $num_rows = count($data);
@@ -134,6 +135,7 @@ function novo_reports_general_report_get_data() {
 
       $attendance_percent_sum = 0;
       $sum = [];
+      $unique = [];
       foreach ($data as $key => $item) {
         $attendance_percent = (!empty($item->enrolled)) ? round($item->attendance * 100 / $item->enrolled, 0) : 0;
         $volunteers_percent = (!empty($item->active_volunteers)) ? round($item->volunteers * 100 / $item->active_volunteers, 0) : 0;
@@ -145,6 +147,12 @@ function novo_reports_general_report_get_data() {
           if ($h_key == "incident_reports") {
             $val = 0;
           }
+
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_conversation", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_salvation", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_disciplined", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_other", $item);
+          _novo_reports_unique($val, $unique, $h_key, "new", $item);
 
           $sum[$h_key] = (isset($sum[$h_key])) ? $sum[$h_key] + intval($val) : intval($val);
           if ($h_key == "attendance") {
@@ -188,6 +196,20 @@ function novo_reports_general_report_get_data() {
   return [$header, $rows];
 
 }
+
+/**
+ * Show data only for first item for day.
+ */
+function _novo_reports_unique(&$val, &$unique, $h_key, $field, $item){
+  if ($h_key == $field) {
+    if (isset($unique[$field][$item->att_date_value])) {
+      $val = 0;
+    } else {
+      $unique[$field][$item->att_date_value] = $val;
+    }
+  }
+}
+
 
 /**
  * Get location row.
