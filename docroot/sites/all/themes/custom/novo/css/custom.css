@@ -423,7 +423,6 @@ li.novo-leaf a {
   display: none;
 }
 
-
 .form-item-field-p-small-group-target-id-entityreference-filter button,
 #edit-actionviews-bulk-operations-argument-selector-action,
 #edit-actionviews-bulk-operations-argument-selector-action--2,
@@ -440,4 +439,7 @@ li.novo-leaf a {
 #edit-actionviews-bulk-operations-argument-selector-action--2,
 #edit-actionviews-bulk-operations-argument-selector-action{
   padding: 4px 10px;
+}
+h3.accordion-item.error a {
+  color: #a94442;
 }
