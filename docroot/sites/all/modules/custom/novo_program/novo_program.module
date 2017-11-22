@@ -248,3 +248,28 @@ function novo_program_render_report_links($form, $form_state) {
     ]) . '</div>';
   // @codingStandardsIgnoreEnd
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_program_form_class_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'novo_program_form_class_node_form_validate';
+}
+
+/**
+ * Class form validate.
+ */
+function novo_program_form_class_node_form_validate(&$form, &$form_state) {
+  $program_day = isset($form_state['values']['field_program_day'][LANGUAGE_NONE]) ? $form_state['values']['field_program_day'][LANGUAGE_NONE] : [];
+
+  if (isset($program_day['add_more'])) {
+    unset($program_day['add_more']);
+  }
+  foreach ($program_day as $key => $day) {
+    $start = isset($day['field_program_time'][LANGUAGE_NONE][0]['value']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value'] : 0;
+    $end = isset($day['field_program_time'][LANGUAGE_NONE][0]['value2']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value2'] : 0;
+    if ($end <= $start) {
+      form_set_error("field_program_day][" . LANGUAGE_NONE . "][" . $key . "][field_program_time", t("Start Time should be less then End time."));
+    }
+  }
+}

@@ -673,7 +673,7 @@ function novo_content_feature_field_group_info() {
       'label' => 'PERSONAL BELIEFS',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => '',
+        'classes' => 'group-app-4-beliefs field-group-accordion-item',
         'description' => 'Please check the statements that apply to you.',
       ),
       'formatter' => 'closed',
@@ -704,12 +704,13 @@ function novo_content_feature_field_group_info() {
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'CHURCH ATTENDANCE AND BACKGROUND',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
         'required_fields' => 1,
+        'classes' => 'group-app-4-church field-group-accordion-item',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_app_4_church|node|application|form'] = $field_group;
