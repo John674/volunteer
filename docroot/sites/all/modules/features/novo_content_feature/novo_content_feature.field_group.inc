@@ -1334,7 +1334,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '76',
+    'weight' => '75',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

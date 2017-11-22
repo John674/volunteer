@@ -1,7 +1,7 @@
 name = Novo roles/permissions feature
 core = 7.x
 package = Novo
-version = 7.x-1.22
+version = 7.x-1.23
 dependencies[] = admin_menu
 dependencies[] = ctools
 dependencies[] = entity_print
@@ -90,6 +90,7 @@ features[user_permission][] = novo reports access
 features[user_permission][] = publish any content
 features[user_permission][] = unpublish any content
 features[user_permission][] = view own unpublished content
+features[user_permission][] = view revisions
 features[user_permission][] = view the administration theme
 features[user_role][] = Applicant US citizen
 features[user_role][] = Reviewer

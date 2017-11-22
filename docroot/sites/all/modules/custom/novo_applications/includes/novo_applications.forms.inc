@@ -39,6 +39,17 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         drupal_goto("node/$app_nid/edit");
       }
     }
+    else {
+      // Add default values from user profile.
+      $account = user_load($user->uid);
+      $first_name = novo_applications_get_field_value("user", $account, "field_u_first_name");
+      $last_name = novo_applications_get_field_value("user", $account, "field_u_last_name");
+      $birthday = novo_applications_get_field_value("user", $account, "field_u_birthday");
+      $birthday_formatted = (!empty($birthday)) ? date("m/d/Y", strtotime($birthday)) : "";
+      $form['field_first_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $first_name;
+      $form['field_last_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_name;
+      $form['field_dob'][LANGUAGE_NONE][0]['#default_value']['value'] = $birthday_formatted;
+    }
   }
 
   // Add exp date default value.
@@ -342,4 +353,12 @@ function novo_applications_add_exp_date_validate(&$form, &$form_state) {
     $new_exp_date = [$lang => [['value' => strtotime('+3 year')]]];
     form_set_value($form['field_expired_date'], $new_exp_date, $form_state);
   }
+}
+
+/**
+ * get first value of field.
+ */
+function novo_applications_get_field_value($entity_type, $entity, $field) {
+  $field = field_get_items($entity_type, $entity, $field);
+  return isset($field[0]['value']) ? $field[0]['value'] : "";
 }
