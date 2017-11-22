@@ -164,12 +164,13 @@
                 </div>
             </div>
             <hr>
-            <?php print render($content['pseudo_field_request_date_cia'])?>
-            <?php print render($content['pseudo_field_response_date_cia'])?>
             <div class="panel panel-default">
                 <div class="panel-heading"><?php print (t('Application background tasks')); ?></div>
                 <div class="panel-body">
                   <?php print render($content['pseudo_field_request_cia']); ?>
+                  <?php print render($content['pseudo_field_request_date_cia'])?>
+                  <?php print render($content['pseudo_field_response_date_cia'])?>
+                  <?php print render($content['pseudo_field_renewal_date_cia'])?>
                   <?php print render($content['field_reference_request_1']); ?>
                   <?php print render($content['field_reference_request_2']); ?>
                   <?php print render($content['field_reference_request_standby']); ?>
