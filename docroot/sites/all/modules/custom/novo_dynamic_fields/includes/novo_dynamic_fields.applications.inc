@@ -23,12 +23,12 @@ function novo_dynamic_fields_attach_dynamic_fields_applications(&$variables) {
 
   $output .= theme("novo_dynamic_fields_row", array(
     "title" => t("First date serving"),
-    "content" => (!empty($min_date) ? format_date($min_date, "short") : " - ")
+    "content" => (!empty($min_date) ? format_date($min_date, "custom", "m/d/Y") : " - ")
   ));
 
   $output .= theme("novo_dynamic_fields_row", array(
     "title" => t("Last date serving"),
-    "content" => (!empty($max_date) ? format_date($max_date, "short") : " - ")
+    "content" => (!empty($max_date) ? format_date($max_date, "custom", "m/d/Y") : " - ")
   ));
 
   $output .= theme("novo_dynamic_fields_row", array(
