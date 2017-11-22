@@ -40,15 +40,23 @@ function novo_cia_node_view($node, $view_mode, $langcode) {
       '#type' => 'item',
       '#field_name' => 'pseudo_field_request_date_cia',
       '#theme' => 'pseudo_field__date_cia',
-      '#date_type' => t('Request date'),
+      '#date_type' => t('CIA Request date'),
       '#date' => novo_cia_date($node->nid, 'request_date'),
     );
     $node->content['pseudo_field_response_date_cia'] = array(
       '#type' => 'item',
       '#field_name' => 'pseudo_field_response_date_cia',
       '#theme' => 'pseudo_field__date_cia',
-      '#date_type' => t('Response date'),
+      '#date_type' => t('CIA Response date'),
       '#date' => novo_cia_date($node->nid, 'response_date'),
+    );
+
+    $node->content['pseudo_field_renewal_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_response_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('Background Check Renewal Date'),
+      '#date' => novo_cia_date($node->nid, 'response_date', TRUE),
     );
   }
 }

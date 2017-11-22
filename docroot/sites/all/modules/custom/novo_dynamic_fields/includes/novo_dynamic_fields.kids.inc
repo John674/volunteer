@@ -46,12 +46,12 @@ function novo_dynamic_fields_get_kids_active_status($nid) {
  */
 function novo_dynamic_fields_get_kids_active_status_formula() {
   $formula = "IF((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
-      FROM {field_revision_field_attendance_kids_list} AS kids
-        INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = kids.entity_id)
+      FROM {field_data_field_attendance_kids_list} AS kids
+        INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = kids.entity_id AND n_rev.vid = kids.revision_id)
       WHERE n_rev.timestamp < UNIX_TIMESTAMP() AND kids.field_attendance_kids_list_target_id = {node}.nid) <= 6, 'Current',
      IF((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24)
-         FROM {field_revision_field_attendance_kids_list} AS kids
-           INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = kids.entity_id)
+         FROM {field_data_field_attendance_kids_list} AS kids
+           INNER JOIN {node_revision} AS n_rev ON (n_rev.nid = kids.entity_id AND n_rev.vid = kids.revision_id)
          WHERE n_rev.timestamp < UNIX_TIMESTAMP() AND kids.field_attendance_kids_list_target_id = {node}.nid) <= 18, 'Lapsed',
         'Inactive'))";
   return "(" . $formula . ")";

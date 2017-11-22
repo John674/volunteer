@@ -315,10 +315,21 @@ function novo_cia_get_report_doc($nid) {
 /**
  * Get request or response date for CIA.
  */
-function novo_cia_date($nid = NULL, $date_type = NULL) {
+function novo_cia_date($nid = NULL, $date_type = NULL, $renewal = FALSE) {
   if (!empty($nid)) {
     $request = novo_cia_get_last_success_request($nid);
-    return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
+    if ($renewal) {
+      if (!empty($request->{$date_type}) && !empty($request->tracking_number)) {
+        $time = $request->{$date_type};
+        return format_date(strtotime("+3 month", $time), 'custom', 'Y-m-d  H:i:s');
+      }
+      else {
+        return 'N/A';
+      }
+    }
+    else {
+      return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
+    }
   }
   return NULL;
 }
