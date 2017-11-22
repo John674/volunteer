@@ -2877,7 +2877,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -3283,7 +3283,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 73,
+      'weight' => 72,
     ),
   );
 
@@ -3510,7 +3510,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 67,
+      'weight' => 76,
     ),
   );
 
@@ -3962,7 +3962,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 74,
+      'weight' => 73,
     ),
   );
 
@@ -5325,7 +5325,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -7053,7 +7053,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 71,
     ),
   );
 
@@ -7101,7 +7101,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -7433,7 +7433,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 71,
+      'weight' => 70,
     ),
   );
 
@@ -7540,7 +7540,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 75,
+      'weight' => 74,
     ),
   );
 
