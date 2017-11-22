@@ -168,7 +168,7 @@ function novo_reports_preprocess_body_report_nametag(&$vars) {
 }
 
 /**
- * Implements template_preprocess_views_data_export_xls_header
+ * Implements template_preprocess_views_data_export_xls_header().
  */
 function novo_reports_preprocess_views_data_export_xls_header(&$vars) {
 
@@ -195,12 +195,12 @@ function novo_reports_preprocess_views_data_export_xls_header(&$vars) {
 
     $vars['header_row'] .= '</tr></thead>';
 
-    $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']); // strip 'a' and 'span' tags
-  } else {
+    $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']);
+  }
+  else {
     template_preprocess_views_data_export_msoffice_header($vars);
   }
 }
-
 
 
 /**
@@ -211,13 +211,12 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
     $output = '';
 
     // Construct the tbody of a table, see theme_table().
-
     $ts = tablesort_init($vars['header']);
 
-    $flip = array(
+    $flip = [
       'even' => 'odd',
       'odd' => 'even',
-    );
+    ];
     $class = 'even';
 
     // Add grouping.
@@ -225,20 +224,20 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
       $rows = $vars['rows'];
       $first_row = reset($rows);
       $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
-      $cell = array(
+      $cell = [
         'data' => '<strong> ' . strtoupper($vars['title']) . '</strong>',
         'colspan' => count($vars['header']),
-        'style' => 'background-color:' . $color . ';'
-      );
+        'style' => 'background-color:' . $color . ';',
+      ];
       $output .= ' <tr>';
       $output .= _theme_table_cell($cell);
       $output .= " </tr>\n";
     }
 
     foreach ($vars['themed_rows'] as $number => $row) {
-      $attributes = array();
+      $attributes = [];
 
-      // Check if we're dealing with a simple or complex row
+      // Check if we're dealing with a simple or complex row.
       if (isset($row['data'])) {
         foreach ($row as $key => $value) {
           if ($key == 'data') {
@@ -262,7 +261,7 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
           $attributes['class'] = $class;
         }
 
-        // Build row
+        // Build row.
         $output .= ' <tr' . drupal_attributes($attributes) . '>';
         $i = 0;
         foreach ($cells as $cell) {
@@ -276,7 +275,8 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
 
     $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
 
-  } else {
+  }
+  else {
     // Pass through the generic MS Office process.
     template_process_views_data_export_msoffice_body($vars);
   }

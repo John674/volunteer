@@ -133,6 +133,8 @@ function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access arguments'] = [1];
 
   $items['user']['access callback'] = 'novo_master_disable_user_view';
+  $items['user/%user']['access callback'] = 'novo_master_disable_user_view_profiles';
+  $items['user/%user/view']['access callback'] = 'novo_master_disable_user_view_profiles';
 
   $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
 }
@@ -175,6 +177,17 @@ function novo_master_disable_user_view() {
     return FALSE;
   }
   return user_access('access user profiles');
+}
+
+/**
+ * Disable user view profile link for all users.
+ */
+function novo_master_disable_user_view_profiles() {
+  global $user;
+  if ($user->uid == 1) {
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**
@@ -345,7 +358,7 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
       $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : [];
       $paths[] = 'enrollment-report';
       $paths[] = 'general-report';
-      $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
+      $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths);
       break;
   }
 }

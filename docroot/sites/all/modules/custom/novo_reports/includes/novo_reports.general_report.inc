@@ -200,16 +200,16 @@ function novo_reports_general_report_get_data() {
 /**
  * Show data only for first item for day.
  */
-function _novo_reports_unique(&$val, &$unique, $h_key, $field, $item){
+function _novo_reports_unique(&$val, &$unique, $h_key, $field, $item) {
   if ($h_key == $field) {
     if (isset($unique[$field][$item->att_date_value])) {
       $val = 0;
-    } else {
+    }
+    else {
       $unique[$field][$item->att_date_value] = $val;
     }
   }
 }
-
 
 /**
  * Get location row.

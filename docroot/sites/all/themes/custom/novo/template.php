@@ -684,6 +684,11 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     }
   }
 
+  // Disable multistep fir user profiles.
+  if ($form['#id'] == "user-profile-form") {
+    $form['actions']['done']['#access'] = FALSE;
+  }
+
 }
 
 /**
