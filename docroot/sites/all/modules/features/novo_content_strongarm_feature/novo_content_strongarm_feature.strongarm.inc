@@ -151,6 +151,13 @@ function novo_content_strongarm_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'auto_entitylabel_strip_node_application';
+  $strongarm->value = 0;
+  $export['auto_entitylabel_strip_node_application'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_field_collection_item__field_church_phone';
   $strongarm->value = array(
     'view_modes' => array(

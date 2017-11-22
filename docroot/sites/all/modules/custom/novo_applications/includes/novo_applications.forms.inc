@@ -78,6 +78,9 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['actions']['previous']['#submit'][] = "novo_applications_form_submit";
   $form['actions']['save']['#submit'][] = "novo_applications_form_submit";
   $form['actions']['next']['#submit'][] = "novo_applications_form_submit";
+  $form['actions']['done']['#submit'][] = "novo_applications_form_submit";
+
+  $form['actions']['save']['#access'] = FALSE;
 
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
@@ -182,6 +185,7 @@ function novo_applications_form_submit(&$form, &$form_state) {
         node_save($node);
         cache_clear_all("field:node:{$node->nid}", 'cache_field');
         if (!user_access("disable auto complete redirect")) {
+          drupal_get_messages("status");
           drupal_set_message("Your application will begin processing now!");
           drupal_goto("<front>");
         }
@@ -217,10 +221,12 @@ function _custom_ref_how_long_field_validate($element, $form_state) {
   $field_how_long_period_name = $field_how_long_name . '_period';
   $field_how_long_period_value = isset($form_state['values'][$field_how_long_period_name][$lang]) ? $form_state['values'][$field_how_long_period_name][$lang] : NULL;
 
-  if (!empty($field_how_long_period_value) && ($field_how_long_period_value == 'months')) {
+  if (!empty($field_how_long_period_value)) {
     $field_how_long_value = isset($field_how_long_period_value) ? intval($element[$lang][0]['value']['#value']) : NULL;
-    if (!empty($field_how_long_value) && ($field_how_long_value < 6)) {
-      form_error($element, t('@field_name field should be minimum 6 months.', ['@field_name' => $element[$lang]['#title']]));
+    if (empty($field_how_long_value)) {
+      form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
+    } elseif (($field_how_long_period_value == 'months') && $field_how_long_value < 6) {
+      form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
     }
   }
 }
