@@ -28,6 +28,7 @@ function novo_reports_general_report() {
  * Get report data for table.
  */
 function novo_reports_general_report_get_data() {
+  novo_master_set_default_mysql_timezone();
   $params = drupal_get_query_parameters();
   $start_time = isset($params['filter_by_start_date']) ? strtotime($params['filter_by_start_date']) : NULL;
   $end_time = isset($params['filter_by_end_date']) ? strtotime($params['filter_by_end_date']) : NULL;

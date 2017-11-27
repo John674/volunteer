@@ -133,6 +133,9 @@ function novo_applications_get_app_active_status_formula() {
 //    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18, 'Lapsed', 'Inactive'))";
   // @codingStandardsIgnoreEnd
 
+
+  novo_master_set_default_mysql_timezone();
+
   $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
     FROM {field_data_field_attendance_volunteer_list} AS av 
     INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
@@ -149,6 +152,7 @@ function novo_applications_get_app_active_status_formula() {
  * Select last date serving (max date) for views and dyn fields.
  */
 function novo_applications_get_last_date_serving_formula() {
+  novo_master_set_default_mysql_timezone();
   $formula = "SELECT UNIX_TIMESTAMP(MAX(ad.field_attendance_date_value))
     FROM {field_data_field_attendance_volunteer_list} AS av 
     INNER JOIN {field_data_field_attendance_date} AS ad ON ad.entity_id = av.entity_id
@@ -160,6 +164,7 @@ function novo_applications_get_last_date_serving_formula() {
  * Select first date serving (min date) for views and dyn fields.
  */
 function novo_applications_get_first_date_serving_formula() {
+  novo_master_set_default_mysql_timezone();
   $formula = "SELECT UNIX_TIMESTAMP(MIN(ad.field_attendance_date_value))
     FROM {field_data_field_attendance_volunteer_list} AS av 
     INNER JOIN {field_data_field_attendance_date} AS ad ON ad.entity_id = av.entity_id

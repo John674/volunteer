@@ -9,6 +9,7 @@
  * Get attendance enrolled formula.
  */
 function novo_reports_get_attendance_enrolled_formula($sub_query_nid = NULL) {
+  novo_master_set_default_mysql_timezone();
   // SELECT KIDS Enrolled before attendance date (23:59).
   // Select last revision on this date.
   $sub_query_nid_value = (!empty($sub_query_nid)) ? $sub_query_nid : "{node}.nid";
@@ -72,6 +73,7 @@ function novo_reports_get_attendance_new_formula($sub_query_nid = NULL) {
  * Get mentoring_conversation_formula formula.
  */
 function novo_reports_get_mentoring_conversation_formula($att_nid, $type_filter = NULL) {
+  novo_master_set_default_mysql_timezone();
   $prev_att_date_formula = "SELECT UNIX_TIMESTAMP(att_prev_date.field_attendance_date_value) FROM {field_data_field_attendance_date} AS att_prev_date 
   WHERE att_prev_date.entity_id = (SELECT a_p_name2.entity_id AS prev_entity_id
                             FROM field_data_field_attendance_program_name AS a_p_name
@@ -132,7 +134,7 @@ WHERE att_vol_list.entity_id = $att_nid";
  * Get volunteers number formula.
  */
 function novo_reports_get_active_volunteers_number_formula($att_nid) {
-
+  novo_master_set_default_mysql_timezone();
   $formula = "
   SELECT count(DISTINCT att_vol_list.field_attendance_volunteer_list_target_id)
 
