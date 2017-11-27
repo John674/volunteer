@@ -573,3 +573,15 @@ function _novo_master_datetotime($date, $format = 'YYYY-MM-DD') {
   return 0;
 
 }
+
+/**
+ * Set default mysql timezone.
+ */
+function novo_master_set_default_mysql_timezone() {
+  static $already_set = FALSE;
+  if (!$already_set) {
+    // Set default timezone.
+    db_query("SET @@session.time_zone = '+00:00'");
+    $already_set = TRUE;
+  }
+}

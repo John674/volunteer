@@ -57,6 +57,9 @@ function novo_dynamic_fields_get_kids_active_status_formula() {
 //         WHERE n_rev.timestamp < UNIX_TIMESTAMP() AND kids.field_attendance_kids_list_target_id = {node}.nid) <= 18, 'Lapsed',
 //        'Inactive'))";
   // @codingStandardsIgnoreEnd
+  // Set default timezone.
+  novo_master_set_default_mysql_timezone();
+
   $formula = "IF((SELECT ((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24)
       FROM {field_data_field_attendance_kids_list} AS kids
         INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = kids.entity_id
