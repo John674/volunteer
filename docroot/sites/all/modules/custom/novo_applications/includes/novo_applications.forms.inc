@@ -40,15 +40,24 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
       }
     }
     else {
+      $uid = $user->uid;
+      if (user_access("edit application with any status")) {
+        $uid = (isset($_GET['uid'])) ? $_GET['uid'] : $uid;
+      }
+
       // Add default values from user profile.
-      $account = user_load($user->uid);
-      $first_name = novo_applications_get_field_value("user", $account, "field_u_first_name");
-      $last_name = novo_applications_get_field_value("user", $account, "field_u_last_name");
-      $birthday = novo_applications_get_field_value("user", $account, "field_u_birthday");
-      $birthday_formatted = (!empty($birthday)) ? date("m/d/Y", strtotime($birthday)) : "";
-      $form['field_first_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $first_name;
-      $form['field_last_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_name;
-      $form['field_dob'][LANGUAGE_NONE][0]['#default_value']['value'] = $birthday_formatted;
+      $account = user_load($uid);
+      if (!empty($account)) {
+        $email = $account->mail;
+        $first_name = novo_applications_get_field_value("user", $account, "field_u_first_name");
+        $last_name = novo_applications_get_field_value("user", $account, "field_u_last_name");
+        $birthday = novo_applications_get_field_value("user", $account, "field_u_birthday");
+        $birthday_formatted = (!empty($birthday)) ? date("m/d/Y", strtotime($birthday)) : "";
+        $form['field_first_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $first_name;
+        $form['field_last_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_name;
+        $form['field_dob'][LANGUAGE_NONE][0]['#default_value']['value'] = $birthday_formatted;
+        $form['field_email'][LANGUAGE_NONE][0]['email']['#default_value'] = $email;
+      }
     }
   }
 
@@ -64,21 +73,7 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   }
 
   // Replace uid for admins.
-  if (user_access("edit application with any status")) {
-    $uid = 0;
-    $arg_uid = (isset($_GET['uid'])) ? $_GET['uid'] : NULL;
-    if (!empty($arg_uid)) {
-      $loaded_user = user_load($arg_uid);
-      if (isset($loaded_user->uid)) {
-        $uid = $loaded_user->uid;
-      }
-    }
-    $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
-  }
-  else {
-    $uid = $user->uid;
-    $form['field_app_user']['#access'] = FALSE;
-  }
+  $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
 
   if (empty($form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'])) {
     $form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'] = $uid;
