@@ -70,6 +70,7 @@ function novo_reports_general_report_get_data() {
   $select->condition("n_program.status", 1);
   $select->condition("n_program.type", "program");
   $select->addField("n_program", "title", "program");
+  $select->addField("n_program", "nid", "program_nid");
 
   // Add Mentoring Conversation.
   $ment_conv_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid");
@@ -100,6 +101,7 @@ function novo_reports_general_report_get_data() {
   $select->addExpression($active_volunteers_number_subquery, "active_volunteers");
 
   $select->orderBy("att_date_value");
+  $select->orderBy("program");
   $result = $select->execute()->fetchAll();
 
   $new_result = [];
@@ -202,11 +204,11 @@ function novo_reports_general_report_get_data() {
  */
 function _novo_reports_unique(&$val, &$unique, $h_key, $field, $item) {
   if ($h_key == $field) {
-    if (isset($unique[$field][$item->att_date_value])) {
+    if (isset($unique[$field][$item->program_nid][$item->att_date_value])) {
       $val = 0;
     }
     else {
-      $unique[$field][$item->att_date_value] = $val;
+      $unique[$field][$item->program_nid][$item->att_date_value] = $val;
     }
   }
 }
