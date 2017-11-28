@@ -24,7 +24,7 @@ function novo_preprocess_html(&$variables) {
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
 
-  if ($variables['type'] == 'kids' && $variables['view_mode'] == 'full') {
+  if (($variables['type'] == 'kids' || $variables['type'] == 'staff') && $variables['view_mode'] == 'full') {
     drupal_goto("node/" . $variables['nid'] . "/edit");
   }
 
