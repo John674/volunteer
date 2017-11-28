@@ -785,9 +785,14 @@ function novo_views_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Attendance Records of Kids';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
@@ -930,7 +935,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -1051,7 +1056,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -1223,9 +1228,14 @@ function novo_views_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Attendance Records of Staff';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
@@ -1368,7 +1378,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -1489,7 +1499,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -1664,10 +1674,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    5 => '5',
     3 => '3',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
@@ -1809,7 +1821,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -1930,7 +1942,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['label'] = 'Class name';
   $handler->display->display_options['fields']['field_attendance_program_name']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: Attendance date */
@@ -4465,9 +4477,14 @@ function novo_views_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'List Kids mentored';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
@@ -4961,9 +4978,14 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'List Programm Participated';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
@@ -5049,7 +5071,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5152,7 +5174,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5202,7 +5224,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5248,9 +5270,14 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['title'] = 'List Programm Participated';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
@@ -5336,7 +5363,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5439,7 +5466,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5489,7 +5516,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_program_location']['table'] = 'field_data_field_program_location';
   $handler->display->display_options['fields']['field_program_location']['field'] = 'field_program_location';
   $handler->display->display_options['fields']['field_program_location']['settings'] = array(
-    'bypass_access' => 0,
+    'bypass_access' => 1,
     'link' => 0,
   );
   /* Field: Content: School year */
@@ -5534,9 +5561,14 @@ function novo_views_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'List Staff mentors';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    5 => '5',
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(

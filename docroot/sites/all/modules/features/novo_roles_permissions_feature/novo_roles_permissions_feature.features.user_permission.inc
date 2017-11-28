@@ -20,7 +20,9 @@ function novo_roles_permissions_feature_user_default_permissions() {
   // Exported permission: 'access administration pages'.
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
-    'roles' => array(),
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
     'module' => 'system',
   );
 

@@ -131,11 +131,8 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
 function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
   $items['node/%node/view']['access arguments'] = [1];
-
   $items['user']['access callback'] = 'novo_master_disable_user_view';
-  $items['user/%user']['access callback'] = 'novo_master_disable_user_view_profiles';
-  $items['user/%user/view']['access callback'] = 'novo_master_disable_user_view_profiles';
-
+  $items['user/%user']['access callback'] = 'novo_master_disable_user_view';
   $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
 }
 
@@ -169,25 +166,11 @@ function novo_master_disable_node_add_page() {
  * Disable user view link for volunteers.
  */
 function novo_master_disable_user_view() {
-  if (user_is_anonymous()) {
-    return TRUE;
-  }
   $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
   if (user_has_role($role->rid)) {
     return FALSE;
   }
-  return user_access('access user profiles');
-}
-
-/**
- * Disable user view profile link for all users.
- */
-function novo_master_disable_user_view_profiles() {
-  global $user;
-  if ($user->uid == 1) {
-    return TRUE;
-  }
-  return FALSE;
+  return user_access("access user profiles");
 }
 
 /**

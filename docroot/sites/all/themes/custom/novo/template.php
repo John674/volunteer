@@ -24,6 +24,10 @@ function novo_preprocess_html(&$variables) {
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
 
+  if ($variables['type'] == 'kids' && $variables['view_mode'] == 'full') {
+    drupal_goto("node/" . $variables['nid'] . "/edit");
+  }
+
   if ($variables['type'] == 'kids') {
     $node = $variables['node'];
     $field_suffix = field_get_items('node', $node, 'field_suffix');
