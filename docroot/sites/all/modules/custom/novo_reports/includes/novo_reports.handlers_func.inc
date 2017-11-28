@@ -86,7 +86,15 @@ function novo_reports_get_mentoring_conversation_formula($att_nid, $type_filter 
                             LIMIT 1)
                             LIMIT 1";
 
-  $type_filter_formula = (!empty($type_filter)) ? "AND LOWER(ment_type.field_mentoring_value) = '" . $type_filter . "'" : "";
+  $type_filter_formula = "";
+  if (!empty($type_filter)) {
+    if ($type_filter == 'other') {
+      $type_filter_formula = "AND ment_type.field_mentoring_value IS NOT NULL AND LOWER(ment_type.field_mentoring_value) <> 'salvation' AND LOWER(ment_type.field_mentoring_value) <> 'discipline'";
+    }
+    else {
+      $type_filter_formula = "AND LOWER(ment_type.field_mentoring_value) = '" . $type_filter . "'";
+    }
+  }
 
   $formula = "SELECT count(*) AS mentors
 FROM {field_data_field_attendance_program_name} AS a_p_name
