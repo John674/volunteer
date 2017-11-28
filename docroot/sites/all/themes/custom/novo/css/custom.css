@@ -443,3 +443,7 @@ li.novo-leaf a {
 h3.accordion-item.error a {
   color: #a94442;
 }
+
+body.page-user-edit .tabs--primary{
+  display: none;
+}
