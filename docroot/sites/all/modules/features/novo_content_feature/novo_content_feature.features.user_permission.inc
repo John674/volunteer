@@ -2929,6 +2929,7 @@ function novo_content_feature_user_default_permissions() {
   $permissions['view field_email'] = array(
     'name' => 'view field_email',
     'roles' => array(
+      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'field_permissions',
@@ -3812,6 +3813,7 @@ function novo_content_feature_user_default_permissions() {
   $permissions['view own field_email'] = array(
     'name' => 'view own field_email',
     'roles' => array(
+      'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'field_permissions',

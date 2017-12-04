@@ -24,30 +24,35 @@ function novo_cia_get_render_data($nid) {
  * Prepare action buttons.
  */
 function novo_cia_prepare_action_buttons($nid) {
-  $buttons = [
-    'resend_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "novo-cia-request/send/" . $nid, [
+  $buttons = [];
+
+  if (user_access("send CIA")) {
+    $buttons['resend_link'] = l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "novo-cia-request/send/" . $nid, [
       'query' => drupal_get_destination(),
       'html' => TRUE,
       'attributes' => [
         'class' => ["btn", "btn-default", "btn-xs"],
       ],
-    ]),
-    'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send'), "novo-cia-request/send/" . $nid, [
+    ]);
+    $buttons['send_link'] = l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send'), "novo-cia-request/send/" . $nid, [
       'query' => drupal_get_destination(),
       'html' => TRUE,
       'attributes' => [
         'class' => ["btn", "btn-default", "btn-xs"],
       ],
-    ]),
-    'view_report_disabled' => l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "/", [
+    ]);
+  }
+
+  if (user_access("view CIA")) {
+    $buttons['view_report_disabled'] = l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "/", [
       'html' => TRUE,
       'attributes' => [
         'class' => ["btn", "btn-default", "btn-xs"],
         'disabled' => 'true',
         'role' => 'button',
       ],
-    ]),
-    'view_report_enabled' => l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "novo-cia/view_report/" . $nid, [
+    ]);
+    $buttons['view_report_enabled'] = l('<i class="glyphicon glyphicon-eye-open"></i> ' . t('View Report'), "novo-cia/view_report/" . $nid, [
       'query' => drupal_get_destination(),
       'html' => TRUE,
       'attributes' => [
@@ -55,8 +60,8 @@ function novo_cia_prepare_action_buttons($nid) {
         'role' => 'button',
         'target' => '_blank',
       ],
-    ]),
-  ];
+    ]);
+  }
 
   return $buttons;
 }
@@ -67,19 +72,31 @@ function novo_cia_prepare_action_buttons($nid) {
 function novo_cia_render_action_buttons($nid, $first_request = FALSE) {
   $buttons = novo_cia_prepare_action_buttons($nid);
   $completed_pull_request = novo_cia_get_completed_pull_request($nid);
+  $output = [];
   if (!$first_request) {
-    $output = $buttons['resend_link'];
+    if (isset($buttons['resend_link'])) {
+      $output[] = $buttons['resend_link'];
+    }
     if (!empty($completed_pull_request)) {
-      $output = $output . ' ' . $buttons['view_report_enabled'];
+      if (isset($buttons['view_report_enabled'])) {
+        $output[] = $buttons['view_report_enabled'];
+      }
     }
     else {
-      $output = $output . ' ' . $buttons['view_report_disabled'];
+      if (isset($buttons['view_report_disabled'])) {
+        $output[] = $buttons['view_report_disabled'];
+      }
     }
   }
   else {
-    $output = $buttons['send_link'] . ' ' . $buttons['view_report_disabled'];
+    if (isset($buttons['send_link'])) {
+      $output[] = $buttons['send_link'];
+    }
+    if (isset($buttons['view_report_disabled'])) {
+      $output[] = $buttons['view_report_disabled'];
+    }
   }
-  return $output;
+  return implode(" ", $output);
 }
 
 /**

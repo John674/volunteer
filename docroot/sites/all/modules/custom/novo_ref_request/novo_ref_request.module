@@ -132,7 +132,7 @@ function novo_ref_request_preprocess_node(&$variables) {
     $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
     $task = novo_ref_request_task_get_last($node->nid, TRUE);
 
-    if ((isset($task->status) && ($task->status == 1 || $task->status == 0) && !$responded) || user_access("edit ref request with any status")) {
+    if ((isset($task->status) && ($task->status == 1 || $task->status == 0) && !$responded && !user_is_logged_in()) || user_access("edit ref request with any status")) {
       $save_form = drupal_get_form("novo_ref_request_save_form", $node);
       $variables['content'] = array();
       $variables['content']['save_form'] = $save_form;
@@ -328,6 +328,7 @@ function novo_ref_request_preprocess_field(&$variables) {
   $node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
 
   if (isset($node->type) && $node->type == 'application') {
+
     switch ($variables['element']['#field_name']) {
       case 'field_reference_request_1':
       case 'field_reference_request_2':
@@ -382,7 +383,6 @@ function novo_ref_request_prepare_fields(&$variables, $title = "") {
     $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));
     $phone = isset($ref_task->phone) ? $ref_task->phone : "";
     $status_buttons = novo_ref_request_render_action_buttons($entity->nid, $status, $phone);
-
     $variables['ref_data'] = array(
       'status' => $status,
       'status_label' => $status_label,
@@ -455,7 +455,6 @@ function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
       break;
 
     default:
-      $output = $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'];
       $output = (user_access("edit ref request with any status")) ? $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'] : $buttons['pdf_link'];
       break;
   }
