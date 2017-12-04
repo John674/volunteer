@@ -133,7 +133,6 @@ function novo_applications_get_app_active_status_formula() {
 //    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18, 'Lapsed', 'Inactive'))";
   // @codingStandardsIgnoreEnd
 
-
   novo_master_set_default_mysql_timezone();
 
   $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)

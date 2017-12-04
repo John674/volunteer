@@ -42,7 +42,7 @@ function novo_content_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Class name'),
+      'title_label' => t('Class'),
       'help' => '',
     ),
     'kids' => array(
@@ -58,7 +58,7 @@ function novo_content_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Location Name'),
+      'title_label' => t('Location'),
       'help' => '',
     ),
     'mentors' => array(

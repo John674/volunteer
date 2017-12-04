@@ -434,6 +434,7 @@ function novo_master_node_grants($account, $op) {
     }
     $grants["novo_master_access_webform"] = $rids;
     $grants["novo_master_access_reviewer"] = $rids;
+    $grants["novo_master_access_anon"] = $rids;
   }
   return $grants;
 }
@@ -480,7 +481,7 @@ function novo_master_node_access_records($node) {
   }
 
   // Allow reviewer access.
-  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application') {
+  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application' || $node->type == 'reference_request') {
     $grants[] = [
       'realm' => "novo_master_access_reviewer",
       'gid' => NOVO_MASTER_ROLE_REVIEWER,
@@ -508,6 +509,17 @@ function novo_master_node_access_records($node) {
     'grant_delete' => 0,
     'priority' => 1,
   ];
+
+  if ($node->type == 'reference_request') {
+    $grants[] = [
+      'realm' => "novo_master_access_anon",
+      'gid' => NOVO_MASTER_ROLE_ANON,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+  }
 
   return $grants;
 }

@@ -7632,7 +7632,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_date',
-    'label' => 'Attendance date',
+    'label' => 'Attendance Date',
     'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
@@ -7688,7 +7688,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_kids_list',
-    'label' => 'Kids list',
+    'label' => 'Kids List',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7778,7 +7778,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_program_name',
-    'label' => 'Program name',
+    'label' => 'Enrollment (Class) Name',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7823,7 +7823,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_staff_list',
-    'label' => 'Staff list',
+    'label' => 'Staff List',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7833,11 +7833,6 @@ Friend',
       'module' => 'select2widget',
       'settings' => array(
         'apply_chosen' => 0,
-        'fix_display' => 0,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
         'select2widgetajax' => array(
           'match_limit' => 10,
           'match_operator' => 'STARTS_WITH',
@@ -7846,7 +7841,6 @@ Friend',
           'view_mode' => 'select2widget_labels',
           'width' => '',
         ),
-        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
       'weight' => 6,
@@ -7882,7 +7876,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_volunteer_list',
-    'label' => 'Volunteer list',
+    'label' => 'Volunteer List',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7933,7 +7927,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_year',
-    'label' => 'Year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -8030,7 +8024,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_class_year',
-    'label' => 'School year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -8083,7 +8077,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_day',
-    'label' => 'Program day',
+    'label' => 'Program Day',
     'required' => 1,
     'settings' => array(
       'field_lock_multi_values' => array(
@@ -10442,7 +10436,7 @@ Discipline',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_class_name',
-    'label' => 'Class name',
+    'label' => 'Class',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -10586,7 +10580,7 @@ Discipline',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_year',
-    'label' => 'School year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -11088,13 +11082,13 @@ Discipline',
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');
   t('Attend Church Regularly?');
-  t('Attendance date');
+  t('Attendance Date');
   t('Bag');
   t('Canvassing Group');
   t('Church Reference');
   t('Church name');
   t('City');
-  t('Class name');
+  t('Class');
   t('Color Preference');
   t('Completed');
   t('Contact List');
@@ -11104,6 +11098,7 @@ Discipline',
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
   t('Employer');
+  t('Enrollment (Class) Name');
   t('Ephesians 2:10, Romans 8:1');
   t('Ephesians 2:4-7, Romans 3:10-12');
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
@@ -11161,6 +11156,7 @@ Discipline',
   t('Job Title');
   t('Kid Name');
   t('Kid name');
+  t('Kids List');
   t('Kids list');
   t('Last Name');
   t('Legal First Name');
@@ -11189,10 +11185,9 @@ Discipline',
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
   t('Previous Church Involvement');
+  t('Program Day');
   t('Program Location');
   t('Program Name');
-  t('Program day');
-  t('Program name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');
@@ -11203,13 +11198,13 @@ Discipline',
   t('Relationship');
   t('Responded');
   t('Romans 1:16');
+  t('School Year');
   t('School name');
-  t('School year');
   t('Small Group');
   t('Social security number');
+  t('Staff List');
   t('Staff Mentor Name');
   t('Staff contact');
-  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');
@@ -11225,13 +11220,12 @@ Discipline',
   t('Type');
   t('User uid');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('Volunteer List');
   t('Volunteer Mentor Name');
-  t('Volunteer list');
   t('Weekday');
   t('What did you talk about');
   t('What verses did you share');
   t('When and how did you receive Jesus as Savior?');
-  t('Year');
   t('Zip');
 
   return $field_instances;

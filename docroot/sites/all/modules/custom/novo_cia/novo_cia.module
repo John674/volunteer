@@ -274,3 +274,19 @@ function novo_cia_cron() {
     variable_set(NOVO_CIA_CRON_LAST_CHECK_EXPIRED, REQUEST_TIME);
   }
 }
+
+/**
+ * Implements hook_permission().
+ */
+function novo_cia_permission() {
+  return array(
+    'view CIA' => array(
+      'title' => t('Allow view CIA'),
+      'description' => t('Allow view CIA data.'),
+    ),
+    'send CIA' => array(
+      'title' => t('Allow send/resend CIA'),
+      'description' => t('Allow send/resend CIA data.'),
+    ),
+  );
+}

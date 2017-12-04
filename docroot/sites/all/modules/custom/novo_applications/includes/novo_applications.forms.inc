@@ -218,8 +218,7 @@ function _novo_application_hide_parent_section(&$form) {
 }
 
 /**
- * Validate 'How do you know this reference?' fields, value should be minimum 6
- * months.
+ * Validate 'How do you know this reference?' fields, value should be minimum 6 months.
  */
 function _custom_ref_how_long_field_validate($element, $form_state) {
   $lang = isset($form_state['language']['#value']) ? $form_state['language']['#value'] : LANGUAGE_NONE;
@@ -231,7 +230,8 @@ function _custom_ref_how_long_field_validate($element, $form_state) {
     $field_how_long_value = isset($field_how_long_period_value) ? intval($element[$lang][0]['value']['#value']) : NULL;
     if (empty($field_how_long_value)) {
       form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
-    } elseif (($field_how_long_period_value == 'months') && $field_how_long_value < 6) {
+    }
+    elseif (($field_how_long_period_value == 'months') && $field_how_long_value < 6) {
       form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
     }
   }
@@ -351,7 +351,7 @@ function novo_applications_add_exp_date_validate(&$form, &$form_state) {
 }
 
 /**
- * get first value of field.
+ * Get first value of field.
  */
 function novo_applications_get_field_value($entity_type, $entity, $field) {
   $field = field_get_items($entity_type, $entity, $field);

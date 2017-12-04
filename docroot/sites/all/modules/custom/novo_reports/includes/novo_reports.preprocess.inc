@@ -202,7 +202,6 @@ function novo_reports_preprocess_views_data_export_xls_header(&$vars) {
   }
 }
 
-
 /**
  * Implements hook_process_views_data_export_xls_body().
  */
@@ -252,7 +251,7 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
         $cells = $row;
       }
       if (count($cells)) {
-        // Add odd/even class
+        // Add odd/even class.
         $class = $flip[$class];
         if (isset($attributes['class'])) {
           $attributes['class'] .= ' ' . $class;
@@ -272,8 +271,7 @@ function novo_reports_process_views_data_export_xls_body(&$vars) {
       }
     }
 
-
-    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
+    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
 
   }
   else {
