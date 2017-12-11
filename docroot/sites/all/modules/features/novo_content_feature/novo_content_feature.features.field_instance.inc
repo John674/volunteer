@@ -9714,6 +9714,7 @@ Discipline',
   // Exported field_instance: 'node-mentors-field_mentoring_date'.
   $field_instances['node-mentors-field_mentoring_date'] = array(
     'bundle' => 'mentors',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -9757,7 +9758,7 @@ Discipline',
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'j M Y - g:i:sa',
+        'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
