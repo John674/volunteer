@@ -119,3 +119,10 @@
 .group-title .placeholder {
   font-style: normal;
 }
+
+.form-item-novo-reports-filter-years select {
+  width: 134px;
+}
+.novo-report-enrollment-report-form .form-item-novo-reports-filter-years.form-item {
+  width: 140px;
+}

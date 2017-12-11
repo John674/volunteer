@@ -203,7 +203,8 @@ a.tabledrag-handle .handle {
   color: #fff;
   font-family: ProximaNovaBold;
   margin: 0px 20px;
-  padding: 0px 10px;
+  padding: 5px 10px;
+  line-height: 1.1;
 }
 
 .novo-small-group-wrapper {
@@ -446,4 +447,11 @@ h3.accordion-item.error a {
 
 body.page-user-edit .tabs--primary{
   display: none;
+}
+#user-profile-form .form-control {
+  height: 25px;
+}
+
+.form-item-field-attendance-year-year select {
+  width: 134px;
 }

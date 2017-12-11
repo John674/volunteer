@@ -625,12 +625,12 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     if (($form_id == 'user_register_form' || $form_id == 'user_pass') && isset($form['actions'])) {
 
       if ($form_id == 'user_register_form') {
-        $form['actions']['submit']['#value'] = t('Register');
+        $form['actions']['submit']['#value'] = t('Create New Account');
         $form['actions']['submit']['#weight'] = 5;
       }
 
       if ($form_id == 'user_pass') {
-        $form['actions']['submit']['#value'] = t('Send password');
+        $form['actions']['submit']['#value'] = t('Request New Password');
         $form['actions']['submit']['#weight'] = 10;
       }
 

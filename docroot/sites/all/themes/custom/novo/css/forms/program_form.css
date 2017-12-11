@@ -56,6 +56,10 @@
 .node-program-form .field-p-group-wrapper .field-name-field-p-small-group {
   margin-right: 30px;
 }
+.node-program-form .field-name-field-p-small-group .form-control,
+.node-program-form .field-p-canvassing-group .form-control {
+  height: auto;
+}
 
 .node-program-form .form-item-title {
   min-width: 300px;

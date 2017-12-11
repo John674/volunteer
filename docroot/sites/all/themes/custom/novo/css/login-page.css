@@ -266,9 +266,43 @@ html {
     left: 100%;
     color: white;
 }
-.novo-login-form .btn-login{
-    margin-right: 8px;
-}
+
 .novo-login-form .btn-submit{
     margin-left: 8px;
+}
+body.front .novo-login-form .form-actions ul li:first-child a:hover,
+body.page-user-register .novo-login-form .form-actions a:hover,
+body.page-user-password .novo-login-form .form-actions a:hover {
+    text-decoration: underline;
+}
+body.front .novo-login-form .form-actions ul li,
+body.page-user-register .novo-login-form .form-actions a,
+body.page-user-register .novo-login-form .form-actions button,
+body.page-user-password .novo-login-form .form-actions a,
+body.page-user-password .novo-login-form .form-actions button {
+    margin-left: 30px;
+}
+body.front .novo-login-form .form-actions ul li:first-child a,
+body.front .novo-login-form .form-actions a,
+body.page-user-register .novo-login-form .form-actions a,
+body.page-user-password .novo-login-form .form-actions a {
+    color: #ec1e24;
+    padding: 0px;
+    border: none;
+    vertical-align: top;
+    color: #ec1e24;
+    background: none;
+    margin-top: 6px;
+    display: inline-block;
+}
+body.front .novo-login-form .form-actions a,
+body.front .novo-login-form .form-actions ul li:first-child a {
+    margin-top: 3px;
+}
+body.page-user-register .novo-login-form .form-actions a.btn-login,
+body.page-user-password .novo-login-form .form-actions a.btn-login {
+    margin-left: 0px;
+}
+.novo-login-form .btn-login {
+    margin-right: 0px;
 }
