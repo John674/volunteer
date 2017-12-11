@@ -73,7 +73,7 @@ class novo_applications_handler_app_status_btn extends views_handler_field {
         $output = l('<i class="glyphicon glyphicon-plus"></i>', 'node/add/application', array(
           'query' => $query,
           'html' => TRUE,
-          'attributes' => array('class' => array("btn", "btn-danger", "btn-xs"))
+          'attributes' => array('class' => array())
         ));
       }
     }
