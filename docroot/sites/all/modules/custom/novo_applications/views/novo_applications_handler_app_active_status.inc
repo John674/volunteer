@@ -18,7 +18,13 @@ class novo_applications_handler_app_active_status extends views_handler_field {
   function query() {
     parent::query();
     $this->ensure_my_table();
-    $formula = novo_applications_get_app_active_status_formula();
+
+    $on_date = $this->view->exposed_input['novo_application_active_status_on_date'] ?? NULL;
+    if ($on_date) {
+      $on_date = strtotime($on_date);
+    }
+
+    $formula = novo_applications_get_app_active_status_formula($on_date);
     $this->field_alias = $this->query->add_field(NULL, $formula, $this->field_alias);
     $this->add_additional_fields();
   }
