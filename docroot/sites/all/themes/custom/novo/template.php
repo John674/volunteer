@@ -15,7 +15,7 @@ novo_theme_load_include("inc", "novo", "includes/novo_theme_form_elements");
  * Implements hook_preprocess_html().
  */
 function novo_preprocess_html(&$variables) {
-  // Specify new favicon location
+  // Specify new favicon location.
   $element = [
     'rel' => 'shortcut icon',
     'sizes' => "32x32",
@@ -786,6 +786,9 @@ function novo_views_data_export_feed_icon__pdf($variables) {
   return l($text, $url, $url_options);
 }
 
+/**
+ * Implements hook_html_head_alter().
+ */
 function novo_html_head_alter(&$head_elements) {
   global $base_url;
   $default_favicon_element = 'drupal_add_html_head_link:shortcut icon:' . $base_url . '/misc/favicon.ico';
