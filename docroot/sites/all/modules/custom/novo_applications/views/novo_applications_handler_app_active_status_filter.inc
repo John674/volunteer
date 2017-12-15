@@ -26,7 +26,13 @@ class novo_applications_handler_app_active_status_filter extends views_handler_f
   function query() {
     $this->ensure_my_table();
 
-    $formula = novo_applications_get_app_active_status_formula();
+    $on_date = $this->view->exposed_input['novo_application_active_status_on_date'] ?? NULL;
+    if ($on_date) {
+      $on_date = strtotime($on_date);
+    }
+
+    $formula = novo_applications_get_app_active_status_formula($on_date);
+    $where_formula = novo_applications_get_app_active_status_formula_where($on_date);
 
     $values = $this->value;
     foreach ($values as $key => $value) {
@@ -44,5 +50,7 @@ class novo_applications_handler_app_active_status_filter extends views_handler_f
 
     $values = implode(",", $values);
     $this->query->add_where_expression($this->options['group'], "$formula $this->operator ($values)");
+    $this->query->add_where_expression($this->options['group'], "$where_formula");
+
   }
 }

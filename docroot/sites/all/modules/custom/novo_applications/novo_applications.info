@@ -11,3 +11,7 @@ files[] = views/novo_applications_handler_app_active_status_sort.inc
 files[] = views/novo_applications_handler_app_active_status_filter.inc
 files[] = views/novo_applications_handler_app_last_date_serving.inc
 files[] = views/novo_applications_handler_app_last_date_serving_sort.inc
+
+
+
+files[] = views/novo_applications_handler_app_active_status_on_date_filter.inc

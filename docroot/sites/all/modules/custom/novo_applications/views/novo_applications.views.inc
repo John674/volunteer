@@ -63,6 +63,35 @@ function novo_applications_views_data() {
     ),
   );
 
+  $data['node']['novo_application_active_status_on_date'] = array(
+    'title' => t('Novo application specific date for active status'),
+    'help' => t('Provide Novo application active status sort on specific date.'),
+    'real field' => 'nid',
+    'filter' => array(
+      'real field' => 'nid',
+      'handler' => 'novo_applications_handler_app_active_status_on_date_filter',
+    ),
+  );
+
+  $data['node']['novo_application_active_status'] = array(
+    'title' => t('Novo application active status'),
+    'help' => t('Provide Novo application active status sort.'),
+    'real field' => 'nid',
+    'field' => array(
+      'title' => t('Novo application active status'),
+      'help' => t('Provide application active status Current/Lapsed/Inactive.'),
+      'handler' => 'novo_applications_handler_app_active_status',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'novo_applications_handler_app_active_status_sort',
+    ),
+    'filter' => array(
+      'real field' => 'nid',
+      'handler' => 'novo_applications_handler_app_active_status_filter',
+    ),
+  );
+
 
   return $data;
 }

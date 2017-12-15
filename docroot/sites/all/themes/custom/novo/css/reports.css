@@ -126,3 +126,12 @@
 .novo-report-enrollment-report-form .form-item-novo-reports-filter-years.form-item {
   width: 140px;
 }
+.view-volunteer-activity-report .views-widget-filter-novo_application_active_status_on_date .views-widget {
+  position: relative;
+  width: 134px;
+}
+.view-volunteer-activity-report .views-widget-filter-novo_application_active_status_on_date .views-widget .novo-reports-filter-on-date-icon {
+  margin-top: 0px;
+  top: 0px;
+  padding: 3px 6px;
+}
