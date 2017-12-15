@@ -85,6 +85,10 @@ function novo_reports_views_pre_render(&$view) {
   }
 
   if ($view->name == 'enrollment_report') {
+
+  }
+
+  if ($view->name == 'enrollment_report') {
     $tmp_result = [];
     foreach ($view->result as $key => $row) {
       $tmp_result[$row->field_data_field_program_location_field_program_location_tar][] = $row;

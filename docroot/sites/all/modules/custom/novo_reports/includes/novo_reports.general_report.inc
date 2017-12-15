@@ -108,11 +108,11 @@ function novo_reports_general_report_get_data() {
   $new_result = [];
   $header = [
     'att_date_value' => t('Date'),
-    'program' => 'Program name',
+    'program' => 'Enrollment name',
     'enrolled' => t('Enrolled'),
     'attendance' => t('Attendance'),
     'new' => t('New'),
-    'programming_days' => t('Programming_days'),
+    'programming_days' => t('Programming days'),
     'mentoring_conversation' => t('Mentoring Conversation'),
     'mentoring_salvation' => t('Salvations'),
     'mentoring_disciplined' => t('Disciplined'),
