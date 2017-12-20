@@ -11,7 +11,6 @@
 function novo_reports_general_report() {
   list($header, $rows) = novo_reports_general_report_get_data();
 
-
   $filters_form = drupal_get_form("novo_reports_general_report_get_filters_form");
   $output = drupal_render($filters_form);
 
@@ -29,6 +28,7 @@ function novo_reports_general_report() {
  * Get report data for table.
  */
 function novo_reports_general_report_get_data() {
+  novo_master_set_default_mysql_timezone();
   $params = drupal_get_query_parameters();
   $start_time = isset($params['filter_by_start_date']) ? strtotime($params['filter_by_start_date']) : NULL;
   $end_time = isset($params['filter_by_end_date']) ? strtotime($params['filter_by_end_date']) : NULL;
@@ -71,6 +71,7 @@ function novo_reports_general_report_get_data() {
   $select->condition("n_program.status", 1);
   $select->condition("n_program.type", "program");
   $select->addField("n_program", "title", "program");
+  $select->addField("n_program", "nid", "program_nid");
 
   // Add Mentoring Conversation.
   $ment_conv_subquery = novo_reports_get_mentoring_conversation_formula("n_att.nid");
@@ -96,7 +97,12 @@ function novo_reports_general_report_get_data() {
   $volunteers_number_subquery = novo_reports_get_volunteers_number_formula("n_att.nid");
   $select->addExpression($volunteers_number_subquery, "volunteers");
 
+  // Attendance active volunteers.
+  $active_volunteers_number_subquery = novo_reports_get_active_volunteers_number_formula("n_att.nid");
+  $select->addExpression($active_volunteers_number_subquery, "active_volunteers");
+
   $select->orderBy("att_date_value");
+  $select->orderBy("program");
   $result = $select->execute()->fetchAll();
 
   $new_result = [];
@@ -114,6 +120,7 @@ function novo_reports_general_report_get_data() {
     'incident_reports' => t('Incident Reports'),
     'att_staff_list' => t('Paid Staff'),
     'volunteers' => t('Volunteers'),
+    'active_volunteers' => t('Active Volunteers'),
   ];
 
   foreach ($result as $key => $item) {
@@ -121,6 +128,7 @@ function novo_reports_general_report_get_data() {
   }
 
   $rows = [];
+
   foreach ($new_result as $location => $data) {
 
     $num_rows = count($data);
@@ -130,8 +138,10 @@ function novo_reports_general_report_get_data() {
 
       $attendance_percent_sum = 0;
       $sum = [];
+      $unique = [];
       foreach ($data as $key => $item) {
         $attendance_percent = (!empty($item->enrolled)) ? round($item->attendance * 100 / $item->enrolled, 0) : 0;
+        $volunteers_percent = (!empty($item->active_volunteers)) ? round($item->volunteers * 100 / $item->active_volunteers, 0) : 0;
 
         $row = [];
         foreach ($header as $h_key => $h_value) {
@@ -141,9 +151,18 @@ function novo_reports_general_report_get_data() {
             $val = 0;
           }
 
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_conversation", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_salvation", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_disciplined", $item);
+          _novo_reports_unique($val, $unique, $h_key, "mentoring_other", $item);
+          _novo_reports_unique($val, $unique, $h_key, "new", $item);
+
           $sum[$h_key] = (isset($sum[$h_key])) ? $sum[$h_key] + intval($val) : intval($val);
           if ($h_key == "attendance") {
             $val .= " (" . $attendance_percent . "%)";
+          }
+          if ($h_key == "volunteers") {
+            $val .= " (" . $volunteers_percent . "%)";
           }
           $row[] = $val;
 
@@ -179,6 +198,20 @@ function novo_reports_general_report_get_data() {
 
   return [$header, $rows];
 
+}
+
+/**
+ * Show data only for first item for day.
+ */
+function _novo_reports_unique(&$val, &$unique, $h_key, $field, $item) {
+  if ($h_key == $field) {
+    if (isset($unique[$field][$item->program_nid][$item->att_date_value])) {
+      $val = 0;
+    }
+    else {
+      $unique[$field][$item->program_nid][$item->att_date_value] = $val;
+    }
+  }
 }
 
 /**

@@ -30,6 +30,8 @@
 .view-roster-report .views-field-views-conditional-1 > div,
 .view-roster-report .views-field-views-conditional-2 > div {
   padding: 5px 10px;
+  line-height: 1.1;
+  text-align: center;
 }
 .view-roster-report .field-collection-item-field-parent-guardian .field {
   display: inline-block;
@@ -105,4 +107,22 @@
 }
 .novo-report-general-report-form  #edit-novo-reports-filters {
   margin-bottom: 10px;
+}
+.view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian {
+  margin-top: 10px;
+}
+
+.view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian:first-child {
+  margin-top: 0px;
+}
+
+.group-title .placeholder {
+  font-style: normal;
+}
+
+.form-item-novo-reports-filter-years select {
+  width: 134px;
+}
+.novo-report-enrollment-report-form .form-item-novo-reports-filter-years.form-item {
+  width: 140px;
 }

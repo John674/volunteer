@@ -85,7 +85,7 @@ a.tabledrag-handle .handle {
   width: 200px;
 }
 #ui-datepicker-div {
-  z-index: 2 !important;
+  z-index: 100 !important;
 }
 .novo-entity-add-btn {
   float: right;
@@ -203,7 +203,8 @@ a.tabledrag-handle .handle {
   color: #fff;
   font-family: ProximaNovaBold;
   margin: 0px 20px;
-  padding: 0px 10px;
+  padding: 5px 10px;
+  line-height: 1.1;
 }
 
 .novo-small-group-wrapper {
@@ -349,26 +350,108 @@ li.novo-leaf a {
 
 .novo-form .field-name-field-phone .field-multiple-table {
   width: 70%;
-  float: left;
   margin-top: 10px;
 }
 
 .novo-form .field-name-field-phone .field-multiple-table thead {
   display: none;
 }
-.novo-form .field-name-field-parent-guardian .field-add-more-submit{
+/*.novo-form .field-name-field-parent-guardian .field-add-more-submit{
   position: absolute;
   bottom: 9px;
   left: 50px;
-}
-.novo-form .field-name-field-phone .field-add-more-submit {
-  position: absolute;
-  bottom: 10px;
-  left: auto;
-  margin-left: 15px;
-}
+}*/
+
 
 .novo-web-form .btn-primary{
   background: #EC1E24 none;
   border: 1px solid transparent;
+}
+
+.novo-collection{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.novo-collection .field-name-field-phone{
+  order: 2;
+  width: 100%;
+}
+
+.novo-collection button{
+  max-height: 25px;
+  align-self: flex-end;
+}
+.novo-collection .field-name-field-phone {
+  padding-left: 30px;
+}
+
+.field-name-field-ssn input,
+.field-name-field-phone-number input {
+  display: inline-block;
+  width: 100%;
+  padding: 2px 12px;
+  height: 25px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.field-name-field-ssn input{
+  width: auto;
+}
+
+.field-name-field-ssn input:focus,
+.field-name-field-phone-number input:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.field-p-kid-name .select2-arrow{
+  display: none;
+}
+
+.form-item-field-p-small-group-target-id-entityreference-filter button,
+#edit-actionviews-bulk-operations-argument-selector-action,
+#edit-actionviews-bulk-operations-argument-selector-action--2,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter {
+   max-height: 25px;
+}
+
+.form-item-field-p-small-group-target-id-entityreference-filter button,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button{
+  padding: 2px 12px;
+}
+
+#edit-actionviews-bulk-operations-argument-selector-action--2,
+#edit-actionviews-bulk-operations-argument-selector-action{
+  padding: 4px 10px;
+}
+h3.accordion-item.error a {
+  color: #a94442;
+}
+
+body.page-user-edit .tabs--primary{
+  display: none;
+}
+#user-profile-form .form-control {
+  height: 25px;
+}
+
+.form-item-field-attendance-year-year select {
+  width: 134px;
 }

@@ -435,7 +435,7 @@ function novo_master_update_7138() {
   features_revert_module("novo_content_feature");
   features_revert_module("novo_menu_feature");
   features_revert_module("novo_views_feature");
-  features_revert_module("novo_roles_permissions_feature");
+  features_revert_module("novo_roles_permissions_featuKre");
 }
 
 /**
@@ -484,4 +484,11 @@ function novo_master_update_7143() {
  */
 function novo_master_update_7144() {
   features_revert_module("novo_views_feature");
+}
+
+/**
+ * Ask to rebuild access.
+ */
+function novo_master_update_7145() {
+  node_access_needs_rebuild(TRUE);
 }

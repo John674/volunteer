@@ -664,7 +664,7 @@ function novo_content_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_phone_number',
     'label' => 'Phone',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -2877,7 +2877,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 70,
+      'weight' => 69,
     ),
   );
 
@@ -3283,7 +3283,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 73,
+      'weight' => 72,
     ),
   );
 
@@ -3510,7 +3510,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 67,
+      'weight' => 76,
     ),
   );
 
@@ -3962,7 +3962,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 74,
+      'weight' => 73,
     ),
   );
 
@@ -5325,7 +5325,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 68,
+      'weight' => 67,
     ),
   );
 
@@ -7053,7 +7053,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 71,
     ),
   );
 
@@ -7101,7 +7101,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 69,
+      'weight' => 68,
     ),
   );
 
@@ -7433,7 +7433,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 71,
+      'weight' => 70,
     ),
   );
 
@@ -7540,7 +7540,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 75,
+      'weight' => 74,
     ),
   );
 
@@ -7602,6 +7602,7 @@ Friend',
   // Exported field_instance: 'node-attendance-field_attendance_date'.
   $field_instances['node-attendance-field_attendance_date'] = array(
     'bundle' => 'attendance',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -7631,8 +7632,8 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_date',
-    'label' => 'Attendance date',
-    'required' => 0,
+    'label' => 'Attendance Date',
+    'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -7645,18 +7646,12 @@ Friend',
       'module' => 'date',
       'settings' => array(
         'apply_chosen' => 0,
-        'fix_display' => 0,
         'increment' => 15,
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
         'text_parts' => array(),
-        'typing_placeholder' => 'Keep typing...',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
@@ -7693,8 +7688,8 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_kids_list',
-    'label' => 'Kids list',
-    'required' => 1,
+    'label' => 'Kids List',
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -7783,7 +7778,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_program_name',
-    'label' => 'Program name',
+    'label' => 'Enrollment (Class) Name',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7828,7 +7823,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_staff_list',
-    'label' => 'Staff list',
+    'label' => 'Staff List',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7838,11 +7833,6 @@ Friend',
       'module' => 'select2widget',
       'settings' => array(
         'apply_chosen' => 0,
-        'fix_display' => 0,
-        'pattern' => '/(.+) \\((\\d+)\\)/',
-        'placeholder_text' => 'Choose an option',
-        'replacement' => '${1}',
-        'searching_placeholder' => 'Looking for',
         'select2widgetajax' => array(
           'match_limit' => 10,
           'match_operator' => 'STARTS_WITH',
@@ -7851,7 +7841,6 @@ Friend',
           'view_mode' => 'select2widget_labels',
           'width' => '',
         ),
-        'typing_placeholder' => 'Keep typing...',
       ),
       'type' => 'select2widgetajax',
       'weight' => 6,
@@ -7887,7 +7876,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_volunteer_list',
-    'label' => 'Volunteer list',
+    'label' => 'Volunteer List',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -7938,7 +7927,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_attendance_year',
-    'label' => 'Year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -8035,7 +8024,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_class_year',
-    'label' => 'School year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -8088,7 +8077,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_day',
-    'label' => 'Program day',
+    'label' => 'Program Day',
     'required' => 1,
     'settings' => array(
       'field_lock_multi_values' => array(
@@ -9725,6 +9714,7 @@ Discipline',
   // Exported field_instance: 'node-mentors-field_mentoring_date'.
   $field_instances['node-mentors-field_mentoring_date'] = array(
     'bundle' => 'mentors',
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -9768,7 +9758,7 @@ Discipline',
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'j M Y - g:i:sa',
+        'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
@@ -10447,7 +10437,7 @@ Discipline',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_class_name',
-    'label' => 'Class name',
+    'label' => 'Class',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -10591,7 +10581,7 @@ Discipline',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_year',
-    'label' => 'School year',
+    'label' => 'School Year',
     'required' => 1,
     'settings' => array(
       'academic_year' => 1,
@@ -11093,13 +11083,13 @@ Discipline',
   t('Are you taking any prescription medications with side effects that might affect your ability to work with children?');
   t('At what site do you want to volunteer?');
   t('Attend Church Regularly?');
-  t('Attendance date');
+  t('Attendance Date');
   t('Bag');
   t('Canvassing Group');
   t('Church Reference');
   t('Church name');
   t('City');
-  t('Class name');
+  t('Class');
   t('Color Preference');
   t('Completed');
   t('Contact List');
@@ -11109,6 +11099,7 @@ Discipline',
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
   t('Employer');
+  t('Enrollment (Class) Name');
   t('Ephesians 2:10, Romans 8:1');
   t('Ephesians 2:4-7, Romans 3:10-12');
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
@@ -11166,6 +11157,7 @@ Discipline',
   t('Job Title');
   t('Kid Name');
   t('Kid name');
+  t('Kids List');
   t('Kids list');
   t('Last Name');
   t('Legal First Name');
@@ -11194,10 +11186,9 @@ Discipline',
   t('Please mark your highest level of education completed, and put the year completed in the blank');
   t('Prefix');
   t('Previous Church Involvement');
+  t('Program Day');
   t('Program Location');
   t('Program Name');
-  t('Program day');
-  t('Program name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');
@@ -11208,13 +11199,13 @@ Discipline',
   t('Relationship');
   t('Responded');
   t('Romans 1:16');
+  t('School Year');
   t('School name');
-  t('School year');
   t('Small Group');
   t('Social security number');
+  t('Staff List');
   t('Staff Mentor Name');
   t('Staff contact');
-  t('Staff list');
   t('State');
   t('Status');
   t('Suffix');
@@ -11230,13 +11221,12 @@ Discipline',
   t('Type');
   t('User uid');
   t('VOLUNTEER INTERESTS / ROLES');
+  t('Volunteer List');
   t('Volunteer Mentor Name');
-  t('Volunteer list');
   t('Weekday');
   t('What did you talk about');
   t('What verses did you share');
   t('When and how did you receive Jesus as Savior?');
-  t('Year');
   t('Zip');
 
   return $field_instances;

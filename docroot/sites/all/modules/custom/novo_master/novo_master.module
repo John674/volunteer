@@ -131,9 +131,8 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
 function novo_master_menu_alter(&$items) {
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
   $items['node/%node/view']['access arguments'] = [1];
-
   $items['user']['access callback'] = 'novo_master_disable_user_view';
-
+  $items['user/%user']['access callback'] = 'novo_master_disable_user_view';
   $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
 }
 
@@ -167,14 +166,11 @@ function novo_master_disable_node_add_page() {
  * Disable user view link for volunteers.
  */
 function novo_master_disable_user_view() {
-  if (user_is_anonymous()) {
-    return TRUE;
-  }
   $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
   if (user_has_role($role->rid)) {
     return FALSE;
   }
-  return user_access('access user profiles');
+  return user_access("access user profiles");
 }
 
 /**
@@ -189,7 +185,7 @@ function novo_master_preprocess_node($variables) {
       $variables['view_mode'] == "full" &&
       node_access("update", $variables['node'])
     ) {
-      drupal_goto("node/" . $variables['nid'] . "/edit");
+      // drupal_goto("node/" . $variables['nid'] . "/edit").
     }
   }
 }
@@ -345,7 +341,7 @@ function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_ma
       $paths = (function_exists("novo_reports_get_report_view_list_paths")) ? novo_reports_get_report_view_list_paths() : [];
       $paths[] = 'enrollment-report';
       $paths[] = 'general-report';
-      $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths, TRUE);
+      $rule_matches = novo_master_menu_position_rule_rules($context, [], $paths);
       break;
   }
 }
@@ -438,6 +434,7 @@ function novo_master_node_grants($account, $op) {
     }
     $grants["novo_master_access_webform"] = $rids;
     $grants["novo_master_access_reviewer"] = $rids;
+    $grants["novo_master_access_anon"] = $rids;
   }
   return $grants;
 }
@@ -484,7 +481,7 @@ function novo_master_node_access_records($node) {
   }
 
   // Allow reviewer access.
-  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application') {
+  if ($node->type == 'staff' || $node->type == 'kids' || $node->type == 'application' || $node->type == 'reference_request') {
     $grants[] = [
       'realm' => "novo_master_access_reviewer",
       'gid' => NOVO_MASTER_ROLE_REVIEWER,
@@ -512,6 +509,17 @@ function novo_master_node_access_records($node) {
     'grant_delete' => 0,
     'priority' => 1,
   ];
+
+  if ($node->type == 'reference_request') {
+    $grants[] = [
+      'realm' => "novo_master_access_anon",
+      'gid' => NOVO_MASTER_ROLE_ANON,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 1,
+    ];
+  }
 
   return $grants;
 }
@@ -559,4 +567,16 @@ function _novo_master_datetotime($date, $format = 'YYYY-MM-DD') {
   }
   return 0;
 
+}
+
+/**
+ * Set default mysql timezone.
+ */
+function novo_master_set_default_mysql_timezone() {
+  static $already_set = FALSE;
+  if (!$already_set) {
+    // Set default timezone.
+    db_query("SET @@session.time_zone = '+00:00'");
+    $already_set = TRUE;
+  }
 }

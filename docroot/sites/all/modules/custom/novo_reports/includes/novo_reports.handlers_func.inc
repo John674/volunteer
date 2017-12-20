@@ -9,6 +9,7 @@
  * Get attendance enrolled formula.
  */
 function novo_reports_get_attendance_enrolled_formula($sub_query_nid = NULL) {
+  novo_master_set_default_mysql_timezone();
   // SELECT KIDS Enrolled before attendance date (23:59).
   // Select last revision on this date.
   $sub_query_nid_value = (!empty($sub_query_nid)) ? $sub_query_nid : "{node}.nid";
@@ -72,6 +73,7 @@ function novo_reports_get_attendance_new_formula($sub_query_nid = NULL) {
  * Get mentoring_conversation_formula formula.
  */
 function novo_reports_get_mentoring_conversation_formula($att_nid, $type_filter = NULL) {
+  novo_master_set_default_mysql_timezone();
   $prev_att_date_formula = "SELECT UNIX_TIMESTAMP(att_prev_date.field_attendance_date_value) FROM {field_data_field_attendance_date} AS att_prev_date 
   WHERE att_prev_date.entity_id = (SELECT a_p_name2.entity_id AS prev_entity_id
                             FROM field_data_field_attendance_program_name AS a_p_name
@@ -84,7 +86,15 @@ function novo_reports_get_mentoring_conversation_formula($att_nid, $type_filter 
                             LIMIT 1)
                             LIMIT 1";
 
-  $type_filter_formula = (!empty($type_filter)) ? "AND LOWER(ment_type.field_mentoring_value) = '" . $type_filter . "'" : "";
+  $type_filter_formula = "";
+  if (!empty($type_filter)) {
+    if ($type_filter == 'other') {
+      $type_filter_formula = "AND ment_type.field_mentoring_value IS NOT NULL AND LOWER(ment_type.field_mentoring_value) <> 'salvation' AND LOWER(ment_type.field_mentoring_value) <> 'discipline'";
+    }
+    else {
+      $type_filter_formula = "AND LOWER(ment_type.field_mentoring_value) = '" . $type_filter . "'";
+    }
+  }
 
   $formula = "SELECT count(*) AS mentors
 FROM {field_data_field_attendance_program_name} AS a_p_name
@@ -123,6 +133,31 @@ function novo_reports_get_volunteers_number_formula($att_nid) {
   $formula = "SELECT COUNT(att_vol_list.field_attendance_volunteer_list_target_id) 
 FROM {field_data_field_attendance_volunteer_list} AS att_vol_list 
 WHERE att_vol_list.entity_id = $att_nid";
+
+  return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
+
+}
+
+/**
+ * Get volunteers number formula.
+ */
+function novo_reports_get_active_volunteers_number_formula($att_nid) {
+  novo_master_set_default_mysql_timezone();
+  $formula = "
+  SELECT count(DISTINCT att_vol_list.field_attendance_volunteer_list_target_id)
+
+FROM field_data_field_attendance_location AS att_orig_loc
+  INNER JOIN field_data_field_attendance_date AS att_date_orig ON (att_date_orig.entity_id = att_orig_loc.entity_id)
+
+  INNER JOIN field_data_field_attendance_location AS att_loc
+    ON att_loc.field_attendance_location_target_id = att_orig_loc.field_attendance_location_target_id
+  INNER JOIN field_revision_field_attendance_volunteer_list AS att_vol_list
+    ON att_vol_list.entity_id = att_loc.entity_id
+  INNER JOIN node_revision AS n_rev ON (n_rev.nid = att_vol_list.entity_id AND n_rev.vid = att_vol_list.revision_id)
+
+WHERE att_orig_loc.entity_id = $att_nid AND
+  n_rev.timestamp < UNIX_TIMESTAMP(att_date_orig.field_attendance_date_value) AND
+  n_rev.timestamp > UNIX_TIMESTAMP(att_date_orig.field_attendance_date_value) - (60 * 60 * 24 * 30 * 18)";
 
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
 }

@@ -55,7 +55,7 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
   // Add report links.
   $form['report_links'] = [
     '#type' => 'markup',
-    '#markup' => novo_program_render_report_links(),
+    '#markup' => novo_program_render_report_links($form, $form_state),
     '#weight' => -10,
   ];
 }
@@ -136,22 +136,31 @@ function novo_program_get_kid_data($nid) {
 }
 
 /**
- * Implements hook_node_presave().
+ * Implements hook_node_update().
  */
-function novo_program_node_presave($node) {
+function novo_program_node_update($node) {
   if ($node->type == "class") {
-    // Update programm name in class was updated.
-    $query = db_select("field_data_field_program_class_name", "cn");
-    $query->fields("cn", ["entity_id"]);
-    $query->condition("cn.bundle", "program");
-    $query->condition("cn.field_program_class_name_target_id", $node->nid);
-    $nids = $query->execute()->fetchAllKeyed(0, 0);
-    if (!empty($nids)) {
-      $nodes = node_load_multiple($nids);
-      foreach ($nodes as $node) {
-        $node->title = "%AutoEntityLabel%";
-        node_save($node);
-      }
+    // Invoke your callback function AFTER the node is updated.
+    drupal_register_shutdown_function('novo_program_node_post_update', $node);
+  }
+}
+
+/**
+ * Post save callback for class node.
+ */
+function novo_program_node_post_update($node) {
+  // Update programm name in class was updated.
+  $query = db_select("field_data_field_program_class_name", "cn");
+  $query->fields("cn", ["entity_id"]);
+  $query->condition("cn.bundle", "program");
+  $query->condition("cn.field_program_class_name_target_id", $node->nid);
+  $nids = $query->execute()->fetchAllKeyed(0, 0);
+  if (!empty($nids)) {
+    $nodes = node_load_multiple($nids, [], TRUE);
+    foreach ($nodes as $node) {
+      $node->title = "%AutoEntityLabel%";
+      node_save($node);
+      cache_clear_all("field:node:$node->nid", 'cache_field');
     }
   }
 }
@@ -184,20 +193,58 @@ function novo_program_views_query_alter(&$view, &$query) {
 /**
  * Render report links.
  */
-function novo_program_render_report_links() {
+function novo_program_render_report_links($form, $form_state) {
+  $year = isset($form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0]) ? $form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0] : NULL;
+  $location = isset($form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0]) ? $form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0] : NULL;
+  $class = isset($form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0]) ? $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0] : NULL;
+  $program = isset($form['nid']['#value']) ? $form['nid']['#value'] : NULL;
+
+  $nametag_options = [];
+  $canvassing_options = [];
+  $roster_options = [];
+  if (!empty($year)) {
+    $nametag_options['field_program_year_year'] = $year;
+    $canvassing_options['field_program_year_year'] = $year;
+    $roster_options['field_program_year_year'] = $year;
+  }
+  if (!empty($location)) {
+    $nametag_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $canvassing_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $roster_options['field_program_location_target_id_entityreference_filter'] = $location;
+  }
+  if (!empty($class)) {
+    $nametag_options['nid_entityreference_filter'] = $class;
+  }
+  if (!empty($program)) {
+    $canvassing_options['nid_entityreference_filter'] = $program;
+    $roster_options['nid_entityreference_filter'] = $program;
+  }
+
   $reports = [
-    'canvassing-report' => t('Canvasing'),
-    'roster-report' => t('Roster'),
-    'report-nametag' => t('Nametag'),
+    'canvassing-report' => [
+      'title' => t('Canvasing'),
+      'options' => $canvassing_options,
+    ],
+    'roster-report' => [
+      'title' => t('Roster'),
+      'options' => $roster_options,
+    ],
+    'report-nametag' => [
+      'title' => t('Nametag'),
+      'options' => $nametag_options,
+    ],
   ];
 
   $links = [];
-  foreach ($reports as $url => $title) {
+  foreach ($reports as $url => $link_data) {
     $links[] = [
-      'title' => $title,
+      'title' => $link_data['title'],
       'href' => url($url),
+      'attributes' => ['target' => '_blank'],
+      'query' => isset($link_data['options']) ? $link_data['options'] : [],
     ];
   }
+
   // @codingStandardsIgnoreStart
   return '<div class="novo-program-report-wrapper">' . theme("links", [
       'heading' => [
@@ -209,4 +256,33 @@ function novo_program_render_report_links() {
       'attributes' => ['class' => ['novo-program-report-links']],
     ]) . '</div>';
   // @codingStandardsIgnoreEnd
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_program_form_class_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'novo_program_form_class_node_form_validate';
+}
+
+/**
+ * Class form validate.
+ */
+function novo_program_form_class_node_form_validate(&$form, &$form_state) {
+  $program_day = isset($form_state['values']['field_program_day'][LANGUAGE_NONE]) ? $form_state['values']['field_program_day'][LANGUAGE_NONE] : [];
+
+  if (isset($program_day['add_more'])) {
+    unset($program_day['add_more']);
+  }
+  foreach ($program_day as $key => $day) {
+    $start = isset($day['field_program_time'][LANGUAGE_NONE][0]['value']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value'] : 0;
+    $end = isset($day['field_program_time'][LANGUAGE_NONE][0]['value2']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value2'] : 0;
+    // Fix drupal end time for 12:00AM!
+    if ($end == 86400) {
+      $end = 0;
+    }
+    if ($end <= $start) {
+      form_set_error("field_program_day][" . LANGUAGE_NONE . "][" . $key . "][field_program_time", t("Start Time should be less then End time."));
+    }
+  }
 }

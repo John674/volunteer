@@ -15,6 +15,11 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
   function option_definition() {
     $options = parent::option_definition();
 
+    $options['use_mpdf'] = [
+      'default' => FALSE,
+      'translatable' => FALSE,
+    ];
+
     $options['disable_smart_shrinking'] = [
       'default' => FALSE,
       'translatable' => FALSE,
@@ -60,6 +65,17 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
    */
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
+
+    $mpdf_available = (module_exists("pdf_using_mpdf") && function_exists("pdf_using_mpdf_library_exist")) ? TRUE : FALSE;
+
+    if ($mpdf_available) {
+      $form['use_mpdf'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Use "mpdf" instead of "wkhtmltopdf" for this view.'),
+        '#default_value' => $this->options['use_mpdf'],
+        '#description' => t('Switch to use mpdf library for rendering PDF.'),
+      ];
+    }
 
     $form['disable_smart_shrinking'] = [
       '#type' => 'checkbox',
@@ -194,6 +210,5 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
     }
     unset($this->view->row_index);
     return $output;
-
   }
 }

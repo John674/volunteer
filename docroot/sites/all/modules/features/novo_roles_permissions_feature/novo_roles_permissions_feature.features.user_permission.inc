@@ -636,11 +636,29 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'publishcontent',
   );
 
+  // Exported permission: 'send CIA'.
+  $permissions['send CIA'] = array(
+    'name' => 'send CIA',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_cia',
+  );
+
   // Exported permission: 'unpublish any content'.
   $permissions['unpublish any content'] = array(
     'name' => 'unpublish any content',
     'roles' => array(),
     'module' => 'publishcontent',
+  );
+
+  // Exported permission: 'view CIA'.
+  $permissions['view CIA'] = array(
+    'name' => 'view CIA',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_cia',
   );
 
   // Exported permission: 'view own unpublished content'.
@@ -650,6 +668,13 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'Reviewer' => 'Reviewer',
       'Siteadmin' => 'Siteadmin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'view revisions'.
+  $permissions['view revisions'] = array(
+    'name' => 'view revisions',
+    'roles' => array(),
     'module' => 'node',
   );
 

@@ -24,6 +24,10 @@ function novo_preprocess_html(&$variables) {
 function novo_preprocess_node(&$variables) {
   $variables['theme_hook_suggestions'][] = "node__" . $variables['type'] . "__" . $variables['view_mode'];
 
+  if (($variables['type'] == 'kids' || $variables['type'] == 'staff') && $variables['view_mode'] == 'full') {
+    drupal_goto("node/" . $variables['nid'] . "/edit");
+  }
+
   if ($variables['type'] == 'kids') {
     $node = $variables['node'];
     $field_suffix = field_get_items('node', $node, 'field_suffix');
@@ -397,7 +401,9 @@ function _novo_pre_render_textfield($variable) {
     'field_dob',
     'field_attendance_date_value',
     'field_attendance_date_value_1',
+    'field_mentoring_date',
   );
+
   if (isset($variable['#array_parents']) && (!empty(array_intersect($fields_calendar_icon, $variable['#array_parents'])))) {
     $variable['#theme'] = ['textfield__calendar_icon'];
   };
@@ -566,6 +572,10 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     'user_register_form',
     'user_pass',
   );
+  $collection_fields = array(
+    'field_contact',
+    'field_parent_guardian',
+  );
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
   if (strpos($form_id, 'webform_client_form') !== FALSE) {
@@ -615,12 +625,12 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
     if (($form_id == 'user_register_form' || $form_id == 'user_pass') && isset($form['actions'])) {
 
       if ($form_id == 'user_register_form') {
-        $form['actions']['submit']['#value'] = t('Register');
+        $form['actions']['submit']['#value'] = t('Create New Account');
         $form['actions']['submit']['#weight'] = 5;
       }
 
       if ($form_id == 'user_pass') {
-        $form['actions']['submit']['#value'] = t('Send password');
+        $form['actions']['submit']['#value'] = t('Request New Password');
         $form['actions']['submit']['#weight'] = 10;
       }
 
@@ -663,6 +673,26 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       $form['account']['mail']['#title'] = '';
     }
   }
+  if (isset($form['field_mentoring_date'])) {
+    $form['field_mentoring_date'][$lang][0]['#title'] = '';
+  }
+
+  foreach ($collection_fields as $field) {
+    if (isset($form[$field])) {
+      foreach ($form[$field][$lang] as $key => $item) {
+        if (is_int($key)) {
+          $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
+          $form[$field][$lang][$key]['#suffix'] = '</div>';
+        }
+      }
+    }
+  }
+
+  // Disable multistep fir user profiles.
+  if ($form['#id'] == "user-profile-form") {
+    $form['actions']['done']['#access'] = FALSE;
+  }
+
 }
 
 /**

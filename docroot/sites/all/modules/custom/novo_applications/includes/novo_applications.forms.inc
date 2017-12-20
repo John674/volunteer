@@ -35,6 +35,29 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
         drupal_set_message(t("You already submit application"));
         drupal_goto("<front>");
       }
+      else {
+        drupal_goto("node/$app_nid/edit");
+      }
+    }
+    else {
+      $uid = $user->uid;
+      if (user_access("edit application with any status")) {
+        $uid = (isset($_GET['uid'])) ? $_GET['uid'] : $uid;
+      }
+
+      // Add default values from user profile.
+      $account = user_load($uid);
+      if (!empty($account)) {
+        $email = $account->mail;
+        $first_name = novo_applications_get_field_value("user", $account, "field_u_first_name");
+        $last_name = novo_applications_get_field_value("user", $account, "field_u_last_name");
+        $birthday = novo_applications_get_field_value("user", $account, "field_u_birthday");
+        $birthday_formatted = (!empty($birthday)) ? date("m/d/Y", strtotime($birthday)) : "";
+        $form['field_first_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $first_name;
+        $form['field_last_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_name;
+        $form['field_dob'][LANGUAGE_NONE][0]['#default_value']['value'] = $birthday_formatted;
+        $form['field_email'][LANGUAGE_NONE][0]['email']['#default_value'] = $email;
+      }
     }
   }
 
@@ -50,21 +73,7 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   }
 
   // Replace uid for admins.
-  if (user_access("edit application with any status")) {
-    $uid = 0;
-    $arg_uid = (isset($_GET['uid'])) ? $_GET['uid'] : NULL;
-    if (!empty($arg_uid)) {
-      $loaded_user = user_load($arg_uid);
-      if (isset($loaded_user->uid)) {
-        $uid = $loaded_user->uid;
-      }
-    }
-    $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
-  }
-  else {
-    $uid = $user->uid;
-    $form['field_app_user']['#access'] = FALSE;
-  }
+  $form['field_app_user']['#access'] = ($user->uid == 1) ? TRUE : FALSE;
 
   if (empty($form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'])) {
     $form['field_app_user'][LANGUAGE_NONE][0]['value']['#default_value'] = $uid;
@@ -75,6 +84,9 @@ function novo_applications_form_application_node_form_alter(&$form, &$form_state
   $form['actions']['previous']['#submit'][] = "novo_applications_form_submit";
   $form['actions']['save']['#submit'][] = "novo_applications_form_submit";
   $form['actions']['next']['#submit'][] = "novo_applications_form_submit";
+  $form['actions']['done']['#submit'][] = "novo_applications_form_submit";
+
+  $form['actions']['save']['#access'] = FALSE;
 
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
@@ -139,12 +151,12 @@ function novo_applications_user_unique_validate($element, &$form_state) {
   }
 
   $query = db_select('users', 'u');
-  $query->fields('u', array('uid'));
+  $query->fields('u', ['uid']);
   $query->condition('uid', $uid);
   $query->leftJoin("field_data_field_app_user", "app_user", "app_user.field_app_user_value = u.uid");
 
   if (!empty($nid)) {
-    $query->addExpression("CASE WHEN app_user.entity_id = :nid THEN null ELSE app_user.entity_id END", "app_nid", array(":nid" => $nid));
+    $query->addExpression("CASE WHEN app_user.entity_id = :nid THEN null ELSE app_user.entity_id END", "app_nid", [":nid" => $nid]);
   }
   else {
     $query->addField('app_user', 'entity_id', 'app_nid');
@@ -157,7 +169,7 @@ function novo_applications_user_unique_validate($element, &$form_state) {
   }
   else {
     if (isset($exist->app_nid)) {
-      $error_message = user_access("edit application with any status") ? t("Application for this user already exist. Please edit this !link", array("!link" => l(t("application"), "node/" . $exist->app_nid))) : t("You already submit application");
+      $error_message = user_access("edit application with any status") ? t("Application for this user already exist. Please edit this !link", ["!link" => l(t("application"), "node/" . $exist->app_nid)]) : t("You already submit application");
       form_set_error("field_app_user", $error_message);
     }
   }
@@ -179,6 +191,7 @@ function novo_applications_form_submit(&$form, &$form_state) {
         node_save($node);
         cache_clear_all("field:node:{$node->nid}", 'cache_field');
         if (!user_access("disable auto complete redirect")) {
+          drupal_get_messages("status");
           drupal_set_message("Your application will begin processing now!");
           drupal_goto("<front>");
         }
@@ -208,14 +221,17 @@ function _novo_application_hide_parent_section(&$form) {
  * Validate 'How do you know this reference?' fields, value should be minimum 6 months.
  */
 function _custom_ref_how_long_field_validate($element, $form_state) {
-  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  $lang = isset($form_state['language']['#value']) ? $form_state['language']['#value'] : LANGUAGE_NONE;
   $field_how_long_name = $element[$lang]['#field_name'];
   $field_how_long_period_name = $field_how_long_name . '_period';
   $field_how_long_period_value = isset($form_state['values'][$field_how_long_period_name][$lang]) ? $form_state['values'][$field_how_long_period_name][$lang] : NULL;
 
-  if (!empty($field_how_long_period_value) && ($field_how_long_period_value == 'months')) {
+  if (!empty($field_how_long_period_value)) {
     $field_how_long_value = isset($field_how_long_period_value) ? intval($element[$lang][0]['value']['#value']) : NULL;
-    if (!empty($field_how_long_value) && ($field_how_long_value < 6)) {
+    if (empty($field_how_long_value)) {
+      form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
+    }
+    elseif (($field_how_long_period_value == 'months') && $field_how_long_value < 6) {
       form_error($element, t('@field_name field should be minimum 6 months.', array('@field_name' => $element[$lang]['#title'])));
     }
   }
@@ -231,12 +247,12 @@ function novo_applications_add_sites_virtual_field(&$form, &$form_state) {
     $weight = (isset($form['field_what_site_you_want']['#weight'])) ? $form['field_what_site_you_want']['#weight'] : 100;
     $options = novo_applications_get_sites_for_virtual_field();
     if (!empty($options)) {
-      $form['field_what_site_you_want_virtual'] = array(
+      $form['field_what_site_you_want_virtual'] = [
         '#title' => t('At what site do you want to volunteer?'),
         '#type' => ($multi) ? "checkboxes" : "radios",
         '#options' => $options,
         '#weight' => $weight,
-      );
+      ];
     }
 
     $form['#validate'][] = 'novo_applications_add_sites_virtual_validate';
@@ -250,10 +266,10 @@ function novo_applications_add_sites_virtual_field(&$form, &$form_state) {
  * Get options for site field.
  */
 function novo_applications_get_sites_for_virtual_field() {
-  $options = array();
+  $options = [];
   $result = views_get_view_result("site_field_options_list");
   // Distinct.
-  $new_results = array();
+  $new_results = [];
   if (!empty($result)) {
     foreach ($result as $item) {
       $new_results[$item->nid] = $item;
@@ -264,8 +280,8 @@ function novo_applications_get_sites_for_virtual_field() {
     foreach ($new_results as $item) {
       $class = $item->node_title;
       $location = (isset($item->field_field_class_location[0]['rendered']['#label'])) ? $item->field_field_class_location[0]['rendered']['#label'] : "";
-      $fc_items = (isset($item->field_field_program_day)) ? $item->field_field_program_day : array();
-      $p_date = array();
+      $fc_items = (isset($item->field_field_program_day)) ? $item->field_field_program_day : [];
+      $p_date = [];
       foreach ($fc_items as $item) {
         $fc_item = reset($item['rendered']['entity']['field_collection_item']);
         $w = isset($fc_item['field_program_weekday'][0]['#markup']) ? $fc_item['field_program_weekday'][0]['#markup'] : "";
@@ -275,7 +291,8 @@ function novo_applications_get_sites_for_virtual_field() {
       }
       $p_date = novo_applications_field_weekday_sort($p_date);
       foreach ($p_date as $weekday => $time_arr) {
-        $options[] = $weekday . ", " . $location . ", " . implode(", ", $time_arr) . " (" . $class . ")";
+        $key = $weekday . ", " . $location . ", " . implode(", ", $time_arr) . " (" . $class . ")";
+        $options[$key] = $key;
       }
     }
   }
@@ -305,24 +322,18 @@ function novo_applications_add_sites_virtual_validate(&$form, &$form_state) {
 
   if ($virtual && $original_field) {
     if (is_array($virtual)) {
-      $names = array();
+      $names = [];
       // Multi.
-      foreach ($virtual as $tid => $status) {
+      foreach ($virtual as $key => $status) {
         if ($status) {
-          $term = taxonomy_term_load($tid);
-          if (isset($term->name)) {
-            $names[] = array('value' => $term->name);
-          }
+          $names[] = ['value' => $key];
         }
       }
       form_set_value($original_field, $names, $form_state);
     }
     else {
       // Single.
-      $term = taxonomy_term_load(intval($virtual));
-      if (isset($term->name)) {
-        form_set_value($original_field[0]['value'], $term->name, $form_state);
-      }
+      form_set_value($original_field[0]['value'], $virtual, $form_state);
     }
   }
 }
@@ -334,7 +345,15 @@ function novo_applications_add_exp_date_validate(&$form, &$form_state) {
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
   $exp_date_value = (isset($form_state['values']['field_expired_date'][$lang][0]['value'])) ? trim($form_state['values']['field_expired_date'][$lang][0]['value']) : NULL;
   if (empty($exp_date_value)) {
-    $new_exp_date = array($lang => array(array('value' => strtotime('+3 year'))));
+    $new_exp_date = [$lang => [['value' => strtotime('+3 year')]]];
     form_set_value($form['field_expired_date'], $new_exp_date, $form_state);
   }
+}
+
+/**
+ * Get first value of field.
+ */
+function novo_applications_get_field_value($entity_type, $entity, $field) {
+  $field = field_get_items($entity_type, $entity, $field);
+  return isset($field[0]['value']) ? $field[0]['value'] : "";
 }

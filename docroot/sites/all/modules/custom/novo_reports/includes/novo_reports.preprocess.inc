@@ -50,12 +50,16 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
   if (!empty($location)) {
     $vars['header_row'] .= '<tr class="location-header"><th colspan="' . count($vars['header']) . '">' . $location . '</th></tr>';
   }
-  $vars['header_row'] .= '<tr style="background: ' . $color . '">';
+  $vars['header_row'] .= '<tr style="background-color: ' . $color . ';">';
 
   $ts = tablesort_init($vars['header']);
 
   foreach ($vars['header'] as $cell) {
     $cell = tablesort_header($cell, $vars['header'], $ts);
+    $cell = [
+      'data' => $cell,
+      'style' => "background-color: " . $color . ";",
+    ];
     $vars['header_row'] .= _theme_table_cell($cell, TRUE);
   }
 
@@ -160,5 +164,118 @@ function novo_reports_preprocess_body_report_nametag(&$vars) {
     $rendered_kid_date = theme("novo_reports_nametag_kid", ['data' => $data]);
     $vars['themed_rows'][$col_num][] = $rendered_kid_date;
     $c++;
+  }
+}
+
+/**
+ * Implements template_preprocess_views_data_export_xls_header().
+ */
+function novo_reports_preprocess_views_data_export_xls_header(&$vars) {
+
+  if ($vars['view']->name == "canvassing_report") {
+    _views_data_export_header_shared_preprocess($vars);
+
+    $rows = $vars['view']->result;
+    $first_row = reset($rows);
+    $location = isset($first_row->field_field_program_location[0]['rendered']['#label']) ? $first_row->field_field_program_location[0]['rendered']['#label'] : "";
+
+    // Need to do a little work to construct the table header, see theme_table().
+    $vars['header_row'] = '<thead>';
+    if (!empty($location)) {
+      $vars['header_row'] .= '<tr class="location-header"><th colspan="' . count($vars['header']) . '" style="text-align: right;">' . $location . '</th></tr>';
+    }
+    $vars['header_row'] .= '<tr>';
+
+    $ts = tablesort_init($vars['header']);
+
+    foreach ($vars['header'] as $cell) {
+      $cell = tablesort_header($cell, $vars['header'], $ts);
+      $vars['header_row'] .= _theme_table_cell($cell, TRUE);
+    }
+
+    $vars['header_row'] .= '</tr></thead>';
+
+    $vars['header_row'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $vars['header_row']);
+  }
+  else {
+    template_preprocess_views_data_export_msoffice_header($vars);
+  }
+}
+
+/**
+ * Implements hook_process_views_data_export_xls_body().
+ */
+function novo_reports_process_views_data_export_xls_body(&$vars) {
+  if ($vars['view']->name == "canvassing_report") {
+    $output = '';
+
+    // Construct the tbody of a table, see theme_table().
+    $ts = tablesort_init($vars['header']);
+
+    $flip = [
+      'even' => 'odd',
+      'odd' => 'even',
+    ];
+    $class = 'even';
+
+    // Add grouping.
+    if (!empty($vars['title'])) {
+      $rows = $vars['rows'];
+      $first_row = reset($rows);
+      $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
+      $cell = [
+        'data' => '<strong> ' . strtoupper($vars['title']) . '</strong>',
+        'colspan' => count($vars['header']),
+        'style' => 'background-color:' . $color . ';',
+      ];
+      $output .= ' <tr>';
+      $output .= _theme_table_cell($cell);
+      $output .= " </tr>\n";
+    }
+
+    foreach ($vars['themed_rows'] as $number => $row) {
+      $attributes = [];
+
+      // Check if we're dealing with a simple or complex row.
+      if (isset($row['data'])) {
+        foreach ($row as $key => $value) {
+          if ($key == 'data') {
+            $cells = $value;
+          }
+          else {
+            $attributes[$key] = $value;
+          }
+        }
+      }
+      else {
+        $cells = $row;
+      }
+      if (count($cells)) {
+        // Add odd/even class.
+        $class = $flip[$class];
+        if (isset($attributes['class'])) {
+          $attributes['class'] .= ' ' . $class;
+        }
+        else {
+          $attributes['class'] = $class;
+        }
+
+        // Build row.
+        $output .= ' <tr' . drupal_attributes($attributes) . '>';
+        $i = 0;
+        foreach ($cells as $cell) {
+          $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
+          $output .= _theme_table_cell($cell);
+        }
+        $output .= " </tr>\n";
+      }
+    }
+
+    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
+
+  }
+  else {
+    // Pass through the generic MS Office process.
+    template_process_views_data_export_msoffice_body($vars);
   }
 }
