@@ -3429,6 +3429,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Novo CIA requests: Novo cia filter by last active row */
+  $handler->display->display_options['filters']['filter_by_last_active']['id'] = 'filter_by_last_active';
+  $handler->display->display_options['filters']['filter_by_last_active']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['filters']['filter_by_last_active']['field'] = 'filter_by_last_active';
+  $handler->display->display_options['filters']['filter_by_last_active']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -3602,6 +3607,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Options';
+  /* Sort criterion: Content: Location (field_class_location) */
+  $handler->display->display_options['sorts']['field_class_location_target_id']['id'] = 'field_class_location_target_id';
+  $handler->display->display_options['sorts']['field_class_location_target_id']['table'] = 'field_data_field_class_location';
+  $handler->display->display_options['sorts']['field_class_location_target_id']['field'] = 'field_class_location_target_id';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
