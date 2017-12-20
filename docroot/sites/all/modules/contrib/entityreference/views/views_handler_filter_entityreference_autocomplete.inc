@@ -36,10 +36,9 @@ class views_handler_filter_entityreference_autocomplete extends views_handler_fi
     $instances = field_read_instances(array('field_name' => $this->definition['field_name']));
     $instance = reset($instances);
 
-    if ($this->options['expose']['multiple'] == 1) {
+    if($this->options['expose']['multiple'] == 1) {
       $autocomplete_path = 'entityreference/autocomplete/tags/';
-    }
-    else {
+    } else {
       $autocomplete_path = 'entityreference/autocomplete/single/';
     }
     $autocomplete_path .= $this->definition['field_name'] . '/' . $instance['entity_type'] . '/' . $instance['bundle'] . '/NULL';
@@ -113,4 +112,3 @@ class views_handler_filter_entityreference_autocomplete extends views_handler_fi
       $this->validated_exposed_input = $values;
     }
   }
-}
