@@ -10,7 +10,8 @@
  */
 function novo_cia_send_search_request($request_id) {
   $search_request = novo_cia_get_request($request_id);
-  $application_data = novo_cia_get_data_for_cia_request($search_request->application_nid);
+  $app_nid = $search_request->application_nid;
+  $application_data = novo_cia_get_data_for_cia_request($app_nid);
   $api_credentials = novo_cia_get_api_credentials();
   $request_data = array_merge($api_credentials, $application_data);
   $api_urls = unserialize(NOVO_CIA_API_URLS);
@@ -38,15 +39,16 @@ function novo_cia_send_search_request($request_id) {
       $feed_json = json_encode($feed_xml);
       $feed_array = json_decode($feed_json, TRUE);
       if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_ACCEPTED) {
-        $tracking_number = $feed_array['TrackingNumber'];
-        if (!empty($tracking_number)) {
-          novo_cia_update_request($search_request->id, array(
-            'tracking_number' => $tracking_number,
-            'request_status' => 1,
-          ));
-          novo_cia_add_pull_report_request_to_queue($search_request->application_nid, $search_request->uid, $search_request->id, $tracking_number);
-          return TRUE;
-        }
+
+          if (isset($feed_array['TrackingNumber']) && !empty($feed_array['TrackingNumber'])) {
+              $tracking_number = $feed_array['TrackingNumber'];
+              novo_cia_update_request($search_request->id, array(
+                  'tracking_number' => $tracking_number,
+                  'request_status' => 1,
+              ));
+              novo_cia_add_pull_report_request_to_queue($search_request->application_nid, $search_request->uid, $search_request->id, $tracking_number);
+              return TRUE;
+          }
       }
 
       if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_REJECTED) {
@@ -54,14 +56,15 @@ function novo_cia_send_search_request($request_id) {
         $error_message = NULL;
         if ($feed_array['Error'] == NOVO_CIA_ERROR_RESPONSE_MESSAGE_DUPLICATE) {
           $error_message = $feed_array['DuplicateList']['DuplicateSearch'];
-          $last_pending_pull_report_request = novo_cia_get_last_pending_pull_report_request($search_request->application_nid);
-          if (empty($last_pending_pull_report_request) && empty($last_pending_pull_report_request->tracking_number)) {
-            novo_cia_add_search_request_to_queue($search_request->application_nid, $search_request->uid);
+          $last_pending_pull_report_request = novo_cia_get_last_pending_pull_report_request($app_nid);
+          if (empty($last_pending_pull_report_request)) {
+            novo_cia_add_search_request_to_queue($app_nid, $search_request->uid);
           }
         }
         else {
-          novo_cia_add_search_request_to_queue($search_request->application_nid, $search_request->uid);
+          novo_cia_add_search_request_to_queue($app_nid, $search_request->uid);
         }
+
         novo_cia_update_request($request_id, array(
           'request_status' => 2,
           'log' => $error,

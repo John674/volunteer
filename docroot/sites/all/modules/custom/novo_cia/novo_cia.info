@@ -8,3 +8,4 @@ files[] = views/novo_cia_handler_status.inc
 files[] = views/novo_cia_handler_type.inc
 files[] = views/novo_cia_handler_report_status.inc
 files[] = views/novo_cia_handler_actions.inc
+files[] = views/novo_cia_filter.inc
