@@ -244,13 +244,13 @@ function novo_cia_views_data() {
     ),
   );
 
-  $data['novo_cia_checks']['filter_custom'] = array(
+  $data['novo_cia_checks']['filter_by_last_active'] = array(
       'real field' => 'application_nid',
       'group' => t('Novo CIA requests'),
-      'title' => t('Novo cia filter'),
-      'help' => t('Novo cia filter'),
+      'title' => t('Novo cia filter by last active row'),
+      'help' => t('Novo cia filter: filter by last real active row.'),
       'filter' => array(
-          'handler' => 'novo_cia_filter',
+          'handler' => 'novo_cia_handler_filter_by_last_active',
       ),
   );
 
