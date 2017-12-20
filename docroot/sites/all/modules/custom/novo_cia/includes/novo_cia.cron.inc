@@ -10,7 +10,7 @@
  */
 function novo_cia_search_queue_worker($data) {
   $result = novo_cia_send_search_request($data['id']);
-  if (!empty($result)) {
+  if (empty($result)) {
     watchdog("novo_cia", "Search request :id have error", array(
       ":id" => $data['id'],
     ), WATCHDOG_ERROR);

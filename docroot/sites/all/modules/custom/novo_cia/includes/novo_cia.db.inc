@@ -143,7 +143,7 @@ function novo_cia_get_last_success_request($nid) {
     ->fields('cc')
     ->condition('request_status', array(0, 1, 4))
     ->condition('application_nid', $nid)
-    ->orderBy('cc.created', 'DESC')
+    ->orderBy('cc.id', 'DESC')
     ->range(0, 1)
     ->execute()
     ->fetchObject();
@@ -163,7 +163,7 @@ function novo_cia_get_completed_pull_request($nid) {
     ->condition('request_type', 1)
     ->condition('application_nid', $nid)
     ->condition('request_status', 1)
-    ->orderBy('cc.created', 'DESC')
+    ->orderBy('cc.id', 'DESC')
     ->range(0, 1)
     ->execute()
     ->fetchObject();

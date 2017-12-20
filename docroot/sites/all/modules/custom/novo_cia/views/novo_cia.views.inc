@@ -41,7 +41,14 @@ function novo_cia_views_data() {
     'filter' => array(
       'handler' => 'views_handler_filter_numeric',
     ),
+    'relationship' => array(
+      'base' => 'novo_cia_checks',
+      'base field' => 'id',
+      'handler' => 'views_handler_relationship',
+      'label' => t('Cia'),
+    ),
   );
+
 
   $data['novo_cia_checks']['uid'] = array(
     'title' => t('User ID'),
@@ -235,6 +242,16 @@ function novo_cia_views_data() {
       'help' => t('Provide buttons.'),
       'handler' => 'novo_cia_handler_actions',
     ),
+  );
+
+  $data['novo_cia_checks']['filter_custom'] = array(
+      'real field' => 'application_nid',
+      'group' => t('Novo CIA requests'),
+      'title' => t('Novo cia filter'),
+      'help' => t('Novo cia filter'),
+      'filter' => array(
+          'handler' => 'novo_cia_filter',
+      ),
   );
 
   return $data;
