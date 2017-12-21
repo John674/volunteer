@@ -298,10 +298,11 @@ function novo_cia_add_request_for_search($node) {
       $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
       if (!empty($search_request_id)) {
         $search_result = novo_cia_send_search_request($search_request_id);
-        if(!empty($search_result)){
-            drupal_set_message(t("The request was added to the queue for report from CIA"));
-        } else {
-            drupal_set_message(t("The request was added to the queue for sending to CIA."));
+        if (!empty($search_result)) {
+          drupal_set_message(t("The request was added to the queue for report from CIA"));
+        }
+        else {
+          drupal_set_message(t("The request was added to the queue for sending to CIA."));
         }
       }
       else {
@@ -350,13 +351,15 @@ function novo_cia_date($nid = NULL, $date_type = NULL, $renewal = FALSE) {
       }
     }
     if ($date_type == 'response_date') {
-        if(($request->request_type == 1) && ($request->request_status == 1)){
-            return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
-        } else {
-            return 'N/A';
-        }
-    } else{
+      if (($request->request_type == 1) && ($request->request_status == 1)) {
         return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
+      }
+      else {
+        return 'N/A';
+      }
+    }
+    else {
+      return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
     }
   }
   return NULL;

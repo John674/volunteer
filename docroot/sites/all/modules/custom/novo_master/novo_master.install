@@ -497,5 +497,5 @@ function novo_master_update_7145() {
  * Revert novo_views_feature.
  */
 function novo_master_update_7146() {
-    features_revert_module("novo_views_feature");
+  features_revert_module("novo_views_feature");
 }
