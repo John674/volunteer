@@ -20,6 +20,7 @@ define('NOVO_APPLICATION_WEEKDAY_ORDER', serialize(array_flip(array(
 
 module_load_include("inc", "novo_applications", "includes/novo_applications.func");
 module_load_include("inc", "novo_applications", "includes/novo_applications.forms");
+module_load_include("inc", "novo_applications", "includes/novo_applications.cron");
 
 /**
  * Implements hook_menu().
@@ -46,6 +47,14 @@ function novo_applications_theme() {
     'novo_applications_welcome_block' => array(
       'render element' => 'data',
       'template' => 'plugins/templates/novo_applications_welcome_block',
+    ),
+    'novo_application_exp_admin_email' => array(
+      'variables' => array('params' => NULL),
+      'template' => 'templates/email/novo-application-exp-admin-email',
+    ),
+    'novo_application_exp_volunteer_email' => array(
+      'variables' => array('params' => NULL),
+      'template' => 'templates/email/novo-application-exp-volunteer-email',
     )
   );
 }
@@ -64,6 +73,7 @@ function novo_applications_ctools_plugin_directory($owner, $plugin_type) {
  */
 function novo_applications_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == 'application') {
+
     // Application status.
     $app_status_tid = (isset($variables['field_app_status'][0]['tid'])) ? $variables['field_app_status'][0]['tid'] : NULL;
     $lang = isset($variables['language']) ? $variables['language'] : LANGUAGE_NONE;
@@ -164,4 +174,51 @@ function novo_applications_get_academic_current_year() {
   $month = date("n", $time);
 
   return ($month >= 8) ? $year : $year - 1;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function novo_applications_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+
+  switch ($key) {
+    case 'exp_email_admin':
+      $html_email = theme("novo_application_exp_admin_email", ['params' => $params]);
+      $message['subject'] = strip_tags(t("Background Check Expired!"));
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
+      $message['body'][] = $html_email;
+      break;
+    case 'exp_email_volunteer':
+      $html_email = theme("novo_application_exp_volunteer_email", ['params' => $params]);
+      $message['subject'] = strip_tags(t("Background Check Expired!"));
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
+      $message['body'][] = $html_email;
+      break;
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function novo_applications_node_update($node) {
+  if ($node->type == "application") {
+    // Invoke your callback function AFTER the node is updated.
+    drupal_register_shutdown_function('novo_applications_node_post_update', $node);
+  }
+}
+
+/**
+ * Post save callback for class node.
+ */
+function novo_applications_node_post_update($node) {
+  if ($node->field_expired_date[LANGUAGE_NONE][0]['value'] != $node->original->field_expired_date[LANGUAGE_NONE][0]['value']) {
+    $node->field_expired_email_sent[$node->language][0]['value'] = 0;
+    $info = field_info_field('field_expired_email_sent');
+    $fields = [$info['id']];
+    field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+    cache_clear_all("field:node:$node->nid", 'cache_field');
+  }
 }

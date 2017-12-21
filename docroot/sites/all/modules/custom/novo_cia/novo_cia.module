@@ -199,14 +199,14 @@ function novo_cia_mail($key, &$message, $params) {
     case 'answer_report':
       $html_email = theme("novo_cia_answer_report", array('params' => $params));
       $message['subject'] = t("Volunteer reviewed by CIA");
-      $message['from'] = NOVO_CIA_BASE_EMAIL;
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
 
     case 'expired_date':
       $html_email = theme("novo_cia_expired_date", array('params' => $params));
       $message['subject'] = t("Volunteer expired");
-      $message['from'] = NOVO_CIA_BASE_EMAIL;
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
   }

@@ -345,7 +345,8 @@ function novo_applications_add_exp_date_validate(&$form, &$form_state) {
   $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
   $exp_date_value = (isset($form_state['values']['field_expired_date'][$lang][0]['value'])) ? trim($form_state['values']['field_expired_date'][$lang][0]['value']) : NULL;
   if (empty($exp_date_value)) {
-    $new_exp_date = [$lang => [['value' => strtotime('+3 year')]]];
+    $exp_period = variable_get('novo_master_exp_period', '+36 months');
+    $new_exp_date = [$lang => [['value' => strtotime($exp_period)]]];
     form_set_value($form['field_expired_date'], $new_exp_date, $form_state);
   }
 }

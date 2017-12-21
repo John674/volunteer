@@ -192,3 +192,33 @@ function novo_applications_get_first_date_serving_formula() {
     WHERE av.field_attendance_volunteer_list_target_id = {node}.nid";
   return "(" . $formula . ")";
 }
+
+
+/**
+ * Implements hook_action_info().
+ */
+function novo_applications_set_expiration_date($nid, $date = NULL) {
+  if (empty($nid)) {
+    return NULL;
+  }
+
+  $node = node_load($nid);
+  if (!empty($node)) {
+    cache_clear_all("field:node:$nid", 'cache_field');
+    $exp_period = variable_get('novo_master_exp_period', '+36 months');
+    $expired_date = strtotime($exp_period, REQUEST_TIME);
+
+    $node->field_expired_date[$node->language][0]['value'] = $expired_date;
+    $info1 = field_info_field('field_expired_date');
+
+    $node->field_expired_email_sent[$node->language][0]['value'] = 0;
+    $info2 = field_info_field('field_expired_email_sent');
+
+    $fields = [$info1['id'], $info2['id']];
+    field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+
+    cache_clear_all("field:node:$node->nid", 'cache_field');
+    return TRUE;
+  }
+  return FALSE;
+}
