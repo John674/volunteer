@@ -9,6 +9,10 @@
  * Implements hook_form_FORM_ID_alter().
  */
 function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
+  $nid = $form['nid']['#value'] ?? NULL;
+  $title = $form['title']['#default_value'] ?? $form['title']['#value'] ?? NULL;
+  drupal_set_title($nid ? t("Edit Enrollment @title", ["@title" => $title]) : t("Create Enrollment"), PASS_THROUGH);
+
   $form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program.js";
   // @codingStandardsIgnoreStart
   $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Class"), "node/add/class", ['query' => drupal_get_destination()])]);

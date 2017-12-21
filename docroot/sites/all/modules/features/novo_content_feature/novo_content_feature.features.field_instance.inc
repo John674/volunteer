@@ -9600,7 +9600,7 @@ Friend',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_mentor_program_name',
-    'label' => 'Program Name',
+    'label' => 'Enrollment Name',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -9799,7 +9799,7 @@ Discipline',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_location',
-    'label' => 'Program Location',
+    'label' => 'Location',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -11100,6 +11100,7 @@ Discipline',
   t('Email');
   t('Employer');
   t('Enrollment (Class) Name');
+  t('Enrollment Name');
   t('Ephesians 2:10, Romans 8:1');
   t('Ephesians 2:4-7, Romans 3:10-12');
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
@@ -11187,8 +11188,6 @@ Discipline',
   t('Prefix');
   t('Previous Church Involvement');
   t('Program Day');
-  t('Program Location');
-  t('Program Name');
   t('Q');
   t('Reference request 1');
   t('Reference request 2');

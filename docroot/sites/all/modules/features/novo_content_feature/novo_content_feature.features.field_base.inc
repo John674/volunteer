@@ -1791,6 +1791,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -3059,6 +3062,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 1,
           ),

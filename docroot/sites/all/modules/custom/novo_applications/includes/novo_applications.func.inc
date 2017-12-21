@@ -121,7 +121,7 @@ function novo_application_get_status($app_completed, $app_status_tid) {
 /**
  * Select active app status for views and dyn fields.
  */
-function novo_applications_get_app_active_status_formula() {
+function novo_applications_get_app_active_status_formula($on_date = NULL) {
   // @codingStandardsIgnoreStart
   // FROM REVISION
 //  $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - max(n_rev.timestamp)) / 60 / 60 / 24 / 30)
@@ -135,16 +135,38 @@ function novo_applications_get_app_active_status_formula() {
 
   novo_master_set_default_mysql_timezone();
 
-  $formula = "IF ((SELECT ((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+  if (!$on_date) {
+    $on_date = "UNIX_TIMESTAMP()";
+  }
+
+  $formula = "IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
     FROM {field_data_field_attendance_volunteer_list} AS av 
     INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
     WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6, 'Current', 
-      IF ((SELECT ((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+      IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
       FROM {field_data_field_attendance_volunteer_list} AS av 
       INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
       WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18, 'Lapsed', 'Inactive'))";
 
   return "(" . $formula . ")";
+}
+
+/**
+ * Select active app status for views and dyn fields.
+ */
+function novo_applications_get_app_active_status_formula_where($on_date = NULL) {
+  novo_master_set_default_mysql_timezone();
+
+  if (!$on_date) {
+    $on_date = "UNIX_TIMESTAMP()";
+  }
+
+  $formula = "SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+    FROM {field_data_field_attendance_volunteer_list} AS av 
+    INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid";
+
+  return "((" . $formula . ") >= 0 OR (" . $formula . ") IS NULL)";
 }
 
 /**

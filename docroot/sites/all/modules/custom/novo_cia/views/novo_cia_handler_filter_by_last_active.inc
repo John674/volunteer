@@ -21,9 +21,24 @@
  *
  * @ingroup views_filter_handlers
  */
-class novo_cia_filter extends views_handler_filter_boolean_operator_string {
+class novo_cia_handler_filter_by_last_active extends views_handler_filter_boolean_operator_string {
 
   function query() {
-    parent::query();
+    $this->ensure_my_table();
+
+    $table = $this->table;
+
+    $formula = "((
+       $table.request_type = 0 AND
+       (
+         SELECT count(*)
+         FROM novo_cia_checks AS sub_ncc
+
+         WHERE sub_ncc.application_nid = $table.application_nid AND sub_ncc.request_type = 1
+       ) = 0  
+      ) OR 
+      ($table.request_type = 1))";
+
+    $this->query->add_where_expression($this->options['group'], "$formula");
   }
 }
