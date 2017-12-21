@@ -9,3 +9,4 @@ files[] = views/novo_cia_handler_type.inc
 files[] = views/novo_cia_handler_report_status.inc
 files[] = views/novo_cia_handler_actions.inc
 files[] = views/novo_cia_handler_filter_by_last_active.inc
+files[] = views/novo_cia_handler_response_date.inc

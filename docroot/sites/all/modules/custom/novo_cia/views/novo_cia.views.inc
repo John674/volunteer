@@ -164,7 +164,7 @@ function novo_cia_views_data() {
     'title' => t('Response date'),
     'help' => t('The date the response from CIA was got.'),
     'field' => array(
-      'handler' => 'views_handler_field_date',
+      'handler' => 'novo_cia_handler_response_date',
       'click sortable' => TRUE,
     ),
     'sort' => array(
