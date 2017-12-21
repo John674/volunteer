@@ -186,6 +186,14 @@
 
         </div>
         <div class="panel-footer clearfix">
+
+            <div class="pull-left novo-notify-user-exp-btn">
+                <a role="button" class="btn btn-default" href="#">
+                    <i class="fa fa-envelope-o"></i>
+                  <?php print (t('Notify User About Expiration')) ?>
+                </a>
+            </div>
+
             <a role="button" class="btn btn-default"
                href="<?php print url("entityprint/node/" . $node->nid); ?>">
                 <i class="fa fa-download"></i>

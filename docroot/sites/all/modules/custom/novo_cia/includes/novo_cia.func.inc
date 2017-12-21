@@ -233,22 +233,7 @@ function novo_cia_check_report_status($report) {
  * Set expiration date for node.
  */
 function novo_cia_set_expiration_date($nid = NULL) {
-  if (empty($nid)) {
-    return NULL;
-  }
-
-  $node = node_load($nid);
-  if (!empty($node)) {
-    cache_clear_all("field:node:$nid", 'cache_field');
-    $expired_date = strtotime('+36 months', REQUEST_TIME);
-    $node->field_expired_date[$node->language][0]['value'] = $expired_date;
-    $info = field_info_field('field_expired_date');
-    $fields = [$info['id']];
-    field_sql_storage_field_storage_write('node', $node, 'update', $fields);
-    cache_clear_all("field:node:$node->nid", 'cache_field');
-    return TRUE;
-  }
-  return FALSE;
+  return novo_applications_set_expiration_date($nid);
 }
 
 /**
@@ -265,7 +250,8 @@ function novo_cia_is_expired_request($request_id = NULL) {
   }
 
   $response_date = $request->response_date;
-  $expired_date = strtotime('+36 months', $response_date);
+  $exp_period = variable_get('novo_master_exp_period', '+36 months');
+  $expired_date = strtotime($exp_period, $response_date);
   if (REQUEST_TIME > $expired_date && ($request->request_status != 4)) {
     $update_data = [
       'request_status' => 4,
