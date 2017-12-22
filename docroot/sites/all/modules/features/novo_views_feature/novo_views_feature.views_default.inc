@@ -3398,21 +3398,25 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = 'User';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Novo CIA requests: Type */
-  $handler->display->display_options['fields']['request_type']['id'] = 'request_type';
-  $handler->display->display_options['fields']['request_type']['table'] = 'novo_cia_checks';
-  $handler->display->display_options['fields']['request_type']['field'] = 'request_type';
-  $handler->display->display_options['fields']['request_type']['label'] = 'Request Type';
   /* Field: Novo CIA requests: Status */
   $handler->display->display_options['fields']['request_status']['id'] = 'request_status';
   $handler->display->display_options['fields']['request_status']['table'] = 'novo_cia_checks';
   $handler->display->display_options['fields']['request_status']['field'] = 'request_status';
   $handler->display->display_options['fields']['request_status']['label'] = 'Request Status';
-  /* Field: Novo CIA requests: Cia Log message */
-  $handler->display->display_options['fields']['log']['id'] = 'log';
-  $handler->display->display_options['fields']['log']['table'] = 'novo_cia_checks';
-  $handler->display->display_options['fields']['log']['field'] = 'log';
-  $handler->display->display_options['fields']['log']['label'] = 'Log message';
+  /* Field: Novo CIA requests: Request date */
+  $handler->display->display_options['fields']['request_date']['id'] = 'request_date';
+  $handler->display->display_options['fields']['request_date']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['request_date']['field'] = 'request_date';
+  $handler->display->display_options['fields']['request_date']['empty'] = 'N/a';
+  $handler->display->display_options['fields']['request_date']['date_format'] = 'short';
+  $handler->display->display_options['fields']['request_date']['second_date_format'] = 'long';
+  /* Field: Novo CIA requests: Response date */
+  $handler->display->display_options['fields']['response_date']['id'] = 'response_date';
+  $handler->display->display_options['fields']['response_date']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['fields']['response_date']['field'] = 'response_date';
+  $handler->display->display_options['fields']['response_date']['empty'] = 'N/a';
+  $handler->display->display_options['fields']['response_date']['date_format'] = 'short';
+  $handler->display->display_options['fields']['response_date']['second_date_format'] = 'long';
   /* Field: Novo CIA requests: Actions */
   $handler->display->display_options['fields']['actions']['id'] = 'actions';
   $handler->display->display_options['fields']['actions']['table'] = 'novo_cia_checks';
@@ -3422,6 +3426,10 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -3433,7 +3441,38 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['filter_by_last_active']['id'] = 'filter_by_last_active';
   $handler->display->display_options['filters']['filter_by_last_active']['table'] = 'novo_cia_checks';
   $handler->display->display_options['filters']['filter_by_last_active']['field'] = 'filter_by_last_active';
-  $handler->display->display_options['filters']['filter_by_last_active']['value'] = '1';
+  $handler->display->display_options['filters']['filter_by_last_active']['value'] = '0';
+  $handler->display->display_options['filters']['filter_by_last_active']['group'] = 1;
+  /* Filter criterion: Novo CIA requests: Status */
+  $handler->display->display_options['filters']['request_status']['id'] = 'request_status';
+  $handler->display->display_options['filters']['request_status']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['filters']['request_status']['field'] = 'request_status';
+  $handler->display->display_options['filters']['request_status']['value']['value'] = '0';
+  $handler->display->display_options['filters']['request_status']['group'] = 2;
+  $handler->display->display_options['filters']['request_status']['expose']['operator_id'] = 'request_status_op';
+  $handler->display->display_options['filters']['request_status']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['request_status']['expose']['operator'] = 'request_status_op';
+  $handler->display->display_options['filters']['request_status']['expose']['identifier'] = 'request_status';
+  $handler->display->display_options['filters']['request_status']['group_info']['label'] = 'Status';
+  $handler->display->display_options['filters']['request_status']['group_info']['identifier'] = 'request_status';
+  $handler->display->display_options['filters']['request_status']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['request_status']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  /* Filter criterion: Novo CIA requests: Status */
+  $handler->display->display_options['filters']['request_status_1']['id'] = 'request_status_1';
+  $handler->display->display_options['filters']['request_status_1']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['filters']['request_status_1']['field'] = 'request_status';
+  $handler->display->display_options['filters']['request_status_1']['value']['value'] = '1';
+  $handler->display->display_options['filters']['request_status_1']['group'] = 2;
+  /* Filter criterion: Novo CIA requests: Status */
+  $handler->display->display_options['filters']['request_status_2']['id'] = 'request_status_2';
+  $handler->display->display_options['filters']['request_status_2']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['filters']['request_status_2']['field'] = 'request_status';
+  $handler->display->display_options['filters']['request_status_2']['value']['value'] = '4';
+  $handler->display->display_options['filters']['request_status_2']['group'] = 2;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
