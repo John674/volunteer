@@ -193,7 +193,6 @@ function novo_applications_get_first_date_serving_formula() {
   return "(" . $formula . ")";
 }
 
-
 /**
  * Implements hook_action_info().
  */

@@ -16,7 +16,7 @@ function novo_applications_cron() {
     $email_queue = DrupalQueue::get('novo_application_exp_email_queue');
     $data = novo_application_get_all_expired_nids();
     foreach ($data as $key => $item) {
-      $email_queue->createItem((array)$item);
+      $email_queue->createItem((array) $item);
     }
 
     variable_set('novo_application_exp_email_cron_last', REQUEST_TIME);
@@ -34,6 +34,9 @@ function novo_applications_cron_queue_info() {
   return $queue;
 }
 
+/**
+ * Expired email queue worker.
+ */
 function novo_application_exp_email_queue_worker($data) {
   // Send email.
   $link = url("node/" . $data['nid'], array("absolute" => TRUE));
@@ -93,7 +96,6 @@ function novo_application_get_siteadmin_emails() {
     WHERE ur.rid = :rid", array(":rid" => $role->rid))->fetchAllKeyed();
 }
 
-
 /**
  * Update status for application exp email send falue.
  */
@@ -112,6 +114,3 @@ function novo_application_update_expired_email_sent($nid, $value = 0) {
 
   return $result;
 }
-
-// TODO: Change status to expired.
-// TODO: Notify user about exp btn.

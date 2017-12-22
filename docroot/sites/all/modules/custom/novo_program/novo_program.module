@@ -70,7 +70,6 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
     $form['field_program_location'][$form['field_program_location']['#language']]['#disabled'] = TRUE;
     $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#disabled'] = TRUE;
   }
-  
 }
 
 /**

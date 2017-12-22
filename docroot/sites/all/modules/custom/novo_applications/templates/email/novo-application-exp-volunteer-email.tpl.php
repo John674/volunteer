@@ -11,6 +11,7 @@
 <p>Our records indicate that your background check for serving in Novo Programs is about to expire. Please click here to update any personal information that may have changed since we last ran a background check.</p>
 
 <p>Simply follow the link, update any information that has changed, and provide permission for us to run a new background check. That’s it! We take care of the rest.</p>
+<p><?php print $params['link'];?></p>
 
 <p>Thank you for volunteering with us!</p>
 

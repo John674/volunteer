@@ -91,7 +91,9 @@ function novo_applications_preprocess_node(&$variables) {
     list($app_status_output, $app_status) = novo_application_get_status($app_completed, $app_status_tid);
 
     if ($expired_date && $expired_date < REQUEST_TIME) {
-      $app_status_output = t("Expired :date", [":date" => format_date($expired_date, "custom", "m/d/Y")]);
+      $app_status_output = t("Expired :date", [
+        ":date" => format_date($expired_date, "custom", "m/d/Y"),
+      ]);
       $variables['app_status_is_expired'] = TRUE;
     }
 
@@ -209,6 +211,7 @@ function novo_applications_mail($key, &$message, $params) {
       $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
+
     case 'exp_email_volunteer':
       $html_email = theme("novo_application_exp_volunteer_email", ['params' => $params]);
       $message['subject'] = strip_tags(t("Novoministries background check expired!"));

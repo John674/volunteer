@@ -186,7 +186,7 @@ function novo_applications_form_submit(&$form, &$form_state) {
       $node = isset($form_state['node']) ? $form_state['node'] : NULL;
       $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
       $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
-      $is_done_btn = (isset($form_state['triggering_element']['#id']) && $form_state['triggering_element']['#id'] === "edit-done") ? TRUE: FALSE;
+      $is_done_btn = (isset($form_state['triggering_element']['#id']) && $form_state['triggering_element']['#id'] === "edit-done") ? TRUE : FALSE;
 
       if (!$node_completed && $is_done_btn) {
         $node->field_completed[$lang][0]['value'] = 1;
