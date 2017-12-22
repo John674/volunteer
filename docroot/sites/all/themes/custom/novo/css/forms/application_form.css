@@ -216,3 +216,10 @@
   padding: 3px 10px;
   line-height: 1.45;
 }
+
+.node-application hr{
+  margin: 0.5em;
+}
+.node-application p:empty{
+  display: none;
+}

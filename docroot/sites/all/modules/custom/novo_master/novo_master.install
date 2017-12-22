@@ -494,8 +494,10 @@ function novo_master_update_7145() {
 }
 
 /**
- * Revert novo_views_feature.
+ * Revert novo_views_feature, novo_master_feature, delete old field_decision_other_explained.
  */
 function novo_master_update_7146() {
+  field_delete_field('field_decision_other_explained');
   features_revert_module("novo_views_feature");
+  features_revert_module("novo_master_feature");
 }
