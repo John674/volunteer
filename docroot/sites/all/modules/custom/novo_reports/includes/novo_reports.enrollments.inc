@@ -133,6 +133,7 @@ function novo_reports_enrollment_report_get_data() {
 
   $select->groupBy("p_kids_list.entity_id");
   $select->addTag('node_access');
+  $select->orderBy("n_location.title");
 
   if (!empty($filter_year) && $filter_year != -1) {
     $select->innerJoin("field_data_field_program_year", "y", "y.entity_id = p_kids_list.entity_id");

@@ -98,6 +98,10 @@ function novo_wrap_app_status_label($text) {
       $label = "default";
   }
 
+  if (strstr(drupal_strtolower($text), 'expired')) {
+    $label = "danger";
+  }
+
   if ($label) {
     $label_html = theme('status_label', array(
       'status' => $text,

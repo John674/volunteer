@@ -36,6 +36,14 @@ function novo_applications_menu() {
     'type' => MENU_CALLBACK
   );
 
+  $items['novo-applications/notify-user-exp/%node'] = [
+    'title' => 'Notify User About Expiration',
+    'page callback' => 'novo_application_notify_user_exp',
+    'page arguments' => [2],
+    'access arguments' => ['notify user about expiration'],
+    'type' => MENU_CALLBACK,
+  ];
+
   return $items;
 }
 
@@ -78,8 +86,14 @@ function novo_applications_preprocess_node(&$variables) {
     $app_status_tid = (isset($variables['field_app_status'][0]['tid'])) ? $variables['field_app_status'][0]['tid'] : NULL;
     $lang = isset($variables['language']) ? $variables['language'] : LANGUAGE_NONE;
     $app_completed = (isset($variables['field_completed'][$lang][0]['value'])) ? $variables['field_completed'][$lang][0]['value'] : FALSE;
+    $expired_date = (isset($variables['field_expired_date'][$lang][0]['value'])) ? $variables['field_expired_date'][$lang][0]['value'] : FALSE;
 
     list($app_status_output, $app_status) = novo_application_get_status($app_completed, $app_status_tid);
+
+    if ($expired_date && $expired_date < REQUEST_TIME) {
+      $app_status_output = t("Expired :date", [":date" => format_date($expired_date, "custom", "m/d/Y")]);
+      $variables['app_status_is_expired'] = TRUE;
+    }
 
     $variables['content']['app_status'] = array(
       "#markup" => $app_status_output,
@@ -119,6 +133,10 @@ function novo_applications_permission() {
     'disable multistep application form' => array(
       'title' => t('Disable multistep application form.'),
       'description' => t('Disable multistep (for reviewer).'),
+    ),
+    'notify user about expiration' => array(
+      'title' => t('Notify User About Expiration.'),
+      'description' => t('Allow Notify User About Expiration.'),
     ),
   );
 }
@@ -193,7 +211,7 @@ function novo_applications_mail($key, &$message, $params) {
       break;
     case 'exp_email_volunteer':
       $html_email = theme("novo_application_exp_volunteer_email", ['params' => $params]);
-      $message['subject'] = strip_tags(t("Background Check Expired!"));
+      $message['subject'] = strip_tags(t("Novoministries background check expired!"));
       $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
@@ -219,6 +237,44 @@ function novo_applications_node_post_update($node) {
     $info = field_info_field('field_expired_email_sent');
     $fields = [$info['id']];
     field_sql_storage_field_storage_write('node', $node, 'update', $fields);
-    cache_clear_all("field:node:$node->nid", 'cache_field');
+    cache_clear_all("field:node:{$node->nid}", 'cache_field');
   }
+}
+
+/**
+ * Notify user about expiration.
+ */
+function novo_application_notify_user_exp($node) {
+  $app_first_name = novo_applications_get_field_value("node", $node, "field_first_name");
+  $app_last_name = novo_applications_get_field_value("node", $node, "field_last_name");
+  $app_email = novo_applications_get_field_value("node", $node, "field_email");
+  $link = url("node/" . $node->nid . "/edit", array("absolute" => TRUE));
+
+  $params = [
+    'link' => $link,
+    'app_first_name' => $app_first_name,
+    'app_last_name' => $app_last_name,
+  ];
+  $result = drupal_mail('novo_applications', 'exp_email_volunteer', $app_email, language_default(), $params);
+
+  if ($result && isset($result['result']) && $result['result']) {
+    // Switch status to "Started".
+    $node->field_completed[$node->language][0]['value'] = 0;
+    $info = field_info_field('field_completed');
+    $fields = [$info['id']];
+    field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+    cache_clear_all("field:node:{$node->nid}", 'cache_field');
+    entity_get_controller('node')->resetCache(array($node->nid));
+
+    drupal_set_message("User has been notified.");
+    drupal_goto("node/" . $node->nid);
+  }
+  else {
+    watchdog("novo_application_exp_email", "Can't send email for volunteer node.nid: :nid", [
+      ":nid" => $node->nid,
+    ], WATCHDOG_ERROR);
+    drupal_set_message("User has not been notified. ", "error");
+    drupal_goto("node/" . $node->nid);
+  }
+
 }

@@ -5,8 +5,7 @@
  * Applications cron.
  */
 
-//define("NOVO_APPLICATION_EXP_EMAIL_CRON_PERIOD", 60 * 5);
-define("NOVO_APPLICATION_EXP_EMAIL_CRON_PERIOD", 1);
+define("NOVO_APPLICATION_EXP_EMAIL_CRON_PERIOD", 60 * 5);
 
 /**
  * Implements hook_cron().
@@ -37,7 +36,7 @@ function novo_applications_cron_queue_info() {
 
 function novo_application_exp_email_queue_worker($data) {
   // Send email.
-  $link = url("application/" . $data['nid'], array("absolute" => TRUE));
+  $link = url("node/" . $data['nid'], array("absolute" => TRUE));
   $admin_emails = novo_application_get_siteadmin_emails();
 
   $result = NULL;
@@ -48,7 +47,7 @@ function novo_application_exp_email_queue_worker($data) {
       'app_last_name' => $data['app_last_name']
     ];
 
-    $result = drupal_mail('novo_application', 'exp_email_admin', $email, language_default(), $params);
+    $result = drupal_mail('novo_applications', 'exp_email_admin', $email, language_default(), $params);
   }
 
   // Set status email has been sent.
@@ -113,7 +112,6 @@ function novo_application_update_expired_email_sent($nid, $value = 0) {
 
   return $result;
 }
-
 
 // TODO: Change status to expired.
 // TODO: Notify user about exp btn.

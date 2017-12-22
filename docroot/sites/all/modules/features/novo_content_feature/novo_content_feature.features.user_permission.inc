@@ -2972,16 +2972,6 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_faq_a'.
-  $permissions['view field_faq_a'] = array(
-    'name' => 'view field_faq_a',
-    'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view field_how_did_you_hear_about_nov'.
   $permissions['view field_how_did_you_hear_about_nov'] = array(
     'name' => 'view field_how_did_you_hear_about_nov',
@@ -3852,13 +3842,6 @@ function novo_content_feature_user_default_permissions() {
   // Exported permission: 'view own field_expired_date'.
   $permissions['view own field_expired_date'] = array(
     'name' => 'view own field_expired_date',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_faq_a'.
-  $permissions['view own field_faq_a'] = array(
-    'name' => 'view own field_faq_a',
     'roles' => array(),
     'module' => 'field_permissions',
   );

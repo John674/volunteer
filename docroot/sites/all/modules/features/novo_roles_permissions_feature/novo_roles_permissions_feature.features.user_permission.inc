@@ -38,6 +38,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'access draggableviews'.
+  $permissions['access draggableviews'] = array(
+    'name' => 'access draggableviews',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'draggableviews',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -602,6 +611,15 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_ref_request',
+  );
+
+  // Exported permission: 'notify user about expiration'.
+  $permissions['notify user about expiration'] = array(
+    'name' => 'notify user about expiration',
+    'roles' => array(
+      'Siteadmin' => 'Siteadmin',
+    ),
+    'module' => 'novo_applications',
   );
 
   // Exported permission: 'novo account edit roles'.
