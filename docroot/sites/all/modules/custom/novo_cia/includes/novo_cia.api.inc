@@ -40,15 +40,15 @@ function novo_cia_send_search_request($request_id) {
       $feed_array = json_decode($feed_json, TRUE);
       if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_ACCEPTED) {
 
-          if (isset($feed_array['TrackingNumber']) && !empty($feed_array['TrackingNumber'])) {
-              $tracking_number = $feed_array['TrackingNumber'];
-              novo_cia_update_request($search_request->id, array(
-                  'tracking_number' => $tracking_number,
-                  'request_status' => 1,
-              ));
-              novo_cia_add_pull_report_request_to_queue($search_request->application_nid, $search_request->uid, $search_request->id, $tracking_number);
-              return TRUE;
-          }
+        if (isset($feed_array['TrackingNumber']) && !empty($feed_array['TrackingNumber'])) {
+          $tracking_number = $feed_array['TrackingNumber'];
+          novo_cia_update_request($search_request->id, array(
+            'tracking_number' => $tracking_number,
+            'request_status' => 1,
+          ));
+          novo_cia_add_pull_report_request_to_queue($search_request->application_nid, $search_request->uid, $search_request->id, $tracking_number);
+          return TRUE;
+        }
       }
 
       if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_REJECTED) {

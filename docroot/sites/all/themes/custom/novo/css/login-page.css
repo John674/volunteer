@@ -73,8 +73,11 @@ html {
     margin-top: 20px;
     margin-left: 20px;
 }
+.novo-login-logo + .main-container{
+    margin-top: 60px;
+}
 .novo-login-header{
-    max-width: 450px;
+    max-width: 550px;
     padding: 5px 25px;
     margin-left: auto;
     margin-right: auto;
@@ -96,7 +99,7 @@ html {
     margin-bottom: 0;
 }
 .novo-login-form{
-    max-width: 500px;
+    max-width: 640px;
     padding: 5px 25px;
     margin-left: auto;
     margin-right: auto;
@@ -280,14 +283,13 @@ body.page-user-register .novo-login-form .form-actions a,
 body.page-user-register .novo-login-form .form-actions button,
 body.page-user-password .novo-login-form .form-actions a,
 body.page-user-password .novo-login-form .form-actions button {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 body.front .novo-login-form .form-actions ul li:first-child a,
 body.front .novo-login-form .form-actions a,
 body.page-user-register .novo-login-form .form-actions a,
 body.page-user-password .novo-login-form .form-actions a {
-    color: #ec1e24;
-    padding: 0px;
+    padding: 0;
     border: none;
     vertical-align: top;
     color: #ec1e24;
@@ -300,9 +302,15 @@ body.front .novo-login-form .form-actions ul li:first-child a {
     margin-top: 3px;
 }
 body.page-user-register .novo-login-form .form-actions a.btn-login,
-body.page-user-password .novo-login-form .form-actions a.btn-login {
-    margin-left: 0px;
+body.page-user-password .novo-login-form .form-actions a{
+    margin: 0;
+    padding: 7px 12px;
+    background: #EC1E24;
+    color: #FFFFFF;
+}
+body.page-user-password .novo-login-form .form-actions a:nth-child(2){
+    margin-left: 20px;
 }
 .novo-login-form .btn-login {
-    margin-right: 0px;
+    margin-right: 0;
 }
