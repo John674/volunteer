@@ -455,3 +455,7 @@ body.page-user-edit .tabs--primary{
 .form-item-field-attendance-year-year select {
   width: 134px;
 }
+
+.novo-notify-user-exp-btn {
+  margin-right: 5px;
+}

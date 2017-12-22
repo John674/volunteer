@@ -62,6 +62,15 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
     '#markup' => novo_program_render_report_links($form, $form_state),
     '#weight' => -10,
   ];
+
+  // Disable change fields on edit form.
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if (!$is_new) {
+    $form['field_program_year'][$form['field_program_year']['#language']]['#disabled'] = TRUE;
+    $form['field_program_location'][$form['field_program_location']['#language']]['#disabled'] = TRUE;
+    $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#disabled'] = TRUE;
+  }
+  
 }
 
 // Function novo_program_pickup_contacts_element_validate($element, &$form_state) {
@@ -267,6 +276,14 @@ function novo_program_render_report_links($form, $form_state) {
  */
 function novo_program_form_class_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#validate'][] = 'novo_program_form_class_node_form_validate';
+
+  // Disable change fields on edit form.
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if (!$is_new) {
+    $form['field_class_year'][$form['field_class_year']['#language']]['#disabled'] = TRUE;
+    $form['field_class_location'][$form['field_class_location']['#language']]['#disabled'] = TRUE;
+  }
+
 }
 
 /**

@@ -13,7 +13,6 @@ define('NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME', 'Standby');
 define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
 define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
 
-define("NOVO_REF_REQUEST_BASE_EMAIL", "volunteer@novoministries.org");
 define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
 define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
 
@@ -485,7 +484,7 @@ function novo_ref_request_mail($key, &$message, $params) {
     case 'referral_request':
       $html_email = theme("novo_ref_request_ref_email", array('params' => $params));
       $message['subject'] = strip_tags(t(":vol_name Has Requested You As a Reference!", array(":vol_name" => $params['vol_name'])));
-      $message['from'] = NOVO_REF_REQUEST_BASE_EMAIL;
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
   }

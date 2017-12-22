@@ -12,7 +12,7 @@
 
 <p>Our reference form takes about 3 minutes to complete on our secure and confidential reference for at <?php print $params['link'];?>. Please complete this form within 3 days of receiving, because the link will expire after 72 hours.</p>
 
-<p>If you have any questions, please contact us at <?php print NOVO_REF_REQUEST_BASE_PHONE_LABEL;?> or by email at <?php print NOVO_REF_REQUEST_BASE_EMAIL;?></p>
+<p>If you have any questions, please contact us at <?php print NOVO_REF_REQUEST_BASE_PHONE_LABEL;?> or by email at <?php print NOVO_MASTER_BASE_EMAIL;?></p>
 
 <p>Thank you for your time and help!</p>
 
