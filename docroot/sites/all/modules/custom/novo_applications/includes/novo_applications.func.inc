@@ -193,7 +193,6 @@ function novo_applications_get_first_date_serving_formula() {
   return "(" . $formula . ")";
 }
 
-
 /**
  * Implements hook_action_info().
  */
@@ -204,7 +203,6 @@ function novo_applications_set_expiration_date($nid, $date = NULL) {
 
   $node = node_load($nid);
   if (!empty($node)) {
-    cache_clear_all("field:node:$nid", 'cache_field');
     $exp_period = variable_get('novo_master_exp_period', '+36 months');
     $expired_date = strtotime($exp_period, REQUEST_TIME);
 
@@ -217,7 +215,8 @@ function novo_applications_set_expiration_date($nid, $date = NULL) {
     $fields = [$info1['id'], $info2['id']];
     field_sql_storage_field_storage_write('node', $node, 'update', $fields);
 
-    cache_clear_all("field:node:$node->nid", 'cache_field');
+    cache_clear_all("field:node:{$node->nid}", 'cache_field');
+    entity_get_controller('node')->resetCache(array($node->nid));
     return TRUE;
   }
   return FALSE;

@@ -70,17 +70,7 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
     $form['field_program_location'][$form['field_program_location']['#language']]['#disabled'] = TRUE;
     $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#disabled'] = TRUE;
   }
-  
 }
-
-// Function novo_program_pickup_contacts_element_validate($element, &$form_state) {
-// kpr($element);
-// kpr($form_state);
-//
-// $form_state['values']['field_program_kids_list']
-// die();
-// form_error($element, t('The "!name" must be x'));
-// }.
 
 /**
  * Implements hook_preprocess_field().
@@ -173,7 +163,8 @@ function novo_program_node_post_update($node) {
     foreach ($nodes as $node) {
       $node->title = "%AutoEntityLabel%";
       node_save($node);
-      cache_clear_all("field:node:$node->nid", 'cache_field');
+      cache_clear_all("field:node:{$node->nid}", 'cache_field');
+      entity_get_controller('node')->resetCache(array($node->nid));
     }
   }
 }

@@ -186,10 +186,13 @@ function novo_applications_form_submit(&$form, &$form_state) {
       $node = isset($form_state['node']) ? $form_state['node'] : NULL;
       $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
       $node_completed = isset($node->field_completed[$lang][0]['value']) ? ($node->field_completed[$lang][0]['value']) : FALSE;
-      if (!$node_completed) {
+      $is_done_btn = (isset($form_state['triggering_element']['#id']) && $form_state['triggering_element']['#id'] === "edit-done") ? TRUE : FALSE;
+
+      if (!$node_completed && $is_done_btn) {
         $node->field_completed[$lang][0]['value'] = 1;
         node_save($node);
         cache_clear_all("field:node:{$node->nid}", 'cache_field');
+        entity_get_controller('node')->resetCache(array($node->nid));
         if (!user_access("disable auto complete redirect")) {
           drupal_get_messages("status");
           drupal_set_message("Your application will begin processing now!");

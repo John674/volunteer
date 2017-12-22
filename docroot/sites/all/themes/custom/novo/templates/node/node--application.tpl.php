@@ -187,12 +187,14 @@
         </div>
         <div class="panel-footer clearfix">
 
-            <div class="pull-left novo-notify-user-exp-btn">
-                <a role="button" class="btn btn-default" href="#">
-                    <i class="fa fa-envelope-o"></i>
-                  <?php print (t('Notify User About Expiration')) ?>
-                </a>
-            </div>
+          <?php if (isset($app_status_is_expired) && $app_status_is_expired && user_access("notify user about expiration")): ?>
+              <div class="pull-left novo-notify-user-exp-btn">
+                  <a role="button" class="btn btn-default" href="<?php print url("novo-applications/notify-user-exp/" . $node->nid); ?>">
+                      <i class="fa fa-envelope-o"></i>
+                    <?php print (t('Notify User About Expiration')) ?>
+                  </a>
+              </div>
+          <?php endif; ?>
 
             <a role="button" class="btn btn-default"
                href="<?php print url("entityprint/node/" . $node->nid); ?>">

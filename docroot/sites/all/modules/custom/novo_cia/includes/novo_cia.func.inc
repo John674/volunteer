@@ -337,7 +337,7 @@ function novo_cia_date($nid = NULL, $date_type = NULL, $renewal = FALSE) {
       }
     }
     if ($date_type == 'response_date') {
-      if (($request->request_type == 1) && ($request->request_status == 1)) {
+      if ($request && ($request->request_type == 1) && ($request->request_status == 1)) {
         return !empty($request->{$date_type}) && !empty($request->tracking_number) ? format_date($request->{$date_type}, 'custom', 'Y-m-d  H:i:s') : 'N/A';
       }
       else {

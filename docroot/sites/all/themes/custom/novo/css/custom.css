@@ -459,3 +459,7 @@ body.page-user-edit .tabs--primary{
 .novo-notify-user-exp-btn {
   margin-right: 5px;
 }
+
+.label.label-danger em.placeholder {
+  font-style: normal;
+}
