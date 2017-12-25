@@ -57,6 +57,30 @@ define("NOVO_MAIL_EMAILS", serialize([
     'is_manager' => TRUE,
   ],
 
+  [
+    'key' => 'novo_mail_app_not_completed_to_admin_24',
+    'template' => 'templates/email/application/novo-mail-app-not-completed-to-admin-24',
+    'theme' => 'novo_mail_app_not_completed_to_admin_24',
+    'subject' => 'Application Incomplete - 24 Hour Notice',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_app_not_completed_to_admin_72',
+    'template' => 'templates/email/application/novo-mail-app-not-completed-to-admin-72',
+    'theme' => 'novo_mail_app_not_completed_to_admin_72',
+    'subject' => 'Application Incomplete - 72 Hour Notice',
+    'is_manager' => TRUE,
+  ],
+
+  [
+    'key' => 'novo_mail_app_not_completed_to_volunteer_24',
+    'template' => 'templates/email/application/novo-mail-app-not-completed-to-volunteer-24',
+    'theme' => 'novo_mail_app_not_completed_to_volunteer_24',
+    'subject' => 'Let\'s Get You Connected!',
+  ],
+
+
+
 ]));
 
 /**
@@ -77,23 +101,15 @@ function novo_mail_menu() {
 }
 
 function novo_mail_test() {
-  novo_master_set_default_mysql_timezone();
-  $r =  db_query("SELECT
-  ed.entity_id AS nid,
-  fn.field_first_name_value AS app_first_name,
-  ln.field_last_name_value AS app_last_name
-FROM field_data_field_expired_date AS ed
-  LEFT JOIN field_data_field_first_name AS fn ON fn.entity_id = ed.entity_id
-  LEFT JOIN field_data_field_last_name AS ln ON ln.entity_id = ed.entity_id
-  
-  LEFT JOIN novo_mail AS nm ON nm.nid = ed.entity_id
+  // Not completed nids.
+//  $email_queue = DrupalQueue::get('novo_mail_app_exp_email_queue');
+//  $data = novo_mail_app_get_all_expired_nids();
+//  kpr($data);
+//  foreach ($data as $key => $item) {
+//    $email_queue->createItem((array) $item);
+//  }
 
-WHERE ed.field_expired_date_value <= UNIX_TIMESTAMP()
-      AND nm.id IS NULL LIMIT 100")->fetchAll();
-
-  kpr($r);
-
-  novo_mail_add_status_to_storage('novo_mail_app_expired_to_admin', 14450);
+  //novo_mail_add_status_to_storage('novo_mail_app_expired_to_admin', 14450);
 
   return "";
 }
