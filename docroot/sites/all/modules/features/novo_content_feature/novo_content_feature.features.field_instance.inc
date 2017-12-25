@@ -3767,48 +3767,6 @@ College',
     ),
   );
 
-  // Exported field_instance: 'node-application-field_expired_email_sent'.
-  $field_instances['node-application-field_expired_email_sent'] = array(
-    'bundle' => 'application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'pdf' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_expired_email_sent',
-    'label' => 'Expired email sent',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 183,
-    ),
-  );
-
   // Exported field_instance: 'node-application-field_first_name'.
   $field_instances['node-application-field_first_name'] = array(
     'bundle' => 'application',
@@ -11148,7 +11106,6 @@ Discipline',
   t('Ephesians 2:8-9, Romans 10:9-10, Romans 5:1');
   t('Ethnicity');
   t('Expired date (36 months after CIA response)');
-  t('Expired email sent');
   t('FAQ');
   t('First Name');
   t('Food Allergies');

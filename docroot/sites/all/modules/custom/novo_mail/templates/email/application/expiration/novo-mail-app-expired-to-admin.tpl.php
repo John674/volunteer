@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Ref request email theme.
+ * Email template.
  */
 ?>
 
@@ -14,4 +14,8 @@
 
 <p>If active, send the volunteer’s consent email. Once permission is granted, run the background check.</p>
 
-<p>If inactive, mark volunteer as inactive, and no further action is necessary.</p>
+<p>f inactive, mark volunteer as inactive, and no further action is necessary.
+    All tasks related to that volunteer will automatically be removed from the
+    Background Tasks list.
+    You can review his address data yourself, or resend request email to him on
+    site volunteer.novoministries.org</p>

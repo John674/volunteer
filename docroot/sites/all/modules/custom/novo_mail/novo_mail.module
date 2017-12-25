@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * @file
+ * Mail templates.
+ */
+
+module_load_include("inc", "novo_mail", "includes/novo_mail.func");
+module_load_include("inc", "novo_mail", "includes/novo_mail.cron");
+
+
+define("NOVO_MAIL_EMAILS", serialize([
+  [
+    'key' => 'novo_mail_app_expired_to_admin',
+    'template' => 'templates/email/application/expiration/novo-mail-app-expired-to-admin',
+    'theme' => 'novo_mail_app_expired_to_admin',
+    'subject' => 'Background Check Expired!',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_app_expired_to_volunteer',
+    'template' => 'templates/email/application/expiration/novo-mail-app-expired-to-volunteer',
+    'theme' => 'novo_mail_app_expired_to_volunteer',
+    'subject' => 'Novoministries background check expired!',
+  ],
+  [
+    'key' => 'novo_mail_app_approved_to_volunteer',
+    'template' => 'templates/email/application/novo-mail-app-approved-to-volunteer',
+    'theme' => 'novo_mail_app_approved_to_volunteer',
+    'subject' => 'You\'re Approved',
+  ],
+  [
+    'key' => 'novo_mail_app_approved_to_admin',
+    'template' => 'templates/email/application/novo-mail-app-approved-to-admin',
+    'theme' => 'novo_mail_app_approved_to_admin',
+    'subject' => 'Application Approved, need a call',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_app_not_approved_to_admin',
+    'template' => 'templates/email/application/novo-mail-app-not-approved-to-admin',
+    'theme' => 'novo_mail_app_not_approved_to_admin',
+    'subject' => 'Application Not Approved, need a call',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_app_submitted_to_volunteer',
+    'template' => 'templates/email/application/novo-mail-app-submitted-to-volunteer',
+    'theme' => 'novo_mail_app_submitted_to_volunteer',
+    'subject' => 'Application Submitted',
+  ],
+  [
+    'key' => 'novo_mail_app_submitted_to_admin',
+    'template' => 'templates/email/application/novo-mail-app-submitted-to-admin',
+    'theme' => 'novo_mail_app_submitted_to_admin',
+    'subject' => 'New Application Submitted - app_first_name app_last_name',
+    'is_manager' => TRUE,
+  ],
+
+]));
+
+/**
+ * Implements hook_menu().
+ */
+function novo_mail_menu() {
+  $items = array();
+
+  $items['novo-mail/test'] = array(
+    'title' => 'novo_mail_test',
+    'page callback' => 'novo_mail_test',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
+function novo_mail_test() {
+  novo_master_set_default_mysql_timezone();
+  $r =  db_query("SELECT
+  ed.entity_id AS nid,
+  fn.field_first_name_value AS app_first_name,
+  ln.field_last_name_value AS app_last_name
+FROM field_data_field_expired_date AS ed
+  LEFT JOIN field_data_field_first_name AS fn ON fn.entity_id = ed.entity_id
+  LEFT JOIN field_data_field_last_name AS ln ON ln.entity_id = ed.entity_id
+  
+  LEFT JOIN novo_mail AS nm ON nm.nid = ed.entity_id
+
+WHERE ed.field_expired_date_value <= UNIX_TIMESTAMP()
+      AND nm.id IS NULL LIMIT 100")->fetchAll();
+
+  kpr($r);
+
+  novo_mail_add_status_to_storage('novo_mail_app_expired_to_admin', 14450);
+
+  return "";
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_mail_theme() {
+  $emails_conf = unserialize(NOVO_MAIL_EMAILS);
+  $themes = [];
+  foreach ($emails_conf as $item) {
+    $themes[$item['key']] = [
+      'variables' => ['params' => NULL],
+      'template' => $item['template'],
+    ];
+  }
+
+  return $themes;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function novo_mail_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+  $message['from'] = NOVO_MASTER_BASE_EMAIL;
+
+  $emails_conf = unserialize(NOVO_MAIL_EMAILS);
+  foreach ($emails_conf as $item) {
+    if ($item['key'] == $key) {
+      $message['subject'] = strip_tags(t($item['subject'], $params));
+      $message['body'][] = theme($item['theme'], ['params' => $params]);
+    }
+  }
+}
+
+/**
+ * Email: application was approved (Admin click bu button).
+ */
+function novo_mail_app_approved($nid) {
+  novo_mail_add_to_queue($nid, 'novo_mail_app_approved_to_volunteer');
+}
+
+/**
+ * Email: CIA application was approved. @TODO: add to CIA
+ */
+function novo_mail_app_cia_approved($nid) {
+  novo_mail_add_to_queue($nid, 'novo_mail_app_approved_to_admin');
+}
+
+/**
+ * Email: CIA application was not approved. @TODO: add to CIA
+ */
+function novo_mail_app_cia_not_approved($nid) {
+  novo_mail_add_to_queue($nid, 'novo_mail_app_not_approved_to_admin');
+}
+
+/**
+ * Email: application was submitted.
+ */
+function novo_mail_app_submitted($nid) {
+  novo_mail_add_to_queue($nid, 'novo_mail_app_submitted_to_volunteer');
+  novo_mail_add_to_queue($nid, 'novo_mail_app_submitted_to_admin');
+}
+
+
+/**
+ * Email: Notify user about expiration.
+ */
+function novo_mail_app_notify_user_exp($nid) {
+  $additional_params = ['link' => url("node/" . $nid . "/edit", ["absolute" => TRUE])];
+  novo_mail_add_to_queue($nid, 'novo_mail_app_expired_to_volunteer', $additional_params);
+}
+

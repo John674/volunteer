@@ -1,7 +1,7 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.24
+version = 7.x-1.25
 dependencies[] = autoassignrole
 dependencies[] = chosen
 dependencies[] = ctools
@@ -16,6 +16,7 @@ dependencies[] = novo_block_feature
 dependencies[] = novo_content_feature
 dependencies[] = novo_dynamic_fields
 dependencies[] = novo_formatters
+dependencies[] = novo_mail
 dependencies[] = novo_mentors
 dependencies[] = novo_menu_feature
 dependencies[] = novo_panels_feature
