@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * All hook_update()'s.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function novo_mail_schema() {
+  $schema['novo_mail'] = [
+    'description' => 'Mail status storage.',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier for a record.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'uid' => [
+        'description' => 'The user.uid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ],
+      'nid' => [
+        'description' => 'The node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ],
+      'mail_key' => [
+        'description' => 'Mail key name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'mail_status' => [
+        'description' => 'Mail status',
+        'type' => 'int',
+        'length' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'created' => [
+        'description' => 'The Unix timestamp when the task was created.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0,
+      ],
+      'updated' => [
+        'description' => 'The Unix timestamp when the task was updated.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'id' => ['id'],
+      'nid' => ['nid'],
+    ],
+  ];
+
+  return $schema;
+}

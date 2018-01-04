@@ -181,3 +181,22 @@ function novo_ref_request_task_update_status_by_id($id, $status = 4) {
 
   return $result;
 }
+
+/**
+ * Check if all 3 ref request were finished. (submitted by user).
+ */
+function novo_ref_request_check_all_refs_finished($app_nid) {
+  $sql = "SELECT count(nrt.id) AS number_res FROM novo_ref_tasks AS nrt
+  WHERE
+    nrt.volunteer_nid = :app_nid AND
+    nrt.status = 2 AND
+    (
+      (SELECT req_1.field_reference_request_1_target_id FROM field_data_field_reference_request_1 AS req_1 WHERE req_1.field_reference_request_1_target_id = nrt.nid) IS NOT NULL OR
+      (SELECT req_2.field_reference_request_2_target_id FROM field_data_field_reference_request_2 AS req_2 WHERE req_2.field_reference_request_2_target_id = nrt.nid) IS NOT NULL OR
+      (SELECT req_3.field_reference_request_standby_target_id FROM field_data_field_reference_request_standby AS req_3 WHERE req_3.field_reference_request_standby_target_id = nrt.nid) IS NOT NULL
+    )
+    HAVING number_res = 3";
+  return db_query($sql, [
+    ":app_nid" => $app_nid,
+  ])->fetchField();
+}

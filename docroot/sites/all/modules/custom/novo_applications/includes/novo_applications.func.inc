@@ -83,6 +83,9 @@ function novo_application_update_status($node, $status = 0) {
       $node->field_app_status[$lang][0]['tid'] = $status_tid;
       node_save($node);
       drupal_set_message(t("Status has been changed"));
+      if ($status && function_exists("novo_mail_app_approved")) {
+        novo_mail_app_approved($node->nid);
+      }
     }
     else {
       drupal_set_message(t("Can't change status for application"), "error");
@@ -207,12 +210,13 @@ function novo_applications_set_expiration_date($nid, $date = NULL) {
     $expired_date = strtotime($exp_period, REQUEST_TIME);
 
     $node->field_expired_date[$node->language][0]['value'] = $expired_date;
-    $info1 = field_info_field('field_expired_date');
+    $info = field_info_field('field_expired_date');
 
-    $node->field_expired_email_sent[$node->language][0]['value'] = 0;
-    $info2 = field_info_field('field_expired_email_sent');
+    if (function_exists("novo_mail_remove_status_from_storage")) {
+      novo_mail_remove_status_from_storage('novo_mail_app_expired_to_admin', $nid);
+    }
 
-    $fields = [$info1['id'], $info2['id']];
+    $fields = [$info['id']];
     field_sql_storage_field_storage_write('node', $node, 'update', $fields);
 
     cache_clear_all("field:node:{$node->nid}", 'cache_field');

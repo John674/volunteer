@@ -1,0 +1,5 @@
+name = Novo Mail
+description = Mail module.
+core = 7.x
+package = Novo
+version = 7.x-1.0

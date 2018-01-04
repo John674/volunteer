@@ -16,7 +16,6 @@ define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
 define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
 define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
 
-define("NOVO_REF_REQUEST_CRON_EMAIL_PERIOD", 60 * 5);
 define("NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD", 60 * 60);
 
 // 72 hours.
@@ -90,11 +89,13 @@ function novo_ref_request_permission() {
  */
 function novo_ref_request_node_access($node, $op, $account) {
   $type = is_string($node) ? $node : $node->type;
+  $role_siteadmin = user_role_load_by_name('Siteadmin');
+
   if ($type == "reference_request" && $op == 'update') {
-    return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : NODE_ACCESS_IGNORE;
+    return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
   }
 
-  return NODE_ACCESS_IGNORE;
+  return (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
 }
 
 /**
@@ -127,17 +128,15 @@ function novo_ref_request_generate_hashed_link($nid) {
 function novo_ref_request_preprocess_node(&$variables) {
   if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
     $node = $variables['node'];
-    $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
-    $responded = isset($node->field_responded[$land][0]['value']) ? $node->field_responded[$land][0]['value'] : FALSE;
     $task = novo_ref_request_task_get_last($node->nid, TRUE);
 
-    if ((isset($task->status) && ($task->status == 1 || $task->status == 0) && !$responded && !user_is_logged_in()) || user_access("edit ref request with any status")) {
+    if ((isset($task->status) && $task->status <= 1 && !user_is_logged_in()) || user_access("edit ref request with any status")) {
       $save_form = drupal_get_form("novo_ref_request_save_form", $node);
       $variables['content'] = array();
       $variables['content']['save_form'] = $save_form;
     }
 
-    if ($responded && !user_access("edit ref request with any status")) {
+    if (isset($task->status) && $task->status == 2 && !user_access("edit ref request with any status")) {
       drupal_set_message(t("You have already answered."));
     }
 
@@ -239,10 +238,6 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
 
   $node = node_load($nid);
   if ($node) {
-    $land = isset($node->language) ? $node->language : LANGUAGE_NONE;
-    $node->field_responded[$land][0]['value'] = 1;
-    node_save($node);
-
     // Update answers FC.
     foreach ($faq as $key => $value) {
       $raw_collection = field_collection_item_load($value['fc_id']);
@@ -252,6 +247,33 @@ function novo_ref_request_save_form_submit($form, &$form_state) {
     }
     novo_ref_request_task_update_status($node->nid, 2);
     drupal_set_message(t("Your answers have been saved."));
+
+    // Send emails.
+    $ref = novo_ref_request_get_ref_data_by_ref_nid($node->nid);
+    if (isset($ref->ref_email)) {
+      switch ($ref->ref_type) {
+        case "ref_1":
+        case "ref_2":
+        case "ref_standby":
+          // Check if all finished.
+          if (novo_ref_request_check_all_refs_finished($ref->parent_nid) && function_exists("novo_mail_ref_form_finished")) {
+            novo_mail_ref_form_finished($ref->parent_nid);
+          }
+          break;
+
+        case "ref_church":
+          if (function_exists("novo_mail_church_form_finished")) {
+            novo_mail_church_form_finished($ref->parent_nid);
+          }
+          break;
+
+        case "ref_parents":
+          if (function_exists("novo_mail_parent_form_finished")) {
+            novo_mail_parent_form_finished($ref->parent_nid);
+          }
+          break;
+      }
+    }
   }
   else {
     drupal_set_message(t("Can't save your answers."), "error");
@@ -461,44 +483,9 @@ function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
 }
 
 /**
- * Implements hook_theme().
- */
-function novo_ref_request_theme($existing, $type, $theme, $path) {
-  return array(
-    'novo_ref_request_ref_email' => array(
-      'variables' => array('params' => NULL),
-      'template' => 'templates/email/novo-ref-request-ref-email',
-    )
-  );
-}
-
-/**
- * Implements hook_mail().
- */
-function novo_ref_request_mail($key, &$message, $params) {
-  $message['headers']['MIME-Version'] = '1.0';
-  $message['headers']['Content-Type'] = 'multipart/mixed;';
-  $message['headers']['Content-Type'] = 'text/html;';
-
-  switch ($key) {
-    case 'referral_request':
-      $html_email = theme("novo_ref_request_ref_email", array('params' => $params));
-      $message['subject'] = strip_tags(t(":vol_name Has Requested You As a Reference!", array(":vol_name" => $params['vol_name'])));
-      $message['from'] = NOVO_MASTER_BASE_EMAIL;
-      $message['body'][] = $html_email;
-      break;
-  }
-}
-
-/**
  * Implements hook_cron_queue_info().
  */
 function novo_ref_request_cron_queue_info() {
-  $queue['novo_ref_request_email_queue'] = array(
-    'worker callback' => 'novo_ref_request_email_queue_worker',
-    'time' => 60,
-  );
-
   $queue['novo_ref_request_expired_queue'] = array(
     'worker callback' => 'novo_ref_request_expired_queue_worker',
     'time' => 60,
@@ -511,16 +498,6 @@ function novo_ref_request_cron_queue_info() {
  * Implements hook_cron().
  */
 function novo_ref_request_cron() {
-  $cron_last = variable_get('novo_ref_request_cron_email_last');
-  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EMAIL_PERIOD) {
-    $email_queue = DrupalQueue::get('novo_ref_request_email_queue');
-    $data = novo_ref_request_task_get_all_not_sent();
-    foreach ($data as $key => $task) {
-      $email_queue->createItem(array('nid' => $task->nid, 'id' => $task->id));
-    }
-    variable_set('novo_ref_request_cron_email_last', REQUEST_TIME);
-  }
-
   $cron_last = variable_get('novo_ref_request_cron_expired_last');
   if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
     $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
@@ -529,21 +506,6 @@ function novo_ref_request_cron() {
       $expired_queue->createItem(array('id' => $task->id));
     }
     variable_set('novo_ref_request_cron_expired_last', REQUEST_TIME);
-  }
-}
-
-/**
- * Send emails worker.
- */
-function novo_ref_request_email_queue_worker($data) {
-  $result = novo_ref_request_send_email($data['nid']);
-  if ($result && isset($result['result']) && $result['result']) {
-    novo_ref_request_task_update_status_by_id($data['id'], 1);
-  }
-  else {
-    watchdog("novo_ref_request", "Can't send email :nid", array(
-      ":nid" => $data['nid']
-    ), WATCHDOG_ERROR);
   }
 }
 
