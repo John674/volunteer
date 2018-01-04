@@ -1,7 +1,7 @@
 name = Novo content STRONGARM feature
 core = 7.x
 package = Novo
-version = 7.x-1.4
+version = 7.x-1.5
 dependencies[] = ctools
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
