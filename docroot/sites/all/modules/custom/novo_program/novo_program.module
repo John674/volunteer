@@ -111,7 +111,8 @@ function novo_program_get_kid_data($nid) {
   $dob_items = field_get_items("node", $node, "field_dob");
   if (isset($dob_items[0])) {
     $display = ['label' => 'hidden', 'type' => 'only_age'];
-    $age = render(field_view_value("node", $node, "field_dob", $dob_items[0], $display));
+    $view = field_view_value("node", $node, "field_dob", $dob_items[0], $display);
+    $age = render($view);
     $output_data[] = '<span class="novo-program-kid-data-age">' . $age . ' </span>';
   }
   else {
@@ -154,10 +155,13 @@ function novo_program_node_update($node) {
 function novo_program_node_post_update($node) {
   // Update programm name in class was updated.
   $query = db_select("field_data_field_program_class_name", "cn");
-  $query->fields("cn", ["entity_id"]);
+  $query->addField("cn", "entity_id");
   $query->condition("cn.bundle", "program");
   $query->condition("cn.field_program_class_name_target_id", $node->nid);
-  $nids = $query->execute()->fetchAllKeyed(0, 0);
+  $query->join("field_data_field_attendance_program_name", "pn", "pn.field_attendance_program_name_target_id = cn.entity_id");
+  $query->addField("pn", "entity_id");
+  $nids = $query->execute()->fetchAllKeyed();
+  $nids = array_merge($nids, array_keys($nids));
   if (!empty($nids)) {
     $nodes = node_load_multiple($nids, [], TRUE);
     foreach ($nodes as $node) {

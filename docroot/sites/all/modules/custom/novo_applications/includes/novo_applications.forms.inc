@@ -193,6 +193,9 @@ function novo_applications_form_submit(&$form, &$form_state) {
         node_save($node);
         cache_clear_all("field:node:{$node->nid}", 'cache_field');
         entity_get_controller('node')->resetCache(array($node->nid));
+        if (function_exists("novo_mail_app_submitted")) {
+          novo_mail_app_submitted($node->nid);
+        }
         if (!user_access("disable auto complete redirect")) {
           drupal_get_messages("status");
           drupal_set_message("Your application will begin processing now!");

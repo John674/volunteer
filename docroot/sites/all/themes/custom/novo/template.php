@@ -20,14 +20,14 @@ function novo_preprocess_html(&$variables) {
     'rel' => 'shortcut icon',
     'sizes' => "32x32",
     'type' => "image/png",
-    'href' => drupal_get_path('theme', 'novo') . '/favicon-32x32.png',
+    'href' => base_path() . drupal_get_path('theme', 'novo') . '/favicon-32x32.png',
   ];
   drupal_add_html_head_link($element);
   $element = [
     'rel' => 'shortcut icon',
     'sizes' => "16x16",
     'type' => "image/png",
-    'href' => drupal_get_path('theme', 'novo') . '/favicon-16x16.png',
+    'href' => base_path() . drupal_get_path('theme', 'novo') . '/favicon-16x16.png',
   ];
   drupal_add_html_head_link($element);
 }
@@ -584,133 +584,134 @@ function novo_preprocess_views_view_table(&$vars) {
  * Implements hook_form_alter().
  */
 function novo_form_alter(&$form, &$form_state, &$form_id) {
-  $login_forms = array(
-    'user_login',
-    'user_login_block',
-    'user_register_form',
-    'user_pass',
-  );
-  $collection_fields = array(
-    'field_contact',
-    'field_parent_guardian',
-  );
-  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if (!user_is_logged_in()) {
+    $login_forms = [
+      'user_login',
+      'user_login_block',
+      'user_register_form',
+      'user_pass',
+    ];
+    $collection_fields = [
+      'field_contact',
+      'field_parent_guardian',
+    ];
+    $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
 
-  if (strpos($form_id, 'webform_client_form') !== FALSE) {
-    if (isset($form['#attributes']['class'])) {
-      $form['#attributes']['class'][] = 'novo-web-form';
+    if (strpos($form_id, 'webform_client_form') !== FALSE) {
+      if (isset($form['#attributes']['class'])) {
+        $form['#attributes']['class'][] = 'novo-web-form';
+      }
     }
-  }
-  if (isset($form['field_dob'])) {
-    $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
-  }
-  if (isset($form['#attributes']['class']) && !in_array($form_id, $login_forms)) {
-    $form['#attributes']['class'][] = 'novo-form';
-  }
-  if ($form_id == "user_login_block") {
-    if (isset($form['actions']) && isset($form['links'])) {
-      $items[] = l(t('Register'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
-      $items[] = l(t('Restore Password'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
-      $form['actions']['links'] = array('#markup' => theme('item_list', array('items' => $items)));
-      unset($form['links']);
+    if (isset($form['field_dob'])) {
+      $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
     }
-  }
-  if (in_array($form_id, $login_forms)) {
-    $form['#attributes']['class'][] = 'novo-login-form';
-    if (isset($form['pass'])) {
-      $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-      $form['pass']['#title'] = '';
+    if (isset($form['#attributes']['class']) && !in_array($form_id, $login_forms)) {
+      $form['#attributes']['class'][] = 'novo-form';
     }
-
-    if (isset($form['name'])) {
-      $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-      $form['name']['#title'] = '';
+    if ($form_id == "user_login_block") {
+      if (isset($form['actions']) && isset($form['links'])) {
+        $items[] = l(t('Register'), 'user/register', ['attributes' => ['title' => t('Create a new user account.')]]);
+        $items[] = l(t('Restore Password'), 'user/password', ['attributes' => ['title' => t('Request new password via e-mail.')]]);
+        $form['actions']['links'] = ['#markup' => theme('item_list', ['items' => $items])];
+        unset($form['links']);
+      }
     }
-
-    $form['help'] = array(
-      '#markup' => l('<span class="glyphicon glyphicon-question-sign "></span>' . t('Need help logging in?'), '/\#', array(
-        'attributes' => array(
-          'data-target' => '#novo-contact-us-block',
-          'data-toggle' => 'modal',
-          'class' => array(
-            'novo-login-help',
-          ),
-        ),
-        'html' => TRUE,
-      )),
-    );
-    $form['help']['#weight'] = 110;
-    if (($form_id == 'user_register_form' || $form_id == 'user_pass') && isset($form['actions'])) {
-
-      if ($form_id == 'user_register_form') {
-        $form['actions']['submit']['#value'] = t('Create New Account');
-        $form['actions']['submit']['#weight'] = 5;
+    if (in_array($form_id, $login_forms)) {
+      $form['#attributes']['class'][] = 'novo-login-form';
+      if (isset($form['pass'])) {
+        $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+        $form['pass']['#title'] = '';
       }
 
-      if ($form_id == 'user_pass') {
-        $form['actions']['submit']['#value'] = t('Request New Password');
-        $form['actions']['submit']['#weight'] = 10;
+      if (isset($form['name'])) {
+        $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+        $form['name']['#title'] = '';
       }
 
-      $form['actions']['submit']['#attributes']['class'] = array(
-        'btn',
-        'btn-primary',
-        'btn-submit',
-      );
-      $login_txt = '<span class="icon glyphicon glyphicon-log-in" aria-hidden="true"></span>  ' . t('Log in');
-      $form['actions']['login']['#markup'] = l($login_txt, '/', array(
-        'attributes' => array(
-          'class' => array(
-            'btn',
-            'btn-primary',
-            'btn-login',
-          ),
-        ),
-        'html' => TRUE,
-      ));
+      $form['help'] = [
+        '#markup' => l('<span class="glyphicon glyphicon-question-sign "></span>' . t('Need help logging in?'), '/\#', [
+          'attributes' => [
+            'data-target' => '#novo-contact-us-block',
+            'data-toggle' => 'modal',
+            'class' => [
+              'novo-login-help',
+            ],
+          ],
+          'html' => TRUE,
+        ]),
+      ];
+      $form['help']['#weight'] = 110;
+      if (($form_id == 'user_register_form' || $form_id == 'user_pass') && isset($form['actions'])) {
+
+        if ($form_id == 'user_register_form') {
+          $form['actions']['submit']['#value'] = t('Create New Account');
+          $form['actions']['submit']['#weight'] = 5;
+        }
+
+        if ($form_id == 'user_pass') {
+          $form['actions']['submit']['#value'] = t('Request New Password');
+          $form['actions']['submit']['#weight'] = 10;
+        }
+
+        $form['actions']['submit']['#attributes']['class'] = [
+          'btn',
+          'btn-primary',
+          'btn-submit',
+        ];
+        $login_txt = '<span class="icon glyphicon glyphicon-log-in" aria-hidden="true"></span>  ' . t('Log in');
+        $form['actions']['login']['#markup'] = l($login_txt, '/', [
+          'attributes' => [
+            'class' => [
+              'btn',
+              'btn-primary',
+              'btn-login',
+            ],
+          ],
+          'html' => TRUE,
+        ]);
+      }
+
+      $form_fields = [
+        'field_u_first_name',
+        'field_u_last_name',
+      ];
+      foreach ($form_fields as $field) {
+        if (array_key_exists($field, $form)) {
+          if (isset($form[$field][$lang][0]['value'])) {
+            $form[$field][$lang][0]['value']['#attributes']['placeholder'] = $form[$field][$lang][0]['#title'];
+            $form[$field][$lang][0]['value']['#title'] = '';
+          }
+        }
+      }
+
+      if (isset($form['field_u_birthday'])) {
+        $form['field_u_birthday']['#weight'] = 10;
+      }
+      if (isset($form['account']['mail'])) {
+        $form['account']['mail']['#attributes']['placeholder'] = $form['account']['mail']['#title'];
+        $form['account']['mail']['#title'] = '';
+      }
+    }
+    if (isset($form['field_mentoring_date'])) {
+      $form['field_mentoring_date'][$lang][0]['#title'] = '';
     }
 
-    $form_fields = array(
-      'field_u_first_name',
-      'field_u_last_name',
-    );
-    foreach ($form_fields as $field) {
-      if (array_key_exists($field, $form)) {
-        if (isset($form[$field][$lang][0]['value'])) {
-          $form[$field][$lang][0]['value']['#attributes']['placeholder'] = $form[$field][$lang][0]['#title'];
-          $form[$field][$lang][0]['value']['#title'] = '';
+    foreach ($collection_fields as $field) {
+      if (isset($form[$field])) {
+        foreach ($form[$field][$lang] as $key => $item) {
+          if (is_int($key)) {
+            $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
+            $form[$field][$lang][$key]['#suffix'] = '</div>';
+          }
         }
       }
     }
 
-    if (isset($form['field_u_birthday'])) {
-      $form['field_u_birthday']['#weight'] = 10;
-    }
-    if (isset($form['account']['mail'])) {
-      $form['account']['mail']['#attributes']['placeholder'] = $form['account']['mail']['#title'];
-      $form['account']['mail']['#title'] = '';
+    // Disable multistep fir user profiles.
+    if ($form['#id'] == "user-profile-form") {
+      $form['actions']['done']['#access'] = FALSE;
     }
   }
-  if (isset($form['field_mentoring_date'])) {
-    $form['field_mentoring_date'][$lang][0]['#title'] = '';
-  }
-
-  foreach ($collection_fields as $field) {
-    if (isset($form[$field])) {
-      foreach ($form[$field][$lang] as $key => $item) {
-        if (is_int($key)) {
-          $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
-          $form[$field][$lang][$key]['#suffix'] = '</div>';
-        }
-      }
-    }
-  }
-
-  // Disable multistep fir user profiles.
-  if ($form['#id'] == "user-profile-form") {
-    $form['actions']['done']['#access'] = FALSE;
-  }
-
 }
 
 /**

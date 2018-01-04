@@ -10698,48 +10698,6 @@ Discipline',
     ),
   );
 
-  // Exported field_instance: 'node-reference_request-field_responded'.
-  $field_instances['node-reference_request-field_responded'] = array(
-    'bundle' => 'reference_request',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
-      ),
-      'pdf' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_responded',
-    'label' => 'Responded',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 0,
-      ),
-      'type' => 'options_onoff',
-      'weight' => -2,
-    ),
-  );
-
   // Exported field_instance: 'node-staff-field_email'.
   $field_instances['node-staff-field_email'] = array(
     'bundle' => 'staff',
@@ -11239,7 +11197,6 @@ Discipline',
   t('Reference request standby');
   t('Relation');
   t('Relationship');
-  t('Responded');
   t('Romans 1:16');
   t('School Year');
   t('School name');

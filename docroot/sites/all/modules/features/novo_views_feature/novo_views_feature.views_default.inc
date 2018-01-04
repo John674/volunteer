@@ -197,7 +197,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_attendance_program_name_target_id';
-  $handler->display->display_options['fields']['title']['label'] = 'Enrollment (Class) Name';
+  $handler->display->display_options['fields']['title']['label'] = 'Enrollment Name';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Attendance Date */
   $handler->display->display_options['fields']['field_attendance_date']['id'] = 'field_attendance_date';
@@ -291,7 +291,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'attendance_filter_locations:entityreference_1';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_arguments'] = '[field_attendance_year_year]';
-  /* Filter criterion: Content: Enrollment (Class) Name (field_attendance_program_name) (reference filter) */
+  /* Filter criterion: Content: Enrollment Name (field_attendance_program_name) (reference filter) */
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['id'] = 'field_attendance_program_name_target_id_entityreference_filter';
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['field'] = 'field_attendance_program_name_target_id_entityreference_filter';
@@ -929,7 +929,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_attendance_kids_list_target_id']['ui_name'] = 'Kids list';
   $handler->display->display_options['relationships']['field_attendance_kids_list_target_id']['label'] = 'Kids list';
   $handler->display->display_options['relationships']['field_attendance_kids_list_target_id']['required'] = TRUE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -1050,7 +1050,7 @@ function novo_views_feature_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -1372,7 +1372,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_attendance_staff_list_target_id']['ui_name'] = 'Staff';
   $handler->display->display_options['relationships']['field_attendance_staff_list_target_id']['label'] = 'Staff';
   $handler->display->display_options['relationships']['field_attendance_staff_list_target_id']['required'] = TRUE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -1493,7 +1493,7 @@ function novo_views_feature_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -1815,7 +1815,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_attendance_volunteer_list_target_id']['field'] = 'field_attendance_volunteer_list_target_id';
   $handler->display->display_options['relationships']['field_attendance_volunteer_list_target_id']['label'] = 'Volunteers';
   $handler->display->display_options['relationships']['field_attendance_volunteer_list_target_id']['required'] = TRUE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -1936,7 +1936,7 @@ function novo_views_feature_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Enrollment (Class) Name */
+  /* Field: Content: Enrollment Name */
   $handler->display->display_options['fields']['field_attendance_program_name']['id'] = 'field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['fields']['field_attendance_program_name']['field'] = 'field_attendance_program_name';
@@ -3307,7 +3307,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_display'] = 'attendance_filter_locations:entityreference_1';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['reference_arguments'] = '[field_program_year_year]';
-  /* Filter criterion: Content: Enrollment (Class) Name (field_attendance_program_name) (reference filter) */
+  /* Filter criterion: Content: Enrollment Name (field_attendance_program_name) (reference filter) */
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['id'] = 'field_attendance_program_name_target_id_entityreference_filter';
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['table'] = 'field_data_field_attendance_program_name';
   $handler->display->display_options['filters']['field_attendance_program_name_target_id_entityreference_filter']['field'] = 'field_attendance_program_name_target_id_entityreference_filter';
@@ -9199,7 +9199,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['group'] = 1;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator_id'] = 'field_program_location_target_id_entityreference_filter_op';
-  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Program Location';
+  $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['label'] = 'Filter by Location';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['operator'] = 'field_program_location_target_id_entityreference_filter_op';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['identifier'] = 'field_program_location_target_id_entityreference_filter';
   $handler->display->display_options['filters']['field_program_location_target_id_entityreference_filter']['expose']['remember'] = TRUE;
