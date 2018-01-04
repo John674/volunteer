@@ -798,3 +798,17 @@ function novo_html_head_alter(&$head_elements) {
   $default_favicon_element = 'drupal_add_html_head_link:shortcut icon:' . $base_url . '/misc/favicon.ico';
   unset($head_elements[$default_favicon_element]);
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function novo_form_kids_node_form_alter(&$form, &$form_state) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if (isset($form['field_ethnicity']) && isset($form['field_ethnicity'][$lang]['#options']['_none'])) {
+    $form['field_ethnicity'][$lang]['#options']['_none'] = t('Unknown');
+  }
+
+  if (isset($form['field_attend_church_regularly']) && isset($form['field_attend_church_regularly'][$lang]['#options']['_none'])) {
+    $form['field_attend_church_regularly'][$lang]['#options']['_none'] = t('Unknown');
+  }
+}
