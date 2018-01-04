@@ -20,14 +20,14 @@ function novo_preprocess_html(&$variables) {
     'rel' => 'shortcut icon',
     'sizes' => "32x32",
     'type' => "image/png",
-    'href' => drupal_get_path('theme', 'novo') . '/favicon-32x32.png',
+    'href' => base_path() . drupal_get_path('theme', 'novo') . '/favicon-32x32.png',
   ];
   drupal_add_html_head_link($element);
   $element = [
     'rel' => 'shortcut icon',
     'sizes' => "16x16",
     'type' => "image/png",
-    'href' => drupal_get_path('theme', 'novo') . '/favicon-16x16.png',
+    'href' => base_path() . drupal_get_path('theme', 'novo') . '/favicon-16x16.png',
   ];
   drupal_add_html_head_link($element);
 }

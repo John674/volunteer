@@ -29,6 +29,12 @@ function novo_mail_send($nid, $key, $additional_params = []) {
   $result = NULL;
   if ($params) {
     $params = array_merge($params, $additional_params);
+    if (isset($params['callback'])) {
+      unset($params['callback']);
+    }
+    if (isset($params['callback_params'])) {
+      unset($params['callback_params']);
+    }
     $is_manager = novo_mail_check_is_manager_email($key);
 
     if ($is_manager) {
@@ -38,7 +44,16 @@ function novo_mail_send($nid, $key, $additional_params = []) {
       }
     }
     else {
-      $result = drupal_mail('novo_mail', $key, $params['app_email'], language_default(), $params);
+      $email = $additional_params['email_to'] ?? $params['app_email'];
+      $result = drupal_mail('novo_mail', $key, $email, language_default(), $params);
+    }
+
+    // Run callback function if exist.
+    if ($result && isset($result['result']) && $result['result']) {
+      if (isset($additional_params['callback']) && function_exists($additional_params['callback'])) {
+        $params = $additional_params['callback_params'] ?? [];
+        call_user_func_array($additional_params['callback'], $params);
+      }
     }
   }
 

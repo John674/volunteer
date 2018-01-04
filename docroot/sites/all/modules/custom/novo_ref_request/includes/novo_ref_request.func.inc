@@ -160,28 +160,40 @@ function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);
       if (isset($ref->ref_email)) {
         $title = "";
+        $func = FALSE;
 
         switch ($ref->ref_type) {
           case "ref_1":
           case "ref_2":
             $title = t("Reference request");
+            $func = "novo_mail_ref_form_to_reference";
             break;
 
           case "ref_church":
             $title = t("Church reference request");
+            $func = "novo_mail_ref_form_to_church";
             break;
 
           case "ref_parents":
             $title = t("Parent reference request");
+            $func = "novo_mail_ref_form_to_parent";
             break;
 
           case "ref_standby":
             $title = t("Standby reference request");
+            $func = "novo_mail_ref_form_to_reference";
             break;
         }
 
         $task_name = $title . " " . $ref->ref_username;
         novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone, $status);
+
+        // Send emails.
+        if ($nid) {
+          if ($func && function_exists($func)) {
+            call_user_func_array($func, [$ref->parent_nid, $nid]);
+          }
+        }
       }
     }
   }
@@ -323,4 +335,6 @@ function novo_ref_request_send_email($nid) {
     return drupal_mail('novo_ref_request', 'referral_request', $task_data->email, language_default(), $data);
   }
   return FALSE;
+
 }
+

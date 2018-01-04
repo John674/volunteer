@@ -8,51 +8,46 @@
 module_load_include("inc", "novo_mail", "includes/novo_mail.func");
 module_load_include("inc", "novo_mail", "includes/novo_mail.cron");
 
+define("NOVO_MAIL_BASE_EMAIL_FOR_REPLACE_TEMPLATE", "volunteer@novoministries.org");
 
 define("NOVO_MAIL_EMAILS", serialize([
+  // Application emails
   [
     'key' => 'novo_mail_app_expired_to_admin',
     'template' => 'templates/email/application/expiration/novo-mail-app-expired-to-admin',
-    'theme' => 'novo_mail_app_expired_to_admin',
     'subject' => 'Background Check Expired!',
     'is_manager' => TRUE,
   ],
   [
     'key' => 'novo_mail_app_expired_to_volunteer',
     'template' => 'templates/email/application/expiration/novo-mail-app-expired-to-volunteer',
-    'theme' => 'novo_mail_app_expired_to_volunteer',
     'subject' => 'Novoministries background check expired!',
   ],
   [
     'key' => 'novo_mail_app_approved_to_volunteer',
     'template' => 'templates/email/application/novo-mail-app-approved-to-volunteer',
-    'theme' => 'novo_mail_app_approved_to_volunteer',
     'subject' => 'You\'re Approved',
   ],
   [
     'key' => 'novo_mail_app_approved_to_admin',
     'template' => 'templates/email/application/novo-mail-app-approved-to-admin',
-    'theme' => 'novo_mail_app_approved_to_admin',
     'subject' => 'Application Approved, need a call',
     'is_manager' => TRUE,
   ],
   [
     'key' => 'novo_mail_app_not_approved_to_admin',
     'template' => 'templates/email/application/novo-mail-app-not-approved-to-admin',
-    'theme' => 'novo_mail_app_not_approved_to_admin',
     'subject' => 'Application Not Approved, need a call',
     'is_manager' => TRUE,
   ],
   [
     'key' => 'novo_mail_app_submitted_to_volunteer',
     'template' => 'templates/email/application/novo-mail-app-submitted-to-volunteer',
-    'theme' => 'novo_mail_app_submitted_to_volunteer',
     'subject' => 'Application Submitted',
   ],
   [
     'key' => 'novo_mail_app_submitted_to_admin',
     'template' => 'templates/email/application/novo-mail-app-submitted-to-admin',
-    'theme' => 'novo_mail_app_submitted_to_admin',
     'subject' => 'New Application Submitted - app_first_name app_last_name',
     'is_manager' => TRUE,
   ],
@@ -60,14 +55,12 @@ define("NOVO_MAIL_EMAILS", serialize([
   [
     'key' => 'novo_mail_app_not_completed_to_admin_24',
     'template' => 'templates/email/application/novo-mail-app-not-completed-to-admin-24',
-    'theme' => 'novo_mail_app_not_completed_to_admin_24',
     'subject' => 'Application Incomplete - 24 Hour Notice',
     'is_manager' => TRUE,
   ],
   [
     'key' => 'novo_mail_app_not_completed_to_admin_72',
     'template' => 'templates/email/application/novo-mail-app-not-completed-to-admin-72',
-    'theme' => 'novo_mail_app_not_completed_to_admin_72',
     'subject' => 'Application Incomplete - 72 Hour Notice',
     'is_manager' => TRUE,
   ],
@@ -75,10 +68,52 @@ define("NOVO_MAIL_EMAILS", serialize([
   [
     'key' => 'novo_mail_app_not_completed_to_volunteer_24',
     'template' => 'templates/email/application/novo-mail-app-not-completed-to-volunteer-24',
-    'theme' => 'novo_mail_app_not_completed_to_volunteer_24',
     'subject' => 'Let\'s Get You Connected!',
   ],
 
+  // References/requests to admins
+  [
+    'key' => 'novo_mail_ref_finished_form_to_admin',
+    'template' => 'templates/email/requests/novo-mail-ref-finished-form-to-admin',
+    'subject' => 'app_first_name app_last_name Personal References Completed (Both).',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_church_finished_form_to_admin',
+    'template' => 'templates/email/requests/novo-mail-church-finished-form-to-admin',
+    'subject' => 'app_first_name app_last_name Church Reference Completed.',
+    'is_manager' => TRUE,
+  ],
+  [
+    'key' => 'novo_mail_parent_finished_form_to_admin',
+    'template' => 'templates/email/requests/novo-mail-parent-finished-form-to-admin',
+    'subject' => 'app_first_name app_last_name Parental Approval Form Completed.',
+    'is_manager' => TRUE,
+  ],
+
+  // References/requests to refs
+  [
+    'key' => 'novo_mail_ref_form_to_parent',
+    'template' => 'templates/email/requests/novo-mail-ref-form-to-parent',
+    'subject' => 'app_first_name app_last_name Has Applied to Volunteer.',
+  ],
+  [
+    'key' => 'novo_mail_ref_form_to_reference',
+    'template' => 'templates/email/requests/novo-mail-ref-form-to-reference',
+    'subject' => 'app_first_name app_last_name Has Requested You As a Reference!',
+  ],
+  [
+    'key' => 'novo_mail_ref_form_to_church',
+    'template' => 'templates/email/requests/novo-mail-ref-form-to-church',
+    'subject' => 'app_first_name app_last_name Has Requested You As a Church Reference!',
+  ],
+
+  [
+    'key' => 'novo_mail_ref_without_email_to_admin',
+    'template' => 'templates/email/requests/novo-mail-ref-without-email-to-admin',
+    'subject' => 'References without email.',
+    'is_manager' => TRUE,
+  ],
 
 
 ]));
@@ -143,7 +178,7 @@ function novo_mail_mail($key, &$message, $params) {
   foreach ($emails_conf as $item) {
     if ($item['key'] == $key) {
       $message['subject'] = strip_tags(t($item['subject'], $params));
-      $message['body'][] = theme($item['theme'], ['params' => $params]);
+      $message['body'][] = theme($item['key'], ['params' => $params]);
     }
   }
 }
@@ -186,3 +221,69 @@ function novo_mail_app_notify_user_exp($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_expired_to_volunteer', $additional_params);
 }
 
+/**
+ * Email: References have finished forms (both).
+ */
+function novo_mail_ref_form_finished($app_nid) {
+  novo_mail_add_to_queue($app_nid, 'novo_mail_ref_finished_form_to_admin');
+}
+
+/**
+ * Email: Church have finished form.
+ */
+function novo_mail_church_form_finished($app_nid) {
+  novo_mail_add_to_queue($app_nid, 'novo_mail_church_finished_form_to_admin');
+}
+
+/**
+ * Email: Parent have finished form.
+ */
+function novo_mail_parent_form_finished($app_nid) {
+  novo_mail_add_to_queue($app_nid, 'novo_mail_parent_finished_form_to_admin');
+}
+
+/**
+ * Email: To Church, To Ref, To Parent base email.
+ */
+function novo_mail_ref_form_to_base($key, $app_nid, $ref_nid) {
+  $task_data = novo_ref_request_task_get_last($ref_nid);
+  if (!empty($task_data)) {
+    $additional_params = [
+      'ref_name' => $task_data->ref_name,
+      'callback' => 'novo_ref_request_task_update_status_by_id',
+      'callback_params' => [$task_data->id, 1],
+    ];
+
+    if (isset($task_data->email) && $task_data->email == NOVO_MAIL_BASE_EMAIL_FOR_REPLACE_TEMPLATE) {
+      // Redirect to managers.
+      $additional_params['link'] = url("node/" . $app_nid . "/edit", ["absolute" => TRUE]);
+      novo_mail_add_to_queue($app_nid, 'novo_mail_ref_without_email_to_admin', $additional_params);
+    }
+    else {
+      $additional_params['link'] = novo_ref_request_generate_hashed_link($ref_nid);
+      $additional_params['email_to'] = $task_data->email;
+      novo_mail_add_to_queue($app_nid, $key, $additional_params);
+    }
+  }
+}
+
+/**
+ * Email: To Reference, Applicant reference request.
+ */
+function novo_mail_ref_form_to_reference($app_nid, $ref_nid) {
+  novo_mail_ref_form_to_base('novo_mail_ref_form_to_reference', $app_nid, $ref_nid);
+}
+
+/**
+ * Email: To Parent, Applicant want to volunteer.
+ */
+function novo_mail_ref_form_to_parent($app_nid, $ref_nid) {
+  novo_mail_ref_form_to_base('novo_mail_ref_form_to_parent', $app_nid, $ref_nid);
+}
+
+/**
+ * Email: To Church, Applicant reference request.
+ */
+function novo_mail_ref_form_to_church($app_nid, $ref_nid) {
+  novo_mail_ref_form_to_base('novo_mail_ref_form_to_church', $app_nid, $ref_nid);
+}

@@ -5,7 +5,7 @@
  * Mail cron.
  */
 
-define("NOVO_MAIL_CRON_PERIOD", 60 * 5);
+define("NOVO_MAIL_CRON_PERIOD", 60 * 1);
 
 define("NOVO_MAIL_HOURLY_CRON_PERIOD", 60 * 60);
 

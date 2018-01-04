@@ -508,3 +508,11 @@ function novo_master_update_7146() {
 function novo_master_update_7147() {
   field_delete_field('field_decision_other_explained');
 }
+
+/**
+ * Delete field_responded.
+ */
+function novo_master_update_7148() {
+  field_delete_field('field_responded');
+  field_purge_batch(1);
+}
