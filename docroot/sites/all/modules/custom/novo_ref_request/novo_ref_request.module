@@ -91,11 +91,15 @@ function novo_ref_request_node_access($node, $op, $account) {
   $type = is_string($node) ? $node : $node->type;
   $role_siteadmin = user_role_load_by_name('Siteadmin');
 
-  if ($type == "reference_request" && $op == 'update') {
-    return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+  if ($type == "reference_request") {
+    if ($op == 'update') {
+      return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+    } else {
+      return (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+    }
   }
 
-  return (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+  return NODE_ACCESS_IGNORE;
 }
 
 /**

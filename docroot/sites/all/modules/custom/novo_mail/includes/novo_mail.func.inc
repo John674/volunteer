@@ -129,6 +129,22 @@ WHERE
 }
 
 /**
+ * Get becoming of age nids.
+ */
+function novo_mail_app_get_becoming_of_age_nids() {
+  novo_master_set_default_mysql_timezone();
+  $mail_key = "novo_mail_app_becoming_of_age_to_admin";
+  $sql = "SELECT dob.entity_id AS nid
+          FROM field_data_field_dob AS dob
+          JOIN field_data_field_reference_request_parents AS parents ON parents.entity_id = dob.entity_id
+          LEFT JOIN novo_mail AS nm ON nm.nid = dob.entity_id AND nm.mail_key = :mail_key
+          WHERE 
+            FLOOR((UNIX_TIMESTAMP() - dob.field_dob_value) / (60*60*24*365)) >= 18 AND 
+            (nm.id IS NULL OR nm.mail_key <> :mail_key)";
+  return db_query($sql, [":mail_key" => $mail_key])->fetchAll();
+}
+
+/**
  * Get siteadmin emails.
  */
 function novo_mail_get_siteadmin_emails() {
@@ -136,7 +152,7 @@ function novo_mail_get_siteadmin_emails() {
   $role_reviewer = user_role_load_by_name('Reviewer');
   return db_query("SELECT u.uid, u.mail FROM users AS u
     LEFT JOIN users_roles AS ur ON ur.uid = u.uid
-    WHERE ur.rid = :rid OR ur.rid = :rid2 AND u.status = 1", [
+    WHERE ur.rid = :rid OR ur.rid = :rid2 AND u.status = 1 LIMIT 2", [
     ":rid" => $role_siteadmin->rid,
     ":rid2" => $role_reviewer->rid,
   ])->fetchAllKeyed();

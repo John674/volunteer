@@ -71,6 +71,20 @@ define("NOVO_MAIL_EMAILS", serialize([
     'subject' => 'Let\'s Get You Connected!',
   ],
 
+  [
+    'key' => 'novo_mail_app_exp_app_checked_by_applicant_to_admin',
+    'template' => 'templates/email/application/expiration/novo-mail-app-exp-app-checked-by-applicant-to-admin',
+    'subject' => 'Expired application checked by applicant',
+    'is_manager' => TRUE,
+  ],
+
+  [
+    'key' => 'novo_mail_app_becoming_of_age_to_admin',
+    'template' => 'templates/email/application/novo-mail-app-becoming-of-age-to-admin',
+    'subject' => 'Active Volunteer app_first_name app_last_name Turning 18',
+    'is_manager' => TRUE,
+  ],
+
   // References/requests to admins
   [
     'key' => 'novo_mail_ref_finished_form_to_admin',
@@ -219,6 +233,13 @@ function novo_mail_app_submitted($nid) {
 function novo_mail_app_notify_user_exp($nid) {
   $additional_params = ['link' => url("node/" . $nid . "/edit", ["absolute" => TRUE])];
   novo_mail_add_to_queue($nid, 'novo_mail_app_expired_to_volunteer', $additional_params);
+}
+
+/**
+ * Email: To Manager, Expired application checked by applicant.
+ */
+function novo_mail_app_exp_app_checked_by_applicant_to_admin($nid) {
+  novo_mail_add_to_queue($nid, 'novo_mail_app_exp_app_checked_by_applicant_to_admin');
 }
 
 /**

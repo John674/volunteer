@@ -193,8 +193,17 @@ function novo_applications_form_submit(&$form, &$form_state) {
         node_save($node);
         cache_clear_all("field:node:{$node->nid}", 'cache_field');
         entity_get_controller('node')->resetCache(array($node->nid));
-        if (function_exists("novo_mail_app_submitted")) {
-          novo_mail_app_submitted($node->nid);
+
+        // Expired application checked by applicant.
+        $app_expired_date = $node->field_expired_date[LANGUAGE_NONE][0]['value'] ?? NULL;
+        if ($app_expired_date && $app_expired_date < REQUEST_TIME) {
+          if (function_exists("novo_mail_app_exp_app_checked_by_applicant_to_admin")) {
+            novo_mail_app_exp_app_checked_by_applicant_to_admin($node->nid);
+          }
+        } else {
+          if (function_exists("novo_mail_app_submitted")) {
+            novo_mail_app_submitted($node->nid);
+          }
         }
         if (!user_access("disable auto complete redirect")) {
           drupal_get_messages("status");
@@ -207,9 +216,6 @@ function novo_applications_form_submit(&$form, &$form_state) {
       }
     }
   }
-
-  // Add default expiration date.
-  $exp_date = isset($form_state['values']) ? $form_state['values'] : NULL;
 }
 
 /**
