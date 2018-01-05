@@ -91,7 +91,6 @@ function novo_mail_check_is_manager_email($key) {
   return FALSE;
 }
 
-
 /**
  * Get all not sent tasks.
  *
@@ -108,7 +107,6 @@ FROM field_data_field_expired_date AS ed
 WHERE ed.field_expired_date_value <= UNIX_TIMESTAMP()
       AND nm.id IS NULL LIMIT 100")->fetchAll();
 }
-
 
 /**
  * Get nodes which was not completed X hours.
@@ -137,11 +135,10 @@ function novo_mail_get_siteadmin_emails() {
   return db_query("SELECT u.uid, u.mail FROM users AS u
     LEFT JOIN users_roles AS ur ON ur.uid = u.uid
     WHERE ur.rid = :rid OR ur.rid = :rid2 AND u.status = 1", [
-    ":rid" => $role_siteadmin->rid,
-    ":rid2" => $role_reviewer->rid,
-  ])->fetchAllKeyed();
+      ":rid" => $role_siteadmin->rid,
+      ":rid2" => $role_reviewer->rid,
+    ])->fetchAllKeyed();
 }
-
 
 /**
  * Get volunteer data for email.

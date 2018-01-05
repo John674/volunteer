@@ -330,11 +330,9 @@ function novo_ref_request_send_email($nid) {
     $data = array(
       'ref_name' => $task_data->ref_name,
       'vol_name' => $task_data->volunteer_name,
-      'link' => $link
+      'link' => $link,
     );
     return drupal_mail('novo_ref_request', 'referral_request', $task_data->email, language_default(), $data);
   }
   return FALSE;
-
 }
-
