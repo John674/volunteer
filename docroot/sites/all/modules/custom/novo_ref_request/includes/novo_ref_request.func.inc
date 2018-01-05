@@ -95,6 +95,12 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
         }
       }
 
+      // Created at.
+      $created_at = $node->{VolunteerNovoMigration::NOVO_MIGRATE_REF_REQUEST}[$migrate_ref_type]['created_at'];
+      if ($created_at) {
+        $array_nid_status['created_at'] = strtotime($created_at);
+      }
+
     }
     elseif (!empty($q_type)) {
       // Prepare questions from taxonomy.
@@ -149,50 +155,46 @@ function novo_ref_request_create_ref_entity($q_type = NULL, $node = NULL, $field
 /**
  * Add tasks.
  */
-function novo_ref_request_add_tasks_callback($ref_nids_statuses) {
+function novo_ref_request_add_tasks_callback($ref_nids_statuses, $is_migration = FALSE) {
 
   foreach ($ref_nids_statuses as $data) {
     $nid = (isset($data['nid']) && !empty($data['nid'])) ? $data['nid'] : NULL;
     $status = (isset($data['status']) && !is_null($data['status'])) ? $data['status'] : NULL;
+    $created_at = (isset($data['created_at']) && !is_null($data['created_at'])) ? $data['created_at'] : REQUEST_TIME;
 
     if ($nid) {
       // Create tasks.
       $ref = novo_ref_request_get_ref_data_by_ref_nid($nid);
       if (isset($ref->ref_email)) {
         $title = "";
-        $func = FALSE;
 
         switch ($ref->ref_type) {
           case "ref_1":
           case "ref_2":
             $title = t("Reference request");
-            $func = "novo_mail_ref_form_to_reference";
             break;
 
           case "ref_church":
             $title = t("Church reference request");
-            $func = "novo_mail_ref_form_to_church";
             break;
 
           case "ref_parents":
             $title = t("Parent reference request");
-            $func = "novo_mail_ref_form_to_parent";
             break;
 
           case "ref_standby":
             $title = t("Standby reference request");
-            $func = "novo_mail_ref_form_to_reference";
             break;
         }
 
         $task_name = $title . " " . $ref->ref_username;
-        novo_ref_request_task_add($ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone, $status);
+        novo_ref_request_task_add($ref->ref_type, $ref->parent_uid, $nid, $ref->parent_nid, $ref->parent_name, $ref->ref_username, $task_name, $ref->ref_email, $ref->ref_phone, $status, $created_at);
 
-        // Send emails.
-        if ($nid) {
-          if ($func && function_exists($func)) {
-            call_user_func_array($func, [$ref->parent_nid, $nid]);
-          }
+        if (!$is_migration) {
+          // Add email to queue.
+          $ref->volunteer_nid = $ref->parent_uid;
+          $ref->email = $ref->ref_email;
+          novo_ref_request_send_ref_email($ref, $nid);
         }
       }
     }

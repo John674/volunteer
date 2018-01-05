@@ -20,7 +20,7 @@
  * @return DatabaseStatementInterface|int
  *   Result.
  */
-function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, $ref_name, $name, $email, $phone, $status = 0) {
+function novo_ref_request_task_add($ref_type, $uid, $nid, $volunteer_nid, $volunteer_name, $ref_name, $name, $email, $phone, $status = 0, $created_at = REQUEST_TIME) {
   $exist = novo_ref_request_task_get_all_active($nid);
   if ($exist) {
     foreach ($exist as $key => $value) {
@@ -40,11 +40,12 @@ function novo_ref_request_task_add($uid, $nid, $volunteer_nid, $volunteer_name, 
       'volunteer_nid' => $volunteer_nid,
       'volunteer_name' => $volunteer_name,
       'ref_name' => $ref_name,
+      'ref_type' => $ref_type,
       'name' => $name,
       'email' => $email,
       'phone' => $phone,
       'status' => $status,
-      'created' => REQUEST_TIME,
+      'created' => $created_at,
     ))->execute();
 }
 

@@ -198,7 +198,7 @@ function novo_cia_mail($key, &$message, $params) {
   switch ($key) {
     case 'answer_report':
       $html_email = theme("novo_cia_answer_report", array('params' => $params));
-      $message['subject'] = t("Volunteer reviewed by CIA");
+      $message['subject'] = (isset($params['cia_answer']) && $params['cia_answer'] == 'positive') ? t("Background Check Cleared - :name", [":name" => $params['vol_name']]) : t("Background Check Issue(s) Found - :name", [":name" => $params['vol_name']]);
       $message['from'] = NOVO_MASTER_BASE_EMAIL;
       $message['body'][] = $html_email;
       break;
