@@ -30,7 +30,6 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     parent::__construct($args);
 
     $items = $this->getList();
-    // kpr($items);
     $this->source = new MigrateSourceApplication($items);
     $this->destination = new MigrateDestinationNodeApplication("application");
 
@@ -937,7 +936,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
   /**
    * Request in old database.
    */
-  protected function getReferenceRequests() {
+  public function getReferenceRequests() {
     $query = Database::getConnection('default', $this->databaseKey)
       ->select('users', 'u')
       ->fields('u', ['id'])
@@ -959,10 +958,12 @@ class VolunteerNovoMigration extends BaseNovoMigration {
     $query->addField("rf", "prefix", "type");
     $query->addField("rf", "data", "data");
     $query->addField("rf", "status", "status");
+    $query->addField("rf", "created_at", "created_at");
     $query->isNotNull('rf.data');
 
-    $result = $query->execute()->fetchAll();
+    $query->range(0, 100);
 
+    $result = $query->execute()->fetchAll();
     $reference_requests = [];
 
     foreach ($result as $key => $value) {
@@ -970,6 +971,7 @@ class VolunteerNovoMigration extends BaseNovoMigration {
       $questions_answers = $this->getReferenceQuestionsAnswers($value->data, $value->type, $full_name);
       $reference_requests[$value->user_id][$value->type] = $questions_answers;
       $reference_requests[$value->user_id][$value->type]['status'] = $value->status;
+      $reference_requests[$value->user_id][$value->type]['created_at'] = $value->created_at;
     }
     return $reference_requests;
   }

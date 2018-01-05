@@ -5,8 +5,7 @@
  * Mail cron.
  */
 
-define("NOVO_MAIL_CRON_PERIOD", 60 * 1);
-
+define("NOVO_MAIL_CRON_PERIOD", 60 * 4);
 define("NOVO_MAIL_HOURLY_CRON_PERIOD", 60 * 60);
 
 /**
@@ -144,7 +143,6 @@ function novo_mail_app_not_completed_to_admin_72_queue_worker($data) {
 function novo_mail_app_not_completed_to_volunteer_24_queue_worker($data) {
   novo_mail_app_not_completed_progress('novo_mail_app_not_completed_to_volunteer_24', $data['nid']);
 }
-
 
 /**
  * Applicant becoming of age worker.

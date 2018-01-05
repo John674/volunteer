@@ -61,7 +61,10 @@ function novo_ref_request_menu() {
 function novo_ref_request_resend_callback($nid) {
   $task = novo_ref_request_task_get_last($nid);
   if (!empty($task)) {
-    novo_ref_request_task_add($task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->ref_name, $task->name, $task->email, $task->phone);
+    novo_ref_request_task_add($task->ref_type, $task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->ref_name, $task->name, $task->email, $task->phone);
+    // Add email to queue.
+    novo_ref_request_send_ref_email($task, $nid);
+
     drupal_set_message(t("The request was sent to the queue for sending."));
     $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
     drupal_goto($url);
@@ -69,6 +72,42 @@ function novo_ref_request_resend_callback($nid) {
   else {
     drupal_set_message(t("Can't resend."), "error");
     watchdog("novo_ref_request", "Can't resend. NID: :nid", array(":nid" => $nid), WATCHDOG_ERROR);
+  }
+}
+
+
+/**
+ * Send ref email.
+ */
+function novo_ref_request_send_ref_email($task, $ref_nid) {
+  if (isset($task->email)) {
+    $func = FALSE;
+
+    switch ($task->ref_type) {
+      case "ref_1":
+      case "ref_2":
+        $func = "novo_mail_ref_form_to_reference";
+        break;
+
+      case "ref_church":
+        $func = "novo_mail_ref_form_to_church";
+        break;
+
+      case "ref_parents":
+        $func = "novo_mail_ref_form_to_parent";
+        break;
+
+      case "ref_standby":
+        $func = "novo_mail_ref_form_to_reference";
+        break;
+    }
+
+    // Send emails.
+    if ($ref_nid) {
+      if ($func && function_exists($func)) {
+        call_user_func_array($func, [$task->volunteer_nid, $ref_nid]);
+      }
+    }
   }
 }
 
@@ -319,7 +358,9 @@ function novo_ref_request_node_presave($node) {
       }
 
       if (!empty($ref_nids_statuses)) {
-        drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids_statuses);
+        // Check is migration.
+        $is_migration = isset($node->migrate) && ($node->migrate['machineName'] == 'Volunteers');
+        drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids_statuses, $is_migration);
       }
     }
   }
