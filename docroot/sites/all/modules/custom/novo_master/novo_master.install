@@ -525,3 +525,10 @@ function novo_master_update_7149() {
   features_revert_module("novo_block_feature");
   features_revert_module("novo_content_strongarm_feature");
 }
+
+/**
+ * Rebuild novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7150() {
+  features_revert_module("novo_content_feature");
+}

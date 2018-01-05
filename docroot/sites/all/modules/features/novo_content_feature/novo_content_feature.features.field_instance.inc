@@ -8300,7 +8300,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_attend_church_regularly',
     'label' => 'Attend Church Regularly?',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
