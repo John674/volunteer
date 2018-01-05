@@ -5,8 +5,7 @@
  * Mail cron.
  */
 
-define("NOVO_MAIL_CRON_PERIOD", 60 * 1);
-
+define("NOVO_MAIL_CRON_PERIOD", 60 * 4);
 define("NOVO_MAIL_HOURLY_CRON_PERIOD", 60 * 60);
 
 /**
@@ -30,6 +29,11 @@ function novo_mail_cron_queue_info() {
 
   $queue['novo_mail_app_not_completed_to_volunteer_24_queue'] = [
     'worker callback' => 'novo_mail_app_not_completed_to_volunteer_24_queue_worker',
+    'time' => 60,
+  ];
+
+  $queue['novo_mail_app_becoming_of_age_queue'] = [
+    'worker callback' => 'novo_mail_app_becoming_of_age_queue_worker',
     'time' => 60,
   ];
 
@@ -69,6 +73,13 @@ function novo_mail_cron() {
     foreach ($data as $key => $item) {
       $email_queue->createItem((array) $item);
     }
+
+    $email_queue = DrupalQueue::get('novo_mail_app_becoming_of_age_queue');
+    $data = novo_mail_app_get_becoming_of_age_nids();
+    foreach ($data as $key => $item) {
+      $email_queue->createItem((array) $item);
+    }
+
 
     $email_queue = DrupalQueue::get('novo_mail_app_not_completed_to_volunteer_24_queue');
     $data = novo_mail_app_get_all_not_completed_nids(24, "novo_mail_app_not_completed_to_volunteer_24");
@@ -131,4 +142,17 @@ function novo_mail_app_not_completed_to_admin_72_queue_worker($data) {
  */
 function novo_mail_app_not_completed_to_volunteer_24_queue_worker($data) {
   novo_mail_app_not_completed_progress('novo_mail_app_not_completed_to_volunteer_24', $data['nid']);
+}
+
+/**
+ * Applicant becoming of age worker.
+ */
+function novo_mail_app_becoming_of_age_queue_worker($data) {
+  // Send email.
+  $nid = $data['nid'];
+  $result = novo_mail_send($nid, 'novo_mail_app_becoming_of_age_to_admin');
+
+  if ($result && isset($result['result']) && $result['result']) {
+    novo_mail_add_status_to_storage('novo_mail_app_becoming_of_age_to_admin', $nid);
+  }
 }

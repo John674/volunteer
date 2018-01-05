@@ -90,6 +90,13 @@ function novo_ref_request_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
+      ),
+      'ref_type' => array(
+        'description' => 'Referral type key',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
       )
     ),
     'primary key' => array('id'),
@@ -216,4 +223,18 @@ function novo_ref_request_update_7103() {
     'default' => '',
   );
   db_add_field('novo_ref_tasks', 'ref_name', $spec);
+}
+
+/**
+ * Add fields "ref_type".
+ */
+function novo_ref_request_update_7104() {
+  $spec = [
+    'description' => 'Referral type key',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  ];
+  db_add_field('novo_ref_tasks', 'ref_type', $spec);
 }

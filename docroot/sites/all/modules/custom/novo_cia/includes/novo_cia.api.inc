@@ -38,7 +38,7 @@ function novo_cia_send_search_request($request_id) {
       $feed_xml = simplexml_load_string($response->data);
       $feed_json = json_encode($feed_xml);
       $feed_array = json_decode($feed_json, TRUE);
-      if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_ACCEPTED) {
+      if (strtolower($feed_array['Status']) == NOVO_CIA_RESPONSE_STATUS_ACCEPTED) {
 
         if (isset($feed_array['TrackingNumber']) && !empty($feed_array['TrackingNumber'])) {
           $tracking_number = $feed_array['TrackingNumber'];
@@ -51,10 +51,10 @@ function novo_cia_send_search_request($request_id) {
         }
       }
 
-      if ($feed_array['Status'] == NOVO_CIA_RESPONSE_STATUS_REJECTED) {
+      if (strtolower($feed_array['Status']) == NOVO_CIA_RESPONSE_STATUS_REJECTED) {
         $error = isset($feed_array['Error']) && !empty($feed_array['Error']) ? $feed_array['Error'] : NULL;
         $error_message = NULL;
-        if ($feed_array['Error'] == NOVO_CIA_ERROR_RESPONSE_MESSAGE_DUPLICATE) {
+        if (strtolower($feed_array['Error']) == NOVO_CIA_ERROR_RESPONSE_MESSAGE_DUPLICATE) {
           $error_message = $feed_array['DuplicateList']['DuplicateSearch'];
           $last_pending_pull_report_request = novo_cia_get_last_pending_pull_report_request($app_nid);
           if (empty($last_pending_pull_report_request)) {
