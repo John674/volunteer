@@ -283,7 +283,7 @@ function novo_cia_add_request_for_search($node) {
     if (isset($nid) && !empty($nid)) {
       $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
       if (!empty($search_request_id)) {
-        $search_result = novo_cia_send_search_request($search_request_id);
+        //$search_result = novo_cia_send_search_request($search_request_id);
         if (!empty($search_result)) {
           drupal_set_message(t("The request was added to the queue for report from CIA"));
         }

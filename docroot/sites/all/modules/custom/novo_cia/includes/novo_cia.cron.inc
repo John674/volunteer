@@ -9,7 +9,8 @@
  * Send search request to CIA.
  */
 function novo_cia_search_queue_worker($data) {
-  $result = novo_cia_send_search_request($data['id']);
+  $result = '';
+  //$result = novo_cia_send_search_request($data['id']);
   if (empty($result)) {
     watchdog("novo_cia", "Search request :id have error", array(
       ":id" => $data['id'],
@@ -21,7 +22,8 @@ function novo_cia_search_queue_worker($data) {
  * Send pull report request to CIA.
  */
 function novo_cia_pull_report_queue_worker($data) {
-  $result = novo_cia_send_pull_report_request($data['id']);
+  $result = '';
+  //$result = novo_cia_send_pull_report_request($data['id']);
   if (!empty($result) && isset($result->report_status) && !empty($result->report_status)) {
     novo_cia_add_send_mail_reviewer_to_queue($result->id);
   }
