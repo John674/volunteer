@@ -152,7 +152,7 @@ function novo_mail_get_siteadmin_emails() {
   $role_reviewer = user_role_load_by_name('Reviewer');
   return db_query("SELECT u.uid, u.mail FROM users AS u
     LEFT JOIN users_roles AS ur ON ur.uid = u.uid
-    WHERE ur.rid = :rid OR ur.rid = :rid2 AND u.status = 1 LIMIT 2", [
+    WHERE ur.rid = :rid OR ur.rid = :rid2 AND u.status = 1", [
     ":rid" => $role_siteadmin->rid,
     ":rid2" => $role_reviewer->rid,
   ])->fetchAllKeyed();
