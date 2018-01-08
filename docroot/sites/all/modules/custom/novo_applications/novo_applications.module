@@ -186,7 +186,6 @@ function novo_applications_get_academic_current_year() {
   return ($month >= 8) ? $year : $year - 1;
 }
 
-
 /**
  * Implements hook_node_update().
  */
