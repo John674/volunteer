@@ -80,7 +80,6 @@ function novo_mail_cron() {
       $email_queue->createItem((array) $item);
     }
 
-
     $email_queue = DrupalQueue::get('novo_mail_app_not_completed_to_volunteer_24_queue');
     $data = novo_mail_app_get_all_not_completed_nids(24, "novo_mail_app_not_completed_to_volunteer_24");
     foreach ($data as $key => $item) {

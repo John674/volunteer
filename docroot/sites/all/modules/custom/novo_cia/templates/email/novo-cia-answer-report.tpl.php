@@ -18,4 +18,3 @@
     Login at volunteer.novoministries.org to review the issue and determine next steps.
   <?php print $params['vol_link']; ?>
 <?php endif; ?>
-

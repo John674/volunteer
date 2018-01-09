@@ -24,6 +24,7 @@ function novo_cia_add_search_request_to_queue($nid, $uid) {
     'application_nid' => $nid,
     'request_type' => 0,
     'request_status' => 0,
+    'attempts_number' => 1,
     'created' => REQUEST_TIME,
   ))->execute();
   return $id;
@@ -52,6 +53,7 @@ function novo_cia_add_pull_report_request_to_queue($nid, $uid, $search_request_i
       'tracking_number' => $tracking_number,
       'search_request_id' => $search_request_id,
       'request_date' => REQUEST_TIME,
+      'attempts_number' => 1,
       'created' => REQUEST_TIME,
     ))->execute();
 }
@@ -183,4 +185,26 @@ function novo_cia_get_user_by_role($role_name) {
     ->fetchCol();
 
   return user_load_multiple($uids);
+}
+
+/**
+ * Get request attempts.
+ */
+function novo_cia_get_request_attempts($request_id) {
+  $attempts = db_select('novo_cia_checks', 'cc')
+    ->fields('cc', array('attempts_number'))
+    ->condition('id', $request_id)
+    ->execute()
+    ->fetchField();
+  if (empty($attempts)) {
+    db_update('novo_cia_checks')
+      ->fields([
+        'attempts_number' => 1,
+        'updated' => REQUEST_TIME,
+      ])
+      ->condition('id', $request_id)
+      ->execute();
+    return 1;
+  }
+  return $attempts;
 }

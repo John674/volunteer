@@ -200,7 +200,8 @@ function novo_applications_form_submit(&$form, &$form_state) {
           if (function_exists("novo_mail_app_exp_app_checked_by_applicant_to_admin")) {
             novo_mail_app_exp_app_checked_by_applicant_to_admin($node->nid);
           }
-        } else {
+        }
+        else {
           if (function_exists("novo_mail_app_submitted")) {
             novo_mail_app_submitted($node->nid);
           }

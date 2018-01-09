@@ -11,5 +11,3 @@
 
 <p>Login at volunteer.novoministries.org to begin the background check
     process.</p>
-
-
