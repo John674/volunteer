@@ -532,3 +532,11 @@ function novo_master_update_7149() {
 function novo_master_update_7150() {
   features_revert_module("novo_content_feature");
 }
+
+/**
+ * Delete field_attend_church_regularly.
+ */
+function novo_master_update_7151() {
+  field_delete_field('field_attend_church_regularly');
+  field_purge_batch(1);
+}

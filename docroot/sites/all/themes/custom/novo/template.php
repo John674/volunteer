@@ -807,8 +807,4 @@ function novo_form_kids_node_form_alter(&$form, &$form_state) {
   if (isset($form['field_ethnicity']) && isset($form['field_ethnicity'][$lang]['#options']['_none'])) {
     $form['field_ethnicity'][$lang]['#options']['_none'] = t('Unknown');
   }
-
-  if (isset($form['field_attend_church_regularly']) && isset($form['field_attend_church_regularly'][$lang]['#options']['_none'])) {
-    $form['field_attend_church_regularly'][$lang]['#options']['_none'] = t('Unknown');
-  }
 }

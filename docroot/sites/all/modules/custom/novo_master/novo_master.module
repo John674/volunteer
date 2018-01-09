@@ -133,6 +133,7 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
   // Disable autofill form for browsers.
   $form['#attributes']['autocomplete'] = 'off';
 
+
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
       $form['actions']['publish']['#value'] = t("Active");
@@ -149,7 +150,7 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
-  // Remove Revision information tab
+  // Remove Revision information tab.
   if ($user->uid != 1) {
     $form['revision_information']['#access'] = FALSE;
   }
