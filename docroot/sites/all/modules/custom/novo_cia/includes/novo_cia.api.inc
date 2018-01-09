@@ -51,7 +51,7 @@ function novo_cia_send_search_request($request_id) {
         }
       }
 
-      if (strtolower($feed_array['Status']) == NOVO_CIA_RESPONSE_STATUS_REJECTED) {
+      if (strtolower($feed_array['Status']) != NOVO_CIA_RESPONSE_DATABASE_OFFLINE) {
         $error = isset($feed_array['Error']) && !empty($feed_array['Error']) ? $feed_array['Error'] : NULL;
 
         // @codingStandardsIgnoreStart
