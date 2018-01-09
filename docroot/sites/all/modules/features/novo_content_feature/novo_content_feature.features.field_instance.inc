@@ -8268,12 +8268,12 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-kids-field_attend_church_regularly'.
-  $field_instances['node-kids-field_attend_church_regularly'] = array(
+  // Exported field_instance: 'node-kids-field_attend_church_reg'.
+  $field_instances['node-kids-field_attend_church_reg'] = array(
     'bundle' => 'kids',
     'default_value' => array(
       0 => array(
-        'value' => 0,
+        'value' => 'unknown',
       ),
     ),
     'deleted' => 0,
@@ -8288,19 +8288,19 @@ Friend',
           'field_multiple_limit_order' => 0,
         ),
         'type' => 'list_default',
-        'weight' => 23,
+        'weight' => 39,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_attend_church_regularly',
+    'field_name' => 'field_attend_church_reg',
     'label' => 'Attend Church Regularly?',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -8309,7 +8309,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -8481,7 +8481,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_ethnicity',
     'label' => 'Ethnicity',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -8492,7 +8492,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -8580,7 +8580,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -8756,7 +8756,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -8897,7 +8897,7 @@ Friend',
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -8947,7 +8947,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -9109,7 +9109,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -9521,50 +9521,6 @@ Friend',
       'settings' => array(),
       'type' => 'number',
       'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_decision_other_explained'.
-  $field_instances['node-mentors-field_decision_other_explained'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'field_multiple_limit' => -1,
-          'field_multiple_limit_offset' => 0,
-          'field_multiple_limit_order' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_decision_other_explained',
-    'label' => 'Decision other explained',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 9,
     ),
   );
 
@@ -11094,7 +11050,6 @@ Discipline',
   t('Completed');
   t('Contact List');
   t('Date of Birth');
-  t('Decision other explained');
   t('Dismissal');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
   t('Email');
