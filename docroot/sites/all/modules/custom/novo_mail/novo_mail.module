@@ -149,6 +149,7 @@ function novo_mail_menu() {
   return $items;
 }
 
+// @codingStandardsIgnoreStart
 function novo_mail_test() {
   // Not completed nids.
 //  $email_queue = DrupalQueue::get('novo_mail_app_exp_email_queue');
@@ -169,6 +170,7 @@ function novo_mail_test() {
 
   return "";
 }
+// @codingStandardsIgnoreEnd
 
 /**
  * Implements hook_theme().

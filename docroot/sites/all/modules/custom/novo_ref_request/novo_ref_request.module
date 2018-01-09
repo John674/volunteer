@@ -75,7 +75,6 @@ function novo_ref_request_resend_callback($nid) {
   }
 }
 
-
 /**
  * Send ref email.
  */
@@ -133,7 +132,8 @@ function novo_ref_request_node_access($node, $op, $account) {
   if ($type == "reference_request") {
     if ($op == 'update') {
       return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
-    } else {
+    }
+    else {
       return (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
     }
   }
