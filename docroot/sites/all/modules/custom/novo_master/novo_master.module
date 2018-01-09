@@ -129,6 +129,7 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   // Disable autofill form for browsers.
   $form['#attributes']['autocomplete'] = 'off';
 
@@ -146,6 +147,11 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
     if (function_exists("novo_master_dob_validate")) {
       $form['field_dob'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
     }
+  }
+
+  // Remove Revision information tab
+  if ($user->uid != 1) {
+    $form['revision_information']['#access'] = FALSE;
   }
 }
 
