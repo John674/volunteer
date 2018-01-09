@@ -216,7 +216,7 @@ function novo_cia_mail($key, &$message, $params) {
  * Implements hook_cron_queue_info().
  */
 function novo_cia_cron_queue_info() {
-  /*$queue['novo_cia_search_queue'] = array(
+  $queue['novo_cia_search_queue'] = array(
     'worker callback' => 'novo_cia_search_queue_worker',
     'time' => 60,
   );
@@ -224,7 +224,7 @@ function novo_cia_cron_queue_info() {
   $queue['novo_cia_pull_report_queue'] = array(
     'worker callback' => 'novo_cia_pull_report_queue_worker',
     'time' => 60,
-  );*/
+  );
 
   $queue['novo_cia_send_email_reviewer_queue'] = array(
     'worker callback' => 'novo_cia_send_email_reviewer_queue_worker',
@@ -247,7 +247,7 @@ function novo_cia_cron() {
   $cron_last_pull_report = variable_get(NOVO_CIA_CRON_LAST_PULL_REPORT_REQUEST);
   $cron_last_check_expired = variable_get(NOVO_CIA_CRON_LAST_CHECK_EXPIRED);
 
-  if ((REQUEST_TIME - $cron_last_search) > NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST && FALSE) {
+  if ((REQUEST_TIME - $cron_last_search) > NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST) {
     $search_queue = DrupalQueue::get('novo_cia_search_queue');
     $pending_search_requests = novo_cia_get_pending_search_requests();
     foreach ($pending_search_requests as $request) {
@@ -256,7 +256,7 @@ function novo_cia_cron() {
     variable_set(NOVO_CIA_CRON_LAST_SEARCH_REQUEST, REQUEST_TIME);
   }
 
-  if ((REQUEST_TIME - $cron_last_pull_report) > NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST && FALSE) {
+  if ((REQUEST_TIME - $cron_last_pull_report) > NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST) {
     $pull_report_queue = DrupalQueue::get('novo_cia_pull_report_queue');
     $pending_pull_report_requests = novo_cia_get_pending_pull_report_requests();
     foreach ($pending_pull_report_requests as $request) {

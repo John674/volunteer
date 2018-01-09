@@ -56,6 +56,13 @@ function novo_cia_api_credentials($form, &$form_state) {
     '#default_value' => variable_get(NOVO_CIA_API_CLIENT_CONTACT_EMAIL) ,
     '#required' => TRUE,
   );
+  $form[NOVO_CIA_API_ATTEMPTS] = array(
+    '#type' => 'textfield',
+    '#title' => t('Attempts requests'),
+    '#description' => t('Number of requests allowed.'),
+    '#default_value' => 10 ,
+    '#required' => TRUE,
+  );
 
   $form[NOVO_CIA_API_IS_TEST] = array(
     '#type' => 'checkbox',
