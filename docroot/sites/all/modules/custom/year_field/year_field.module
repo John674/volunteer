@@ -329,14 +329,17 @@ function year_field_field_widget_properties_alter(&$widget, $context) {
  * Implements hook_form_FORM_ID_alter() for field_ui_field_edit_form().
  */
 function year_field_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
-  $form['instance']['default_value_widget']['#access'] = FALSE;
   $field = $form['#field'];
   $instance = $form['#instance'];
 
-  if (!in_array($field['type'], array('year'))) {
+  if (
+    (is_array($field['type']) && !in_array($field['type'], ['year'])) ||
+    (!is_array($field['type']) && $field['type'] != 'year')
+  ) {
     return;
   }
 
+  $form['instance']['default_value_widget']['#access'] = FALSE;
   // Reorganize the instance settings and widget settings sections into a more
   // intuitive combined fieldset.
   $form['instance']['default_values'] = array(
