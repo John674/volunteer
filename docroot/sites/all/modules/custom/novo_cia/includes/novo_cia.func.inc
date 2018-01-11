@@ -283,13 +283,20 @@ function novo_cia_add_request_for_search($node) {
     $nid = $node->nid;
     $uid = $node->uid;
     if (isset($nid) && !empty($nid)) {
-      $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
-      if (!empty($search_request_id)) {
-        drupal_set_message(t("The request was added to the queue for sending to CIA."));
+      $last_request = novo_cia_get_last_success_request($nid);
+      if ($last_request->request_type == 1 && $last_request->request_status == 0) {
+        drupal_set_message(t("You can't request to CIA. Previous request has`t completed"), 'error');
       }
       else {
-        drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
+        $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
+        if (!empty($search_request_id)) {
+          drupal_set_message(t("The request was added to the queue for sending to CIA."));
+        }
+        else {
+          drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
+        }
       }
+
     }
   }
   else {
