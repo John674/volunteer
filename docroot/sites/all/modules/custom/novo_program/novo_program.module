@@ -191,10 +191,12 @@ function novo_program_views_query_alter(&$view, &$query) {
       $nid = arg(5);
     }
 
-    $condition = db_or()
-      ->isNull('field_program_class_name_node.nid')
-      ->condition('field_program_class_name_node.nid', $nid, '=');
-    $query->add_where(0, $condition);
+    if ($nid) {
+      $condition = db_or()
+        ->isNull('field_program_class_name_node.nid')
+        ->condition('field_program_class_name_node.nid', $nid, '=');
+      $query->add_where(0, $condition);
+    }
   }
 }
 
