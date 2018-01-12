@@ -211,15 +211,18 @@ function novo_program_render_report_links($form, $form_state) {
 
   $nametag_options = [];
   $canvassing_options = [];
+  $allergy_options = [];
   $roster_options = [];
   if (!empty($year)) {
     $nametag_options['field_program_year_year'] = $year;
     $canvassing_options['field_program_year_year'] = $year;
+    $allergy_options['field_program_year_year'] = $year;
     $roster_options['field_program_year_year'] = $year;
   }
   if (!empty($location)) {
     $nametag_options['field_program_location_target_id_entityreference_filter'] = $location;
     $canvassing_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $allergy_options['field_program_location_target_id_entityreference_filter'] = $location;
     $roster_options['field_program_location_target_id_entityreference_filter'] = $location;
   }
   if (!empty($class)) {
@@ -227,6 +230,7 @@ function novo_program_render_report_links($form, $form_state) {
   }
   if (!empty($program)) {
     $canvassing_options['nid_entityreference_filter'] = $program;
+    $allergy_options['nid_entityreference_filter'] = $program;
     $roster_options['nid_entityreference_filter'] = $program;
   }
 
@@ -242,6 +246,10 @@ function novo_program_render_report_links($form, $form_state) {
     'report-nametag' => [
       'title' => t('Nametag'),
       'options' => $nametag_options,
+    ],
+    'children-allergy-report' => [
+      'title' => t('Allergy'),
+      'options' => $allergy_options,
     ],
   ];
 
