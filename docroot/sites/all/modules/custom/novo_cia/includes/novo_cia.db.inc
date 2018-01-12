@@ -143,7 +143,7 @@ function novo_cia_update_request($request_id, $data = array()) {
 function novo_cia_get_last_success_request($nid) {
   return db_select('novo_cia_checks', 'cc')
     ->fields('cc')
-    ->condition('request_status', array(0, 1, 4))
+    ->condition('request_status', array(0, 1, 2, 4))
     ->condition('application_nid', $nid)
     ->orderBy('cc.id', 'DESC')
     ->range(0, 1)

@@ -3859,6 +3859,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['request_status_1']['value']['value'] = '1';
   $handler->display->display_options['filters']['request_status_1']['group'] = 2;
   /* Filter criterion: Novo CIA requests: Status */
+  $handler->display->display_options['filters']['request_status_3']['id'] = 'request_status_3';
+  $handler->display->display_options['filters']['request_status_3']['table'] = 'novo_cia_checks';
+  $handler->display->display_options['filters']['request_status_3']['field'] = 'request_status';
+  $handler->display->display_options['filters']['request_status_3']['value']['value'] = '2';
+  $handler->display->display_options['filters']['request_status_3']['group'] = 2;
+  /* Filter criterion: Novo CIA requests: Status */
   $handler->display->display_options['filters']['request_status_2']['id'] = 'request_status_2';
   $handler->display->display_options['filters']['request_status_2']['table'] = 'novo_cia_checks';
   $handler->display->display_options['filters']['request_status_2']['field'] = 'request_status';

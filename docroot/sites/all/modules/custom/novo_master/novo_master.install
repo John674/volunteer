@@ -540,3 +540,10 @@ function novo_master_update_7151() {
   field_delete_field('field_attend_church_regularly');
   field_purge_batch(1);
 }
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7152() {
+  features_revert_module('novo_views_feature');
+}

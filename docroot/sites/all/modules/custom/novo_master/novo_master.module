@@ -73,7 +73,6 @@ function novo_master_menu() {
  */
 function novo_master_preprocess_page(&$vars) {
   // Set breadcrumbs.
-
   $app_dyn_pages = [
     "page__list_kids_mentored",
     "page__attendance_records",
@@ -132,7 +131,6 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   // Disable autofill form for browsers.
   $form['#attributes']['autocomplete'] = 'off';
-
 
   if (isset($form['actions']['publish']['#value'])) {
     if ($form['actions']['publish']['#value'] == "Publish") {
