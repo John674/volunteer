@@ -463,3 +463,7 @@ body.page-user-edit .tabs--primary{
 .label.label-danger em.placeholder {
   font-style: normal;
 }
+
+.field-name-field-attend-church-reg label > .form-required{
+  display: none;
+}
