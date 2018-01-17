@@ -598,3 +598,57 @@ function novo_master_update_7154(&$sandbox) {
     drupal_set_message(t('Nodes @nodes were updated. DONE!!!', array('@nodes' => $sandbox['total'])));
   }
 }
+
+/**
+ * Change apostrophe \’ to \' in name fields.
+ */
+function novo_master_update_7155(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', ['nid'])
+      ->condition('type', 'kids')
+      ->execute();
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_pass = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'kids')
+    ->orderBy('n.nid')
+    ->range($sandbox['current'], $nodes_per_pass)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $name_fields = [
+      'field_first_name',
+      'field_last_name',
+      'field_goes_by',
+      'field_middle_name',
+    ];
+    foreach ($name_fields as $field) {
+      if (isset($node->{$field})) {
+        $name_field = reset(field_get_items('node', $node, $field));
+        $name = strtolower(trim($name_field['value']));
+        if (strpos($name, '’') !== FALSE) {
+          $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+          $node->{$field}[$lang][0]['value'] = str_replace('’', '\'', $name);
+          node_save($node);
+        }
+      }
+    }
+    if ((strpos($node->title, '’') !== FALSE)) {
+      $node->title = str_replace('’', '\'', $node->title);
+    }
+    node_save($node);
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('Kids @nodes were updated. DONE!!!', array('@nodes' => $sandbox['total'])));
+  }
+}
