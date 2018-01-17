@@ -549,10 +549,11 @@ function novo_master_update_7152() {
 }
 
 /**
- * Revert novo_content_feature.
+ * Revert novo_content_feature and novo_views_feature features.
  */
 function novo_master_update_7153() {
   features_revert_module("novo_content_feature");
+  features_revert_module("novo_views_feature");
 }
 
 /**

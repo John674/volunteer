@@ -2408,6 +2408,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
   /* Field: Content: Location */
@@ -2635,6 +2636,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
@@ -2746,6 +2748,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
   /* Field: Content: Location */
