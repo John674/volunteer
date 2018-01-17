@@ -135,3 +135,7 @@
   top: 0px;
   padding: 3px 6px;
 }
+
+#views-form-canvassing-report-page .field-collection-item-field-phone{
+  display: inline-block;
+}
