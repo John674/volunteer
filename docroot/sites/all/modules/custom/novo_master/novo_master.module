@@ -23,7 +23,7 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize([
   'partners',
   'programs',
   'staff',
-  'volunteers',
+  'users',
   'mentors',
   'class',
   'list_kids_mentored',
@@ -229,10 +229,11 @@ function novo_master_preprocess_views_view(&$vars) {
   if (isset($vars['name']) && isset($vars['display_id']) && in_array($vars['name'], $view_names) && $vars['display_id'] == 'page') {
     $type = (isset($vars['view']->filter['type']->value)) ? $vars['view']->filter['type']->value : [];
     $type = reset($type);
-    if (!empty($type)) {
+    if (!empty($type) || $vars['name'] == 'users') {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       $destination = drupal_get_destination();
       switch ($vars['name']) {
+        case "users":
         case "volunteers":
           $add_link = "admin/people/create";
           $destination = ["destination" => "users"];
