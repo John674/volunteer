@@ -250,6 +250,37 @@ class views_data_export_plugin_style_export extends views_plugin_style {
     return $output;
   }
 
+  function multigroup_support($sets) {
+    $new_sets = [];
+    foreach ($sets as $group_1 => $values) {
+      $group_1 = strip_tags($group_1);
+      $is_multigroup = FALSE;
+      foreach ($values as $group_2 => $v) {
+        if (is_array($v) && isset($v['group'])) {
+          $is_multigroup = TRUE;
+          break;
+        }
+      }
+
+      if ($is_multigroup) {
+        $child_sets = [];
+        foreach ($values as $group_2 => $v) {
+          $child_sets[$group_2] = $v['rows'];
+          $_sets = $this->multigroup_support($child_sets);
+          foreach ($_sets as $_group => $_values) {
+            $new_sets[$group_1 . " / " . $_group] = $_values;
+          }
+        }
+      }
+
+      else {
+        $new_sets[$group_1] = $values;
+      }
+    }
+
+    return $new_sets;
+  }
+
   function render_body() {
     if ($this->uses_row_plugin() && empty($this->row_plugin)) {
       vpr('views_plugin_style_default: Missing row plugin');
@@ -258,6 +289,9 @@ class views_data_export_plugin_style_export extends views_plugin_style {
 
     // Group the rows according to the grouping field, if specified.
     $sets = $this->render_grouping($this->view->result, $this->options['grouping']);
+
+    // Support multigroups.
+    $sets = $this->multigroup_support($sets);
 
     // Render each group separately and concatenate.  Plugins may override this
     // method if they wish some other way of handling grouping.
