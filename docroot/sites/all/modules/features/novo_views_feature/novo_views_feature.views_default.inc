@@ -2288,6 +2288,11 @@ function novo_views_feature_views_default_views() {
       'rendered' => 1,
       'rendered_strip' => 0,
     ),
+    1 => array(
+      'field' => 'title',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
   );
   $handler->display->display_options['style_options']['columns'] = array(
     'field_address_1' => 'field_address_1',
@@ -2297,6 +2302,7 @@ function novo_views_feature_views_default_views() {
     'field_program_location' => 'field_program_location',
     'title' => 'title',
     'field_p_canvassing_group' => 'field_p_canvassing_group',
+    'draggableviews' => 'draggableviews',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2343,6 +2349,11 @@ function novo_views_feature_views_default_views() {
     'field_p_canvassing_group' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'draggableviews' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -2423,9 +2434,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field collection item: Canvassing Group */
   $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
@@ -2592,6 +2605,11 @@ function novo_views_feature_views_default_views() {
       'rendered' => 1,
       'rendered_strip' => 0,
     ),
+    1 => array(
+      'field' => 'title',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
   );
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
@@ -2651,9 +2669,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field collection item: Canvassing Group */
   $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
@@ -2686,6 +2706,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
       'field' => 'field_p_canvassing_group',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+    1 => array(
+      'field' => 'title',
       'rendered' => 1,
       'rendered_strip' => 0,
     ),
@@ -2752,9 +2777,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Program';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field collection item: Canvassing Group */
   $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
