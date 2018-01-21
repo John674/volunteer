@@ -2671,15 +2671,6 @@ function novo_views_feature_views_default_views() {
     'links' => 0,
     'use_content_language' => 0,
   );
-  /* Field: Draggableviews: Field collection item */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'field_collection_item';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['relationship'] = 'field_program_kids_list_value';
-  $handler->display->display_options['fields']['draggableviews']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 1;
   $handler->display->display_options['path'] = 'canvassing-report/export';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -2781,15 +2772,32 @@ function novo_views_feature_views_default_views() {
     'links' => 0,
     'use_content_language' => 0,
   );
-  /* Field: Draggableviews: Field collection item */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'field_collection_item';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['relationship'] = 'field_program_kids_list_value';
-  $handler->display->display_options['fields']['draggableviews']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 1;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Field collection item: Canvassing Group (field_p_canvassing_group) */
+  $handler->display->display_options['sorts']['field_p_canvassing_group_target_id']['id'] = 'field_p_canvassing_group_target_id';
+  $handler->display->display_options['sorts']['field_p_canvassing_group_target_id']['table'] = 'field_data_field_p_canvassing_group';
+  $handler->display->display_options['sorts']['field_p_canvassing_group_target_id']['field'] = 'field_p_canvassing_group_target_id';
+  $handler->display->display_options['sorts']['field_p_canvassing_group_target_id']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['sorts']['field_p_canvassing_group_target_id']['order'] = 'DESC';
+  /* Sort criterion: Draggableviews: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'field_program_kids_list_value';
+  $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'canvassing_report:page';
+  $handler->display->display_options['sorts']['weight']['draggableviews_setting_arguments'] = 'none';
+  $handler->display->display_options['sorts']['weight']['draggableviews_setting_arguments_ignore_empty'] = 0;
+  $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
+  /* Sort criterion: Content: Address Apartment number (field_apt) */
+  $handler->display->display_options['sorts']['field_apt_value']['id'] = 'field_apt_value';
+  $handler->display->display_options['sorts']['field_apt_value']['table'] = 'field_data_field_apt';
+  $handler->display->display_options['sorts']['field_apt_value']['field'] = 'field_apt_value';
+  $handler->display->display_options['sorts']['field_apt_value']['relationship'] = 'field_p_kid_name_target_id';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['path'] = 'canvassing-report/export-pdf';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
