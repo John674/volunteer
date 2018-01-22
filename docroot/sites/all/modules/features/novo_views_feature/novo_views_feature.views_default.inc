@@ -3824,14 +3824,13 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'User';
+  $handler->display->display_options['fields']['title']['label'] = 'Volunteer Name';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Novo CIA requests: Status */
   $handler->display->display_options['fields']['request_status']['id'] = 'request_status';
   $handler->display->display_options['fields']['request_status']['table'] = 'novo_cia_checks';
   $handler->display->display_options['fields']['request_status']['field'] = 'request_status';
-  $handler->display->display_options['fields']['request_status']['label'] = 'Request Status';
   /* Field: Novo CIA requests: Request date */
   $handler->display->display_options['fields']['request_date']['id'] = 'request_date';
   $handler->display->display_options['fields']['request_date']['table'] = 'novo_cia_checks';
@@ -8614,7 +8613,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_u_first_name']['table'] = 'field_data_field_u_first_name';
   $handler->display->display_options['fields']['field_u_first_name']['field'] = 'field_u_first_name';
   $handler->display->display_options['fields']['field_u_first_name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['field_u_first_name']['label'] = 'User';
+  $handler->display->display_options['fields']['field_u_first_name']['label'] = 'Volunteer Name';
   $handler->display->display_options['fields']['field_u_first_name']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_u_first_name']['alter']['path'] = 'user/[uid]/edit';
   /* Field: User: Last Name */
@@ -8630,7 +8629,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'novo_ref_tasks';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = 'Name';
+  $handler->display->display_options['fields']['name']['label'] = 'Type';
   /* Field: Novo referral request tasks: Status */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'novo_ref_tasks';
@@ -8639,6 +8638,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'novo_ref_tasks';
   $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'today time ago';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'short';
   /* Field: Novo referral request tasks: Actions */
