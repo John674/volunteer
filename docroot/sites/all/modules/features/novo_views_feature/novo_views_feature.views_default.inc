@@ -2419,6 +2419,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
   /* Field: Content: Location */
@@ -2653,6 +2654,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '';
@@ -2762,6 +2764,7 @@ function novo_views_feature_views_default_views() {
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
+  $handler->display->display_options['fields']['field_parent_guardian']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_parent_guardian']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_parent_guardian']['separator'] = '<br>';
   /* Field: Content: Location */
@@ -3800,7 +3803,7 @@ function novo_views_feature_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Cia requests';
+  $handler->display->display_options['title'] = 'CIA requests';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -3821,14 +3824,13 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'User';
+  $handler->display->display_options['fields']['title']['label'] = 'Volunteer Name';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Novo CIA requests: Status */
   $handler->display->display_options['fields']['request_status']['id'] = 'request_status';
   $handler->display->display_options['fields']['request_status']['table'] = 'novo_cia_checks';
   $handler->display->display_options['fields']['request_status']['field'] = 'request_status';
-  $handler->display->display_options['fields']['request_status']['label'] = 'Request Status';
   /* Field: Novo CIA requests: Request date */
   $handler->display->display_options['fields']['request_date']['id'] = 'request_date';
   $handler->display->display_options['fields']['request_date']['table'] = 'novo_cia_checks';
@@ -8611,7 +8613,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_u_first_name']['table'] = 'field_data_field_u_first_name';
   $handler->display->display_options['fields']['field_u_first_name']['field'] = 'field_u_first_name';
   $handler->display->display_options['fields']['field_u_first_name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['field_u_first_name']['label'] = 'User';
+  $handler->display->display_options['fields']['field_u_first_name']['label'] = 'Volunteer Name';
   $handler->display->display_options['fields']['field_u_first_name']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_u_first_name']['alter']['path'] = 'user/[uid]/edit';
   /* Field: User: Last Name */
@@ -8627,7 +8629,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'novo_ref_tasks';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = 'Name';
+  $handler->display->display_options['fields']['name']['label'] = 'Type';
   /* Field: Novo referral request tasks: Status */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'novo_ref_tasks';
@@ -8636,6 +8638,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'novo_ref_tasks';
   $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'today time ago';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'short';
   /* Field: Novo referral request tasks: Actions */
@@ -11322,6 +11325,19 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="novo-title-published-[status_1]">[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   /* Field: Content: Novo application status */
   $handler->display->display_options['fields']['novo_application_status']['id'] = 'novo_application_status';
   $handler->display->display_options['fields']['novo_application_status']['table'] = 'node';

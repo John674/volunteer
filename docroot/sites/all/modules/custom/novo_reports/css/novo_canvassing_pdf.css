@@ -31,6 +31,9 @@ tr.location-header th {
   text-align: right;
   border: none;
 }
+.field-collection-item-field-phone {
+  display: inline-block;
+}
 tr.even {
   background: none!important;
 }

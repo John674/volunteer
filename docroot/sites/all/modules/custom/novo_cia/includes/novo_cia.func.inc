@@ -13,7 +13,7 @@ function novo_cia_get_render_data($nid) {
   $request_statuses = unserialize(NOVO_CIA_REQUEST_STATUSES);
   $status_request = !empty($last_request) ? $request_statuses[$last_request->request_status] : t('Not Sent');
   $status_buttons = !empty($last_request) ? novo_cia_render_action_buttons($nid) : novo_cia_render_action_buttons($nid, TRUE);
-  $error = $last_request->request_status == 2 ? $last_request->response : NULL;
+  $error = !empty($last_request) && isset($last_request->request_status) && $last_request->request_status == 2 ? $last_request->response : NULL;
   return [
     'title' => t('CIA Background Check:'),
     'status_label' => $status_request,

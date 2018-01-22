@@ -117,7 +117,8 @@
               <hr>
           <?php endif; ?>
           <?php
-          // Hide comments, tags, and links now so that we can render them later.
+          // Hide comments, tags, and links
+          // now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
           hide($content['field_tags']);
@@ -130,6 +131,7 @@
           hide($content['pseudo_field_request_cia']);
           hide($content['pseudo_field_request_date_cia']);
           hide($content['pseudo_field_response_date_cia']);
+          hide($content['pseudo_field_renewal_date_cia']);
 
           hide($content['field_app_status']);
           hide($content['app_status']);
@@ -176,7 +178,6 @@
                   <?php print render($content['field_reference_request_standby']); ?>
                   <?php print render($content['field_reference_request_church']); ?>
                   <?php print render($content['field_reference_request_parents']); ?>
-
                 </div>
             </div>
 
