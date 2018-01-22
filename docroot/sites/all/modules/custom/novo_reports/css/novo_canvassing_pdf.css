@@ -10,6 +10,11 @@
   font-style: normal;
 }
 
+.group-title div {
+  padding: 0px 5px;
+  font-size: 18px;
+}
+
 table{
   page-break-after: left;
 }
@@ -17,6 +22,7 @@ table{
 table thead tr th {
   background: none;
   page-break-inside: avoid;
+  border: none;
 }
 table thead tr {
   page-break-inside: avoid;
@@ -27,4 +33,7 @@ tr.location-header th {
 }
 .field-collection-item-field-phone {
   display: inline-block;
+}
+tr.even {
+  background: none!important;
 }

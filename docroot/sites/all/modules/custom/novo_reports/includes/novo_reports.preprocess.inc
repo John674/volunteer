@@ -50,7 +50,7 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
   if (!empty($location)) {
     $vars['header_row'] .= '<tr class="location-header"><th colspan="' . count($vars['header']) . '">' . $location . '</th></tr>';
   }
-  $vars['header_row'] .= '<tr style="background-color: ' . $color . ';">';
+  $vars['header_row'] .= '<tr>';
 
   $ts = tablesort_init($vars['header']);
 
@@ -58,7 +58,7 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
     $cell = tablesort_header($cell, $vars['header'], $ts);
     $cell = [
       'data' => $cell,
-      'style' => "background-color: " . $color . ";",
+      'style' => "color: gray;",
     ];
     $vars['header_row'] .= _theme_table_cell($cell, TRUE);
   }
@@ -77,9 +77,9 @@ function novo_reports_preprocess_body_canvassing_report(&$vars) {
   $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
   $title = strip_tags($vars['title']);
   if ($title != "No group") {
-    $title = t("%name group", ["%name" => $title]);
+    $title = t("%name", ["%name" => $title]);
   }
-  $vars['title'] = '<div style="color: ' . $color . '">' . $title . '</div>';
+  $vars['title'] = '<div style="background-color: ' . $color . '">' . $title . '</div>';
 }
 
 /**
