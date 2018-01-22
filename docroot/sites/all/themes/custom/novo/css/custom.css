@@ -469,3 +469,8 @@ body.page-user-edit .tabs--primary{
 .view-canvassing-report .novo-canvassing-group-wrapper {
   margin: 0px;
 }
+
+
+.field-name-field-attend-church-reg label > .form-required{
+  display: none;
+}
