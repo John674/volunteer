@@ -173,6 +173,9 @@ class views_data_export_pdf_plugin_style_export extends views_data_export_plugin
     // Group the rows according to the grouping field, if specified.
     $sets = $this->render_grouping($this->view->result, $this->options['grouping']);
 
+    // Support 2 groups.
+    $sets = $this->multigroup_support($sets);
+
     // Render each group separately and concatenate.  Plugins may override this
     // method if they wish some other way of handling grouping.
     $output = '';

@@ -463,6 +463,13 @@ body.page-user-edit .tabs--primary{
 .label.label-danger em.placeholder {
   font-style: normal;
 }
+.view-canvassing-report .view-grouping-content caption {
+  text-align: right;
+}
+.view-canvassing-report .novo-canvassing-group-wrapper {
+  margin: 0px;
+}
+
 
 .field-name-field-attend-church-reg label > .form-required{
   display: none;
