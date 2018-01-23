@@ -408,10 +408,10 @@ function novo_content_strongarm_feature_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '52',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -484,7 +484,7 @@ function novo_content_strongarm_feature_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '25',
+          'weight' => '26',
         ),
       ),
       'display' => array(),

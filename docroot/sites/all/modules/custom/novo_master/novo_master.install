@@ -652,3 +652,74 @@ function novo_master_update_7155(&$sandbox) {
     drupal_set_message(t('Kids @nodes were updated. DONE!!!', array('@nodes' => $sandbox['total'])));
   }
 }
+
+/**
+ * Update "..and put the year completed in the blank" field.
+ */
+function novo_master_update_7156(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', ['nid'])
+      ->condition('type', 'application')
+      ->execute();
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_pass = 20;
+
+  $result = db_select('node', 'n')
+    ->fields('n', ['nid'])
+    ->condition('type', 'application')
+    ->orderBy('n.nid')
+    ->range($sandbox['current'], $nodes_per_pass)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $field_edu_level_field = reset(field_get_items('node', $node, 'field_edu_level'));
+    $years_value = '';
+
+    if (!empty($field_edu_level_field)) {
+      $field_edu_level = strtolower(trim($field_edu_level_field['value']));
+
+      switch ($field_edu_level) {
+        case "high school":
+          $value = "High School";
+          break;
+        case "college":
+          $value = "College";
+          break;
+        case "n/a":
+          $value = "N/A";
+          break;
+        default:
+          $value = "Other";
+          $years_value = $field_edu_level_field['value'];
+      }
+    }
+    else {
+      $value = "N/A";
+    }
+
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node->field_edu_level_type[$lang][0]['value'] = $value;
+    $node->field_edu_level_years[$lang][0]['value'] = $years_value;
+    node_save($node);
+
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('Nodes @nodes were updated. DONE!!!', ['@nodes' => $sandbox['total']]));
+  }
+}
+
+/**
+ * Delete field_edu_level.
+ */
+function novo_master_update_7157() {
+  field_delete_field('field_edu_level');
+  field_purge_batch(1);
+}
