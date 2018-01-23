@@ -175,6 +175,7 @@ html {
     color: #EC1E24;
 }
 
+#user-pass-reset .btn-primary,
 .novo-login-form .btn-primary{
     background: #EC1E24 none;
     border: 1px solid transparent;
