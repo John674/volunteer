@@ -115,7 +115,7 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
-
+  $a = 1;
   if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
@@ -170,6 +170,10 @@ function novo_preprocess_page(&$variables) {
         $date_of_birthday['value']['date']['#value'] = '';
 
       }
+    }
+    if (in_array('page__user__reset', $variables['theme_hook_suggestions'])) {
+      $variables['page']['content']['system_main']['main']['#prefix'] = '<div class="panel panel-default col-md-6 col-md-offset-3"><div class="panel-body">';
+      $variables['page']['content']['system_main']['main']['#suffix'] = '</div></div>';
     }
   }
 
