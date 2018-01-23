@@ -271,9 +271,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_edu_level'.
-  $permissions['create field_edu_level'] = array(
-    'name' => 'create field_edu_level',
+  // Exported permission: 'create field_edu_level_type'.
+  $permissions['create field_edu_level_type'] = array(
+    'name' => 'create field_edu_level_type',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
@@ -281,9 +281,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_edu_level_type'.
-  $permissions['create field_edu_level_type'] = array(
-    'name' => 'create field_edu_level_type',
+  // Exported permission: 'create field_edu_level_years'.
+  $permissions['create field_edu_level_years'] = array(
+    'name' => 'create field_edu_level_years',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
@@ -1172,9 +1172,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_edu_level'.
-  $permissions['edit field_edu_level'] = array(
-    'name' => 'edit field_edu_level',
+  // Exported permission: 'edit field_edu_level_type'.
+  $permissions['edit field_edu_level_type'] = array(
+    'name' => 'edit field_edu_level_type',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
@@ -2038,9 +2038,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit own field_edu_level'.
-  $permissions['edit own field_edu_level'] = array(
-    'name' => 'edit own field_edu_level',
+  // Exported permission: 'edit own field_edu_level_type'.
+  $permissions['edit own field_edu_level_type'] = array(
+    'name' => 'edit own field_edu_level_type',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
@@ -2048,9 +2048,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit own field_edu_level_type'.
-  $permissions['edit own field_edu_level_type'] = array(
-    'name' => 'edit own field_edu_level_type',
+  // Exported permission: 'edit own field_edu_level_years'.
+  $permissions['edit own field_edu_level_years'] = array(
+    'name' => 'edit own field_edu_level_years',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
@@ -2936,9 +2936,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_edu_level'.
-  $permissions['view field_edu_level'] = array(
-    'name' => 'view field_edu_level',
+  // Exported permission: 'view field_edu_level_type'.
+  $permissions['view field_edu_level_type'] = array(
+    'name' => 'view field_edu_level_type',
     'roles' => array(
       'Siteadmin' => 'Siteadmin',
     ),
@@ -3809,9 +3809,9 @@ function novo_content_feature_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view own field_edu_level'.
-  $permissions['view own field_edu_level'] = array(
-    'name' => 'view own field_edu_level',
+  // Exported permission: 'view own field_edu_level_type'.
+  $permissions['view own field_edu_level_type'] = array(
+    'name' => 'view own field_edu_level_type',
     'roles' => array(
       'Applicant US citizen' => 'Applicant US citizen',
       'Siteadmin' => 'Siteadmin',
