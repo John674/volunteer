@@ -151,7 +151,7 @@ function novo_reports_enrollment_report_get_data() {
   $header = [];
   foreach ($result as $key => $item) {
     $p_name_key = strtolower(trim($item->program));
-    $new_result[$item->location][$p_name_key] = $item->kids_number;
+    $new_result[$item->location][$p_name_key] = (isset($new_result[$item->location][$p_name_key])) ? $new_result[$item->location][$p_name_key] + $item->kids_number : $item->kids_number;
     if (!isset($header[$p_name_key])) {
       $header[$p_name_key] = $item->program;
     }
