@@ -363,6 +363,8 @@ function novo_content_feature_field_group_info() {
     'weight' => '47',
     'children' => array(
       0 => 'field_edu_level',
+      1 => 'field_edu_level_type',
+      2 => 'field_edu_level_years',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -1334,7 +1336,7 @@ All believers are called to follow Jesus Christ. Their purpose is to glorify God
   $field_group->parent_name = 'group_app_1_contact';
   $field_group->data = array(
     'label' => 'Emergency Contact',
-    'weight' => '75',
+    'weight' => '23',
     'children' => array(
       0 => 'field_emergency_name',
       1 => 'field_relationship',

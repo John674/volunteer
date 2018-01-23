@@ -11,6 +11,8 @@
 function novo_applications_form_application_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
+  $form['field_edu_level_years'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+
   if (user_access("disable multistep application form") && $user->uid > 1) {
     // Disable multistep.
     unset($form['#multistep']);
