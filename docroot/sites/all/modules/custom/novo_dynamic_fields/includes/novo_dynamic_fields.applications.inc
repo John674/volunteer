@@ -11,7 +11,7 @@
 function novo_dynamic_fields_attach_dynamic_fields_applications(&$variables) {
   $title = htmlspecialchars_decode($variables['title']);
   // ASCII decode.
-  $title =  html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+  $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
 
   $exposed_value = array("title" => $title);
   $output = "";

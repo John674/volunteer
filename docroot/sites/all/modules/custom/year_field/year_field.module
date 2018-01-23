@@ -291,9 +291,10 @@ function year_field_field_widget_form_alter(&$element, &$form_state, $context) {
         switch ($settings_default_value) {
           case "now":
             if ($settings_academic_year) {
-              // School Year ++1 on Aug 1st each year
+              // School Year ++1 on Aug 1st each year.
               $element_default_value = (date("n") < 8) ? date("Y", strtotime("-1 year")) : date("Y");
-            } else {
+            }
+            else {
               $element_default_value = date("Y");
             }
             break;
