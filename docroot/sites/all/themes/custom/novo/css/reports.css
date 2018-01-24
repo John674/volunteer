@@ -136,6 +136,7 @@
   padding: 3px 6px;
 }
 
+.view-children-active-report .field-collection-item-field-phone,
 #views-form-canvassing-report-page .field-collection-item-field-phone{
   display: inline-block;
 }
