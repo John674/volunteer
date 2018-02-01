@@ -723,3 +723,10 @@ function novo_master_update_7157() {
   field_delete_field('field_edu_level');
   field_purge_batch(1);
 }
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7158() {
+  features_revert_module("novo_views_feature");
+}
