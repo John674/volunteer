@@ -110,16 +110,34 @@ function novo_attendance_views_query_alter(&$view, &$query) {
     $start_time = (function_exists("_novo_master_datetotime")) ? _novo_master_datetotime($date, $format) : strtotime($date);
     $end_time = $start_time + 60 * 60 * 24 - 1;
 
-    $subquery = "SELECT n_kid.nid
-FROM field_revision_field_program_kids_list AS r_kids_list
+    // @codingStandardsIgnoreStart
+    // With attendance date filter.
+//    $subquery = <<<SQL
+//SELECT n_kid.nid
+//FROM field_revision_field_program_kids_list AS r_kids_list
+//  INNER JOIN field_data_field_p_kid_name AS p_kid_name
+//    ON p_kid_name.entity_id = r_kids_list.field_program_kids_list_value
+//  INNER JOIN node AS n_kid ON n_kid.nid = p_kid_name.field_p_kid_name_target_id
+//WHERE
+//  r_kids_list.revision_id = (SELECT MAX(n_r.vid)
+//                           FROM node_revision AS n_r
+//                           WHERE n_r.timestamp <= $end_time AND n_r.nid = $program_nid) AND
+//  r_kids_list.entity_id = $program_nid
+//SQL;
+    // @codingStandardsIgnoreEnd
+
+    // Without attendance date filter.
+    $subquery = <<<SQL
+SELECT n_kid.nid
+FROM field_data_field_program_kids_list as pkl
+
   INNER JOIN field_data_field_p_kid_name AS p_kid_name
-    ON p_kid_name.entity_id = r_kids_list.field_program_kids_list_value
+    ON p_kid_name.entity_id = pkl.field_program_kids_list_value
   INNER JOIN node AS n_kid ON n_kid.nid = p_kid_name.field_p_kid_name_target_id
-WHERE
-  r_kids_list.revision_id = (SELECT MAX(n_r.vid)
-                           FROM node_revision AS n_r
-                           WHERE n_r.timestamp <= $end_time AND n_r.nid = $program_nid) AND
-  r_kids_list.entity_id = $program_nid";
+
+WHERE pkl.entity_id = $program_nid
+SQL;
+    
     $query->add_where_expression('AND', "(node.nid IN ($subquery))");
   }
 }
