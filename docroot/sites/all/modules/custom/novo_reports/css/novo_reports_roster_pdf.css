@@ -8,3 +8,6 @@
 table{
   page-break-after: left;
 }
+.field-collection-item-field-phone{
+  display: inline-block;
+}
