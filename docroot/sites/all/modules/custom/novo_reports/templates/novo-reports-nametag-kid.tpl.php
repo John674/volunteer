@@ -39,9 +39,9 @@
     <div class="nametag-row nametag-row-b2"><?php print $data['last_name']; ?></div>
     <div class="nametag-row nametag-row-b2"><?php print $data['small_group']; ?></div>
 
+    <div class="nametag-row nametag-row-b1 nametag-dismissal <?php print isset($data['dismissal_class']) ? $data['dismissal_class'] : ""; ?>"
+         style="<?php print isset($data['dismissal_style']) ? $data['dismissal_style'] : ''; ?>"><?php print $data['dismissal']; ?></div>
 
-    <div class="nametag-row nametag-row-b1 nametag-dismissal"
-         style="<?php print (isset($data['canvassing_group_color']) && !empty($data['canvassing_group_color'])) ? "color:" . $data['canvassing_group_color'] : ""; ?>"><?php print $data['dismissal']; ?></div>
     <div class="nametag-row nametag-canvassing"><?php print $data['canvassing_group']; ?></div>
 
     <div class="nametag-row nametag-row-allergies">

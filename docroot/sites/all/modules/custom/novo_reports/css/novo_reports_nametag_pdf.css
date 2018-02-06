@@ -55,6 +55,12 @@
 .nametag-dismissal {
   padding-top: 0.36in;
 }
+.nametag-dismissal-walked-home {
+  color: #84527e;
+}
+.nametag-dismissal-alone-walk {
+  color: #ad7200;
+}
 .nametag-canvassing {
   font-size: 0.1667in;
   text-transform: uppercase;
