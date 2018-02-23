@@ -32,8 +32,10 @@
                 });
             }
 
-
-
+            // Hover main menu.
+            $('.navbar-nav .dropdown a.dropdown-toggle', context).on('click', function() {
+              location.href = $(this).attr('href');
+            });
         }
     };
 })(window.jQuery);
