@@ -7321,14 +7321,19 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_program_location_target_id']['relationship'] = 'field_mentor_program_name_target_id';
   $handler->display->display_options['relationships']['field_program_location_target_id']['label'] = 'Location';
   $handler->display->display_options['relationships']['field_program_location_target_id']['required'] = TRUE;
-  /* Field: Content: Kid Name */
-  $handler->display->display_options['fields']['field_mentor_kid_name']['id'] = 'field_mentor_kid_name';
-  $handler->display->display_options['fields']['field_mentor_kid_name']['table'] = 'field_data_field_mentor_kid_name';
-  $handler->display->display_options['fields']['field_mentor_kid_name']['field'] = 'field_mentor_kid_name';
-  $handler->display->display_options['fields']['field_mentor_kid_name']['settings'] = array(
-    'bypass_access' => 0,
-    'link' => 0,
-  );
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_mentor_kid_name_target_id']['id'] = 'field_mentor_kid_name_target_id';
+  $handler->display->display_options['relationships']['field_mentor_kid_name_target_id']['table'] = 'field_data_field_mentor_kid_name';
+  $handler->display->display_options['relationships']['field_mentor_kid_name_target_id']['field'] = 'field_mentor_kid_name_target_id';
+  $handler->display->display_options['relationships']['field_mentor_kid_name_target_id']['label'] = 'Kid';
+  $handler->display->display_options['relationships']['field_mentor_kid_name_target_id']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_mentor_kid_name_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'Kid Name';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Mentoring Date */
   $handler->display->display_options['fields']['field_mentoring_date']['id'] = 'field_mentoring_date';
   $handler->display->display_options['fields']['field_mentoring_date']['table'] = 'field_data_field_mentoring_date';
@@ -9180,6 +9185,7 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'views_data_export_pdf';
   $handler->display->display_options['style_options']['provide_file'] = 1;
   $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['style_options']['use_mpdf'] = 0;
   $handler->display->display_options['style_options']['disable_smart_shrinking'] = 1;
   $handler->display->display_options['style_options']['each_group_separate_table'] = 0;
   $handler->display->display_options['style_options']['landscape'] = 0;
