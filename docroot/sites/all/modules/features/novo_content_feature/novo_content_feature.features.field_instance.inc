@@ -9110,7 +9110,7 @@ Friend',
     'bundle' => 'kids',
     'default_value' => array(
       0 => array(
-        'tid' => 211,
+        'tid' => 388,
       ),
     ),
     'deleted' => 0,
