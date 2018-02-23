@@ -9108,7 +9108,11 @@ Friend',
   // Exported field_instance: 'node-kids-field_t_shirt_size'.
   $field_instances['node-kids-field_t_shirt_size'] = array(
     'bundle' => 'kids',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 211,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -9133,7 +9137,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_t_shirt_size',
     'label' => 'T-shirt Size',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
