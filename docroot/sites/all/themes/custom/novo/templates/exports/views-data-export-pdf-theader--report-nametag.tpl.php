@@ -6,5 +6,5 @@
  */
 ?>
 
-<table border="0" cellpadding="5" cellspacing="0" style="margin-top: 0.5in;">
+<table border="0" cellpadding="0" cellspacing="0" style="margin-top: 0.5in;">
     <tbody>
