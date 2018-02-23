@@ -147,7 +147,16 @@ function novo_panels_feature_default_page_manager_pages() {
     'body_classes_to_add' => '',
     'css_id' => '',
     'css' => '',
-    'contexts' => array(),
+    'contexts' => array(
+      0 => array(
+        'identifier' => 'User',
+        'keyword' => 'user',
+        'name' => 'user',
+        'type' => 'current',
+        'uid' => '',
+        'id' => 1,
+      ),
+    ),
     'relationships' => array(),
     'name' => '',
     'access' => array(
@@ -184,22 +193,21 @@ function novo_panels_feature_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
-  $pane->pid = 'new-ec0375cb-2c93-4b1f-aaa0-97146c1db0e2';
+  $pane->pid = 'new-59e7af25-4616-4f48-80ed-eb148329b88a';
   $pane->panel = 'center';
-  $pane->type = 'custom';
-  $pane->subtype = 'custom';
+  $pane->type = 'frontpage_admin_redirect';
+  $pane->subtype = 'frontpage_admin_redirect';
   $pane->shown = TRUE;
   $pane->access = array();
   $pane->configuration = array(
-    'admin_title' => '',
-    'title' => 'Welcome admin.',
-    'title_heading' => 'h2',
-    'body' => '<div class="container">
-<h3>Admin Dashboard <span class="label label-danger">Coming soon</span></h3>  
-<div class="bs-example" data-example-id="contextual-panels"> <div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-success"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-info"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-warning"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> <div class="panel panel-danger"> <div class="panel-heading"> <h3 class="panel-title">Panel title</h3> </div> <div class="panel-body"> Panel content </div> </div> </div>
-</div>',
-    'format' => 'php_code',
-    'substitute' => TRUE,
+    'context' => 'context_user_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'redirect_url' => 'attendance',
+    'form_build_id' => 'form-6I0rI3ObL_Gh_98SodBpPW5puf-czYlsLVTnI2HlyNg',
+    'form_token' => 'ahFu0gudT0bQjbHgW2cmumOCr9VpevOTg5yMNVeigSA',
+    'form_id' => 'novo_frontpage_admin_redirect_edit_form',
   );
   $pane->cache = array();
   $pane->style = array(
@@ -209,9 +217,9 @@ function novo_panels_feature_default_page_manager_pages() {
   $pane->extras = array();
   $pane->position = 0;
   $pane->locks = array();
-  $pane->uuid = 'ec0375cb-2c93-4b1f-aaa0-97146c1db0e2';
-  $display->content['new-ec0375cb-2c93-4b1f-aaa0-97146c1db0e2'] = $pane;
-  $display->panels['center'][0] = 'new-ec0375cb-2c93-4b1f-aaa0-97146c1db0e2';
+  $pane->uuid = '59e7af25-4616-4f48-80ed-eb148329b88a';
+  $display->content['new-59e7af25-4616-4f48-80ed-eb148329b88a'] = $pane;
+  $display->panels['center'][0] = 'new-59e7af25-4616-4f48-80ed-eb148329b88a';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

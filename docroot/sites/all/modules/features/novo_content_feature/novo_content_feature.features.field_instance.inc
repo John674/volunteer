@@ -1092,7 +1092,7 @@ function novo_content_feature_field_default_field_instances() {
       'settings' => array(
         'select2widgetajax' => array(
           'match_limit' => 10,
-          'match_operator' => 'STARTS_WITH',
+          'match_operator' => 'CONTAINS',
           'min_char' => 1,
           'placeholder' => 'Search',
           'view_mode' => 'select2widget_labels',

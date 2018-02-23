@@ -623,3 +623,12 @@ function _novo_master_node_kids_presave($node) {
     }
   }
 }
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function novo_master_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' || $owner == 'panels') {
+    return 'plugins/' . $plugin_type;
+  }
+}
