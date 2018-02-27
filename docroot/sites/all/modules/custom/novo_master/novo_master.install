@@ -687,12 +687,15 @@ function novo_master_update_7156(&$sandbox) {
         case "high school":
           $value = "High School";
           break;
+
         case "college":
           $value = "College";
           break;
+
         case "n/a":
           $value = "N/A";
           break;
+
         default:
           $value = "Other";
           $years_value = $field_edu_level_field['value'];

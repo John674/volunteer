@@ -138,7 +138,7 @@ FROM field_data_field_program_kids_list as pkl
 
 WHERE pkl.entity_id = $program_nid
 SQL;
-    
+
     $query->add_where_expression('AND', "(node.nid IN ($subquery))");
   }
 }

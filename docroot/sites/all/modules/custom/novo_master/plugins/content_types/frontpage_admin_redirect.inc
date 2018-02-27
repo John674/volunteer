@@ -26,7 +26,7 @@ function novo_frontpage_admin_redirect($subtype, $conf, $args, $context) {
     drupal_goto($redirect_url);
   }
 
-  return null;
+  return NULL;
 }
 
 /**
