@@ -11,7 +11,7 @@ module_load_include("inc", "novo_mail", "includes/novo_mail.cron");
 define("NOVO_MAIL_BASE_EMAIL_FOR_REPLACE_TEMPLATE", "volunteer@novoministries.org");
 
 define("NOVO_MAIL_EMAILS", serialize([
-  // Application emails
+  // Application emails.
   [
     'key' => 'novo_mail_app_expired_to_admin',
     'template' => 'templates/email/application/expiration/novo-mail-app-expired-to-admin',
@@ -85,7 +85,7 @@ define("NOVO_MAIL_EMAILS", serialize([
     'is_manager' => TRUE,
   ],
 
-  // References/requests to admins
+  // References/requests to admins.
   [
     'key' => 'novo_mail_ref_finished_form_to_admin',
     'template' => 'templates/email/requests/novo-mail-ref-finished-form-to-admin',
@@ -105,7 +105,7 @@ define("NOVO_MAIL_EMAILS", serialize([
     'is_manager' => TRUE,
   ],
 
-  // References/requests to refs
+  // References/requests to refs.
   [
     'key' => 'novo_mail_ref_form_to_parent',
     'template' => 'templates/email/requests/novo-mail-ref-form-to-parent',
@@ -143,12 +143,13 @@ function novo_mail_menu() {
     'page callback' => 'novo_mail_test',
     'page arguments' => array(),
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
 }
 
+// @codingStandardsIgnoreStart
 function novo_mail_test() {
   // Not completed nids.
 //  $email_queue = DrupalQueue::get('novo_mail_app_exp_email_queue');
@@ -169,6 +170,7 @@ function novo_mail_test() {
 
   return "";
 }
+// @codingStandardsIgnoreEnd
 
 /**
  * Implements hook_theme().
@@ -212,14 +214,14 @@ function novo_mail_app_approved($nid) {
 }
 
 /**
- * Email: CIA application was approved. @TODO: add to CIA
+ * Email: CIA application was approved. @TODO: add to CIA.
  */
 function novo_mail_app_cia_approved($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_approved_to_admin');
 }
 
 /**
- * Email: CIA application was not approved. @TODO: add to CIA
+ * Email: CIA application was not approved. @TODO: add to CIA.
  */
 function novo_mail_app_cia_not_approved($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_not_approved_to_admin');
@@ -232,7 +234,6 @@ function novo_mail_app_submitted($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_submitted_to_volunteer');
   novo_mail_add_to_queue($nid, 'novo_mail_app_submitted_to_admin');
 }
-
 
 /**
  * Email: Notify user about expiration.

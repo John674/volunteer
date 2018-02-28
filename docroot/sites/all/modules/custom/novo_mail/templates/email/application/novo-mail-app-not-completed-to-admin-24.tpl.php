@@ -11,6 +11,3 @@
 <p>Call and try to complete application over
     the phone. Log into the application before you call so you are ready to type
     the answers in as you visit.</p>
-
-
-

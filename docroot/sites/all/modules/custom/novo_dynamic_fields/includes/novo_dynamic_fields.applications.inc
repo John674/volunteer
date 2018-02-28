@@ -9,7 +9,11 @@
  * Attach dynamic fields to application node.
  */
 function novo_dynamic_fields_attach_dynamic_fields_applications(&$variables) {
-  $exposed_value = array("title" => htmlspecialchars_decode($variables['title']));
+  $title = htmlspecialchars_decode($variables['title']);
+  // ASCII decode.
+  $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+
+  $exposed_value = array("title" => $title);
   $output = "";
 
   $output .= theme("novo_dynamic_fields_row", novo_dynamic_fields_build_view_dyn_field("Attendance Records", "History attendance dates", "attendance_records_of_volunteer", array(), $exposed_value));

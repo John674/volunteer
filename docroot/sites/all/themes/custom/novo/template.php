@@ -115,7 +115,6 @@ function novo_wrap_app_status_label($text) {
  * Implements hook_preprocess_page().
  */
 function novo_preprocess_page(&$variables) {
-
   if (in_array("page__children_active_report", $variables['theme_hook_suggestions'])) {
     $variables['container_class'] = "container-fluid";
     $variables['navbar_classes_array'][] = "container-fluid";
@@ -170,6 +169,10 @@ function novo_preprocess_page(&$variables) {
         $date_of_birthday['value']['date']['#value'] = '';
 
       }
+    }
+    if (in_array('page__user__reset', $variables['theme_hook_suggestions'])) {
+      $variables['page']['content']['system_main']['main']['#prefix'] = '<div class="panel panel-default col-md-6 col-md-offset-3"><div class="panel-body">';
+      $variables['page']['content']['system_main']['main']['#suffix'] = '</div></div>';
     }
   }
 
@@ -584,6 +587,7 @@ function novo_preprocess_views_view_table(&$vars) {
  * Implements hook_form_alter().
  */
 function novo_form_alter(&$form, &$form_state, &$form_id) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
   if (!user_is_logged_in()) {
     $login_forms = [
       'user_login',
@@ -591,19 +595,10 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       'user_register_form',
       'user_pass',
     ];
-    $collection_fields = [
-      'field_contact',
-      'field_parent_guardian',
-    ];
-    $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
-
     if (strpos($form_id, 'webform_client_form') !== FALSE) {
       if (isset($form['#attributes']['class'])) {
         $form['#attributes']['class'][] = 'novo-web-form';
       }
-    }
-    if (isset($form['field_dob'])) {
-      $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
     }
     if (isset($form['#attributes']['class']) && !in_array($form_id, $login_forms)) {
       $form['#attributes']['class'][] = 'novo-form';
@@ -692,25 +687,32 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
         $form['account']['mail']['#title'] = '';
       }
     }
-    if (isset($form['field_mentoring_date'])) {
-      $form['field_mentoring_date'][$lang][0]['#title'] = '';
-    }
-
-    foreach ($collection_fields as $field) {
-      if (isset($form[$field])) {
-        foreach ($form[$field][$lang] as $key => $item) {
-          if (is_int($key)) {
-            $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
-            $form[$field][$lang][$key]['#suffix'] = '</div>';
-          }
+  }
+  if (isset($form['field_mentoring_date'])) {
+    $form['field_mentoring_date'][$lang][0]['#title'] = '';
+  }
+  $collection_fields = [
+    'field_contact',
+    'field_parent_guardian',
+  ];
+  foreach ($collection_fields as $field) {
+    if (isset($form[$field])) {
+      foreach ($form[$field][$lang] as $key => $item) {
+        if (is_int($key)) {
+          $form[$field][$lang][$key]['#prefix'] = '<div class="novo-collection">';
+          $form[$field][$lang][$key]['#suffix'] = '</div>';
         }
       }
     }
+  }
 
-    // Disable multistep fir user profiles.
-    if ($form['#id'] == "user-profile-form") {
-      $form['actions']['done']['#access'] = FALSE;
-    }
+  // Disable multistep fir user profiles.
+  if ($form['#id'] == "user-profile-form") {
+    $form['actions']['done']['#access'] = FALSE;
+  }
+
+  if (isset($form['field_dob'])) {
+    $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
   }
 }
 
@@ -798,4 +800,14 @@ function novo_html_head_alter(&$head_elements) {
   global $base_url;
   $default_favicon_element = 'drupal_add_html_head_link:shortcut icon:' . $base_url . '/misc/favicon.ico';
   unset($head_elements[$default_favicon_element]);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_form_kids_node_form_alter(&$form, &$form_state) {
+  $lang = isset($form['language']['#value']) ? $form['language']['#value'] : LANGUAGE_NONE;
+  if (isset($form['field_ethnicity']) && isset($form['field_ethnicity'][$lang]['#options']['_none'])) {
+    $form['field_ethnicity'][$lang]['#options']['_none'] = t('Unknown');
+  }
 }

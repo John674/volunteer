@@ -291,13 +291,16 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_attend_church_regularly'.
-  $field_bases['field_attend_church_regularly'] = array(
+  // Exported field_base: 'field_attend_church_reg'.
+  $field_bases['field_attend_church_reg'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_attend_church_regularly',
+    'field_name' => 'field_attend_church_reg',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -307,13 +310,14 @@ function novo_content_feature_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'No',
-        1 => 'Yes',
+        'unknown' => 'Unknown',
+        'no' => 'No',
+        'yes' => 'Yes',
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'list_boolean',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_attendance_date'.
@@ -1176,30 +1180,6 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
-  // Exported field_base: 'field_decision_other_explained'.
-  $field_bases['field_decision_other_explained'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_decision_other_explained',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_dob'.
   $field_bases['field_dob'] = array(
     'active' => 1,
@@ -1229,13 +1209,43 @@ function novo_content_feature_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
-  // Exported field_base: 'field_edu_level'.
-  $field_bases['field_edu_level'] = array(
+  // Exported field_base: 'field_edu_level_type'.
+  $field_bases['field_edu_level_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_edu_level',
+    'field_name' => 'field_edu_level_type',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'N/A' => 'N/A',
+        'High School' => 'High School',
+        'College' => 'College',
+        'Other' => 'Other',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_edu_level_years'.
+  $field_bases['field_edu_level_years'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_edu_level_years',
     'field_permissions' => array(
       'type' => 2,
     ),
@@ -1388,6 +1398,7 @@ function novo_content_feature_field_default_field_bases() {
           'parent' => 0,
         ),
       ),
+      'delete_on_parent_delete' => '',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
@@ -2146,6 +2157,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),
@@ -2979,6 +2993,9 @@ function novo_content_feature_field_default_field_bases() {
       'handler' => 'ddf',
       'handler_settings' => array(
         'behaviors' => array(
+          'views-autocomplete' => array(
+            'status' => 0,
+          ),
           'views-select-list' => array(
             'status' => 0,
           ),

@@ -11,6 +11,8 @@
 function novo_applications_form_application_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
+  $form['field_edu_level_years'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+
   if (user_access("disable multistep application form") && $user->uid > 1) {
     // Disable multistep.
     unset($form['#multistep']);
@@ -200,7 +202,8 @@ function novo_applications_form_submit(&$form, &$form_state) {
           if (function_exists("novo_mail_app_exp_app_checked_by_applicant_to_admin")) {
             novo_mail_app_exp_app_checked_by_applicant_to_admin($node->nid);
           }
-        } else {
+        }
+        else {
           if (function_exists("novo_mail_app_submitted")) {
             novo_mail_app_submitted($node->nid);
           }

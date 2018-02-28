@@ -1,3 +1,18 @@
 #module-filter-modules {
   overflow: hidden;
 }
+
+.view-users > .view-filters{
+  display: inline-block;
+}
+
+.view-users > .attachment-before {
+  display: inline-block;
+  margin-top: 30px;
+  float: right;
+}
+
+.view-users > .attachment-after{
+  overflow: auto;
+  margin-bottom: 30px;
+}

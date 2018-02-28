@@ -23,7 +23,7 @@ define("NOVO_MASTER_ADD_BUTTON_VIEW_NAMES", serialize([
   'partners',
   'programs',
   'staff',
-  'volunteers',
+  'users',
   'mentors',
   'class',
   'list_kids_mentored',
@@ -73,7 +73,6 @@ function novo_master_menu() {
  */
 function novo_master_preprocess_page(&$vars) {
   // Set breadcrumbs.
-
   $app_dyn_pages = [
     "page__list_kids_mentored",
     "page__attendance_records",
@@ -129,6 +128,7 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
  * Implements hook_form_alter().
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   // Disable autofill form for browsers.
   $form['#attributes']['autocomplete'] = 'off';
 
@@ -146,6 +146,11 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
     if (function_exists("novo_master_dob_validate")) {
       $form['field_dob'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
     }
+  }
+
+  // Remove Revision information tab.
+  if ($user->uid != 1) {
+    $form['revision_information']['#access'] = FALSE;
   }
 }
 
@@ -224,10 +229,11 @@ function novo_master_preprocess_views_view(&$vars) {
   if (isset($vars['name']) && isset($vars['display_id']) && in_array($vars['name'], $view_names) && $vars['display_id'] == 'page') {
     $type = (isset($vars['view']->filter['type']->value)) ? $vars['view']->filter['type']->value : [];
     $type = reset($type);
-    if (!empty($type)) {
+    if (!empty($type) || $vars['name'] == 'users') {
       $icon = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
       $destination = drupal_get_destination();
       switch ($vars['name']) {
+        case "users":
         case "volunteers":
           $add_link = "admin/people/create";
           $destination = ["destination" => "users"];
@@ -292,29 +298,6 @@ function novo_master_ddf_handle_args_alter(&$value, &$column, $field) {
  */
 function novo_master_menu_position_rule_alter(&$rule, array &$context, &$rule_matches, &$set_breadcrumb) {
   switch ($rule->machine_name) {
-    case "programms_menu_active":
-      $content_types = [
-        "attendance",
-        "program",
-        "class",
-        "mentors",
-        "locations",
-      ];
-      $paths = [
-        "node/add/attendance",
-        "node/add/program",
-        "node/add/class",
-        "node/add/mentors",
-        "node/add/locations",
-        "locations",
-        "programs",
-        "mentors",
-        "class",
-      ];
-
-      $rule_matches = novo_master_menu_position_rule_rules($context, $content_types, $paths);
-      break;
-
     case "attendance_menu_active":
       $rule_matches = novo_master_menu_position_rule_rules($context, ["attendance"], ["node/add/attendance"]);
       break;
@@ -602,5 +585,50 @@ function novo_master_set_default_mysql_timezone() {
     // Set default timezone.
     db_query("SET @@session.time_zone = '+00:00'");
     $already_set = TRUE;
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function novo_master_node_presave($node) {
+  if ($node->type == 'kids') {
+    if ((strpos($node->title, '’') !== FALSE)) {
+      $node->title = str_replace('’', '\'', $node->title);
+    }
+    drupal_register_shutdown_function('_novo_master_node_kids_presave', $node);
+  }
+}
+
+/**
+ * Change apostrophe \’ to \' in name fields.
+ */
+function _novo_master_node_kids_presave($node) {
+  $name_fields = [
+    'field_first_name',
+    'field_last_name',
+    'field_goes_by',
+    'field_middle_name',
+  ];
+  foreach ($name_fields as $field) {
+    if (isset($node->{$field})) {
+      $name = $node->{$field}[$node->language][0]['value'];
+      if (strpos($name, '’') !== FALSE) {
+        $node->{$field}[$node->language][0]['value'] = str_replace('’', '\'', $name);
+        $info = field_info_field($field);
+        $fields = [$info['id']];
+        field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+        cache_clear_all("field:node:{$node->nid}", 'cache_field');
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function novo_master_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' || $owner == 'panels') {
+    return 'plugins/' . $plugin_type;
   }
 }

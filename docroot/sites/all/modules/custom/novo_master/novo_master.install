@@ -525,3 +525,215 @@ function novo_master_update_7149() {
   features_revert_module("novo_block_feature");
   features_revert_module("novo_content_strongarm_feature");
 }
+
+/**
+ * Rebuild novo_taxonomy_feature and novo_content_feature.
+ */
+function novo_master_update_7150() {
+  features_revert_module("novo_content_feature");
+}
+
+/**
+ * Delete field_attend_church_regularly.
+ */
+function novo_master_update_7151() {
+  field_delete_field('field_attend_church_regularly');
+  field_purge_batch(1);
+}
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7152() {
+  features_revert_module('novo_views_feature');
+}
+
+/**
+ * Revert novo_content_feature and novo_views_feature features.
+ */
+function novo_master_update_7153() {
+  features_revert_module("novo_content_feature");
+  features_revert_module("novo_views_feature");
+}
+
+/**
+ * Delete "goes by" value if it equal to "first name".
+ */
+function novo_master_update_7154(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', ['nid'])
+      ->condition('type', 'application')
+      ->execute();
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_pass = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'application')
+    ->orderBy('n.nid')
+    ->range($sandbox['current'], $nodes_per_pass)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $first_name_field = reset(field_get_items('node', $node, 'field_first_name'));
+    $goes_by_name_field = reset(field_get_items('node', $node, 'field_goes_by'));
+
+    $first_name = strtolower(trim($first_name_field['value']));
+    $goes_by_name = strtolower(trim($goes_by_name_field['value']));
+    if ($first_name == $goes_by_name) {
+      $lang = $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+      $node->field_goes_by[$lang][0]['value'] = '';
+      node_save($node);
+    }
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('Nodes @nodes were updated. DONE!!!', array('@nodes' => $sandbox['total'])));
+  }
+}
+
+/**
+ * Change apostrophe \’ to \' in name fields.
+ */
+function novo_master_update_7155(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', ['nid'])
+      ->condition('type', 'kids')
+      ->execute();
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_pass = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'kids')
+    ->orderBy('n.nid')
+    ->range($sandbox['current'], $nodes_per_pass)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $name_fields = [
+      'field_first_name',
+      'field_last_name',
+      'field_goes_by',
+      'field_middle_name',
+    ];
+    foreach ($name_fields as $field) {
+      if (isset($node->{$field})) {
+        $name_field = reset(field_get_items('node', $node, $field));
+        $name = strtolower(trim($name_field['value']));
+        if (strpos($name, '’') !== FALSE) {
+          $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+          $node->{$field}[$lang][0]['value'] = str_replace('’', '\'', $name);
+          node_save($node);
+        }
+      }
+    }
+    if ((strpos($node->title, '’') !== FALSE)) {
+      $node->title = str_replace('’', '\'', $node->title);
+    }
+    node_save($node);
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('Kids @nodes were updated. DONE!!!', array('@nodes' => $sandbox['total'])));
+  }
+}
+
+/**
+ * Update "..and put the year completed in the blank" field.
+ */
+function novo_master_update_7156(&$sandbox) {
+
+  if (!isset($sandbox['total'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', ['nid'])
+      ->condition('type', 'application')
+      ->execute();
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+  $nodes_per_pass = 20;
+
+  $result = db_select('node', 'n')
+    ->fields('n', ['nid'])
+    ->condition('type', 'application')
+    ->orderBy('n.nid')
+    ->range($sandbox['current'], $nodes_per_pass)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $field_edu_level_field = reset(field_get_items('node', $node, 'field_edu_level'));
+    $years_value = '';
+
+    if (!empty($field_edu_level_field)) {
+      $field_edu_level = strtolower(trim($field_edu_level_field['value']));
+
+      switch ($field_edu_level) {
+        case "high school":
+          $value = "High School";
+          break;
+        case "college":
+          $value = "College";
+          break;
+        case "n/a":
+          $value = "N/A";
+          break;
+        default:
+          $value = "Other";
+          $years_value = $field_edu_level_field['value'];
+      }
+    }
+    else {
+      $value = "N/A";
+    }
+
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node->field_edu_level_type[$lang][0]['value'] = $value;
+    $node->field_edu_level_years[$lang][0]['value'] = $years_value;
+    node_save($node);
+
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('Nodes @nodes were updated. DONE!!!', ['@nodes' => $sandbox['total']]));
+  }
+}
+
+/**
+ * Delete field_edu_level.
+ */
+function novo_master_update_7157() {
+  field_delete_field('field_edu_level');
+  field_purge_batch(1);
+}
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7158() {
+  features_revert_module("novo_views_feature");
+}
+
+/**
+ * Revert novo_views_feature.
+ */
+function novo_master_update_7159() {
+  features_revert_module("novo_views_feature");
+}

@@ -283,13 +283,20 @@ function year_field_field_is_empty($item, $field) {
 function year_field_field_widget_form_alter(&$element, &$form_state, $context) {
   if (isset($context['field']['type']) && $context['field']['type'] == "year") {
     $settings_default_value = isset($context['instance']['settings']['default_value']) ? $context['instance']['settings']['default_value'] : NULL;
+    $settings_academic_year = isset($context['instance']['settings']['academic_year']) ? $context['instance']['settings']['academic_year'] : FALSE;
     $element_default_value = NULL;
     if (!empty($context['instance']['widget']['is_new'])) {
       if (!empty($settings_default_value)) {
 
         switch ($settings_default_value) {
           case "now":
-            $element_default_value = date("Y");
+            if ($settings_academic_year) {
+              // School Year ++1 on Aug 1st each year.
+              $element_default_value = (date("n") < 8) ? date("Y", strtotime("-1 year")) : date("Y");
+            }
+            else {
+              $element_default_value = date("Y");
+            }
             break;
 
           case "strtotime":
@@ -329,14 +336,17 @@ function year_field_field_widget_properties_alter(&$widget, $context) {
  * Implements hook_form_FORM_ID_alter() for field_ui_field_edit_form().
  */
 function year_field_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
-  $form['instance']['default_value_widget']['#access'] = FALSE;
   $field = $form['#field'];
   $instance = $form['#instance'];
 
-  if (!in_array($field['type'], array('year'))) {
+  if (
+    (is_array($field['type']) && !in_array($field['type'], ['year'])) ||
+    (!is_array($field['type']) && $field['type'] != 'year')
+  ) {
     return;
   }
 
+  $form['instance']['default_value_widget']['#access'] = FALSE;
   // Reorganize the instance settings and widget settings sections into a more
   // intuitive combined fieldset.
   $form['instance']['default_values'] = array(

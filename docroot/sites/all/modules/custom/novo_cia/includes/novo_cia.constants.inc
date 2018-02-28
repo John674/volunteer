@@ -72,6 +72,7 @@ define('NOVO_CIA_API_BRANCH_NAME', 'novo_cia_api_branch_name');
 define('NOVO_CIA_API_CLIENT_CONTACT', 'novo_cia_api_client_contact');
 define('NOVO_CIA_API_CLIENT_CONTACT_EMAIL', 'novo_cia_api_client_contact_email');
 define('NOVO_CIA_API_IS_TEST', 'novo_cia_api_is_test');
+define('NOVO_CIA_API_ATTEMPTS', 'novo_cia_api_attempts');
 
 define('NOVO_CIA_RESPONSE_STATUS_ACCEPTED', 'accepted');
 define('NOVO_CIA_RESPONSE_STATUS_REJECTED', 'rejected');

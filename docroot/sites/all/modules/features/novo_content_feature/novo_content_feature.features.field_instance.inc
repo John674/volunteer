@@ -1092,7 +1092,7 @@ function novo_content_feature_field_default_field_instances() {
       'settings' => array(
         'select2widgetajax' => array(
           'match_limit' => 10,
-          'match_operator' => 'STARTS_WITH',
+          'match_operator' => 'CONTAINS',
           'min_char' => 1,
           'placeholder' => 'Search',
           'view_mode' => 'select2widget_labels',
@@ -1732,7 +1732,7 @@ function novo_content_feature_field_default_field_instances() {
     'label' => 'Training Completed Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -1806,7 +1806,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 60,
+      'weight' => 8,
     ),
   );
 
@@ -1856,7 +1856,7 @@ function novo_content_feature_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 61,
+      'weight' => 9,
     ),
   );
 
@@ -2269,7 +2269,7 @@ function novo_content_feature_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -2309,7 +2309,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -2353,7 +2353,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 62,
+      'weight' => 10,
     ),
   );
 
@@ -2877,7 +2877,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 69,
+      'weight' => 17,
     ),
   );
 
@@ -3232,7 +3232,7 @@ function novo_content_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 63,
+      'weight' => 11,
     ),
   );
 
@@ -3283,7 +3283,7 @@ function novo_content_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 72,
+      'weight' => 20,
     ),
   );
 
@@ -3331,7 +3331,7 @@ function novo_content_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -3400,24 +3400,63 @@ function novo_content_feature_field_default_field_instances() {
         'year_range' => '-100:+0',
       ),
       'type' => 'date_popup',
-      'weight' => 58,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-application-field_edu_level'.
-  $field_instances['node-application-field_edu_level'] = array(
+  // Exported field_instance: 'node-application-field_edu_level_type'.
+  $field_instances['node-application-field_edu_level_type'] = array(
+    'bundle' => 'application',
+    'default_value' => array(
+      0 => array(
+        'value' => 'N/A',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 116,
+      ),
+      'pdf' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_edu_level_type',
+    'label' => 'Please mark your highest level of education completed, and put the year completed in the blank',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 26,
+    ),
+  );
+
+  // Exported field_instance: 'node-application-field_edu_level_years'.
+  $field_instances['node-application-field_edu_level_years'] = array(
     'bundle' => 'application',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 31,
-      ),
-      'pdf' => array(
         'label' => 'above',
         'module' => 'text',
         'settings' => array(
@@ -3426,9 +3465,9 @@ function novo_content_feature_field_default_field_instances() {
           'field_multiple_limit_order' => 0,
         ),
         'type' => 'text_default',
-        'weight' => 22,
+        'weight' => 117,
       ),
-      'teaser' => array(
+      'pdf' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3436,8 +3475,8 @@ function novo_content_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_edu_level',
-    'label' => 'Please mark your highest level of education completed, and put the year completed in the blank',
+    'field_name' => 'field_edu_level_years',
+    'label' => 'Edu level years',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3445,18 +3484,12 @@ function novo_content_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'select_or_other',
+      'module' => 'text',
       'settings' => array(
-        'available_options' => 'High School
-College',
-        'other' => 'Other',
-        'other_size' => 60,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'sort_options' => 0,
+        'size' => 60,
       ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 45,
+      'type' => 'text_textfield',
+      'weight' => 27,
     ),
   );
 
@@ -3510,7 +3543,7 @@ College',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 76,
+      'weight' => 24,
     ),
   );
 
@@ -3763,7 +3796,7 @@ College',
         'year_range' => '-0:+10',
       ),
       'type' => 'date_popup',
-      'weight' => 78,
+      'weight' => 28,
     ),
   );
 
@@ -3805,7 +3838,7 @@ College',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 183,
+      'weight' => 13,
     ),
   );
 
@@ -3849,7 +3882,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 53,
+      'weight' => 1,
     ),
   );
 
@@ -3896,7 +3929,7 @@ College',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 59,
+      'weight' => 7,
     ),
   );
 
@@ -3946,7 +3979,7 @@ College',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 2,
     ),
   );
 
@@ -4004,7 +4037,7 @@ Church',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 73,
+      'weight' => 21,
     ),
   );
 
@@ -4054,7 +4087,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 56,
+      'weight' => 4,
     ),
   );
 
@@ -4105,7 +4138,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 57,
+      'weight' => 5,
     ),
   );
 
@@ -4196,7 +4229,7 @@ Church',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 3,
     ),
   );
 
@@ -4341,7 +4374,7 @@ Church',
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 77,
+      'weight' => 25,
     ),
   );
 
@@ -5367,7 +5400,7 @@ Church',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 67,
+      'weight' => 15,
     ),
   );
 
@@ -6995,7 +7028,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'masked_input',
-      'weight' => 66,
+      'weight' => 14,
     ),
   );
 
@@ -7044,7 +7077,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 64,
+      'weight' => 12,
     ),
   );
 
@@ -7095,7 +7128,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 71,
+      'weight' => 19,
     ),
   );
 
@@ -7143,7 +7176,7 @@ Friend',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 68,
+      'weight' => 16,
     ),
   );
 
@@ -7475,7 +7508,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 70,
+      'weight' => 18,
     ),
   );
 
@@ -7582,7 +7615,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 74,
+      'weight' => 22,
     ),
   );
 
@@ -7637,7 +7670,7 @@ Friend',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 65,
+      'weight' => 13,
     ),
   );
 
@@ -8268,12 +8301,12 @@ Friend',
     ),
   );
 
-  // Exported field_instance: 'node-kids-field_attend_church_regularly'.
-  $field_instances['node-kids-field_attend_church_regularly'] = array(
+  // Exported field_instance: 'node-kids-field_attend_church_reg'.
+  $field_instances['node-kids-field_attend_church_reg'] = array(
     'bundle' => 'kids',
     'default_value' => array(
       0 => array(
-        'value' => 0,
+        'value' => 'unknown',
       ),
     ),
     'deleted' => 0,
@@ -8288,17 +8321,17 @@ Friend',
           'field_multiple_limit_order' => 0,
         ),
         'type' => 'list_default',
-        'weight' => 23,
+        'weight' => 39,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_attend_church_regularly',
+    'field_name' => 'field_attend_church_reg',
     'label' => 'Attend Church Regularly?',
     'required' => 1,
     'settings' => array(
@@ -8309,7 +8342,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -8481,7 +8514,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_ethnicity',
     'label' => 'Ethnicity',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -8492,7 +8525,7 @@ Friend',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -8580,7 +8613,7 @@ Friend',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -8756,7 +8789,7 @@ Friend',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -8897,7 +8930,7 @@ Friend',
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -8947,7 +8980,7 @@ Friend',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -9075,7 +9108,11 @@ Friend',
   // Exported field_instance: 'node-kids-field_t_shirt_size'.
   $field_instances['node-kids-field_t_shirt_size'] = array(
     'bundle' => 'kids',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 388,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -9100,7 +9137,7 @@ Friend',
     'entity_type' => 'node',
     'field_name' => 'field_t_shirt_size',
     'label' => 'T-shirt Size',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -9109,7 +9146,7 @@ Friend',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -9521,50 +9558,6 @@ Friend',
       'settings' => array(),
       'type' => 'number',
       'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-mentors-field_decision_other_explained'.
-  $field_instances['node-mentors-field_decision_other_explained'] = array(
-    'bundle' => 'mentors',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'field_multiple_limit' => -1,
-          'field_multiple_limit_offset' => 0,
-          'field_multiple_limit_order' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_decision_other_explained',
-    'label' => 'Decision other explained',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 9,
     ),
   );
 
@@ -11094,9 +11087,9 @@ Discipline',
   t('Completed');
   t('Contact List');
   t('Date of Birth');
-  t('Decision other explained');
   t('Dismissal');
   t('Do you have any mental, behavioral, or physical condition or illness which could affect your ability to work with children?');
+  t('Edu level years');
   t('Email');
   t('Employer');
   t('Enrollment (Class) Name');

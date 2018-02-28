@@ -13,10 +13,12 @@ function novo_cia_get_render_data($nid) {
   $request_statuses = unserialize(NOVO_CIA_REQUEST_STATUSES);
   $status_request = !empty($last_request) ? $request_statuses[$last_request->request_status] : t('Not Sent');
   $status_buttons = !empty($last_request) ? novo_cia_render_action_buttons($nid) : novo_cia_render_action_buttons($nid, TRUE);
+  $error = !empty($last_request) && isset($last_request->request_status) && $last_request->request_status == 2 ? $last_request->response : NULL;
   return [
     'title' => t('CIA Background Check:'),
     'status_label' => $status_request,
     'status_buttons' => $status_buttons,
+    'error' => $error,
   ];
 }
 
@@ -281,19 +283,20 @@ function novo_cia_add_request_for_search($node) {
     $nid = $node->nid;
     $uid = $node->uid;
     if (isset($nid) && !empty($nid)) {
-      $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
-      if (!empty($search_request_id)) {
-        $search_result = novo_cia_send_search_request($search_request_id);
-        if (!empty($search_result)) {
-          drupal_set_message(t("The request was added to the queue for report from CIA"));
-        }
-        else {
-          drupal_set_message(t("The request was added to the queue for sending to CIA."));
-        }
+      $last_request = novo_cia_get_last_success_request($nid);
+      if ($last_request->request_type == 1 && $last_request->request_status == 0) {
+        drupal_set_message(t("You can't request to CIA. Previous request has`t completed"), 'error');
       }
       else {
-        drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
+        $search_request_id = novo_cia_add_search_request_to_queue($nid, $uid);
+        if (!empty($search_request_id)) {
+          drupal_set_message(t("The request was added to the queue for sending to CIA."));
+        }
+        else {
+          drupal_set_message(t("The request was`t be added to the queue for sending to CIA."), 'error');
+        }
       }
+
     }
   }
   else {

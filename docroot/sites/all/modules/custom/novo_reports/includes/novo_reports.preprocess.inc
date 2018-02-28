@@ -50,7 +50,7 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
   if (!empty($location)) {
     $vars['header_row'] .= '<tr class="location-header"><th colspan="' . count($vars['header']) . '">' . $location . '</th></tr>';
   }
-  $vars['header_row'] .= '<tr style="background-color: ' . $color . ';">';
+  $vars['header_row'] .= '<tr>';
 
   $ts = tablesort_init($vars['header']);
 
@@ -58,7 +58,7 @@ function novo_reports_preprocess_theader_canvassing_report(&$vars) {
     $cell = tablesort_header($cell, $vars['header'], $ts);
     $cell = [
       'data' => $cell,
-      'style' => "background-color: " . $color . ";",
+      'style' => "color: gray;",
     ];
     $vars['header_row'] .= _theme_table_cell($cell, TRUE);
   }
@@ -77,9 +77,9 @@ function novo_reports_preprocess_body_canvassing_report(&$vars) {
   $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
   $title = strip_tags($vars['title']);
   if ($title != "No group") {
-    $title = t("%name group", ["%name" => $title]);
+    $title = t("%name", ["%name" => $title]);
   }
-  $vars['title'] = '<div style="color: ' . $color . '">' . $title . '</div>';
+  $vars['title'] = '<div style="background-color: ' . $color . '">' . $title . '</div>';
 }
 
 /**
@@ -160,6 +160,11 @@ function novo_reports_preprocess_body_report_nametag(&$vars) {
       'parent' => implode("", $parent_guardian_values),
       'pickup_contacts' => implode("", $pickup_contacts_values),
     ];
+
+    $data['dismissal_class'] = "nametag-dismissal-" . preg_replace("/[^a-zA-Z0-9]/", "-", strtolower($data['dismissal']));
+    if ($data['dismissal_class'] == "nametag-dismissal-picked-up") {
+      $data['dismissal_style'] = (isset($data['canvassing_group_color']) && !empty($data['canvassing_group_color'])) ? "color:" . $data['canvassing_group_color'] : "";
+    }
 
     $rendered_kid_date = theme("novo_reports_nametag_kid", ['data' => $data]);
     $vars['themed_rows'][$col_num][] = $rendered_kid_date;

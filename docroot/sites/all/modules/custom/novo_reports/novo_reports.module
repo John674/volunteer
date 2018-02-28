@@ -84,8 +84,16 @@ function novo_reports_views_pre_render(&$view) {
     return TRUE;
   }
 
-  if ($view->name == 'enrollment_report') {
+  if ($view->name == 'children_allergy_report') {
+    // Pure distinct.
+    $tmp_result = [];
+    foreach ($view->result as $key => $row) {
+      if (!isset($tmp_result[$row->node_field_data_field_p_kid_name_nid])) {
+        $tmp_result[$row->node_field_data_field_p_kid_name_nid] = $row;
+      }
+    }
 
+    $view->result = $tmp_result;
   }
 
   if ($view->name == 'enrollment_report') {

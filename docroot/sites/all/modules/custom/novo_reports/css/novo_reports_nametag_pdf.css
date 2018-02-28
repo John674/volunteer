@@ -11,7 +11,7 @@
   height: 3.5in;
   font-size: 0.1458in;
   text-align: center;
-  /*border: 1px solid gray;*/
+  border: 1px solid gray;
   font-family: sans-serif;
 }
 .nametag-row {
@@ -54,6 +54,12 @@
 }
 .nametag-dismissal {
   padding-top: 0.36in;
+}
+.nametag-dismissal-walked-home {
+  color: #84527e;
+}
+.nametag-dismissal-alone-walk {
+  color: #ad7200;
 }
 .nametag-canvassing {
   font-size: 0.1667in;

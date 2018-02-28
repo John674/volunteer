@@ -135,3 +135,8 @@
   top: 0px;
   padding: 3px 6px;
 }
+.view-roster-report .field-collection-item-field-phone,
+.view-children-active-report .field-collection-item-field-phone,
+#views-form-canvassing-report-page .field-collection-item-field-phone{
+  display: inline-block;
+}

@@ -12,7 +12,9 @@
           <?php print $cia_data['title']; ?>
         </div>
         <div class="col-md-3">
-          <?php print $cia_data['status_label']; ?>
+            <span data-toggle="tooltip" data-placement="left" title="<?php print $cia_data['error']?>">
+                <?php print $cia_data['status_label']; ?>
+            </span>
         </div>
         <div class="col-md-3">
           <?php if (isset($cia_data['status_buttons'])): ?>
