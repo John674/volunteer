@@ -83,8 +83,18 @@ function novo_application_update_status($node, $status = 0) {
       $node->field_app_status[$lang][0]['tid'] = $status_tid;
       node_save($node);
       drupal_set_message(t("Status has been changed"));
-      if ($status && function_exists("novo_mail_app_approved")) {
-        novo_mail_app_approved($node->nid);
+      if ($status) {
+        if (function_exists("novo_mail_app_approved")) {
+          novo_mail_app_approved($node->nid);
+        }
+        if (function_exists("novo_mail_app_admin_approved")) {
+          novo_mail_app_admin_approved($node->nid);
+        }
+      }
+      else {
+        if (function_exists("novo_mail_app_admin_not_approved")) {
+          novo_mail_app_admin_not_approved($node->nid);
+        }
       }
     }
     else {

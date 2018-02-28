@@ -18,4 +18,4 @@
     All tasks related to that volunteer will automatically be removed from the
     Background Tasks list.
     You can review his address data yourself, or resend request email to him on
-    site volunteer.novoministries.org</p>
+    site <?php print $params['site_link']; ?></p>

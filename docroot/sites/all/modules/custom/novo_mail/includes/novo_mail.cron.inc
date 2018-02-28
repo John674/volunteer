@@ -149,7 +149,8 @@ function novo_mail_app_not_completed_to_volunteer_24_queue_worker($data) {
 function novo_mail_app_becoming_of_age_queue_worker($data) {
   // Send email.
   $nid = $data['nid'];
-  $result = novo_mail_send($nid, 'novo_mail_app_becoming_of_age_to_admin');
+  $additional_params = ['dob_date' => $data['dob_date']];
+  $result = novo_mail_send($nid, 'novo_mail_app_becoming_of_age_to_admin', $additional_params);
 
   if ($result && isset($result['result']) && $result['result']) {
     novo_mail_add_status_to_storage('novo_mail_app_becoming_of_age_to_admin', $nid);

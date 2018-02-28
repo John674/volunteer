@@ -26,6 +26,7 @@ function novo_mail_send($nid, $key, $additional_params = []) {
   }
 
   $params = novo_mail_app_get_volunteer_params($nid);
+  $params['site_link'] = url("<front>", ['absolute' => TRUE]);
   $result = NULL;
   if ($params) {
     $params = array_merge($params, $additional_params);
@@ -132,12 +133,14 @@ WHERE
 function novo_mail_app_get_becoming_of_age_nids() {
   novo_master_set_default_mysql_timezone();
   $mail_key = "novo_mail_app_becoming_of_age_to_admin";
-  $sql = "SELECT dob.entity_id AS nid
+  $sql = "SELECT 
+            dob.entity_id AS nid,
+            FROM_UNIXTIME(dob.field_dob_value, '%m/%d/%Y') AS dob_date
           FROM field_data_field_dob AS dob
           JOIN field_data_field_reference_request_parents AS parents ON parents.entity_id = dob.entity_id
           LEFT JOIN novo_mail AS nm ON nm.nid = dob.entity_id AND nm.mail_key = :mail_key
           WHERE 
-            FLOOR((UNIX_TIMESTAMP() - dob.field_dob_value) / (60*60*24*365)) >= 18 AND 
+            FLOOR((UNIX_TIMESTAMP() - dob.field_dob_value) / (60*60*24*365)) >= 18 AND
             (nm.id IS NULL OR nm.mail_key <> :mail_key)";
   return db_query($sql, [":mail_key" => $mail_key])->fetchAll();
 }

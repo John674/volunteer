@@ -6,7 +6,7 @@
  */
 ?>
 
-<p><?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?> is turning 18 on (date). </p>
+<p><?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?> is turning 18 on (<?php print $params['dob_date']; ?>). </p>
 
 <p>Verify if the volunteer is active. Mark the
     volunteer's name accordingly in the database. If active, a birthday email
