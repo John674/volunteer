@@ -7,8 +7,7 @@
 ?>
 
 <p>
-    Hi, <?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>
-    ,</p>
+    Hi, <?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>,</p>
 
 <p>Your volunteer application with Novo has been approved! A Novo staff member
     will be contacting you shortly to schedule your face-to-face meeting.</p>

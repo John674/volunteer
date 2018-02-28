@@ -7,8 +7,7 @@
 ?>
 
 <p>
-    Hi, <?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>
-    ,</p>
+    Hi, <?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>,</p>
 
 <p>Thank you for submitting your volunteer application! We have begun processing
     your information and we will be contacting you soon with more details.</p>

@@ -214,16 +214,16 @@ function novo_mail_app_approved($nid) {
 }
 
 /**
- * Email: CIA application was approved. @TODO: add to CIA.
+ * Email: To Manager, Application Approved, need a call.
  */
-function novo_mail_app_cia_approved($nid) {
+function novo_mail_app_admin_approved($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_approved_to_admin');
 }
 
 /**
- * Email: CIA application was not approved. @TODO: add to CIA.
+ * Email: To Manager, Application Not Approved, need a call.
  */
-function novo_mail_app_cia_not_approved($nid) {
+function novo_mail_app_admin_not_approved($nid) {
   novo_mail_add_to_queue($nid, 'novo_mail_app_not_approved_to_admin');
 }
 

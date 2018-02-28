@@ -5,7 +5,7 @@
  * Email template.
  */
 ?>
-<p> Hello <?php print $params['ref_name']; ?></p>
+<p> Hello, <?php print $params['ref_name']; ?>,</p>
 
 <p>
   <?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>
@@ -21,6 +21,6 @@
 </p>
 
 <p>If you have any questions, please contact us at 405.208.4255 or by email at
-    volunteer@novoministries.org</p>
+  <?php print NOVO_MAIL_BASE_EMAIL_FOR_REPLACE_TEMPLATE; ?></p>
 
 <p>Thank you for your time and help! Novo Staff Team</p>

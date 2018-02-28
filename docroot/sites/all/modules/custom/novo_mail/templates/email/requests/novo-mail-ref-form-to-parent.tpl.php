@@ -6,7 +6,7 @@
  */
 ?>
 
-<p>Dear <?php print $params['ref_name']; ?></p>
+<p>Dear <?php print $params['ref_name']; ?>,</p>
 
 <p><?php print $params['app_first_name']; ?> <?php print $params['app_last_name']; ?>
     has applied to volunteer with our organization. All volunteers under 18
