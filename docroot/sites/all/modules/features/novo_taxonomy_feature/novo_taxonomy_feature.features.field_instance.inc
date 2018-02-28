@@ -54,11 +54,16 @@ function novo_taxonomy_feature_field_default_field_instances() {
       'cell_margin' => 1,
       'cell_width' => 10,
       'columns' => 16,
-      'default_colors' => '#AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46
-#42D692,#16A765,#7BD148,#B3DC6C,#FBE983
-#92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF
-#B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2
-#CD74E6,#A47AE2,#008080,#800020',
+      'default_colors' => '#FF0000,
+#0044FE,
+#009E00,
+#FFF000,
+#F38F36,
+#96C551,
+#64CED1,
+#852723,
+#84527E,
+#AD7200',
       'palette' => '',
       'show_buttons' => FALSE,
       'show_input' => FALSE,
@@ -108,11 +113,10 @@ function novo_taxonomy_feature_field_default_field_instances() {
       'cell_margin' => 1,
       'cell_width' => 10,
       'columns' => 16,
-      'default_colors' => '#AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46
-#42D692,#16A765,#7BD148,#B3DC6C,#FBE983
-#92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF
-#B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2
-#CD74E6,#A47AE2,#008080,#800020',
+      'default_colors' => '#FF0000,
+#0044FE,
+#009E00,
+#FFF000',
       'palette' => '',
       'show_buttons' => FALSE,
       'show_input' => FALSE,

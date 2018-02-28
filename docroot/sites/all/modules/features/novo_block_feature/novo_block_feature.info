@@ -1,7 +1,7 @@
 name = Novo Block feature
 core = 7.x
 package = Novo
-version = 7.x-1.9
+version = 7.x-1.10
 dependencies[] = ctools
 dependencies[] = fe_block
 dependencies[] = menu
@@ -22,4 +22,3 @@ features[variable][] = menu_parent_webform
 features[variable][] = node_options_webform
 features[variable][] = node_preview_webform
 features[variable][] = node_submitted_webform
-features[webform][] = contact_us
