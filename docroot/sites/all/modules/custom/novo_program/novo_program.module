@@ -28,6 +28,9 @@ function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_i
         $pc[$j]['#prefix'] = '<div class="field-p-kids-pickup-contacts-wrapper">';
         $pc[$j]['#suffix'] = '</div>';
         $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
+        if (empty($pc[$j]['field_pc_full_name'][$pc[$j]['field_pc_full_name']['#language']][0]['value']['#default_value'])) {
+          $pc[$j]['field_pc_full_name'][$pc[$j]['field_pc_full_name']['#language']][0]['value']['#attributes']['autofocus'] = 'autofocus';
+        }
       }
 
       // Limit to max 3 pickup_contacts.
