@@ -104,9 +104,6 @@ html {
     margin-left: auto;
     margin-right: auto;
 }
-.page-user-register .novo-login-form{
-    max-width: 700px;
-}
 
 .novo-login-form .form-item{
     position: relative;
@@ -302,16 +299,12 @@ body.front .novo-login-form .form-actions a,
 body.front .novo-login-form .form-actions ul li:first-child a {
     margin-top: 3px;
 }
-body.page-user-register .novo-login-form .form-actions a.btn-login,
-body.page-user-password .novo-login-form .form-actions a{
-    margin: 0;
-    padding: 7px 12px;
-    background: #EC1E24;
-    color: #FFFFFF;
-}
+
 body.page-user-password .novo-login-form .form-actions a:nth-child(2){
     margin-left: 20px;
 }
-.novo-login-form .btn-login {
-    margin-right: 0;
+
+
+.novo-login-form .link-login {
+    margin-left: 0px!important;
 }
