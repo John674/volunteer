@@ -156,22 +156,42 @@ function novo_program_node_update($node) {
  * Post save callback for class node.
  */
 function novo_program_node_post_update($node) {
-  // Update programm name in class was updated.
+  // Update programm name and attendance name when class name was updated.
   $query = db_select("field_data_field_program_class_name", "cn");
-  $query->addField("cn", "entity_id");
+  $query->addField("cn", "entity_id", "program_entity_id");
+  $query->addField("pn", "entity_id", "attendance_entity_id");
   $query->condition("cn.bundle", "program");
   $query->condition("cn.field_program_class_name_target_id", $node->nid);
-  $query->join("field_data_field_attendance_program_name", "pn", "pn.field_attendance_program_name_target_id = cn.entity_id");
-  $query->addField("pn", "entity_id");
-  $nids = $query->execute()->fetchAllKeyed();
-  $nids = array_merge($nids, array_keys($nids));
-  if (!empty($nids)) {
-    $nodes = node_load_multiple($nids, [], TRUE);
-    foreach ($nodes as $node) {
-      $node->title = "%AutoEntityLabel%";
-      node_save($node);
-      cache_clear_all("field:node:{$node->nid}", 'cache_field');
-      entity_get_controller('node')->resetCache(array($node->nid));
+  $query->leftJoin("field_data_field_attendance_program_name", "pn", "pn.field_attendance_program_name_target_id = cn.entity_id");
+  $rows = $query->execute()->fetchAll();
+
+  if (!empty($rows)) {
+    $program_nids = [];
+    $attendance_nids = [];
+    // We redistribute nids by types because we need update program nodes first and then attendance nodes.
+    foreach($rows as $value){
+      $program_nids[$value->program_entity_id] = $value->program_entity_id;
+      $attendance_nids[$value->attendance_entity_id] = $value->attendance_entity_id;
+    }
+
+    if (!empty($program_nids)) {
+      $program_nodes = node_load_multiple(array_keys($program_nids), [], TRUE);
+      foreach ($program_nodes as $program_node) {
+        $program_node->title = "%AutoEntityLabel%";
+        node_save($program_node);
+        cache_clear_all("field:node:{$program_node->nid}", 'cache_field');
+        entity_get_controller('node')->resetCache(array($program_node->nid));
+      }
+    }
+
+    if (!empty($attendance_nids)) {
+      $attendance_nodes = node_load_multiple(array_keys($attendance_nids), [], TRUE);
+      foreach ($attendance_nodes as $attendance_node) {
+        $attendance_node->title = "%AutoEntityLabel%";
+        node_save($attendance_node);
+        cache_clear_all("field:node:{$attendance_node->nid}", 'cache_field');
+        entity_get_controller('node')->resetCache(array($attendance_node->nid));
+      }
     }
   }
 }
