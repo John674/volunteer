@@ -592,33 +592,22 @@ function novo_master_set_default_mysql_timezone() {
  * Implements hook_node_presave().
  */
 function novo_master_node_presave($node) {
-  if ($node->type == 'kids') {
-    if ((strpos($node->title, '’') !== FALSE)) {
-      $node->title = str_replace('’', '\'', $node->title);
-    }
-    drupal_register_shutdown_function('_novo_master_node_kids_presave', $node);
-  }
-}
+  // Change apostrophe ’ to ' in ALL text fields.
+  $fields = field_info_instances("node", $node->type);
+  $available_widget_types = ['text_textarea', 'text_textfield'];
 
-/**
- * Change apostrophe \’ to \' in name fields.
- */
-function _novo_master_node_kids_presave($node) {
-  $name_fields = [
-    'field_first_name',
-    'field_last_name',
-    'field_goes_by',
-    'field_middle_name',
-  ];
-  foreach ($name_fields as $field) {
-    if (isset($node->{$field})) {
-      $name = $node->{$field}[$node->language][0]['value'];
-      if (strpos($name, '’') !== FALSE) {
-        $node->{$field}[$node->language][0]['value'] = str_replace('’', '\'', $name);
-        $info = field_info_field($field);
-        $fields = [$info['id']];
-        field_sql_storage_field_storage_write('node', $node, 'update', $fields);
-        cache_clear_all("field:node:{$node->nid}", 'cache_field');
+  if (isset($node->title)) {
+    $node->title = str_replace("’", "'", $node->title);
+  }
+
+  foreach($fields as $field_name => $field_data) {
+    if (in_array($field_data['widget']['type'], $available_widget_types)) {
+      if (isset($node->{$field_name}[$node->language])) {
+        foreach($node->{$field_name}[$node->language] as &$field) {
+          if (isset($field['value']) && is_string($field['value'])) {
+            $field['value'] = str_replace("’", "'", $field['value']);
+          }
+        }
       }
     }
   }
