@@ -190,34 +190,6 @@ function novo_applications_get_last_date_serving_formula() {
   novo_master_set_default_mysql_timezone();
 
   $formula = <<<SQL
-  SELECT MAX( CASE
-       WHEN ((SELECT UNIX_TIMESTAMP(MAX(ad.field_attendance_date_value))
-             FROM field_data_field_attendance_volunteer_list AS av
-               INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
-             WHERE av.field_attendance_volunteer_list_target_id = node.nid) > 
-             (SELECT MAX(md.field_mentoring_date_value)
-              FROM field_data_field_volunteer_mentor_name AS mv
-               INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
-               INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
-              WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer')) OR 
-              (SELECT MAX(md.field_mentoring_date_value)
-                     FROM field_data_field_volunteer_mentor_name AS mv
-                       INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
-                       INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
-                     WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer') IS NULL
-       THEN (SELECT UNIX_TIMESTAMP(MAX(ad.field_attendance_date_value))
-              FROM field_data_field_attendance_volunteer_list AS av                                                                                                                                               INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
-             WHERE av.field_attendance_volunteer_list_target_id = node.nid)
-       ELSE (SELECT MAX(md.field_mentoring_date_value)
-             FROM field_data_field_volunteer_mentor_name AS mv
-               INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
-               INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
-             WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer')
-       END)
-SQL;
-
-
-  $formula = <<<SQL
   SELECT CASE
        WHEN ((SELECT UNIX_TIMESTAMP(MAX(ad.field_attendance_date_value))
              FROM field_data_field_attendance_volunteer_list AS av
@@ -243,7 +215,6 @@ SQL;
              WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer')
        END
 SQL;
-
 
   return "(" . $formula . ")";
 }

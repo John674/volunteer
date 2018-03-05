@@ -166,7 +166,7 @@ function novo_program_node_post_update($node) {
     $program_nids = [];
     $attendance_nids = [];
     // We redistribute nids by types because we need update program nodes first and then attendance nodes.
-    foreach($rows as $value){
+    foreach ($rows as $value) {
       $program_nids[$value->program_entity_id] = $value->program_entity_id;
       $attendance_nids[$value->attendance_entity_id] = $value->attendance_entity_id;
     }
