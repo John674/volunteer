@@ -648,7 +648,6 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
           $form['actions']['submit']['#weight'] = 10;
         }
 
-
         if ($form_id == 'user_register_form' || $form_id == 'user_pass') {
           $login_txt = '<span class="icon glyphicon glyphicon-log-in" aria-hidden="true"></span>  ' . t('Log in');
           $form['actions']['login']['#markup'] = l($login_txt, '/', [

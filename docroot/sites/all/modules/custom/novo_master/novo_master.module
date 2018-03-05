@@ -600,10 +600,10 @@ function novo_master_node_presave($node) {
     $node->title = str_replace("’", "'", $node->title);
   }
 
-  foreach($fields as $field_name => $field_data) {
+  foreach ($fields as $field_name => $field_data) {
     if (in_array($field_data['widget']['type'], $available_widget_types)) {
       if (isset($node->{$field_name}[$node->language])) {
-        foreach($node->{$field_name}[$node->language] as &$field) {
+        foreach ($node->{$field_name}[$node->language] as &$field) {
           if (isset($field['value']) && is_string($field['value'])) {
             $field['value'] = str_replace("’", "'", $field['value']);
           }

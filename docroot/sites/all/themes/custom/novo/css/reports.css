@@ -133,7 +133,9 @@
 .view-volunteer-activity-report .views-widget-filter-novo_application_active_status_on_date .views-widget .novo-reports-filter-on-date-icon {
   margin-top: 0px;
   top: 0px;
-  padding: 3px 6px;
+  position: absolute;
+  right: 0px;
+  padding: 8px 20px 7px 10px;
 }
 .view-roster-report .field-collection-item-field-phone,
 .view-children-active-report .field-collection-item-field-phone,
