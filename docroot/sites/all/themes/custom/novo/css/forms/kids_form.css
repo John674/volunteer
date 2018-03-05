@@ -5,7 +5,6 @@
   margin-right: 10px;
   margin-top: 5px;
 }
-
 .node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-first-name,
 .node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-last-name,
 .node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-relation {
@@ -13,4 +12,7 @@
   max-width: 300px;
   margin-right: 10px;
   margin-bottom: 0px;
+}
+.node-kids-form .field-name-field-parent-guardian .field-name-field-phone .field-multiple-table thead {
+  display: none;
 }
