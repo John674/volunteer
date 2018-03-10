@@ -141,25 +141,60 @@ function novo_applications_get_app_active_status_formula($on_date = NULL) {
     $on_date = "UNIX_TIMESTAMP()";
   }
 
+//  $formula = <<<SQL
+//IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+//    FROM {field_data_field_attendance_volunteer_list} AS av
+//    INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+//    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6 OR
+//    (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
+//      FROM field_data_field_volunteer_mentor_name AS mv
+//        INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+//        INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+//      WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer') <= 6, 'Current',
+//      IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+//      FROM {field_data_field_attendance_volunteer_list} AS av
+//      INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+//      WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18 OR
+//      (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
+//      FROM field_data_field_volunteer_mentor_name AS mv
+//        INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+//        INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+//      WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer') <= 18, 'Lapsed', 'Inactive'))
+//SQL;
+
   $formula = <<<SQL
-IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
-    FROM {field_data_field_attendance_volunteer_list} AS av 
-    INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
-    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 6 OR 
-    (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
-      FROM field_data_field_volunteer_mentor_name AS mv
-        INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
-        INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
-      WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer') <= 6, 'Current', 
-      IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
-      FROM {field_data_field_attendance_volunteer_list} AS av 
+  
+IF((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+    FROM field_data_field_attendance_volunteer_list AS av
       INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
-      WHERE av.field_attendance_volunteer_list_target_id = {node}.nid) <= 18 OR 
-      (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
-      FROM field_data_field_volunteer_mentor_name AS mv
-        INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
-        INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
-      WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer') <= 18, 'Lapsed', 'Inactive'))
+    WHERE av.field_attendance_volunteer_list_target_id = node.nid AND UNIX_TIMESTAMP(ad.field_attendance_date_value) <= $on_date) < 0 
+    OR
+    (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
+    FROM field_data_field_volunteer_mentor_name AS mv
+      INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+      INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+    WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer' AND UNIX_TIMESTAMP(md.field_mentoring_date_value) <= $on_date) < 0, 'Inactive',  
+  
+    IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+         FROM {field_data_field_attendance_volunteer_list} AS av 
+           INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+         WHERE av.field_attendance_volunteer_list_target_id = {node}.nid AND UNIX_TIMESTAMP(ad.field_attendance_date_value) <= $on_date) <= 6 
+         OR 
+         (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
+          FROM field_data_field_volunteer_mentor_name AS mv
+            INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+            INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+          WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer' AND UNIX_TIMESTAMP(md.field_mentoring_date_value) <= $on_date) <= 6, 'Current', 
+        IF ((SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
+             FROM {field_data_field_attendance_volunteer_list} AS av 
+               INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+             WHERE av.field_attendance_volunteer_list_target_id = {node}.nid AND UNIX_TIMESTAMP(ad.field_attendance_date_value) <= $on_date) <= 18 OR 
+            (SELECT (($on_date - max(md.field_mentoring_date_value)) / 60 / 60 / 24 / 30)
+             FROM field_data_field_volunteer_mentor_name AS mv
+               INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+               INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+             WHERE mv.field_volunteer_mentor_name_target_id = node.nid AND mt.field_mentor_type_value = 'Volunteer' AND UNIX_TIMESTAMP(md.field_mentoring_date_value) < $on_date) <= 18, 'Lapsed', 'Inactive'))
+)
 SQL;
 
   return "(" . $formula . ")";
