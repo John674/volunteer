@@ -484,7 +484,7 @@ function novo_content_strongarm_feature_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '26',
+          'weight' => '25',
         ),
       ),
       'display' => array(),
