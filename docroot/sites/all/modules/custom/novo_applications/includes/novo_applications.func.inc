@@ -213,7 +213,7 @@ function novo_applications_get_app_active_status_formula_where($on_date = NULL) 
   $formula = "SELECT (($on_date - UNIX_TIMESTAMP(max(ad.field_attendance_date_value))) / 60 / 60 / 24 / 30)
     FROM {field_data_field_attendance_volunteer_list} AS av 
     INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
-    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid";
+    WHERE av.field_attendance_volunteer_list_target_id = {node}.nid AND UNIX_TIMESTAMP(ad.field_attendance_date_value) <= $on_date";
 
   return "((" . $formula . ") >= 0 OR (" . $formula . ") IS NULL)";
 }
