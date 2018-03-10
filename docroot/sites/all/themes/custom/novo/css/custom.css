@@ -474,8 +474,3 @@ body.page-user-edit .tabs--primary{
 .field-name-field-attend-church-reg label > .form-required{
   display: none;
 }
-
-.navbar-nav .dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-}
