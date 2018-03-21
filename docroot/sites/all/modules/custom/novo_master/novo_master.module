@@ -129,6 +129,7 @@ function novo_master_add_breadcrumb_on_dyn_views($vars, $type, $list_title = NUL
  */
 function novo_master_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+
   // Disable autofill form for browsers.
   $form['#attributes']['autocomplete'] = 'off';
 
@@ -158,11 +159,23 @@ function novo_master_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_menu_alter().
  */
 function novo_master_menu_alter(&$items) {
+//  kpr($items);
+//  die();
   $items['node/%node/view']['access callback'] = 'novo_master_disable_node_view';
   $items['node/%node/view']['access arguments'] = [1];
-  $items['user']['access callback'] = 'novo_master_disable_user_view';
+  //$items['user']['access callback'] = 'novo_master_disable_user_view';
   $items['user/%user']['access callback'] = 'novo_master_disable_user_view';
+  $items['user/%user/edit']['access callback'] = 'novo_master_user_edit_access';
   $items['node/add']['access callback'] = 'novo_master_disable_node_add_page';
+}
+
+
+function novo_master_user_edit_access($account) {
+  if (isset($_GET['pass-reset-token'])) {
+    return user_edit_access($account);
+  } else {
+    return function_exists("userprotect_user_edit_access") ? userprotect_user_edit_access($account) : user_edit_access($account);
+  }
 }
 
 /**
@@ -195,6 +208,7 @@ function novo_master_disable_node_add_page() {
  * Disable user view link for volunteers.
  */
 function novo_master_disable_user_view() {
+  return TRUE;
   $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
   if (user_has_role($role->rid)) {
     return FALSE;

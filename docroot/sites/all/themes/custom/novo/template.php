@@ -171,8 +171,8 @@ function novo_preprocess_page(&$variables) {
       }
     }
     if (in_array('page__user__reset', $variables['theme_hook_suggestions'])) {
-      $variables['page']['content']['system_main']['main']['#prefix'] = '<div class="panel panel-default col-md-6 col-md-offset-3"><div class="panel-body">';
-      $variables['page']['content']['system_main']['main']['#suffix'] = '</div></div>';
+      $variables['page']['content']['system_main']['#prefix'] = '<div class="panel panel-default col-md-6 col-md-offset-3"><div class="panel-body">';
+      $variables['page']['content']['system_main']['#suffix'] = '</div></div>';
     }
   }
 
@@ -715,6 +715,7 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
   if (isset($form['field_dob'])) {
     $form['field_dob'][$lang][0]['#theme_wrappers'][0] = 'date_form_element__date_of_birthday';
   }
+
 }
 
 /**

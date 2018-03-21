@@ -9,7 +9,9 @@
  * Implements hook__FORM_ID_form_alter().
  */
 function novo_account_form_user_profile_form_alter(&$form, &$form_state) {
-  $form['account']['name']['#access'] = FALSE;
+  global $user;
+  $form['account']['name']['#access'] = TRUE;
+  $form['actions']['cancel']['#access'] = ($user->uid == 1) ? TRUE: FALSE;
 }
 
 /**
@@ -17,11 +19,14 @@ function novo_account_form_user_profile_form_alter(&$form, &$form_state) {
  */
 function novo_account_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
   if (isset($form['#user']->uid) && $form['#user']->uid == 1 && $user->uid != 1) {
     drupal_access_denied();
     module_invoke_all('exit');
     drupal_exit();
+  }
+
+  if ($form_id == "user_profile_form" && user_has_role(NOVO_MASTER_ROLE_VOLUNTEER)) {
+    $form['account']['mail']['#attributes']['disabled'] = 'disabled';
   }
 
   if (($form_id == "user_profile_form" || $form_id == "user_register_form")) {

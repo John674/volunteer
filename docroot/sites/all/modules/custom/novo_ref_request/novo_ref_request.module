@@ -188,7 +188,7 @@ function novo_ref_request_preprocess_node(&$variables) {
     }
 
     $link = novo_ref_request_generate_hashed_link($variables['nid']);
-    kpr("This is test link which sent via email: " . $link);
+    //kpr("This is test link which sent via email: " . $link);
   }
 }
 
