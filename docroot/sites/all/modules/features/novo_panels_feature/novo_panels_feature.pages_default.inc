@@ -166,8 +166,7 @@ function novo_panels_feature_default_page_manager_pages() {
           'name' => 'role',
           'settings' => array(
             'rids' => array(
-              0 => 5,
-              1 => 3,
+              0 => 3,
             ),
           ),
           'context' => 'logged-in-user',
@@ -300,6 +299,98 @@ function novo_panels_feature_default_page_manager_pages() {
   $display->panels['center'][0] = 'new-092401cb-9675-46b2-9f2f-6cfa86a250de';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-092401cb-9675-46b2-9f2f-6cfa86a250de';
+  $handler->conf['display'] = $display;
+  $page->default_handlers[$handler->name] = $handler;
+  $handler = new stdClass();
+  $handler->disabled = FALSE; /* Edit this to true to make a default handler disabled initially */
+  $handler->api_version = 1;
+  $handler->name = 'page_frontpage__reviever';
+  $handler->task = 'page';
+  $handler->subtask = 'frontpage';
+  $handler->handler = 'panel_context';
+  $handler->weight = 3;
+  $handler->conf = array(
+    'title' => 'Reviever',
+    'no_blocks' => 0,
+    'pipeline' => 'standard',
+    'body_classes_to_remove' => '',
+    'body_classes_to_add' => '',
+    'css_id' => '',
+    'css' => '',
+    'contexts' => array(
+      0 => array(
+        'identifier' => 'User',
+        'keyword' => 'user',
+        'name' => 'user',
+        'type' => 'current',
+        'uid' => '',
+        'id' => 1,
+      ),
+    ),
+    'relationships' => array(),
+    'name' => 'reviever',
+    'access' => array(
+      'logic' => 'and',
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 5,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    ),
+  );
+  $display = new panels_display();
+  $display->layout = 'flexible';
+  $display->layout_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'center' => NULL,
+    ),
+  );
+  $display->cache = array();
+  $display->title = '';
+  $display->uuid = 'b813ea3a-ff82-479f-9373-e4df3dc8e8a4';
+  $display->storage_type = 'page_manager';
+  $display->storage_id = 'page_frontpage__reviever';
+  $display->content = array();
+  $display->panels = array();
+  $pane = new stdClass();
+  $pane->pid = 'new-59e7af25-4616-4f48-80ed-eb148329b88a';
+  $pane->panel = 'center';
+  $pane->type = 'frontpage_admin_redirect';
+  $pane->subtype = 'frontpage_admin_redirect';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'context' => 'context_user_1',
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+    'redirect_url' => 'kids',
+    'form_build_id' => 'form-yQ57DqVtrHhuyPa6GGy_DI1djJdKzOi-YK1ylFuPBv0',
+    'form_token' => 'zKsMi7X6NRVqp7UjvX68CV_URV0BDSFrKawV-xHpnz4',
+    'form_id' => 'novo_frontpage_admin_redirect_edit_form',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 0;
+  $pane->locks = array();
+  $pane->uuid = '59e7af25-4616-4f48-80ed-eb148329b88a';
+  $display->content['new-59e7af25-4616-4f48-80ed-eb148329b88a'] = $pane;
+  $display->panels['center'][0] = 'new-59e7af25-4616-4f48-80ed-eb148329b88a';
+  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['frontpage'] = $page;

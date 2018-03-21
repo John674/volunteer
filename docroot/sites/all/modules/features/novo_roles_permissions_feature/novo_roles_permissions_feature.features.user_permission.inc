@@ -74,15 +74,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'administer userprotect'.
-  $permissions['administer userprotect'] = array(
-    'name' => 'administer userprotect',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'userprotect',
-  );
-
   // Exported permission: 'administer users'.
   $permissions['administer users'] = array(
     'name' => 'administer users',
@@ -110,35 +101,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'entity_print',
-  );
-
-  // Exported permission: 'change own e-mail'.
-  $permissions['change own e-mail'] = array(
-    'name' => 'change own e-mail',
-    'roles' => array(
-      'Reviewer' => 'Reviewer',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'userprotect',
-  );
-
-  // Exported permission: 'change own openid'.
-  $permissions['change own openid'] = array(
-    'name' => 'change own openid',
-    'roles' => array(
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'userprotect',
-  );
-
-  // Exported permission: 'change own password'.
-  $permissions['change own password'] = array(
-    'name' => 'change own password',
-    'roles' => array(
-      'Reviewer' => 'Reviewer',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'userprotect',
   );
 
   // Exported permission: 'change own username'.
@@ -510,16 +472,6 @@ function novo_roles_permissions_feature_user_default_permissions() {
       'Siteadmin' => 'Siteadmin',
     ),
     'module' => 'novo_applications',
-  );
-
-  // Exported permission: 'edit own account'.
-  $permissions['edit own account'] = array(
-    'name' => 'edit own account',
-    'roles' => array(
-      'Reviewer' => 'Reviewer',
-      'Siteadmin' => 'Siteadmin',
-    ),
-    'module' => 'userprotect',
   );
 
   // Exported permission: 'edit own application content'.
