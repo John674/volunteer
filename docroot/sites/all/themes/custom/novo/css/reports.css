@@ -77,7 +77,7 @@
   margin-top: 25px;
 }
 .novo-report-general-report-reset-btn {
-  margin-top: 22px;
+  margin-top: 27px;
 }
 .novo-reports-general-header-row {
   font-family: "ProximaNovaBold";
@@ -105,21 +105,18 @@
   top: 0px;
   margin-top: 22px;
 }
-.novo-report-general-report-form  #edit-novo-reports-filters {
+.novo-report-general-report-form #edit-novo-reports-filters {
   margin-bottom: 10px;
 }
 .view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian {
   margin-top: 10px;
 }
-
 .view-canvassing-report .views-field-field-parent-guardian .field-collection-item-field-parent-guardian:first-child {
   margin-top: 0px;
 }
-
 .group-title .placeholder {
   font-style: normal;
 }
-
 .form-item-novo-reports-filter-years select {
   width: 134px;
 }
@@ -130,6 +127,10 @@
   position: relative;
   width: 134px;
 }
+#edit-novo-reports-filters .form-item-novo-reports-filter-start-date,
+#edit-novo-reports-filters .form-item-novo-reports-filter-end-date {
+  position: relative;
+}
 .view-volunteer-activity-report .views-widget-filter-novo_application_active_status_on_date .views-widget .novo-reports-filter-on-date-icon {
   margin-top: 0px;
   top: 0px;
@@ -137,8 +138,16 @@
   right: 0px;
   padding: 8px 20px 7px 10px;
 }
+.novo-report-general-report-form .novo-reports-general-filter-date-icon {
+  margin-top: 25px;
+  margin-right: 5px;
+  top: 0px;
+  position: absolute;
+  right: 0px;
+  padding: 8px 20px 7px 10px;
+}
 .view-roster-report .field-collection-item-field-phone,
 .view-children-active-report .field-collection-item-field-phone,
-#views-form-canvassing-report-page .field-collection-item-field-phone{
+#views-form-canvassing-report-page .field-collection-item-field-phone {
   display: inline-block;
 }
