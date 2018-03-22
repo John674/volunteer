@@ -273,20 +273,23 @@ html {
 }
 body.front .novo-login-form .form-actions ul li:first-child a:hover,
 body.page-user-register .novo-login-form .form-actions a:hover,
-body.page-user-password .novo-login-form .form-actions a:hover {
+body.page-user-password .novo-login-form .form-actions a:hover,
+body.page-user .novo-login-form .form-actions a:hover{
     text-decoration: underline;
 }
 body.front .novo-login-form .form-actions ul li,
 body.page-user-register .novo-login-form .form-actions a,
 body.page-user-register .novo-login-form .form-actions button,
 body.page-user-password .novo-login-form .form-actions a,
-body.page-user-password .novo-login-form .form-actions button {
+body.page-user-password .novo-login-form .form-actions button,
+body.page-user .novo-login-form .form-actions a {
     margin-left: 20px;
 }
 body.front .novo-login-form .form-actions ul li:first-child a,
 body.front .novo-login-form .form-actions a,
 body.page-user-register .novo-login-form .form-actions a,
-body.page-user-password .novo-login-form .form-actions a {
+body.page-user-password .novo-login-form .form-actions a,
+body.page-user .novo-login-form .form-actions a{
     padding: 0;
     border: none;
     vertical-align: top;
