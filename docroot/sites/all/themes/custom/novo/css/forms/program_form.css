@@ -263,3 +263,10 @@
   margin-top: -10px;
   padding-top: 8px;
 }
+.node-program-form .field-p-dismissal select,
+.node-program-form .remove-button > button {
+  max-height: 25px;
+}
+.node-program-form .remove-button > button  > span.glyphicon-remove {
+  top: 1px!important;
+}

@@ -431,6 +431,14 @@ li.novo-leaf a {
 .form-item-field-p-canvassing-group-target-id-entityreference-filter {
    max-height: 25px;
 }
+.form-item-field-p-small-group-target-id-entityreference-filter,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter,
+.form-item-field-p-small-group-target-id-entityreference-filter button,
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button
+{
+  height: 34px;
+  max-height: 34px;
+}
 
 .form-item-field-p-small-group-target-id-entityreference-filter button,
 .form-item-field-p-canvassing-group-target-id-entityreference-filter button{
