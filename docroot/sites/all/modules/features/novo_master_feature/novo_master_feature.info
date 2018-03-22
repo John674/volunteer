@@ -1,7 +1,7 @@
 name = Novo master feature
 core = 7.x
 package = Novo
-version = 7.x-1.26
+version = 7.x-1.27
 dependencies[] = autoassignrole
 dependencies[] = chosen
 dependencies[] = ctools
@@ -52,6 +52,7 @@ features[variable][] = chosen_placeholder_text_single
 features[variable][] = chosen_search_contains
 features[variable][] = configurable_timezones
 features[variable][] = entity_print_wkhtmltopdf
+features[variable][] = ife_display
 features[variable][] = mail_system
 features[variable][] = mailsystem_theme
 features[variable][] = pdf_using_mpdf_dpi

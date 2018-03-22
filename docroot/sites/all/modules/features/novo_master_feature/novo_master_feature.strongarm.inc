@@ -153,6 +153,13 @@ function novo_master_feature_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ife_display';
+  $strongarm->value = '2';
+  $export['ife_display'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'mailsystem_theme';
   $strongarm->value = 'current';
   $export['mailsystem_theme'] = $strongarm;

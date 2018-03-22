@@ -148,21 +148,24 @@ function novo_preprocess_page(&$variables) {
         $pass_1 = &$variables['page']['content']['system_main']['account']['pass']['pass1'];
 
         $pass_1['#attributes']['placeholder'] = $pass_1['#title'];
-        $pass_1['#title'] = '';
+        $pass_1['#title_display'] = 'none';
+        //$pass_1['#title'] = '';
       }
 
       if (isset($variables['page']['content']['system_main']['account']['pass']['pass2'])) {
         $pass_2 = &$variables['page']['content']['system_main']['account']['pass']['pass2'];
 
         $pass_2['#attributes']['placeholder'] = $pass_2['#title'];
-        $pass_2['#title'] = '';
+        $pass_2['#title_display'] = 'none';
+        //$pass_2['#title'] = '';
       }
       if (isset($variables['page']['content']['system_main']['field_u_birthday']['und'][0])) {
         $date_of_birthday = &$variables['page']['content']['system_main']['field_u_birthday']['und'][0];
 
         $date_of_birthday['value']['date']['#attributes']['placeholder'] = $date_of_birthday['value']['date']['#title'];
 
-        $date_of_birthday['#title'] = '';
+        //$date_of_birthday['#title'] = '';
+        $date_of_birthday['#title_display'] = 'none';
         $date_of_birthday['value']['date']['#title'] = '';
         $date_of_birthday['value']['date']['#default_value'] = '';
         $date_of_birthday['value']['#date_title'] = '';
@@ -615,12 +618,14 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       $form['#attributes']['class'][] = 'novo-login-form';
       if (isset($form['pass'])) {
         $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-        $form['pass']['#title'] = '';
+        $form['pass']['#title_display'] = 'none';
+        //$form['pass']['#title'] = '';
       }
 
       if (isset($form['name'])) {
         $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-        $form['name']['#title'] = '';
+        $form['name']['#title_display'] = 'none';
+        //$form['name']['#title'] = '';
       }
 
       $form['help'] = [
@@ -675,7 +680,8 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
         if (array_key_exists($field, $form)) {
           if (isset($form[$field][$lang][0]['value'])) {
             $form[$field][$lang][0]['value']['#attributes']['placeholder'] = $form[$field][$lang][0]['#title'];
-            $form[$field][$lang][0]['value']['#title'] = '';
+            $form[$field][$lang][0]['value']['#title_display'] = 'none';
+            //$form[$field][$lang][0]['value']['#title'] = '';
           }
         }
       }
@@ -685,12 +691,14 @@ function novo_form_alter(&$form, &$form_state, &$form_id) {
       }
       if (isset($form['account']['mail'])) {
         $form['account']['mail']['#attributes']['placeholder'] = $form['account']['mail']['#title'];
-        $form['account']['mail']['#title'] = '';
+        $form['account']['mail']['#title_display'] = 'none';
+        //$form['account']['mail']['#title'] = '';
       }
     }
   }
   if (isset($form['field_mentoring_date'])) {
-    $form['field_mentoring_date'][$lang][0]['#title'] = '';
+    //$form['field_mentoring_date'][$lang][0]['#title'] = '';
+    $form['field_mentoring_date'][$lang][0]['#title_display'] = 'none';
   }
   $collection_fields = [
     'field_contact',

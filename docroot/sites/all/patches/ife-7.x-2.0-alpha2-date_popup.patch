@@ -1,0 +1,15 @@
+diff --git a/ife.module b/ife.module
+index 5e738b6..afa3e14 100644
+--- a/ife.module
++++ b/ife.module
+@@ -324,3 +324,10 @@ function ife_element_info_alter(&$types) {
+     }
+   }
+ }
++
++/**
++ *  Implements hook_date_popup_process_alter().
++ */
++function ife_date_popup_process_alter(&$element, &$form_state, $context) {
++  $element['#theme_wrappers'][] = 'ife_form_element';
++}
