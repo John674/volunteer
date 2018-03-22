@@ -131,6 +131,11 @@ function novo_reports_enrollment_report_get_data() {
   $select->condition("n_program.type", "program");
   $select->addField("n_program", "title", "program");
 
+  // Exclude Kids moved.
+  $select->leftJoin("field_data_field_p_kid_name", "p_kid_name", "p_kid_name.entity_id = p_kids_list.field_program_kids_list_value");
+  $select->leftJoin("field_data_field_moved", "moved", "moved.entity_id = p_kid_name.field_p_kid_name_target_id");
+  $select->condition("moved.field_moved_value", 1, '<>');
+
   $select->groupBy("p_kids_list.entity_id");
   $select->addTag('node_access');
   $select->orderBy("n_location.title");

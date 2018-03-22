@@ -2583,6 +2583,15 @@ function novo_views_feature_views_default_views() {
     6 => 0,
   );
   $handler->display->display_options['filters']['field_p_canvassing_group_target_id_entityreference_filter']['reference_display'] = 'canvassing_group:entityreference_1';
+  /* Filter criterion: Content: Moved (field_moved) */
+  $handler->display->display_options['filters']['field_moved_value']['id'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['table'] = 'field_data_field_moved';
+  $handler->display->display_options['filters']['field_moved_value']['field'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['filters']['field_moved_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_moved_value']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -9173,6 +9182,15 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['filters']['nid_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['nid_entityreference_filter']['reference_display'] = 'programms_list_ref_:entityreference_1';
   $handler->display->display_options['filters']['nid_entityreference_filter']['reference_arguments'] = '[field_program_year_year]/[field_program_location_target_id_entityreference_filter]';
+  /* Filter criterion: Content: Moved (field_moved) */
+  $handler->display->display_options['filters']['field_moved_value']['id'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['table'] = 'field_data_field_moved';
+  $handler->display->display_options['filters']['field_moved_value']['field'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['filters']['field_moved_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_moved_value']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -9715,6 +9733,15 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_p_small_group_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['field_p_small_group_target_id_entityreference_filter']['reference_display'] = 'small_groups:entityreference_1';
+  /* Filter criterion: Content: Moved (field_moved) */
+  $handler->display->display_options['filters']['field_moved_value']['id'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['table'] = 'field_data_field_moved';
+  $handler->display->display_options['filters']['field_moved_value']['field'] = 'field_moved_value';
+  $handler->display->display_options['filters']['field_moved_value']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['filters']['field_moved_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_moved_value']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
