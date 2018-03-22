@@ -639,6 +639,31 @@ function novo_master_node_presave($node) {
 }
 
 /**
+ * Implements hook_node_presave().
+ */
+function novo_master_user_presave(&$edit, $account, $category) {
+  // Change apostrophe ’ to ' in ALL text fields.
+  $fields = field_info_instances("user", "user");
+  $available_widget_types = ['text_textarea', 'text_textfield'];
+
+  if (isset($edit['name'])) {
+    $edit['name'] = str_replace("’", "'", $edit['name']);
+  }
+
+  foreach ($fields as $field_name => $field_data) {
+    if (in_array($field_data['widget']['type'], $available_widget_types)) {
+      if (isset($edit[$field_name][LANGUAGE_NONE])) {
+        foreach ($edit[$field_name][LANGUAGE_NONE] as &$field) {
+          if (isset($field['value']) && is_string($field['value'])) {
+            $field['value'] = str_replace("’", "'", $field['value']);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_ctools_plugin_directory().
  */
 function novo_master_ctools_plugin_directory($owner, $plugin_type) {
