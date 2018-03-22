@@ -7,7 +7,6 @@
   font-style: normal;
   font-weight: normal;
 }
-
 @font-face {
   font-family: "ProximaNovaBold";
   src: url("../fonts/ProximaNova/ProximaNovaBold/ProximaNovaBold.eot");
@@ -17,7 +16,6 @@
   font-style: normal;
   font-weight: normal;
 }
-
 @font-face {
   font-family: "ProximaNovaBlack";
   src: url("../fonts/ProximaNova/ProximaNovaBlack/ProximaNovaBlack.eot");
@@ -27,7 +25,6 @@
   font-style: normal;
   font-weight: normal;
 }
-
 @font-face {
   font-family: "BebasNeue";
   src: url('../fonts/BebasNeue/BebasNeue-webfont.eot');
@@ -37,48 +34,37 @@
   url('../fonts/BebasNeue/BebasNeue-webfont.svg#glyphicons_halflingsregular') format('svg');
 
 }
-
 body {
   font-family: "ProximaNovaRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 .navbar-default {
   background-color: rgba(71, 73, 72, 0.85);
 }
-
 .navbar-default .navbar-brand {
   color: white;
 }
-
 .navbar-default .navbar-nav > li > a {
   color: rgba(255, 255, 255, 0.8)
 }
-
 .navbar-default .navbar-nav > li > a:hover {
   color: white;
 }
-
 .ui-timepicker-table td a {
   width: 2em;
 }
-
 a.tabledrag-handle .handle {
   height: 23px;
   width: 23px;
 }
-
 .table-responsive {
   overflow: inherit;
 }
-
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   border-bottom: 1px solid #ddd;
 }
-
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #fff;
 }
-
 .novo-applications-create-edit-form-btn {
   margin: 20px auto;
   display: block;
@@ -92,28 +78,22 @@ a.tabledrag-handle .handle {
   clear: both;
   overflow: hidden;
 }
-
 .novo-entity-add-btn span {
   margin-left: 3px;
 }
-
 .view-class .views-field-field-program-day ul {
   margin: 0px;
 }
-
 .view-class .views-field-field-program-day .field-collection-item-field-program-day {
   display: inline-block;
 }
-
 .view-class .views-field-field-program-day .field-name-field-program-weekday,
 .view-class .views-field-field-program-day .field-name-field-program-time {
   display: inline-block;
 }
-
 .novo-title-published-0 {
   color: gray;
 }
-
 .field-name-field-faq-q {
   font-family: "ProximaNovaBold";
 }
@@ -132,51 +112,40 @@ a.tabledrag-handle .handle {
 .select2-container-multi .select2-choices .select2-search-choice {
   padding-left: 5px;
 }
-
 .select2-container-multi .select2-choices .select2-search-choice div {
   margin-right: 15px;
 }
-
 .select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close {
   left: inherit;
 }
-
 .views-exposed-form label, th {
   font-family: ProximaNovaBold;
 }
-
 .novo-no-data-found {
   margin: 20px 0px;
 }
-
 .node-application .field-name-field-phone-number,
 .node-application .field-name-field-phone-type {
   display: inline-block;
 }
-
 .contact-us-container {
   position: fixed;
   bottom: 0;
   left: 20%;
 }
-
 .modal#novo-contact-us-block {
   display: block !important;
   visibility: hidden;
 }
-
 .modal.in#novo-contact-us-block {
   visibility: visible;
 }
-
 .modal.in#novo-contact-us-block .modal-dialog {
   transform: translateY(0);
 }
-
 .modal#novo-contact-us-block .modal-dialog {
   transform: translateY(100%);
 }
-
 .modal#novo-contact-us-block .modal-dialog {
   position: fixed;
   bottom: 0;
@@ -187,7 +156,6 @@ a.tabledrag-handle .handle {
   -moz-transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: all 0.5s cubic-bezier(0.36, 0.66, 0.04, 1);
 }
-
 .novo-select-color-block {
   width: 16px;
   height: 16px;
@@ -197,7 +165,6 @@ a.tabledrag-handle .handle {
   text-align: center;
   font-size: 12px;
 }
-
 .novo-canvassing-group-wrapper,
 .novo-small-group-wrapper {
   color: #fff;
@@ -206,15 +173,12 @@ a.tabledrag-handle .handle {
   padding: 5px 10px;
   line-height: 1.1;
 }
-
 .novo-small-group-wrapper {
   color: #000;
 }
-
 .draggableviews-changed-notice {
   color: red;
 }
-
 .novo-glyphicon {
   padding: 6px;
   color: rgba(71, 73, 72, 0.85);
@@ -222,56 +186,44 @@ a.tabledrag-handle .handle {
   border-radius: 50%;
   font-size: 0.9em;
 }
-
 .novo-glyphicon.glyphicon-arrow-right {
   padding-right: 5px;
 }
-
 li.novo-leaf a {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .container-inline-date .form-item .novo-input-group input {
   margin-right: 0;
 }
-
 .novo-input-group .input-group-addon {
   width: auto;
-  color: #777777;
-  background-color: #ffffff;
+  color: #777;
+  background-color: #fff;
 }
-
 .btn.icon-before .glyphicon.novo-glyphicon-remove {
   top: 3px;
   margin: 0;
 }
-
 .control-label .form-required {
   color: #d9534f;
 }
-
 .field-name-field-program-time + .btn {
   margin-left: 10px;
   margin-bottom: 2px;
 }
-
 .novo-export-feed-icon {
   margin-right: 5px;
 }
-
 .novo-export-feed-icon i {
   margin-right: 2px;
 }
-
 .novo-export-feed-icon:last-child {
   margin-right: 0px;
 }
-
 .novo-title-moved-wrapper {
   background-color: #ccc !important;
 }
-
 .ctools-use-ajax.btn.js-hide {
   display: block;
   background: none;
@@ -280,26 +232,21 @@ li.novo-leaf a {
   padding-left: 0px;
   padding-right: 0px;
 }
-
 .ctools-use-ajax.btn.js-hide .ajax-progress.ajax-progress-throbber {
   font-size: 14px;
-  color: #777777;
+  color: #777;
   margin-top: 1.8em;
 }
-
-.views-field .img-responsive{
+.views-field .img-responsive {
   display: inline-block;
 }
-
 .novo-report-class-total-label {
   font-family: "ProximaNovaBold";
-  color: #777777;
+  color: #777;
 }
-
-.pane-frontpage-volunteer-welcome .panel{
+.pane-frontpage-volunteer-welcome .panel {
   max-width: 1140px;
 }
-
 .novo-header .nav > li > a,
 .novo-header .navbar-nav > li > a {
   padding: 15px 8px;
@@ -309,21 +256,18 @@ li.novo-leaf a {
   height: auto;
   line-height: 27px
 }
-
 .navbar.container.novo-header,
-.navbar.container-fluid.novo-header{
+.navbar.container-fluid.novo-header {
   border: none;
   margin-top: 0;
 }
-
 .novo-entity-add-btn,
 .novo-form .btn-sm {
   padding: 3px 8px;
   line-height: 1.45;
   font-size: 12px;
 }
-
-.novo-form .input-group-addon{
+.novo-form .input-group-addon {
   padding: 3px 8px;
   width: 25px;
   position: absolute;
@@ -331,28 +275,24 @@ li.novo-leaf a {
   height: 25px;
   z-index: 100;
 }
-.novo-form .input-group-addon .icon{
+.novo-form .input-group-addon .icon {
   font-size: 100%;
 }
-
 .novo-form select.form-control,
-.novo-form input.form-control{
+.novo-form input.form-control {
   padding: 2px 12px;
   height: 25px;
 }
-.novo-form label{
+.novo-form label {
   margin-bottom: 2px;
 }
-
-.novo-form .form-item{
+.novo-form .form-item {
   position: relative;
 }
-
 .novo-form .field-name-field-phone .field-multiple-table {
   width: 70%;
   margin-top: 10px;
 }
-
 .novo-form .field-name-field-phone .field-multiple-table thead {
   display: none;
 }
@@ -362,30 +302,25 @@ li.novo-leaf a {
   left: 50px;
 }*/
 
-
-.novo-web-form .btn-primary{
-  background: #EC1E24 none;
+.novo-web-form .btn-primary {
+  background: #ec1e24 none;
   border: 1px solid transparent;
 }
-
-.novo-collection{
+.novo-collection {
   display: flex;
   flex-wrap: wrap;
 }
-
-.novo-collection .field-name-field-phone{
+.novo-collection .field-name-field-phone {
   order: 2;
   width: 100%;
 }
-
-.novo-collection button{
+.novo-collection button {
   max-height: 25px;
   align-self: flex-end;
 }
 .novo-collection .field-name-field-phone {
   padding-left: 30px;
 }
-
 .field-name-field-ssn input,
 .field-name-field-phone-number input {
   display: inline-block;
@@ -394,7 +329,7 @@ li.novo-leaf a {
   height: 25px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #555555;
+  color: #555;
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
@@ -406,68 +341,57 @@ li.novo-leaf a {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-
-.field-name-field-ssn input{
+.field-name-field-ssn input {
   width: auto;
 }
-
 .field-name-field-ssn input:focus,
-.field-name-field-phone-number input:focus{
+.field-name-field-phone-number input:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
-
-.field-p-kid-name .select2-arrow{
+.field-p-kid-name .select2-arrow {
   display: none;
 }
-
 .form-item-field-p-small-group-target-id-entityreference-filter button,
 #edit-actionviews-bulk-operations-argument-selector-action,
 #edit-actionviews-bulk-operations-argument-selector-action--2,
 .form-item-field-p-canvassing-group-target-id-entityreference-filter button,
 .form-item-field-p-canvassing-group-target-id-entityreference-filter {
-   max-height: 25px;
+  max-height: 25px;
 }
 .form-item-field-p-small-group-target-id-entityreference-filter,
 .form-item-field-p-canvassing-group-target-id-entityreference-filter,
 .form-item-field-p-small-group-target-id-entityreference-filter button,
-.form-item-field-p-canvassing-group-target-id-entityreference-filter button
-{
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button {
   height: 34px;
   max-height: 34px;
 }
-
 .form-item-field-p-small-group-target-id-entityreference-filter button,
-.form-item-field-p-canvassing-group-target-id-entityreference-filter button{
+.form-item-field-p-canvassing-group-target-id-entityreference-filter button {
   padding: 2px 12px;
 }
-
 #edit-actionviews-bulk-operations-argument-selector-action--2,
-#edit-actionviews-bulk-operations-argument-selector-action{
+#edit-actionviews-bulk-operations-argument-selector-action {
   padding: 4px 10px;
 }
 h3.accordion-item.error a {
   color: #a94442;
 }
-
-body.page-user-edit .tabs--primary{
+body.page-user-edit .tabs--primary {
   display: none;
 }
 #user-profile-form .form-control {
   height: 25px;
 }
-
 .form-item-field-attendance-year-year select {
   width: 134px;
 }
-
 .novo-notify-user-exp-btn {
   margin-right: 5px;
 }
-
 .label.label-danger em.placeholder {
   font-style: normal;
 }
@@ -477,8 +401,19 @@ body.page-user-edit .tabs--primary{
 .view-canvassing-report .novo-canvassing-group-wrapper {
   margin: 0px;
 }
-
-
-.field-name-field-attend-church-reg label > .form-required{
+.field-name-field-attend-church-reg label > .form-required {
   display: none;
+}
+.view-report-nametag .views-reset-button button,
+.view-canvassing-report .views-reset-button button,
+.view-roster-report .views-reset-button button,
+.view-children-active-report .views-reset-button button,
+.view-children-allergy-report .views-reset-button button,
+.view-volunteer-activity-report .views-reset-button button,
+.view-volunteer-birthdays-report .views-reset-button button,
+.novo-report-enrollment-report-form .novo-report-enrollment-report-reset-btn,
+.novo-report-general-report-form .novo-report-general-report-reset-btn {
+  margin-top: 25px;
+  height: 34px;
+  font-size: 14px;
 }
