@@ -427,3 +427,11 @@ body.page-user-edit .tabs--primary {
 .view-roster-report td.views-field-views-conditional-1 {
   min-width: 100px;
 }
+.novo-login-form .messages.messages-inline {
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+.novo-login-form .field-name-field-u-birthday .date-no-float.container-inline-date {
+  margin-bottom: 15px;
+}
