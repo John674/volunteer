@@ -404,7 +404,7 @@ body.page-user-edit .tabs--primary {
 .field-name-field-attend-church-reg label > .form-required {
   display: none;
 }
-.views-exposed-form .views-exposed-widget .btn,
+
 .view-report-nametag .views-reset-button button,
 .view-canvassing-report .views-reset-button button,
 .view-roster-report .views-reset-button button,
@@ -417,4 +417,13 @@ body.page-user-edit .tabs--primary {
   margin-top: 25px;
   height: 34px;
   font-size: 14px;
+}
+
+.views-exposed-form .views-exposed-widget.views-reset-button .btn {
+  height: 34px;
+  font-size: 14px;
+}
+
+.view-roster-report td.views-field-views-conditional-1 {
+  min-width: 100px;
 }

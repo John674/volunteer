@@ -2411,8 +2411,8 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian';
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
-    'view_mode' => 'full',
-    'field_multiple_limit' => '-1',
+    'view_mode' => 'parent_guardian_row',
+    'field_multiple_limit' => '1',
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
@@ -9383,20 +9383,42 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['columns'] = array(
     'title_1' => 'title_1',
+    'field_dob' => 'field_dob',
+    'field_p_small_group' => 'field_p_small_group',
+    'field_parent_guardian' => 'field_parent_guardian',
     'field_address_1' => 'field_address_1',
     'field_apt' => 'field_apt',
-    'field_dob' => 'field_dob',
-    'field_grade' => 'field_grade',
-    'field_parent_guardian' => 'field_parent_guardian',
     'field_p_dismissal' => 'field_p_dismissal',
-    'field_p_small_group' => 'field_p_small_group',
     'field_program_location' => 'field_program_location',
+    'field_p_canvassing_group' => 'field_p_canvassing_group',
+    'views_conditional' => 'views_conditional',
+    'views_conditional_1' => 'views_conditional_1',
+    'views_conditional_2' => 'views_conditional_2',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'title_1';
   $handler->display->display_options['style_options']['info'] = array(
     'title_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dob' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_p_small_group' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_parent_guardian' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -9415,33 +9437,7 @@ function novo_views_feature_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_dob' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_grade' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_parent_guardian' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_p_dismissal' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_p_small_group' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -9451,6 +9447,28 @@ function novo_views_feature_views_default_views() {
     'field_program_location' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_p_canvassing_group' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_conditional' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_conditional_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_conditional_2' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -9517,11 +9535,11 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['field_parent_guardian']['table'] = 'field_data_field_parent_guardian';
   $handler->display->display_options['fields']['field_parent_guardian']['field'] = 'field_parent_guardian';
   $handler->display->display_options['fields']['field_parent_guardian']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian / Phone';
+  $handler->display->display_options['fields']['field_parent_guardian']['label'] = 'Parent / Guardian';
   $handler->display->display_options['fields']['field_parent_guardian']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_parent_guardian']['settings'] = array(
-    'view_mode' => 'full',
-    'field_multiple_limit' => '-1',
+    'view_mode' => 'parent_guardian_row',
+    'field_multiple_limit' => '1',
     'field_multiple_limit_offset' => '0',
     'field_multiple_limit_order' => '0',
   );
@@ -9611,10 +9629,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['relationship'] = 'field_p_kid_name_target_id';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['relationship'] = 'field_p_kid_name_target_id';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
