@@ -7086,7 +7086,7 @@ Friend',
     'bundle' => 'application',
     'default_value' => array(
       0 => array(
-        'tid' => 69,
+        'tid' => 388,
       ),
     ),
     'deleted' => 0,

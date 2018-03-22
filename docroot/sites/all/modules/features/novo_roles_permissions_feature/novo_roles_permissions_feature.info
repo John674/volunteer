@@ -96,4 +96,3 @@ features[user_role][] = Applicant US citizen
 features[user_role][] = Reviewer
 features[user_role][] = Siteadmin
 features[variable][] = user_register
-features[variable][] = userprotect_role_protections
