@@ -207,6 +207,12 @@ function novo_content_strongarm_feature_strongarm() {
       'only_first_row' => array(
         'custom_settings' => TRUE,
       ),
+      'parent_guardian_phone' => array(
+        'custom_settings' => FALSE,
+      ),
+      'parent_guardian_row' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(),
@@ -239,6 +245,18 @@ function novo_content_strongarm_feature_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'only_first_row' => array(
+        'custom_settings' => FALSE,
+      ),
+      'parent_guardian_phone' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'pdf' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
         'custom_settings' => FALSE,
       ),
     ),

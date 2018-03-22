@@ -671,3 +671,18 @@ function novo_master_ctools_plugin_directory($owner, $plugin_type) {
     return 'plugins/' . $plugin_type;
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function novo_master_entity_info_alter(&$entity_info) {
+  $entity_info['field_collection_item']['view modes']['parent_guardian_phone'] = array(
+    'label' => t('Parent guardian phone'),
+    'custom settings' => NULL,
+  );
+
+  $entity_info['field_collection_item']['view modes']['parent_guardian_row'] = array(
+    'label' => t('Parent guardian row'),
+    'custom settings' => NULL,
+  );
+}

@@ -430,6 +430,17 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'parent_guardian_row' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_parent_guardian_first_name',
@@ -481,6 +492,17 @@ function novo_content_feature_field_default_field_instances() {
         'weight' => 1,
       ),
       'only_first_row' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'parent_guardian_row' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
@@ -552,6 +574,17 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'parent_guardian_row' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
     ),
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_parent_guardian_relation',
@@ -584,10 +617,10 @@ function novo_content_feature_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'field_collection',
         'settings' => array(
-          'field_multiple_limit' => -1,
+          'field_multiple_limit' => 1,
           'field_multiple_limit_offset' => 0,
           'field_multiple_limit_order' => 0,
-          'view_mode' => 'full',
+          'view_mode' => 'parent_guardian_phone',
         ),
         'type' => 'field_collection_fields',
         'weight' => 3,
@@ -596,7 +629,7 @@ function novo_content_feature_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'field_collection',
         'settings' => array(
-          'field_multiple_limit' => -1,
+          'field_multiple_limit' => 1,
           'field_multiple_limit_offset' => 0,
           'field_multiple_limit_order' => 0,
           'view_mode' => 'full',
@@ -612,6 +645,18 @@ function novo_content_feature_field_default_field_instances() {
           'field_multiple_limit_offset' => 0,
           'field_multiple_limit_order' => 0,
           'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_fields',
+        'weight' => 3,
+      ),
+      'parent_guardian_row' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'field_multiple_limit' => 1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+          'view_mode' => 'parent_guardian_phone',
         ),
         'type' => 'field_collection_fields',
         'weight' => 3,
@@ -743,7 +788,29 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
       'only_first_row' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'parent_guardian_phone' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
@@ -799,6 +866,17 @@ function novo_content_feature_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_plain',
         'weight' => 1,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(
+          'field_multiple_limit' => -1,
+          'field_multiple_limit_offset' => 0,
+          'field_multiple_limit_order' => 0,
+        ),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
       'only_first_row' => array(
         'label' => 'hidden',
         'module' => 'taxonomy',
@@ -808,6 +886,12 @@ function novo_content_feature_field_default_field_instances() {
           'field_multiple_limit_order' => 0,
         ),
         'type' => 'taxonomy_term_reference_plain',
+        'weight' => 1,
+      ),
+      'parent_guardian_phone' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
     ),
