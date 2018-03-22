@@ -404,6 +404,7 @@ body.page-user-edit .tabs--primary {
 .field-name-field-attend-church-reg label > .form-required {
   display: none;
 }
+.views-exposed-form .views-exposed-widget .btn,
 .view-report-nametag .views-reset-button button,
 .view-canvassing-report .views-reset-button button,
 .view-roster-report .views-reset-button button,
