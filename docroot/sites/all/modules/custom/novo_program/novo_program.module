@@ -92,13 +92,35 @@ function novo_program_menu() {
     'access arguments' => ['access content'],
   ];
 
+  $items['novo-program/get-kid-data-all'] = [
+    'title' => 'Get kid data',
+    'page callback' => 'novo_program_get_kid_data_all',
+    'page arguments' => [],
+    'access arguments' => ['access content'],
+  ];
+
   return $items;
 }
 
 /**
  * Get kid's data.
  */
-function novo_program_get_kid_data($nid) {
+function novo_program_get_kid_data_all() {
+  $data = $_POST;
+  $output = [];
+  if (isset($data['nids'])) {
+    foreach($data['nids'] as $nid_string) {
+      $output[$nid_string] = novo_program_get_kid_data($nid_string, FALSE);
+    }
+  }
+
+  drupal_json_output($output);
+}
+
+/**
+ * Get kid data.
+ */
+function novo_program_get_kid_data($nid, $json = TRUE) {
   if (function_exists("_entityreference_autocomplete_validate") && preg_match(ENTITYREFERENCE_FIND_ID_REGEX, rtrim($nid), $matches)) {
     $nid = !empty($matches[ENTITYREFERENCE_ID_MATCH_INDEX]) ? $matches[ENTITYREFERENCE_ID_MATCH_INDEX] : '';
   }
@@ -135,8 +157,14 @@ function novo_program_get_kid_data($nid) {
   if (!empty($output_data)) {
     $output .= '<span class="novo-program-kid-data">' . implode(" ", $output_data) . ' </span>';
   }
+  if ($json) {
+    drupal_json_output($output);
+  } else {
+    return $output;
+  }
 
-  drupal_json_output($output);
+  drupal_json_output([]);
+
 }
 
 /**
