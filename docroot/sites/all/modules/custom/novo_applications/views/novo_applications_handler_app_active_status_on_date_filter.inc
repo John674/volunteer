@@ -11,6 +11,15 @@
 class novo_applications_handler_app_active_status_on_date_filter extends views_handler_filter_date {
 
   function query() {
+
+    $on_date = $this->view->exposed_input['novo_application_active_status_on_date'] ?? NULL;
+    if ($on_date) {
+      $on_date = strtotime($on_date);
+      $where_last_date = novo_applications_get_last_date_serving_formula();
+      $where_last_date_formula = "(" . $where_last_date . " < " . $on_date . ")";
+
+      $this->query->add_where_expression($this->options['group'], "$where_last_date_formula");
+    }
   }
 
   function op_between($field) {
