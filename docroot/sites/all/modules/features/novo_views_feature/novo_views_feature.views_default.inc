@@ -9382,6 +9382,7 @@ function novo_views_feature_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['columns'] = array(
+    'field_moved' => 'field_moved',
     'title_1' => 'title_1',
     'field_dob' => 'field_dob',
     'field_p_small_group' => 'field_p_small_group',
@@ -9397,6 +9398,13 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = 'title_1';
   $handler->display->display_options['style_options']['info'] = array(
+    'field_moved' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -9474,6 +9482,7 @@ function novo_views_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  $handler->display->display_options['style_options']['override'] = FALSE;
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
@@ -9495,6 +9504,12 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['ui_name'] = 'Kid';
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['label'] = 'Kid';
   $handler->display->display_options['relationships']['field_p_kid_name_target_id']['required'] = TRUE;
+  /* Field: Content: Moved */
+  $handler->display->display_options['fields']['field_moved']['id'] = 'field_moved';
+  $handler->display->display_options['fields']['field_moved']['table'] = 'field_data_field_moved';
+  $handler->display->display_options['fields']['field_moved']['field'] = 'field_moved';
+  $handler->display->display_options['fields']['field_moved']['relationship'] = 'field_p_kid_name_target_id';
+  $handler->display->display_options['fields']['field_moved']['exclude'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
@@ -9583,6 +9598,9 @@ function novo_views_feature_views_default_views() {
     'bypass_access' => 0,
     'link' => 0,
   );
+  $handler->display->display_options['fields']['field_program_location']['group_columns'] = array(
+    'target_id' => 'target_id',
+  );
   /* Field: Field collection item: Canvassing Group */
   $handler->display->display_options['fields']['field_p_canvassing_group']['id'] = 'field_p_canvassing_group';
   $handler->display->display_options['fields']['field_p_canvassing_group']['table'] = 'field_data_field_p_canvassing_group';
@@ -9625,6 +9643,15 @@ function novo_views_feature_views_default_views() {
   $handler->display->display_options['fields']['views_conditional_2']['equalto'] = 'Walked';
   $handler->display->display_options['fields']['views_conditional_2']['then'] = 'Walked';
   $handler->display->display_options['fields']['views_conditional_2']['strip_tags'] = 0;
+  /* Sort criterion: Content: Location (field_program_location) */
+  $handler->display->display_options['sorts']['field_program_location_target_id']['id'] = 'field_program_location_target_id';
+  $handler->display->display_options['sorts']['field_program_location_target_id']['table'] = 'field_data_field_program_location';
+  $handler->display->display_options['sorts']['field_program_location_target_id']['field'] = 'field_program_location_target_id';
+  /* Sort criterion: Content: Moved (field_moved) */
+  $handler->display->display_options['sorts']['field_moved_value']['id'] = 'field_moved_value';
+  $handler->display->display_options['sorts']['field_moved_value']['table'] = 'field_data_field_moved';
+  $handler->display->display_options['sorts']['field_moved_value']['field'] = 'field_moved_value';
+  $handler->display->display_options['sorts']['field_moved_value']['relationship'] = 'field_p_kid_name_target_id';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -9753,18 +9780,17 @@ function novo_views_feature_views_default_views() {
   );
   $handler->display->display_options['filters']['field_p_small_group_target_id_entityreference_filter']['expose']['hide_empty_filter'] = FALSE;
   $handler->display->display_options['filters']['field_p_small_group_target_id_entityreference_filter']['reference_display'] = 'small_groups:entityreference_1';
-  /* Filter criterion: Content: Moved (field_moved) */
-  $handler->display->display_options['filters']['field_moved_value']['id'] = 'field_moved_value';
-  $handler->display->display_options['filters']['field_moved_value']['table'] = 'field_data_field_moved';
-  $handler->display->display_options['filters']['field_moved_value']['field'] = 'field_moved_value';
-  $handler->display->display_options['filters']['field_moved_value']['relationship'] = 'field_p_kid_name_target_id';
-  $handler->display->display_options['filters']['field_moved_value']['operator'] = 'not';
-  $handler->display->display_options['filters']['field_moved_value']['value'] = array(
-    1 => '1',
-  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: View area */
+  $handler->display->display_options['footer']['view']['id'] = 'view';
+  $handler->display->display_options['footer']['view']['table'] = 'views';
+  $handler->display->display_options['footer']['view']['field'] = 'view';
+  $handler->display->display_options['footer']['view']['label'] = 'Moved';
+  $handler->display->display_options['footer']['view']['view_to_insert'] = 'roster_report:block_1';
+  $handler->display->display_options['footer']['view']['inherit_arguments'] = TRUE;
   $handler->display->display_options['path'] = 'roster-report';
   $handler->display->display_options['menu']['title'] = 'Canvassing Report';
   $handler->display->display_options['menu']['weight'] = '0';
