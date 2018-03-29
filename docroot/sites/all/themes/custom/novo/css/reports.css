@@ -151,3 +151,13 @@
 #views-form-canvassing-report-page .field-collection-item-field-phone {
   display: inline-block;
 }
+table.views-table tr.row-kid-moved-header-margin,
+table.views-table tr.row-kid-moved-header-margin td {
+  background: none;
+}
+table.views-table tr.row-kid-moved-header td {
+  font-family: ProximaNovaBold;
+  color: #000;
+  background-color: #ccc;
+  padding: 5px 10px;
+}

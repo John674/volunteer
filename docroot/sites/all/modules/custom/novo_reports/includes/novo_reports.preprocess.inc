@@ -10,7 +10,35 @@
  */
 function novo_reports_preprocess_body_roster_report(&$vars) {
   // Dismissal conditional fields.
-  foreach ($vars['themed_rows'] as $row_id => &$row) {
+  $temp_themed_rows = [];
+  $moved_flag_first = FALSE;
+  foreach ($vars['themed_rows'] as $row_id => $row) {
+    $moved = ($vars['rows'][$row_id]->node_field_data_field_p_kid_name__field_data_field_moved_fie);
+    if ($moved && !$moved_flag_first) {
+      $moved_flag_first = TRUE;
+
+      $temp_row1 = $temp_row2 = $row;
+      foreach ($temp_row1 as $key => &$val) {
+        $val = [
+          "data" => '',
+          "style" => "background:none; border:none;",
+        ];
+      }
+      foreach ($temp_row2 as $key => &$val) {
+        $val = ($key == 'title_1') ? [
+          "data" => t('Moved'),
+          "style" => "background:#c9c9c9;",
+        ] : [
+          "data" => '',
+          "style" => "background:#c9c9c9;",
+        ];
+      }
+
+      $temp_themed_rows[] = $temp_row1;
+      $temp_themed_rows[] = $temp_row2;
+    }
+
+
     if (isset($row['views_conditional']) && !empty($row['views_conditional'])) {
       $row['views_conditional'] = [
         "data" => $row['views_conditional'],
@@ -34,7 +62,10 @@ function novo_reports_preprocess_body_roster_report(&$vars) {
         "style" => "background:$color;",
       ];
     }
+
+    $temp_themed_rows[] = $row;
   }
+  $vars['themed_rows'] = $temp_themed_rows;
 }
 
 /**
@@ -211,76 +242,162 @@ function novo_reports_preprocess_views_data_export_xls_header(&$vars) {
  * Implements hook_process_views_data_export_xls_body().
  */
 function novo_reports_process_views_data_export_xls_body(&$vars) {
-  if ($vars['view']->name == "canvassing_report") {
-    $output = '';
+  switch ($vars['view']->name) {
+    case "canvassing_report":
+      novo_reports_canvassing_report_process_views_data_export_xls_body($vars);
+      break;
+    case "roster_report":
+      novo_reports_roster_report_process_views_data_export_xls_body($vars);
+      break;
+    default:
+      template_process_views_data_export_msoffice_body($vars);
+  }
+}
 
-    // Construct the tbody of a table, see theme_table().
-    $ts = tablesort_init($vars['header']);
+/**
+ * Excel body for canvassing_report.
+ */
+function novo_reports_canvassing_report_process_views_data_export_xls_body(&$vars) {
+  $output = '';
 
-    $flip = [
-      'even' => 'odd',
-      'odd' => 'even',
+  // Construct the tbody of a table, see theme_table().
+  $ts = tablesort_init($vars['header']);
+
+  $flip = [
+    'even' => 'odd',
+    'odd' => 'even',
+  ];
+  $class = 'even';
+
+  // Add grouping.
+  if (!empty($vars['title'])) {
+    $rows = $vars['rows'];
+    $first_row = reset($rows);
+    $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
+    $cell = [
+      'data' => '<strong> ' . strtoupper($vars['title']) . '</strong>',
+      'colspan' => count($vars['header']),
+      'style' => 'background-color:' . $color . ';',
     ];
-    $class = 'even';
+    $output .= ' <tr>';
+    $output .= _theme_table_cell($cell);
+    $output .= " </tr>\n";
+  }
 
-    // Add grouping.
-    if (!empty($vars['title'])) {
-      $rows = $vars['rows'];
-      $first_row = reset($rows);
-      $color = novo_reports_get_group_color_value($first_row, "field_p_canvassing_group");
-      $cell = [
-        'data' => '<strong> ' . strtoupper($vars['title']) . '</strong>',
-        'colspan' => count($vars['header']),
-        'style' => 'background-color:' . $color . ';',
-      ];
-      $output .= ' <tr>';
-      $output .= _theme_table_cell($cell);
-      $output .= " </tr>\n";
-    }
+  foreach ($vars['themed_rows'] as $number => $row) {
+    $attributes = [];
 
-    foreach ($vars['themed_rows'] as $number => $row) {
-      $attributes = [];
-
-      // Check if we're dealing with a simple or complex row.
-      if (isset($row['data'])) {
-        foreach ($row as $key => $value) {
-          if ($key == 'data') {
-            $cells = $value;
-          }
-          else {
-            $attributes[$key] = $value;
-          }
-        }
-      }
-      else {
-        $cells = $row;
-      }
-      if (count($cells)) {
-        // Add odd/even class.
-        $class = $flip[$class];
-        if (isset($attributes['class'])) {
-          $attributes['class'] .= ' ' . $class;
+    // Check if we're dealing with a simple or complex row.
+    if (isset($row['data'])) {
+      foreach ($row as $key => $value) {
+        if ($key == 'data') {
+          $cells = $value;
         }
         else {
-          $attributes['class'] = $class;
+          $attributes[$key] = $value;
         }
-
-        // Build row.
-        $output .= ' <tr' . drupal_attributes($attributes) . '>';
-        $i = 0;
-        foreach ($cells as $cell) {
-          $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
-          $output .= _theme_table_cell($cell);
-        }
-        $output .= " </tr>\n";
       }
     }
+    else {
+      $cells = $row;
+    }
+    if (count($cells)) {
+      // Add odd/even class.
+      $class = $flip[$class];
+      if (isset($attributes['class'])) {
+        $attributes['class'] .= ' ' . $class;
+      }
+      else {
+        $attributes['class'] = $class;
+      }
 
-    $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
+      // Build row.
+      $output .= ' <tr' . drupal_attributes($attributes) . '>';
+      $i = 0;
+      foreach ($cells as $cell) {
+        $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
+        $output .= _theme_table_cell($cell);
+      }
+      $output .= " </tr>\n";
+    }
+  }
 
+  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output);
+}
+
+/**
+ * Excel body for roster_report.
+ */
+function novo_reports_roster_report_process_views_data_export_xls_body(&$vars) {
+  $output = '';
+
+  // Construct the tbody of a table, see theme_table().
+
+  $ts = tablesort_init($vars['header']);
+
+  $flip = array(
+    'even' => 'odd',
+    'odd' => 'even',
+  );
+  $class = 'even';
+
+  // Add grouping.
+  if (!empty($vars['title'])) {
+    $cell = array(
+      'data' => '<strong> ' . $vars['title'] . '</strong>',
+      'colspan' => count($vars['header']),
+    );
+    $output .= ' <tr>';
+    $output .= _theme_table_cell($cell);
+    $output .= " </tr>\n";
   }
-  else {
-    // Pass through the generic MS Office process.
-    template_process_views_data_export_msoffice_body($vars);
+
+  $moved_flag_first = FALSE;
+  foreach ($vars['themed_rows'] as $number => $row) {
+    $moved = ($vars['rows'][$number]->node_field_data_field_p_kid_name__field_data_field_moved_fie);
+    if ($moved && !$moved_flag_first) {
+      $moved_flag_first = TRUE;
+      $count_cells = count($row);
+      $output .= '<tr><td colspan="' . $count_cells . '"></tr>';
+      $output .= '<tr><td>' . t('Moved') . '</td><td colspan="' . ($count_cells - 1) . '"></tr>';
+    }
+
+    $attributes = array();
+
+    // Check if we're dealing with a simple or complex row
+    if (isset($row['data'])) {
+      foreach ($row as $key => $value) {
+        if ($key == 'data') {
+          $cells = $value;
+        }
+        else {
+          $attributes[$key] = $value;
+        }
+      }
+    }
+    else {
+      $cells = $row;
+    }
+    if (count($cells)) {
+      // Add odd/even class
+      $class = $flip[$class];
+      if (isset($attributes['class'])) {
+        $attributes['class'] .= ' ' . $class;
+      }
+      else {
+        $attributes['class'] = $class;
+      }
+
+      // Build row
+      $output .= ' <tr' . drupal_attributes($attributes) . '>';
+      $i = 0;
+      foreach ($cells as $cell) {
+        $cell = tablesort_cell($cell, $vars['header'], $ts, $i++);
+        $output .= _theme_table_cell($cell);
+      }
+      $output .= " </tr>\n";
+    }
   }
+
+  $vars['tbody'] = preg_replace('/<\/?(a|span) ?.*?>/', '', $output); // strip 'a' and 'span' tags
 }
