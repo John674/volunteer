@@ -27,17 +27,20 @@ function system_requirements($phase) {
     // is not running the default installation profile.
     $profile = drupal_get_profile();
     if ($profile != 'standard') {
-      $info = system_get_info('module', $profile);
-      $requirements['install_profile'] = array(
-        'title' => $t('Install profile'),
-        'value' => $t('%profile_name (%profile-%version)', array(
-          '%profile_name' => $info['name'],
-          '%profile' => $profile,
-          '%version' => $info['version']
-        )),
-        'severity' => REQUIREMENT_INFO,
-        'weight' => -9
-      );
+      $modules = module_list();
+      if (isset($modules[$profile])) {
+        $info = system_get_info('module', $profile);
+        $requirements['install_profile'] = array(
+          'title' => $t('Install profile'),
+          'value' => $t('%profile_name (%profile-%version)', array(
+            '%profile_name' => $info['name'],
+            '%profile' => $profile,
+            '%version' => $info['version']
+          )),
+          'severity' => REQUIREMENT_INFO,
+          'weight' => -9
+        );
+      }
     }
   }
 
@@ -53,7 +56,7 @@ function system_requirements($phase) {
   if (function_exists('phpinfo')) {
     $requirements['php'] = array(
       'title' => $t('PHP'),
-      'value' => ($phase == 'runtime') ? $phpversion .' ('. l($t('more information'), 'admin/reports/status/php') .')' : $phpversion,
+      'value' => ($phase == 'runtime') ? $phpversion . ' (' . l($t('more information'), 'admin/reports/status/php') . ')' : $phpversion,
     );
   }
   else {
@@ -218,7 +221,10 @@ function system_requirements($phase) {
       $description = $t('Consider increasing your PHP memory limit to %memory_minimum_limit to help prevent errors in the update process.', array('%memory_minimum_limit' => DRUPAL_MINIMUM_PHP_MEMORY_LIMIT));
     }
     elseif ($phase == 'runtime') {
-      $description = $t('Depending on your configuration, Drupal can run with a %memory_limit PHP memory limit. However, a %memory_minimum_limit PHP memory limit or above is recommended, especially if your site uses additional custom or contributed modules.', array('%memory_limit' => $memory_limit, '%memory_minimum_limit' => DRUPAL_MINIMUM_PHP_MEMORY_LIMIT));
+      $description = $t('Depending on your configuration, Drupal can run with a %memory_limit PHP memory limit. However, a %memory_minimum_limit PHP memory limit or above is recommended, especially if your site uses additional custom or contributed modules.', array(
+        '%memory_limit' => $memory_limit,
+        '%memory_minimum_limit' => DRUPAL_MINIMUM_PHP_MEMORY_LIMIT
+      ));
     }
 
     if (!empty($description)) {
@@ -237,7 +243,7 @@ function system_requirements($phase) {
   // Test settings.php file writability
   if ($phase == 'runtime') {
     $conf_dir = drupal_verify_install_file(conf_path(), FILE_NOT_WRITABLE, 'dir');
-    $conf_file = drupal_verify_install_file(conf_path() . '/settings.php', FILE_EXIST|FILE_READABLE|FILE_NOT_WRITABLE);
+    $conf_file = drupal_verify_install_file(conf_path() . '/settings.php', FILE_EXIST | FILE_READABLE | FILE_NOT_WRITABLE);
     if (!$conf_dir || !$conf_file) {
       $requirements['settings.php'] = array(
         'value' => $t('Not protected'),
@@ -286,7 +292,10 @@ function system_requirements($phase) {
           'title' => $info['title'],
           'value' => $t('Not fully protected'),
           'severity' => REQUIREMENT_ERROR,
-          'description' => $t('See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.', array('@url' => 'http://drupal.org/SA-CORE-2013-003', '%directory' => $info['directory'])),
+          'description' => $t('See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.', array(
+            '@url' => 'http://drupal.org/SA-CORE-2013-003',
+            '%directory' => $info['directory']
+          )),
         );
       }
     }
@@ -324,7 +333,12 @@ function system_requirements($phase) {
     }
 
     $description .= ' ' . $t('You can <a href="@cron">run cron manually</a>.', array('@cron' => url('admin/reports/status/run-cron')));
-    $description .= '<br />' . $t('To run cron from outside the site, go to <a href="!cron">!cron</a>', array('!cron' => url($base_url . '/cron.php', array('external' => TRUE, 'query' => array('cron_key' => variable_get('cron_key', 'drupal'))))));
+    $description .= '<br />' . $t('To run cron from outside the site, go to <a href="!cron">!cron</a>', array(
+        '!cron' => url($base_url . '/cron.php', array(
+          'external' => TRUE,
+          'query' => array('cron_key' => variable_get('cron_key', 'drupal'))
+        ))
+      ));
 
     $requirements['cron'] = array(
       'title' => $t('Cron maintenance tasks'),
@@ -454,7 +468,10 @@ function system_requirements($phase) {
       $name = $file->info['name'];
       $php = $file->info['php'];
       if (version_compare($php, PHP_VERSION, '>')) {
-        $requirements['php']['description'] .= $t('@name requires at least PHP @version.', array('@name' => $name, '@version' => $php));
+        $requirements['php']['description'] .= $t('@name requires at least PHP @version.', array(
+          '@name' => $name,
+          '@version' => $php
+        ));
         $requirements['php']['severity'] = REQUIREMENT_ERROR;
       }
       // Check the module's required modules.
@@ -479,8 +496,15 @@ function system_requirements($phase) {
           $compatibility = rtrim(substr($compatibility, 2), ')');
           $requirements["$module-$required_module"] = array(
             'title' => $t('Unresolved dependency'),
-            'description' => $t('@name requires this module and version. Currently using @required_name version @version', array('@name' => $name, '@required_name' => $required_name, '@version' => $version)),
-            'value' => t('@required_name (Version @compatibility required)', array('@required_name' => $required_name, '@compatibility' => $compatibility)),
+            'description' => $t('@name requires this module and version. Currently using @required_name version @version', array(
+              '@name' => $name,
+              '@required_name' => $required_name,
+              '@version' => $version
+            )),
+            'value' => t('@required_name (Version @compatibility required)', array(
+              '@required_name' => $required_name,
+              '@compatibility' => $compatibility
+            )),
             'severity' => REQUIREMENT_ERROR,
           );
           continue;
@@ -499,7 +523,10 @@ function system_requirements($phase) {
       $requirements['update status'] = array(
         'value' => $t('Not enabled'),
         'severity' => REQUIREMENT_WARNING,
-        'description' => $t('Update notifications are not enabled. It is <strong>highly recommended</strong> that you enable the update manager module from the <a href="@module">module administration page</a> in order to stay up-to-date on new releases. For more information, <a href="@update">Update status handbook page</a>.', array('@update' => 'http://drupal.org/documentation/modules/update', '@module' => url('admin/modules'))),
+        'description' => $t('Update notifications are not enabled. It is <strong>highly recommended</strong> that you enable the update manager module from the <a href="@module">module administration page</a> in order to stay up-to-date on new releases. For more information, <a href="@update">Update status handbook page</a>.', array(
+          '@update' => 'http://drupal.org/documentation/modules/update',
+          '@module' => url('admin/modules')
+        )),
       );
     }
     else {
@@ -571,7 +598,10 @@ function _system_check_db_utf8mb4_requirements($phase) {
     else {
       // Not supported, active.
       $requirements['value'] = $t('Not supported');
-      $requirements['description'] = $t('4 byte UTF-8 for @driver is activated, but not supported on your system. Please turn this off in settings.php, or ensure that all database-related requirements are met. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array('@driver' => $driver, '@url' => $documentation_url));
+      $requirements['description'] = $t('4 byte UTF-8 for @driver is activated, but not supported on your system. Please turn this off in settings.php, or ensure that all database-related requirements are met. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array(
+        '@driver' => $driver,
+        '@url' => $documentation_url
+      ));
       $requirements['severity'] = REQUIREMENT_ERROR;
     }
   }
@@ -579,13 +609,19 @@ function _system_check_db_utf8mb4_requirements($phase) {
     if ($utf8mb4_supported) {
       // Supported, not active.
       $requirements['value'] = $t('Not enabled');
-      $requirements['description'] = $t('4 byte UTF-8 for @driver is not activated, but it is supported on your system. It is recommended that you enable this to allow 4-byte UTF-8 input such as emojis, Asian symbols and mathematical symbols to be stored correctly. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array('@driver' => $driver, '@url' => $documentation_url));
+      $requirements['description'] = $t('4 byte UTF-8 for @driver is not activated, but it is supported on your system. It is recommended that you enable this to allow 4-byte UTF-8 input such as emojis, Asian symbols and mathematical symbols to be stored correctly. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array(
+        '@driver' => $driver,
+        '@url' => $documentation_url
+      ));
       $requirements['severity'] = REQUIREMENT_INFO;
     }
     else {
       // Not supported, not active.
       $requirements['value'] = $t('Disabled');
-      $requirements['description'] = $t('4 byte UTF-8 for @driver is disabled. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array('@driver' => $driver, '@url' => $documentation_url));
+      $requirements['description'] = $t('4 byte UTF-8 for @driver is disabled. See the <a href="@url">documentation on adding 4 byte UTF-8 support</a> for more information.', array(
+        '@driver' => $driver,
+        '@url' => $documentation_url
+      ));
       $requirements['severity'] = REQUIREMENT_INFO;
     }
   }
@@ -733,7 +769,7 @@ function system_schema() {
   $schema['blocked_ips'] = array(
     'description' => 'Stores blocked IP addresses.',
     'fields' => array(
-       'iid' => array(
+      'iid' => array(
         'description' => 'Primary Key: unique ID for IP addresses.',
         'type' => 'serial',
         'unsigned' => TRUE,
@@ -1214,7 +1250,11 @@ function system_schema() {
     'indexes' => array(
       'fit' => array('fit'),
       'tab_parent' => array(array('tab_parent', 64), 'weight', 'title'),
-      'tab_root_weight_title' => array(array('tab_root', 64), 'weight', 'title'),
+      'tab_root_weight_title' => array(
+        array('tab_root', 64),
+        'weight',
+        'title'
+      ),
     ),
     'primary key' => array('path'),
   );
@@ -1222,7 +1262,7 @@ function system_schema() {
   $schema['menu_links'] = array(
     'description' => 'Contains the individual links within a menu.',
     'fields' => array(
-     'menu_name' => array(
+      'menu_name' => array(
         'description' => "The menu name. All links with the same menu name (such as 'navigation') are part of the same menu.",
         'type' => 'varchar',
         'length' => 32,
@@ -1257,7 +1297,7 @@ function system_schema() {
         'default' => '',
       ),
       'link_title' => array(
-      'description' => 'The text displayed for the link, which may be modified by a title callback stored in {menu_router}.',
+        'description' => 'The text displayed for the link, which may be modified by a title callback stored in {menu_router}.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
@@ -1398,8 +1438,24 @@ function system_schema() {
     ),
     'indexes' => array(
       'path_menu' => array(array('link_path', 128), 'menu_name'),
-      'menu_plid_expand_child' => array('menu_name', 'plid', 'expanded', 'has_children'),
-      'menu_parents' => array('menu_name', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'),
+      'menu_plid_expand_child' => array(
+        'menu_name',
+        'plid',
+        'expanded',
+        'has_children'
+      ),
+      'menu_parents' => array(
+        'menu_name',
+        'p1',
+        'p2',
+        'p3',
+        'p4',
+        'p5',
+        'p6',
+        'p7',
+        'p8',
+        'p9'
+      ),
       'router_path' => array(array('router_path', 128)),
     ),
     'primary key' => array('mlid'),
@@ -1451,21 +1507,21 @@ function system_schema() {
   $schema['registry'] = array(
     'description' => "Each record is a function, class, or interface name and the file it is in.",
     'fields' => array(
-      'name'   => array(
+      'name' => array(
         'description' => 'The name of the function, class, or interface.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
       ),
-      'type'   => array(
+      'type' => array(
         'description' => 'Either function or class or interface.',
         'type' => 'varchar',
         'length' => 9,
         'not null' => TRUE,
         'default' => '',
       ),
-      'filename'   => array(
+      'filename' => array(
         'description' => 'Name of the file.',
         'type' => 'varchar',
         'length' => 255,
@@ -1494,13 +1550,13 @@ function system_schema() {
   $schema['registry_file'] = array(
     'description' => "Files parsed to build the registry.",
     'fields' => array(
-      'filename'   => array(
+      'filename' => array(
         'description' => 'Path to the file.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
       ),
-      'hash'  => array(
+      'hash' => array(
         'description' => "sha-256 hash of the file's contents when last parsed.",
         'type' => 'varchar',
         'length' => 64,
@@ -1550,7 +1606,7 @@ function system_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-     ),
+    ),
     'primary key' => array('value'),
   );
 
@@ -1902,7 +1958,7 @@ function system_update_7003() {
     }
     else {
       $invalid_host = check_plain($blocked->mask);
-      $messages[] = t('The host !host is no longer blocked because it is not a valid IP address.', array('!host' => $invalid_host ));
+      $messages[] = t('The host !host is no longer blocked because it is not a valid IP address.', array('!host' => $invalid_host));
     }
   }
   if (isset($invalid_host)) {
@@ -2037,8 +2093,8 @@ function system_update_7011() {
   $insert = db_insert('role_permission')->fields(array('rid', 'permission'));
   foreach ($rids as $rid) {
     $insert->values(array(
-    'rid' => $rid,
-    'permission' => 'bypass node access',
+      'rid' => $rid,
+      'permission' => 'bypass node access',
     ));
   }
   $insert->execute();
@@ -2091,7 +2147,10 @@ function system_update_7013() {
     $timezone = 'UTC';
   }
   variable_set('date_default_timezone', $timezone);
-  drupal_set_message(format_string('The default time zone has been set to %timezone. Check the <a href="@config-url">date and time configuration page</a> to configure it correctly.', array('%timezone' => $timezone, '@config-url' => url('admin/config/regional/settings'))), 'warning');
+  drupal_set_message(format_string('The default time zone has been set to %timezone. Check the <a href="@config-url">date and time configuration page</a> to configure it correctly.', array(
+    '%timezone' => $timezone,
+    '@config-url' => url('admin/config/regional/settings')
+  )), 'warning');
   // Remove temporary override.
   variable_del('date_temporary_timezone');
 }
@@ -2187,7 +2246,12 @@ function system_update_7017() {
 function system_update_7018() {
   db_drop_index('system', 'modules');
   db_drop_index('system', 'type_name');
-  db_change_field('system', 'type', 'type', array('type' => 'varchar', 'length' => 12, 'not null' => TRUE, 'default' => ''));
+  db_change_field('system', 'type', 'type', array(
+    'type' => 'varchar',
+    'length' => 12,
+    'not null' => TRUE,
+    'default' => ''
+  ));
   db_add_index('system', 'type_name', array('type', 'name'));
 }
 
@@ -2231,11 +2295,16 @@ function system_update_7029() {
 }
 
 /**
-* Alter field hostname to identifier in the {flood} table.
+ * Alter field hostname to identifier in the {flood} table.
  */
 function system_update_7032() {
   db_drop_index('flood', 'allow');
-  db_change_field('flood', 'hostname', 'identifier', array('type' => 'varchar', 'length' => 128, 'not null' => TRUE, 'default' => ''));
+  db_change_field('flood', 'hostname', 'identifier', array(
+    'type' => 'varchar',
+    'length' => 128,
+    'not null' => TRUE,
+    'default' => ''
+  ));
   db_add_index('flood', 'allow', array('event', 'identifier', 'timestamp'));
 }
 
@@ -2377,12 +2446,30 @@ function system_update_7042() {
   db_drop_index('url_alias', 'src_language_pid');
   db_drop_unique_key('url_alias', 'dst_language_pid');
   // Rename the fields, and increase their length to 255 characters.
-  db_change_field('url_alias', 'src', 'source', array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''));
-  db_change_field('url_alias', 'dst', 'alias', array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''));
+  db_change_field('url_alias', 'src', 'source', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => ''
+  ));
+  db_change_field('url_alias', 'dst', 'alias', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => ''
+  ));
   // Add indexes back. We replace the unique key with an index since it never
   // provided any meaningful unique constraint ('pid' is a primary key).
-  db_add_index('url_alias', 'source_language_pid', array('source', 'language', 'pid'));
-  db_add_index('url_alias', 'alias_language_pid', array('alias', 'language', 'pid'));
+  db_add_index('url_alias', 'source_language_pid', array(
+    'source',
+    'language',
+    'pid'
+  ));
+  db_add_index('url_alias', 'alias_language_pid', array(
+    'alias',
+    'language',
+    'pid'
+  ));
 
   // Now that the URL aliases are correct, we can rebuild the whitelist.
   drupal_path_alias_whitelist_rebuild();
@@ -2401,7 +2488,12 @@ function system_update_7044() {
  * Add expiration field to the {flood} table.
  */
 function system_update_7045() {
-  db_add_field('flood', 'expiration', array('description' => 'Expiration timestamp. Expired events are purged on cron run.', 'type' => 'int', 'not null' => TRUE, 'default' => 0));
+  db_add_field('flood', 'expiration', array(
+    'description' => 'Expiration timestamp. Expired events are purged on cron run.',
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0
+  ));
   db_add_index('flood', 'purge', array('expiration'));
 }
 
@@ -2475,21 +2567,35 @@ function system_update_7049() {
  * Change {batch}.id column from serial to regular int.
  */
 function system_update_7050() {
-  db_change_field('batch', 'bid', 'bid', array('description' => 'Primary Key: Unique batch ID.', 'type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE));
+  db_change_field('batch', 'bid', 'bid', array(
+    'description' => 'Primary Key: Unique batch ID.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE
+  ));
 }
 
 /**
  * make the IP field IPv6 compatible
  */
 function system_update_7051() {
-  db_change_field('blocked_ips', 'ip', 'ip', array('description' => 'IP address', 'type' => 'varchar', 'length' => 40, 'not null' => TRUE, 'default' => ''));
+  db_change_field('blocked_ips', 'ip', 'ip', array(
+    'description' => 'IP address',
+    'type' => 'varchar',
+    'length' => 40,
+    'not null' => TRUE,
+    'default' => ''
+  ));
 }
 
 /**
  * Rename file to include_file in {menu_router} table.
  */
 function system_update_7052() {
-  db_change_field('menu_router', 'file', 'include_file', array('type' => 'text', 'size' => 'medium'));
+  db_change_field('menu_router', 'file', 'include_file', array(
+    'type' => 'text',
+    'size' => 'medium'
+  ));
 }
 
 /**
@@ -2499,11 +2605,19 @@ function system_update_7053() {
   if (db_table_exists('menu_custom')) {
     // Create the same menus as in menu_install().
     db_insert('menu_custom')
-      ->fields(array('menu_name' => 'user-menu', 'title' => 'User Menu', 'description' => "The <em>User</em> menu contains links related to the user's account, as well as the 'Log out' link."))
+      ->fields(array(
+        'menu_name' => 'user-menu',
+        'title' => 'User Menu',
+        'description' => "The <em>User</em> menu contains links related to the user's account, as well as the 'Log out' link."
+      ))
       ->execute();
 
     db_insert('menu_custom')
-      ->fields(array('menu_name' => 'management', 'title' => 'Management', 'description' => "The <em>Management</em> menu contains links for administrative tasks."))
+      ->fields(array(
+        'menu_name' => 'management',
+        'title' => 'Management',
+        'description' => "The <em>Management</em> menu contains links for administrative tasks."
+      ))
       ->execute();
   }
 
@@ -2848,8 +2962,8 @@ function system_update_7061(&$sandbox) {
     db_delete('upload')
       ->notExists(
         db_select('files', 'f')
-        ->fields('f', array('fid'))
-        ->where('f.fid = {upload}.fid')
+          ->fields('f', array('fid'))
+          ->where('f.fid = {upload}.fid')
       )
       ->execute();
 
@@ -2859,8 +2973,8 @@ function system_update_7061(&$sandbox) {
     db_delete('upload')
       ->notExists(
         db_select('node_revision', 'nr')
-        ->fields('nr', array('vid'))
-        ->where('nr.vid = {upload}.vid')
+          ->fields('nr', array('vid'))
+          ->where('nr.vid = {upload}.vid')
       )
       ->execute();
 
@@ -2877,7 +2991,7 @@ function system_update_7061(&$sandbox) {
     }
     $query = db_select('upload', 'u');
     $query->distinct();
-    $query->addField('u','vid');
+    $query->addField('u', 'vid');
     db_insert('system_update_7061')
       ->from($query)
       ->execute();
@@ -2913,7 +3027,16 @@ function system_update_7061(&$sandbox) {
       // files table (since upload doesn't know about the new entry in the
       // file_managed table).
       $file = db_select('files', 'f')
-        ->fields('f', array('fid', 'uid', 'filename', 'filepath', 'filemime', 'filesize', 'status', 'timestamp'))
+        ->fields('f', array(
+          'fid',
+          'uid',
+          'filename',
+          'filepath',
+          'filemime',
+          'filesize',
+          'status',
+          'timestamp'
+        ))
         ->condition('f.fid', $record->fid)
         ->execute()
         ->fetchAssoc();
@@ -2925,7 +3048,16 @@ function system_update_7061(&$sandbox) {
       // most-recently uploaded file that has the same filepath.
       if (isset($sandbox['duplicate_filepath_fids_to_use'][$file['filepath']]) && $record->fid != $sandbox['duplicate_filepath_fids_to_use'][$file['filepath']]) {
         $file = db_select('files', 'f')
-          ->fields('f', array('fid', 'uid', 'filename', 'filepath', 'filemime', 'filesize', 'status', 'timestamp'))
+          ->fields('f', array(
+            'fid',
+            'uid',
+            'filename',
+            'filepath',
+            'filemime',
+            'filesize',
+            'status',
+            'timestamp'
+          ))
           ->condition('f.fid', $sandbox['duplicate_filepath_fids_to_use'][$file['filepath']])
           ->execute()
           ->fetchAssoc();
@@ -2984,7 +3116,11 @@ function system_update_7061(&$sandbox) {
         file_usage_add($file, 'file', 'node', $revision['nid']);
 
         // Update the node revision's upload file field with the file data.
-        $revision['file'][LANGUAGE_NONE][$delta] = array('fid' => $file->fid, 'display' => $file->display, 'description' => $file->description);
+        $revision['file'][LANGUAGE_NONE][$delta] = array(
+          'fid' => $file->fid,
+          'display' => $file->display,
+          'description' => $file->description
+        );
       }
 
       // Write the revision's upload field data into the field_upload tables.
@@ -3021,7 +3157,13 @@ function system_update_7061(&$sandbox) {
 function system_update_7062() {
   db_drop_index('system', 'bootstrap');
   db_drop_index('system', 'system_list');
-  db_add_index('system', 'system_list', array('status', 'bootstrap', 'type', 'weight', 'name'));
+  db_add_index('system', 'system_list', array(
+    'status',
+    'bootstrap',
+    'type',
+    'weight',
+    'name'
+  ));
 }
 
 /**
@@ -3031,7 +3173,13 @@ function system_update_7063() {
   // For router items where 'type' => MENU_CALLBACK, {menu_router}.type is
   // stored as 4 in Drupal 6, and 0 in Drupal 7. Fortunately Drupal 7 doesn't
   // store any types as 4, so delete both.
-  $result = db_query('SELECT ml.mlid FROM {menu_links} ml INNER JOIN {menu_router} mr ON ml.router_path = mr.path WHERE ml.module = :system AND ml.customized = 0 AND mr.type IN(:callbacks)', array(':callbacks' => array(0, 4), ':system' => 'system'));
+  $result = db_query('SELECT ml.mlid FROM {menu_links} ml INNER JOIN {menu_router} mr ON ml.router_path = mr.path WHERE ml.module = :system AND ml.customized = 0 AND mr.type IN(:callbacks)', array(
+    ':callbacks' => array(
+      0,
+      4
+    ),
+    ':system' => 'system'
+  ));
   foreach ($result as $record) {
     db_delete('menu_links')->condition('mlid', $record->mlid)->execute();
   }
@@ -3055,7 +3203,12 @@ function system_update_7065() {
     'not null' => TRUE,
   );
   db_drop_primary_key('sessions');
-  db_change_field('sessions', 'sid', 'sid', $spec, array('primary key' => array('sid', 'ssid')));
+  db_change_field('sessions', 'sid', 'sid', $spec, array(
+    'primary key' => array(
+      'sid',
+      'ssid'
+    )
+  ));
   // Delete any sessions with empty session ID.
   db_delete('sessions')->condition('sid', '')->execute();
 }
