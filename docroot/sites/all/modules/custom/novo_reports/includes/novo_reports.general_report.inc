@@ -97,11 +97,7 @@ function novo_reports_general_report_get_data() {
   $volunteers_number_subquery = novo_reports_get_volunteers_number_formula("n_att.nid");
   $select->addExpression($volunteers_number_subquery, "volunteers");
 
-  // Attendance active volunteers.
-  $active_volunteers_number_subquery = novo_reports_get_active_volunteers_number_formula("n_att.nid");
-  $select->addExpression($active_volunteers_number_subquery, "active_volunteers");
-
-  $select->orderBy("att_date_value");
+  $select->orderBy("att_date.field_attendance_date_value", "ASC");
   $select->orderBy("program");
   $result = $select->execute()->fetchAll();
 
@@ -139,7 +135,10 @@ function novo_reports_general_report_get_data() {
       $attendance_percent_sum = 0;
       $sum = [];
       $unique = [];
-      foreach ($data as $key => $item) {
+      foreach ($data as $key => &$item) {
+        // Calculate active volunteers.
+        $item->active_volunteers = novo_reports_get_active_volunteers_number_on_date($item->att_date_value);
+
         $attendance_percent = (!empty($item->enrolled)) ? round($item->attendance * 100 / $item->enrolled, 0) : 0;
         $volunteers_percent = (!empty($item->active_volunteers)) ? round($item->volunteers * 100 / $item->active_volunteers, 0) : 0;
 

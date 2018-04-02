@@ -161,3 +161,44 @@ WHERE att_orig_loc.entity_id = $att_nid AND
 
   return "IF ((" . $formula . ") IS NULL, 0, (" . $formula . "))";
 }
+
+/**
+ * Get active volunteers number on date formula.
+ */
+function novo_reports_get_active_volunteers_number_formula2($att_date_value) {
+  novo_master_set_default_mysql_timezone();
+
+  $on_date = strtotime($att_date_value);
+
+  $formula = <<<SQL
+SELECT count(DISTINCT vol_nid) FROM (
+
+  SELECT DISTINCT av.field_attendance_volunteer_list_target_id AS vol_nid
+  FROM field_data_field_attendance_volunteer_list AS av
+    INNER JOIN field_data_field_attendance_date AS ad ON ad.entity_id = av.entity_id
+  WHERE (($on_date - UNIX_TIMESTAMP(ad.field_attendance_date_value)) / 60 / 60 / 24 / 30) >= 0
+        AND (($on_date - UNIX_TIMESTAMP(ad.field_attendance_date_value)) / 60 / 60 / 24 / 30) <= 6
+
+  UNION ALL
+
+  SELECT DISTINCT mv.field_volunteer_mentor_name_target_id AS vol_nid
+  FROM field_data_field_volunteer_mentor_name AS mv
+    INNER JOIN field_data_field_mentoring_date AS md ON md.entity_id = mv.entity_id
+    INNER JOIN field_data_field_mentor_type AS mt ON mt.entity_id = mv.entity_id
+
+  WHERE mt.field_mentor_type_value = 'Volunteer'
+        AND (($on_date - md.field_mentoring_date_value) / 60 / 60 / 24 / 30) >= 0
+        AND (($on_date - md.field_mentoring_date_value) / 60 / 60 / 24 / 30) <= 6
+) AS n
+SQL;
+
+   return "(" . $formula . ")";
+}
+
+/**
+ * Get active volunteers on date.
+ */
+function novo_reports_get_active_volunteers_number_on_date($att_date_value) {
+  $formula = novo_reports_get_active_volunteers_number_formula2($att_date_value);
+  return db_query($formula)->fetchField();
+}

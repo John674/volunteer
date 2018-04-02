@@ -20,7 +20,7 @@ class novo_applications_handler_app_active_status_on_date_filter extends views_h
 //      $this->query->add_where_expression($this->options['group'], "$where_last_date_formula");
 
       $where_first_date = novo_applications_get_first_date_serving_formula();
-      $where_first_date_formula = "(" . $where_first_date . " < " . $on_date . ")";
+      $where_first_date_formula = "(" . $where_first_date . " <= " . $on_date . ")";
       $this->query->add_where_expression($this->options['group'], "$where_first_date_formula");
     }
   }
