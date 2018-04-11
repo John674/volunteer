@@ -1,0 +1,33 @@
+Index: docroot/modules/node/node.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/modules/node/node.module	(revision 2d265cad06db0a8aa11f94f06586735715753ef5)
++++ docroot/modules/node/node.module	(date 1523449008000)
+@@ -1077,6 +1077,8 @@
+ function node_save($node) {
+   $transaction = db_transaction();
+ 
++  $request_time = (isset($node->custom_request_time)) ? $node->custom_request_time : REQUEST_TIME;
++
+   try {
+     // Load the stored entity, if any.
+     if (!empty($node->nid) && !isset($node->original)) {
+@@ -1093,13 +1095,13 @@
+ 
+     // Set the timestamp fields.
+     if (empty($node->created)) {
+-      $node->created = REQUEST_TIME;
++      $node->created = $request_time;
+     }
+     // The changed timestamp is always updated for bookkeeping purposes,
+     // for example: revisions, searching, etc.
+-    $node->changed = REQUEST_TIME;
++    $node->changed = $request_time;
+ 
+-    $node->timestamp = REQUEST_TIME;
++    $node->timestamp = $request_time;
+     $update_node = TRUE;
+ 
+     // Let modules modify the node before it is saved to the database.
