@@ -39,6 +39,13 @@ function novo_reports_menu() {
     'type' => MENU_NORMAL_ITEM,
   ];
 
+  $items['general-generate'] = [
+    'title' => 'Generate data',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'novo_reports_general_generate',
+    'type' => MENU_CALLBACK,
+  ];
+
   return $items;
 }
 
@@ -266,4 +273,158 @@ function novo_reports_views_bulk_operations_form_alter(&$form, &$form_state, $vb
 function novo_reports_reports_access() {
   $role = user_role_load_by_name('Siteadmin');
   return (user_has_role($role->rid)) ? TRUE : FALSE;
+}
+
+/**
+ * Generate test content.
+ */
+function novo_reports_general_generate() {
+  return "";
+  $location_nid = 22526;
+  $class_nid = 22527;
+
+  $kid1_nid = 22446;
+  $kid2_nid = 22437;
+  $kid3_nid = 22434;
+  $kid4_nid = 22430;
+  $kid5_nid = 22429;
+
+  // Create enrollment with 1 kid (1 sept 12 AM)
+  $request_time = strtotime("01-09-2007 13:00:59");
+  $node = novo_reports_create_enrollment($request_time, $location_nid, $class_nid, [$kid1_nid]);
+  $program_node = $node;
+  kpr("Create enrollment with 1 kid (1 sept 12 AM)  Total: 1");
+  kpr($node);
+
+  kpr("Created enrollment nid: " . $program_node->nid);
+
+
+  // Add 1 new kid (2 sept 1PM)
+  $request_time = strtotime("02-09-2007 13:45:59");
+  $node = novo_reports_update_enrollment($node->nid, $request_time, [$kid2_nid]);
+  kpr("Add 1 new kid (2 sept 1PM) Total: 2");
+  kpr($node);
+
+  // Add 2 new kids (2 sept 2PM)
+  $request_time = strtotime("02-09-2007 14:55:59");
+  $node = novo_reports_update_enrollment($node->nid, $request_time, [$kid3_nid, $kid4_nid]);
+  kpr("Add 2 new kids (2 sept 2PM)   Total: 4");
+  kpr($node);
+
+// Create attendance visited kids 4 (2 sept 3 PM)
+  $att_date = strtotime('02-09-2007 00:00:00');
+  $request_time = strtotime("02-09-2007 15:00:59");
+  $att_node = novo_reports_create_attendance($request_time, $att_date, $location_nid, $program_node->nid, [$kid1_nid, $kid2_nid, $kid3_nid, $kid4_nid]);
+  kpr("Create attendance visited kids 4 (2 sept 3 PM)");
+  kpr($att_node);
+
+  // Add 1 new kids (2 sept 4 PM)
+  $request_time = strtotime("02-09-2007 16:00:59");
+  $node = novo_reports_update_enrollment($node->nid, $request_time, [$kid5_nid]);
+  kpr("Add 1 new kids (2 sept 4 PM) Total: 5");
+  kpr($node);
+
+
+// Create attendance visited kids 5 (3 sept 1 PM)
+  $att_date = strtotime('03-09-2007 00:00:00');
+  $request_time = strtotime("03-09-2007 13:00:59");
+  $att_node = novo_reports_create_attendance($request_time, $att_date, $location_nid, $program_node->nid, [$kid1_nid, $kid2_nid, $kid3_nid, $kid4_nid, $kid5_nid]);
+  kpr("Create attendance visited kids 5 (3 sept 1 PM)");
+  kpr($att_node);
+
+  return "";
+}
+
+function novo_reports_create_enrollment($request_time, $location_nid, $class_nid, $kids) {
+  // Create enrollment.
+  $node = new stdClass();
+  $node->type = 'program';
+  $node->language = LANGUAGE_NONE;
+  node_object_prepare($node);
+
+  $node->custom_request_time = $request_time;
+
+  $node->title = 'Test enrollment';
+
+  $node->status = 1;
+  $node->promote = 0;
+  $node->sticky = 0;
+  $node->comment = 0;
+  $node->uid = 1;
+  // Set created date
+  $node->created = $request_time;
+
+  $node->field_program_location[LANGUAGE_NONE][0]['target_id'] = $location_nid;
+  $node->field_program_class_name[LANGUAGE_NONE][0]['target_id'] = $class_nid;
+
+  foreach($kids as $kid_nid) {
+    $collection = entity_create('field_collection_item', array('field_name' => 'field_program_kids_list'));
+    $collection->setHostEntity('node', $node);
+    $cwrapper = entity_metadata_wrapper('field_collection_item', $collection);
+    $cwrapper->field_p_kid_name->set($kid_nid);
+    $cwrapper->save();
+  }
+
+  // Save the node
+  node_save($node);
+  return $node;
+}
+
+function novo_reports_update_enrollment($nid, $request_time, $add_kids) {
+  // Create enrollment.
+  $node = node_load($nid);
+  $node->custom_request_time = $request_time;
+
+  foreach($add_kids as $kid_nid) {
+    $collection = entity_create('field_collection_item', array('field_name' => 'field_program_kids_list'));
+    $collection->setHostEntity('node', $node);
+    $cwrapper = entity_metadata_wrapper('field_collection_item', $collection);
+    $cwrapper->field_p_kid_name->set($kid_nid);
+    $cwrapper->save();
+  }
+
+  $node->revision = 1;
+  // Save the node
+  node_save($node);
+  return $node;
+}
+
+
+function novo_reports_create_attendance($request_time, $att_date, $location_nid, $programm_nid, $kids) {
+  // Create enrollment.
+  $node = new stdClass();
+  $node->type = 'attendance';
+  $node->language = LANGUAGE_NONE;
+  node_object_prepare($node);
+
+  $node->custom_request_time = $request_time;
+
+  $node->title = 'Test attendance';
+
+  $node->status = 1;
+  $node->promote = 0;
+  $node->sticky = 0;
+  $node->comment = 0;
+  $node->uid = 1;
+  // Set created date
+  $node->created = $request_time;
+
+  $node->field_attendance_location[LANGUAGE_NONE][0]['target_id'] = $location_nid;
+  $node->field_attendance_program_name[LANGUAGE_NONE][0]['target_id'] = $programm_nid;
+
+  // 2017-08-01 00:00:00
+  $node->field_attendance_date[LANGUAGE_NONE][0] = [
+    'value' => date("Y-m-d H:i:s", $att_date),
+    'date_type' => 'datetime'
+  ];
+
+  //$node->field_attendance_kids_list[LANGUAGE_NONE][]['target_type'] = "node";
+
+  foreach($kids as $kid_nid) {
+    $node->field_attendance_kids_list[LANGUAGE_NONE][]['target_id'] = $kid_nid;
+  }
+
+  // Save the node
+  node_save($node);
+  return $node;
 }
