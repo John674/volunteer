@@ -14,9 +14,13 @@
 ```sh
 vagrant up && vagrant ssh
 ```
+for
+```sh
+[vagrant@127.0.0.1's password: 
+```
+use default password: vagrant
 
 If you need to rerun provisioning
-
 ```sh
 vagrant provision
 ```
