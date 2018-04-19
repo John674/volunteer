@@ -1,0 +1,560 @@
+<?php
+/**
+ * @file
+ * Code for the Novo Taxonomy Feature feature.
+ */
+
+include_once 'novo_taxonomy_feature.features.inc';
+
+/** Constants */
+define('NOVO_VOCABULARY_STATES', 'states');
+define('NOVO_VOCABULARY_GENDER', 'gender');
+define('NOVO_VOCABULARY_GRADE', 'grade');
+define('NOVO_VOCABULARY_COLOR_PREFERENCE', 'color_preference');
+define('NOVO_VOCABULARY_T_SHIRT_SIZE', 't_shirt_size');
+define('NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES', 'volunteer_interests_roles');
+define('NOVO_VOCABULARY_PREFIX', 'prefix');
+define('NOVO_VOCABULARY_APPLICATION_STATUS', 'application_status');
+define('NOVO_VOCABULARY_PHONE_TYPE', 'phone_type');
+define('NOVO_VOCABULARY_ETHNICITY', 'ethnicity');
+define('NOVO_VOCABULARY_WEEKDAYS', 'weekdays');
+define('NOVO_VOCABULARY_SMALL_GROUP', 'small_group');
+define('NOVO_VOCABULARY_CANVASSING_GROUP', 'canvassing_group');
+define('NOVO_VOCABULARY_DISMISSAL', 'dismissal');
+define('NOVO_VOCABULARY_REF_QUESTIONS', 'reference_request_questions');
+define('NOVO_VOCABULARY_TRAINING', 'training');
+
+/**
+ * Implements hook_taxonomy_vocabulary_insert().
+ */
+function novo_taxonomy_feature_taxonomy_vocabulary_insert($vocabulary) {
+
+
+  switch ($vocabulary->machine_name) {
+    case NOVO_VOCABULARY_STATES:
+      _novo_taxonomy_feature_add_states($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_GENDER:
+      _novo_taxonomy_feature_add_gender($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_GRADE:
+      _novo_taxonomy_feature_add_grade($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_COLOR_PREFERENCE:
+      _novo_taxonomy_feature_add_color_preference($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_T_SHIRT_SIZE:
+      _novo_taxonomy_feature_add_t_shirt_size($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_VOLUNTEER_INTERESTS_ROLES:
+      _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_PREFIX:
+      _novo_taxonomy_feature_add_prefix($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_APPLICATION_STATUS:
+      _novo_taxonomy_feature_add_application_status($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_PHONE_TYPE:
+      _novo_taxonomy_feature_add_phone_type($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_ETHNICITY:
+      _novo_taxonomy_feature_add_ethnicity($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_WEEKDAYS:
+      _novo_taxonomy_feature_add_weekdays($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_SMALL_GROUP:
+      _novo_taxonomy_feature_add_small_group($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_CANVASSING_GROUP:
+      _novo_taxonomy_feature_add_canvassing_group($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_DISMISSAL:
+      _novo_taxonomy_feature_add_dismissal($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_REF_QUESTIONS:
+      _novo_taxonomy_feature_add_ref_questions($vocabulary);
+      break;
+
+    case NOVO_VOCABULARY_TRAINING:
+      _novo_taxonomy_feature_add_training($vocabulary);
+      break;
+  }
+}
+
+/**
+ * Import states.
+ */
+function _novo_taxonomy_feature_add_states($vocabulary) {
+  //lets import known states
+  $state_list = array(
+    'AL' => "Alabama",
+    'AK' => "Alaska",
+    'AZ' => "Arizona",
+    'AR' => "Arkansas",
+    'CA' => "California",
+    'CO' => "Colorado",
+    'CT' => "Connecticut",
+    'DE' => "Delaware",
+    'DC' => "District Of Columbia",
+    'FL' => "Florida",
+    'GA' => "Georgia",
+    'HI' => "Hawaii",
+    'ID' => "Idaho",
+    'IL' => "Illinois",
+    'IN' => "Indiana",
+    'IA' => "Iowa",
+    'KS' => "Kansas",
+    'KY' => "Kentucky",
+    'LA' => "Louisiana",
+    'ME' => "Maine",
+    'MD' => "Maryland",
+    'MA' => "Massachusetts",
+    'MI' => "Michigan",
+    'MN' => "Minnesota",
+    'MS' => "Mississippi",
+    'MO' => "Missouri",
+    'MT' => "Montana",
+    'NE' => "Nebraska",
+    'NV' => "Nevada",
+    'NH' => "New Hampshire",
+    'NJ' => "New Jersey",
+    'NM' => "New Mexico",
+    'NY' => "New York",
+    'NC' => "North Carolina",
+    'ND' => "North Dakota",
+    'OH' => "Ohio",
+    'OK' => "Oklahoma",
+    'OR' => "Oregon",
+    'PA' => "Pennsylvania",
+    'RI' => "Rhode Island",
+    'SC' => "South Carolina",
+    'SD' => "South Dakota",
+    'TN' => "Tennessee",
+    'TX' => "Texas",
+    'UT' => "Utah",
+    'VT' => "Vermont",
+    'VA' => "Virginia",
+    'WA' => "Washington",
+    'WV' => "West Virginia",
+    'WI' => "Wisconsin",
+    'WY' => "Wyoming"
+  );
+  foreach ($state_list as $abbr => $state_name) {
+    $term = new stdClass();
+    $term->name = $state_name;
+    $term->description = $abbr;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import gender.
+ */
+function _novo_taxonomy_feature_add_gender($vocabulary) {
+  $gender_list = array(
+    'M' => "Male",
+    'F' => "Female",
+  );
+  foreach ($gender_list as $abbr => $name) {
+    $term = new stdClass();
+    $term->name = $abbr;
+    $term->description = $name;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import grade.
+ */
+function _novo_taxonomy_feature_add_grade($vocabulary) {
+  $grade_list = array(
+    'K' => "Kindergarten",
+    '1' => '1',
+    '2' => '2',
+    '3' => '3',
+    '4' => '4',
+    '5' => '5',
+    '6' => '6',
+    '7' => '7',
+    '8' => '8',
+    '9' => '9',
+    '10' => '10',
+    '11' => '11',
+    '12' => '12',
+  );
+  foreach ($grade_list as $abbr => $name) {
+    $term = new stdClass();
+    $term->name = $abbr;
+    $term->description = $name;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import color_preference.
+ */
+function _novo_taxonomy_feature_add_color_preference($vocabulary) {
+  $list = array(
+    'Cardinal Red',
+    'Heather Gray',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import t_shirt_size.
+ */
+function _novo_taxonomy_feature_add_t_shirt_size($vocabulary) {
+  $list = array(
+    'S',
+    'L',
+    'M',
+    'XL',
+    'XXL',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import volunteer_interests_roles.
+ */
+function _novo_taxonomy_feature_add_volunteer_interests_roles($vocabulary) {
+  $list = array(
+    'Assistant Liaison' => array(
+      3,
+      "Assist the Community Liaison with logistics, emergencies, and more."
+    ),
+    'Buddy' => array(
+      3,
+      "Stays with one specific child, helps them throughout the program."
+    ),
+    'Canvasser' => array(
+      2,
+      "Assists with walking and picking up children from their homes / apartments before programming, and / or walking them home after programming."
+    ),
+    'Greeter / Registration Leader or Helper' => array(
+      1,
+      "Ensures child is registered, checks children into the program, helps them find their nametags, and directs them to their Small Groups and Leaders."
+    ),
+    'Large Group Leader' => array(
+      2,
+      "Prepares for and leads various parts of Large Group each week (Games, Songs, Testimony, Bible Story, or Challenge)."
+    ),
+    'Prayer Team' => array(
+      1,
+      "Commits to pray for the program, volunteers, and children. Receives updated prayer requests and is able to pray specifcally for the team and the kids."
+    ),
+    'Program Substitute' => array(
+      2,
+      "Is willing to be “on call” if needed to fll in because of the absence of another teacher, and would fll in if available."
+    ),
+    'Small Group Helper' => array(
+      2,
+      "Assists the Small Group Leader. Tasks include helping children pay attention, assisting with activities, assisting with discipline problems, and more."
+    ),
+    'Small Group Leader' => array(
+      3,
+      "Leads a group of 5 - 10 children each week. Develops relationships with each child, leads activities, and teaches Biblical truth."
+    ),
+    'Snack Leader / Helper' => array(
+      1,
+      "Assembles the snacks needed for the programs, delivers them to the small group leaders of each Small Group."
+    ),
+
+  );
+  foreach ($list as $key => $data) {
+    $term = new stdClass();
+    $term->name = $key;
+    $term->description = $data[1];
+    $term->field_vol_roles_time[LANGUAGE_NONE][0]['value'] = $data[0];
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import prefixes.
+ */
+function _novo_taxonomy_feature_add_prefix($vocabulary) {
+  $list = array(
+    'Mr.',
+    'Mrs.',
+    'Ms.'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import statuses.
+ */
+function _novo_taxonomy_feature_add_application_status($vocabulary) {
+  $list = array(
+    'Approved',
+    'Not Approved',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_phone_type($vocabulary) {
+  $list = array(
+    'Mobile',
+    'Home',
+    'Work',
+    'Fax'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_ethnicity($vocabulary) {
+  $list = array(
+    'African American',
+    'African American/Latino',
+    'Asian American',
+    'Indian',
+    'Latino',
+    'Middle Eastern American',
+    'Native American',
+    'Native Hawaiians',
+    'Other',
+    'Two or more races',
+    'White American'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import Weekdays.
+ */
+function _novo_taxonomy_feature_add_weekdays($vocabulary) {
+  $list = array(
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import small groups.
+ */
+function _novo_taxonomy_feature_add_small_group($vocabulary) {
+  $list = array(
+    'Red 1',
+    'Red 2',
+    'Red 3',
+    'Blue 1',
+    'Blue 2',
+    'Blue 3',
+    'Green 1',
+    'Green 2',
+    'Green 3',
+    'Yellow 1',
+    'Yellow 2',
+    'Yellow 3'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import canvassing groups.
+ */
+function _novo_taxonomy_feature_add_canvassing_group($vocabulary) {
+  $list = array(
+    'Orange',
+    'Lime',
+    'Teal',
+    'Burgundy'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import dismissal.
+ */
+function _novo_taxonomy_feature_add_dismissal($vocabulary) {
+  $list = array(
+    'Alone walk',
+    'Picked Up',
+    'Walked Home'
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    $term->weight = $key;
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * Import ref_questions.
+ */
+function _novo_taxonomy_feature_add_ref_questions($vocabulary) {
+  $list = array(
+    'Reference 1' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Reference 2' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Standby' => array(
+      'How have you seen God work in the life of [ref_name]?',
+      'How long and in what capacity have you known [ref_name]?',
+      'How would you describe his/her personal characteristics, abilities, and experience?',
+      'How would you say he/ she relates to children?',
+      'Given that no one is perfect what are some areas that he or she should continue to develop?',
+      'Is there anything else that I should know about before moving this individual forward in the process?',
+      'Other Questions or Comments'
+    ),
+    'Parents' => array(
+      'I hereby certify that: I and my son / daughter have read and agrees he / she will abide by the Statement of Faith Agreement.',
+      'I hereby certify that: I and my son / daughter have read and agrees he / she will abide by the Pertinent Novo Program Policies.',
+      'By signing below, I indicate that: I and my son / daughter have carefully read this document and recognize that it is a legally-binding agreement.',
+      'By signing below, I indicate that: I certify that, to the best of my knowledge, all answers and information given are true and complete.',
+      'By signing below, I indicate that: I give Novo the right to use my son’s / daughter’s picture, voice, and / or testimony for promotional materials.',
+    ),
+    'Church' => array(
+      'How long has [ref_name] been attending your church?',
+      'What is your relationship with [ref_name]?',
+      'Has he or she made the decision to make Jesus their Lord and Savior?',
+      'What involvement does this person have within your church?',
+      'How have you seen God use [ref_name]?',
+      'Do you have any hesitations for this person to volunteer working directly with children?',
+      'Other Questions or Comments'
+    )
+  );
+  $w_p = 0;
+  foreach ($list as $parent_name => $childs) {
+    $term = new stdClass();
+    $term->name = $parent_name;
+    $term->vid = $vocabulary->vid;
+    $term->description = t("Do not rename or change this term! You can change only children terms!");
+    $term->weight = $w_p;
+    taxonomy_term_save($term);
+    if (!empty($childs)) {
+      $w_c = 0;
+      foreach ($childs as $child_name) {
+        $term_child = new stdClass();
+        $term_child->name = $child_name;
+        $term_child->vid = $vocabulary->vid;
+        $term_child->weight = $w_c;
+        $term_child->parent = $term->tid;
+        taxonomy_term_save($term_child);
+        $w_c++;
+      }
+    }
+    $w_p++;
+  }
+}
+
+/**
+ * Import phone types.
+ */
+function _novo_taxonomy_feature_add_training($vocabulary) {
+  $list = array(
+    'CPR Training Certification',
+    'Discipline',
+    'Foundational Gospel Truths',
+    'Mentoring',
+    'Ministry Safe',
+    'Orientation',
+    'Policy and Procedure Assessment',
+    'Small Groups',
+  );
+  foreach ($list as $key => $value) {
+    $term = new stdClass();
+    $term->name = $value;
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+  }
+}

@@ -1,0 +1,9 @@
+name = Novoministries Database
+version = VERSION
+description = Novo installation profile
+core = 7.x
+
+dependencies[] = novo_master
+
+
+

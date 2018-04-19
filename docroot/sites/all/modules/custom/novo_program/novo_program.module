@@ -1,0 +1,362 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_program_form_program_node_form_alter(&$form, &$form_state, $form_id) {
+  $nid = $form['nid']['#value'] ?? NULL;
+  $title = $form['title']['#default_value'] ?? $form['title']['#value'] ?? NULL;
+  drupal_set_title($nid ? t("Edit Enrollment @title", ["@title" => $title]) : t("Create Enrollment"), PASS_THROUGH);
+
+  $form['#attached']['js'][] = drupal_get_path("module", "novo_program") . "/js/novo_program.js";
+  // @codingStandardsIgnoreStart
+  $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Class"), "node/add/class", ['query' => drupal_get_destination()])]);
+  // @codingStandardsIgnoreEnd
+
+  // Pickup contacts modal form theming.
+  $kids_list = &$form['field_program_kids_list'][$form['field_program_class_name']['#language']];
+
+  for ($i = 0; $i <= $kids_list['#max_delta']; $i++) {
+    if (isset($kids_list[$i])) {
+      $pc = &$kids_list[$i]['field_p_kids_pickup_contacts'][$kids_list[$i]['field_p_kids_pickup_contacts']['#language']];
+      for ($j = 0; $j <= $pc['#max_delta']; $j++) {
+        $pc[$j]['#prefix'] = '<div class="field-p-kids-pickup-contacts-wrapper">';
+        $pc[$j]['#suffix'] = '</div>';
+        $pc[$j]['field_pc_phone'][$pc[$j]['field_pc_phone']['#language']][0]['value']['#attributes']['class'][] = "form-control";
+      }
+
+      // Limit to max 3 pickup_contacts.
+      if ($pc['#max_delta'] > 1) {
+        $pc['add_more']['#access'] = FALSE;
+      }
+
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] = '<a href="#field-p-kids-pc-' . $i . '" class="btn btn-primary" data-toggle="modal"> <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#prefix'] .= '
+    <div class="modal fade" id="field-p-kids-pc-' . $i . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document"><div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="' . t("Close") . '">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">' . t("Pickup Contacts") . '</h4>
+      </div>
+      <div class="modal-body">';
+
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] = '</div>';
+      $kids_list[$i]['field_p_kids_pickup_contacts']['#suffix'] .= '
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">' . t("Ok") . '</button>
+      </div>
+      </div></div></div>';
+    }
+  }
+
+  // Add report links.
+  $form['report_links'] = [
+    '#type' => 'markup',
+    '#markup' => novo_program_render_report_links($form, $form_state),
+    '#weight' => -10,
+  ];
+
+  // Disable change fields on edit form.
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if (!$is_new) {
+    $form['field_program_year'][$form['field_program_year']['#language']]['#disabled'] = TRUE;
+    $form['field_program_location'][$form['field_program_location']['#language']]['#disabled'] = TRUE;
+    $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function novo_program_preprocess_field($variables) {
+
+}
+
+/**
+ * Implements hook_menu().
+ */
+function novo_program_menu() {
+  $items = [];
+
+  $items['novo-program/get-kid-data/%'] = [
+    'title' => 'Get kid data',
+    'page callback' => 'novo_program_get_kid_data',
+    'page arguments' => [2],
+    'access arguments' => ['access content'],
+  ];
+
+  $items['novo-program/get-kid-data-all'] = [
+    'title' => 'Get kid data',
+    'page callback' => 'novo_program_get_kid_data_all',
+    'page arguments' => [],
+    'access arguments' => ['access content'],
+  ];
+
+  return $items;
+}
+
+/**
+ * Get kid's data.
+ */
+function novo_program_get_kid_data_all() {
+  $data = $_POST;
+  $output = [];
+  if (isset($data['nids'])) {
+    foreach($data['nids'] as $nid_string) {
+      $output[$nid_string] = novo_program_get_kid_data($nid_string, FALSE);
+    }
+  }
+
+  drupal_json_output($output);
+}
+
+/**
+ * Get kid data.
+ */
+function novo_program_get_kid_data($nid, $json = TRUE) {
+  if (function_exists("_entityreference_autocomplete_validate") && preg_match(ENTITYREFERENCE_FIND_ID_REGEX, rtrim($nid), $matches)) {
+    $nid = !empty($matches[ENTITYREFERENCE_ID_MATCH_INDEX]) ? $matches[ENTITYREFERENCE_ID_MATCH_INDEX] : '';
+  }
+
+  $node = node_load($nid);
+
+  $output = '';
+  $output_data = [];
+
+  $dob_items = field_get_items("node", $node, "field_dob");
+  if (isset($dob_items[0])) {
+    $display = ['label' => 'hidden', 'type' => 'only_age'];
+    $view = field_view_value("node", $node, "field_dob", $dob_items[0], $display);
+    $age = render($view);
+    $output_data[] = '<span class="novo-program-kid-data-age">' . $age . ' </span>';
+  }
+  else {
+    $output_data[] = '<span class="novo-program-kid-data-age"> - </span>';
+  }
+
+  $dob_items = field_get_items("node", $node, "field_grade");
+  if (isset($dob_items[0])) {
+    $display = [
+      'label' => 'hidden',
+      'type' => 'taxonomy_term_reference_plain',
+    ];
+    $grade = render(field_view_value("node", $node, "field_grade", $dob_items[0], $display));
+    $output_data[] = '<span class="novo-program-kid-data-grage">' . $grade . ' </span>';
+  }
+  else {
+    $output_data[] = '<span class="novo-program-kid-data-grage"> - </span>';
+  }
+
+  if (!empty($output_data)) {
+    $output .= '<span class="novo-program-kid-data">' . implode(" ", $output_data) . ' </span>';
+  }
+  if ($json) {
+    drupal_json_output($output);
+  } else {
+    return $output;
+  }
+
+  drupal_json_output([]);
+
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function novo_program_node_update($node) {
+  if ($node->type == "class") {
+    // Invoke your callback function AFTER the node is updated.
+    drupal_register_shutdown_function('novo_program_node_post_update', $node);
+  }
+}
+
+/**
+ * Post save callback for class node.
+ */
+function novo_program_node_post_update($node) {
+  // Update programm name and attendance name when class name was updated.
+  $query = db_select("field_data_field_program_class_name", "cn");
+  $query->addField("cn", "entity_id", "program_entity_id");
+  $query->addField("pn", "entity_id", "attendance_entity_id");
+  $query->condition("cn.bundle", "program");
+  $query->condition("cn.field_program_class_name_target_id", $node->nid);
+  $query->leftJoin("field_data_field_attendance_program_name", "pn", "pn.field_attendance_program_name_target_id = cn.entity_id");
+  $rows = $query->execute()->fetchAll();
+
+  if (!empty($rows)) {
+    $program_nids = [];
+    $attendance_nids = [];
+    // We redistribute nids by types because we need update program nodes first and then attendance nodes.
+    foreach ($rows as $value) {
+      $program_nids[$value->program_entity_id] = $value->program_entity_id;
+      $attendance_nids[$value->attendance_entity_id] = $value->attendance_entity_id;
+    }
+
+    if (!empty($program_nids)) {
+      $program_nodes = node_load_multiple(array_keys($program_nids), [], TRUE);
+      foreach ($program_nodes as $program_node) {
+        $program_node->title = "%AutoEntityLabel%";
+        node_save($program_node);
+        cache_clear_all("field:node:{$program_node->nid}", 'cache_field');
+        entity_get_controller('node')->resetCache(array($program_node->nid));
+      }
+    }
+
+    if (!empty($attendance_nids)) {
+      $attendance_nodes = node_load_multiple(array_keys($attendance_nids), [], TRUE);
+      foreach ($attendance_nodes as $attendance_node) {
+        $attendance_node->title = "%AutoEntityLabel%";
+        node_save($attendance_node);
+        cache_clear_all("field:node:{$attendance_node->nid}", 'cache_field');
+        entity_get_controller('node')->resetCache(array($attendance_node->nid));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function novo_program_views_query_alter(&$view, &$query) {
+  // Not show classes used in other programs.
+  if ($view->name == 'programm_class_list') {
+    $nid = NULL;
+
+    // Default node edit page.
+    if (arg(0) == "node" && arg(2) == "edit") {
+      $nid = arg(1);
+    }
+
+    // DDF update.
+    if (arg(0) == "ddf" && arg(1) == "update" && is_numeric(arg(5))) {
+      $nid = arg(5);
+    }
+
+    if ($nid) {
+      $condition = db_or()
+        ->isNull('field_program_class_name_node.nid')
+        ->condition('field_program_class_name_node.nid', $nid, '=');
+      $query->add_where(0, $condition);
+    }
+  }
+}
+
+/**
+ * Render report links.
+ */
+function novo_program_render_report_links($form, $form_state) {
+  $year = isset($form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0]) ? $form['field_program_year'][$form['field_program_year']['#language']]['#default_value'][0] : NULL;
+  $location = isset($form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0]) ? $form['field_program_location'][$form['field_program_location']['#language']]['#default_value'][0] : NULL;
+  $class = isset($form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0]) ? $form['field_program_class_name'][$form['field_program_class_name']['#language']]['#default_value'][0] : NULL;
+  $program = isset($form['nid']['#value']) ? $form['nid']['#value'] : NULL;
+
+  $nametag_options = [];
+  $canvassing_options = [];
+  $allergy_options = [];
+  $roster_options = [];
+  if (!empty($year)) {
+    $nametag_options['field_program_year_year'] = $year;
+    $canvassing_options['field_program_year_year'] = $year;
+    $allergy_options['field_program_year_year'] = $year;
+    $roster_options['field_program_year_year'] = $year;
+  }
+  if (!empty($location)) {
+    $nametag_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $canvassing_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $allergy_options['field_program_location_target_id_entityreference_filter'] = $location;
+    $roster_options['field_program_location_target_id_entityreference_filter'] = $location;
+  }
+  if (!empty($class)) {
+    $nametag_options['nid_entityreference_filter'] = $class;
+  }
+  if (!empty($program)) {
+    $canvassing_options['nid_entityreference_filter'] = $program;
+    $allergy_options['nid_entityreference_filter'] = $program;
+    $roster_options['nid_entityreference_filter'] = $program;
+  }
+
+  $reports = [
+    'canvassing-report' => [
+      'title' => t('Canvasing'),
+      'options' => $canvassing_options,
+    ],
+    'roster-report' => [
+      'title' => t('Roster'),
+      'options' => $roster_options,
+    ],
+    'report-nametag' => [
+      'title' => t('Nametag'),
+      'options' => $nametag_options,
+    ],
+    'children-allergy-report' => [
+      'title' => t('Allergy'),
+      'options' => $allergy_options,
+    ],
+  ];
+
+  $links = [];
+  foreach ($reports as $url => $link_data) {
+    $links[] = [
+      'title' => $link_data['title'],
+      'href' => url($url),
+      'attributes' => ['target' => '_blank'],
+      'query' => isset($link_data['options']) ? $link_data['options'] : [],
+    ];
+  }
+
+  // @codingStandardsIgnoreStart
+  return '<div class="novo-program-report-wrapper">' . theme("links", [
+      'heading' => [
+        'level' => 'h4',
+        'class' => 'novo-program-report-links-heading',
+        'text' => t("Reports"),
+      ],
+      'links' => $links,
+      'attributes' => ['class' => ['novo-program-report-links']],
+    ]) . '</div>';
+  // @codingStandardsIgnoreEnd
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_program_form_class_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'novo_program_form_class_node_form_validate';
+
+  // Disable change fields on edit form.
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if (!$is_new) {
+    $form['field_class_year'][$form['field_class_year']['#language']]['#disabled'] = TRUE;
+    $form['field_class_location'][$form['field_class_location']['#language']]['#disabled'] = TRUE;
+  }
+
+}
+
+/**
+ * Class form validate.
+ */
+function novo_program_form_class_node_form_validate(&$form, &$form_state) {
+  $program_day = isset($form_state['values']['field_program_day'][LANGUAGE_NONE]) ? $form_state['values']['field_program_day'][LANGUAGE_NONE] : [];
+
+  if (isset($program_day['add_more'])) {
+    unset($program_day['add_more']);
+  }
+  foreach ($program_day as $key => $day) {
+    $start = isset($day['field_program_time'][LANGUAGE_NONE][0]['value']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value'] : 0;
+    $end = isset($day['field_program_time'][LANGUAGE_NONE][0]['value2']) ? $day['field_program_time'][LANGUAGE_NONE][0]['value2'] : 0;
+    // Fix drupal end time for 12:00AM!
+    if ($end == 86400) {
+      $end = 0;
+    }
+    if ($end <= $start) {
+      form_set_error("field_program_day][" . LANGUAGE_NONE . "][" . $key . "][field_program_time", t("Start Time should be less then End time."));
+    }
+  }
+}

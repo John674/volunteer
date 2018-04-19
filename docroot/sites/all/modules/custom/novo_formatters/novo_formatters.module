@@ -1,0 +1,165 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function novo_formatters_field_formatter_info() {
+  $formatters = array(
+    'icon_times' => array(
+      'label' => t('Icon times'),
+      'field types' => array('number_integer'),
+    ),
+    'date_age' => array(
+      'label' => t('Date and age'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
+    'only_age' => array(
+      'label' => t('Only age'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
+    'advanced_dob' => array(
+      'label' => t('Advanced date of birth'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
+    'school_year' => array(
+      'label' => t('School year'),
+      'field types' => array('date', 'datestamp', 'datetime'),
+    ),
+  );
+
+  return $formatters;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_formatters_theme($existing, $type, $theme, $path) {
+  return array(
+    'icon_clock' => array(
+      'variables' => array('times' => NULL),
+      'template' => 'templates/icon_clock',
+    ),
+    'date_age' => array(
+      'variables' => array('dob' => NULL, 'age' => NULL),
+      'template' => 'templates/date_age',
+    ),
+    'only_age' => array(
+      'variables' => array('dob' => NULL, 'age' => NULL),
+      'template' => 'templates/only_age',
+    ),
+    'advanced_dob' => array(
+      'variables' => array(
+        'dob' => NULL,
+        'age' => NULL,
+        'advanced_text' => NULL
+      ),
+      'template' => 'templates/advanced_dob',
+    ),
+    'school_year' => array(
+      'variables' => array('year' => NULL, 'to_year' => NULL),
+      'template' => 'templates/school_year',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function novo_formatters_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = [];
+  $type = $display['type'];
+
+  switch ($type) {
+    case 'icon_times':
+      $times = isset($items[0]['value']) ? (int) $items[0]['value'] : NULL;
+      if (!empty($times)) {
+        $element[] = array(
+          '#theme' => 'icon_clock',
+          '#times' => $times,
+        );
+      }
+      break;
+
+    case 'date_age':
+      $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
+      if (!empty($dob)) {
+        $date_diff = date_diff(new DateTime($dob), new DateTime());
+        $age = $date_diff->y;
+        $element[] = array(
+          '#theme' => 'date_age',
+          '#dob' => $dob,
+          '#age' => $age,
+        );
+      }
+      break;
+
+    case 'only_age':
+      $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
+      if (!empty($dob)) {
+        $date_diff = date_diff(new DateTime($dob), new DateTime());
+        $age = $date_diff->y;
+        $element[] = array(
+          '#theme' => 'only_age',
+          '#dob' => $dob,
+          '#age' => $age
+        );
+      }
+      break;
+
+    case 'advanced_dob':
+      $dob = isset($items[0]['value']) ? format_date($items[0]['value'], 'custom', 'm/d/Y') : NULL;
+      if (!empty($dob)) {
+        $dob_obj = new DateTime($dob);
+
+        $now_obj = new DateTime();
+        $now_obj->setTime(23, 59, 59);
+        $date_diff = date_diff($dob_obj, $now_obj);
+        $age = $date_diff->y;
+
+        $dob_m = $dob_obj->format("n");
+        $dob_d = $dob_obj->format("j");
+
+        $new_dob_obj = $dob_obj->setDate($now_obj->format("Y"), $dob_m, $dob_d)->setTime(23, 59, 59);
+        $dob_diff = date_diff($new_dob_obj, $now_obj);
+
+        $advanced_text = "";
+        $m = $dob_diff->m;
+        $d = $dob_diff->d;
+
+        if (empty($m)) {
+          if (empty($d)) {
+            $advanced_text = t("Today!");
+          }
+          elseif ($d < 2) {
+            $advanced_text = t("Tomorrow!");
+          }
+        }
+
+        $element[] = array(
+          '#theme' => 'advanced_dob',
+          '#dob' => $dob,
+          '#age' => $age,
+          '#advanced_text' => $advanced_text
+        );
+      }
+      break;
+
+    case 'school_year':
+      $year = isset($items[0]['value']) ? format_date(strtotime($items[0]['value']), 'custom', 'Y') : NULL;
+      if (!empty($year)) {
+        $element[] = array(
+          '#theme' => 'school_year',
+          '#year' => $year,
+          '#to_year' => intval($year) + 1,
+        );
+      }
+      break;
+  }
+
+  return $element;
+}

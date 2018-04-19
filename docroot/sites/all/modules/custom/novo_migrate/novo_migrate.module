@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Migrate functions.
+ */
+
+/**
+ * Implement hook_migrate_api()
+ */
+function novo_migrate_migrate_api() {
+  return array(
+    'api' => 2,
+    'groups' => array(
+      'novo' => array(
+        'title' => 'Import data',
+      ),
+    ),
+    'migrations' => array(
+      'Users' => array(
+        'class_name' => 'UserNovoMigration',
+        'group_name' => 'novo',
+      ),
+      'Volunteers' => array(
+        'class_name' => 'VolunteerNovoMigration',
+        'group_name' => 'novo',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function novo_migrate_preprocess_page($variables) {
+
+}

@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook__FORM_ID_form_alter().
+ */
+function novo_account_form_user_profile_form_alter(&$form, &$form_state) {
+  global $user;
+  $form['account']['name']['#access'] = TRUE;
+  $form['actions']['cancel']['#access'] = ($user->uid == 1) ? TRUE: FALSE;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function novo_account_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if (isset($form['#user']->uid) && $form['#user']->uid == 1 && $user->uid != 1) {
+    drupal_access_denied();
+    module_invoke_all('exit');
+    drupal_exit();
+  }
+
+  if ($form_id == "user_profile_form" && user_has_role(NOVO_MASTER_ROLE_VOLUNTEER)) {
+    $form['account']['mail']['#attributes']['disabled'] = 'disabled';
+  }
+
+  if (($form_id == "user_profile_form" || $form_id == "user_register_form")) {
+    if (user_access("novo account edit roles")) {
+      $form['account']['roles']['#access'] = TRUE;
+    }
+
+    // Validate Date of Birth.
+    if (function_exists("novo_master_dob_validate")) {
+      $form['field_u_birthday'][LANGUAGE_NONE][0]['#element_validate'][] = "novo_master_dob_validate";
+    }
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_account_permission() {
+  return array(
+    'novo account edit roles' => array(
+      'title' => t('Allow edit roles for users'),
+      'description' => t('Allow edit roles for any user.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function novo_account_preprocess_page(&$variables) {
+  global $user;
+
+  if ($user->uid != 1 && user_is_logged_in()) {
+    if (in_array("page__user", $variables['theme_hook_suggestions']) && !in_array("page__user__edit", $variables['theme_hook_suggestions'])) {
+      $role = user_role_load_by_name(NOVO_MASTER_VOLUNTEER_ROLE_MANE);
+      $account_uid = (int) arg(1);
+
+      if (arg(0) == "user" && !empty($account_uid) && user_load($account_uid) && !user_has_role($role->rid)) {
+        drupal_goto("user/$account_uid/edit");
+      }
+      else {
+        // For volunteers and if user account if not exist.
+        if (isset($_GET['destination'])) {
+          // Need for right redirect.
+          unset($_GET['destination']);
+        }
+        drupal_goto("<front>");
+      }
+    }
+  }
+}

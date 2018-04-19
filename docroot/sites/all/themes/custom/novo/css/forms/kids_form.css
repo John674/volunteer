@@ -1,0 +1,18 @@
+.node-kids-form .field-name-field-gender .form-item.radio,
+.node-kids-form .field-name-field-attend-church-reg .form-item.radio,
+.node-kids-form .field-name-field-t-shirt-size .form-item.radio {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-first-name,
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-last-name,
+.node-kids-form .field-name-field-parent-guardian .field-name-field-parent-guardian-relation {
+  display: inline-block;
+  max-width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+.node-kids-form .field-name-field-parent-guardian .field-name-field-phone .field-multiple-table thead {
+  display: none;
+}

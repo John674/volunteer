@@ -1,0 +1,228 @@
+<?php
+
+/**
+ * @file
+ * Applications functions.
+ */
+
+define('NOVO_APPLICATION_STATUS_VOC_NAME', 'application_status');
+define('NOVO_APPLICATION_STATUS_APPROVED_NAME', 'Approved');
+define('NOVO_APPLICATION_STATUS_NOT_APPROVED_NAME', 'Not Approved');
+define('NOVO_APPLICATION_WEEKDAY_ORDER', serialize(array_flip(array(
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+))));
+
+module_load_include("inc", "novo_applications", "includes/novo_applications.func");
+module_load_include("inc", "novo_applications", "includes/novo_applications.forms");
+
+/**
+ * Implements hook_menu().
+ */
+function novo_applications_menu() {
+  $items = array();
+
+  $items['novo-applications/update-status/%node/%'] = array(
+    'title' => 'Update status',
+    'page callback' => 'novo_application_update_status',
+    'page arguments' => array(2, 3),
+    'access arguments' => array('approve application'),
+    'type' => MENU_CALLBACK
+  );
+
+  $items['novo-applications/notify-user-exp/%node'] = [
+    'title' => 'Notify User About Expiration',
+    'page callback' => 'novo_application_notify_user_exp',
+    'page arguments' => [2],
+    'access arguments' => ['notify user about expiration'],
+    'type' => MENU_CALLBACK,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_applications_theme() {
+  return array(
+    'novo_applications_welcome_block' => array(
+      'render element' => 'data',
+      'template' => 'plugins/templates/novo_applications_welcome_block',
+    )
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function novo_applications_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' || $owner == 'panels') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_applications_preprocess_node(&$variables) {
+  if (isset($variables['type']) && $variables['type'] == 'application') {
+    // Application status.
+    $app_status_tid = (isset($variables['field_app_status'][0]['tid'])) ? $variables['field_app_status'][0]['tid'] : NULL;
+    $lang = isset($variables['language']) ? $variables['language'] : LANGUAGE_NONE;
+    $app_completed = (isset($variables['field_completed'][$lang][0]['value'])) ? $variables['field_completed'][$lang][0]['value'] : FALSE;
+    $expired_date = (isset($variables['field_expired_date'][$lang][0]['value'])) ? $variables['field_expired_date'][$lang][0]['value'] : FALSE;
+
+    list($app_status_output, $app_status) = novo_application_get_status($app_completed, $app_status_tid);
+
+    if ($expired_date && $expired_date < REQUEST_TIME) {
+      $app_status_output = t("Expired :date", [
+        ":date" => format_date($expired_date, "custom", "m/d/Y"),
+      ]);
+      $variables['app_status_is_expired'] = TRUE;
+    }
+
+    $variables['content']['app_status'] = array(
+      "#markup" => $app_status_output,
+    );
+
+    // Approve/ not approve buttons.
+    $approve_block = novo_application_prepare_approve_block($variables['nid'], $app_status, $app_completed);
+    if ($approve_block) {
+      $variables['content']['app_approve_block'] = array(
+        "#markup" => $approve_block,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_applications_permission() {
+  return array(
+    'edit application with any status' => array(
+      'title' => t('Allow edit application with any status'),
+      'description' => t('Allow edit application with any status: complete or not.'),
+    ),
+    'approve application' => array(
+      'title' => t('Allow approve/not approve application'),
+      'description' => t('Allow approve/not approve application.'),
+    ),
+    'disable auto complete' => array(
+      'title' => t('Disable auto complete'),
+      'description' => t('Disable auto complete multistep (for admins).'),
+    ),
+    'disable auto complete redirect' => array(
+      'title' => t('Disable auto complete redirect'),
+      'description' => t('Disable auto complete redirect (for admins).'),
+    ),
+    'disable multistep application form' => array(
+      'title' => t('Disable multistep application form.'),
+      'description' => t('Disable multistep (for reviewer).'),
+    ),
+    'notify user about expiration' => array(
+      'title' => t('Notify User About Expiration.'),
+      'description' => t('Allow Notify User About Expiration.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function novo_applications_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_applications') . '/views',
+  );
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function novo_applications_node_access($node, $op, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  if ($type == "application" && $op == 'update' && !user_access("edit application with any status")) {
+
+    // Disable edit access for volunteer for completed node.
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? $node->field_completed[$lang][0]['value'] : FALSE;
+    $app_user_uid = isset($node->field_app_user[$lang][0]['value']) ? $node->field_app_user[$lang][0]['value'] : -1;
+
+    return (!$node_completed && $app_user_uid == $account->uid) ? NODE_ACCESS_ALLOW : NODE_ACCESS_DENY;
+  }
+
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function novo_applications_views_query_alter(&$view, &$query) {
+  // Not show classes used in other programs.
+  if ($view->name == 'site_field_options_list') {
+
+    $year = novo_applications_get_academic_current_year();
+    $alias = $query->add_table('field_data_field_class_year');
+    $query->add_where(0, "$alias.field_class_year_year", $year, '=');
+
+  }
+}
+
+/**
+ * Get current academic year.
+ */
+function novo_applications_get_academic_current_year() {
+  $time = time();
+  $year = date("Y", $time);
+  $month = date("n", $time);
+
+  return ($month >= 8) ? $year : $year - 1;
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function novo_applications_node_update($node) {
+  if ($node->type == "application") {
+    // Invoke your callback function AFTER the node is updated.
+    drupal_register_shutdown_function('novo_applications_node_post_update', $node);
+  }
+}
+
+/**
+ * Post save callback for class node.
+ */
+function novo_applications_node_post_update($node) {
+  if (isset($node->original) && $node->field_expired_date[LANGUAGE_NONE][0]['value'] != $node->original->field_expired_date[LANGUAGE_NONE][0]['value']) {
+    $node->field_expired_email_sent[$node->language][0]['value'] = 0;
+    $info = field_info_field('field_expired_email_sent');
+    $fields = [$info['id']];
+    field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+    cache_clear_all("field:node:{$node->nid}", 'cache_field');
+  }
+}
+
+/**
+ * Notify user about expiration.
+ */
+function novo_application_notify_user_exp($node) {
+  novo_mail_app_notify_user_exp($node->nid);
+
+  // Switch status to "Started".
+  $node->field_completed[$node->language][0]['value'] = 0;
+  $info = field_info_field('field_completed');
+  $fields = [$info['id']];
+  field_sql_storage_field_storage_write('node', $node, 'update', $fields);
+  cache_clear_all("field:node:{$node->nid}", 'cache_field');
+  entity_get_controller('node')->resetCache(array($node->nid));
+
+  drupal_set_message("User has been notified.");
+  drupal_goto("node/" . $node->nid);
+}

@@ -1,0 +1,240 @@
+<?php
+
+/**
+ * @file
+ * All hook_update()'s.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function novo_ref_request_schema() {
+  $schema['novo_ref_tasks'] = array(
+    'description' => 'Referral request tasks.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a record.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user.uid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Task name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'email' => array(
+        'description' => 'User email',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'phone' => array(
+        'description' => 'User phone',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Task status',
+        'type' => 'int',
+        'length' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the task was created.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'updated' => array(
+        'description' => 'The Unix timestamp when the task was updated.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0
+      ),
+      'volunteer_nid' => array(
+        'description' => 'The volunteer node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1
+      ),
+      'volunteer_name' => array(
+        'description' => 'Volunteer name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'ref_name' => array(
+        'description' => 'Referral name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'ref_type' => array(
+        'description' => 'Referral type key',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      )
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+      'user_nid' => array('uid', 'nid'),
+      'nid' => array('nid'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add ref task table.
+ */
+function novo_ref_request_update_7101() {
+  $table = array(
+    'description' => 'Referral request tasks.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a record.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user.uid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The node.nid identifier.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Task name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'email' => array(
+        'description' => 'User email',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Task status',
+        'type' => 'int',
+        'length' => 1,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the task was created.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'updated' => array(
+        'description' => 'The Unix timestamp when the task was updated.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+      'user_nid' => array('uid', 'nid'),
+      'nid' => array('nid'),
+    ),
+  );
+  db_create_table('novo_ref_tasks', $table);
+}
+
+/**
+ * Add fields "volunteer_nid" and "volunteer_name".
+ */
+function novo_ref_request_update_7102() {
+  $spec = array(
+    'description' => 'User phone',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'phone', $spec);
+
+  $spec = array(
+    'description' => 'The volunteer node.nid identifier.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 1
+  );
+  db_add_field('novo_ref_tasks', 'volunteer_nid', $spec);
+
+  $spec = array(
+    'description' => 'Volunteer name',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'volunteer_name', $spec);
+}
+
+/**
+ * Add fields "ref_name".
+ */
+function novo_ref_request_update_7103() {
+  $spec = array(
+    'description' => 'Referral name',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_add_field('novo_ref_tasks', 'ref_name', $spec);
+}
+
+/**
+ * Add fields "ref_type".
+ */
+function novo_ref_request_update_7104() {
+  $spec = [
+    'description' => 'Referral type key',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => '',
+  ];
+  db_add_field('novo_ref_tasks', 'ref_type', $spec);
+}

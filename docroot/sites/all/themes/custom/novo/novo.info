@@ -1,0 +1,69 @@
+name = Novo custom theme
+description = A Bootstrap Sub-theme.
+core = 7.x
+base theme = bootstrap
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+
+regions[navigation]     = 'Navigation'
+regions[header]         = 'Top Bar'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Primary'
+regions[sidebar_second] = 'Secondary'
+regions[footer]         = 'Footer'
+regions[page_top]       = 'Page top'
+regions[page_bottom]    = 'Page bottom'
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = js/bootstrap_select/css/bootstrap-select.min.css
+
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/forms/base_form.css
+stylesheets[all][] = css/forms/application_form.css
+stylesheets[all][] = css/forms/program_form.css
+stylesheets[all][] = css/forms/attendance_form.css
+stylesheets[all][] = css/forms/kids_form.css
+stylesheets[all][] = css/forms/staff_form.css
+stylesheets[all][] = css/forms/partner_form.css
+stylesheets[all][] = css/forms/locations_form.css
+stylesheets[all][] = css/forms/mentor_form.css
+stylesheets[all][] = css/forms/class_form.css
+stylesheets[all][] = css/reports.css
+stylesheets[all][] = css/dyn_views.css
+stylesheets[all][] = css/dynamic_fields.css
+stylesheets[all][] = css/custom.css
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Scripts
+;;;;;;;;;;;;;;;;;;;;;
+
+scripts[] = 'bootstrap/js/affix.js'
+scripts[] = 'bootstrap/js/alert.js'
+scripts[] = 'bootstrap/js/button.js'
+scripts[] = 'bootstrap/js/carousel.js'
+scripts[] = 'bootstrap/js/collapse.js'
+scripts[] = 'bootstrap/js/dropdown.js'
+scripts[] = 'bootstrap/js/modal.js'
+scripts[] = 'bootstrap/js/tooltip.js'
+scripts[] = 'bootstrap/js/popover.js'
+scripts[] = 'bootstrap/js/scrollspy.js'
+scripts[] = 'bootstrap/js/tab.js'
+scripts[] = 'bootstrap/js/transition.js'
+
+scripts[] = 'js/bootstrap_select/js/bootstrap-select.min.js'
+
+scripts[] = 'js/novo.js'
+
+
+; Disable the CDN provider so compiled source files can be used.
+settings[bootstrap_cdn] = ''
+plugins[panels][layouts] = layouts

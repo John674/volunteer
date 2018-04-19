@@ -1,0 +1,17 @@
+Index: docroot/sites/all/modules/contrib/multistep/multistep.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/multistep/multistep.module	(revision 6917658ec83719796c45ac6ce65c89df00ecb509)
++++ docroot/sites/all/modules/contrib/multistep/multistep.module	(revision )
+@@ -711,6 +711,9 @@
+   $node = !empty($form_state['node']) && is_object($form_state['node']);
+   $user = !empty($form_state['user']) && is_object($form_state['user']);
+ 
++  // Disable user.
++  $user = NULL;
++
+   if ($node) {
+     $nid = $form_state['nid'];
+     // Update the step list for this node in the database

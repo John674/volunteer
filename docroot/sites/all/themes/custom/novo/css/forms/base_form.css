@@ -1,0 +1,54 @@
+.node-form {
+  background: #f5f5f5;
+  border-color: #dddddd;
+  padding: 20px;
+}
+
+.node-form .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+
+.node-form .field-name-field-contact .field-name-field-first-name,
+.node-form .field-name-field-contact .field-name-field-last-name,
+.node-form .field-name-field-contact .field-name-field-email {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  vertical-align: top;
+}
+
+.node-form .date-form-element-content-multiline,
+#user-profile-form .date-form-element-content-multiline {
+  border: none;
+  padding: 0px;
+}
+
+.node-form .field-name-field-training-list .field-name-field-training-completed,
+.node-form .field-name-field-training-list .field-name-field-training-completed-date {
+  max-width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
+.node-form .field-name-field-training-list .field-multiple-table button {
+  margin-top: 26px;
+}
+
+.node-form .field-name-field-phone-number,
+.node-form .field-name-field-phone-type {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.node-form .field-name-field-phone-number input.form-text {
+  width: 200px;
+}
+
+.node-form .field-name-field-phone-type select.form-select {
+  width: 100px;
+  display: inline-block;
+}

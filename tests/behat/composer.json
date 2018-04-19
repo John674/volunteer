@@ -1,0 +1,17 @@
+{
+  "require": {
+    "drupal/tqextension": "1.*",
+    "emuse/behat-html-formatter": "master",
+    "drupal/drupal-extension": "~3.0",
+    "drupal/drupal-driver": "master",
+    "behat/drupal-propeople-context": "~1.1",
+    "behat/behat": "dev-master",
+    "behat/mink-selenium2-driver": "*",
+    "behat/mink-extension": "*"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

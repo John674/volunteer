@@ -1,0 +1,12 @@
+diff --git a/includes/base.inc b/includes/base.inc
+index 383f59a..108d92d 100644
+--- a/includes/base.inc
++++ b/includes/base.inc
+@@ -418,6 +418,7 @@ abstract class MigrationBase {
+     else {
+       if (!is_numeric($limit)) {
+         $last = drupal_strtolower($limit[strlen($limit)-1]);
++        $limit = substr($limit, 0, -1);
+         switch ($last) {
+           case 'g':
+             $limit *= 1024;

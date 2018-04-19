@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo master feature feature.
+ */
+
+include_once 'novo_master_feature.features.inc';

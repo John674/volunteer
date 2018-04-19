@@ -1,0 +1,24 @@
+Index: docroot/sites/all/modules/contrib/field_group/field_group.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/field_group/field_group.js	(date 1511273674000)
++++ docroot/sites/all/modules/contrib/field_group/field_group.js	(revision )
+@@ -69,14 +69,14 @@
+ 
+         // Add required fields mark to any element containing required fields
+         wrapper.find('div.field-group-accordion-item').each(function(i) {
+-
+           if ($(this).is('.required-fields') && $(this).find('.form-required').length > 0) {
+             $('h3.ui-accordion-header a').eq(i).append(' ').append($('.form-required').eq(0).clone());
+           }
+           if ($('.error', $(this)).length) {
+             // Save first error item, for focussing it.
+             if (!$firstErrorItem) {
+-              $firstErrorItem = $(this).parent().accordion('option', "activate" , i);
++              $firstErrorItem = $(this).parent().accordion('option', "active" , i);
++
+             }
+             $('h3.ui-accordion-header').eq(i).addClass('error');
+           }

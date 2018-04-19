@@ -1,0 +1,292 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.constants');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.db');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.api');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.func');
+module_load_include('inc', 'novo_cia', 'includes/novo_cia.cron');
+
+/**
+ * Implements hook_views_api().
+ */
+function novo_cia_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_cia') . '/views',
+  );
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function novo_cia_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'application') {
+    $cia_data = novo_cia_get_render_data($node->nid);
+    if (!empty($cia_data)) {
+      $node->content['pseudo_field_request_cia'] = array(
+        '#type' => 'item',
+        '#field_name' => 'pseudo_field_request_cia',
+        '#theme' => 'pseudo_field__request_cia',
+        '#cia_data' => $cia_data,
+      );
+    }
+
+    $node->content['pseudo_field_request_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_request_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('CIA Request date'),
+      '#date' => novo_cia_date($node->nid, 'request_date'),
+    );
+    $node->content['pseudo_field_response_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_response_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('CIA Response date'),
+      '#date' => novo_cia_date($node->nid, 'response_date'),
+    );
+
+    $node->content['pseudo_field_renewal_date_cia'] = array(
+      '#type' => 'item',
+      '#field_name' => 'pseudo_field_response_date_cia',
+      '#theme' => 'pseudo_field__date_cia',
+      '#date_type' => t('Background Check Renewal Date'),
+      '#date' => novo_cia_date($node->nid, 'response_date', TRUE),
+    );
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function novo_cia_menu() {
+  $items['novo-cia-request/send/%node'] = array(
+    'title' => 'CIA Request',
+    'page callback' => 'novo_cia_add_request_for_search',
+    'page arguments' => array(2),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/config/novo-cia'] = array(
+    'title' => 'CIA',
+    'description' => 'Cia administration tools.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'position' => 'right',
+  );
+  $items['admin/config/novo-cia/novo-cia-api-credentials'] = array(
+    'title' => 'API credentials',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('novo_cia_api_credentials'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/novo_cia.admin.inc',
+  );
+  $items['novo-cia/view_report/%'] = array(
+    'title' => 'CIA View Report',
+    'page callback' => 'novo_cia_get_report_doc',
+    'page arguments' => array(2),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function novo_cia_theme() {
+  return array(
+    'pseudo_field__request_cia' => array(
+      'variables' => array('cia_data' => NULL),
+      'template' => 'templates/novo-cia-pseudo-field--request-cia',
+    ),
+
+    'pseudo_field__date_cia' => array(
+      'variables' => array('date' => NULL, 'date_type' => NULL),
+      'template' => 'templates/novo-cia-pseudo-field-date',
+    ),
+
+    'novo_cia_request_by_ssn' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'first_name' => NULL,
+        'middle_initial' => NULL,
+        'last_name' => NULL,
+        'alias_first_name' => NULL,
+        'alias_last_name' => NULL,
+        'suffix' => NULL,
+        'address' => NULL,
+        'city' => NULL,
+        'state' => NULL,
+        'zip_code' => NULL,
+        'dob' => NULL,
+        'ssn' => NULL,
+        'ref_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/request_by_ssn',
+    ),
+
+    'novo_cia_request_by_address' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'first_name' => NULL,
+        'middle_initial' => NULL,
+        'last_name' => NULL,
+        'alias_first_name' => NULL,
+        'alias_last_name' => NULL,
+        'suffix' => NULL,
+        'address' => NULL,
+        'city' => NULL,
+        'state' => NULL,
+        'zip_code' => NULL,
+        'dob' => NULL,
+        'ref_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/request_by_address',
+    ),
+
+    'novo_cia_query_report' => array(
+      'variables' => array(
+        'username' => NULL,
+        'password' => NULL,
+        'client_name' => NULL,
+        'branch_name' => NULL,
+        'client_contact' => NULL,
+        'client_contact_email' => NULL,
+        'tracking_number' => NULL,
+      ),
+      'template' => 'templates/cia_xml/query_report',
+    ),
+
+    'novo_cia_answer_report' => array(
+      'variables' => array('params' => NULL),
+      'template' => 'templates/email/novo-cia-answer-report',
+    ),
+
+    'novo_cia_expired_date' => array(
+      'variables' => array('params' => NULL),
+      'template' => 'templates/email/novo-cia-expired-date',
+    ),
+  );
+}
+
+/**
+ * Implements hook_mail().
+ */
+function novo_cia_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+
+  switch ($key) {
+    case 'answer_report':
+      $html_email = theme("novo_cia_answer_report", array('params' => $params));
+      $message['subject'] = (isset($params['cia_answer']) && $params['cia_answer'] == 'positive') ? t("Background Check Cleared - :name", [":name" => $params['vol_name']]) : t("Background Check Issue(s) Found - :name", [":name" => $params['vol_name']]);
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
+      $message['body'][] = $html_email;
+      break;
+
+    case 'expired_date':
+      $html_email = theme("novo_cia_expired_date", array('params' => $params));
+      $message['subject'] = t("Volunteer expired");
+      $message['from'] = NOVO_MASTER_BASE_EMAIL;
+      $message['body'][] = $html_email;
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function novo_cia_cron_queue_info() {
+  $queue['novo_cia_search_queue'] = array(
+    'worker callback' => 'novo_cia_search_queue_worker',
+    'time' => 60,
+  );
+
+  $queue['novo_cia_pull_report_queue'] = array(
+    'worker callback' => 'novo_cia_pull_report_queue_worker',
+    'time' => 60,
+  );
+
+  $queue['novo_cia_send_email_reviewer_queue'] = array(
+    'worker callback' => 'novo_cia_send_email_reviewer_queue_worker',
+    'time' => 60,
+  );
+
+  $queue['novo_cia_check_expired_date_queue'] = array(
+    'worker callback' => 'novo_cia_check_expired_date_queue_worker',
+    'time' => 60,
+  );
+
+  return $queue;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function novo_cia_cron() {
+  $cron_last_search = variable_get(NOVO_CIA_CRON_LAST_SEARCH_REQUEST);
+  $cron_last_pull_report = variable_get(NOVO_CIA_CRON_LAST_PULL_REPORT_REQUEST);
+  $cron_last_check_expired = variable_get(NOVO_CIA_CRON_LAST_CHECK_EXPIRED);
+
+  if ((REQUEST_TIME - $cron_last_search) > NOVO_CIA_CRON_PERIOD_SEARCH_REQUEST) {
+    $search_queue = DrupalQueue::get('novo_cia_search_queue');
+    $pending_search_requests = novo_cia_get_pending_search_requests();
+    foreach ($pending_search_requests as $request) {
+      $search_queue->createItem(array('id' => $request->id));
+    }
+    variable_set(NOVO_CIA_CRON_LAST_SEARCH_REQUEST, REQUEST_TIME);
+  }
+
+  if ((REQUEST_TIME - $cron_last_pull_report) > NOVO_CIA_CRON_PERIOD_PULL_REPORT_REQUEST) {
+    $pull_report_queue = DrupalQueue::get('novo_cia_pull_report_queue');
+    $pending_pull_report_requests = novo_cia_get_pending_pull_report_requests();
+    foreach ($pending_pull_report_requests as $request) {
+      $pull_report_queue->createItem(array('id' => $request->id));
+    }
+    variable_set(NOVO_CIA_CRON_LAST_PULL_REPORT_REQUEST, REQUEST_TIME);
+  }
+
+  if ((REQUEST_TIME - $cron_last_check_expired) > NOVO_CIA_CRON_CHECK_EXPIRED_REQUEST) {
+    $check_expired_queue = DrupalQueue::get('novo_cia_check_expired_date_queue');
+    $completed_pull_report_requests = novo_cia_get_completed_pull_report_requests();
+    foreach ($completed_pull_report_requests as $request) {
+      $check_expired_queue->createItem(array('id' => $request->id));
+    }
+    variable_set(NOVO_CIA_CRON_LAST_CHECK_EXPIRED, REQUEST_TIME);
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_cia_permission() {
+  return array(
+    'view CIA' => array(
+      'title' => t('Allow view CIA'),
+      'description' => t('Allow view CIA data.'),
+    ),
+    'send CIA' => array(
+      'title' => t('Allow send/resend CIA'),
+      'description' => t('Allow send/resend CIA data.'),
+    ),
+  );
+}

@@ -1,0 +1,36 @@
+diff --git a/masked_input.module b/masked_input.module
+index cd95c48..d87054d 100644
+--- a/masked_input.module
++++ b/masked_input.module
+@@ -43,18 +43,18 @@ function masked_input_libraries_info() {
+     'maskedinput' => array(
+       'name' => 'Masked Input',
+       'vendor url' => 'http://digitalbush.com/projects/masked-input-plugin',
+-      'download url' => 'http://cloud.github.com/downloads/digitalBush',
++      'download url' => 'https://github.com/digitalBush/jquery.maskedinput/archive/1.4.1.zip',
+       'versions' => array(
+-        '1.3' => array(
++        '1.4.1' => array(
+           'variants' => array(
+             'minified' => array(
+               'files' => array(
+-                'js' => array('jquery.maskedinput-1.3.min.js'),
++                'js' => array('jquery.maskedinput.min.js'),
+               ),
+             ),
+             'source' => array(
+               'files' => array(
+-                'js' => array('jquery.maskedinput-1.3.js'),
++                'js' => array('jquery.maskedinput.js'),
+               ),
+             ),
+           ),
+@@ -108,7 +108,7 @@ function masked_input_process_callback($element, &$form_state, $form) {
+   );
+ 
+   // Attaching library, integration script, and settings array.
+-  $element['#attached']['js'][] = libraries_get_path('maskedinput') . '/jquery.maskedinput-1.3.js';
++  $element['#attached']['js'][] = libraries_get_path('maskedinput') . '/jquery.maskedinput.min.js';
+   $element['#attached']['js'][] = drupal_get_path('module','masked_input') . '/js/masked_input.js';
+   $element['#attached']['js'][] = array(
+     'type' => 'setting',

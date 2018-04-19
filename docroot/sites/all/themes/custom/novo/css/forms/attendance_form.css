@@ -1,0 +1,79 @@
+.node-attendance-form .select2-container.select2-container-multi,
+.node-attendance-form .chosen-container-multi {
+  padding: 0px;
+  height: auto;
+}
+.node-attendance-form .input-group-addon {
+  width: 0px;
+  border: none;
+  background: none;
+  padding: 0px;
+}
+.node-attendance-form .field-name-field-attendance-year,
+.node-attendance-form .field-name-field-attendance-location,
+.node-attendance-form .field-name-field-attendance-program-name,
+.node-attendance-form .field-name-field-attendance-date {
+  display: block;
+  vertical-align: bottom;
+  width: 400px;
+}
+.node-attendance-form .field-name-field-attendance-year .form-item,
+.node-attendance-form .field-name-field-attendance-location .form-item,
+.node-attendance-form .field-name-field-attendance-program-name .form-item,
+.node-attendance-form .field-name-field-attendance-date .form-item {
+  vertical-align: bottom;
+}
+.node-attendance-form .field-name-field-attendance-program-name {
+  width: 800px;
+}
+.node-attendance-form .field-name-field-attendance-program-name .form-item {
+  width: 400px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+.node-attendance-form .field-name-field-attendance-date .form-text {
+  width: 400px;
+}
+.node-attendance-form .field-name-field-attendance-year,
+.node-attendance-form .field-name-field-attendance-location,
+.node-attendance-form .field-name-field-attendance-program-name {
+  margin-right: 10px;
+}
+.node-attendance-form .field-name-field-attendance-location select,
+.node-attendance-form .field-name-field-attendance-program-name select {
+  min-width: 300px;
+}
+.node-attendance-form .select2-container {
+  padding: 0px;
+  border: none;
+}
+.node-attendance-form .select2-container-multi .select2-choices .select2-search-choice,
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice {
+  padding: 1px 20px 1px 5px;
+}
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice {
+  margin: 2px 5px 2px 0;
+}
+.node-attendance-form .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+  top: 2px;
+}
+.node-attendance-form .select2-container-multi .select2-choices .select2-search-field input {
+  max-height: 25px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  margin: 0;
+}
+.node-attendance-form .select2-container-multi .select2-choices {
+  min-height: 10px;
+  border-radius: 4px;
+}
+.node-attendance-form .select2-search-choice-close {
+  top: 1px;
+}
+.node-attendance-form .chosen-container-multi input {
+  vertical-align: middle;
+}
+.node-attendance-form .select2-search input, .node-attendance-form .select2-search-choice-close, .node-attendance-form .select2-container .select2-choice abbr, .node-attendance-form .select2-container .select2-choice .select2-arrow b {
+  background-size: 60px 39px !important;
+}

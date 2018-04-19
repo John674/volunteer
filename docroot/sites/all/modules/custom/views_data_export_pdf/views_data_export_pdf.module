@@ -1,0 +1,138 @@
+<?php
+
+/**
+ * @file
+ * Main module functions and hooks.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function views_data_export_pdf_menu() {
+  $items['admin/config/content/views_data_export_pdf'] = [
+    'title' => 'Views data export PDF',
+    'description' => 'Configure the settings for Views data export PDF.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['views_data_export_pdf_settings_form'],
+    'type' => MENU_NORMAL_ITEM,
+    'access arguments' => ['administer views_data_export_pdf'],
+    'file' => 'views_data_export_pdf.admin.inc',
+  ];
+
+  $items['views_data_export_pdf/header-html/%'] = [
+    'title' => '',
+    'page callback' => 'views_data_export_pdf_header_html',
+    'page arguments' => [2],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'delivery callback' => 'views_data_export_pdf_delivery_callback',
+  ];
+
+  $items['views_data_export_pdf/footer-html/%'] = [
+    'title' => '',
+    'page callback' => 'views_data_export_pdf_footer_html',
+    'page arguments' => [2],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'delivery callback' => 'views_data_export_pdf_delivery_callback',
+  ];
+
+  return $items;
+}
+
+/**
+ * PDF header page.
+ */
+function views_data_export_pdf_header_html($view_name) {
+  $view = views_get_view($view_name);
+  $content = theme("views_data_export_pdf_pheader", ['view' => $view]);
+  return theme("views_data_export_pdf_pheader_wrapper", ['content' => $content]);
+}
+
+/**
+ * PDF footer page.
+ */
+function views_data_export_pdf_footer_html($view_name) {
+  $view = views_get_view($view_name);
+  $content = theme("views_data_export_pdf_pfooter", ['view' => $view]);
+  return theme("views_data_export_pdf_pfooter_wrapper", ['content' => $content]);
+}
+
+/**
+ * Delivery callback for PDF header/footer.
+ */
+function views_data_export_pdf_delivery_callback($page_callback_result) {
+  print $page_callback_result;
+  drupal_page_footer();
+}
+
+/**
+ * Implements hook_permission().
+ */
+function views_data_export_permission() {
+  $permissions['administer views_data_export_pdf'] = [
+    'title' => t('Administer Views data export PDF'),
+    'description' => t('Allow users to administer the Views data export PDF settings.'),
+    // We make this restricted because you can set the path to the wkhtmltopdf
+    // binary from the settings page. It isn't vulnerable to injection but
+    // it's probably not a setting you want everyone configuring anyway.
+    'restrict access' => TRUE,
+  ];
+
+  return $permissions;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function views_data_export_pdf_views_api() {
+  // Using version 2 because Views Data Export still uses it too.
+  return [
+    'api' => 2,
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function views_data_export_pdf_theme($existing, $type, $theme, $path) {
+  module_load_include('inc', 'views_data_export_pdf', 'theme/views_data_export_pdf.theme');
+  $hooks = [];
+  $hooks['views_data_export_pdf_theader'] = [
+    'variables' => ['view' => NULL, 'header_row' => ''],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-theader',
+  ];
+
+  $hooks['views_data_export_pdf_tfooter'] = [
+    'variables' => [],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-tfooter',
+  ];
+
+  $hooks['views_data_export_pdf_pheader'] = [
+    'variables' => [],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pheader',
+  ];
+
+  $hooks['views_data_export_pdf_pfooter'] = [
+    'variables' => [],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pfooter',
+  ];
+
+  $hooks['views_data_export_pdf_pheader_wrapper'] = [
+    'variables' => ['content' => ''],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pheader-wrapper',
+  ];
+
+  $hooks['views_data_export_pdf_pfooter_wrapper'] = [
+    'variables' => ['content' => ''],
+    'file' => 'theme/views_data_export_pdf.theme.inc',
+    'template' => 'theme/views-data-export-pdf-pfooter-wrapper',
+  ];
+
+  return $hooks;
+}

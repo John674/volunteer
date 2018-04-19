@@ -1,0 +1,39 @@
+.group-title {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  text-transform: uppercase;
+}
+
+.group-title .placeholder {
+  font-style: normal;
+}
+
+.group-title div {
+  padding: 0px 5px;
+  font-size: 18px;
+}
+
+table{
+  page-break-after: left;
+}
+
+table thead tr th {
+  background: none;
+  page-break-inside: avoid;
+  border: none;
+}
+table thead tr {
+  page-break-inside: avoid;
+}
+tr.location-header th {
+  text-align: right;
+  border: none;
+}
+.field-collection-item-field-phone {
+  display: inline-block;
+}
+tr.even {
+  background: none!important;
+}

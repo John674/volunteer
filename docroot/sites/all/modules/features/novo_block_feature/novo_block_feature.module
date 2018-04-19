@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo Block feature feature.
+ */
+
+include_once 'novo_block_feature.features.inc';

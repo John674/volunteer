@@ -1,0 +1,4 @@
+name = Novo Mentors
+description = Mentors module.
+core = 7.x
+package = Novo

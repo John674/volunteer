@@ -1,0 +1,24 @@
+.node-mentors-form .field-name-field-mentor-type .form-item.radio,
+.node-mentors-form .field-name-field-mentoring .form-item.radio {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.node-mentors-form .select2-container {
+  max-height: 25px;
+  padding: 0;
+  border: none;
+}
+.node-mentors-form .select2-container .select2-choice {
+  height: 25px;
+}
+
+.field-type-entityreference .select2-container.select2-allowclear .select2-choice abbr {
+  top: 5px;
+}
+
+.node-mentors-form .select2-drop-active {
+  margin-top: -10px;
+  padding-top: 8px;
+}

@@ -1,0 +1,272 @@
+.node-program-form .field-name-field-program-volunteers-list .select2-container.select2-container-multi,
+.node-program-form .field-name-field-program-staff-list .select2-container.select2-container-multi {
+  padding: 0px;
+  height: auto;
+}
+
+.node-program-form .field-name-field-program-volunteers-list .select2-choices,
+.node-program-form .field-name-field-program-staff-list .select2-choices {
+  background: none;
+  border: none;
+}
+
+.node-program-form .field-p-kid-name {
+  width: 370px;
+}
+
+.node-program-form .field-name-field-p-kid-name {
+  max-width: 250px;
+  min-width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 0px;
+}
+
+.node-program-form .field-name-field-p-parent-sign,
+.node-program-form .field-name-field-p-photo-release,
+.node-program-form .field-name-field-p-text-parent,
+.node-program-form .field-name-field-p-bag {
+  display: inline-block;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  margin-top: 6px;
+  vertical-align: top;
+}
+
+.node-program-form .field-name-field-p-small-group .bootstrap-select.form-select,
+.node-program-form .field-name-field-p-canvassing-group .bootstrap-select.form-select {
+  display: inline-block;
+  max-width: 200px;
+  margin-left: 0px;
+}
+
+.node-program-form .field-name-field-p-small-group .bootstrap-select.form-select {
+  max-width: 200px;
+}
+
+.node-program-form .field-p-group-wrapper {
+  margin-top: 15px;
+}
+
+.node-program-form .field-p-group-wrapper .field-name-field-p-small-group,
+.node-program-form .field-p-group-wrapper .field-name-field-p-canvassing-group {
+  display: inline-block;
+}
+
+.node-program-form .field-p-group-wrapper .field-name-field-p-small-group {
+  margin-right: 30px;
+}
+.node-program-form .field-name-field-p-small-group .form-control,
+.node-program-form .field-p-canvassing-group .form-control {
+  height: auto;
+}
+
+.node-program-form .form-item-title {
+  min-width: 300px;
+  display: block;
+  vertical-align: top;
+}
+
+.node-program-form .field-name-field-program-school-year {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 0px;
+}
+
+.node-program-form .field-name-field-program-school-year .date-form-element-content {
+  border: none;
+  padding: 0px;
+  max-width: 300px;
+}
+
+.node-program-form .field-name-field-program-location {
+  display: block;
+  vertical-align: top;
+  width: 310px;
+  margin-left: 0px;
+}
+
+.node-program-form .field-name-field-program-location .form-control.form-select {
+  width: 300px;
+}
+
+.node-program-form .field-name-field-program-year select {
+  width: 300px;
+}
+
+.node-program-form .field-name-field-program-class-name {
+  display: block;
+  vertical-align: top;
+  width: 610px;
+  margin-left: 0px;
+}
+
+.node-program-form .field-name-field-program-class-name .form-type-select.form-item {
+  width: 300px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.node-program-form .field-name-field-program-class-name .form-control.form-select {
+  width: 300px;
+}
+
+.node-program-form .input-group-addon {
+  width: 0px;
+  border: none;
+  background: none;
+  padding: 0px;
+}
+
+.node-program-form .field-name-field-program-kids-list table .tabledrag,
+.node-program-form .field-name-field-program-kids-list table .field-multiple-drag,
+.node-program-form .field-name-field-program-kids-list .tabledrag-toggle-weight-wrapper,
+.node-program-form .field-name-field-program-day table .tabledrag,
+.node-program-form .field-name-field-program-day table .field-multiple-drag,
+.node-program-form .field-name-field-program-day .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+
+.node-program-form .tabledrag-hide {
+  display: none;
+}
+
+
+.node-program-form .field-name-field-program-kids-list table thead tr th {
+  padding: 0px 0px 7px 7px;
+}
+
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4),
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(8) {
+  width: 50px;
+}
+
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(1) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(2) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(3) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(4) label,
+.node-program-form .field-name-field-program-kids-list table thead tr th:nth-child(8) label {
+  -moz-transform: rotate(300deg);
+  -webkit-transform: rotate(300deg);
+  -o-transform: rotate(300deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  font-size: 12px;
+}
+
+.node-program-form .field-name-field-program-day table td,
+.node-program-form .field-name-field-program-kids-list table td {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.node-program-form .field-name-field-program-kids-list .field-p-parent-sign,
+.node-program-form .field-name-field-program-kids-list .field-p-photo-release,
+.node-program-form .field-name-field-program-kids-list .field-p-text-parent {
+  text-align: center;
+}
+
+.node-program-form .sticky-header {
+  z-index: 3 !important;
+}
+
+.node-program-form .select2-container {
+  max-height: 25px;
+  padding: 0;
+  border: none;
+}
+
+.node-program-form .select2-container .select2-choice {
+  height: 25px;
+}
+
+.node-program-form .select2-container .select2-chosen {
+  height: 100%;
+}
+
+.node-program-form .novo-program-kid-data {
+  float: right;
+  margin: 5px 25px 5px 0;
+  width: 60px;
+}
+
+.node-program-form .novo-program-kid-data .novo-program-kid-data-age {
+  margin-right: 25px;
+}
+
+.node-program-form .novo-program-kid-data .novo-program-kid-data-age,
+.node-program-form .novo-program-kid-data .novo-program-kid-data-grade {
+  display: inline-block;
+  width: 15px;
+}
+
+.node-program-form .novo-program-kid-data-header {
+  width: 100px;
+  float: right;
+}
+
+.node-program-form .novo-program-kid-data-header .novo-program-kid-data-header-age {
+  margin-right: 10px;
+}
+
+.node-program-form .field-name-field-p-kids-pickup-contacts thead tr th label{
+  display: none;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper {
+  position: relative;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper .form-group {
+  margin-bottom: 5px;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper label {
+  width: 100px;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper input {
+  width: 350px;
+  display: inline-block;
+}
+
+.field-name-field-p-kids-pickup-contacts .field-p-kids-pickup-contacts-wrapper button {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+.field-p-kid-name .select2-container.select2-allowclear .select2-choice abbr {
+  top: 5px;
+}
+
+.field-p-canvassing-group button,
+.field-p-small-group button {
+  max-height: 25px;
+  padding: 3px 12px;
+}
+
+.field-p-kid-name .select2-container .select2-choice .select2-arrow b{
+  background-position: 0 -1px;
+}
+.field-p-kids-pickup-contacts .btn {
+  padding: 3px 8px;
+  line-height: 1.45;
+  font-size: 12px;
+}
+.field-p-kids-pickup-contacts .btn i{
+  top: 2px;
+}
+.node-program-form .select2-drop-active {
+  margin-top: -10px;
+  padding-top: 8px;
+}
+.node-program-form .field-p-dismissal select,
+.node-program-form .remove-button > button {
+  max-height: 25px;
+}
+.node-program-form .remove-button > button  > span.glyphicon-remove {
+  top: 1px!important;
+}

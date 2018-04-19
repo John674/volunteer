@@ -1,0 +1,562 @@
+<?php
+
+/**
+ * @file
+ * Ref request functions.
+ */
+
+define("NOVO_REF_REQUEST_SALT", "dbNovoS");
+define('NOVO_REF_QUESTIONS_VOC', 'reference_request_questions');
+define('NOVO_REF_QUESTIONS_REF1_TERM_NAME', 'Reference 1');
+define('NOVO_REF_QUESTIONS_REF2_TERM_NAME', 'Reference 2');
+define('NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME', 'Standby');
+define('NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME', 'Parents');
+define('NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME', 'Church');
+
+define("NOVO_REF_REQUEST_BASE_PHONE", "4052084255");
+define("NOVO_REF_REQUEST_BASE_PHONE_LABEL", "405.208.4255");
+
+define("NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD", 60 * 60);
+
+// 72 hours.
+define("NOVO_REF_REQUEST_EXPIRED_TIME", 60 * 60 * 72);
+
+define('NOVO_REF_REQUEST_TASK_STATUSES', serialize(array(
+  0 => t("Pending"),
+  1 => t("Not responded"),
+  2 => t("Responded"),
+  3 => t("Expired"),
+  4 => t("Canceled"),
+)));
+
+define('NOVO_FIELD_REF_REQUEST_1', 'field_reference_request_1');
+define('NOVO_FIELD_REF_REQUEST_2', 'field_reference_request_2');
+define('NOVO_FIELD_REF_REQUEST_CHURCH', 'field_reference_request_church');
+define('NOVO_FIELD_REF_REQUEST_STANDBY', 'field_reference_request_standby');
+define('NOVO_FIELD_REF_REQUEST_PARENTS', 'field_reference_request_parents');
+
+module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.db");
+module_load_include("inc", "novo_ref_request", "includes/novo_ref_request.func");
+
+/**
+ * Implements hook_menu().
+ */
+function novo_ref_request_menu() {
+  $items = array();
+
+  $items['novo-ref-request/resend/%'] = array(
+    'title' => 'Mark result as not relevant by AJAX',
+    'page arguments' => array(2),
+    'access arguments' => array('edit ref request with any status'),
+    'page callback' => 'novo_ref_request_resend_callback',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Resend task callback.
+ */
+function novo_ref_request_resend_callback($nid) {
+  $task = novo_ref_request_task_get_last($nid);
+  if (!empty($task)) {
+    novo_ref_request_task_add($task->ref_type, $task->uid, $task->nid, $task->volunteer_nid, $task->volunteer_name, $task->ref_name, $task->name, $task->email, $task->phone);
+    // Add email to queue.
+    novo_ref_request_send_ref_email($task, $nid);
+
+    drupal_set_message(t("The request was sent to the queue for sending."));
+    $url = $_GET['destination'] ? $_GET['destination'] : '<front>';
+    drupal_goto($url);
+  }
+  else {
+    drupal_set_message(t("Can't resend."), "error");
+    watchdog("novo_ref_request", "Can't resend. NID: :nid", array(":nid" => $nid), WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * Send ref email.
+ */
+function novo_ref_request_send_ref_email($task, $ref_nid) {
+  if (isset($task->email)) {
+    $func = FALSE;
+
+    switch ($task->ref_type) {
+      case "ref_1":
+      case "ref_2":
+        $func = "novo_mail_ref_form_to_reference";
+        break;
+
+      case "ref_church":
+        $func = "novo_mail_ref_form_to_church";
+        break;
+
+      case "ref_parents":
+        $func = "novo_mail_ref_form_to_parent";
+        break;
+
+      case "ref_standby":
+        $func = "novo_mail_ref_form_to_reference";
+        break;
+    }
+
+    // Send emails.
+    if ($ref_nid) {
+      if ($func && function_exists($func)) {
+        call_user_func_array($func, [$task->volunteer_nid, $ref_nid]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function novo_ref_request_permission() {
+  return array(
+    'edit ref request with any status' => array(
+      'title' => t('Allow edit ref request with any status'),
+      'description' => t('Allow edit ref request with any status: complete or not.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function novo_ref_request_node_access($node, $op, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  $role_siteadmin = user_role_load_by_name('Siteadmin');
+
+  if ($type == "reference_request") {
+    if ($op == 'update') {
+      return (novo_ref_request_check_hash_access($node)) ? NODE_ACCESS_ALLOW : (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+    }
+    else {
+      return (user_has_role($role_siteadmin->rid)) ? NODE_ACCESS_IGNORE : NODE_ACCESS_DENY;
+    }
+  }
+
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Access to ref nodes vial hash link.
+ */
+function novo_ref_request_check_hash_access($node) {
+  $op = arg(2);
+  $hash = arg(3);
+  $access_key = crypt($node->nid, NOVO_REF_REQUEST_SALT);
+
+  if (!empty($hash) && $op == 'view' && hash_equals($access_key, $hash)) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Generate Link for Ref with hash.
+ */
+function novo_ref_request_generate_hashed_link($nid) {
+  $access_key = crypt($nid, NOVO_REF_REQUEST_SALT);
+  $link = url("node/" . $nid . "/view/" . $access_key, array("absolute" => TRUE));
+  return $link;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function novo_ref_request_preprocess_node(&$variables) {
+  if (isset($variables['type']) && $variables['type'] == "reference_request" && $variables['view_mode'] == "full") {
+    $node = $variables['node'];
+    $task = novo_ref_request_task_get_last($node->nid, TRUE);
+
+    if ((isset($task->status) && $task->status <= 1 && !user_is_logged_in()) || user_access("edit ref request with any status")) {
+      $save_form = drupal_get_form("novo_ref_request_save_form", $node);
+      $variables['content'] = array();
+      $variables['content']['save_form'] = $save_form;
+    }
+
+    if (isset($task->status) && $task->status == 2 && !user_access("edit ref request with any status")) {
+      drupal_set_message(t("You have already answered."));
+    }
+
+    if (isset($task->status) && $task->status > 2 && !user_access("edit ref request with any status")) {
+      drupal_set_message(t("The response time has ended."));
+    }
+
+    $link = novo_ref_request_generate_hashed_link($variables['nid']);
+    //kpr("This is test link which sent via email: " . $link);
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function novo_ref_request_preprocess_page(&$variables) {
+  $node = isset($variables['node']) ? $variables['node'] : NULL;
+  if ($node && $node->type == "reference_request") {
+    drupal_set_title(t("Reference form"));
+  }
+}
+
+/**
+ * Ref save form().
+ */
+function novo_ref_request_save_form($form, &$form_state, $node) {
+  $form['faq'] = array(
+    '#tree' => TRUE,
+    '#type' => 'container',
+  );
+
+  $faq = field_get_items("node", $node, "field_ref_faq");
+  foreach ($faq as $key => $value) {
+    $collection = field_collection_item_load($value['value']);
+    $q_items = field_get_items("field_collection_item", $collection, "field_faq_q");
+    $q_arr = (isset($q_items[0])) ? field_view_value("field_collection_item", $collection, "field_faq_q", $q_items[0]) : NULL;
+    $a_items = field_get_items("field_collection_item", $collection, "field_faq_a");
+    $a = (isset($a_items[0]['value'])) ? $a_items[0]['value'] : "";
+
+    if ($q_arr) {
+      $form['faq'][$key]["fc_id"] = array(
+        '#type' => 'hidden',
+        '#value' => $collection->item_id
+      );
+      $form['faq'][$key]["q"] = $q_arr;
+      $form['faq'][$key]["a"] = array(
+        '#type' => 'textarea',
+        '#default_value' => $a,
+      );
+    }
+  }
+
+  $form['nid'] = array(
+    '#type' => 'hidden',
+    '#value' => $node->nid
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t("Send"),
+    '#attributes' => array(
+      'class' => array("btn", "btn-success")
+    )
+  );
+
+  $form['actions']['cancel'] = array(
+    '#type' => 'submit',
+    '#value' => t('Cancel'),
+    '#submit' => array(
+      'novo_ref_request_save_form_cancel',
+      'node_form_submit_build_node'
+    ),
+    '#limit_validation_errors' => array(),
+    '#attributes' => array(
+      'class' => array("btn", "btn-danger")
+    )
+  );
+
+  return $form;
+}
+
+/**
+ * Cancel form submit.
+ */
+function novo_ref_request_save_form_cancel($form, &$form_state) {
+  $nid = arg(1);
+  $not_destination_url = (!empty($nid)) ? "node/" . $nid : "<front>";
+  $url = (isset($_GET['destination']) && !empty($_GET['destination'])) ? $_GET['destination'] : $not_destination_url;
+  drupal_goto($url);
+}
+
+/**
+ * Ref save form submit().
+ */
+function novo_ref_request_save_form_submit($form, &$form_state) {
+  $values = (isset($form_state['values'])) ? $form_state['values'] : NULL;
+  $nid = (isset($values['nid'])) ? $values['nid'] : NULL;
+  $faq = (isset($values['faq'])) ? $values['faq'] : NULL;
+
+  $node = node_load($nid);
+  if ($node) {
+    // Update answers FC.
+    foreach ($faq as $key => $value) {
+      $raw_collection = field_collection_item_load($value['fc_id']);
+      $collection = entity_metadata_wrapper('field_collection_item', $raw_collection);
+      $collection->field_faq_a = $value['a'];
+      $collection->save();
+    }
+    novo_ref_request_task_update_status($node->nid, 2);
+    drupal_set_message(t("Your answers have been saved."));
+
+    // Send emails.
+    $ref = novo_ref_request_get_ref_data_by_ref_nid($node->nid);
+    if (isset($ref->ref_email)) {
+      switch ($ref->ref_type) {
+        case "ref_1":
+        case "ref_2":
+        case "ref_standby":
+          // Check if all finished.
+          if (novo_ref_request_check_all_refs_finished($ref->parent_nid) && function_exists("novo_mail_ref_form_finished")) {
+            novo_mail_ref_form_finished($ref->parent_nid);
+          }
+          break;
+
+        case "ref_church":
+          if (function_exists("novo_mail_church_form_finished")) {
+            novo_mail_church_form_finished($ref->parent_nid);
+          }
+          break;
+
+        case "ref_parents":
+          if (function_exists("novo_mail_parent_form_finished")) {
+            novo_mail_parent_form_finished($ref->parent_nid);
+          }
+          break;
+      }
+    }
+  }
+  else {
+    drupal_set_message(t("Can't save your answers."), "error");
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function novo_ref_request_node_presave($node) {
+  if ($node->type == "application") {
+
+    $lang = isset($node->language) ? $node->language : LANGUAGE_NONE;
+    $node_original_completed = isset($node->original->field_completed[$lang][0]['value']) ? $node->original->field_completed[$lang][0]['value'] : FALSE;
+    $node_completed = isset($node->field_completed[$lang][0]['value']) ? $node->field_completed[$lang][0]['value'] : FALSE;
+
+    if (!$node_original_completed && $node_completed) {
+      // Create and attach ref request nodes.
+      $ref_nids_statuses = array();
+
+      if (novo_ref_request_check_email($node, 'field_ref_1_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_1, NOVO_REF_QUESTIONS_REF1_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_ref_2_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_2, NOVO_REF_QUESTIONS_REF2_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_ref_3_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_STANDBY, NOVO_REF_QUESTIONS_REF_STAND_BY_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_church_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_CHURCH, NOVO_REF_QUESTIONS_REF_CHURCH_TERM_NAME);
+      }
+
+      if (novo_ref_request_check_email($node, 'field_parent_email')) {
+        $ref_nids_statuses[] = novo_ref_request_attach_ref($node, NOVO_FIELD_REF_REQUEST_PARENTS, NOVO_REF_QUESTIONS_REF_PARENTS_TERM_NAME);
+      }
+
+      if (!empty($ref_nids_statuses)) {
+        // Check is migration.
+        $is_migration = isset($node->migrate) && ($node->migrate['machineName'] == 'Volunteers');
+        drupal_register_shutdown_function('novo_ref_request_add_tasks_callback', $ref_nids_statuses, $is_migration);
+      }
+    }
+  }
+}
+
+/**
+ * Check email for references.
+ */
+function novo_ref_request_check_email($node, $field) {
+  $field_email = field_get_items('node', $node, $field);
+  if (isset($field_email) && !empty($field_email)) {
+    return (!empty($field_email[0]['email'])) ? TRUE : FALSE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function novo_ref_request_node_delete($node) {
+  if ($node->type == "reference_request") {
+    // Remove tasks when node removed.
+    novo_ref_request_task_delete($node->nid);
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function novo_ref_request_preprocess_field(&$variables) {
+  $node = isset($variables['element']['#object']) ? $variables['element']['#object'] : NULL;
+
+  if (isset($node->type) && $node->type == 'application') {
+
+    switch ($variables['element']['#field_name']) {
+      case 'field_reference_request_1':
+      case 'field_reference_request_2':
+        novo_ref_request_prepare_fields($variables, "Reference request");
+        break;
+
+      case 'field_reference_request_standby':
+        novo_ref_request_prepare_fields($variables, "Standby reference request");
+        break;
+
+      case 'field_reference_request_parents':
+        novo_ref_request_prepare_fields($variables, "Parent reference");
+        break;
+
+      case 'field_reference_request_church':
+        novo_ref_request_prepare_fields($variables, "Church reference request");
+        break;
+    }
+  }
+
+  if (isset($node->field_name) && $node->field_name == 'field_ref_faq') {
+    if ($variables['element']['#field_name'] == "field_faq_a" && empty(trim($variables['items'][0]['#markup']))) {
+      $variables['items'][0]['#markup'] = t("no answer");
+    }
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function novo_ref_request_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'novo_ref_request') . '/views',
+  );
+}
+
+/**
+ * Prepare fields.
+ */
+function novo_ref_request_prepare_fields(&$variables, $title = "") {
+
+  $entity = isset($variables['items'][0]['#item']['entity']) ? $variables['items'][0]['#item']['entity'] : NULL;
+  if (!empty($entity->nid)) {
+    $statuses = unserialize(NOVO_REF_REQUEST_TASK_STATUSES);
+    $ref_task = novo_ref_request_task_get_last($entity->nid, TRUE);
+
+    $status = (isset($ref_task->status) && isset($statuses[$ref_task->status])) ? $ref_task->status : NULL;
+    $status_label = (!is_null($status)) ? $statuses[$status] : " - ";
+
+    $ref_name = novo_ref_get_ref_name($entity->nid);
+    $label = t(":title :name", array(":title" => $title, ":name" => $ref_name));
+    $phone = isset($ref_task->phone) ? $ref_task->phone : "";
+    $status_buttons = novo_ref_request_render_action_buttons($entity->nid, $status, $phone);
+    $variables['ref_data'] = array(
+      'status' => $status,
+      'status_label' => $status_label,
+      'title' => $label,
+      'status_buttons' => $status_buttons
+    );
+  }
+}
+
+/**
+ * Prepare action buttons.
+ */
+function novo_ref_request_prepare_action_buttons($nid) {
+  $buttons = array(
+    'pdf_link' => l('<i class="glyphicon glyphicon-file"></i> ' . t('View Response'), "entityprint/node/" . $nid, array(
+      'html' => TRUE,
+      'attributes' => array(
+        'target' => '_blank',
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'edit_link' => l('<i class="glyphicon glyphicon-edit"></i> ' . t('Edit'), "node/" . $nid . "/view", array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'resend_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Resend'), "novo-ref-request/resend/" . $nid, array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'send_link' => l('<i class="glyphicon glyphicon-envelope"></i> ' . t('Send to referer'), "novo-ref-request/resend/" . $nid, array(
+      'query' => drupal_get_destination(),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array("btn", "btn-default", "btn-xs")
+      )
+    )),
+    'disabled' => '<button class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-file"></i> ' . t('View Response') . '</button>'
+  );
+
+  return $buttons;
+}
+
+/**
+ * Render action buttons.
+ */
+function novo_ref_request_render_action_buttons($nid, $status, $phone = "") {
+  $buttons = novo_ref_request_prepare_action_buttons($nid);
+  $output = "";
+  switch ($status) {
+    case "0":
+      // Not send - show "Edit link".
+      $output = (user_access("edit ref request with any status")) ? $buttons['edit_link'] : $buttons['disabled'];
+      break;
+
+    case "1":
+      // Not responded - show phone number.
+      // Edit.
+      $output = $phone . " " . (user_access("edit ref request with any status")) ? $buttons['edit_link'] : $buttons['disabled'];
+      break;
+
+    case "4":
+      // Cancelled.
+      $output = "";
+      break;
+
+    default:
+      $output = (user_access("edit ref request with any status")) ? $buttons['resend_link'] . " " . $buttons['pdf_link'] . " " . $buttons['edit_link'] : $buttons['pdf_link'];
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function novo_ref_request_cron_queue_info() {
+  $queue['novo_ref_request_expired_queue'] = array(
+    'worker callback' => 'novo_ref_request_expired_queue_worker',
+    'time' => 60,
+  );
+
+  return $queue;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function novo_ref_request_cron() {
+  $cron_last = variable_get('novo_ref_request_cron_expired_last');
+  if (REQUEST_TIME - $cron_last > NOVO_REF_REQUEST_CRON_EXPIRED_PERIOD) {
+    $expired_queue = DrupalQueue::get('novo_ref_request_expired_queue');
+    $data = novo_ref_request_task_get_all_not_responded_expired();
+    foreach ($data as $key => $task) {
+      $expired_queue->createItem(array('id' => $task->id));
+    }
+    variable_set('novo_ref_request_cron_expired_last', REQUEST_TIME);
+  }
+}
+
+/**
+ * Set expired tasks.
+ */
+function novo_ref_request_expired_queue_worker($data) {
+  novo_ref_request_task_update_status_by_id($data['id'], 3);
+}

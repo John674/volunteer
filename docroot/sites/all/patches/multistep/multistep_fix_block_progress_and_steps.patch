@@ -1,0 +1,27 @@
+Index: docroot/sites/all/modules/contrib/multistep/multistep.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- docroot/sites/all/modules/contrib/multistep/multistep.module	(revision 484c912de12c3c79ca18b6022f88f37071f064a7)
++++ docroot/sites/all/modules/contrib/multistep/multistep.module	(revision )
+@@ -228,7 +228,7 @@
+   // Get design variables
+   $workflow_mode = variable_get('multistep_workflow_mode', 'free');
+   // Generate the menu items.
+-  if (variable_get('multistep_menu_' . $entity_type . '_' . $type, 1)) {
++  if (variable_get('multistep_menu_' . $type, 1)) {
+     $content['multistep_block_navigation'] = array(
+       '#theme' => 'multistep_navigation',
+       '#children' => array(),
+@@ -263,8 +263,9 @@
+       }
+     }
+   }
++
+   // Generate the progress bar.
+-  if (variable_get('multistep_progress_' . $entity_type . '_' . $type, 1) && count($groups) > 0) {
++  if (variable_get('multistep_progress_' . $type, 1) && count($groups) > 0) {
+     $content['multistep_block_progress'] = array(
+       '#theme' => 'multistep_progress_bar',
+       '#progress' => round($submitted / count($groups) * 100),

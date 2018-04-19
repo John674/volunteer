@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @file
+ * Helper functions.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function novo_attendance_form_attendance_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#attached']['js'][] = drupal_get_path("module", "novo_attendance") . "/js/novo_attendance.js";
+  $form['field_attendance_date'][LANGUAGE_NONE]['#element_validate'][] = 'novo_attendance_field_attendance_date_validate';
+
+  // Fix by https://www.drupal.org/node/2842043.
+  $year_copy = $form['field_attendance_year'];
+  $location_copy = $form['field_attendance_location'];
+  $program_copy = $form['field_attendance_program_name'];
+  $kids_copy = $form['field_attendance_kids_list'];
+
+  unset($form['field_attendance_year']);
+  unset($form['field_attendance_location']);
+  unset($form['field_attendance_program_name']);
+  unset($form['field_attendance_kids_list']);
+  $form['field_attendance_year'] = $year_copy;
+  $form['field_attendance_location'] = $location_copy;
+  $form['field_attendance_program_name'] = $program_copy;
+  $form['field_attendance_kids_list'] = $kids_copy;
+
+  $form['field_attendance_staff_list']['#attributes']['class'] = ['chosen-widget'];
+  $form['field_attendance_volunteer_list']['#attributes']['class'] = ['chosen-widget'];
+
+  $form['field_attendance_staff_list'][LANGUAGE_NONE]['#attributes']['class'] = ['chosen-widget'];
+  $form['field_attendance_volunteer_list'][LANGUAGE_NONE]['#attributes']['class'] = ['chosen-widget'];
+
+  // Disable change date field on edit form.
+  $is_new = (isset($form['nid']['#value']) && !empty($form['nid']['#value'])) ? FALSE : TRUE;
+  if (!$is_new) {
+    $form['field_attendance_date'][$form['field_attendance_date']['#language']]['#disabled'] = TRUE;
+    $form['field_attendance_year'][$form['field_attendance_year']['#language']]['#disabled'] = TRUE;
+    $form['field_attendance_location'][$form['field_attendance_location']['#language']]['#disabled'] = TRUE;
+    $form['field_attendance_program_name'][$form['field_attendance_program_name']['#language']]['#disabled'] = TRUE;
+  }
+
+  // @codingStandardsIgnoreStart
+  $form['field_attendance_program_name'][$form['field_attendance_program_name']['#language']]['#suffix'] = t("If no options add !link first", ["!link" => l(t("Enrollment"), "node/add/program", ['query' => drupal_get_destination()])]);
+  // @codingStandardsIgnoreEnd
+}
+
+/**
+ * Attendance date validate.
+ */
+function novo_attendance_field_attendance_date_validate($element, &$form_state, $form) {
+  $values = isset($form_state['values']) ? $form_state['values'] : [];
+  $nid = isset($values['nid']) ? $values['nid'] : NULL;
+
+  if (!empty($nid)) {
+    // Disable validation for update form.
+    return;
+  }
+
+  $year = isset($values['field_attendance_year'][LANGUAGE_NONE]) ? $values['field_attendance_year'][LANGUAGE_NONE] : NULL;
+  $date = (isset($element[0]['#value']['value']['date'])) ? $element[0]['#value']['value']['date'] : NULL;
+
+  if (!empty($date)) {
+    $unix_date = strtotime($date);
+    // Set end of day.
+    $unix_date += 23 * 59 * 59;
+
+    $date_year = date("Y", $unix_date);
+
+    if ($date_year != $year && $date_year - 1 != $year) {
+      form_error($element, t('Date is not valid.'));
+    }
+    // @codingStandardsIgnoreStart
+//    $program_nid = isset($values['field_attendance_program_name'][$values['language']]) ? $values['field_attendance_program_name'][$values['language']] : NULL;
+//    $program = node_load($program_nid);
+//    if (isset($program->created)) {
+//      if ($program->created > $unix_date) {
+//        form_error($element, t('Date must be greater than the date of creation of the enrollment. (:date)', [":date" => format_date($program->created, 'short')]));
+//      }
+//    }
+//    else {
+//      form_error($element, t('Date is not valid.'));
+//    }
+    // @codingStandardsIgnoreEnd
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function novo_attendance_views_query_alter(&$view, &$query) {
+  if ($view->name == 'attendance_kids_list') {
+
+    // Add filter kids by Attendance date.
+    $program_nid = isset($view->args[0]) ? $view->args[0] : NULL;
+    $date = isset($view->args[1]) ? $view->args[1] : NULL;
+    if (is_array($date) && isset($date['date'])) {
+      $date = $date['date'];
+    }
+
+    if ($time_str = strstr($date, " 00:00:00")) {
+      $date = str_replace($time_str, "", $date);
+      $format = "YYYY-MM-DD";
+    }
+    else {
+      $format = "MM/DD/YYYY";
+    }
+
+    $start_time = (function_exists("_novo_master_datetotime")) ? _novo_master_datetotime($date, $format) : strtotime($date);
+    $end_time = $start_time + 60 * 60 * 24 - 1;
+
+    // @codingStandardsIgnoreStart
+    // With attendance date filter.
+//    $subquery = <<<SQL
+//SELECT n_kid.nid
+//FROM field_revision_field_program_kids_list AS r_kids_list
+//  INNER JOIN field_data_field_p_kid_name AS p_kid_name
+//    ON p_kid_name.entity_id = r_kids_list.field_program_kids_list_value
+//  INNER JOIN node AS n_kid ON n_kid.nid = p_kid_name.field_p_kid_name_target_id
+//WHERE
+//  r_kids_list.revision_id = (SELECT MAX(n_r.vid)
+//                           FROM node_revision AS n_r
+//                           WHERE n_r.timestamp <= $end_time AND n_r.nid = $program_nid) AND
+//  r_kids_list.entity_id = $program_nid
+//SQL;
+    // @codingStandardsIgnoreEnd
+
+    // Without attendance date filter.
+    $subquery = <<<SQL
+SELECT n_kid.nid
+FROM field_data_field_program_kids_list as pkl
+
+  INNER JOIN field_data_field_p_kid_name AS p_kid_name
+    ON p_kid_name.entity_id = pkl.field_program_kids_list_value
+  INNER JOIN node AS n_kid ON n_kid.nid = p_kid_name.field_p_kid_name_target_id
+
+WHERE pkl.entity_id = $program_nid
+SQL;
+
+    $query->add_where_expression('AND', "(node.nid IN ($subquery))");
+  }
+}

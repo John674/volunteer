@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Novo views feature feature.
+ */
+
+include_once 'novo_views_feature.features.inc';
